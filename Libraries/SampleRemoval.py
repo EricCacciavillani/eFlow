@@ -319,13 +319,156 @@ class SampleRemoval:
 
         return tmp_df
 
-    def remove_samples(self,
+    def remove_noise(self,
+                     new_sample_amount,
+                     zscore_high=1.2,
+                     annotate=False,
+                     apply_changes=False,
+                     display_all_graphs=False,
+                     show_gif=False,
+                     shelve_relative_path=None,
+                     create_visuals=True):
+
+        new_sample_amount = int(new_sample_amount)
+
+        if new_sample_amount >= self.__scaled.shape[0]:
+            print("THROW ERROR HERE: Sample removal must be less then")
+        elif new_sample_amount <= 0:
+            print("THROW ERROR HERE: Val must be a positive number!")
+        else:
+            # Store data for removal
+            removed_dps_dict = dict()
+
+            # Stored removed datapoints for visualizations
+            noise_removal_dps_dict = dict()
+            similarity_dps_dict = dict()
+
+            df_index_scaled_dict = dict()
+            # Index to shape
+            for i, df_index in enumerate(self.__df_index_values):
+                df_index_scaled_dict[df_index] = i
+
+            if zscore_high:
+                folder_dir_name = "Data_Point_Removal_Noise_Zscore={0}".format(
+                    zscore_high)
+            else:
+                folder_dir_name = "Data_Point_Removal_Noise_Zscore=NaN"
+
+            # Display graph before augmentation; Create centroid
+            centroid = np.mean(self.__scaled, axis=0)
+            column_list = [i for i in range(0, self.__scaled.shape[1])]
+
+            reduced_scaled = np.column_stack(
+                (self.__scaled, self.__df_index_values.reshape(
+                    (self.__scaled.shape[0], 1)).astype(self.__scaled.dtype)))
+
+            if create_visuals:
+                self.__visualize_data_points(centroid=centroid,
+                                             scaled_data=self.__scaled,
+                                             noise_removal_dps=[],
+                                             similar_removal_dps=[],
+                                             new_sample_amount=new_sample_amount,
+                                             zscore_high=zscore_high,
+                                             weighted_dist_value=None,
+                                             annotate=annotate,
+                                             output_path=folder_dir_name,
+                                             title="Starting point",
+                                             display_all_graphs=display_all_graphs)
+
+        dp_distances = np.zeros(len(reduced_scaled))
+
+        # Keep looping until new sample amount has been reached or
+        # the distances are properly.
+        while reduced_scaled.shape[0] > new_sample_amount:
+
+            for index, dp in enumerate(reduced_scaled):
+                dp_distances[index] = distance.euclidean(
+                    centroid, dp[:column_list[-1] + 1])
+
+            farthest_dp_index = np.argmax(dp_distances)
+            zscores_dp_distances = zscore(np.concatenate((
+                dp_distances, np.array([distance.euclidean(centroid,
+                                                           self.__scaled[
+                                                               dp_index])
+                                        for dp_index in
+                                        list(removed_dps_dict.values())
+                                        ])), axis=0))
+
+            if zscores_dp_distances[farthest_dp_index] >= zscore_high:
+
+                farthest_dp = reduced_scaled[farthest_dp_index][
+                              :column_list[-1] + 1]
+
+                # Add original dataframe index to the dict;
+                # remove actual row from the data
+
+                df_index = int(reduced_scaled[farthest_dp_index][-1])
+                removed_dps_dict[df_index] = df_index_scaled_dict[
+                    df_index]
+
+                if shelve_relative_path:
+                    shelf = shelve.open(shelve_relative_path)
+                    shelf[shelve_relative_path.split("/")[-1]] = list(
+                        removed_dps_dict.keys())
+                    shelf.close()
+
+                if create_visuals:
+                    noise_removal_dps_dict[df_index] = \
+                        df_index_scaled_dict[df_index]
+
+                reduced_scaled = np.delete(reduced_scaled,
+                                           farthest_dp_index,
+                                           0)
+                # Update centroid
+                centroid = np.mean(reduced_scaled[:, column_list],
+                                   axis=0)
+                if create_visuals:
+                    self.__visualize_data_points(centroid=centroid,
+                                                 scaled_data=reduced_scaled[
+                                                             :,
+                                                             column_list],
+                                                 noise_removal_dps=list(
+                                                     noise_removal_dps_dict.values()),
+                                                 similar_removal_dps=[],
+                                                 new_sample_amount=new_sample_amount,
+                                                 zscore_high=zscore_high,
+                                                 weighted_dist_value=0,
+                                                 annotate=annotate,
+                                                 output_path=folder_dir_name,
+                                                 new_dp_meta_noise_removal=(
+                                                     farthest_dp,
+                                                     zscores_dp_distances[
+                                                         farthest_dp_index],
+                                                     dp_distances[
+                                                         farthest_dp_index]),
+                                                 title="Data Removal: Noise reduction",
+                                                 display_all_graphs=display_all_graphs)
+                else:
+                    print(
+                        "Scaled size is now {0} and Z-Score {1:.2f}.".format(
+                            reduced_scaled.shape[0],
+                            zscores_dp_distances[farthest_dp_index]))
+            # Break loop distances are below z-score val
+            else:
+                break
+
+        if create_visuals:
+            self.__create_gif_dp_amount(n_start=self.__scaled.shape[0],
+                                        n_end=reduced_scaled.shape[0],
+                                        folder_dir_name=folder_dir_name,
+                                        filename="Noise Reduction",
+                                        show_gif=show_gif)
+
+        if apply_changes:
+            self.__scaled = reduced_scaled[:, column_list]
+
+        return list(removed_dps_dict.keys())
+
+
+    def remove_similar(self,
                        new_sample_amount,
-                       zscore_high=2,
                        weighted_dist_value=1.0,
                        annotate=False,
-                       remove_noise=True,
-                       remove_similar=True,
                        apply_changes=False,
                        display_all_graphs=False,
                        show_gif=False,
@@ -345,8 +488,6 @@ class SampleRemoval:
             print("THROW ERROR HERE: Sample removal must be less then")
         elif new_sample_amount <= 0:
             print("THROW ERROR HERE: Val must be a positive number!")
-        elif remove_noise == False and remove_similar == False:
-            print("THROW ERROR HERE: At least one operation must be made!")
         else:
             # Store data for removal
             removed_dps_dict = dict()
@@ -360,17 +501,11 @@ class SampleRemoval:
             for i, df_index in enumerate(self.__df_index_values):
                 df_index_scaled_dict[df_index] = i
 
-            if not remove_noise:
-                folder_dir_name = "Data_Point_Removal_Weight={1}".format(
-                    zscore_high, weighted_dist_value)
-
-            elif not remove_similar:
-                folder_dir_name = "Data_Point_Removal_Zscore={0}".format(
-                    zscore_high, weighted_dist_value)
-
+            if weighted_dist_value:
+                folder_dir_name = "Data_Point_Removal_Similar_Weight={0}".format(
+                    weighted_dist_value)
             else:
-                folder_dir_name = "Data_Point_Removal_Zscore={0}_Weight={1}".format(
-                    zscore_high, weighted_dist_value)
+                folder_dir_name = "Data_Point_Removal_Similar_Weight=NaN"
 
             # Display graph before augmentation; Create centroid
             centroid = np.mean(self.__scaled, axis=0)
@@ -386,226 +521,105 @@ class SampleRemoval:
                                              noise_removal_dps=[],
                                              similar_removal_dps=[],
                                              new_sample_amount=new_sample_amount,
-                                             zscore_high=zscore_high,
+                                             zscore_high=None,
                                              weighted_dist_value=weighted_dist_value,
                                              annotate=annotate,
                                              output_path=folder_dir_name,
                                              title="Starting point",
-                                             remove_noise=remove_noise,
-                                             remove_similar=remove_similar,
                                              display_all_graphs=display_all_graphs)
 
-            if remove_noise:
+            starting_shape = reduced_scaled.shape[0]
 
-                dp_distances = np.zeros(len(reduced_scaled))
+            farthest_dp_distance = None
+            dp_distances = np.zeros(len(reduced_scaled))
 
-                # Keep looping until new sample amount has been reached or
-                # the distances are properly.
-                while reduced_scaled.shape[0] > new_sample_amount:
+            while reduced_scaled.shape[0] > new_sample_amount:
+                # Following unconventional programming for multi threading
+                # speed and memory increase
+                self.__index_array = [i for i in
+                                      range(0, len(reduced_scaled))]
+                self.__total_indexes = len(self.__index_array)
+                self.__tmp_reduced_scaled = copy.deepcopy(
+                    reduced_scaled[:, column_list])
 
-                    for index, dp in enumerate(reduced_scaled):
+                if not farthest_dp_distance:
+                    for index, dp in enumerate(self.__tmp_reduced_scaled):
                         dp_distances[index] = distance.euclidean(
                             centroid, dp[:column_list[-1] + 1])
 
-                    farthest_dp_index = np.argmax(dp_distances)
-                    zscores_dp_distances = zscore(np.concatenate((
-                        dp_distances, np.array([distance.euclidean(centroid,
-                                                                   self.__scaled[
-                                                                       dp_index])
-                                                for dp_index in
-                                                list(removed_dps_dict.values())
-                                                ])), axis=0))
+                    farthest_dp_distance = np.amax(dp_distances)
+                    farthest_dp_distance *= weighted_dist_value
 
-                    if zscores_dp_distances[farthest_dp_index] >= zscore_high:
+                removal_index, keep_index, smallest_dist = self.__shortest_dist_relationship(
+                    centroid)
 
-                        farthest_dp = reduced_scaled[farthest_dp_index][
-                                      :column_list[-1] + 1]
+                if farthest_dp_distance < smallest_dist:
+                    print("Target distance reached!!!")
+                    break
 
-                        # Add original dataframe index to the dict;
-                        # remove actual row from the data
+                new_dp_meta_similar_removal = (
+                self.__tmp_reduced_scaled[removal_index],
+                self.__tmp_reduced_scaled[keep_index])
 
-                        df_index = int(reduced_scaled[farthest_dp_index][-1])
-                        removed_dps_dict[df_index] = df_index_scaled_dict[
-                            df_index]
+                df_index = int(reduced_scaled[removal_index][-1])
+                removed_dps_dict[df_index] = df_index_scaled_dict[df_index]
 
-                        if shelve_relative_path:
-                            shelf = shelve.open(shelve_relative_path)
-                            shelf[shelve_relative_path.split("/")[-1]] = list(
-                                removed_dps_dict.keys())
-                            shelf.close()
-
-                        if create_visuals:
-                            noise_removal_dps_dict[df_index] = \
-                            df_index_scaled_dict[df_index]
-
-                        reduced_scaled = np.delete(reduced_scaled,
-                                                   farthest_dp_index,
-                                                   0)
-                        # Update centroid
-                        centroid = np.mean(reduced_scaled[:, column_list],
-                                           axis=0)
-                        if create_visuals:
-                            self.__visualize_data_points(centroid=centroid,
-                                                         scaled_data=reduced_scaled[
-                                                                     :,
-                                                                     column_list],
-                                                         noise_removal_dps=list(
-                                                             noise_removal_dps_dict.values()),
-                                                         similar_removal_dps=[],
-                                                         new_sample_amount=new_sample_amount,
-                                                         zscore_high=zscore_high,
-                                                         weighted_dist_value=weighted_dist_value,
-                                                         annotate=annotate,
-                                                         output_path=folder_dir_name,
-                                                         new_dp_meta_noise_removal=(
-                                                         farthest_dp,
-                                                         zscores_dp_distances[
-                                                             farthest_dp_index],
-                                                         dp_distances[
-                                                             farthest_dp_index]),
-                                                         title="Data Removal: Noise reduction",
-                                                         remove_noise=remove_noise,
-                                                         remove_similar=remove_similar,
-                                                         display_all_graphs=display_all_graphs)
-                        else:
-                            print(
-                                "Scaled size is now {0} and Z-Score {1:.2f}.".format(
-                                    reduced_scaled.shape[0],
-                                    zscores_dp_distances[farthest_dp_index]))
-                    # Break loop distances are below z-score val
-                    else:
-                        break
                 if create_visuals:
-                    self.__create_gif_dp_amount(n_start=self.__scaled.shape[0],
-                                                n_end=reduced_scaled.shape[0],
-                                                folder_dir_name=folder_dir_name,
-                                                filename="Noise Reduction",
-                                                show_gif=show_gif)
+                    similarity_dps_dict[df_index] = df_index_scaled_dict[
+                        df_index]
 
-            if remove_similar:
+                if shelve_relative_path:
+                    shelf = shelve.open(shelve_relative_path)
+                    shelf[shelve_relative_path.split("/")[-1]] = list(
+                        removed_dps_dict.keys())
+                    shelf.close()
 
-                starting_shape = reduced_scaled.shape[0]
-                
-                farthest_dp_distance = None
-                dp_distances = np.zeros(len(reduced_scaled))
+                # Remove from temp scaled
+                reduced_scaled = np.delete(reduced_scaled,
+                                           removal_index,
+                                           0)
+                # Update centroid
+                centroid = np.mean(reduced_scaled[:, column_list],
+                                   axis=0)
 
-                while reduced_scaled.shape[0] > new_sample_amount:
-                    # Following unconventional programming for multi threading
-                    # speed and memory increase
-                    self.__index_array = [i for i in
-                                          range(0, len(reduced_scaled))]
-                    self.__total_indexes = len(self.__index_array)
-                    self.__tmp_reduced_scaled = copy.deepcopy(
-                        reduced_scaled[:, column_list])
-                    
-                    if not farthest_dp_distance:
-                        for index, dp in enumerate(self.__tmp_reduced_scaled):
-                            dp_distances[index] = distance.euclidean(
-                                centroid, dp[:column_list[-1] + 1])
+                if create_visuals:
+                    self.__visualize_data_points(centroid=centroid,
+                                                 scaled_data=reduced_scaled[
+                                                             :,
+                                                             column_list],
+                                                 noise_removal_dps=list(
+                                                     noise_removal_dps_dict.values()),
+                                                 similar_removal_dps=list(
+                                                     similarity_dps_dict.values()),
+                                                 new_sample_amount=new_sample_amount,
+                                                 zscore_high=None,
+                                                 weighted_dist_value=weighted_dist_value,
+                                                 annotate=annotate,
+                                                 output_path=folder_dir_name,
+                                                 new_dp_meta_similar_removal=new_dp_meta_similar_removal,
+                                                 title="Data Removal: Similarity removal",
+                                                 display_all_graphs=display_all_graphs)
+                else:
+                    print("Scaled size is now {0}.".format(
+                        reduced_scaled.shape[0]))
 
-                        farthest_dp_distance = np.amax(dp_distances)
-                        farthest_dp_distance *= weighted_dist_value
+        # De-init multithreading artifacts
+        self.__index_array = None
+        self.__total_indexes = None
+        self.__tmp_reduced_scaled = None
+        self.__all_dp_dist_list = None
 
-                    removal_index, keep_index, smallest_dist = self.__shortest_dist_relationship(
-                        centroid)
-                    
-                    if farthest_dp_distance < smallest_dist:
-                        print("Target distance reached!!!")
-                        break
+        if create_visuals:
+            self.__create_gif_dp_amount(n_start=starting_shape - 1,
+                                        n_end=reduced_scaled.shape[0],
+                                        folder_dir_name=folder_dir_name,
+                                        filename="Similar Reduction",
+                                        show_gif=show_gif)
 
-                    new_dp_meta_similar_removal = (
-                    self.__tmp_reduced_scaled[removal_index],
-                    self.__tmp_reduced_scaled[keep_index])
+        if apply_changes:
+            self.__scaled = reduced_scaled[:, column_list]
 
-                    df_index = int(reduced_scaled[removal_index][-1])
-                    removed_dps_dict[df_index] = df_index_scaled_dict[df_index]
-
-                    if create_visuals:
-                        similarity_dps_dict[df_index] = df_index_scaled_dict[
-                            df_index]
-
-                    if shelve_relative_path:
-                        shelf = shelve.open(shelve_relative_path)
-                        shelf[shelve_relative_path.split("/")[-1]] = list(
-                            removed_dps_dict.keys())
-                        shelf.close()
-
-                    # Remove from temp scaled
-                    reduced_scaled = np.delete(reduced_scaled,
-                                               removal_index,
-                                               0)
-                    # Update centroid
-                    centroid = np.mean(reduced_scaled[:, column_list],
-                                       axis=0)
-
-                    if create_visuals:
-                        self.__visualize_data_points(centroid=centroid,
-                                                     scaled_data=reduced_scaled[
-                                                                 :,
-                                                                 column_list],
-                                                     noise_removal_dps=list(
-                                                         noise_removal_dps_dict.values()),
-                                                     similar_removal_dps=list(
-                                                         similarity_dps_dict.values()),
-                                                     new_sample_amount=new_sample_amount,
-                                                     zscore_high=zscore_high,
-                                                     weighted_dist_value=weighted_dist_value,
-                                                     annotate=annotate,
-                                                     output_path=folder_dir_name,
-                                                     new_dp_meta_similar_removal=new_dp_meta_similar_removal,
-                                                     title="Data Removal: Similarity removal",
-                                                     remove_noise=remove_noise,
-                                                     remove_similar=remove_similar,
-                                                     display_all_graphs=display_all_graphs)
-                    else:
-                        print("Scaled size is now {0}.".format(
-                            reduced_scaled.shape[0]))
-
-            # De-init multithreading artifacts
-            self.__index_array = None
-            self.__total_indexes = None
-            self.__tmp_reduced_scaled = None
-            self.__all_dp_dist_list = None
-
-            if create_visuals:
-                self.__create_gif_dp_amount(n_start=starting_shape - 1,
-                                            n_end=reduced_scaled.shape[0],
-                                            folder_dir_name=folder_dir_name,
-                                            filename="Similar Reduction",
-                                            show_gif=show_gif)
-
-            if remove_similar and remove_noise and create_visuals:
-                self.__visualize_data_points(centroid=centroid,
-                                             scaled_data=reduced_scaled[:,
-                                                         column_list],
-                                             noise_removal_dps=list(
-                                                 noise_removal_dps_dict.values()),
-                                             similar_removal_dps=list(
-                                                 similarity_dps_dict.values()),
-                                             new_sample_amount=new_sample_amount,
-                                             zscore_high=zscore_high,
-                                             weighted_dist_value=weighted_dist_value,
-                                             annotate=annotate,
-                                             output_path=folder_dir_name,
-                                             new_dp_meta_similar_removal=None,
-                                             title="Final Result",
-                                             remove_noise=remove_noise,
-                                             remove_similar=remove_similar,
-                                             white_out_mode=True,
-                                             no_print_output=True,
-                                             display_all_graphs=display_all_graphs)
-
-                self.__create_gif_dp_amount(n_start=self.__scaled.shape[0],
-                                            n_end=reduced_scaled.shape[0],
-                                            folder_dir_name=folder_dir_name,
-                                            filename="Noise and Similar Reduction",
-                                            flash_final_results=True,
-                                            show_gif=show_gif)
-
-            if apply_changes:
-                self.__scaled = reduced_scaled[:, column_list]
-
-            return list(removed_dps_dict.keys())
+        return list(removed_dps_dict.keys())
 
     def __find_dp_dist_mean(self,
                             target_index,
@@ -755,8 +769,6 @@ class SampleRemoval:
                                 annotate,
                                 output_path,
                                 title,
-                                remove_noise,
-                                remove_similar,
                                 new_dp_meta_noise_removal=None,
                                 new_dp_meta_similar_removal=None,
                                 white_out_mode=False,
@@ -772,8 +784,17 @@ class SampleRemoval:
 
         plt.gcf().text(.94, .94, "Target_n_samples={0}".format(
             new_sample_amount), fontsize=12)
-        plt.gcf().text(.91, 0.9, "Weight={0:.2f}, Zscore={1:.2f}".format(
-            weighted_dist_value, zscore_high), fontsize=12)
+
+        if weighted_dist_value and zscore_high:
+            plt.gcf().text(.91, 0.9, "Weight={0:.2f}, Zscore={1:.2f}".format(
+                weighted_dist_value, zscore_high), fontsize=12)
+        elif weighted_dist_value:
+            plt.gcf().text(.91, 0.9, "Weight={0:.2f}".format(
+                weighted_dist_value), fontsize=12)
+        else:
+            plt.gcf().text(.91, 0.9, "Zscore={1:.2f}".format(
+                weighted_dist_value, zscore_high), fontsize=12)
+
 
         # Plot existing data points
         for i in range(0, scaled_data.shape[0]):
