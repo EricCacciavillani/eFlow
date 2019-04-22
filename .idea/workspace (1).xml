@@ -1,0 +1,391 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="ed041e50-c9da-4464-8bcf-e2b46601487b" name="Default Changelist" comment="" />
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="CoverageDataManager">
+    <SUITE FILE_PATH="coverage/Master_Universal_Data_Analytics$Global_Utils.coverage" NAME="Global_Utils Coverage Results" MODIFIED="1551580422168" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Libraries/Utils" />
+  </component>
+  <component name="FileEditorManager">
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/Libraries/ClusterMaster.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="2535">
+              <caret line="169" column="33" selection-start-line="169" selection-start-column="33" selection-end-line="169" selection-end-column="33" />
+              <folding>
+                <element signature="e#27#64#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Libraries/Utils/Global_Utils.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-879">
+              <caret line="298" column="23" selection-start-line="298" selection-start-column="4" selection-end-line="298" selection-end-column="23" />
+              <folding>
+                <element signature="e#21#37#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
+  </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>rend</find>
+      <find>elf.____integer_features</find>
+      <find>create_plt_png</find>
+      <find>__create_plt_png</find>
+      <find>render_mpl</find>
+      <find>visual</find>
+      <find>plt.figure</find>
+      <find>create_ag</find>
+      <find>lomerative</find>
+      <find>create_agglomerative_models</find>
+      <find>create_kmeans_models</find>
+      <find>get_</find>
+      <find>agglomerative</find>
+      <find>n_clusters_list</find>
+      <find>n_cluster</find>
+      <find>random</find>
+      <find>kmeans</find>
+      <find>visualize</find>
+      <find>find_nearest_on_cols</find>
+      <find>create_cluster_pr</find>
+      <find>__render_mpl_table</find>
+      <find>__create_cluster_profiles</find>
+      <find>org_df</find>
+      <find>__create_cluster_sub_dfs</find>
+      <find>=linkage</find>
+      <find>hierarchical</find>
+      <find>from pandas.tools.plotting import table</find>
+      <find>display</find>
+      <find>__display_rank_graph</find>
+      <find>optimize_model_grid</find>
+    </findStrings>
+  </component>
+  <component name="IdeDocumentHistory">
+    <option name="CHANGED_PATHS">
+      <list>
+        <option value="$PROJECT_DIR$/Sklearn_Utils/test.py" />
+        <option value="$PROJECT_DIR$/Sklearn_Utils/Sklearn_Utils.py" />
+        <option value="$PROJECT_DIR$/Sklearn_Utils/Project_Maintainer.py" />
+        <option value="$PROJECT_DIR$/Libraries/Utils/Sklearn_Utils.py" />
+        <option value="$PROJECT_DIR$/Libraries/Iris_Clustering.ipynb" />
+        <option value="$PROJECT_DIR$/Libraries/Utils/Output_Maintainer.py" />
+        <option value="$PROJECT_DIR$/Libraries/Utils/Constants.py" />
+        <option value="$PROJECT_DIR$/Libraries/Dataframe_Type_Holder.py" />
+        <option value="$PROJECT_DIR$/Libraries/DataframeTypeHolder.py" />
+        <option value="$PROJECT_DIR$/Libraries/ClusterMaster.py" />
+        <option value="$PROJECT_DIR$/Libraries/Utils/Global_Utils.py" />
+      </list>
+    </option>
+  </component>
+  <component name="ProjectFrameBounds">
+    <option name="x" value="57" />
+    <option name="y" value="23" />
+    <option name="width" value="1623" />
+    <option name="height" value="1027" />
+  </component>
+  <component name="ProjectView">
+    <navigator proportions="" version="1">
+      <foldersAlwaysOnTop value="true" />
+    </navigator>
+    <panes>
+      <pane id="ProjectPane">
+        <subPane>
+          <expand>
+            <path>
+              <item name="Master_Universal_Data_Analytics" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Master_Universal_Data_Analytics" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Master_Universal_Data_Analytics" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Master_Universal_Data_Analytics" type="462c0819:PsiDirectoryNode" />
+              <item name="Libraries" type="462c0819:PsiDirectoryNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
+      <pane id="Scope" />
+    </panes>
+  </component>
+  <component name="PropertiesComponent">
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
+    <property name="nodejs_npm_path_reset_for_default_project" value="true" />
+    <property name="settings.editor.selected.configurable" value="preferences.sourceCode" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$" />
+    </key>
+  </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
+  </component>
+  <component name="RunManager">
+    <configuration name="Global_Utils" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="Custom Sklearn Objects" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Libraries/Utils" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Libraries/Utils/Global_Utils.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Python.Global_Utils" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="ed041e50-c9da-4464-8bcf-e2b46601487b" name="Default Changelist" comment="" />
+      <created>1551479364844</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1551479364844</updated>
+      <workItem from="1551479367456" duration="3024000" />
+      <workItem from="1551554525149" duration="52959000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TimeTrackingManager">
+    <option name="totallyTimeSpent" value="55983000" />
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="57" y="23" width="1623" height="1027" extended-state="0" />
+    <editor active="true" />
+    <layout>
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.31688803" />
+      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
+      <window_info id="Favorites" order="2" side_tool="true" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.32941177" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.32941177" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="bottom" id="TODO" order="6" />
+      <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Version Control" order="8" />
+      <window_info anchor="bottom" id="Database Changes" order="9" />
+      <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.50031626" side_tool="true" weight="0.22352941" />
+      <window_info anchor="bottom" id="Terminal" order="11" sideWeight="0.49968374" visible="true" weight="0.22352941" />
+      <window_info anchor="bottom" id="Python Console" order="12" />
+      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="right" id="SciView" order="3" />
+      <window_info anchor="right" id="R Graphics" order="4" />
+      <window_info anchor="right" id="R Packages" order="5" />
+      <window_info anchor="right" id="Database" order="6" />
+    </layout>
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+  <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/Sklearn_Utils/Sklearn_Utils.py" />
+    <entry file="file://$PROJECT_DIR$/Sklearn_Utils/Project_Maintainer.py" />
+    <entry file="file://$PROJECT_DIR$/Sklearn_Utils/Dataframe_Type_Holder.py" />
+    <entry file="file://$PROJECT_DIR$/Figures/Default/mytable.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Figures/test.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/testing.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/testing2.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/myfig.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/foo.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Figures/Default/Testingtest.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Figures/Default/Analysis/Rank_Graph_Features.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Figures/Default/Analysis/Rank_Graph_Average Feature Correlation.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Iris_Clustering.ipynb">
+      <provider selected="true" editor-type-id="ipnb-editor">
+        <state>
+          <selected id="14" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Libraries/Utils/Custom_Exc.py">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Figures/Default/Analysis/test.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Figures/Default/Analysis/Scale_PCA_Scale Results.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Figures/Default/Analysis/Rank_Graph_Average_Feature_Correlation.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/83490254.html">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/mytable.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/sgd_method.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Libraries/Utils/Constants.py">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Figures/pca_variance_ratio.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Figures/Default/Clustering/PCA/PCA_Cumulative_Sum_of_Variances.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Figures/Default/Clustering/PCA/PCA_Feature_Variance_Ratio.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Figures/Default/Clustering/Kmeans/Kmeans_Cluster_4/Kmeans_Cluster_4_Cluster_Count.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Libraries/DataframeTypeHolder.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="486">
+          <caret line="85" column="24" selection-start-line="85" selection-start-column="24" selection-end-line="85" selection-end-column="24" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Figures/Default/Clustering/Kmeans/Kmeans_Cluster_4/Cluster:3_Eval_Df.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Figures/Default/Clustering/Kmeans/Kmeans_Cluster_3/Kmeans_Cluster_3_Cluster_Count.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Figures/Default/Clustering/Kmeans/Kmeans_Cluster_3/Cluster:2_Means_Rounded_To_Nearest_Real_Numbers.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Figures/Default/Clustering/Kmeans/Kmeans_Cluster_3/Kmeans_Cluster_3_Visualized_Cluster.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Figures/Default/Clustering/Kmeans/Kmeans_Cluster_2/Cluster:0_Eval_Df.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Figures/Default/Clustering/Kmeans/Kmeans_Cluster_2/Cluster:0_Means_Rounded_To_Nearest_Real_Numbers.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Figures/Default/Clustering/Kmeans/Kmeans_Cluster_2/Cluster:1_Eval_Df.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Figures/Default/Clustering/Kmeans/Kmeans_Cluster_2/Kmeans_Cluster_2_Visualized_Cluster.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Figures/Default/Clustering/Kmeans/Kmeans_Cluster_2/Kmeans_Cluster_2_Cluster_Count.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Figures/Default/Clustering/Kmeans/Kmeans_Cluster_2/Cluster:1_Means_Rounded_To_Nearest_Real_Numbers.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Figures/Default/Clustering/Kmeans/Kmeans_Cluster_4/Cluster:1_Eval_Df.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Figures/Default/Clustering/Kmeans/Kmeans_Cluster_4/Cluster:2_Means_Rounded_To_Nearest_Real_Numbers.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Figures/Default/Clustering/Kmeans/Kmeans_Cluster_4/Cluster:3_Means_Rounded_To_Nearest_Real_Numbers.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Figures/Default/Clustering/Kmeans/Kmeans_Cluster_4/Kmeans_Cluster_4_Visualized_Cluster.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Figures/Default/Clustering/Kmeans/Kmeans_Cluster_3/Cluster:2_Eval_Df.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Figures/Default/Clustering/Hierarchical_Clustering/Hierarchical_Clustering_Method_:_average.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Figures/Default/Clustering/Hierarchical_Clustering/Hierarchical_Clustering_Method_median.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Figures/Default/Clustering/Hierarchical_Clustering/Hierarchical_Clustering_Method_average.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Figures/Default/Clustering/Kmeans/Kmeans_Visualized_Cluster.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Figures/Default/Clustering/AgglomerativeClustering/AgglomerativeClustering_complete_cluster2_ConnectivityFalse/AgglomerativeClustering_complete_cluster2_ConnectivityFalse_Cluster_Count.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Figures/Default/Clustering/AgglomerativeClustering/AgglomerativeClustering_complete_cluster2_ConnectivityFalse/AgglomerativeClustering_complete_cluster2_ConnectivityFalse_Visualized_Cluster.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Libraries/Utils/Global_Utils.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-879">
+          <caret line="298" column="23" selection-start-line="298" selection-start-column="4" selection-end-line="298" selection-end-column="23" />
+          <folding>
+            <element signature="e#21#37#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Libraries/ClusterMaster.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2535">
+          <caret line="169" column="33" selection-start-line="169" selection-start-column="33" selection-end-line="169" selection-end-column="33" />
+          <folding>
+            <element signature="e#27#64#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+  </component>
+</project>
