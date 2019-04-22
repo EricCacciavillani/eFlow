@@ -171,6 +171,14 @@ def encode_df(df, objt_cols):
 
     return df, le_map
 
+def decode_df(df,le_map):
+    
+    df = copy.deepcopy(df)
+    decode_cols = list(le_map.keys())
+    df[decode_cols] = df[decode_cols].apply(lambda x: le_map[x.name].inverse_transform(x))
+    
+    return df
+
 
 def print_encoder(le):
 

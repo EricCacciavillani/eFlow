@@ -82,7 +82,7 @@ def find_all_distances_in_matrix(matrix,
     return all_dp_dist_list
 
 
-class SampleRemoval:
+class TargetSampleRemoval:
     def __init__(self,
                  df,
                  sample_target_dict,
@@ -198,7 +198,8 @@ class SampleRemoval:
             self.__inspect_feature_matrix(matrix=scaled,
                                           feature_names=pca_feature_names)
 
-            self.__scaled = scaled
+            self.__org_scaled = copy.deepcopy(scaled)
+            self.__scaled = copy.deepcopy(scaled)
 
         # Assumed PCA has already been applied; pass as matrix
         else:
@@ -216,14 +217,15 @@ class SampleRemoval:
             shutil.rmtree(self.__PROJECT.PATH_TO_OUTPUT_FOLDER)
         self.__PROJECT = enum(
             PATH_TO_OUTPUT_FOLDER=new_folder_path)
-
-        self.__df_index_values = df.index.values
+        self.__targeted_df = copy.deepcopy(df)
 
         # Init dummy variables to only be used for multithreading
         self.__index_array = None
         self.__total_indexes = None
         self.__tmp_reduced_scaled = None
         self.__all_dp_dist_list = None
+        self.__removed_dps_dict = dict()
+        self.__org_df_index_dict = None
         self.__pbar = None
 
     # Not created by me!
@@ -321,7 +323,7 @@ class SampleRemoval:
 
     def remove_noise(self,
                      new_sample_amount,
-                     zscore_high=1.2,
+                     zscore_high=2.0,
                      annotate=False,
                      apply_changes=False,
                      display_all_graphs=False,
@@ -333,20 +335,11 @@ class SampleRemoval:
 
         if new_sample_amount >= self.__scaled.shape[0]:
             print("THROW ERROR HERE: Sample removal must be less then")
+            return
         elif new_sample_amount <= 0:
             print("THROW ERROR HERE: Val must be a positive number!")
+            return
         else:
-            # Store data for removal
-            removed_dps_dict = dict()
-
-            # Stored removed datapoints for visualizations
-            noise_removal_dps_dict = dict()
-            similarity_dps_dict = dict()
-
-            df_index_scaled_dict = dict()
-            # Index to shape
-            for i, df_index in enumerate(self.__df_index_values):
-                df_index_scaled_dict[df_index] = i
 
             if zscore_high:
                 folder_dir_name = "Data_Point_Removal_Noise_Zscore={0}".format(
@@ -358,15 +351,26 @@ class SampleRemoval:
             centroid = np.mean(self.__scaled, axis=0)
             column_list = [i for i in range(0, self.__scaled.shape[1])]
 
+            df_index_scaled_dict = dict()
+
             reduced_scaled = np.column_stack(
-                (self.__scaled, self.__df_index_values.reshape(
+                (self.__scaled, self.__targeted_df.index.values.reshape(
                     (self.__scaled.shape[0], 1)).astype(self.__scaled.dtype)))
+
+            # Index to shape
+            if not self.__org_df_index_dict:
+                self.__org_df_index_dict = dict()
+                for i, df_index in enumerate(self.__targeted_df.index.values):
+                    df_index = reduced_scaled[i][-1]
+                    self.__org_df_index_dict[df_index] = i
+
+            for i, _ in enumerate(reduced_scaled):
+                df_index = reduced_scaled[i][-1]
+                df_index_scaled_dict[df_index] = i
 
             if create_visuals:
                 self.__visualize_data_points(centroid=centroid,
                                              scaled_data=self.__scaled,
-                                             noise_removal_dps=[],
-                                             similar_removal_dps=[],
                                              new_sample_amount=new_sample_amount,
                                              zscore_high=zscore_high,
                                              weighted_dist_value=None,
@@ -375,7 +379,10 @@ class SampleRemoval:
                                              title="Starting point",
                                              display_all_graphs=display_all_graphs)
 
-        dp_distances = np.zeros(len(reduced_scaled))
+            dp_distances = np.zeros(len(reduced_scaled))
+
+            if "Remove Noise" not in self.__removed_dps_dict.keys():
+                self.__removed_dps_dict["Remove Noise"] = list()
 
         # Keep looping until new sample amount has been reached or
         # the distances are properly.
@@ -388,10 +395,10 @@ class SampleRemoval:
             farthest_dp_index = np.argmax(dp_distances)
             zscores_dp_distances = zscore(np.concatenate((
                 dp_distances, np.array([distance.euclidean(centroid,
-                                                           self.__scaled[
-                                                               dp_index])
+                                                           self.__org_scaled[
+                                                               self.__org_df_index_dict[dp_index]])
                                         for dp_index in
-                                        list(removed_dps_dict.values())
+                                        self.__removed_dps_dict["Remove Noise"]
                                         ])), axis=0))
 
             if zscores_dp_distances[farthest_dp_index] >= zscore_high:
@@ -403,18 +410,13 @@ class SampleRemoval:
                 # remove actual row from the data
 
                 df_index = int(reduced_scaled[farthest_dp_index][-1])
-                removed_dps_dict[df_index] = df_index_scaled_dict[
-                    df_index]
+                self.__removed_dps_dict["Remove Noise"].append(df_index)
 
                 if shelve_relative_path:
                     shelf = shelve.open(shelve_relative_path)
                     shelf[shelve_relative_path.split("/")[-1]] = list(
-                        removed_dps_dict.keys())
+                        self.__removed_dps_dict["Remove Noise"])
                     shelf.close()
-
-                if create_visuals:
-                    noise_removal_dps_dict[df_index] = \
-                        df_index_scaled_dict[df_index]
 
                 reduced_scaled = np.delete(reduced_scaled,
                                            farthest_dp_index,
@@ -427,9 +429,6 @@ class SampleRemoval:
                                                  scaled_data=reduced_scaled[
                                                              :,
                                                              column_list],
-                                                 noise_removal_dps=list(
-                                                     noise_removal_dps_dict.values()),
-                                                 similar_removal_dps=[],
                                                  new_sample_amount=new_sample_amount,
                                                  zscore_high=zscore_high,
                                                  weighted_dist_value=0,
@@ -459,11 +458,20 @@ class SampleRemoval:
                                         filename="Noise Reduction",
                                         show_gif=show_gif)
 
+        df_removal_indexes = copy.deepcopy(
+            self.__removed_dps_dict["Remove Noise"])
         if apply_changes:
             self.__scaled = reduced_scaled[:, column_list]
 
-        return list(removed_dps_dict.keys())
+            for i in df_removal_indexes:
+                try:
+                    self.__targeted_df.drop(i, inplace=True)
+                except KeyError:
+                    pass
+        else:
+            self.__removed_dps_dict.pop("Remove Noise", None)
 
+        return df_removal_indexes
 
     def remove_similar(self,
                        new_sample_amount,
@@ -484,22 +492,13 @@ class SampleRemoval:
 
         new_sample_amount = int(new_sample_amount)
 
+        print(len(self.__targeted_df.index.values))
+
         if new_sample_amount >= self.__scaled.shape[0]:
             print("THROW ERROR HERE: Sample removal must be less then")
         elif new_sample_amount <= 0:
             print("THROW ERROR HERE: Val must be a positive number!")
         else:
-            # Store data for removal
-            removed_dps_dict = dict()
-
-            # Stored removed datapoints for visualizations
-            noise_removal_dps_dict = dict()
-            similarity_dps_dict = dict()
-
-            df_index_scaled_dict = dict()
-            # Index to shape
-            for i, df_index in enumerate(self.__df_index_values):
-                df_index_scaled_dict[df_index] = i
 
             if weighted_dist_value:
                 folder_dir_name = "Data_Point_Removal_Similar_Weight={0}".format(
@@ -507,19 +506,33 @@ class SampleRemoval:
             else:
                 folder_dir_name = "Data_Point_Removal_Similar_Weight=NaN"
 
+            df_index_scaled_dict = dict()
+            reduced_scaled = np.column_stack(
+                (self.__scaled, self.__targeted_df.index.values.reshape(
+                    (self.__scaled.shape[0], 1)).astype(self.__scaled.dtype)))
+
+            # Index to shape
+            if not self.__org_df_index_dict:
+                self.__org_df_index_dict = dict()
+                for i, df_index in enumerate(self.__targeted_df.index.values):
+                    df_index = reduced_scaled[i][-1]
+                    self.__org_df_index_dict[df_index] = i
+
+            for i, _ in enumerate(reduced_scaled):
+                df_index = reduced_scaled[i][-1]
+                df_index_scaled_dict[df_index] = i
+
             # Display graph before augmentation; Create centroid
             centroid = np.mean(self.__scaled, axis=0)
             column_list = [i for i in range(0, self.__scaled.shape[1])]
 
-            reduced_scaled = np.column_stack(
-                (self.__scaled, self.__df_index_values.reshape(
-                    (self.__scaled.shape[0], 1)).astype(self.__scaled.dtype)))
+            for i, _ in enumerate(reduced_scaled):
+                df_index = reduced_scaled[i][-1]
+                df_index_scaled_dict[df_index] = i
 
             if create_visuals:
                 self.__visualize_data_points(centroid=centroid,
                                              scaled_data=self.__scaled,
-                                             noise_removal_dps=[],
-                                             similar_removal_dps=[],
                                              new_sample_amount=new_sample_amount,
                                              zscore_high=None,
                                              weighted_dist_value=weighted_dist_value,
@@ -529,6 +542,9 @@ class SampleRemoval:
                                              display_all_graphs=display_all_graphs)
 
             starting_shape = reduced_scaled.shape[0]
+
+            if "Remove Similar" not in self.__removed_dps_dict.keys():
+                self.__removed_dps_dict["Remove Similar"] = list()
 
             farthest_dp_distance = None
             dp_distances = np.zeros(len(reduced_scaled))
@@ -562,16 +578,12 @@ class SampleRemoval:
                 self.__tmp_reduced_scaled[keep_index])
 
                 df_index = int(reduced_scaled[removal_index][-1])
-                removed_dps_dict[df_index] = df_index_scaled_dict[df_index]
-
-                if create_visuals:
-                    similarity_dps_dict[df_index] = df_index_scaled_dict[
-                        df_index]
+                self.__removed_dps_dict["Remove Similar"].append(df_index)
 
                 if shelve_relative_path:
                     shelf = shelve.open(shelve_relative_path)
-                    shelf[shelve_relative_path.split("/")[-1]] = list(
-                        removed_dps_dict.keys())
+                    shelf[shelve_relative_path.split("/")[-1]] =\
+                        self.__removed_dps_dict["Remove Similar"]
                     shelf.close()
 
                 # Remove from temp scaled
@@ -587,10 +599,6 @@ class SampleRemoval:
                                                  scaled_data=reduced_scaled[
                                                              :,
                                                              column_list],
-                                                 noise_removal_dps=list(
-                                                     noise_removal_dps_dict.values()),
-                                                 similar_removal_dps=list(
-                                                     similarity_dps_dict.values()),
                                                  new_sample_amount=new_sample_amount,
                                                  zscore_high=None,
                                                  weighted_dist_value=weighted_dist_value,
@@ -616,10 +624,19 @@ class SampleRemoval:
                                         filename="Similar Reduction",
                                         show_gif=show_gif)
 
+
+        df_removal_indexes = copy.deepcopy(self.__removed_dps_dict["Remove Similar"])
         if apply_changes:
             self.__scaled = reduced_scaled[:, column_list]
+            for i in df_removal_indexes:
+                try:
+                    self.__targeted_df.drop(i, inplace=True)
+                except KeyError:
+                    pass
+        else:
+            self.__removed_dps_dict.pop("Remove Similar", None)
 
-        return list(removed_dps_dict.keys())
+        return df_removal_indexes
 
     def __find_dp_dist_mean(self,
                             target_index,
@@ -761,8 +778,6 @@ class SampleRemoval:
     def __visualize_data_points(self,
                                 centroid,
                                 scaled_data,
-                                noise_removal_dps,
-                                similar_removal_dps,
                                 new_sample_amount,
                                 zscore_high,
                                 weighted_dist_value,
@@ -810,105 +825,115 @@ class SampleRemoval:
             #                      distance.euclidean(scaled_data[i], centroid)))
 
         # Plot data points removed from noise removal
-        noise_removal_last_index = len(noise_removal_dps) - 1
-        for index, dp_index in enumerate(noise_removal_dps):
+        for key_name,list_of_removed_indexes in self.__removed_dps_dict.items():
+            for index, dp_index in enumerate(list_of_removed_indexes):
 
-            if white_out_mode:
-                pl.scatter(np.mean(self.__scaled[dp_index]),
-                           distance.euclidean(self.__scaled[dp_index],
-                                              centroid),
-                           c="#ffffff",
-                           marker='X',
-                           alpha=0)
-            else:
-                pl.scatter(np.mean(self.__scaled[dp_index]),
-                           distance.euclidean(self.__scaled[dp_index],
-                                              centroid),
-                           c="#00A572",
-                           marker='X',
-                           label="Noise Removal")
+                if white_out_mode:
+                    pl.scatter(np.mean(self.__org_scaled[dp_index]),
+                               distance.euclidean(self.__org_scaled[dp_index],
+                                                  centroid),
+                               c="#ffffff",
+                               marker='X',
+                               alpha=0)
+                else:
 
-        if annotate and new_dp_meta_noise_removal:
+                    if key_name == "Remove Noise":
+                        pl.scatter(np.mean(self.__org_scaled[
+                                               self.__org_df_index_dict[dp_index]]),
+                                   distance.euclidean(self.__org_scaled[
+                                                          self.__org_df_index_dict[
+                                                              dp_index]],
+                                                      centroid),
+                                   c="#00A572",
+                                   marker='X',
+                                   label="Noise Removal")
+                        if annotate and new_dp_meta_noise_removal \
+                                and index == len(list_of_removed_indexes)-1:
 
-            # ---
-            dp = new_dp_meta_noise_removal[0]
+                            # ---
+                            dp = new_dp_meta_noise_removal[0]
 
-            # Find the correct angle to have the text and annotated line match
-            mean_of_dp = np.mean(dp)
-            dp_centroid_dist = distance.euclidean(dp, centroid)
+                            # Find the correct angle to have the text and annotated line match
+                            mean_of_dp = np.mean(dp)
+                            dp_centroid_dist = distance.euclidean(dp, centroid)
 
-            dy = (0 - dp_centroid_dist)
-            dx = (np.mean(centroid) - mean_of_dp)
-            rotn = np.degrees(np.arctan2(dy, dx))
-            trans_angle = plt.gca().transData.transform_angles(
-                np.array((rotn,)), np.array((mean_of_dp,
-                                             dp_centroid_dist)).reshape(
-                    (1, 2)))[0]
-            # Fix text representation on the given angle
-            if trans_angle > 90:
-                trans_angle = trans_angle - 180
+                            dy = (0 - dp_centroid_dist)
+                            dx = (np.mean(centroid) - mean_of_dp)
+                            rotn = np.degrees(np.arctan2(dy, dx))
+                            trans_angle = plt.gca().transData.transform_angles(
+                                np.array((rotn,)), np.array((mean_of_dp,
+                                                             dp_centroid_dist)).reshape(
+                                    (1, 2)))[0]
+                            # Fix text representation on the given angle
+                            if trans_angle > 90:
+                                trans_angle = trans_angle - 180
 
-            if trans_angle < -90:
-                trans_angle = trans_angle + 180
+                            if trans_angle < -90:
+                                trans_angle = trans_angle + 180
 
-            # Spacing for formatting
-            spacing = "\n" * 2
-            if trans_angle < 0:
-                spacing = "\n" * 4
+                            # Spacing for formatting
+                            spacing = "\n" * 2
+                            if trans_angle < 0:
+                                spacing = "\n" * 4
 
-            # Create line
-            plt.annotate(' ', xy=(mean_of_dp, dp_centroid_dist), xytext=(
-                np.mean(centroid), 0),
-                         rotation=trans_angle,
-                         ha='center',
-                         va='center',
-                         rotation_mode='anchor',
-                         arrowprops={'arrowstyle': '<->', 'shrinkA': .4,
-                                     'shrinkB': 4.5}
-                         )
+                            # Create line
+                            plt.annotate(' ', xy=(mean_of_dp, dp_centroid_dist),
+                                         xytext=(
+                                             np.mean(centroid), 0),
+                                         rotation=trans_angle,
+                                         ha='center',
+                                         va='center',
+                                         rotation_mode='anchor',
+                                         arrowprops={'arrowstyle': '<->',
+                                                     'shrinkA': .4,
+                                                     'shrinkB': 4.5}
+                                         )
 
-            # Create text
-            plt.annotate(spacing + 'zscore={0:.2f} , Dist:{1:.2f}\n'.format(
-                new_dp_meta_noise_removal[1],
-                new_dp_meta_noise_removal[2]),
-                         xy=(mean_of_dp * .5, dp_centroid_dist * .5),
-                         rotation_mode='anchor',
-                         va='center',
-                         ha='center',
-                         rotation=trans_angle)
+                            # Create text
+                            plt.annotate(
+                                spacing + 'zscore={0:.2f} , Dist:{1:.2f}\n'.format(
+                                    new_dp_meta_noise_removal[1],
+                                    new_dp_meta_noise_removal[2]),
+                                xy=(mean_of_dp * .5, dp_centroid_dist * .5),
+                                rotation_mode='anchor',
+                                va='center',
+                                ha='center',
+                                rotation=trans_angle)
+                    elif key_name == "Remove Similar":
+                        pl.scatter(np.mean(self.__org_scaled[
+                                               self.__org_df_index_dict[
+                                                   dp_index]]),
+                                   distance.euclidean(self.__org_scaled[
+                                                          self.__org_df_index_dict[
+                                                              dp_index]],
+                                                      centroid),
+                                   c="#8A2BE2",
+                                   marker='X',
+                                   label="Similar Removal")
 
-        for index, dp_index in enumerate(similar_removal_dps):
-            if white_out_mode:
-                pl.scatter(np.mean(self.__scaled[dp_index]),
-                           distance.euclidean(self.__scaled[dp_index],
-                                              centroid),
-                           c="#ffffff",
-                           marker='X',
-                           alpha=0)
-            else:
-                pl.scatter(np.mean(self.__scaled[dp_index]),
-                           distance.euclidean(self.__scaled[dp_index],
-                                              centroid),
-                           c="#8A2BE2",
-                           marker='X',
-                           label="Similar Removal")
+                        if annotate and new_dp_meta_similar_removal \
+                                and index == len(list_of_removed_indexes)-1:
+                            # Create line
+                            plt.annotate(' ',
+                                         xy=(
+                                         np.mean(new_dp_meta_similar_removal[0]),
+                                         distance.euclidean(
+                                             new_dp_meta_similar_removal[0],
+                                             centroid)),
+                                         xytext=(
+                                             np.mean(
+                                                 new_dp_meta_similar_removal[1]),
+                                             distance.euclidean(
+                                                 new_dp_meta_similar_removal[1],
+                                                 centroid)),
+                                         ha='center',
+                                         va='center',
+                                         rotation_mode='anchor',
+                                         arrowprops={'arrowstyle': '<->',
+                                                     'shrinkA': .4,
+                                                     'shrinkB': 4.5}
+                                         )
 
-        if annotate and new_dp_meta_similar_removal:
-            # Create line
-            plt.annotate(' ', xy=(np.mean(new_dp_meta_similar_removal[0]),
-                                  distance.euclidean(
-                                      new_dp_meta_similar_removal[0],
-                                      centroid)),
-                         xytext=(np.mean(new_dp_meta_similar_removal[1]),
-                                 distance.euclidean(
-                                     new_dp_meta_similar_removal[1],
-                                     centroid)),
-                         ha='center',
-                         va='center',
-                         rotation_mode='anchor',
-                         arrowprops={'arrowstyle': '<->', 'shrinkA': .4,
-                                     'shrinkB': 4.5}
-                         )
 
         # Plot centroid
         pl.scatter(np.mean(centroid), 0,
@@ -934,8 +959,8 @@ class SampleRemoval:
         if display_all_graphs:
             plt.show()
         else:
-            if self.__scaled.shape[0] > scaled_data.shape[
-                0] and not no_print_output:
+            if self.__scaled.shape[0] > scaled_data.shape[0] and \
+                    not no_print_output:
                 if new_dp_meta_noise_removal:
                     print("Scaled size is now {0}".format(
                         scaled_data.shape[

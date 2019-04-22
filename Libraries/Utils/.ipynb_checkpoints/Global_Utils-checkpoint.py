@@ -17,8 +17,10 @@ from IPython.display import display, HTML
 import six
 from sklearn.cluster import KMeans
 from sklearn.decomposition import PCA
-
-
+from tqdm import tqdm
+from kneed import DataGenerator, KneeLocator
+from sklearn.decomposition import PCA
+from sklearn.preprocessing import StandardScaler
 
 class ThreadSafeDict(dict) :
     def __init__(self, * p_arg, ** n_arg) :
@@ -168,6 +170,14 @@ def encode_df(df, objt_cols):
     df[objt_cols] = df[objt_cols].apply(lambda x: le_map[x.name].transform(x))
 
     return df, le_map
+
+def decode_df(df,le_map):
+    
+    df = copy.deepcopy(df)
+    decode_cols = list(le_map.keys())
+    df[decode_cols] = df[decode_cols].apply(lambda x: le_map[x.name].inverse_transform(x))
+    
+    return df
 
 
 def print_encoder(le):
@@ -434,36 +444,96 @@ def random_partition_of_random_samples(list_of_df_indexes,
     np.random.seed(None)
     return return_matrix
 
-def kmeans_impurity_sample_removal(df):
-    df=copy.deepcopy(df)
-     """
-            Generate models based on the found 'elbow' of the interia values.
-     """
 
-        ks = range(1, 15)
-        inertias = []
+def kmeans_impurity_sample_removal(df,
+                                   target,
+                                   pca_perc,
+                                   majority_class,
+                                   majority_class_threshold=.5,
+                                   random_state=None):
+    """
+        Generate models based on the found 'elbow' of the interia values.
+    """
+    df = copy.deepcopy(df)
+    removal_df_indexes = []
 
-        for k in tqdm(ks):
-            # Create a KMeans instance with k clusters: model
-            model = KMeans(n_clusters=k,
-                           random_state=random_state).fit(self.__scaled)
+    # Create scaler object
+    scaler = StandardScaler()
+    scaled = scaler.fit_transform(df.drop(columns=[target]))
 
-            # Append the inertia to the list of inertias
-            inertias.append(model.inertia_)
+    print("\nInspecting scaled results!")
+    # self.__inspect_feature_matrix(matrix=scaled,
+    #                               feature_names=df.columns)
 
-        a = KneeLocator(inertias, ks, curve='convex', direction='decreasing')
-        elbow_index = np.where(inertias == a.knee)
-        elbow_index = elbow_index[0][0] + 1
+    pca = PCA()
+    scaled = pca.fit_transform(scaled)
 
-        for k_val in [elbow_index - 1, elbow_index, elbow_index + 1]:
-            self.__all_cluster_models["Kmeans_Cluster_" + str(k_val)] = KMeans(
-                n_clusters=k_val, random_state=random_state).fit(self.__scaled)
-            plt.plot(ks[k_val - 1], inertias[k_val - 1], 'r*')
+    # Generate "dummy" feature names
+    pca_feature_names = ["PCA_Feature_" +
+                         str(i) for i in range(1,
+                                               len(df.columns) + 1)]
 
-            print(
-                "Successfully generate Kmeans model on k_val={0}".format(k_val)
-            )
+    print("\nInspecting applied pca results!")
+    # self.__inspect_feature_matrix(matrix=scaled,
+    #                               feature_names=pca_feature_names)
 
-        self.__create_plt_png("Kmeans",
-                              "Kmeans_Visualized_Cluster")
-    
+    if pca_perc < 1.0:
+        # Find cut off point on cumulative sum
+        cutoff_index = np.where(
+            pca.explained_variance_ratio_.cumsum() > pca_perc)[0][0]
+    else:
+        cutoff_index = scaled.shape[1] - 1
+
+    print(
+        "After applying pca with a cutoff percentage {0}%"
+        " for the cumulative index. Using features 1 to {1}".format(
+            pca_perc, cutoff_index + 1))
+
+    print("Old shape {0}".format(scaled.shape))
+
+    scaled = scaled[:, :cutoff_index + 1]
+    pca_feature_names = pca_feature_names[0: cutoff_index + 1]
+
+    print("New shape {0}".format(scaled.shape))
+
+    scaled = scaler.fit_transform(scaled)
+
+    print("\nInspecting re-applied scaled results!")
+    # self.__inspect_feature_matrix(matrix=scaled,
+    #                               feature_names=pca_feature_names)
+
+    ks = range(1, 15)
+    inertias = []
+    all_models = []
+
+    for k in tqdm(ks):
+        # Create a KMeans instance with k clusters: model
+        model = KMeans(n_clusters=k,
+                       random_state=random_state).fit(scaled)
+
+        # Append the inertia to the list of inertias
+        inertias.append(model.inertia_)
+        all_models.append(model)
+
+    a = KneeLocator(inertias, ks, curve='convex', direction='decreasing')
+    elbow_index = np.where(inertias == a.knee)
+    best_worst_model_index = elbow_index[0][0] + 2
+    best_worst_model = None
+
+    if len(all_models) < best_worst_model_index:
+        print("OUT OF INDEX ERROR!!!")
+    else:
+        best_worst_model = all_models[best_worst_model_index]
+
+    print(best_worst_model.labels_)
+    df["Cluster_Name"] = model.labels_
+    for val in set(df["Cluster_Name"]):
+        sub_df = df[df["Cluster_Name"] == val]
+        val_counts_dict = sub_df[target].value_counts().to_dict()
+
+        if majority_class in val_counts_dict and val_counts_dict[
+            majority_class] / sum(val_counts_dict.values()) <= majority_class_threshold:
+            removal_df_indexes += sub_df[
+                sub_df[target] == majority_class].index.values.tolist()
+
+    return removal_df_indexes
