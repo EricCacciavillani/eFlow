@@ -2,8 +2,45 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ed041e50-c9da-4464-8bcf-e2b46601487b" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Libraries/SampleRemoval.py" beforeDir="false" afterPath="$PROJECT_DIR$/Libraries/SampleRemoval.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Testing/.ipynb_checkpoints/Sample_Removal-checkpoint.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/Testing/.ipynb_checkpoints/Sample_Removal-checkpoint.ipynb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Testing/Figures/Default/SampleRemoval_PCA_Features=3/Data_Point_Removal_Noise_Zscore=1.0 Data_Point_Removal_Similar_Weight=1.0 .gif" beforeDir="false" afterPath="$PROJECT_DIR$/Testing/Figures/Default/SampleRemoval_PCA_Features=3/Data_Point_Removal_Noise_Zscore=1.0 Data_Point_Removal_Similar_Weight=1.0 .gif" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Testing/Figures/Default/SampleRemoval_PCA_Features=3/Data_Point_Removal_Noise_Zscore=1.0/Noise Reduction.gif" beforeDir="false" afterPath="$PROJECT_DIR$/Testing/Figures/Default/SampleRemoval_PCA_Features=3/Data_Point_Removal_Noise_Zscore=1.0/Noise Reduction.gif" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Testing/Figures/Default/SampleRemoval_PCA_Features=3/Data_Point_Removal_Noise_Zscore=1.0/Sample_removal_Visualized_Cluster_n=42.png" beforeDir="false" afterPath="$PROJECT_DIR$/Testing/Figures/Default/SampleRemoval_PCA_Features=3/Data_Point_Removal_Noise_Zscore=1.0/Sample_removal_Visualized_Cluster_n=42.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Testing/Figures/Default/SampleRemoval_PCA_Features=3/Data_Point_Removal_Noise_Zscore=1.0/Sample_removal_Visualized_Cluster_n=43.png" beforeDir="false" afterPath="$PROJECT_DIR$/Testing/Figures/Default/SampleRemoval_PCA_Features=3/Data_Point_Removal_Noise_Zscore=1.0/Sample_removal_Visualized_Cluster_n=43.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Testing/Figures/Default/SampleRemoval_PCA_Features=3/Data_Point_Removal_Noise_Zscore=1.0/Sample_removal_Visualized_Cluster_n=44.png" beforeDir="false" afterPath="$PROJECT_DIR$/Testing/Figures/Default/SampleRemoval_PCA_Features=3/Data_Point_Removal_Noise_Zscore=1.0/Sample_removal_Visualized_Cluster_n=44.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Testing/Figures/Default/SampleRemoval_PCA_Features=3/Data_Point_Removal_Noise_Zscore=1.0/Sample_removal_Visualized_Cluster_n=45.png" beforeDir="false" afterPath="$PROJECT_DIR$/Testing/Figures/Default/SampleRemoval_PCA_Features=3/Data_Point_Removal_Noise_Zscore=1.0/Sample_removal_Visualized_Cluster_n=45.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Testing/Figures/Default/SampleRemoval_PCA_Features=3/Data_Point_Removal_Noise_Zscore=1.0/Sample_removal_Visualized_Cluster_n=46.png" beforeDir="false" afterPath="$PROJECT_DIR$/Testing/Figures/Default/SampleRemoval_PCA_Features=3/Data_Point_Removal_Noise_Zscore=1.0/Sample_removal_Visualized_Cluster_n=46.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Testing/Figures/Default/SampleRemoval_PCA_Features=3/Data_Point_Removal_Noise_Zscore=1.0/Sample_removal_Visualized_Cluster_n=47.png" beforeDir="false" afterPath="$PROJECT_DIR$/Testing/Figures/Default/SampleRemoval_PCA_Features=3/Data_Point_Removal_Noise_Zscore=1.0/Sample_removal_Visualized_Cluster_n=47.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Testing/Figures/Default/SampleRemoval_PCA_Features=3/Data_Point_Removal_Noise_Zscore=1.0/Sample_removal_Visualized_Cluster_n=48.png" beforeDir="false" afterPath="$PROJECT_DIR$/Testing/Figures/Default/SampleRemoval_PCA_Features=3/Data_Point_Removal_Noise_Zscore=1.0/Sample_removal_Visualized_Cluster_n=48.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Testing/Figures/Default/SampleRemoval_PCA_Features=3/Data_Point_Removal_Noise_Zscore=1.0/Sample_removal_Visualized_Cluster_n=49.png" beforeDir="false" afterPath="$PROJECT_DIR$/Testing/Figures/Default/SampleRemoval_PCA_Features=3/Data_Point_Removal_Noise_Zscore=1.0/Sample_removal_Visualized_Cluster_n=49.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Testing/Figures/Default/SampleRemoval_PCA_Features=3/Data_Point_Removal_Noise_Zscore=1.0/Sample_removal_Visualized_Cluster_n=50.png" beforeDir="false" afterPath="$PROJECT_DIR$/Testing/Figures/Default/SampleRemoval_PCA_Features=3/Data_Point_Removal_Noise_Zscore=1.0/Sample_removal_Visualized_Cluster_n=50.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Testing/Figures/Default/SampleRemoval_PCA_Features=3/Data_Point_Removal_Similar_Weight=1.0 Data_Point_Removal_Noise_Zscore=1.0 .gif" beforeDir="false" afterPath="$PROJECT_DIR$/Testing/Figures/Default/SampleRemoval_PCA_Features=3/Data_Point_Removal_Similar_Weight=1.0 Data_Point_Removal_Noise_Zscore=1.0 .gif" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Testing/Figures/Default/SampleRemoval_PCA_Features=3/Data_Point_Removal_Similar_Weight=1.0/Sample_removal_Visualized_Cluster_n=20.png" beforeDir="false" afterPath="$PROJECT_DIR$/Testing/Figures/Default/SampleRemoval_PCA_Features=3/Data_Point_Removal_Similar_Weight=1.0/Sample_removal_Visualized_Cluster_n=20.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Testing/Figures/Default/SampleRemoval_PCA_Features=3/Data_Point_Removal_Similar_Weight=1.0/Sample_removal_Visualized_Cluster_n=21.png" beforeDir="false" afterPath="$PROJECT_DIR$/Testing/Figures/Default/SampleRemoval_PCA_Features=3/Data_Point_Removal_Similar_Weight=1.0/Sample_removal_Visualized_Cluster_n=21.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Testing/Figures/Default/SampleRemoval_PCA_Features=3/Data_Point_Removal_Similar_Weight=1.0/Sample_removal_Visualized_Cluster_n=22.png" beforeDir="false" afterPath="$PROJECT_DIR$/Testing/Figures/Default/SampleRemoval_PCA_Features=3/Data_Point_Removal_Similar_Weight=1.0/Sample_removal_Visualized_Cluster_n=22.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Testing/Figures/Default/SampleRemoval_PCA_Features=3/Data_Point_Removal_Similar_Weight=1.0/Sample_removal_Visualized_Cluster_n=23.png" beforeDir="false" afterPath="$PROJECT_DIR$/Testing/Figures/Default/SampleRemoval_PCA_Features=3/Data_Point_Removal_Similar_Weight=1.0/Sample_removal_Visualized_Cluster_n=23.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Testing/Figures/Default/SampleRemoval_PCA_Features=3/Data_Point_Removal_Similar_Weight=1.0/Sample_removal_Visualized_Cluster_n=24.png" beforeDir="false" afterPath="$PROJECT_DIR$/Testing/Figures/Default/SampleRemoval_PCA_Features=3/Data_Point_Removal_Similar_Weight=1.0/Sample_removal_Visualized_Cluster_n=24.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Testing/Figures/Default/SampleRemoval_PCA_Features=3/Data_Point_Removal_Similar_Weight=1.0/Sample_removal_Visualized_Cluster_n=25.png" beforeDir="false" afterPath="$PROJECT_DIR$/Testing/Figures/Default/SampleRemoval_PCA_Features=3/Data_Point_Removal_Similar_Weight=1.0/Sample_removal_Visualized_Cluster_n=25.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Testing/Figures/Default/SampleRemoval_PCA_Features=3/Data_Point_Removal_Similar_Weight=1.0/Sample_removal_Visualized_Cluster_n=26.png" beforeDir="false" afterPath="$PROJECT_DIR$/Testing/Figures/Default/SampleRemoval_PCA_Features=3/Data_Point_Removal_Similar_Weight=1.0/Sample_removal_Visualized_Cluster_n=26.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Testing/Figures/Default/SampleRemoval_PCA_Features=3/Data_Point_Removal_Similar_Weight=1.0/Sample_removal_Visualized_Cluster_n=27.png" beforeDir="false" afterPath="$PROJECT_DIR$/Testing/Figures/Default/SampleRemoval_PCA_Features=3/Data_Point_Removal_Similar_Weight=1.0/Sample_removal_Visualized_Cluster_n=27.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Testing/Figures/Default/SampleRemoval_PCA_Features=3/Data_Point_Removal_Similar_Weight=1.0/Sample_removal_Visualized_Cluster_n=28.png" beforeDir="false" afterPath="$PROJECT_DIR$/Testing/Figures/Default/SampleRemoval_PCA_Features=3/Data_Point_Removal_Similar_Weight=1.0/Sample_removal_Visualized_Cluster_n=28.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Testing/Figures/Default/SampleRemoval_PCA_Features=3/Data_Point_Removal_Similar_Weight=1.0/Sample_removal_Visualized_Cluster_n=29.png" beforeDir="false" afterPath="$PROJECT_DIR$/Testing/Figures/Default/SampleRemoval_PCA_Features=3/Data_Point_Removal_Similar_Weight=1.0/Sample_removal_Visualized_Cluster_n=29.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Testing/Figures/Default/SampleRemoval_PCA_Features=3/Data_Point_Removal_Similar_Weight=1.0/Sample_removal_Visualized_Cluster_n=30.png" beforeDir="false" afterPath="$PROJECT_DIR$/Testing/Figures/Default/SampleRemoval_PCA_Features=3/Data_Point_Removal_Similar_Weight=1.0/Sample_removal_Visualized_Cluster_n=30.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Testing/Figures/Default/SampleRemoval_PCA_Features=3/Data_Point_Removal_Similar_Weight=1.0/Sample_removal_Visualized_Cluster_n=31.png" beforeDir="false" afterPath="$PROJECT_DIR$/Testing/Figures/Default/SampleRemoval_PCA_Features=3/Data_Point_Removal_Similar_Weight=1.0/Sample_removal_Visualized_Cluster_n=31.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Testing/Figures/Default/SampleRemoval_PCA_Features=3/Data_Point_Removal_Similar_Weight=1.0/Sample_removal_Visualized_Cluster_n=32.png" beforeDir="false" afterPath="$PROJECT_DIR$/Testing/Figures/Default/SampleRemoval_PCA_Features=3/Data_Point_Removal_Similar_Weight=1.0/Sample_removal_Visualized_Cluster_n=32.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Testing/Figures/Default/SampleRemoval_PCA_Features=3/Data_Point_Removal_Similar_Weight=1.0/Sample_removal_Visualized_Cluster_n=33.png" beforeDir="false" afterPath="$PROJECT_DIR$/Testing/Figures/Default/SampleRemoval_PCA_Features=3/Data_Point_Removal_Similar_Weight=1.0/Sample_removal_Visualized_Cluster_n=33.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Testing/Figures/Default/SampleRemoval_PCA_Features=3/Data_Point_Removal_Similar_Weight=1.0/Sample_removal_Visualized_Cluster_n=34.png" beforeDir="false" afterPath="$PROJECT_DIR$/Testing/Figures/Default/SampleRemoval_PCA_Features=3/Data_Point_Removal_Similar_Weight=1.0/Sample_removal_Visualized_Cluster_n=34.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Testing/Figures/Default/SampleRemoval_PCA_Features=3/Data_Point_Removal_Similar_Weight=1.0/Sample_removal_Visualized_Cluster_n=35.png" beforeDir="false" afterPath="$PROJECT_DIR$/Testing/Figures/Default/SampleRemoval_PCA_Features=3/Data_Point_Removal_Similar_Weight=1.0/Sample_removal_Visualized_Cluster_n=35.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Testing/Figures/Default/SampleRemoval_PCA_Features=3/Data_Point_Removal_Similar_Weight=1.0/Sample_removal_Visualized_Cluster_n=36.png" beforeDir="false" afterPath="$PROJECT_DIR$/Testing/Figures/Default/SampleRemoval_PCA_Features=3/Data_Point_Removal_Similar_Weight=1.0/Sample_removal_Visualized_Cluster_n=36.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Testing/Figures/Default/SampleRemoval_PCA_Features=3/Data_Point_Removal_Similar_Weight=1.0/Sample_removal_Visualized_Cluster_n=37.png" beforeDir="false" afterPath="$PROJECT_DIR$/Testing/Figures/Default/SampleRemoval_PCA_Features=3/Data_Point_Removal_Similar_Weight=1.0/Sample_removal_Visualized_Cluster_n=37.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Testing/Figures/Default/SampleRemoval_PCA_Features=3/Data_Point_Removal_Similar_Weight=1.0/Sample_removal_Visualized_Cluster_n=38.png" beforeDir="false" afterPath="$PROJECT_DIR$/Testing/Figures/Default/SampleRemoval_PCA_Features=3/Data_Point_Removal_Similar_Weight=1.0/Sample_removal_Visualized_Cluster_n=38.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Testing/Figures/Default/SampleRemoval_PCA_Features=3/Data_Point_Removal_Similar_Weight=1.0/Sample_removal_Visualized_Cluster_n=39.png" beforeDir="false" afterPath="$PROJECT_DIR$/Testing/Figures/Default/SampleRemoval_PCA_Features=3/Data_Point_Removal_Similar_Weight=1.0/Sample_removal_Visualized_Cluster_n=39.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Testing/Figures/Default/SampleRemoval_PCA_Features=3/Data_Point_Removal_Similar_Weight=1.0/Sample_removal_Visualized_Cluster_n=40.png" beforeDir="false" afterPath="$PROJECT_DIR$/Testing/Figures/Default/SampleRemoval_PCA_Features=3/Data_Point_Removal_Similar_Weight=1.0/Sample_removal_Visualized_Cluster_n=40.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Testing/Figures/Default/SampleRemoval_PCA_Features=3/Data_Point_Removal_Similar_Weight=1.0/Sample_removal_Visualized_Cluster_n=41.png" beforeDir="false" afterPath="$PROJECT_DIR$/Testing/Figures/Default/SampleRemoval_PCA_Features=3/Data_Point_Removal_Similar_Weight=1.0/Sample_removal_Visualized_Cluster_n=41.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Testing/Figures/Default/SampleRemoval_PCA_Features=3/Data_Point_Removal_Similar_Weight=1.0/Sample_removal_Visualized_Cluster_n=42.png" beforeDir="false" afterPath="$PROJECT_DIR$/Testing/Figures/Default/SampleRemoval_PCA_Features=3/Data_Point_Removal_Similar_Weight=1.0/Sample_removal_Visualized_Cluster_n=42.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Testing/Figures/Default/SampleRemoval_PCA_Features=3/Data_Point_Removal_Similar_Weight=1.0/Similar Reduction.gif" beforeDir="false" afterPath="$PROJECT_DIR$/Testing/Figures/Default/SampleRemoval_PCA_Features=3/Data_Point_Removal_Similar_Weight=1.0/Similar Reduction.gif" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Testing/Sample_Removal.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/Testing/Sample_Removal.ipynb" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -25,8 +62,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Libraries/SampleRemoval.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="369">
-              <caret line="821" column="47" selection-start-line="821" selection-start-column="47" selection-end-line="821" selection-end-column="47" />
+            <state relative-caret-position="278">
+              <caret line="969" column="59" selection-start-line="969" selection-start-column="59" selection-end-line="969" selection-end-column="59" />
               <folding>
                 <element signature="e#25#62#0" expanded="true" />
               </folding>
@@ -38,8 +75,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>__for_find_all_dist_with_target</find>
-      <find>ThreadSafeDict</find>
       <find>thread</find>
       <find>StandardScaler</find>
       <find>inspect_feature_matrix</find>
@@ -68,6 +103,8 @@
       <find>__saved_created_folders</find>
       <find>insert</find>
       <find>filename=</find>
+      <find>called_from</find>
+      <find>new_dp_meta_similar_removal</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -240,12 +277,12 @@
       <workItem from="1554599615015" duration="1898000" />
       <workItem from="1554670455924" duration="359000" />
       <workItem from="1554686675409" duration="634000" />
-      <workItem from="1555898134151" duration="15959000" />
+      <workItem from="1555898134151" duration="21360000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="214203000" />
+    <option name="totallyTimeSpent" value="219604000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="64" y="23" width="1616" height="1027" extended-state="0" />
@@ -362,8 +399,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Libraries/SampleRemoval.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="369">
-          <caret line="821" column="47" selection-start-line="821" selection-start-column="47" selection-end-line="821" selection-end-column="47" />
+        <state relative-caret-position="278">
+          <caret line="969" column="59" selection-start-line="969" selection-start-column="59" selection-end-line="969" selection-end-column="59" />
           <folding>
             <element signature="e#25#62#0" expanded="true" />
           </folding>

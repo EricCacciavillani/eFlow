@@ -379,11 +379,10 @@ class TargetSampleRemoval:
                 self.__visualize_data_points(centroid=centroid,
                                              scaled_data=self.__scaled,
                                              new_sample_amount=new_sample_amount,
-                                             zscore_high=zscore_high,
-                                             weighted_dist_value=None,
                                              annotate=annotate,
                                              apply_changes=apply_changes,
                                              output_path=folder_dir_name,
+                                             called_from=sys._getframe().f_code.co_name,
                                              title="Starting point",
                                              display_all_graphs=display_all_graphs)
 
@@ -411,12 +410,8 @@ class TargetSampleRemoval:
 
             if zscores_dp_distances[farthest_dp_index] >= zscore_high:
 
-                farthest_dp = reduced_scaled[farthest_dp_index][
-                              :column_list[-1] + 1]
-
                 # Add original dataframe index to the dict;
                 # remove actual row from the data
-
                 df_index = int(reduced_scaled[farthest_dp_index][-1])
                 self.__removed_dps_dict["Remove Noise"].append(df_index)
 
@@ -433,22 +428,23 @@ class TargetSampleRemoval:
                 centroid = np.mean(reduced_scaled[:, column_list],
                                    axis=0)
                 if create_visuals:
+
+                    meta_data = dict()
+                    meta_data["zscore"] = zscores_dp_distances[
+                        farthest_dp_index]
+                    meta_data["distance"] = dp_distances[
+                        farthest_dp_index]
+
                     self.__visualize_data_points(centroid=centroid,
                                                  scaled_data=reduced_scaled[
                                                              :,
                                                              column_list],
                                                  new_sample_amount=new_sample_amount,
-                                                 zscore_high=zscore_high,
-                                                 weighted_dist_value=0,
                                                  annotate=annotate,
                                                  apply_changes=apply_changes,
                                                  output_path=folder_dir_name,
-                                                 new_dp_meta_noise_removal=(
-                                                     farthest_dp,
-                                                     zscores_dp_distances[
-                                                         farthest_dp_index],
-                                                     dp_distances[
-                                                         farthest_dp_index]),
+                                                 meta_data=meta_data,
+                                                 called_from=sys._getframe().f_code.co_name,
                                                  title="Data Removal: Noise reduction",
                                                  display_all_graphs=display_all_graphs)
                 else:
@@ -546,11 +542,10 @@ class TargetSampleRemoval:
                 self.__visualize_data_points(centroid=centroid,
                                              scaled_data=self.__scaled,
                                              new_sample_amount=new_sample_amount,
-                                             zscore_high=None,
-                                             weighted_dist_value=weighted_dist_value,
                                              annotate=annotate,
                                              apply_changes=apply_changes,
                                              output_path=folder_dir_name,
+                                             called_from=sys._getframe().f_code.co_name,
                                              title="Starting point",
                                              display_all_graphs=display_all_graphs)
 
@@ -586,10 +581,6 @@ class TargetSampleRemoval:
                     print("Target distance reached!!!")
                     break
 
-                new_dp_meta_similar_removal = (
-                self.__tmp_reduced_scaled[removal_index],
-                self.__tmp_reduced_scaled[keep_index])
-
                 df_index = int(reduced_scaled[removal_index][-1])
                 self.__removed_dps_dict["Remove Similar"].append(df_index)
 
@@ -608,17 +599,21 @@ class TargetSampleRemoval:
                                    axis=0)
 
                 if create_visuals:
+
+                    meta_data = dict()
+                    meta_data["kept_point"] = self.__tmp_reduced_scaled[
+                        keep_index]
+
                     self.__visualize_data_points(centroid=centroid,
                                                  scaled_data=reduced_scaled[
                                                              :,
                                                              column_list],
                                                  new_sample_amount=new_sample_amount,
-                                                 zscore_high=None,
-                                                 weighted_dist_value=weighted_dist_value,
                                                  annotate=annotate,
                                                  apply_changes=apply_changes,
                                                  output_path=folder_dir_name,
-                                                 new_dp_meta_similar_removal=new_dp_meta_similar_removal,
+                                                 called_from=sys._getframe().f_code.co_name,
+                                                 meta_data=meta_data,
                                                  title="Data Removal: Similarity removal",
                                                  display_all_graphs=display_all_graphs)
                 else:
@@ -637,7 +632,6 @@ class TargetSampleRemoval:
                                              folder_dir_name=folder_dir_name,
                                              filename="Similar Reduction",
                                              show_gif=show_gif)
-
 
         df_removal_indexes = copy.deepcopy(self.__removed_dps_dict["Remove Similar"])
         if apply_changes:
@@ -839,14 +833,12 @@ class TargetSampleRemoval:
                                 centroid,
                                 scaled_data,
                                 new_sample_amount,
-                                zscore_high,
-                                weighted_dist_value,
                                 annotate,
                                 output_path,
+                                called_from,
                                 title,
                                 apply_changes,
-                                new_dp_meta_noise_removal=None,
-                                new_dp_meta_similar_removal=None,
+                                meta_data=None,
                                 white_out_mode=False,
                                 display_all_graphs=False,
                                 no_print_output=False):
@@ -861,15 +853,16 @@ class TargetSampleRemoval:
         plt.gcf().text(.94, .94, "Target_n_samples={0}".format(
             new_sample_amount), fontsize=12)
 
-        if weighted_dist_value and zscore_high:
-            plt.gcf().text(.91, 0.9, "Weight={0:.2f}, Zscore={1:.2f}".format(
-                weighted_dist_value, zscore_high), fontsize=12)
-        elif weighted_dist_value:
-            plt.gcf().text(.91, 0.9, "Weight={0:.2f}".format(
-                weighted_dist_value), fontsize=12)
-        else:
-            plt.gcf().text(.91, 0.9, "Zscore={1:.2f}".format(
-                weighted_dist_value, zscore_high), fontsize=12)
+        legennd_string = ""
+        for count, given_method in enumerate(self.__applied_methods):
+            legennd_string += given_method.split('_', -1)[-1] + " "
+
+            if count % 2 == 0:
+                legennd_string += "\n"
+
+        plt.gcf().text(.91, 0.9,
+                       legennd_string,
+                       fontsize=12)
 
 
         # Plot existing data points
@@ -887,8 +880,9 @@ class TargetSampleRemoval:
 
         # Plot data points removed from noise removal
         for key_name,list_of_removed_indexes in self.__removed_dps_dict.items():
-            for index, dp_index in enumerate(list_of_removed_indexes):
 
+            last_index = len(list_of_removed_indexes) - 1
+            for index, dp_index in enumerate(list_of_removed_indexes):
                 if white_out_mode:
                     pl.scatter(np.mean(self.__org_scaled[dp_index]),
                                distance.euclidean(self.__org_scaled[dp_index],
@@ -899,20 +893,22 @@ class TargetSampleRemoval:
                 else:
 
                     if key_name == "Remove Noise":
-                        pl.scatter(np.mean(self.__org_scaled[
-                                               self.__org_df_index_dict[dp_index]]),
-                                   distance.euclidean(self.__org_scaled[
-                                                          self.__org_df_index_dict[
-                                                              dp_index]],
+
+                        dp = self.__org_scaled[self.__org_df_index_dict[dp_index]]
+
+                        pl.scatter(np.mean(dp),
+                                   distance.euclidean(dp,
                                                       centroid),
                                    c="#00A572",
                                    marker='X',
                                    label="Noise Removal")
-                        if annotate and new_dp_meta_noise_removal \
-                                and index == len(list_of_removed_indexes)-1:
 
-                            # ---
-                            dp = new_dp_meta_noise_removal[0]
+                        if annotate and meta_data \
+                                and index == last_index \
+                                and called_from == "remove_noise":
+
+                            dp = self.__org_scaled[
+                                self.__org_df_index_dict[dp_index]]
 
                             # Find the correct angle to have the text and annotated line match
                             mean_of_dp = np.mean(dp)
@@ -937,6 +933,7 @@ class TargetSampleRemoval:
                             if trans_angle < 0:
                                 spacing = "\n" * 4
 
+                            print("hit")
                             # Create line
                             plt.annotate(' ', xy=(mean_of_dp, dp_centroid_dist),
                                          xytext=(
@@ -953,39 +950,40 @@ class TargetSampleRemoval:
                             # Create text
                             plt.annotate(
                                 spacing + 'zscore={0:.2f} , Dist:{1:.2f}\n'.format(
-                                    new_dp_meta_noise_removal[1],
-                                    new_dp_meta_noise_removal[2]),
+                                    meta_data["zscore"],
+                                    meta_data["distance"]),
                                 xy=(mean_of_dp * .5, dp_centroid_dist * .5),
                                 rotation_mode='anchor',
                                 va='center',
                                 ha='center',
                                 rotation=trans_angle)
+
                     elif key_name == "Remove Similar":
-                        pl.scatter(np.mean(self.__org_scaled[
-                                               self.__org_df_index_dict[
-                                                   dp_index]]),
-                                   distance.euclidean(self.__org_scaled[
-                                                          self.__org_df_index_dict[
-                                                              dp_index]],
+                        dp = self.__org_scaled[self.__org_df_index_dict[
+                            dp_index]]
+
+                        pl.scatter(np.mean(dp),
+                                   distance.euclidean(dp,
                                                       centroid),
                                    c="#8A2BE2",
                                    marker='X',
                                    label="Similar Removal")
 
-                        if annotate and new_dp_meta_similar_removal \
-                                and index == len(list_of_removed_indexes)-1:
+                        if annotate and meta_data \
+                                and index == last_index \
+                                and called_from == "remove_similar":
                             # Create line
                             plt.annotate(' ',
                                          xy=(
-                                         np.mean(new_dp_meta_similar_removal[0]),
+                                         np.mean(dp),
                                          distance.euclidean(
-                                             new_dp_meta_similar_removal[0],
+                                             dp,
                                              centroid)),
                                          xytext=(
                                              np.mean(
-                                                 new_dp_meta_similar_removal[1]),
+                                                 meta_data["kept_point"]),
                                              distance.euclidean(
-                                                 new_dp_meta_similar_removal[1],
+                                                 meta_data["kept_point"],
                                                  centroid)),
                                          ha='center',
                                          va='center',
@@ -1026,16 +1024,14 @@ class TargetSampleRemoval:
         if display_all_graphs:
             plt.show()
         else:
-            if self.__scaled.shape[0] > scaled_data.shape[0] and \
-                    not no_print_output:
-                if new_dp_meta_noise_removal:
-                    print("Scaled size is now {0}".format(
-                        scaled_data.shape[
-                            0]) + " and Z-Score of {0:.2f}".format(
-                        new_dp_meta_noise_removal[1]))
-
-                else:
-                    print("Scaled size is now {0}".format(scaled_data.shape[0]
+            # if self.__scaled.shape[0] > scaled_data.shape[0] and \
+            #         not no_print_output:
+            #     if new_dp_meta_noise_removal:
+            #         print("Scaled size is now {0}".format(
+            #             scaled_data.shape[
+            #                 0]) + " and Z-Score of {0:.2f}".format(
+            #             new_dp_meta_noise_removal[1]))
+            print("Scaled size is now {0}".format(scaled_data.shape[0]
                                                           ))
 
         plt.close()
