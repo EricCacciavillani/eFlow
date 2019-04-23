@@ -8,6 +8,7 @@ import pylab as pl
 import seaborn as sns
 from IPython.display import display, HTML
 import imageio
+from IPython.display import Image
 
 # Pandas lib
 import pandas as pd
@@ -226,6 +227,7 @@ class TargetSampleRemoval:
         self.__all_dp_dist_list = None
         self.__removed_dps_dict = dict()
         self.__org_df_index_dict = None
+        self.__saved_pic_paths_dict = dict()
         self.__pbar = None
 
     # Not created by me!
@@ -341,12 +343,6 @@ class TargetSampleRemoval:
             return
         else:
 
-            if zscore_high:
-                folder_dir_name = "Data_Point_Removal_Noise_Zscore={0}".format(
-                    zscore_high)
-            else:
-                folder_dir_name = "Data_Point_Removal_Noise_Zscore=NaN"
-
             # Display graph before augmentation; Create centroid
             centroid = np.mean(self.__scaled, axis=0)
             column_list = [i for i in range(0, self.__scaled.shape[1])]
@@ -369,12 +365,20 @@ class TargetSampleRemoval:
                 df_index_scaled_dict[df_index] = i
 
             if create_visuals:
+
+                if zscore_high:
+                    folder_dir_name = "Data_Point_Removal_Noise_Zscore={0}".format(
+                        zscore_high)
+                else:
+                    folder_dir_name = "Data_Point_Removal_Noise_Zscore=NaN"
+
                 self.__visualize_data_points(centroid=centroid,
                                              scaled_data=self.__scaled,
                                              new_sample_amount=new_sample_amount,
                                              zscore_high=zscore_high,
                                              weighted_dist_value=None,
                                              annotate=annotate,
+                                             apply_changes=apply_changes,
                                              output_path=folder_dir_name,
                                              title="Starting point",
                                              display_all_graphs=display_all_graphs)
@@ -433,6 +437,7 @@ class TargetSampleRemoval:
                                                  zscore_high=zscore_high,
                                                  weighted_dist_value=0,
                                                  annotate=annotate,
+                                                 apply_changes=apply_changes,
                                                  output_path=folder_dir_name,
                                                  new_dp_meta_noise_removal=(
                                                      farthest_dp,
@@ -452,11 +457,11 @@ class TargetSampleRemoval:
                 break
 
         if create_visuals:
-            self.__create_gif_dp_amount(n_start=self.__scaled.shape[0],
-                                        n_end=reduced_scaled.shape[0],
-                                        folder_dir_name=folder_dir_name,
-                                        filename="Noise Reduction",
-                                        show_gif=show_gif)
+            self.__create_gif_with_dp_amount(n_start=self.__scaled.shape[0],
+                                             n_end=reduced_scaled.shape[0],
+                                             folder_dir_name=folder_dir_name,
+                                             filename="Noise Reduction",
+                                             show_gif=show_gif)
 
         df_removal_indexes = copy.deepcopy(
             self.__removed_dps_dict["Remove Noise"])
@@ -500,12 +505,6 @@ class TargetSampleRemoval:
             print("THROW ERROR HERE: Val must be a positive number!")
         else:
 
-            if weighted_dist_value:
-                folder_dir_name = "Data_Point_Removal_Similar_Weight={0}".format(
-                    weighted_dist_value)
-            else:
-                folder_dir_name = "Data_Point_Removal_Similar_Weight=NaN"
-
             df_index_scaled_dict = dict()
             reduced_scaled = np.column_stack(
                 (self.__scaled, self.__targeted_df.index.values.reshape(
@@ -531,12 +530,20 @@ class TargetSampleRemoval:
                 df_index_scaled_dict[df_index] = i
 
             if create_visuals:
+
+                if weighted_dist_value:
+                    folder_dir_name = "Data_Point_Removal_Similar_Weight={0}".format(
+                        weighted_dist_value)
+                else:
+                    folder_dir_name = "Data_Point_Removal_Similar_Weight=NaN"
+
                 self.__visualize_data_points(centroid=centroid,
                                              scaled_data=self.__scaled,
                                              new_sample_amount=new_sample_amount,
                                              zscore_high=None,
                                              weighted_dist_value=weighted_dist_value,
                                              annotate=annotate,
+                                             apply_changes=apply_changes,
                                              output_path=folder_dir_name,
                                              title="Starting point",
                                              display_all_graphs=display_all_graphs)
@@ -603,6 +610,7 @@ class TargetSampleRemoval:
                                                  zscore_high=None,
                                                  weighted_dist_value=weighted_dist_value,
                                                  annotate=annotate,
+                                                 apply_changes=apply_changes,
                                                  output_path=folder_dir_name,
                                                  new_dp_meta_similar_removal=new_dp_meta_similar_removal,
                                                  title="Data Removal: Similarity removal",
@@ -618,11 +626,11 @@ class TargetSampleRemoval:
         self.__all_dp_dist_list = None
 
         if create_visuals:
-            self.__create_gif_dp_amount(n_start=starting_shape - 1,
-                                        n_end=reduced_scaled.shape[0],
-                                        folder_dir_name=folder_dir_name,
-                                        filename="Similar Reduction",
-                                        show_gif=show_gif)
+            self.__create_gif_with_dp_amount(n_start=starting_shape - 1,
+                                             n_end=reduced_scaled.shape[0],
+                                             folder_dir_name=folder_dir_name,
+                                             filename="Similar Reduction",
+                                             show_gif=show_gif)
 
 
         df_removal_indexes = copy.deepcopy(self.__removed_dps_dict["Remove Similar"])
@@ -736,44 +744,84 @@ class TargetSampleRemoval:
         # Return back the indexes and distance
         return removal_index, keep_index, smallest_distance
 
-    def __create_gif_dp_amount(self,
-                               n_start,
-                               n_end,
-                               folder_dir_name,
-                               filename,
-                               flash_final_results=False,
-                               show_gif=False):
+    def __create_gif_with_dp_amount(self,
+                                    n_start,
+                                    n_end,
+                                    folder_dir_name,
+                                    filename,
+                                    flash_final_results=False,
+                                    show_gif=False):
         """
             Generates a gif based on pre-generated images of sample removal.
         """
-        images = [imageio.imread(self.__PROJECT.PATH_TO_OUTPUT_FOLDER + "/" +
-                                 folder_dir_name
-                                 + "/Sample_removal_Visualized_Cluster_n={0}.png".format(
-            i))
-                  for i in range(n_start,
-                                 n_end - 1,
-                                 -1)]
-        if flash_final_results:
-            images += [imageio.imread(
-                self.__PROJECT.PATH_TO_OUTPUT_FOLDER + "/" +
-                folder_dir_name
-                + "/Sample_removal_Visualized_Cluster_n={0}.png".format(
-                    n_start)), imageio.imread(
-                self.__PROJECT.PATH_TO_OUTPUT_FOLDER + "/" +
-                folder_dir_name
-                + "/Sample_removal_Visualized_Cluster_n={0}_White_Outed.png".format(
-                    n_end))] * 4
 
-        imageio.mimsave(self.__PROJECT.PATH_TO_OUTPUT_FOLDER +
-                        "/" + folder_dir_name + "/{0}.gif".format(filename),
-                        images,
-                        duration=.68)
+        if folder_dir_name:
+            images = [imageio.imread(self.__PROJECT.PATH_TO_OUTPUT_FOLDER + "/" +
+                                     folder_dir_name
+                                     +
+                                     "/Sample_removal_Visualized_Cluster_n={"
+                                     "0}.png".format(i)) for i in range(n_start,
+                                                                        n_end - 1,
+                                                                        -1)]
+        else:
+            images = [imageio.imread(self.__saved_pic_paths_dict[i])
+                                     for i in range(n_start,
+                                                    n_end - 1,
+                                                    -1)]
+
+        if flash_final_results:
+
+            if folder_dir_name:
+                images += [imageio.imread(
+                    self.__PROJECT.PATH_TO_OUTPUT_FOLDER + "/" +
+                    folder_dir_name
+                    + "/Sample_removal_Visualized_Cluster_n={0}.png".format(
+                        n_start)), imageio.imread(
+                    self.__PROJECT.PATH_TO_OUTPUT_FOLDER + "/" +
+                    folder_dir_name
+                    + "/Sample_removal_Visualized_Cluster_n={0}_White_Outed.png".format(
+                        n_end))] * 4
+
+            else:
+                images += [imageio.imread(
+                    self.__saved_pic_paths_dict[n_start]),
+                              imageio.imread(
+                                  self.__saved_pic_paths_dict[n_end])] * 4
+
+        if folder_dir_name:
+            imageio.mimsave(self.__PROJECT.PATH_TO_OUTPUT_FOLDER + "/" +
+                            folder_dir_name +
+                            "/{0}.gif".format(filename),
+                            images,
+                            duration=.68)
+        else:
+            imageio.mimsave(self.__PROJECT.PATH_TO_OUTPUT_FOLDER +
+                            "/{0}.gif".format(filename),
+                            images,
+                            duration=.68)
 
         if show_gif:
-            from IPython.display import Image
-            display(Image(filename=self.__PROJECT.PATH_TO_OUTPUT_FOLDER +
-                                   "/" + folder_dir_name + "/{0}.gif".format(
-                filename)))
+
+            if folder_dir_name:
+                display(Image(filename=self.__PROJECT.PATH_TO_OUTPUT_FOLDER +
+                                       "/" + folder_dir_name +
+                                       "/{0}.gif".format(filename)))
+            else:
+                display(Image(filename=self.__PROJECT.PATH_TO_OUTPUT_FOLDER +
+                                       "/{0}.gif".format(filename)))
+
+    def create_gif_with_dp_amount(self,
+                                  n_start,
+                                  n_end,
+                                  filename,
+                                  flash_final_results=False,
+                                  show_gif=False):
+        self.__create_gif_with_dp_amount(n_start,
+                                         n_end,
+                                         folder_dir_name=None,
+                                         filename=filename,
+                                         flash_final_results=flash_final_results,
+                                         show_gif=show_gif)
 
     def __visualize_data_points(self,
                                 centroid,
@@ -784,6 +832,7 @@ class TargetSampleRemoval:
                                 annotate,
                                 output_path,
                                 title,
+                                apply_changes,
                                 new_dp_meta_noise_removal=None,
                                 new_dp_meta_similar_removal=None,
                                 white_out_mode=False,
@@ -946,16 +995,22 @@ class TargetSampleRemoval:
         plt.legend(by_label.values(), by_label.keys(),
                    loc='center left', bbox_to_anchor=(1, 0.92))
 
+        filename_format = None
         if white_out_mode:
-            self.__create_plt_png(output_path,
-                                  "Sample_removal_Visualized_Cluster_n={0}_White_Outed".format(
-                                      len(scaled_data)))
+            filename_format = "Sample_removal_Visualized_Cluster_n={0}_White_Outed".format(
+                                      len(scaled_data))
 
         else:
-            self.__create_plt_png(output_path,
-                                  "Sample_removal_Visualized_Cluster_n={0}".format(
-                                      len(scaled_data)))
+            filename_format =  "Sample_removal_Visualized_Cluster_n={0}".format(
+                                      len(scaled_data))
+        self.__create_plt_png(output_path,
+                              filename_format)
 
+        if apply_changes:
+            self.__saved_pic_paths_dict[
+                len(scaled_data)] = self.__PROJECT.PATH_TO_OUTPUT_FOLDER + \
+                                    "/" + output_path + "/" + filename_format\
+                                    + ".png"
         if display_all_graphs:
             plt.show()
         else:
