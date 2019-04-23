@@ -228,6 +228,7 @@ class TargetSampleRemoval:
         self.__removed_dps_dict = dict()
         self.__org_df_index_dict = None
         self.__saved_pic_paths_dict = dict()
+        self.__applied_methods = set()
         self.__pbar = None
 
     # Not created by me!
@@ -371,6 +372,9 @@ class TargetSampleRemoval:
                         zscore_high)
                 else:
                     folder_dir_name = "Data_Point_Removal_Noise_Zscore=NaN"
+
+                if apply_changes:
+                    self.__applied_methods.add(folder_dir_name)
 
                 self.__visualize_data_points(centroid=centroid,
                                              scaled_data=self.__scaled,
@@ -537,6 +541,8 @@ class TargetSampleRemoval:
                 else:
                     folder_dir_name = "Data_Point_Removal_Similar_Weight=NaN"
 
+                if apply_changes:
+                    self.__applied_methods.add(folder_dir_name)
                 self.__visualize_data_points(centroid=centroid,
                                              scaled_data=self.__scaled,
                                              new_sample_amount=new_sample_amount,
@@ -813,9 +819,15 @@ class TargetSampleRemoval:
     def create_gif_with_dp_amount(self,
                                   n_start,
                                   n_end,
-                                  filename,
+                                  filename=None,
                                   flash_final_results=False,
                                   show_gif=False):
+
+        if not filename:
+            filename = ""
+            for given_method in self.__applied_methods:
+                filename += given_method + " "
+
         self.__create_gif_with_dp_amount(n_start,
                                          n_end,
                                          folder_dir_name=None,
