@@ -22,6 +22,8 @@ from kneed import DataGenerator, KneeLocator
 from sklearn.decomposition import PCA
 from sklearn.preprocessing import StandardScaler
 
+import math
+
 class ThreadSafeDict(dict) :
     def __init__(self, * p_arg, ** n_arg) :
         dict.__init__(self, * p_arg, ** n_arg)
@@ -67,6 +69,32 @@ def create_plt_png(sub_dir, filename):
 
     fig = plt.figure(1)
     fig.savefig(abs_path + "/" + filename, bbox_inches='tight')
+
+
+def fast_eudis(v1,
+               v2):
+    dist = [((a - b) ** 2) * w for a, b, w in zip(v1, v2)]
+    dist = math.sqrt(sum(dist))
+    return dist
+
+
+def rotate_point(origin,
+                 point,
+                 angle):
+    """
+    Rotate a point counterclockwise by a given angle around a given origin.
+
+    The angle should be given in radians.
+
+    # Author link: http://tinyurl.com/y4yz5hco
+    """
+    ox, oy = origin
+    px, py = point
+    print(px)
+
+    qx = ox + math.cos(angle) * (px - ox) - math.sin(angle) * (py - oy)
+    qy = oy + math.sin(angle) * (px - ox) + math.cos(angle) * (py - oy)
+    return qx, qy
 
 
 # Not created by me!

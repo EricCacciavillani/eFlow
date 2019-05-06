@@ -23,6 +23,7 @@ import numpy as np
 # System Libs
 import os, sys
 import shutil
+import math
 import six
 import time
 import datetime
@@ -37,50 +38,7 @@ from multiprocessing import Pool as ThreadPool
 import multiprocessing as mp
 from tqdm import tqdm
 
-
-def find_all_dist_with_target(matrix,
-                              index_array,
-                              total_indexes,
-                              target_dp_index):
-    """
-        Finds all distances between the target and the other points.
-    """
-    distances = np.zeros(total_indexes - (target_dp_index + 1))
-    for index, dp_index in enumerate(index_array[
-                                     target_dp_index + 1:]):
-        distances[index] = distance.euclidean(matrix[
-                                                  target_dp_index],
-                                              matrix[dp_index])
-        # self.__pbar.update(1)
-    # shortest_dp_index = np.argmin(distances)
-
-    all_distances_to_target = dict()
-
-    all_distances_to_target[target_dp_index] = distances
-
-    return all_distances_to_target
-
-
-def find_all_distances_in_matrix(matrix,
-                                 index_array,
-                                 total_indexes):
-    pool = ThreadPool(mp.cpu_count()-2)
-
-    func = partial(find_all_dist_with_target, matrix, index_array,
-                   total_indexes)
-    all_dp_distances = list(
-        pool.imap_unordered(func,
-                            index_array[:-1]))
-
-    # Store dps relationships and the distances
-    all_dp_dist_list = [np.array([])] * matrix.shape[0]
-
-    # Convert map to list
-    for dp_dict in all_dp_distances:
-        all_dp_dist_list[list(dp_dict.keys())[0]] = \
-            list(dp_dict.values())[0]
-
-    return all_dp_dist_list
+from Libraries.Utils.Multi_Threading_Functions import *
 
 
 class TargetSampleRemoval:
@@ -202,6 +160,17 @@ class TargetSampleRemoval:
             self.__org_scaled = copy.deepcopy(scaled)
             self.__scaled = copy.deepcopy(scaled)
 
+            self.__feature_weights = np.array(pca.explained_variance_ratio_[
+                                              :scaled.shape[1]])
+
+            print(self.__feature_weights)
+
+
+            self.__feature_degress = (self.__feature_weights/self.__feature_weights.sum()) * 50
+
+            print(self.__feature_degress)
+
+
         # Assumed PCA has already been applied; pass as matrix
         else:
             self.__scaled = df.values
@@ -230,6 +199,32 @@ class TargetSampleRemoval:
         self.__saved_pic_paths_dict = dict()
         self.__applied_methods = set()
         self.__pbar = None
+
+    def __weighted_eudis(self,
+                         v1,
+                         v2):
+        dist = [((a - b) ** 2) * w for a, b, w in zip(v1, v2,
+                                                      self.__feature_weights)]
+        dist = math.sqrt(sum(dist))
+        return dist
+
+    def __rotate_point(self,
+                       origin,
+                       point,
+                       angle):
+        """
+        Rotate a point counterclockwise by a given angle around a given origin.
+
+        The angle should be given in radians.
+
+        # Author link: http://tinyurl.com/y4yz5hco
+        """
+        ox, oy = origin
+        px, py = point
+
+        qx = ox + math.cos(angle) * (px - ox) - math.sin(angle) * (py - oy)
+        qy = oy + math.sin(angle) * (px - ox) + math.cos(angle) * (py - oy)
+        return qx, qy
 
     # Not created by me!
     # Created by my teacher: Narine Hall
@@ -396,14 +391,14 @@ class TargetSampleRemoval:
         while reduced_scaled.shape[0] > new_sample_amount:
 
             for index, dp in enumerate(reduced_scaled):
-                dp_distances[index] = distance.euclidean(
+                dp_distances[index] = self.__weighted_eudis(
                     centroid, dp[:column_list[-1] + 1])
 
             farthest_dp_index = np.argmax(dp_distances)
             zscores_dp_distances = zscore(np.concatenate((
-                dp_distances, np.array([distance.euclidean(centroid,
-                                                           self.__org_scaled[
-                                                               self.__org_df_index_dict[dp_index]])
+                dp_distances, np.array([self.__weighted_eudis(
+                    centroid,self.__org_scaled[self.__org_df_index_dict[
+                        dp_index]])
                                         for dp_index in
                                         self.__removed_dps_dict["Remove Noise"]
                                         ])), axis=0))
@@ -497,8 +492,6 @@ class TargetSampleRemoval:
 
         new_sample_amount = int(new_sample_amount)
 
-        print(len(self.__targeted_df.index.values))
-
         if new_sample_amount >= self.__scaled.shape[0]:
             print("THROW ERROR HERE: Sample removal must be less then")
         elif new_sample_amount <= 0:
@@ -568,7 +561,7 @@ class TargetSampleRemoval:
 
                 if not farthest_dp_distance:
                     for index, dp in enumerate(self.__tmp_reduced_scaled):
-                        dp_distances[index] = distance.euclidean(
+                        dp_distances[index] = self.__weighted_eudis(
                             centroid, dp[:column_list[-1] + 1])
 
                     farthest_dp_distance = np.amax(dp_distances)
@@ -653,7 +646,7 @@ class TargetSampleRemoval:
         distances = np.zeros(len(index_array))
         for index, dp_index in enumerate(
                 filter(lambda x: x != target_index, index_array)):
-            distances[index] = distance.euclidean(
+            distances[index] = self.__weighted_eudis(
                 scaled_data[target_index],
                 scaled_data[dp_index])
 
@@ -668,10 +661,10 @@ class TargetSampleRemoval:
         distances = np.zeros(self.__total_indexes - (target_dp_index + 1))
         for index, dp_index in enumerate(self.__index_array[
                                          target_dp_index + 1:]):
-            distances[index] = distance.euclidean(self.__tmp_reduced_scaled[
-                                                      target_dp_index],
-                                                  self.__tmp_reduced_scaled[
-                                                      dp_index])
+            distances[index] = self.__weighted_eudis(self.__tmp_reduced_scaled[
+                                                         target_dp_index],
+                                                     self.__tmp_reduced_scaled[
+                                                         dp_index])
         shortest_dp_index = np.argmin(distances)
 
         return {
@@ -698,7 +691,8 @@ class TargetSampleRemoval:
             self.__all_dp_dist_list = find_all_distances_in_matrix(
                 matrix=self.__tmp_reduced_scaled,
                 index_array=self.__index_array,
-                total_indexes=self.__total_indexes,)
+                total_indexes=self.__total_indexes,
+                feature_weights=self.__feature_weights)
 
         # :::ADD WEIGHTED DISTANCE IDEA HERE FUTURE ERIC:::
 
@@ -716,11 +710,13 @@ class TargetSampleRemoval:
         dp_2_index = smallest_dps_relationship[1]
         smallest_distance = smallest_dps_relationship[2]
 
-        dp_1_dist = distance.euclidean(self.__tmp_reduced_scaled[dp_1_index],
-                                       centroid)
+        dp_1_dist = self.__weighted_eudis(self.__tmp_reduced_scaled[
+                                              dp_1_index],
+                                          centroid)
 
-        dp_2_dist = distance.euclidean(self.__tmp_reduced_scaled[dp_2_index],
-                                       centroid)
+        dp_2_dist = self.__weighted_eudis(self.__tmp_reduced_scaled[
+                                              dp_2_index],
+                                          centroid)
 
         # Decide of the two dps which to remove
         removal_index = None
@@ -853,22 +849,56 @@ class TargetSampleRemoval:
         plt.gcf().text(.94, .94, "Target_n_samples={0}".format(
             new_sample_amount), fontsize=12)
 
-        legennd_string = ""
-        for count, given_method in enumerate(self.__applied_methods):
-            legennd_string += given_method.split('_', -1)[-1] + " "
+        # legennd_string = ""
+        # for count, given_method in enumerate(self.__applied_methods):
+        #     legennd_string += given_method.split('_', -1)[-1] + " "
+        #
+        #     if count % 2 == 0:
+        #         legennd_string += "\n"
+        #
+        # plt.gcf().text(.91, 0.9,
+        #                legennd_string,
+        #                fontsize=12)
 
-            if count % 2 == 0:
-                legennd_string += "\n"
+        cell_information = np.array([])
+        row_information = np.array([])
 
-        plt.gcf().text(.91, 0.9,
-                       legennd_string,
-                       fontsize=12)
+        for method_count, given_method in enumerate(self.__applied_methods):
+            cell_information = np.append(cell_information,
+                                         given_method)
+            row_information = np.append(row_information,
+                                        "Removal Process {0}".format(
+                                            method_count))
+        cell_information = cell_information.reshape(len(
+            self.__applied_methods), 1)
 
+        # plt.axis("off")
+
+        # the_table = plt.table(cellText=cell_information,
+        #                       rowLabels=row_information,
+        #                       colLabels=np.array(["Table"]),
+        #                       colWidths=[0.5] * 3,
+        #                       loc='center left',
+        #                       bbox=[1.3, -0.5, 0.5, 0.5],
+        #                       fontsize=14)
+        plt.subplots_adjust(bottom=0.3)
+        # plt.show()
 
         # Plot existing data points
         for i in range(0, scaled_data.shape[0]):
-            pl.scatter(np.mean(scaled_data[i]),
-                       distance.euclidean(scaled_data[i], centroid),
+
+            rotation_degrees = (
+                    ((centroid - scaled_data[i])/2) * self.__feature_degress).sum()
+
+            px, py = self.__rotate_point(np.array([0,0]),
+                                         np.array(
+                                             [0,
+                                              self.__weighted_eudis(
+                                                  scaled_data[i], centroid)]),
+                                         rotation_degrees)
+
+            pl.scatter(px,
+                       py,
                        c="#0080FF",
                        marker='o',
                        label="Existing data point")
@@ -884,9 +914,20 @@ class TargetSampleRemoval:
             last_index = len(list_of_removed_indexes) - 1
             for index, dp_index in enumerate(list_of_removed_indexes):
                 if white_out_mode:
-                    pl.scatter(np.mean(self.__org_scaled[dp_index]),
-                               distance.euclidean(self.__org_scaled[dp_index],
-                                                  centroid),
+
+                    rotation_degrees = (
+                            ((centroid - dp)/2) * self.__feature_degress).sum()
+
+                    px, py = self.__rotate_point(np.array([0,0]),
+                                                 np.array(
+                                                     [0,
+                                                      self.__weighted_eudis(
+                                                          self.__org_scaled[
+                                                              dp_index])]),
+                                                 rotation_degrees)
+
+                    pl.scatter(px,
+                               py,
                                c="#ffffff",
                                marker='X',
                                alpha=0)
@@ -894,11 +935,21 @@ class TargetSampleRemoval:
 
                     if key_name == "Remove Noise":
 
-                        dp = self.__org_scaled[self.__org_df_index_dict[dp_index]]
+                        dp = self.__org_scaled[self.__org_df_index_dict[
+                            dp_index]]
 
-                        pl.scatter(np.mean(dp),
-                                   distance.euclidean(dp,
-                                                      centroid),
+                        rotation_degrees = (
+                                ((centroid - dp)/2) * self.__feature_degress).sum()
+
+                        px, py = self.__rotate_point(np.array([0,0]),
+                                                     np.array([0,
+                                                               self.__weighted_eudis(
+                                                                   dp,
+                                                                   centroid)]),
+                                                     rotation_degrees)
+
+                        pl.scatter(px,
+                                   py,
                                    c="#00A572",
                                    marker='X',
                                    label="Noise Removal")
@@ -911,15 +962,15 @@ class TargetSampleRemoval:
                                 self.__org_df_index_dict[dp_index]]
 
                             # Find the correct angle to have the text and annotated line match
-                            mean_of_dp = np.mean(dp)
-                            dp_centroid_dist = distance.euclidean(dp, centroid)
+                            dp_centroid_dist = self.__weighted_eudis(dp,
+                                                                     centroid)
 
-                            dy = (0 - dp_centroid_dist)
-                            dx = (np.mean(centroid) - mean_of_dp)
+                            dy = (0 - py)
+                            dx = (0 - px)
                             rotn = np.degrees(np.arctan2(dy, dx))
                             trans_angle = plt.gca().transData.transform_angles(
-                                np.array((rotn,)), np.array((mean_of_dp,
-                                                             dp_centroid_dist)).reshape(
+                                np.array((rotn,)), np.array((dx,
+                                                             dy)).reshape(
                                     (1, 2)))[0]
                             # Fix text representation on the given angle
                             if trans_angle > 90:
@@ -933,11 +984,11 @@ class TargetSampleRemoval:
                             if trans_angle < 0:
                                 spacing = "\n" * 4
 
-                            print("hit")
                             # Create line
-                            plt.annotate(' ', xy=(mean_of_dp, dp_centroid_dist),
-                                         xytext=(
-                                             np.mean(centroid), 0),
+                            plt.annotate(' ', xy=(px,
+                                                  py),
+                                         xytext=(0,
+                                                 0),
                                          rotation=trans_angle,
                                          ha='center',
                                          va='center',
@@ -952,7 +1003,7 @@ class TargetSampleRemoval:
                                 spacing + 'zscore={0:.2f} , Dist:{1:.2f}\n'.format(
                                     meta_data["zscore"],
                                     meta_data["distance"]),
-                                xy=(mean_of_dp * .5, dp_centroid_dist * .5),
+                                xy=(0, 0),
                                 rotation_mode='anchor',
                                 va='center',
                                 ha='center',
@@ -962,9 +1013,18 @@ class TargetSampleRemoval:
                         dp = self.__org_scaled[self.__org_df_index_dict[
                             dp_index]]
 
-                        pl.scatter(np.mean(dp),
-                                   distance.euclidean(dp,
-                                                      centroid),
+                        rotation_degrees = (
+                                ((centroid - dp)/2) * self.__feature_degress).sum()
+
+                        px, py = self.__rotate_point(np.array([0, 0]),
+                                                     np.array([0,
+                                                               self.__weighted_eudis(
+                                                                   dp,
+                                                                   centroid)]),
+                                                     rotation_degrees)
+
+                        pl.scatter(px,
+                                   py,
                                    c="#8A2BE2",
                                    marker='X',
                                    label="Similar Removal")
@@ -972,19 +1032,23 @@ class TargetSampleRemoval:
                         if annotate and meta_data \
                                 and index == last_index \
                                 and called_from == "remove_similar":
+                            rotation_degrees = (
+                                    ((centroid - meta_data["kept_point"])/2) *
+                                    self.__feature_degress).sum()
+                            meta_px, meta_py = self.__rotate_point(np.array([0, 0]),
+                                                                   np.array([0,
+                                                                             self.__weighted_eudis(
+                                                                                 meta_data[
+                                                                                     "kept_point"],
+                                                                                 centroid)]),
+                                                                   rotation_degrees)
                             # Create line
                             plt.annotate(' ',
-                                         xy=(
-                                         np.mean(dp),
-                                         distance.euclidean(
-                                             dp,
-                                             centroid)),
+                                         xy=(px,
+                                             py),
                                          xytext=(
-                                             np.mean(
-                                                 meta_data["kept_point"]),
-                                             distance.euclidean(
-                                                 meta_data["kept_point"],
-                                                 centroid)),
+                                             meta_px,
+                                             meta_py),
                                          ha='center',
                                          va='center',
                                          rotation_mode='anchor',
@@ -992,10 +1056,11 @@ class TargetSampleRemoval:
                                                      'shrinkA': .4,
                                                      'shrinkB': 4.5}
                                          )
-
+                            from scipy.spatial import distance
+                            print(distance.euclidean((px,py),(meta_px, meta_py)))
 
         # Plot centroid
-        pl.scatter(np.mean(centroid), 0,
+        pl.scatter(0, 0,
                    c="r", marker="D",
                    label="Centroid")
         # Author: http://tinyurl.com/yxvd33t2
@@ -1011,8 +1076,9 @@ class TargetSampleRemoval:
                                       len(scaled_data))
 
         else:
-            filename_format =  "Sample_removal_Visualized_Cluster_n={0}".format(
+            filename_format = "Sample_removal_Visualized_Cluster_n={0}".format(
                                       len(scaled_data))
+
         self.__create_plt_png(output_path,
                               filename_format)
 
@@ -1031,8 +1097,10 @@ class TargetSampleRemoval:
             #             scaled_data.shape[
             #                 0]) + " and Z-Score of {0:.2f}".format(
             #             new_dp_meta_noise_removal[1]))
-            print("Scaled size is now {0}".format(scaled_data.shape[0]
-                                                          ))
+
+            # print("Scaled size is now {0}".format(scaled_data.shape[0]
+            #                                               ))
+            pass
 
         plt.close()
 
@@ -1045,6 +1113,9 @@ class TargetSampleRemoval:
     # --- Getters/Setters
     def get_scaled_data(self):
         return copy.deepcopy(self.__scaled)
+
+    def testing_table_data(self):
+        return copy.deepcopy(self.__applied_methods)
 
 
 
