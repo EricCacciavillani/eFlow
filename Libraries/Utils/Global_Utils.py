@@ -182,20 +182,22 @@ def replace_df_vals(passed_df, replace_dict):
 
 
 # Returns encoded df and label encoded map
-def encode_df(df, objt_cols):
+def encode_df(df, df_features):
+    
+    obj_cols = df_features.get_categorical_features()
 
     df = copy.deepcopy(df)
     # ---
     le_map = defaultdict(LabelEncoder)
 
     # Encoding the variable
-    fit = df[objt_cols].apply(lambda x: le_map[x.name].fit_transform(x))
+    fit = df[obj_cols].apply(lambda x: le_map[x.name].fit_transform(x))
 
     # Inverse the encoded
     fit.apply(lambda x: le_map[x.name].inverse_transform(x))
 
     # Using the dictionary to label future data
-    df[objt_cols] = df[objt_cols].apply(lambda x: le_map[x.name].transform(x))
+    df[obj_cols] = df[obj_cols].apply(lambda x: le_map[x.name].transform(x))
 
     return df, le_map
 
@@ -220,6 +222,17 @@ def print_encoder(le):
 
     # Draw a line
     print("-"*30, "\n")
+
+def print_encoder_map(le_map):
+
+    for column_name,le in le_map.items():
+        print("\nLabel mapping:\n")
+
+        for i, item in enumerate(le.classes_):
+            print("\t", item, '-->', i)
+
+        # Draw a line
+        print("-"*30, "\n")
 
 
 def remove_outliers_df(df, removal_dict):
@@ -353,12 +366,13 @@ def optimize_model_grid(model,
                         X_train,
                         y_train,
                         param_grid,
+                        n_jobs,
                         cv=10):
     """
         Finds the best parameters for a grid; returns the model and parameters.
     """
     # Instantiate the GridSearchCV object
-    model_cv = GridSearchCV(model, param_grid, cv=cv, n_jobs=-1)
+    model_cv = GridSearchCV(model, param_grid, cv=cv, n_jobs=n_jobs)
 
     # Fit it to the data
     model_cv.fit(X_train, y_train)

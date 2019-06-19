@@ -31,13 +31,21 @@ class ClusterMaster:
                  df,
                  apply_pca=True,
                  pca_perc=.8,
-                 project_name="Default"
+                 project_name="Default",
+                 overwrite_figure_path=None
                  ):
 
         def enum(**enums):
             return type('Enum', (), enums)
 
-        output_fig_sub_dir = "/Figures/" + project_name + "/Clustering"
+        if overwrite_figure_path:
+            output_fig_sub_dir = overwrite_figure_path
+        else:
+            if pca_perc > 1:
+                pca_perc = 1
+            output_fig_sub_dir = "/Figures/" + project_name +\
+                                 "/Clustering_PCA={0}".format(pca_perc)
+
         # Project directory structure
         self.__PROJECT = enum(
             PATH_TO_OUTPUT_FOLDER=''.join(
@@ -61,20 +69,24 @@ class ClusterMaster:
 
             # Generate "dummy" feature names
             pca_feature_names = ["PCA_Feature_" +
-                                 str(i) for i in range(0, len(df.columns))]
+                                 str(i) for i in range(1,
+                                                       len(df.columns) + 1)]
 
             print("\nInspecting applied pca results!")
             self.__inspect_feature_matrix(matrix=scaled,
                                           feature_names=pca_feature_names)
 
-            # Find cut off point on cumulative sum
-            cutoff_index = np.where(
-                pca.explained_variance_ratio_.cumsum() > pca_perc)[0][0]
+            if pca_perc < 1.0:
+                # Find cut off point on cumulative sum
+                cutoff_index = np.where(
+                    pca.explained_variance_ratio_.cumsum() > pca_perc)[0][0]
+            else:
+                cutoff_index = scaled.shape[1] - 1
 
             print(
-                "After applying pca with a cutoff point of {0}"
-                " for the cumulative index. Using features 0 to {1}".format(
-                    pca_perc, cutoff_index))
+                "After applying pca with a cutoff percentage {0}%"
+                " for the cumulative index. Using features 1 to {1}".format(
+                    pca_perc, cutoff_index + 1))
 
             print("Old shape {0}".format(scaled.shape))
 
