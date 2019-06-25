@@ -68,9 +68,19 @@ class DataAnalysis:
             elif col_feature_name in df_features.get_categorical_features():
                 self.count_plot_graph(df, col_feature_name)
             elif col_feature_name in df_features.get_integer_features():
-                pass
+                if len(df[col_feature_name].dropna().unique()) <= 12:
+                    self.count_plot_graph(df,col_feature_name)
+                else:
+                    self.distance_plot(df,col_feature_name)
+#                 print(df[col_feature_name].describe())
+#                 print(df[col_feature_name].var())
+#                 print("\n\n\n\n\n")
             elif col_feature_name in df_features.get_float_features():
                 self.distance_plot(df,col_feature_name)
+#                 print(df[col_feature_name].describe())
+#                 print(df[col_feature_name].var())
+#                 print("\n\n\n\n\n")
+
     def distance_plot(self,
                       df,
                       col_feature_name):
@@ -80,7 +90,7 @@ class DataAnalysis:
         plt.title("Distance Plot: " + col_feature_name)
         sns.distplot(df[col_feature_name].dropna())
 
-        self.__create_plt_png("Data Analysis: Quick Look",
+        self.__create_plt_png("Data_Analysis_Quick_Look",
                               "Distance Plot: " + col_feature_name)
         plt.show()
         plt.close()
@@ -164,24 +174,26 @@ class DataAnalysis:
 
     def pie_graph(self,
                   df,
-                  col_feature_name):
+                  col_feature_name,
+                  colors=None):
 
         value_list = df[col_feature_name].unique()
 
         target_count_list = []
         for target_value in value_list:
             target_count_list.append(sum(df[col_feature_name].dropna() == target_value))
-
-        colors = []
-        if df[col_feature_name].dtypes.name == 'bool':
-            for val in value_list:
-                if val:
-                    colors.append("#57ff57")
-                else:
-                    colors.append("#ff8585")
-
-        else:
-            colors = self.__check_specfied_column_colors(df, col_feature_name)
+        
+        if colors is None:
+            
+            colors = []
+            if df[col_feature_name].dtypes.name == 'bool':
+                for val in value_list:
+                    if val:
+                        colors.append("#57ff57")
+                    else:
+                        colors.append("#ff8585")
+            else:
+                colors = self.__check_specfied_column_colors(df, col_feature_name)
 
         explode_array = [0] * len(value_list)
         explode_array[np.array(target_count_list).argmax()] = .03

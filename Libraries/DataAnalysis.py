@@ -1,4 +1,5 @@
 from matplotlib import pyplot as plt
+from pandas.plotting import table
 import numpy as np
 import pandas as pd
 import seaborn as sns
@@ -7,6 +8,10 @@ from IPython.display import display, HTML
 import os
 import copy
 import random
+import imgkit
+import six
+
+from Libraries.Sys_Utils import *
 
 
 class DataAnalysis:
@@ -14,76 +19,206 @@ class DataAnalysis:
     def __init__(self,
                  df,
                  df_features,
-                 project_name="Default",
-                 overwrite_figure_path=None):
+                 project_name="Default_Project_Name",
+                 overwrite_full_path=None):
+        """
+        df:
+            Pandas DataFrame object
 
+        df_features:
+            DataframeTypeHolder object. Contains the DataFrame's types
+            to create better code/workflow
+
+        project_name:
+            Creates a parent or "project" folder in which all sub-directories
+            will be inner nested.
+
+        overwrite_full_path:
+            Overwrites the path to the parent folder.
+
+        Designed to increase workflow and overall attempt to automate the
+        routine of graphing/generating tables.
+
+        I will continue to expand on different ways of exploring data and
+        automating that process.
+
+        """
+
+        # Pre-defined colors for column's with set names.
+        # Multiple names/values are allowed
         self.__defined_column_colors = list()
-
         self.__defined_column_colors.append([["gender", "sex"],
                                              ["Male", "M", "#7EAED3"],
                                              ["Female", "F", "#FFB6C1"]])
 
-        def enum(**enums):
-            return type('Enum', (), enums)
-
-        if not overwrite_figure_path:
-            overwrite_figure_path = "/Figures/" + project_name + "/"
+        if not overwrite_full_path:
+            overwrite_full_path = "/Production/" + project_name + "/"
 
         self.__PROJECT = enum(PATH_TO_OUTPUT_FOLDER=''.join(
-            os.getcwd().partition('/Libraries')[0:1]) + overwrite_figure_path)
+            os.getcwd().partition('/Libraries')[0:1]) + overwrite_full_path)
 
+        # ---
         display(df.dtypes)
         print("\n\n")
-        display(self.missing_values_table(df))
+        display(self.__missing_values_table(df))
         print("\n")
 
         if df.isnull().values.any():
 
             # ---
             msno.matrix(df)
+            create_plt_png(self.__PROJECT.PATH_TO_OUTPUT_FOLDER,
+                           "Missing_Data/Graphics",
+                           "Missing_Data_Matrix_Graph")
             plt.show()
             plt.close()
 
             # ---
-            msno.bar(df, color="#072F5F")
+            msno.bar(df,
+                     color="#072F5F")
+
+            create_plt_png(self.__PROJECT.PATH_TO_OUTPUT_FOLDER,
+                           "Missing_Data/Graphics",
+                           "Missing_Data_Bar_Graph")
             plt.show()
             plt.close()
 
             # ---
             msno.heatmap(df)
+            create_plt_png(self.__PROJECT.PATH_TO_OUTPUT_FOLDER,
+                           "Missing_Data/Graphics",
+                           "Missing_Data_Heatmap")
             plt.show()
             plt.close()
 
             # ---
             msno.dendrogram(df)
+            create_plt_png(self.__PROJECT.PATH_TO_OUTPUT_FOLDER,
+                           "Missing_Data/Graphics",
+                           "Missing_Data_Dendrogram_Graph")
             plt.show()
             plt.close()
 
         print("*" * 80 + "\n" * 2)
 
+        # Iterate through DataFrame columns and graph based on data types
         for col_feature_name in df.columns:
+
             if col_feature_name in df_features.get_bool_features() or len(
                     df[col_feature_name].value_counts().values) == 2:
-                self.pie_graph(df, col_feature_name)
+                self.pie_graph(df,
+                               col_feature_name)
+
             elif col_feature_name in df_features.get_categorical_features():
                 self.count_plot_graph(df, col_feature_name)
+
             elif col_feature_name in df_features.get_integer_features():
-                pass
+                if len(df[col_feature_name].dropna().unique()) <= 19:
+                    self.count_plot_graph(df,
+                                          col_feature_name)
+                else:
+                    self.distance_plot(df,
+                                       col_feature_name)
+
             elif col_feature_name in df_features.get_float_features():
-                self.distance_plot(df,col_feature_name)
+                self.distance_plot(df,
+                                   col_feature_name)
+
+            print("-" * 80 + "\n" * 2)
+
+    def __missing_values_table(self,
+                               df):
+        """
+
+        :param df:
+        :return:
+        """
+        mis_val = df.isnull().sum()
+        mis_val_percent = 100 * df.isnull().sum() / len(df)
+        mis_val_table = pd.concat([mis_val, mis_val_percent], axis=1)
+        mis_val_table_ren_columns = mis_val_table.rename(
+            columns={0: 'Missing Values', 1: '% of Total Values'})
+        mis_val_table_ren_columns = mis_val_table_ren_columns[
+            mis_val_table_ren_columns.iloc[:, 1] != 0].sort_values(
+            '% of Total Values', ascending=False).round(1)
+        print("Your selected dataframe has " + str(df.shape[1]) + " columns.\n"
+                                                                  "There are " + str(
+            mis_val_table_ren_columns.shape[0]) +
+              " columns that have missing values.")
+
+        df_to_image(mis_val_table_ren_columns,
+                    self.__PROJECT.PATH_TO_OUTPUT_FOLDER,
+                    "Missing_Data/Tables",
+                    "Missing_Data_Table",
+                    show_index=True,
+                    format_float_pos=2)
+
+        return mis_val_table_ren_columns
+
+    def __create_value_counts_table(self,
+                                    df,
+                                    col_feature_name,
+                                    format_float_pos=None,
+                                    display_table=True
+                                    ):
+        
+        col_vc_df = df[col_feature_name].value_counts().rename_axis(
+            'Unique Values').reset_index(name='Counts')
+
+        if display_table:
+            display(col_vc_df)
+            print("\n"*3)
+
+        df_to_image(col_vc_df,
+                    self.__PROJECT.PATH_TO_OUTPUT_FOLDER,
+                    "Data_Analysis_Quick_Look/Tables",
+                    col_feature_name + " Value Counts",
+                    show_index=True,
+                    format_float_pos=format_float_pos)
+
+    def __create_descr_table(self,
+                             df,
+                             col_feature_name,
+                             format_float_pos=None,
+                             display_table=True):
+
+        col_desc_df = df[col_feature_name].describe().to_frame()
+        col_desc_df["var"] = df[col_feature_name].var()
+
+        if display_table:
+            display(col_desc_df)
+            print("\n"*3)
+
+            df_to_image(col_desc_df,
+                        self.__PROJECT.PATH_TO_OUTPUT_FOLDER,
+                        "Data_Analysis_Quick_Look/Tables",
+                        col_feature_name + " Descr",
+                        show_index=True,
+                        format_float_pos=format_float_pos)
+
+
     def distance_plot(self,
                       df,
-                      col_feature_name):
+                      col_feature_name,
+                      display_table=True):
+
         sns.set(style="whitegrid")
 
         plt.figure(figsize=(12, 8))
         plt.title("Distance Plot: " + col_feature_name)
         sns.distplot(df[col_feature_name].dropna())
 
-        self.__create_plt_png("Data Analysis: Quick Look",
-                              "Distance Plot: " + col_feature_name)
+        create_plt_png(self.__PROJECT.PATH_TO_OUTPUT_FOLDER,
+                       "Data_Analysis_Quick_Look/Graphics",
+                       "Distance_Plot_" + col_feature_name)
         plt.show()
         plt.close()
+
+        self.__create_descr_table(df,
+                                  col_feature_name,
+                                  format_float_pos=3,
+                                  display_table=display_table)
+
     def __check_specfied_column_colors(self,
                                        df,
                                        col_feature_name):
@@ -123,7 +258,8 @@ class DataAnalysis:
                          df,
                          col_feature_name,
                          flip_axis=False,
-                         pallete="PuBu"):
+                         pallete="PuBu",
+                         display_table=True):
 
         sns.set(style="whitegrid")
         plt.figure(figsize=(12, 8))
@@ -157,31 +293,40 @@ class DataAnalysis:
                     ha="center")
 
         plt.title("Category Count Plot: " + col_feature_name)
-        self.__create_plt_png("Data Analysis: Quick Look",
-                              "Count Plot: " + col_feature_name)
+        create_plt_png(self.__PROJECT.PATH_TO_OUTPUT_FOLDER,
+                       "Data_Analysis_Quick_Look/Graphics",
+                       "Count_Plot_" + col_feature_name)
         plt.show()
         plt.close()
 
+        self.__create_value_counts_table(df,
+                                         col_feature_name,
+                                         format_float_pos=3,
+                                         display_table=display_table)
+
     def pie_graph(self,
                   df,
-                  col_feature_name):
+                  col_feature_name,
+                  colors=None,
+                  display_table=True):
 
         value_list = df[col_feature_name].unique()
 
         target_count_list = []
         for target_value in value_list:
             target_count_list.append(sum(df[col_feature_name].dropna() == target_value))
-
-        colors = []
-        if df[col_feature_name].dtypes.name == 'bool':
-            for val in value_list:
-                if val:
-                    colors.append("#57ff57")
-                else:
-                    colors.append("#ff8585")
-
-        else:
-            colors = self.__check_specfied_column_colors(df, col_feature_name)
+        
+        if colors is None:
+            
+            colors = []
+            if df[col_feature_name].dtypes.name == 'bool':
+                for val in value_list:
+                    if val:
+                        colors.append("#57ff57")
+                    else:
+                        colors.append("#ff8585")
+            else:
+                colors = self.__check_specfied_column_colors(df, col_feature_name)
 
         explode_array = [0] * len(value_list)
         explode_array[np.array(target_count_list).argmax()] = .03
@@ -202,54 +347,14 @@ class DataAnalysis:
         plt.axis('equal')
         plt.tight_layout()
         plt.figure(figsize=(20, 20))
-        self.__create_plt_png("Data Analysis: Quick Look",
-                              "Pie Chart: " + col_feature_name)
+        create_plt_png(self.__PROJECT.PATH_TO_OUTPUT_FOLDER,
+                       "Data_Analysis_Quick_Look/Graphics",
+                       "Pie_Chart_" + col_feature_name)
         plt.show()
         plt.close()
 
-    def missing_values_table(self, df):
-        mis_val = df.isnull().sum()
-        mis_val_percent = 100 * df.isnull().sum() / len(df)
-        mis_val_table = pd.concat([mis_val, mis_val_percent], axis=1)
-        mis_val_table_ren_columns = mis_val_table.rename(
-            columns={0: 'Missing Values', 1: '% of Total Values'})
-        mis_val_table_ren_columns = mis_val_table_ren_columns[
-            mis_val_table_ren_columns.iloc[:, 1] != 0].sort_values(
-            '% of Total Values', ascending=False).round(1)
-        print("Your selected dataframe has " + str(df.shape[1]) + " columns.\n"
-              "There are " + str(mis_val_table_ren_columns.shape[0]) +
-              " columns that have missing values.")
-        return mis_val_table_ren_columns
+        self.__create_value_counts_table(df,
+                                         col_feature_name,
+                                         format_float_pos=3,
+                                         display_table=display_table)
 
-    def __check_create_figure_dir(self,
-                                  sub_dir):
-        """
-            Checks/Creates required directory structures inside
-            the parent directory figures.
-        """
-
-        directory_pth = self.__PROJECT.PATH_TO_OUTPUT_FOLDER
-
-        for dir in sub_dir.split("/"):
-            directory_pth += "/" + dir
-            if not os.path.exists(directory_pth):
-                os.makedirs(directory_pth)
-
-        return directory_pth
-
-    def __create_plt_png(self,
-                         sub_dir,
-                         filename):
-        """
-            Saves the plt based image in the correct directory.
-        """
-
-        # Ensure directory structure is init correctly
-        abs_path = self.__check_create_figure_dir(sub_dir)
-
-        # Ensure file ext is on the file.
-        if filename[-4:] != ".png":
-            filename += ".png"
-
-        fig = plt.figure(1)
-        fig.savefig(abs_path + "/" + filename, bbox_inches='tight')

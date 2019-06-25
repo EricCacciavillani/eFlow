@@ -2,46 +2,25 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ed041e50-c9da-4464-8bcf-e2b46601487b" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/Libraries/DataAnalysis.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Libraries/Sys_Utils.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Libraries/__init__.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Libraries/DataframeTypeHolder.py" beforeDir="false" afterPath="$PROJECT_DIR$/Libraries/DataframeTypeHolder.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Libraries/Iris_Clustering.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/Testing/Iris_Clustering.ipynb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Libraries/SampleRemoval.py" beforeDir="false" afterPath="$PROJECT_DIR$/Libraries/SampleRemoval.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Testing/.ipynb_checkpoints/Sample_Removal-checkpoint.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/Testing/.ipynb_checkpoints/Sample_Removal-checkpoint.ipynb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Testing/Figures/Default/SampleRemoval_PCA_Features=4/Data_Point_Removal_Similar_Weight=1.0/Sample_removal_Visualized_Cluster_n=20.png" beforeDir="false" afterPath="$PROJECT_DIR$/Testing/Figures/Default/SampleRemoval_PCA_Features=4/Data_Point_Removal_Similar_Weight=1.0/Sample_removal_Visualized_Cluster_n=20.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Testing/Figures/Default/SampleRemoval_PCA_Features=4/Data_Point_Removal_Similar_Weight=1.0/Sample_removal_Visualized_Cluster_n=21.png" beforeDir="false" afterPath="$PROJECT_DIR$/Testing/Figures/Default/SampleRemoval_PCA_Features=4/Data_Point_Removal_Similar_Weight=1.0/Sample_removal_Visualized_Cluster_n=21.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Testing/Figures/Default/SampleRemoval_PCA_Features=4/Data_Point_Removal_Similar_Weight=1.0/Sample_removal_Visualized_Cluster_n=22.png" beforeDir="false" afterPath="$PROJECT_DIR$/Testing/Figures/Default/SampleRemoval_PCA_Features=4/Data_Point_Removal_Similar_Weight=1.0/Sample_removal_Visualized_Cluster_n=22.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Testing/Figures/Default/SampleRemoval_PCA_Features=4/Data_Point_Removal_Similar_Weight=1.0/Sample_removal_Visualized_Cluster_n=23.png" beforeDir="false" afterPath="$PROJECT_DIR$/Testing/Figures/Default/SampleRemoval_PCA_Features=4/Data_Point_Removal_Similar_Weight=1.0/Sample_removal_Visualized_Cluster_n=23.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Testing/Figures/Default/SampleRemoval_PCA_Features=4/Data_Point_Removal_Similar_Weight=1.0/Sample_removal_Visualized_Cluster_n=24.png" beforeDir="false" afterPath="$PROJECT_DIR$/Testing/Figures/Default/SampleRemoval_PCA_Features=4/Data_Point_Removal_Similar_Weight=1.0/Sample_removal_Visualized_Cluster_n=24.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Testing/Figures/Default/SampleRemoval_PCA_Features=4/Data_Point_Removal_Similar_Weight=1.0/Sample_removal_Visualized_Cluster_n=25.png" beforeDir="false" afterPath="$PROJECT_DIR$/Testing/Figures/Default/SampleRemoval_PCA_Features=4/Data_Point_Removal_Similar_Weight=1.0/Sample_removal_Visualized_Cluster_n=25.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Testing/Figures/Default/SampleRemoval_PCA_Features=4/Data_Point_Removal_Similar_Weight=1.0/Sample_removal_Visualized_Cluster_n=26.png" beforeDir="false" afterPath="$PROJECT_DIR$/Testing/Figures/Default/SampleRemoval_PCA_Features=4/Data_Point_Removal_Similar_Weight=1.0/Sample_removal_Visualized_Cluster_n=26.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Testing/Figures/Default/SampleRemoval_PCA_Features=4/Data_Point_Removal_Similar_Weight=1.0/Sample_removal_Visualized_Cluster_n=27.png" beforeDir="false" afterPath="$PROJECT_DIR$/Testing/Figures/Default/SampleRemoval_PCA_Features=4/Data_Point_Removal_Similar_Weight=1.0/Sample_removal_Visualized_Cluster_n=27.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Testing/Figures/Default/SampleRemoval_PCA_Features=4/Data_Point_Removal_Similar_Weight=1.0/Sample_removal_Visualized_Cluster_n=28.png" beforeDir="false" afterPath="$PROJECT_DIR$/Testing/Figures/Default/SampleRemoval_PCA_Features=4/Data_Point_Removal_Similar_Weight=1.0/Sample_removal_Visualized_Cluster_n=28.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Testing/Figures/Default/SampleRemoval_PCA_Features=4/Data_Point_Removal_Similar_Weight=1.0/Sample_removal_Visualized_Cluster_n=29.png" beforeDir="false" afterPath="$PROJECT_DIR$/Testing/Figures/Default/SampleRemoval_PCA_Features=4/Data_Point_Removal_Similar_Weight=1.0/Sample_removal_Visualized_Cluster_n=29.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Testing/Figures/Default/SampleRemoval_PCA_Features=4/Data_Point_Removal_Similar_Weight=1.0/Sample_removal_Visualized_Cluster_n=30.png" beforeDir="false" afterPath="$PROJECT_DIR$/Testing/Figures/Default/SampleRemoval_PCA_Features=4/Data_Point_Removal_Similar_Weight=1.0/Sample_removal_Visualized_Cluster_n=30.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Testing/Figures/Default/SampleRemoval_PCA_Features=4/Data_Point_Removal_Similar_Weight=1.0/Sample_removal_Visualized_Cluster_n=31.png" beforeDir="false" afterPath="$PROJECT_DIR$/Testing/Figures/Default/SampleRemoval_PCA_Features=4/Data_Point_Removal_Similar_Weight=1.0/Sample_removal_Visualized_Cluster_n=31.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Testing/Figures/Default/SampleRemoval_PCA_Features=4/Data_Point_Removal_Similar_Weight=1.0/Sample_removal_Visualized_Cluster_n=32.png" beforeDir="false" afterPath="$PROJECT_DIR$/Testing/Figures/Default/SampleRemoval_PCA_Features=4/Data_Point_Removal_Similar_Weight=1.0/Sample_removal_Visualized_Cluster_n=32.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Testing/Figures/Default/SampleRemoval_PCA_Features=4/Data_Point_Removal_Similar_Weight=1.0/Sample_removal_Visualized_Cluster_n=33.png" beforeDir="false" afterPath="$PROJECT_DIR$/Testing/Figures/Default/SampleRemoval_PCA_Features=4/Data_Point_Removal_Similar_Weight=1.0/Sample_removal_Visualized_Cluster_n=33.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Testing/Figures/Default/SampleRemoval_PCA_Features=4/Data_Point_Removal_Similar_Weight=1.0/Sample_removal_Visualized_Cluster_n=34.png" beforeDir="false" afterPath="$PROJECT_DIR$/Testing/Figures/Default/SampleRemoval_PCA_Features=4/Data_Point_Removal_Similar_Weight=1.0/Sample_removal_Visualized_Cluster_n=34.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Testing/Figures/Default/SampleRemoval_PCA_Features=4/Data_Point_Removal_Similar_Weight=1.0/Sample_removal_Visualized_Cluster_n=35.png" beforeDir="false" afterPath="$PROJECT_DIR$/Testing/Figures/Default/SampleRemoval_PCA_Features=4/Data_Point_Removal_Similar_Weight=1.0/Sample_removal_Visualized_Cluster_n=35.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Testing/Figures/Default/SampleRemoval_PCA_Features=4/Data_Point_Removal_Similar_Weight=1.0/Sample_removal_Visualized_Cluster_n=36.png" beforeDir="false" afterPath="$PROJECT_DIR$/Testing/Figures/Default/SampleRemoval_PCA_Features=4/Data_Point_Removal_Similar_Weight=1.0/Sample_removal_Visualized_Cluster_n=36.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Testing/Figures/Default/SampleRemoval_PCA_Features=4/Data_Point_Removal_Similar_Weight=1.0/Sample_removal_Visualized_Cluster_n=37.png" beforeDir="false" afterPath="$PROJECT_DIR$/Testing/Figures/Default/SampleRemoval_PCA_Features=4/Data_Point_Removal_Similar_Weight=1.0/Sample_removal_Visualized_Cluster_n=37.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Testing/Figures/Default/SampleRemoval_PCA_Features=4/Data_Point_Removal_Similar_Weight=1.0/Sample_removal_Visualized_Cluster_n=38.png" beforeDir="false" afterPath="$PROJECT_DIR$/Testing/Figures/Default/SampleRemoval_PCA_Features=4/Data_Point_Removal_Similar_Weight=1.0/Sample_removal_Visualized_Cluster_n=38.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Testing/Figures/Default/SampleRemoval_PCA_Features=4/Data_Point_Removal_Similar_Weight=1.0/Sample_removal_Visualized_Cluster_n=39.png" beforeDir="false" afterPath="$PROJECT_DIR$/Testing/Figures/Default/SampleRemoval_PCA_Features=4/Data_Point_Removal_Similar_Weight=1.0/Sample_removal_Visualized_Cluster_n=39.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Testing/Figures/Default/SampleRemoval_PCA_Features=4/Data_Point_Removal_Similar_Weight=1.0/Sample_removal_Visualized_Cluster_n=40.png" beforeDir="false" afterPath="$PROJECT_DIR$/Testing/Figures/Default/SampleRemoval_PCA_Features=4/Data_Point_Removal_Similar_Weight=1.0/Sample_removal_Visualized_Cluster_n=40.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Testing/Figures/Default/SampleRemoval_PCA_Features=4/Data_Point_Removal_Similar_Weight=1.0/Sample_removal_Visualized_Cluster_n=41.png" beforeDir="false" afterPath="$PROJECT_DIR$/Testing/Figures/Default/SampleRemoval_PCA_Features=4/Data_Point_Removal_Similar_Weight=1.0/Sample_removal_Visualized_Cluster_n=41.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Testing/Figures/Default/SampleRemoval_PCA_Features=4/Data_Point_Removal_Similar_Weight=1.0/Sample_removal_Visualized_Cluster_n=42.png" beforeDir="false" afterPath="$PROJECT_DIR$/Testing/Figures/Default/SampleRemoval_PCA_Features=4/Data_Point_Removal_Similar_Weight=1.0/Sample_removal_Visualized_Cluster_n=42.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Testing/Figures/Default/SampleRemoval_PCA_Features=4/Data_Point_Removal_Similar_Weight=1.0/Sample_removal_Visualized_Cluster_n=43.png" beforeDir="false" afterPath="$PROJECT_DIR$/Testing/Figures/Default/SampleRemoval_PCA_Features=4/Data_Point_Removal_Similar_Weight=1.0/Sample_removal_Visualized_Cluster_n=43.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Testing/Figures/Default/SampleRemoval_PCA_Features=4/Data_Point_Removal_Similar_Weight=1.0/Sample_removal_Visualized_Cluster_n=44.png" beforeDir="false" afterPath="$PROJECT_DIR$/Testing/Figures/Default/SampleRemoval_PCA_Features=4/Data_Point_Removal_Similar_Weight=1.0/Sample_removal_Visualized_Cluster_n=44.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Testing/Figures/Default/SampleRemoval_PCA_Features=4/Data_Point_Removal_Similar_Weight=1.0/Sample_removal_Visualized_Cluster_n=45.png" beforeDir="false" afterPath="$PROJECT_DIR$/Testing/Figures/Default/SampleRemoval_PCA_Features=4/Data_Point_Removal_Similar_Weight=1.0/Sample_removal_Visualized_Cluster_n=45.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Testing/Figures/Default/SampleRemoval_PCA_Features=4/Data_Point_Removal_Similar_Weight=1.0/Sample_removal_Visualized_Cluster_n=46.png" beforeDir="false" afterPath="$PROJECT_DIR$/Testing/Figures/Default/SampleRemoval_PCA_Features=4/Data_Point_Removal_Similar_Weight=1.0/Sample_removal_Visualized_Cluster_n=46.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Testing/Figures/Default/SampleRemoval_PCA_Features=4/Data_Point_Removal_Similar_Weight=1.0/Sample_removal_Visualized_Cluster_n=47.png" beforeDir="false" afterPath="$PROJECT_DIR$/Testing/Figures/Default/SampleRemoval_PCA_Features=4/Data_Point_Removal_Similar_Weight=1.0/Sample_removal_Visualized_Cluster_n=47.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Testing/Figures/Default/SampleRemoval_PCA_Features=4/Data_Point_Removal_Similar_Weight=1.0/Sample_removal_Visualized_Cluster_n=48.png" beforeDir="false" afterPath="$PROJECT_DIR$/Testing/Figures/Default/SampleRemoval_PCA_Features=4/Data_Point_Removal_Similar_Weight=1.0/Sample_removal_Visualized_Cluster_n=48.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Testing/Figures/Default/SampleRemoval_PCA_Features=4/Data_Point_Removal_Similar_Weight=1.0/Sample_removal_Visualized_Cluster_n=49.png" beforeDir="false" afterPath="$PROJECT_DIR$/Testing/Figures/Default/SampleRemoval_PCA_Features=4/Data_Point_Removal_Similar_Weight=1.0/Sample_removal_Visualized_Cluster_n=49.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Testing/Figures/Default/SampleRemoval_PCA_Features=4/Data_Point_Removal_Similar_Weight=1.0/Sample_removal_Visualized_Cluster_n=50.png" beforeDir="false" afterPath="$PROJECT_DIR$/Testing/Figures/Default/SampleRemoval_PCA_Features=4/Data_Point_Removal_Similar_Weight=1.0/Sample_removal_Visualized_Cluster_n=50.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Testing/Figures/Default/SampleRemoval_PCA_Features=4/Data_Point_Removal_Similar_Weight=1.0/Similar Reduction.gif" beforeDir="false" afterPath="$PROJECT_DIR$/Testing/Figures/Default/SampleRemoval_PCA_Features=4/Data_Point_Removal_Similar_Weight=1.0/Similar Reduction.gif" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Testing/Figures/Default/SampleRemoval_PCA_Features=4/Just E.gif" beforeDir="false" afterPath="$PROJECT_DIR$/Testing/Figures/Default/SampleRemoval_PCA_Features=4/Just E.gif" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Testing/Sample_Removal.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/Testing/Sample_Removal.ipynb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Libraries/.ipynb_checkpoints/DataAnalysis-checkpoint.py" beforeDir="false" afterPath="$PROJECT_DIR$/Libraries/.ipynb_checkpoints/DataAnalysis-checkpoint.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Libraries/DataAnalysis.py" beforeDir="false" afterPath="$PROJECT_DIR$/Libraries/DataAnalysis.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Libraries/MasterPredictorEvalator.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Testing/.ipynb_checkpoints/Model_Analysis-checkpoint.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/Testing/.ipynb_checkpoints/Model_Analysis-checkpoint.ipynb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Testing/.ipynb_checkpoints/pie-checkpoint.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Testing/.ipynb_checkpoints/temp-plot-checkpoint.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Testing/Figures/Default/Data Analysis: Quick Look/Count Plot: Cabin.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Testing/Figures/Default/Data Analysis: Quick Look/Count Plot: Embarked.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Testing/Figures/Default/Data Analysis: Quick Look/Distance Plot: Age.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Testing/Figures/Default/Data Analysis: Quick Look/Distance Plot: Fare.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Testing/Figures/Default/Data Analysis: Quick Look/Pie Chart: Sex.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Testing/Figures/Default/Data Analysis: Quick Look/Pie Chart: Survived.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Testing/Model_Analysis.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/Testing/Model_Analysis.ipynb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Testing/pie.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Testing/snscounter.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Testing/temp-plot.html" beforeDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -54,75 +33,25 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Libraries/PredictorMaster.py">
-          <provider selected="true" editor-type-id="text-editor" />
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Libraries/SampleRemoval.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state>
-              <caret column="84" selection-start-column="84" selection-end-column="84" />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/Libraries/DataframeTypeHolder.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="778">
-              <caret line="101" column="12" selection-start-line="101" selection-start-column="12" selection-end-line="101" selection-end-column="12" />
-              <folding>
-                <element signature="e#0#11#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Libraries/ClusterMaster.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="5940">
-              <caret line="417" column="28" selection-start-line="417" selection-start-column="28" selection-end-line="417" selection-end-column="28" />
-              <folding>
-                <element signature="e#25#62#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Libraries/DataAnalysis.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="225">
-              <caret line="17" selection-start-line="17" selection-end-line="17" />
+            <state relative-caret-position="-2140">
+              <caret line="163" column="8" selection-start-line="163" selection-start-column="8" selection-end-line="163" selection-end-column="8" />
+              <folding>
+                <element signature="e#0#36#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Libraries/Sys_Utils.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="120">
+              <caret line="9" column="34" selection-start-line="9" selection-start-column="34" selection-end-line="9" selection-end-column="34" />
               <folding>
                 <element signature="e#0#19#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Libraries/Utils/Multi_Threading_Functions.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="900">
-              <caret line="65" selection-start-line="65" selection-end-line="69" selection-end-column="15" />
-              <folding>
-                <element signature="e#0#46#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Libraries/Utils/Global_Utils.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="855">
-              <caret line="80" selection-start-line="80" selection-end-line="96" selection-end-column="17" />
-              <folding>
-                <element signature="e#21#37#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -139,26 +68,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>Weight</find>
-      <find>remove_noise</find>
-      <find>self.__scaled</find>
-      <find>__visualize_data_points</find>
-      <find>df_index_scaled_dict</find>
-      <find>self.__df_index_values</find>
-      <find>.__targeted_df.values.</find>
-      <find>.__targeted_df.values</find>
-      <find>.__targeted_df.</find>
-      <find>__org_scaled</find>
-      <find>gif_</find>
-      <find>Sample_removal_Visualized_Cluster_n</find>
-      <find>__saved_created_folders</find>
-      <find>insert</find>
-      <find>filename=</find>
-      <find>called_from</find>
-      <find>new_dp_meta_similar_removal</find>
-      <find>__visualize_pca_variance</find>
-      <find>math</find>
-      <find>distance.euc</find>
       <find>find_all_dist_with_target</find>
       <find>find_all_distances_in_matrix</find>
       <find>find_all</find>
@@ -169,6 +78,26 @@
       <find>360</find>
       <find>create_gif_with_dp_amount</find>
       <find>-</find>
+      <find>Ana</find>
+      <find>missing_</find>
+      <find>create_plt_pn</find>
+      <find>missing_Data</find>
+      <find>__df_to_image</find>
+      <find>kwargs</find>
+      <find>col_width</find>
+      <find>df_features</find>
+      <find>()</find>
+      <find>format_float_pos=</find>
+      <find>=1</find>
+      <find>Missing_Data</find>
+      <find>Figures</find>
+      <find>distance_plot</find>
+      <find>PROJECT</find>
+      <find>__create_value_counts_table</find>
+      <find>missing_values_table</find>
+      <find>create_plt</find>
+      <find>__missing_values_table</find>
+      <find>df_to_image</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -192,8 +121,10 @@
         <option value="$PROJECT_DIR$/Libraries/Utils/Multi_Threading_Functions.py" />
         <option value="$PROJECT_DIR$/Libraries/Utils/Global_Utils.py" />
         <option value="$PROJECT_DIR$/Libraries/SampleRemoval.py" />
-        <option value="$PROJECT_DIR$/Libraries/DataAnalysis.py" />
         <option value="$PROJECT_DIR$/Libraries/DataframeTypeHolder.py" />
+        <option value="$PROJECT_DIR$/Libraries/Utils/Sys_Utils.py" />
+        <option value="$PROJECT_DIR$/Libraries/Sys_Utils.py" />
+        <option value="$PROJECT_DIR$/Libraries/DataAnalysis.py" />
       </list>
     </option>
   </component>
@@ -214,11 +145,6 @@
               <item name="Master_Universal_Data_Analytics" type="b2602c69:ProjectViewProjectNode" />
               <item name="Master_Universal_Data_Analytics" type="462c0819:PsiDirectoryNode" />
             </path>
-            <path>
-              <item name="Master_Universal_Data_Analytics" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Master_Universal_Data_Analytics" type="462c0819:PsiDirectoryNode" />
-              <item name="Libraries" type="462c0819:PsiDirectoryNode" />
-            </path>
           </expand>
           <select />
         </subPane>
@@ -234,6 +160,7 @@
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/Libraries" />
       <recent name="$PROJECT_DIR$/Testing" />
       <recent name="$PROJECT_DIR$" />
     </key>
@@ -314,16 +241,18 @@
       <workItem from="1557003790993" duration="14412000" />
       <workItem from="1557155113457" duration="9658000" />
       <workItem from="1558637633698" duration="39000" />
+      <workItem from="1561387881004" duration="16898000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="247554000" />
+    <option name="totallyTimeSpent" value="264452000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1680" height="1050" extended-state="0" />
+    <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.16117217" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.16300367" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -352,20 +281,11 @@
     <option name="version" value="1" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/Figures/Default/Analysis/Rank_Graph_Average Feature Correlation.png" />
-    <entry file="file://$PROJECT_DIR$/Iris_Clustering.ipynb" />
-    <entry file="file://$PROJECT_DIR$/Libraries/Utils/Custom_Exc.py">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Figures/Default/Analysis/test.png" />
     <entry file="file://$PROJECT_DIR$/Figures/Default/Analysis/Scale_PCA_Scale Results.png" />
     <entry file="file://$PROJECT_DIR$/Figures/Default/Analysis/Rank_Graph_Average_Feature_Correlation.png" />
     <entry file="file://$PROJECT_DIR$/83490254.html" />
     <entry file="file://$PROJECT_DIR$/mytable.png" />
     <entry file="file://$PROJECT_DIR$/sgd_method.png" />
-    <entry file="file://$PROJECT_DIR$/Libraries/Utils/Constants.py">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
     <entry file="file://$PROJECT_DIR$/Figures/pca_variance_ratio.png" />
     <entry file="file://$PROJECT_DIR$/Figures/Default/Clustering/PCA/PCA_Cumulative_Sum_of_Variances.png" />
     <entry file="file://$PROJECT_DIR$/Figures/Default/Clustering/PCA/PCA_Feature_Variance_Ratio.png" />
@@ -403,29 +323,12 @@
     <entry file="file://$PROJECT_DIR$/Libraries/PredictorMaster.py">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/Libraries/SampleRemoval.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret column="84" selection-start-column="84" selection-end-column="84" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Libraries/ClusterMaster.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="5940">
           <caret line="417" column="28" selection-start-line="417" selection-start-column="28" selection-end-line="417" selection-end-column="28" />
           <folding>
             <element signature="e#25#62#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Libraries/DataAnalysis.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="225">
-          <caret line="17" selection-start-line="17" selection-end-line="17" />
-          <folding>
-            <element signature="e#0#19#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -440,22 +343,61 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/Libraries/SampleRemoval.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret column="84" selection-start-column="84" selection-end-column="84" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Libraries/AutoModeler.py">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Libraries/DataCleaner.py">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Libraries/Utils/Constants.py">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Libraries/Utils/Custom_Exc.py">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Libraries/DataframeTypeHolder.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="285">
+          <caret line="19" column="79" selection-start-line="19" selection-start-column="32" selection-end-line="19" selection-end-column="79" />
+          <folding>
+            <element signature="e#0#11#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/Libraries/Utils/Global_Utils.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="855">
-          <caret line="80" selection-start-line="80" selection-end-line="96" selection-end-column="17" />
+        <state relative-caret-position="-7135">
+          <caret line="50" column="27" selection-start-line="50" selection-start-column="20" selection-end-line="50" selection-end-column="27" />
           <folding>
             <element signature="e#21#37#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Libraries/DataframeTypeHolder.py">
+    <entry file="file://$PROJECT_DIR$/Libraries/Sys_Utils.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="778">
-          <caret line="101" column="12" selection-start-line="101" selection-start-column="12" selection-end-line="101" selection-end-column="12" />
+        <state relative-caret-position="120">
+          <caret line="9" column="34" selection-start-line="9" selection-start-column="34" selection-end-line="9" selection-end-column="34" />
           <folding>
-            <element signature="e#0#11#0" expanded="true" />
+            <element signature="e#0#19#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Libraries/DataAnalysis.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-2140">
+          <caret line="163" column="8" selection-start-line="163" selection-start-column="8" selection-end-line="163" selection-end-column="8" />
+          <folding>
+            <element signature="e#0#36#0" expanded="true" />
           </folding>
         </state>
       </provider>
