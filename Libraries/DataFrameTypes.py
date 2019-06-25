@@ -1,7 +1,8 @@
 import copy
 from IPython.display import display, HTML
 
-class DataframeTypeHolder:
+
+class DataFrameTypes:
 
     """
         Seperates the features based off of dtypes
@@ -66,7 +67,6 @@ class DataframeTypeHolder:
                     if col_feature != self.__target_feature]
         else:
             return list(self.__integer_features)
-            
 
     def get_float_features(self,
                            exclude_target=False):

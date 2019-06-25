@@ -2,25 +2,65 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ed041e50-c9da-4464-8bcf-e2b46601487b" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/Libraries/Sys_Utils.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Libraries/__init__.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Libraries/.ipynb_checkpoints/DataAnalysis-checkpoint.py" beforeDir="false" afterPath="$PROJECT_DIR$/Libraries/.ipynb_checkpoints/DataAnalysis-checkpoint.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.ipynb_checkpoints/Sample_Removal_Testing-checkpoint.py" beforeDir="false" afterPath="$PROJECT_DIR$/.ipynb_checkpoints/Sample_Removal_Testing-checkpoint.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.ipynb_checkpoints/Sample_Removal_Testing1-checkpoint.py" beforeDir="false" afterPath="$PROJECT_DIR$/.ipynb_checkpoints/Sample_Removal_Testing1-checkpoint.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Libraries/DataAnalysis.py" beforeDir="false" afterPath="$PROJECT_DIR$/Libraries/DataAnalysis.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Libraries/MasterPredictorEvalator.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Libraries/DataframeTypeHolder.py" beforeDir="false" afterPath="$PROJECT_DIR$/Libraries/DataFrameTypes.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Testing/.ipynb_checkpoints/Model_Analysis-checkpoint.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/Testing/.ipynb_checkpoints/Model_Analysis-checkpoint.ipynb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Testing/.ipynb_checkpoints/pie-checkpoint.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Testing/.ipynb_checkpoints/temp-plot-checkpoint.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Testing/Figures/Default/Data Analysis: Quick Look/Count Plot: Cabin.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Testing/Figures/Default/Data Analysis: Quick Look/Count Plot: Embarked.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Testing/Figures/Default/Data Analysis: Quick Look/Distance Plot: Age.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Testing/Figures/Default/Data Analysis: Quick Look/Distance Plot: Fare.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Testing/Figures/Default/Data Analysis: Quick Look/Pie Chart: Sex.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Testing/Figures/Default/Data Analysis: Quick Look/Pie Chart: Survived.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Testing/.ipynb_checkpoints/Sample_Removal_Testing-checkpoint.py" beforeDir="false" afterPath="$PROJECT_DIR$/Testing/.ipynb_checkpoints/Sample_Removal_Testing-checkpoint.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Testing/Generated_Data/General Analysis/Data_Analysis_Quick_Look/Graphics/Count_Plot_Cabin.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Testing/Generated_Data/General Analysis/Data_Analysis_Quick_Look/Graphics/Count_Plot_Embarked.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Testing/Generated_Data/General Analysis/Data_Analysis_Quick_Look/Graphics/Count_Plot_Parch.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Testing/Generated_Data/General Analysis/Data_Analysis_Quick_Look/Graphics/Count_Plot_Pclass.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Testing/Generated_Data/General Analysis/Data_Analysis_Quick_Look/Graphics/Count_Plot_SibSp.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Testing/Generated_Data/General Analysis/Data_Analysis_Quick_Look/Graphics/Distance_Plot_Age.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Testing/Generated_Data/General Analysis/Data_Analysis_Quick_Look/Graphics/Distance_Plot_Fare.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Testing/Generated_Data/General Analysis/Data_Analysis_Quick_Look/Graphics/Distance_Plot_PassengerId.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Testing/Generated_Data/General Analysis/Data_Analysis_Quick_Look/Graphics/Pie_Chart_Sex.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Testing/Generated_Data/General Analysis/Data_Analysis_Quick_Look/Graphics/Pie_Chart_Survived.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Testing/Generated_Data/General Analysis/Data_Analysis_Quick_Look/Tables/Age Descr.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Testing/Generated_Data/General Analysis/Data_Analysis_Quick_Look/Tables/Cabin Value Counts.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Testing/Generated_Data/General Analysis/Data_Analysis_Quick_Look/Tables/Embarked Value Counts.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Testing/Generated_Data/General Analysis/Data_Analysis_Quick_Look/Tables/Fare Descr.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Testing/Generated_Data/General Analysis/Data_Analysis_Quick_Look/Tables/Parch Value Counts.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Testing/Generated_Data/General Analysis/Data_Analysis_Quick_Look/Tables/PassengerId Descr.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Testing/Generated_Data/General Analysis/Data_Analysis_Quick_Look/Tables/Pclass Value Counts.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Testing/Generated_Data/General Analysis/Data_Analysis_Quick_Look/Tables/Sex Value Counts.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Testing/Generated_Data/General Analysis/Data_Analysis_Quick_Look/Tables/SibSp Value Counts.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Testing/Generated_Data/General Analysis/Data_Analysis_Quick_Look/Tables/Survived Value Counts.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Testing/Generated_Data/General Analysis/Missing_Data/Graphics/Missing_Data_Bar_Graph.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Testing/Generated_Data/General Analysis/Missing_Data/Graphics/Missing_Data_Dendrogram_Graph.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Testing/Generated_Data/General Analysis/Missing_Data/Graphics/Missing_Data_Heatmap.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Testing/Generated_Data/General Analysis/Missing_Data/Graphics/Missing_Data_Matrix_Graph.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Testing/Generated_Data/General Analysis/Missing_Data/Tables/Missing_Data_Table.png" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/Testing/Model_Analysis.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/Testing/Model_Analysis.ipynb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Testing/pie.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Testing/snscounter.pdf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Testing/temp-plot.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Testing/Production/General Analysis/Data_Analysis_Quick_Look/Graphics/Count_Plot_Cabin.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Testing/Production/General Analysis/Data_Analysis_Quick_Look/Graphics/Count_Plot_Embarked.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Testing/Production/General Analysis/Data_Analysis_Quick_Look/Graphics/Count_Plot_Parch.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Testing/Production/General Analysis/Data_Analysis_Quick_Look/Graphics/Count_Plot_Pclass.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Testing/Production/General Analysis/Data_Analysis_Quick_Look/Graphics/Count_Plot_SibSp.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Testing/Production/General Analysis/Data_Analysis_Quick_Look/Graphics/Distance_Plot_Age.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Testing/Production/General Analysis/Data_Analysis_Quick_Look/Graphics/Distance_Plot_Fare.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Testing/Production/General Analysis/Data_Analysis_Quick_Look/Graphics/Distance_Plot_PassengerId.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Testing/Production/General Analysis/Data_Analysis_Quick_Look/Graphics/Pie_Chart_Sex.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Testing/Production/General Analysis/Data_Analysis_Quick_Look/Graphics/Pie_Chart_Survived.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Testing/Production/General Analysis/Data_Analysis_Quick_Look/Tables/Age Descr.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Testing/Production/General Analysis/Data_Analysis_Quick_Look/Tables/Cabin Value Counts.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Testing/Production/General Analysis/Data_Analysis_Quick_Look/Tables/Embarked Value Counts.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Testing/Production/General Analysis/Data_Analysis_Quick_Look/Tables/Fare Descr.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Testing/Production/General Analysis/Data_Analysis_Quick_Look/Tables/Parch Value Counts.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Testing/Production/General Analysis/Data_Analysis_Quick_Look/Tables/PassengerId Descr.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Testing/Production/General Analysis/Data_Analysis_Quick_Look/Tables/Pclass Value Counts.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Testing/Production/General Analysis/Data_Analysis_Quick_Look/Tables/Sex Value Counts.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Testing/Production/General Analysis/Data_Analysis_Quick_Look/Tables/SibSp Value Counts.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Testing/Production/General Analysis/Data_Analysis_Quick_Look/Tables/Survived Value Counts.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Testing/Production/General Analysis/Missing_Data/Graphics/Missing_Data_Bar_Graph.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Testing/Production/General Analysis/Missing_Data/Graphics/Missing_Data_Dendrogram_Graph.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Testing/Production/General Analysis/Missing_Data/Graphics/Missing_Data_Heatmap.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Testing/Production/General Analysis/Missing_Data/Graphics/Missing_Data_Matrix_Graph.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Testing/Production/General Analysis/Missing_Data/Tables/Missing_Data_Table.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Testing/Sample_Removal_Testing.py" beforeDir="false" afterPath="$PROJECT_DIR$/Testing/Sample_Removal_Testing.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -36,8 +76,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Libraries/DataAnalysis.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-2140">
-              <caret line="163" column="8" selection-start-line="163" selection-start-column="8" selection-end-line="163" selection-end-column="8" />
+            <state relative-caret-position="394">
+              <caret line="256" column="36" lean-forward="true" selection-start-line="256" selection-start-column="36" selection-end-line="256" selection-end-column="45" />
               <folding>
                 <element signature="e#0#36#0" expanded="true" />
               </folding>
@@ -48,13 +88,30 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Libraries/Sys_Utils.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="120">
-              <caret line="9" column="34" selection-start-line="9" selection-start-column="34" selection-end-line="9" selection-end-column="34" />
+            <state relative-caret-position="90">
+              <caret line="7" selection-start-line="7" selection-end-line="7" />
               <folding>
                 <element signature="e#0#19#0" expanded="true" />
               </folding>
             </state>
           </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Libraries/DataFrameTypes.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="219">
+              <caret line="54" column="30" selection-start-line="54" selection-start-column="8" selection-end-line="54" selection-end-column="30" />
+              <folding>
+                <element signature="e#0#11#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Libraries/DataCleaner.py">
+          <provider selected="true" editor-type-id="text-editor" />
         </entry>
       </file>
     </leaf>
@@ -68,13 +125,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>find_all_dist_with_target</find>
-      <find>find_all_distances_in_matrix</find>
-      <find>find_all</find>
-      <find>pca.</find>
-      <find>print</find>
-      <find>self.__feature_degress</find>
-      <find>180</find>
       <find>360</find>
       <find>create_gif_with_dp_amount</find>
       <find>-</find>
@@ -91,13 +141,20 @@
       <find>=1</find>
       <find>Missing_Data</find>
       <find>Figures</find>
-      <find>distance_plot</find>
       <find>PROJECT</find>
       <find>__create_value_counts_table</find>
       <find>missing_values_table</find>
       <find>create_plt</find>
       <find>__missing_values_table</find>
       <find>df_to_image</find>
+      <find>create_value_counts_table</find>
+      <find>_Quick_Look</find>
+      <find>Data_An</find>
+      <find>distance_plot</find>
+      <find>check_specfied_col</find>
+      <find>init_default_color</find>
+      <find>&lt;= 4</find>
+      <find>55a868</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -121,9 +178,10 @@
         <option value="$PROJECT_DIR$/Libraries/Utils/Multi_Threading_Functions.py" />
         <option value="$PROJECT_DIR$/Libraries/Utils/Global_Utils.py" />
         <option value="$PROJECT_DIR$/Libraries/SampleRemoval.py" />
-        <option value="$PROJECT_DIR$/Libraries/DataframeTypeHolder.py" />
         <option value="$PROJECT_DIR$/Libraries/Utils/Sys_Utils.py" />
         <option value="$PROJECT_DIR$/Libraries/Sys_Utils.py" />
+        <option value="$PROJECT_DIR$/Libraries/DataframeTypeHolder.py" />
+        <option value="$PROJECT_DIR$/Libraries/DataFrameTypes.py" />
         <option value="$PROJECT_DIR$/Libraries/DataAnalysis.py" />
       </list>
     </option>
@@ -144,6 +202,11 @@
             <path>
               <item name="Master_Universal_Data_Analytics" type="b2602c69:ProjectViewProjectNode" />
               <item name="Master_Universal_Data_Analytics" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Master_Universal_Data_Analytics" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Master_Universal_Data_Analytics" type="462c0819:PsiDirectoryNode" />
+              <item name="Libraries" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -241,12 +304,12 @@
       <workItem from="1557003790993" duration="14412000" />
       <workItem from="1557155113457" duration="9658000" />
       <workItem from="1558637633698" duration="39000" />
-      <workItem from="1561387881004" duration="16898000" />
+      <workItem from="1561387881004" duration="35501000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="264452000" />
+    <option name="totallyTimeSpent" value="283055000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1680" height="1050" extended-state="0" />
@@ -353,24 +416,11 @@
     <entry file="file://$PROJECT_DIR$/Libraries/AutoModeler.py">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/Libraries/DataCleaner.py">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
     <entry file="file://$PROJECT_DIR$/Libraries/Utils/Constants.py">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
     <entry file="file://$PROJECT_DIR$/Libraries/Utils/Custom_Exc.py">
       <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Libraries/DataframeTypeHolder.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="285">
-          <caret line="19" column="79" selection-start-line="19" selection-start-column="32" selection-end-line="19" selection-end-column="79" />
-          <folding>
-            <element signature="e#0#11#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Libraries/Utils/Global_Utils.py">
       <provider selected="true" editor-type-id="text-editor">
@@ -382,20 +432,33 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/Libraries/DataCleaner.py">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
     <entry file="file://$PROJECT_DIR$/Libraries/Sys_Utils.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="120">
-          <caret line="9" column="34" selection-start-line="9" selection-start-column="34" selection-end-line="9" selection-end-column="34" />
+        <state relative-caret-position="90">
+          <caret line="7" selection-start-line="7" selection-end-line="7" />
           <folding>
             <element signature="e#0#19#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/Libraries/DataFrameTypes.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="219">
+          <caret line="54" column="30" selection-start-line="54" selection-start-column="8" selection-end-line="54" selection-end-column="30" />
+          <folding>
+            <element signature="e#0#11#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/Libraries/DataAnalysis.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-2140">
-          <caret line="163" column="8" selection-start-line="163" selection-start-column="8" selection-end-line="163" selection-end-column="8" />
+        <state relative-caret-position="394">
+          <caret line="256" column="36" lean-forward="true" selection-start-line="256" selection-start-column="36" selection-end-line="256" selection-end-column="45" />
           <folding>
             <element signature="e#0#36#0" expanded="true" />
           </folding>

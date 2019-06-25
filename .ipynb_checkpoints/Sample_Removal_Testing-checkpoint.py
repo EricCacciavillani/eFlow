@@ -35,7 +35,7 @@ sys.path.append('..')
 from Libraries.Utils.Global_Utils import *
 from Libraries.SampleRemoval import *
 from Libraries.ClusterMaster import *
-from Libraries.DataframeTypeHolder import *
+from Libraries.DataFrameTypes import *
 
 
 def testing_all_removal():
