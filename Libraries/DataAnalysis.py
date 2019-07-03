@@ -19,8 +19,9 @@ class DataAnalysis:
     def __init__(self,
                  df=None,
                  df_features=None,
-                 project_name="Default_Project_Name",
-                 overwrite_full_path=None):
+                 project_name="Default_Project_Name_Data_Analysis",
+                 overwrite_full_path=None,
+                 notebook_mode=True):
         """
         df:
             Pandas DataFrame object.
@@ -38,7 +39,8 @@ class DataAnalysis:
 
         Returns/Descr:
             Designed to increase workflow and overall attempt to automate the
-            routine of graphing/generating tables.
+            routine of graphing/generating tables. Will be adding interactive
+            graphs where I think necessary. 
 
         Personal Note:
             I will continue to expand on different ways of exploring data and
@@ -58,6 +60,7 @@ class DataAnalysis:
                                              [True, "#55a868"],
                                              [False, "#ff8585"]])
 
+        self.__notebook_mode = notebook_mode
 
         if not overwrite_full_path:
             parent_structure = "/Production Data/" + project_name + "/"
@@ -68,10 +71,12 @@ class DataAnalysis:
 
         if df is not None and df_features is not None:
             # ---
-            display(df.dtypes)
-            print("\n\n")
-            display(self.__missing_values_table(df))
-            print("\n")
+
+            if self.__notebook_mode:
+                display(df.dtypes)
+                print("\n\n")
+                display(self.__missing_values_table(df))
+                print("\n")
 
             if df.isnull().values.any():
 
@@ -80,7 +85,9 @@ class DataAnalysis:
                 create_plt_png(self.__PROJECT.PATH_TO_OUTPUT_FOLDER,
                                "Missing_Data/Graphics",
                                "Missing_Data_Matrix_Graph")
-                plt.show()
+
+                if self.__notebook_mode:
+                    plt.show()
                 plt.close()
 
                 # ---
@@ -90,7 +97,8 @@ class DataAnalysis:
                 create_plt_png(self.__PROJECT.PATH_TO_OUTPUT_FOLDER,
                                "Missing_Data/Graphics",
                                "Missing_Data_Bar_Graph")
-                plt.show()
+                if self.__notebook_mode:
+                    plt.show()
                 plt.close()
 
                 # ---
@@ -98,7 +106,8 @@ class DataAnalysis:
                 create_plt_png(self.__PROJECT.PATH_TO_OUTPUT_FOLDER,
                                "Missing_Data/Graphics",
                                "Missing_Data_Heatmap")
-                plt.show()
+                if self.__notebook_mode:
+                    plt.show()
                 plt.close()
 
                 # ---
@@ -106,7 +115,8 @@ class DataAnalysis:
                 create_plt_png(self.__PROJECT.PATH_TO_OUTPUT_FOLDER,
                                "Missing_Data/Graphics",
                                "Missing_Data_Dendrogram_Graph")
-                plt.show()
+                if self.__notebook_mode:
+                    plt.show()
                 plt.close()
 
             print("*" * 80 + "\n" * 2)
@@ -125,7 +135,7 @@ class DataAnalysis:
                     self.count_plot_graph(df, col_feature_name)
 
                 elif col_feature_name in df_features.get_integer_features():
-                    if len(df[col_feature_name].dropna().unique()) <= 19:
+                    if len(df[col_feature_name].dropna().unique()) <= 13:
                         self.count_plot_graph(df,
                                               col_feature_name)
                     else:
@@ -205,7 +215,8 @@ class DataAnalysis:
         create_plt_png(self.__PROJECT.PATH_TO_OUTPUT_FOLDER,
                        "Feature_Analysis/Graphics",
                        "Distance_Plot_" + col_feature_name)
-        plt.show()
+        if self.__notebook_mode:
+            plt.show()
         plt.close()
 
         # Numerical column's multi-metric evaluation
@@ -278,7 +289,8 @@ class DataAnalysis:
         create_plt_png(self.__PROJECT.PATH_TO_OUTPUT_FOLDER,
                        "Feature_Analysis/Graphics",
                        "Count_Plot_" + col_feature_name)
-        plt.show()
+        if self.__notebook_mode:
+            plt.show()
         plt.close()
 
         # Save table in proper directory structure
@@ -357,7 +369,8 @@ class DataAnalysis:
         create_plt_png(self.__PROJECT.PATH_TO_OUTPUT_FOLDER,
                        "Feature_Analysis/Graphics",
                        "Pie_Chart_" + col_feature_name)
-        plt.show()
+        if self.__notebook_mode:
+            plt.show()
         plt.close()
 
         # Save table in proper directory structure
@@ -395,7 +408,7 @@ class DataAnalysis:
         col_vc_df = df[col_feature_name].value_counts().rename_axis(
             'Unique Values').reset_index(name='Counts')
 
-        if display_table:
+        if display_table and self.__notebook_mode:
             display(col_vc_df)
             print("\n"*3)
 
@@ -435,7 +448,7 @@ class DataAnalysis:
         col_desc_df = df[col_feature_name].describe().to_frame()
         col_desc_df["var"] = df[col_feature_name].var()
 
-        if display_table:
+        if display_table and self.__notebook_mode:
             display(col_desc_df)
             print("\n"*3)
 
