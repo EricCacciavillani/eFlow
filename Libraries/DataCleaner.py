@@ -191,12 +191,14 @@ class DataCleaner:
 
             self.__feature_cleaning_options_w = {key: widgets.Select(
                 options=feature_cleaning_options[key],
-                layout=Layout(width='70%',
+                layout=Layout(width='50%',
                               height='300px'))
                 for key in feature_cleaning_options}
 
             self.__features_w = widgets.Select(
-                options=list(feature_cleaning_options.keys()))
+                options=list(feature_cleaning_options.keys()),
+                layout=Layout(width='50%')
+            )
             init = self.__features_w.value
             self.__options_w = self.__feature_cleaning_options_w[init]
             self.__features_w.observe(self.__data_cleaning_widget_select_feature,
@@ -209,13 +211,19 @@ class DataCleaner:
                 visible=False
             )
 
-            self.__submit_button = widgets.Button(description='Run')
+            self.__submit_button = widgets.Button(
+                description='Finalize Cleaning',
+                color="#ff1122",
+                layout=Layout(left='100px',
+                              bottom="5px",
+                              width='40%',))
 
             self.__full_widgets_ui = widgets.interactive(
                 self.__data_cleaning_widget_save_option,
                 Features=self.__features_w,
                 Options=self.__options_w,
-                Text_Input=self.__text_w)
+                Text_Input=self.__text_w,
+             )
 
             display(self.__full_widgets_ui)
             display(self.__submit_button)
@@ -262,13 +270,16 @@ class DataCleaner:
     def __data_cleaning_widget_select_feature(self,
                                               feature):
 
-        print(self.__feature_cleaning_options_w)
-
         new_i = widgets.interactive(self.__data_cleaning_widget_save_option,
                                     Features=self.__features_w,
                                     Options=self.__feature_cleaning_options_w[
                                         feature['new']])
         self.__full_widgets_ui.children = new_i.children
+
+    def data_cleaning_with_json_file(self,):
+
+
+
 
     def __get_dtype_key(self,
                         df_features,

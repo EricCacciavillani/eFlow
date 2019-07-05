@@ -3,41 +3,9 @@
   <component name="ChangeListManager">
     <list default="true" id="ed041e50-c9da-4464-8bcf-e2b46601487b" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Libraries/.ipynb_checkpoints/DataAnalysis-checkpoint.py" beforeDir="false" afterPath="$PROJECT_DIR$/Libraries/.ipynb_checkpoints/DataAnalysis-checkpoint.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Libraries/DataAnalysis.py" beforeDir="false" afterPath="$PROJECT_DIR$/Libraries/DataAnalysis.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Libraries/DataCleaner.py" beforeDir="false" afterPath="$PROJECT_DIR$/Libraries/DataCleaner.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Testing/.ipynb_checkpoints/Iris_Clustering-checkpoint.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/Testing/.ipynb_checkpoints/Iris_Clustering-checkpoint.ipynb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Testing/.ipynb_checkpoints/Model_Analysis-checkpoint.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/Testing/.ipynb_checkpoints/Model_Analysis-checkpoint.ipynb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Testing/DataAnalysis.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/Testing/DataAnalysis.ipynb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Testing/Iris_Clustering.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/Testing/Iris_Clustering.ipynb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Testing/Model_Analysis.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/Testing/Model_Analysis.ipynb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Testing/Production Data/General Analysis/Feature_Analysis/Graphics/Count_Plot_Cabin.png" beforeDir="false" afterPath="$PROJECT_DIR$/Testing/Production Data/General Analysis/Feature_Analysis/Graphics/Count_Plot_Cabin.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Testing/Production Data/General Analysis/Feature_Analysis/Graphics/Count_Plot_Parch.png" beforeDir="false" afterPath="$PROJECT_DIR$/Testing/Production Data/General Analysis/Feature_Analysis/Graphics/Count_Plot_Parch.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Testing/Production Data/General Analysis/Feature_Analysis/Graphics/Count_Plot_Pclass.png" beforeDir="false" afterPath="$PROJECT_DIR$/Testing/Production Data/General Analysis/Feature_Analysis/Graphics/Count_Plot_Pclass.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Testing/Production Data/General Analysis/Feature_Analysis/Graphics/Count_Plot_SibSp.png" beforeDir="false" afterPath="$PROJECT_DIR$/Testing/Production Data/General Analysis/Feature_Analysis/Graphics/Count_Plot_SibSp.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Testing/Production Data/General Analysis/Feature_Analysis/Graphics/Distance_Plot_Age.png" beforeDir="false" afterPath="$PROJECT_DIR$/Testing/Production Data/General Analysis/Feature_Analysis/Graphics/Distance_Plot_Age.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Testing/Production Data/General Analysis/Feature_Analysis/Graphics/Distance_Plot_Fare.png" beforeDir="false" afterPath="$PROJECT_DIR$/Testing/Production Data/General Analysis/Feature_Analysis/Graphics/Distance_Plot_Fare.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Testing/Production Data/General Analysis/Feature_Analysis/Graphics/Distance_Plot_PassengerId.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Testing/Production Data/General Analysis/Feature_Analysis/Graphics/Pie_Chart_Embarked.png" beforeDir="false" afterPath="$PROJECT_DIR$/Testing/Production Data/General Analysis/Feature_Analysis/Graphics/Pie_Chart_Embarked.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Testing/Production Data/General Analysis/Feature_Analysis/Graphics/Pie_Chart_Sex.png" beforeDir="false" afterPath="$PROJECT_DIR$/Testing/Production Data/General Analysis/Feature_Analysis/Graphics/Pie_Chart_Sex.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Testing/Production Data/General Analysis/Feature_Analysis/Graphics/Pie_Chart_Survived.png" beforeDir="false" afterPath="$PROJECT_DIR$/Testing/Production Data/General Analysis/Feature_Analysis/Graphics/Pie_Chart_Survived.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Testing/Production Data/General Analysis/Feature_Analysis/Graphics/Pie_Chart_like_dogs.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Testing/Production Data/General Analysis/Feature_Analysis/Tables/Age Descr.png" beforeDir="false" afterPath="$PROJECT_DIR$/Testing/Production Data/General Analysis/Feature_Analysis/Tables/Age Descr.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Testing/Production Data/General Analysis/Feature_Analysis/Tables/Cabin Value Counts.png" beforeDir="false" afterPath="$PROJECT_DIR$/Testing/Production Data/General Analysis/Feature_Analysis/Tables/Cabin Value Counts.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Testing/Production Data/General Analysis/Feature_Analysis/Tables/Embarked Value Counts.png" beforeDir="false" afterPath="$PROJECT_DIR$/Testing/Production Data/General Analysis/Feature_Analysis/Tables/Embarked Value Counts.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Testing/Production Data/General Analysis/Feature_Analysis/Tables/Fare Descr.png" beforeDir="false" afterPath="$PROJECT_DIR$/Testing/Production Data/General Analysis/Feature_Analysis/Tables/Fare Descr.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Testing/Production Data/General Analysis/Feature_Analysis/Tables/Parch Value Counts.png" beforeDir="false" afterPath="$PROJECT_DIR$/Testing/Production Data/General Analysis/Feature_Analysis/Tables/Parch Value Counts.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Testing/Production Data/General Analysis/Feature_Analysis/Tables/PassengerId Descr.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Testing/Production Data/General Analysis/Feature_Analysis/Tables/Pclass Value Counts.png" beforeDir="false" afterPath="$PROJECT_DIR$/Testing/Production Data/General Analysis/Feature_Analysis/Tables/Pclass Value Counts.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Testing/Production Data/General Analysis/Feature_Analysis/Tables/Sex Value Counts.png" beforeDir="false" afterPath="$PROJECT_DIR$/Testing/Production Data/General Analysis/Feature_Analysis/Tables/Sex Value Counts.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Testing/Production Data/General Analysis/Feature_Analysis/Tables/SibSp Value Counts.png" beforeDir="false" afterPath="$PROJECT_DIR$/Testing/Production Data/General Analysis/Feature_Analysis/Tables/SibSp Value Counts.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Testing/Production Data/General Analysis/Feature_Analysis/Tables/Survived Value Counts.png" beforeDir="false" afterPath="$PROJECT_DIR$/Testing/Production Data/General Analysis/Feature_Analysis/Tables/Survived Value Counts.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Testing/Production Data/General Analysis/Feature_Analysis/Tables/like_dogs Value Counts.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Testing/Production Data/General Analysis/Missing_Data/Graphics/Missing_Data_Bar_Graph.png" beforeDir="false" afterPath="$PROJECT_DIR$/Testing/Production Data/General Analysis/Missing_Data/Graphics/Missing_Data_Bar_Graph.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Testing/Production Data/General Analysis/Missing_Data/Graphics/Missing_Data_Dendrogram_Graph.png" beforeDir="false" afterPath="$PROJECT_DIR$/Testing/Production Data/General Analysis/Missing_Data/Graphics/Missing_Data_Dendrogram_Graph.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Testing/Production Data/General Analysis/Missing_Data/Graphics/Missing_Data_Heatmap.png" beforeDir="false" afterPath="$PROJECT_DIR$/Testing/Production Data/General Analysis/Missing_Data/Graphics/Missing_Data_Heatmap.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Testing/Production Data/General Analysis/Missing_Data/Graphics/Missing_Data_Matrix_Graph.png" beforeDir="false" afterPath="$PROJECT_DIR$/Testing/Production Data/General Analysis/Missing_Data/Graphics/Missing_Data_Matrix_Graph.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Testing/Production Data/General Analysis/Missing_Data/Tables/Missing_Data_Table.png" beforeDir="false" afterPath="$PROJECT_DIR$/Testing/Production Data/General Analysis/Missing_Data/Tables/Missing_Data_Table.png" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -86,8 +54,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Libraries/DataCleaner.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="719">
-              <caret line="122" column="33" selection-start-line="122" selection-start-column="33" selection-end-line="122" selection-end-column="33" />
+            <state relative-caret-position="260">
+              <caret line="276" column="56" lean-forward="true" selection-start-line="276" selection-start-column="56" selection-end-line="276" selection-end-column="56" />
               <folding>
                 <element signature="e#0#18#0" expanded="true" />
               </folding>
@@ -106,11 +74,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>col_width</find>
-      <find>df_features</find>
-      <find>()</find>
-      <find>format_float_pos=</find>
-      <find>=1</find>
       <find>Missing_Data</find>
       <find>Figures</find>
       <find>PROJECT</find>
@@ -136,6 +99,11 @@
       <find>__data_cleaning_widget_save_option</find>
       <find>self.__options_w</find>
       <find>__data_cleaning_widget_select_feature</find>
+      <find>__text_w</find>
+      <find>options_w</find>
+      <find>__filter_formula_w</find>
+      <find>__filter_list</find>
+      <find>__filter_formula_box</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -288,12 +256,12 @@
       <workItem from="1557155113457" duration="9658000" />
       <workItem from="1558637633698" duration="39000" />
       <workItem from="1561387881004" duration="38929000" />
-      <workItem from="1562109819761" duration="11734000" />
+      <workItem from="1562109819761" duration="19106000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="298217000" />
+    <option name="totallyTimeSpent" value="305589000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1680" height="1050" extended-state="0" />
@@ -445,8 +413,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Libraries/DataCleaner.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="719">
-          <caret line="122" column="33" selection-start-line="122" selection-start-column="33" selection-end-line="122" selection-end-column="33" />
+        <state relative-caret-position="260">
+          <caret line="276" column="56" lean-forward="true" selection-start-line="276" selection-start-column="56" selection-end-line="276" selection-end-column="56" />
           <folding>
             <element signature="e#0#18#0" expanded="true" />
           </folding>

@@ -1,0 +1,2 @@
+JupyterLab v1.0.1
+Known labextensions:
