@@ -4,27 +4,7 @@
 # In[1]:
 
 
-import time
 import pandas as pd
-import numpy as np
-from collections import Counter
-from collections import defaultdict
-from sklearn.cluster import AgglomerativeClustering
-from sklearn.neighbors import kneighbors_graph
-import copy
-from sklearn.tree import DecisionTreeClassifier
-from sklearn.preprocessing import StandardScaler
-from sklearn.cluster import KMeans
-from scipy.cluster.hierarchy import linkage, dendrogram
-from sklearn.model_selection import train_test_split
-from sklearn.model_selection import GridSearchCV
-from scipy.stats import zscore
-from sklearn.decomposition import PCA
-from sklearn import datasets
-from sklearn.metrics import classification_report, accuracy_score
-from subprocess import check_call
-from sklearn.tree import export_graphviz
-import operator
 from dtreeviz.trees import *
 from sklearn.datasets import load_iris
 # from IPython import display
@@ -32,10 +12,8 @@ from sklearn.datasets import load_iris
 import sys
 sys.path.append('..')
 
-from Libraries.Utils.Global_Utils import *
-from Libraries.SampleRemoval import *
-from Libraries.ClusterMaster import *
-from Libraries.DataFrameTypes import *
+from eFlow.ClusterMaster import *
+from eFlow.DataFrameTypes import *
 
 
 def testing_all_removal():
