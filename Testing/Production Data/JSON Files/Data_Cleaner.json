@@ -1,12 +1,12 @@
 {
   "Age": {
     "Type": "Number",
-    "Option": "Fill with median common count of distribution",
+    "Option": "Fill with least common count of distribution",
     "Extra": {}
   },
   "Cabin": {
     "Type": "Category",
-    "Option": "Drop feature",
+    "Option": "Ignore feature",
     "Extra": {}
   },
   "Embarked": {

@@ -3,77 +3,35 @@
   <component name="ChangeListManager">
     <list default="true" id="ed041e50-c9da-4464-8bcf-e2b46601487b" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.ipynb_checkpoints/Sample_Removal_Testing-checkpoint.py" beforeDir="false" afterPath="$PROJECT_DIR$/.ipynb_checkpoints/Sample_Removal_Testing-checkpoint.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.ipynb_checkpoints/Sample_Removal_Testing1-checkpoint.py" beforeDir="false" afterPath="$PROJECT_DIR$/.ipynb_checkpoints/Sample_Removal_Testing1-checkpoint.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Libraries/.ipynb_checkpoints/ClusterMaster-checkpoint.py" beforeDir="false" afterPath="$PROJECT_DIR$/eFlow/.ipynb_checkpoints/ClusterMaster-checkpoint.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Libraries/.ipynb_checkpoints/DataAnalysis-checkpoint.py" beforeDir="false" afterPath="$PROJECT_DIR$/eFlow/.ipynb_checkpoints/DataAnalysis-checkpoint.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Libraries/.ipynb_checkpoints/DataCleaner-checkpoint.py" beforeDir="false" afterPath="$PROJECT_DIR$/eFlow/.ipynb_checkpoints/DataCleaner-checkpoint.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Libraries/.ipynb_checkpoints/DataFrameTypes-checkpoint.py" beforeDir="false" afterPath="$PROJECT_DIR$/eFlow/.ipynb_checkpoints/DataFrameTypes-checkpoint.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Libraries/.ipynb_checkpoints/DataframeTypeHolder-checkpoint.py" beforeDir="false" afterPath="$PROJECT_DIR$/eFlow/.ipynb_checkpoints/DataframeTypeHolder-checkpoint.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Libraries/.ipynb_checkpoints/Iris_Clustering-checkpoint.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/eFlow/.ipynb_checkpoints/Iris_Clustering-checkpoint.ipynb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Libraries/.ipynb_checkpoints/SampleRemoval-checkpoint.py" beforeDir="false" afterPath="$PROJECT_DIR$/eFlow/.ipynb_checkpoints/SampleRemoval-checkpoint.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Libraries/AutoModeler.py" beforeDir="false" afterPath="$PROJECT_DIR$/eFlow/AutoModeler.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Libraries/ClusterMaster.py" beforeDir="false" afterPath="$PROJECT_DIR$/eFlow/ClusterMaster.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Libraries/DataAnalysis.py" beforeDir="false" afterPath="$PROJECT_DIR$/eFlow/DataAnalysis.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Libraries/DataCleaner.py" beforeDir="false" afterPath="$PROJECT_DIR$/eFlow/DataCleaner.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Libraries/DataFrameTypes.py" beforeDir="false" afterPath="$PROJECT_DIR$/eFlow/DataFrameTypes.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Libraries/My_Encoder.py" beforeDir="false" afterPath="$PROJECT_DIR$/eFlow/My_Encoder.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Libraries/PredictorMaster.py" beforeDir="false" afterPath="$PROJECT_DIR$/eFlow/PredictorMaster.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Libraries/SampleRemoval 2.py" beforeDir="false" afterPath="$PROJECT_DIR$/eFlow/SampleRemoval 2.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Libraries/SampleRemoval.py" beforeDir="false" afterPath="$PROJECT_DIR$/eFlow/SampleRemoval.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Libraries/Sys_Utils.py" beforeDir="false" afterPath="$PROJECT_DIR$/eFlow/Utils/Sys_Utils.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Libraries/Utils/.ipynb_checkpoints/Global_Utils-checkpoint.py" beforeDir="false" afterPath="$PROJECT_DIR$/eFlow/Utils/.ipynb_checkpoints/Global_Utils-checkpoint.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Libraries/Utils/.ipynb_checkpoints/Multi_Threading_Functions-checkpoint.py" beforeDir="false" afterPath="$PROJECT_DIR$/eFlow/Utils/.ipynb_checkpoints/Multi_Threading_Functions-checkpoint.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Libraries/Utils/Constants.py" beforeDir="false" afterPath="$PROJECT_DIR$/eFlow/Utils/Constants.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Libraries/Utils/Custom_Exc.py" beforeDir="false" afterPath="$PROJECT_DIR$/eFlow/Utils/Custom_Exc.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Libraries/Utils/Global_Utils.py" beforeDir="false" afterPath="$PROJECT_DIR$/Global_Utils.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Libraries/Utils/Multi_Threading_Functions.py" beforeDir="false" afterPath="$PROJECT_DIR$/eFlow/Utils/Multi_Threading_Functions.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Libraries/Utils/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/eFlow/Utils/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Libraries/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/eFlow/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Pip Freeze.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Testing/.ipynb_checkpoints/Cluster_Master_Testing-checkpoint.ipynb" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Testing/.ipynb_checkpoints/DataAnalysis-checkpoint.ipynb" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Testing/.ipynb_checkpoints/Iris_Clustering-checkpoint.ipynb" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Testing/.ipynb_checkpoints/Model_Analysis-checkpoint.ipynb" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Testing/.ipynb_checkpoints/PyCLusteringTesting-checkpoint.ipynb" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Testing/.ipynb_checkpoints/Sample_Removal-checkpoint.ipynb" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Testing/.ipynb_checkpoints/Sample_Removal_Testing-checkpoint.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Testing/.ipynb_checkpoints/Testing_Utils-checkpoint.ipynb" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Testing/.ipynb_checkpoints/data-checkpoint.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Testing/Cluster_Master_Testing.ipynb" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Testing/DataAnalysis.ipynb" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Testing/Iris_Clustering.ipynb" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Testing/Model_Analysis.ipynb" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Testing/Production Data/General Analysis/Feature_Analysis/Graphics/Count_Plot_Cabin.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Testing/Production Data/General Analysis/Feature_Analysis/Graphics/Count_Plot_Parch.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Testing/Production Data/General Analysis/Feature_Analysis/Graphics/Count_Plot_Pclass.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Testing/Production Data/General Analysis/Feature_Analysis/Graphics/Count_Plot_SibSp.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Testing/Production Data/General Analysis/Feature_Analysis/Graphics/Distance_Plot_Age.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Testing/Production Data/General Analysis/Feature_Analysis/Graphics/Distance_Plot_Fare.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Testing/Production Data/General Analysis/Feature_Analysis/Graphics/Pie_Chart_Embarked.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Testing/Production Data/General Analysis/Feature_Analysis/Graphics/Pie_Chart_Sex.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Testing/Production Data/General Analysis/Feature_Analysis/Graphics/Pie_Chart_Survived.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Testing/Production Data/General Analysis/Feature_Analysis/Tables/Age Descr.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Testing/Production Data/General Analysis/Feature_Analysis/Tables/Cabin Value Counts.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Testing/Production Data/General Analysis/Feature_Analysis/Tables/Embarked Value Counts.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Testing/Production Data/General Analysis/Feature_Analysis/Tables/Fare Descr.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Testing/Production Data/General Analysis/Feature_Analysis/Tables/Parch Value Counts.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Testing/Production Data/General Analysis/Feature_Analysis/Tables/Pclass Value Counts.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Testing/Production Data/General Analysis/Feature_Analysis/Tables/Sex Value Counts.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Testing/Production Data/General Analysis/Feature_Analysis/Tables/SibSp Value Counts.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Testing/Production Data/General Analysis/Feature_Analysis/Tables/Survived Value Counts.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Testing/Production Data/General Analysis/Missing_Data/Graphics/Missing_Data_Bar_Graph.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Testing/Production Data/General Analysis/Missing_Data/Graphics/Missing_Data_Dendrogram_Graph.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Testing/Production Data/General Analysis/Missing_Data/Graphics/Missing_Data_Heatmap.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Testing/Production Data/General Analysis/Missing_Data/Graphics/Missing_Data_Matrix_Graph.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Testing/Production Data/General Analysis/Missing_Data/Tables/Missing_Data_Table.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Testing/PyCLusteringTesting.ipynb" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Testing/Sample_Removal.ipynb" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Testing/Sample_Removal_Testing.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Testing/Shelves/Removal_df_indexes.db" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Testing/Testing_Utils.ipynb" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Testing/data.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Testing/pivottablejs.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Testing/.ipynb_checkpoints/Config_Creation-checkpoint.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/Testing/.ipynb_checkpoints/Config_Creation-checkpoint.ipynb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Testing/Config_Creation.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/Testing/Config_Creation.ipynb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Testing/Production Data/JSON Files/.ipynb_checkpoints/Data Cleaner-checkpoint.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Testing/Production Data/JSON Files/Data Cleaner.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Testing/Production Data/Pre_processing/Data Cleaning/Missing_Data/Graphics/Missing_Data_Bar_Graph.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Testing/Production Data/Pre_processing/Data Cleaning/Missing_Data/Graphics/Missing_Data_Dendrogram_Graph.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Testing/Production Data/Pre_processing/Data Cleaning/Missing_Data/Graphics/Missing_Data_Heatmap.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Testing/Production Data/Pre_processing/Data Cleaning/Missing_Data/Graphics/Missing_Data_Matrix_Graph.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Testing/Production Data/Pre_processing/Data Cleaning/Missing_Data/Tables/Missing_Data_Table.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Testing/Production Data/Pre_processing/General Analysis/Feature Analysis/Graphics/Count_Plot_Cabin.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Testing/Production Data/Pre_processing/General Analysis/Feature Analysis/Graphics/Count_Plot_Parch.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Testing/Production Data/Pre_processing/General Analysis/Feature Analysis/Graphics/Count_Plot_Pclass.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Testing/Production Data/Pre_processing/General Analysis/Feature Analysis/Graphics/Count_Plot_SibSp.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Testing/Production Data/Pre_processing/General Analysis/Feature Analysis/Graphics/Distance_Plot_Age.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Testing/Production Data/Pre_processing/General Analysis/Feature Analysis/Graphics/Distance_Plot_Fare.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Testing/Production Data/Pre_processing/General Analysis/Feature Analysis/Graphics/Pie_Chart_Embarked.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Testing/Production Data/Pre_processing/General Analysis/Feature Analysis/Graphics/Pie_Chart_Sex.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Testing/Production Data/Pre_processing/General Analysis/Feature Analysis/Graphics/Pie_Chart_Survived.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Testing/Production Data/Pre_processing/General Analysis/Feature Analysis/Tables/Age_Descr.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Testing/Production Data/Pre_processing/General Analysis/Feature Analysis/Tables/Cabin_Value_Counts.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Testing/Production Data/Pre_processing/General Analysis/Feature Analysis/Tables/Embarked_Value_Counts.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Testing/Production Data/Pre_processing/General Analysis/Feature Analysis/Tables/Fare_Descr.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Testing/Production Data/Pre_processing/General Analysis/Feature Analysis/Tables/Parch_Value_Counts.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Testing/Production Data/Pre_processing/General Analysis/Feature Analysis/Tables/Pclass_Value_Counts.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Testing/Production Data/Pre_processing/General Analysis/Feature Analysis/Tables/Sex_Value_Counts.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Testing/Production Data/Pre_processing/General Analysis/Feature Analysis/Tables/SibSp_Value_Counts.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Testing/Production Data/Pre_processing/General Analysis/Feature Analysis/Tables/Survived_Value_Counts.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Testing/Production Data/Pre_processing/General Analysis/Missing Data/Tables/Missing_Data_Table.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/eFlow/DataCleaner.py" beforeDir="false" afterPath="$PROJECT_DIR$/eFlow/DataCleaner.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -101,8 +59,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/eFlow/DataCleaner.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="4180">
-              <caret line="349" column="36" selection-start-line="349" selection-start-column="8" selection-end-line="349" selection-end-column="36" />
+            <state relative-caret-position="515">
+              <caret line="383" column="11" selection-start-line="383" selection-start-column="11" selection-end-line="383" selection-end-column="11" />
               <folding>
                 <element signature="e#0#19#0" expanded="true" />
               </folding>
@@ -130,7 +88,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>__data_cleaning_widget_save_option</find>
       <find>self.__options_w</find>
       <find>__data_cleaning_widget_select_feature</find>
       <find>__text_w</find>
@@ -160,6 +117,7 @@
       <find>not df</find>
       <find>all_cp</find>
       <find>ALL_</find>
+      <find>print</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -325,12 +283,12 @@
       <workItem from="1561387881004" duration="38929000" />
       <workItem from="1562109819761" duration="19542000" />
       <workItem from="1562346864083" duration="1929000" />
-      <workItem from="1562439080621" duration="11478000" />
+      <workItem from="1562439080621" duration="13013000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="319432000" />
+    <option name="totallyTimeSpent" value="320967000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1680" height="1050" extended-state="0" />
@@ -489,8 +447,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/eFlow/DataCleaner.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="4180">
-          <caret line="349" column="36" selection-start-line="349" selection-start-column="8" selection-end-line="349" selection-end-column="36" />
+        <state relative-caret-position="515">
+          <caret line="383" column="11" selection-start-line="383" selection-start-column="11" selection-end-line="383" selection-end-column="11" />
           <folding>
             <element signature="e#0#19#0" expanded="true" />
           </folding>

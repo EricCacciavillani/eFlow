@@ -26,7 +26,6 @@ class DataCleaner:
                                + "/" + project_name + "/"
             self.__PROJECT = enum(PATH_TO_OUTPUT_FOLDER=''.join(
                 os.getcwd().partition('/eFlow')[0:1]) + parent_structure)
-            print(self.__PROJECT.PATH_TO_OUTPUT_FOLDER)
         else:
             self.__PROJECT = enum(PATH_TO_OUTPUT_FOLDER=overwrite_full_path)
 
@@ -330,7 +329,7 @@ class DataCleaner:
         check_create_dir_structure(json_path,
                                    "JSON Files")
 
-        with open(json_path + '/JSON Files/Data Cleaner.json',
+        with open(json_path + '/JSON Files/Data_Cleaner.json',
                   'w',
                   encoding='utf-8') as outfile:
             json.dump(json_dict,
@@ -348,8 +347,15 @@ class DataCleaner:
         self.__full_widgets_ui.children = new_i.children
 
     def data_cleaning_with_json_file(self,
+                                     df,
                                      json_file_path):
-        pass
+        with open(json_file_path) as json_file:
+            data = json.load(json_file)
+            for feature,json_obj in data.items():
+                print(feature)
+                print(json_obj)
+                self.__data_cleaning_options[json_obj["Type"]][json_obj["Option"]]("")
+                print("")
 
     def __get_dtype_key(self,
                         df_features,
@@ -365,25 +371,34 @@ class DataCleaner:
             return "Unknown"
 
     def __ignore_feature(self,
-                         args):
+                         df,
+                         json_obj):
+        """
+        Do nothing to this feature for nan removal
+        """
+
         pass
 
     def __drop_feature(self,
                        args):
-        pass
+        df.
 
     def __fill_nan_by_distribution(self,
-                                   args):
+                                   df,
+                                   json_obj):
         pass
 
     def __peform_interpolation(self,
-                               args):
+                               df,
+                               json_obj):
         pass
 
     def __fill_nan_with_specfic_value(self,
-                                      args):
+                                      df,
+                                      json_obj):
         pass
 
     def __fill_nan_by_count_distrubtion(self,
-                                        args):
+                                        df,
+                                        json_obj):
         pass
