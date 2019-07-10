@@ -1,7 +1,7 @@
 {
   "Age": {
     "Type": "Number",
-    "Option": "Fill with least common count of distribution",
+    "Option": "Fill nan with min value of distribution",
     "Extra": {}
   },
   "Cabin": {

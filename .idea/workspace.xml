@@ -3,34 +3,9 @@
   <component name="ChangeListManager">
     <list default="true" id="ed041e50-c9da-4464-8bcf-e2b46601487b" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Testing/.ipynb_checkpoints/Config_Creation-checkpoint.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/Testing/.ipynb_checkpoints/Config_Creation-checkpoint.ipynb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Testing/Config_Creation.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/Testing/Config_Creation.ipynb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Testing/Production Data/JSON Files/.ipynb_checkpoints/Data Cleaner-checkpoint.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Testing/Production Data/JSON Files/Data Cleaner.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Testing/Production Data/Pre_processing/Data Cleaning/Missing_Data/Graphics/Missing_Data_Bar_Graph.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Testing/Production Data/Pre_processing/Data Cleaning/Missing_Data/Graphics/Missing_Data_Dendrogram_Graph.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Testing/Production Data/Pre_processing/Data Cleaning/Missing_Data/Graphics/Missing_Data_Heatmap.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Testing/Production Data/Pre_processing/Data Cleaning/Missing_Data/Graphics/Missing_Data_Matrix_Graph.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Testing/Production Data/Pre_processing/Data Cleaning/Missing_Data/Tables/Missing_Data_Table.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Testing/Production Data/Pre_processing/General Analysis/Feature Analysis/Graphics/Count_Plot_Cabin.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Testing/Production Data/Pre_processing/General Analysis/Feature Analysis/Graphics/Count_Plot_Parch.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Testing/Production Data/Pre_processing/General Analysis/Feature Analysis/Graphics/Count_Plot_Pclass.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Testing/Production Data/Pre_processing/General Analysis/Feature Analysis/Graphics/Count_Plot_SibSp.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Testing/Production Data/Pre_processing/General Analysis/Feature Analysis/Graphics/Distance_Plot_Age.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Testing/Production Data/Pre_processing/General Analysis/Feature Analysis/Graphics/Distance_Plot_Fare.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Testing/Production Data/Pre_processing/General Analysis/Feature Analysis/Graphics/Pie_Chart_Embarked.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Testing/Production Data/Pre_processing/General Analysis/Feature Analysis/Graphics/Pie_Chart_Sex.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Testing/Production Data/Pre_processing/General Analysis/Feature Analysis/Graphics/Pie_Chart_Survived.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Testing/Production Data/Pre_processing/General Analysis/Feature Analysis/Tables/Age_Descr.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Testing/Production Data/Pre_processing/General Analysis/Feature Analysis/Tables/Cabin_Value_Counts.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Testing/Production Data/Pre_processing/General Analysis/Feature Analysis/Tables/Embarked_Value_Counts.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Testing/Production Data/Pre_processing/General Analysis/Feature Analysis/Tables/Fare_Descr.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Testing/Production Data/Pre_processing/General Analysis/Feature Analysis/Tables/Parch_Value_Counts.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Testing/Production Data/Pre_processing/General Analysis/Feature Analysis/Tables/Pclass_Value_Counts.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Testing/Production Data/Pre_processing/General Analysis/Feature Analysis/Tables/Sex_Value_Counts.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Testing/Production Data/Pre_processing/General Analysis/Feature Analysis/Tables/SibSp_Value_Counts.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Testing/Production Data/Pre_processing/General Analysis/Feature Analysis/Tables/Survived_Value_Counts.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Testing/Production Data/Pre_processing/General Analysis/Missing Data/Tables/Missing_Data_Table.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Testing/.ipynb_checkpoints/Config_Creation-checkpoint.ipynb" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Testing/Config_Creation.ipynb" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Testing/Production Data/JSON Files/Data_Cleaner.json" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/eFlow/DataCleaner.py" beforeDir="false" afterPath="$PROJECT_DIR$/eFlow/DataCleaner.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -59,8 +34,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/eFlow/DataCleaner.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="515">
-              <caret line="383" column="11" selection-start-line="383" selection-start-column="11" selection-end-line="383" selection-end-column="11" />
+            <state relative-caret-position="-2335">
+              <caret line="276" column="36" lean-forward="true" selection-start-line="276" selection-start-column="36" selection-end-line="276" selection-end-column="36" />
               <folding>
                 <element signature="e#0#19#0" expanded="true" />
               </folding>
@@ -88,29 +63,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>self.__options_w</find>
-      <find>__data_cleaning_widget_select_feature</find>
-      <find>__text_w</find>
-      <find>options_w</find>
-      <find>__filter_formula_w</find>
-      <find>__filter_list</find>
-      <find>__filter_formula_box</find>
-      <find>data_cleaning_widget</find>
-      <find>ata_cleaning_js</find>
-      <find>__missing_values_table</find>
-      <find>Missing_Data</find>
-      <find>value counts</find>
-      <find>descr</find>
-      <find>feature_ana</find>
-      <find>DataAnalysis</find>
-      <find>self.__selected_options</find>
-      <find>__submit_button</find>
-      <find>self.__tmp_df_features</find>
-      <find>self.__tmp_df_features</find>
-      <find>__tmp_df_features</find>
-      <find>self.__submit_button</find>
-      <find>create_data_cleaning_json_file</find>
-      <find>check_create_figure_dir</find>
       <find>Feature Analysis</find>
       <find>__create_data_cleaning_json_file</find>
       <find>Feature_Analysis</find>
@@ -118,6 +70,29 @@
       <find>all_cp</find>
       <find>ALL_</find>
       <find>print</find>
+      <find>__drop_feature</find>
+      <find>JSON</find>
+      <find>__extra_feature_holder</find>
+      <find>extra</find>
+      <find>=''</find>
+      <find>self.__text_w.value</find>
+      <find>self.__text_w.value</find>
+      <find>__feature_option_req_input</find>
+      <find>Text_Input</find>
+      <find>__full_widgets_ui</find>
+      <find>__text_w</find>
+      <find>text_w</find>
+      <find>__data_cleaning_widget_select_feature</find>
+      <find>self.__options_w</find>
+      <find>__data_cleaning_widget_save_option</find>
+      <find>Extra</find>
+      <find>get_</find>
+      <find>__get_dtype_key</find>
+      <find>Fill null with specfic value</find>
+      <find>__fill_nan_with_specfic_value</find>
+      <find>Remove all nans</find>
+      <find>elf.__remove_nans</find>
+      <find>remove_nans</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -283,12 +258,12 @@
       <workItem from="1561387881004" duration="38929000" />
       <workItem from="1562109819761" duration="19542000" />
       <workItem from="1562346864083" duration="1929000" />
-      <workItem from="1562439080621" duration="13013000" />
+      <workItem from="1562439080621" duration="29963000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="320967000" />
+    <option name="totallyTimeSpent" value="337917000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1680" height="1050" extended-state="0" />
@@ -447,8 +422,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/eFlow/DataCleaner.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="515">
-          <caret line="383" column="11" selection-start-line="383" selection-start-column="11" selection-end-line="383" selection-end-column="11" />
+        <state relative-caret-position="-2335">
+          <caret line="276" column="36" lean-forward="true" selection-start-line="276" selection-start-column="36" selection-end-line="276" selection-end-column="36" />
           <folding>
             <element signature="e#0#19#0" expanded="true" />
           </folding>

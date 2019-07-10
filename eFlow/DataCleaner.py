@@ -9,6 +9,7 @@ import json
 from eFlow.Utils.Sys_Utils import *
 from eFlow.Utils.Constants import *
 
+
 class DataCleaner:
 
     def __init__(self,
@@ -92,7 +93,9 @@ class DataCleaner:
         self.__data_cleaning_options["Number"]["Ignore feature"] = \
             self.__ignore_feature
         self.__data_cleaning_options["Number"]["Drop feature"] = \
-            self.__ignore_feature
+            self.__drop_feature
+        self.__data_cleaning_options["Number"]["Remove all nans"] = \
+            self.__remove_nans
 
         self.__data_cleaning_options["Number"][
             "---------------------" + (" " * space_counters.pop())] = \
@@ -104,13 +107,10 @@ class DataCleaner:
             "Fill nan with min value of distribution"] = \
             self.__fill_nan_by_distribution
         self.__data_cleaning_options["Number"][
-            "Fill nan with 25% value of distribution"] = \
+            "Fill nan with x% value of distribution"] = \
             self.__fill_nan_by_distribution
         self.__data_cleaning_options["Number"][
             "Fill nan with median value of distribution"] = \
-            self.__fill_nan_by_distribution
-        self.__data_cleaning_options["Number"][
-            "Fill nan with 75% value of distribution"] = \
             self.__fill_nan_by_distribution
         self.__data_cleaning_options["Number"][
             "Fill nan with max value of distribution"] = \
@@ -153,14 +153,14 @@ class DataCleaner:
         self.__data_cleaning_options["Category"] = dict()
         self.__data_cleaning_options["Category"]["Ignore feature"] = self.__ignore_feature
         self.__data_cleaning_options["Category"]["Drop feature"] = \
-            self.__ignore_feature
+            self.__drop_feature
 
         space_counters = {i for i in range(1, 50)}
         self.__data_cleaning_options["Bool"] = dict()
         self.__data_cleaning_options["Bool"][
             "Ignore feature"] = self.__ignore_feature
         self.__data_cleaning_options["Bool"]["Drop feature"] = \
-            self.__ignore_feature
+            self.__drop_feature
 
         space_counters = {i for i in range(1, 50)}
         self.__data_cleaning_options["Unknown"] = dict()
@@ -168,6 +168,10 @@ class DataCleaner:
             "Ignore feature"] = self.__ignore_feature
         self.__data_cleaning_options["Unknown"]["Drop feature"] = \
             self.__ignore_feature
+
+
+        self.__require_input = {"Fill null with specfic value",
+                                "Fill nan with x% value of distribution"}
 
         self.__selected_options = None
         self.__features_w = None
@@ -177,11 +181,15 @@ class DataCleaner:
         self.__full_widgets_ui = None
         self.__submit_button = None
         self.__tmp_df_features = None
+        self.__feature_option_req_input = None
+        self.a = 0
 
     def data_cleaning_widget(self,
                              df,
                              df_features,
                              data_cleaning_csv_path=None):
+
+        self.__feature_option_req_input = dict()
 
         if not data_cleaning_csv_path:
 
@@ -245,6 +253,7 @@ class DataCleaner:
                         cleaning_dataframe=None,
                         data_cleaning_csv_path=None):
 
+        print(self.__feature_option_req_input)
         if cleaning_dataframe is None and data_cleaning_csv_path is None:
             print("You must past in either a data cleaning csv absolute"
                   "path or a cleaning dataframe.")
@@ -259,9 +268,22 @@ class DataCleaner:
         self.__selected_options[func_kwargs["Features"]] = func_kwargs[
             "Options"]
 
-        if func_kwargs["Options"] == "Fill null with specfic value":
+        if func_kwargs["Options"] in self.__require_input:
+            self.__feature_option_req_input[func_kwargs["Features"]] = self.__text_w.value
             self.__text_w.layout.visibility = 'visible'
+            print(self.a)
+            self.a += 1
+
+            if self.__get_dtype_key(
+                    self.__tmp_df_features,
+                    func_kwargs["Features"]) != "Category":
+
+                self.__text_w.value = ''.join(
+                    [i for i in self.__text_w.value if i.isdigit() or i == '.'])
         else:
+            if func_kwargs["Features"] in self.__feature_option_req_input:
+                self.__feature_option_req_input.pop(func_kwargs["Features"], None)
+
             self.__text_w.layout.visibility = 'hidden'
             self.__text_w.value = ""
 
@@ -323,13 +345,18 @@ class DataCleaner:
             json_dict[feature]["Option"] = option
             json_dict[feature]["Extra"] = dict()
 
+            if option == "Fill null with specfic value" and feature in self.__feature_option_req_input.keys():
+                json_dict[feature]["Extra"]["Replace value"] = self.__feature_option_req_input[feature]
+            elif option == "Fill nan with x% value of distribution" and feature in self.__feature_option_req_input.keys():
+                json_dict[feature]["Extra"]["Percentage of distribution"] = self.__feature_option_req_input[feature]
+
         json_path = self.__PROJECT.PATH_TO_OUTPUT_FOLDER[0:
                                                          self.__PROJECT.PATH_TO_OUTPUT_FOLDER.find(
                                                              SYS_CONSTANTS.PARENT_OUTPUT_FOLDER_NAME)] + SYS_CONSTANTS.PARENT_OUTPUT_FOLDER_NAME
         check_create_dir_structure(json_path,
-                                   "JSON Files")
+                                   "JSON File Dump/Data Cleaning")
 
-        with open(json_path + '/JSON Files/Data_Cleaner.json',
+        with open(json_path + '/JSON File Dump/Data Cleaning/Data_Cleaner.json',
                   'w',
                   encoding='utf-8') as outfile:
             json.dump(json_dict,
@@ -340,10 +367,20 @@ class DataCleaner:
     def __data_cleaning_widget_select_feature(self,
                                               feature):
 
+        self.__text_w = widgets.Text(
+                value='',
+                placeholder='Replace Value',
+                description='Input:',
+                disabled=False,
+                visible=True
+            )
+        self.__text_w.layout.visibility = 'hidden'
+
         new_i = widgets.interactive(self.__data_cleaning_widget_save_option,
                                     Features=self.__features_w,
                                     Options=self.__feature_cleaning_options_w[
-                                        feature['new']])
+                                        feature['new']],
+                                    Text_Input=self.__text_w)
         self.__full_widgets_ui.children = new_i.children
 
     def data_cleaning_with_json_file(self,
@@ -351,11 +388,14 @@ class DataCleaner:
                                      json_file_path):
         with open(json_file_path) as json_file:
             data = json.load(json_file)
-            for feature,json_obj in data.items():
+            for feature, json_obj in data.items():
                 print(feature)
-                print(json_obj)
-                self.__data_cleaning_options[json_obj["Type"]][json_obj["Option"]]("")
-                print("")
+                print(json_obj["Option"])
+                print(self.__data_cleaning_options[json_obj["Type"]][json_obj["Option"]])
+                json_obj["Feature"] = feature
+                self.__data_cleaning_options[json_obj["Type"]][json_obj["Option"]](df,
+                                                                                   json_obj)
+                print()
 
     def __get_dtype_key(self,
                         df_features,
@@ -376,29 +416,72 @@ class DataCleaner:
         """
         Do nothing to this feature for nan removal
         """
-
-        pass
+        print("Ignoring Feature: ", json_obj["Feature"])
 
     def __drop_feature(self,
-                       args):
-        df.
+                       df,
+                       json_obj):
+        print("Droping Feature: ", json_obj["Feature"])
+        df.drop(columns=json_obj["Feature"],
+                inplace=True)
+
+    def __remove_nans(self,
+                      df,
+                      json_obj):
+        print("Removing Nans: ", json_obj["Feature"])
+        df[json_obj["Feature"]].dropna(inplace=True)
 
     def __fill_nan_by_distribution(self,
                                    df,
                                    json_obj):
-        pass
+
+        print("Fill nan by distribution: ",)
+        if "min" in json_obj["Option"]:
+            fill_na_val = np.percentile(df.time_diff, 0)
+        elif "median" in json_obj["Option"]:
+            fill_na_val = np.percentile(df.time_diff, 50)
+        elif "max" in json_obj["Option"]:
+            fill_na_val = np.percentile(df.time_diff, 100)
+        else:
+            fill_na_val = np.percentile(df.time_diff,
+                                        float(
+                                            json_obj["Extra"]
+                                            ["Percentage of distribution"]))
+
+        df[json_obj["Feature"]].fillna(fill_na_val,
+                                       inplace=True)
 
     def __peform_interpolation(self,
                                df,
                                json_obj):
+        print("peform interpolation")
         pass
 
     def __fill_nan_with_specfic_value(self,
                                       df,
                                       json_obj):
-        pass
+        print("Replace nan with {0} on feature: {1}".format(json_obj["Extra"]["Replace value"],
+                                         json_obj["Feature"]))
+
+        if json_obj["Type"] == "Number":
+
+            if "." in json_obj["Extra"]["Replace value"]:
+                fill_nan_val = float(json_obj["Extra"]["Replace value"])
+            else:
+                fill_nan_val = int(json_obj["Extra"]["Replace value"])
+        elif json_obj["Extra"] == "Bool":
+            if str(json_obj["Extra"]["Replace value"]).title()[0] == "T" \
+                    or str(json_obj["Extra"]["Replace value"])[0] == '1':
+                fill_nan_val = True
+            else:
+                fill_nan_val = False
+        else:
+            fill_nan_val = json_obj["Extra"]["Replace value"]
+        df[json_obj["Feature"]].fillna(fill_nan_val,
+                                       inplace=True)
 
     def __fill_nan_by_count_distrubtion(self,
                                         df,
                                         json_obj):
+        print("nan by count")
         pass
