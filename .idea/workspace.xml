@@ -3,9 +3,9 @@
   <component name="ChangeListManager">
     <list default="true" id="ed041e50-c9da-4464-8bcf-e2b46601487b" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Testing/.ipynb_checkpoints/Config_Creation-checkpoint.ipynb" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Testing/Config_Creation.ipynb" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Testing/Production Data/JSON Files/Data_Cleaner.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Testing/.ipynb_checkpoints/Pre Production-checkpoint.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/Testing/.ipynb_checkpoints/Pre Production-checkpoint.ipynb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Testing/Pre Production.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/Testing/Pre Production.ipynb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Testing/Production Data/JSON File Dump/Data Cleaning/Data_Cleaner.json" beforeDir="false" afterPath="$PROJECT_DIR$/Testing/Production Data/JSON File Dump/Data Cleaning/Data_Cleaner.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/eFlow/DataCleaner.py" beforeDir="false" afterPath="$PROJECT_DIR$/eFlow/DataCleaner.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -22,7 +22,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/eFlow/DataAnalysis.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="301">
+            <state relative-caret-position="885">
               <caret line="59" column="50" selection-start-line="59" selection-start-column="50" selection-end-line="59" selection-end-column="50" />
               <folding>
                 <element signature="e#0#19#0" expanded="true" />
@@ -34,10 +34,22 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/eFlow/DataCleaner.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-2335">
-              <caret line="276" column="36" lean-forward="true" selection-start-line="276" selection-start-column="36" selection-end-line="276" selection-end-column="36" />
+            <state relative-caret-position="-535">
+              <caret line="527" lean-forward="true" selection-start-line="527" selection-end-line="527" />
               <folding>
                 <element signature="e#0#19#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/eFlow/ClusterMaster.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="127">
+              <caret line="620" column="39" selection-start-line="620" selection-start-column="39" selection-end-line="620" selection-end-column="53" />
+              <folding>
+                <element signature="e#25#62#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -63,11 +75,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>Feature Analysis</find>
-      <find>__create_data_cleaning_json_file</find>
-      <find>Feature_Analysis</find>
-      <find>not df</find>
-      <find>all_cp</find>
       <find>ALL_</find>
       <find>print</find>
       <find>__drop_feature</find>
@@ -75,7 +82,6 @@
       <find>__extra_feature_holder</find>
       <find>extra</find>
       <find>=''</find>
-      <find>self.__text_w.value</find>
       <find>self.__text_w.value</find>
       <find>__feature_option_req_input</find>
       <find>Text_Input</find>
@@ -93,6 +99,12 @@
       <find>Remove all nans</find>
       <find>elf.__remove_nans</find>
       <find>remove_nans</find>
+      <find>__require_input</find>
+      <find>{1}</find>
+      <find>format</find>
+      <find>zscore_low</find>
+      <find>zscore</find>
+      <find>stats</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -123,9 +135,9 @@
         <option value="$PROJECT_DIR$/Libraries/DataAnalysis.py" />
         <option value="$PROJECT_DIR$/Libraries/Sys_Utils.py" />
         <option value="$PROJECT_DIR$/Libraries/DataCleaner.py" />
-        <option value="$PROJECT_DIR$/eFlow/ClusterMaster.py" />
         <option value="$PROJECT_DIR$/eFlow/Utils/Constants.py" />
         <option value="$PROJECT_DIR$/eFlow/DataAnalysis.py" />
+        <option value="$PROJECT_DIR$/eFlow/ClusterMaster.py" />
         <option value="$PROJECT_DIR$/eFlow/DataCleaner.py" />
       </list>
     </option>
@@ -259,17 +271,18 @@
       <workItem from="1562109819761" duration="19542000" />
       <workItem from="1562346864083" duration="1929000" />
       <workItem from="1562439080621" duration="29963000" />
+      <workItem from="1562723536360" duration="9439000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="337917000" />
+    <option name="totallyTimeSpent" value="347356000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1680" height="1050" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.16849817" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.17032968" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -393,26 +406,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/eFlow/ClusterMaster.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="107">
-          <caret line="25" column="35" selection-start-line="25" selection-start-column="35" selection-end-line="25" selection-end-column="35" />
-          <folding>
-            <element signature="e#25#62#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/eFlow/DataAnalysis.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="301">
-          <caret line="59" column="50" selection-start-line="59" selection-start-column="50" selection-end-line="59" selection-end-column="50" />
-          <folding>
-            <element signature="e#0#19#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/eFlow/Utils/Constants.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="30">
@@ -420,10 +413,30 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/eFlow/DataAnalysis.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="885">
+          <caret line="59" column="50" selection-start-line="59" selection-start-column="50" selection-end-line="59" selection-end-column="50" />
+          <folding>
+            <element signature="e#0#19#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/eFlow/ClusterMaster.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="127">
+          <caret line="620" column="39" selection-start-line="620" selection-start-column="39" selection-end-line="620" selection-end-column="53" />
+          <folding>
+            <element signature="e#25#62#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/eFlow/DataCleaner.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-2335">
-          <caret line="276" column="36" lean-forward="true" selection-start-line="276" selection-start-column="36" selection-end-line="276" selection-end-column="36" />
+        <state relative-caret-position="-535">
+          <caret line="527" lean-forward="true" selection-start-line="527" selection-end-line="527" />
           <folding>
             <element signature="e#0#19#0" expanded="true" />
           </folding>

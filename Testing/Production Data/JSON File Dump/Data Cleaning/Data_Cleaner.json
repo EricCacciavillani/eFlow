@@ -1,8 +1,10 @@
 {
   "Age": {
     "Type": "Number",
-    "Option": "Fill nan with min value of distribution",
-    "Extra": {}
+    "Option": "Fill nan with x% value of distribution",
+    "Extra": {
+      "Percentage of distribution": "67"
+    }
   },
   "Cabin": {
     "Type": "Category",

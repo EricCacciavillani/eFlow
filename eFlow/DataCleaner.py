@@ -5,6 +5,8 @@ import ipywidgets as widgets
 from IPython.display import display
 from ipywidgets import Layout
 import json
+import itertools
+from scipy import stats
 
 from eFlow.Utils.Sys_Utils import *
 from eFlow.Utils.Constants import *
@@ -116,6 +118,9 @@ class DataCleaner:
             "Fill nan with max value of distribution"] = \
             self.__fill_nan_by_distribution
         self.__data_cleaning_options["Number"][
+            "Fill nan with x% value of distribution after removing outliers"] = \
+            self.__fill_nan_by_distribution
+        self.__data_cleaning_options["Number"][
             "---------------------" + (" " * space_counters.pop())] = \
             self.__ignore_feature
 
@@ -124,11 +129,11 @@ class DataCleaner:
         self.__data_cleaning_options["Number"]["Peform interpolation"] = \
             self.__peform_interpolation
         self.__data_cleaning_options["Number"][
+            "Fill null with specfic value"] = self.__fill_nan_with_specfic_value
+        self.__data_cleaning_options["Number"][
             "---------------------" + (" " * space_counters.pop())] = \
             self.__ignore_feature
 
-        self.__data_cleaning_options["Number"][
-            "Fill null with specfic value"] = self.__fill_nan_with_specfic_value
         self.__data_cleaning_options["Number"][
             "Fill with least common count of distribution"] = \
             self.__fill_nan_by_count_distrubtion
@@ -169,9 +174,11 @@ class DataCleaner:
         self.__data_cleaning_options["Unknown"]["Drop feature"] = \
             self.__ignore_feature
 
-
-        self.__require_input = {"Fill null with specfic value",
-                                "Fill nan with x% value of distribution"}
+        self.__require_input = {"Fill null with specfic value":None,
+                                "Fill nan with x% value of distribution":
+                                    'x >= 0 and x <=100',
+                                "Fill nan with x% value of distribution "
+                                "after removing outliers":'x >= 0 and x <=100'}
 
         self.__selected_options = None
         self.__features_w = None
@@ -272,14 +279,23 @@ class DataCleaner:
             self.__feature_option_req_input[func_kwargs["Features"]] = self.__text_w.value
             self.__text_w.layout.visibility = 'visible'
             print(self.a)
+
             self.a += 1
 
             if self.__get_dtype_key(
                     self.__tmp_df_features,
-                    func_kwargs["Features"]) != "Category":
+                    func_kwargs["Features"]) != "Category" and len(self.__text_w.value):
 
                 self.__text_w.value = ''.join(
                     [i for i in self.__text_w.value if i.isdigit() or i == '.'])
+
+                if self.__require_input[
+                           func_kwargs["Options"]] is not None \
+                        and not self.__string_condtional(
+                    int(self.__text_w.value), self.__require_input[
+                        func_kwargs["Options"]]):
+                    self.__text_w.value = self.__text_w.value[:-1]
+
         else:
             if func_kwargs["Features"] in self.__feature_option_req_input:
                 self.__feature_option_req_input.pop(func_kwargs["Features"], None)
@@ -410,6 +426,80 @@ class DataCleaner:
         else:
             return "Unknown"
 
+    def __string_condtional(self,
+                            given_val,
+                            full_condtional):
+
+        condtional_returns = []
+        operators = [i for i in full_condtional.split(" ")
+                     if i == "or" or i == "and"]
+
+        all_condtionals = list(
+            itertools.chain(
+                *[i.split("or")
+                  for i in full_condtional.split("and")]))
+        for condtional_line in all_condtionals:
+            condtional_line = condtional_line.replace(" ", "")
+            if condtional_line[0] == 'x':
+                condtional_line = condtional_line.replace('x', '')
+
+                condtional = ''.join(
+                    [i for i in condtional_line if
+                     not (i.isdigit() or i == '.')])
+                compare_val = int(condtional_line.replace(condtional, ''))
+                if condtional == "<=":
+                    condtional_returns.append(given_val <= compare_val)
+
+                elif condtional == "<":
+                    condtional_returns.append(given_val < compare_val)
+
+                elif condtional == ">=":
+                    condtional_returns.append(given_val >= compare_val)
+
+                elif condtional == ">":
+                    condtional_returns.append(given_val > compare_val)
+
+                elif condtional == "==":
+                    condtional_returns.append(given_val == compare_val)
+
+                elif condtional == "!=":
+                    condtional_returns.append(given_val != compare_val)
+                else:
+                    print("ERROR")
+                    return False
+            else:
+                print("ERROR")
+                return False
+
+        if not len(operators):
+            return condtional_returns[0]
+        else:
+            i = 0
+            final_return = None
+
+            for op in operators:
+                print(condtional_returns)
+                if op == "and":
+
+                    if final_return is None:
+                        final_return = condtional_returns[i] and \
+                                       condtional_returns[i + 1]
+                        i += 2
+                    else:
+                        final_return = final_return and condtional_returns[i]
+                        i += 1
+
+                else:
+                    if final_return is None:
+                        final_return = condtional_returns[i] or \
+                                       condtional_returns[i + 1]
+                        i += 2
+                    else:
+                        final_return = final_return or condtional_returns[i]
+                        i += 1
+
+            return final_return
+
     def __ignore_feature(self,
                          df,
                          json_obj):
@@ -424,32 +514,78 @@ class DataCleaner:
         print("Droping Feature: ", json_obj["Feature"])
         df.drop(columns=json_obj["Feature"],
                 inplace=True)
+        df.reset_index(drop=True,
+                       inplace=True)
 
     def __remove_nans(self,
                       df,
                       json_obj):
         print("Removing Nans: ", json_obj["Feature"])
         df[json_obj["Feature"]].dropna(inplace=True)
+        df.reset_index(drop=True,
+                       inplace=True)
+
+
+    def __zcore_remove_outliers(self,
+                                df,
+                                feature):
+
+        z_score_return = stats.zscore(((df[feature].dropna())))
+        return df[feature].dropna()[
+            (z_score_return >= -2) & (z_score_return <= 2)]
+
 
     def __fill_nan_by_distribution(self,
                                    df,
                                    json_obj):
 
-        print("Fill nan by distribution: ",)
-        if "min" in json_obj["Option"]:
-            fill_na_val = np.percentile(df.time_diff, 0)
-        elif "median" in json_obj["Option"]:
-            fill_na_val = np.percentile(df.time_diff, 50)
-        elif "max" in json_obj["Option"]:
-            fill_na_val = np.percentile(df.time_diff, 100)
+        print("Fill nan by distribution for feature {0} by ".format(
+            json_obj["Feature"]),
+              end='')
+
+        if "removing outliers" in json_obj["Option"]:
+            series_obj = self.__zcore_remove_outliers(df,
+                                                      json_obj["Feature"])
         else:
-            fill_na_val = np.percentile(df.time_diff,
+            series_obj = df[json_obj["Feature"]].dropna()
+
+        if "min" in json_obj["Option"]:
+            fill_na_val = np.percentile(series_obj, 0)
+            print("the minimum")
+        elif "median" in json_obj["Option"]:
+            fill_na_val = np.percentile(series_obj, 50)
+            print("the median")
+        elif "max" in json_obj["Option"]:
+            fill_na_val = np.percentile(series_obj, 100)
+            print("the maximum")
+        else:
+            fill_na_val = np.percentile(series_obj,
                                         float(
                                             json_obj["Extra"]
                                             ["Percentage of distribution"]))
+            print("{0}%".format(float(json_obj["Extra"]["Percentage of distribution"])))
 
         df[json_obj["Feature"]].fillna(fill_na_val,
                                        inplace=True)
+
+    def __fill_nan_by_average(self,
+                              df,
+                              json_obj):
+
+        print("Fill nan by average ",end='')
+
+        if "removing outliers" in json_obj["Option"]:
+            print("after removing outliers by feature: {0}".format(
+                json_obj["Feature"]))
+            series_obj = self.__zcore_remove_outliers(df,
+                                                      json_obj["Feature"])
+        else:
+            print("by feature: {0}".format(json_obj["Feature"]))
+            series_obj = df[json_obj["Feature"]].dropna()
+
+        df[json_obj["Feature"]].fillna(
+            series_obj.mean(),
+            inplace=True)
 
     def __peform_interpolation(self,
                                df,
@@ -469,12 +605,6 @@ class DataCleaner:
                 fill_nan_val = float(json_obj["Extra"]["Replace value"])
             else:
                 fill_nan_val = int(json_obj["Extra"]["Replace value"])
-        elif json_obj["Extra"] == "Bool":
-            if str(json_obj["Extra"]["Replace value"]).title()[0] == "T" \
-                    or str(json_obj["Extra"]["Replace value"])[0] == '1':
-                fill_nan_val = True
-            else:
-                fill_nan_val = False
         else:
             fill_nan_val = json_obj["Extra"]["Replace value"]
         df[json_obj["Feature"]].fillna(fill_nan_val,
