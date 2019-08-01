@@ -7,6 +7,8 @@ from ipywidgets import Layout
 import json
 import itertools
 from scipy import stats
+import uuid
+import os.path
 
 from eFlow.Utils.Sys_Utils import *
 from eFlow.Utils.Constants import *
@@ -19,7 +21,8 @@ class DataCleaner:
                  project_name="Default_Data_Cleaner",
                  overwrite_full_path=None,
                  notebook_mode=True,
-                 missing_data_visuals=True):
+                 missing_data_visuals=True,
+                 max_zscore=50):
 
         self.__requires_nan_removal = df.isnull().values.any()
         self.__notebook_mode = notebook_mode
@@ -27,8 +30,8 @@ class DataCleaner:
         if not overwrite_full_path:
             parent_structure = "/" + SYS_CONSTANTS.PARENT_OUTPUT_FOLDER_NAME \
                                + "/" + project_name + "/"
-            self.__PROJECT = enum(PATH_TO_OUTPUT_FOLDER=''.join(
-                os.getcwd().partition('/eFlow')[0:1]) + parent_structure)
+            self.__PROJECT = enum(PATH_TO_OUTPUT_FOLDER=
+                os.getcwd()  + parent_structure)
         else:
             self.__PROJECT = enum(PATH_TO_OUTPUT_FOLDER=overwrite_full_path)
 
@@ -179,6 +182,8 @@ class DataCleaner:
                                     'x >= 0 and x <=100',
                                 "Fill nan with x% value of distribution "
                                 "after removing outliers":'x >= 0 and x <=100'}
+        self.__zscore_condtional = "x <= " + str(max_zscore)
+
 
         self.__selected_options = None
         self.__features_w = None
@@ -189,6 +194,8 @@ class DataCleaner:
         self.__submit_button = None
         self.__tmp_df_features = None
         self.__feature_option_req_input = None
+        self.__last_saved_json_file_path = None
+        self.__zscore_feature_holder = dict()
         self.a = 0
 
     def data_cleaning_widget(self,
@@ -218,8 +225,10 @@ class DataCleaner:
 
             self.__features_w = widgets.Select(
                 options=list(feature_cleaning_options.keys()),
-                layout=Layout(width='50%')
+                layout=Layout(width='50%',
+                              height='175px')
             )
+
             init = self.__features_w.value
             self.__options_w = self.__feature_cleaning_options_w[init]
             self.__features_w.observe(self.__data_cleaning_widget_select_feature,
@@ -229,8 +238,32 @@ class DataCleaner:
                 placeholder='Replace Value',
                 description='Input:',
                 disabled=False,
-                visible=False
+                visible=False,
+                layout=Layout(left='510px',
+                              bottom='250px')
             )
+
+            self.__file_name_w = widgets.Text(
+                value='Default Data Cleaning',
+                placeholder='Replace Value',
+                description='File Name:',
+                disabled=False,
+                visible=False,
+                layout=Layout(left='590px')
+            )
+
+            self.__zscore_w =  widgets.Text(
+                value='',
+                placeholder='Z-Score Value',
+                description='Z Score:',
+                disabled=False,
+                visible=False,
+                layout=Layout(left='510px',
+                              bottom="330px",)
+            )
+
+            self.__zscore_w.observe(self.__validate_save_zscore)
+            self.__file_name_w.observe(self.__validate_file_name)
 
             self.__submit_button = widgets.Button(
                 description='Create JSON File from options',
@@ -246,8 +279,10 @@ class DataCleaner:
                 Features=self.__features_w,
                 Options=self.__options_w,
                 Text_Input=self.__text_w,
+                Z_Score_Input=self.__zscore_w,
              )
 
+            display(self.__file_name_w)
             display(self.__full_widgets_ui)
             display(self.__submit_button)
 
@@ -278,7 +313,6 @@ class DataCleaner:
         if func_kwargs["Options"] in self.__require_input:
             self.__feature_option_req_input[func_kwargs["Features"]] = self.__text_w.value
             self.__text_w.layout.visibility = 'visible'
-            print(self.a)
 
             self.a += 1
 
@@ -292,17 +326,20 @@ class DataCleaner:
                 if self.__require_input[
                            func_kwargs["Options"]] is not None \
                         and not self.__string_condtional(
-                    int(self.__text_w.value), self.__require_input[
+                    float(self.__text_w.value), self.__require_input[
                         func_kwargs["Options"]]):
                     self.__text_w.value = self.__text_w.value[:-1]
 
         else:
             if func_kwargs["Features"] in self.__feature_option_req_input:
-                self.__feature_option_req_input.pop(func_kwargs["Features"], None)
+                self.__feature_option_req_input.pop(func_kwargs["Features"],
+                                                    None)
 
             self.__text_w.layout.visibility = 'hidden'
             self.__text_w.value = ""
+            print(func_kwargs["Options"])
 
+        print(func_kwargs["Features"])
         print("\n\n\t     Feature option Review\n\t   " + "*" * 25)
         for feature, option in self.__selected_options.items():
 
@@ -348,8 +385,50 @@ class DataCleaner:
 
         return mis_val_table_ren_columns
 
+
+    def __validate_file_name(self,
+                             _):
+
+        self.__file_name_w.value = "".join(x for x in str(
+            self.__file_name_w.value) if x.isalnum() or x == "_" or x == "("
+                                           or x == ")" or x == " " or x == "-")
+
+        if self.__file_name_w.value == "":
+
+            json_path = self.__PROJECT.PATH_TO_OUTPUT_FOLDER[0:
+                                                             self.__PROJECT.PATH_TO_OUTPUT_FOLDER.find(
+                                                                 SYS_CONSTANTS.PARENT_OUTPUT_FOLDER_NAME)] + SYS_CONSTANTS.PARENT_OUTPUT_FOLDER_NAME
+            check_create_dir_structure(json_path,
+                                       "JSON File Dump/Data Cleaning")
+
+            tmp_file_name = uuid.uuid4().hex.upper()[0:16]
+            while(os.path.isfile(json_path + '/JSON File Dump/Data Cleaning/' +
+                              tmp_file_name + ".json")):
+                tmp_file_name = uuid.uuid4().hex.upper()[0:16]
+
+            self.__file_name_w.value = tmp_file_name
+
+    def __validate_save_zscore(self,
+                               _):
+
+        self.__zscore_w.value = "".join(x for x in str(
+            self.__zscore_w.value) if x.isdigit() or x == ".")
+
+        if self.__zscore_w.value == ".":
+            self.__zscore_w.value = "0.0"
+
+        if self.__zscore_w.value != "":
+            if self.__zscore_w.value[-1] == ".":
+                self.__zscore_w.value += "0"
+
+            self.__zscore_feature_holder[self.__features_w.value] = \
+                self.__zscore_w.value
+        else:
+            self.__zscore_feature_holder[self.__features_w.value] = None
+
+
     def __create_data_cleaning_json_file(self,
-                                         b):
+                                         _):
 
         json_dict = dict()
         for feature, option in self.__selected_options.items():
@@ -369,10 +448,17 @@ class DataCleaner:
         json_path = self.__PROJECT.PATH_TO_OUTPUT_FOLDER[0:
                                                          self.__PROJECT.PATH_TO_OUTPUT_FOLDER.find(
                                                              SYS_CONSTANTS.PARENT_OUTPUT_FOLDER_NAME)] + SYS_CONSTANTS.PARENT_OUTPUT_FOLDER_NAME
+
+        json_dict[feature]["Extra"] = json_path
+
         check_create_dir_structure(json_path,
                                    "JSON File Dump/Data Cleaning")
 
-        with open(json_path + '/JSON File Dump/Data Cleaning/Data_Cleaner.json',
+        print(self.__file_name_w.value)
+
+        abs_file_path = json_path + "/JSON File Dump/Data Cleaning/" + (self.__file_name_w.value) + ".json"
+
+        with open(abs_file_path,
                   'w',
                   encoding='utf-8') as outfile:
             json.dump(json_dict,
@@ -380,23 +466,59 @@ class DataCleaner:
                       ensure_ascii=False,
                       indent=2)
 
+        self.__last_saved_json_file_path = abs_file_path
+
+
+    def get_last_saved_json_file_path(self):
+        return copy.deepcopy(self.__last_saved_json_file_path)
+
     def __data_cleaning_widget_select_feature(self,
                                               feature):
 
         self.__text_w = widgets.Text(
-                value='',
-                placeholder='Replace Value',
-                description='Input:',
-                disabled=False,
-                visible=True
-            )
-        self.__text_w.layout.visibility = 'hidden'
+            value='',
+            placeholder='Replace Value',
+            description='Input:',
+            disabled=False,
+            visible=False,
+            layout=Layout(left='510px',
+                          bottom='250px')
+        )
+
+        self.__zscore_w = widgets.Text(
+            value='',
+            placeholder='Z-Score Value',
+            description='Z Score:',
+            disabled=False,
+            visible=False,
+            layout=Layout(left='510px',
+                          bottom="330px", )
+        )
+
+        self.__zscore_w.observe(self.__validate_save_zscore)
+
+        if self.__get_dtype_key(self.__tmp_df_features,
+                                feature["new"]) == "Number":
+            self.__zscore_w.layout.visibility = "visible"
+
+        else:
+            self.__zscore_w.layout.visibility = "hidden"
+
+        if feature["new"] in self.__zscore_feature_holder and \
+                self.__zscore_feature_holder[feature["new"]]:
+            self.__zscore_w.value = str(self.__zscore_feature_holder[feature["new"]])
+        # else:
+        #     self.__zscore_feature_holder[feature["new"]] = ""
+
+        self.__text_w.layout.visibility = "hidden"
+        self.__text_w.value = self.__zscore_w.value
 
         new_i = widgets.interactive(self.__data_cleaning_widget_save_option,
                                     Features=self.__features_w,
                                     Options=self.__feature_cleaning_options_w[
-                                        feature['new']],
-                                    Text_Input=self.__text_w)
+                                        feature["new"]],
+                                    Text_Input=self.__text_w,
+                                    Z_Score_Input=self.__zscore_w)
         self.__full_widgets_ui.children = new_i.children
 
     def data_cleaning_with_json_file(self,
@@ -429,6 +551,7 @@ class DataCleaner:
     def __string_condtional(self,
                             given_val,
                             full_condtional):
+        print(full_condtional)
 
         condtional_returns = []
         operators = [i for i in full_condtional.split(" ")
@@ -446,7 +569,7 @@ class DataCleaner:
                 condtional = ''.join(
                     [i for i in condtional_line if
                      not (i.isdigit() or i == '.')])
-                compare_val = int(condtional_line.replace(condtional, ''))
+                compare_val = float(condtional_line.replace(condtional, ''))
                 if condtional == "<=":
                     condtional_returns.append(given_val <= compare_val)
 
@@ -563,7 +686,8 @@ class DataCleaner:
                                         float(
                                             json_obj["Extra"]
                                             ["Percentage of distribution"]))
-            print("{0}%".format(float(json_obj["Extra"]["Percentage of distribution"])))
+            print("{0}%".format(float(json_obj["Extra"]
+                                      ["Percentage of distribution"])))
 
         df[json_obj["Feature"]].fillna(fill_na_val,
                                        inplace=True)

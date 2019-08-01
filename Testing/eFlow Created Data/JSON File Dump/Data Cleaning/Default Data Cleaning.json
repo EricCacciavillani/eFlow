@@ -1,7 +1,7 @@
 {
   "Age": {
     "Type": "Number",
-    "Option": "Fill nan with median value of distribution",
+    "Option": "Fill nan with average value of distribution",
     "Extra": {}
   },
   "Cabin": {
@@ -12,6 +12,6 @@
   "Embarked": {
     "Type": "Category",
     "Option": "Ignore feature",
-    "Extra": {}
+    "Extra": "/Users/ericcacciavillani/Desktop/Coding/Python_Files/Artificial_Intelligence/Data Mining/eFlowMaster/Testing/eFlow Created Data"
   }
 }

@@ -9,7 +9,8 @@ import six
 def enum(**enums):
     return type('Enum', (), enums)
 
-def check_create_dir_structure(directory_pth,sub_dir):
+def check_create_dir_structure(directory_pth,
+                               sub_dir):
     """
         Checks/Creates required directory structures inside
         the parent directory figures.

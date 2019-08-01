@@ -3,7 +3,7 @@
     "Type": "Number",
     "Option": "Fill nan with x% value of distribution",
     "Extra": {
-      "Percentage of distribution": "67"
+      "Percentage of distribution": "55"
     }
   },
   "Cabin": {
@@ -14,6 +14,6 @@
   "Embarked": {
     "Type": "Category",
     "Option": "Ignore feature",
-    "Extra": {}
+    "Extra": "/Users/ericcacciavillani/Desktop/Coding/Python_Files/Artificial_Intelligence/Data Mining/eFlowMaster/Testing/eFlow Created Data"
   }
 }
