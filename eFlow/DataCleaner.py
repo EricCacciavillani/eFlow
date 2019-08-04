@@ -232,7 +232,7 @@ class DataCleaner:
             DataFrameTypes object; organizes feature types into groups.
 
         Returns/Descr:
-            Returns a UI widget to create a JSON file for cleaning. The
+            Returns a UI widget to create a JSON file for cleaning.
         """
         self.__tmp_df_features = df_features
         self.__feature_option_req_input = dict()
@@ -323,6 +323,65 @@ class DataCleaner:
 
         return self.__submit_button
 
+    def data_cleaning_with_json_file(self,
+                                     df,
+                                     json_file_path):
+        """
+        df:
+            Pandas dataframe object.
+        json_file_path:
+            Path to JSON object file for cleaning
+
+        Returns/Descr:
+            Peforms cleaning of the dataframe with the proper json object.
+        """
+        with open(json_file_path) as json_file:
+            data = json.load(json_file)
+            for feature, json_obj in data.items():
+                print(feature)
+                print(json_obj["Option"])
+                print(self.__data_cleaning_options[json_obj["Type"]][
+                    json_obj["Option"]])
+                self.__data_cleaning_options[json_obj["Type"]][
+                    json_obj["Option"]](df,
+                                        json_obj)
+                print()
+
+    def __missing_values_table(self,
+                               df):
+        """
+
+        df:
+            Pandas DataFrame object
+
+        Returns/Descr:
+            Returns/Saves a Pandas DataFrame object giving the percentage of the
+            null data for the original DataFrame columns.
+        """
+        mis_val = df.isnull().sum()
+        mis_val_percent = 100 * df.isnull().sum() / len(df)
+        mis_val_table = pd.concat([mis_val, mis_val_percent], axis=1)
+        mis_val_table_ren_columns = mis_val_table.rename(
+            columns={0: 'Missing Values', 1: '% of Total Values'})
+        mis_val_table_ren_columns = mis_val_table_ren_columns[
+            mis_val_table_ren_columns.iloc[:, 1] != 0].sort_values(
+            '% of Total Values', ascending=False).round(1)
+        print("Your selected dataframe has " + str(df.shape[1]) + " columns.\n"
+                                                                  "There are " + str(
+            mis_val_table_ren_columns.shape[0]) +
+              " columns that have missing values.")
+
+        # ---
+        df_to_image(mis_val_table_ren_columns,
+                    self.__PROJECT.PATH_TO_OUTPUT_FOLDER,
+                    "Missing_Data/Tables",
+                    "Missing_Data_Table",
+                    show_index=True,
+                    format_float_pos=2)
+
+        return mis_val_table_ren_columns
+
+    ### Widget controllers ###
     def __validate_file_name(self,
                              _):
         """
@@ -378,8 +437,8 @@ class DataCleaner:
 
                 if self.__require_input[
                            func_kwargs["Options"]] is not None \
-                        and not self.__string_condtional(
-                    float(self.__text_w.value), self.__require_input[
+                        and not string_condtional(float(self.__text_w.value),
+                                                  self.__require_input[
                         func_kwargs["Options"]]):
                     self.__text_w.value = self.__text_w.value[:-1]
 
@@ -403,40 +462,6 @@ class DataCleaner:
                 feature,
                 option)
                   + "           " + "----" * 7)
-
-    def __missing_values_table(self,
-                               df):
-        """
-
-        df:
-            Pandas DataFrame object
-
-        Returns/Descr:
-            Returns/Saves a Pandas DataFrame object giving the percentage of the
-            null data for the original DataFrame columns.
-        """
-        mis_val = df.isnull().sum()
-        mis_val_percent = 100 * df.isnull().sum() / len(df)
-        mis_val_table = pd.concat([mis_val, mis_val_percent], axis=1)
-        mis_val_table_ren_columns = mis_val_table.rename(
-            columns={0: 'Missing Values', 1: '% of Total Values'})
-        mis_val_table_ren_columns = mis_val_table_ren_columns[
-            mis_val_table_ren_columns.iloc[:, 1] != 0].sort_values(
-            '% of Total Values', ascending=False).round(1)
-        print("Your selected dataframe has " + str(df.shape[1]) + " columns.\n"
-                                                                  "There are " + str(
-            mis_val_table_ren_columns.shape[0]) +
-              " columns that have missing values.")
-
-        # ---
-        df_to_image(mis_val_table_ren_columns,
-                    self.__PROJECT.PATH_TO_OUTPUT_FOLDER,
-                    "Missing_Data/Tables",
-                    "Missing_Data_Table",
-                    show_index=True,
-                    format_float_pos=2)
-
-        return mis_val_table_ren_columns
 
     def __validate_save_zscore(self,
                                _):
@@ -508,6 +533,11 @@ class DataCleaner:
 
     def __data_cleaning_widget_select_feature(self,
                                               feature):
+        """
+        Returns/Descr:
+            When a feature selection is chosen all the widgets are
+            re-initialized.
+        """
 
         self.__text_w = widgets.Text(
             value='',
@@ -518,7 +548,6 @@ class DataCleaner:
             layout=Layout(left='510px',
                           bottom='250px')
         )
-
         self.__zscore_w = widgets.Text(
             value='',
             placeholder='Z-Score Value',
@@ -555,23 +584,19 @@ class DataCleaner:
                                     Z_Score_Input=self.__zscore_w)
         self.__full_widgets_ui.children = new_i.children
 
-    def data_cleaning_with_json_file(self,
-                                     df,
-                                     json_file_path):
-        with open(json_file_path) as json_file:
-            data = json.load(json_file)
-            for feature, json_obj in data.items():
-                print(feature)
-                print(json_obj["Option"])
-                print(self.__data_cleaning_options[json_obj["Type"]][json_obj["Option"]])
-                json_obj["Feature"] = feature
-                self.__data_cleaning_options[json_obj["Type"]][json_obj["Option"]](df,
-                                                                                   json_obj)
-                print()
 
     def __get_dtype_key(self,
                         df_features,
                         col_feature_name):
+        """
+        df_features:
+            DataFrameTypes object.
+        col_feature_name:
+            Pandas column name.
+
+        Returns/Descr:
+            Returns back the data type of the feature that is created
+        """
 
         if col_feature_name in df_features.get_numerical_features():
             return "Number"
@@ -582,81 +607,7 @@ class DataCleaner:
         else:
             return "Unknown"
 
-    def __string_condtional(self,
-                            given_val,
-                            full_condtional):
-        print(full_condtional)
-
-        condtional_returns = []
-        operators = [i for i in full_condtional.split(" ")
-                     if i == "or" or i == "and"]
-
-        all_condtionals = list(
-            itertools.chain(
-                *[i.split("or")
-                  for i in full_condtional.split("and")]))
-        for condtional_line in all_condtionals:
-            condtional_line = condtional_line.replace(" ", "")
-            if condtional_line[0] == 'x':
-                condtional_line = condtional_line.replace('x', '')
-
-                condtional = ''.join(
-                    [i for i in condtional_line if
-                     not (i.isdigit() or i == '.')])
-                compare_val = float(condtional_line.replace(condtional, ''))
-                if condtional == "<=":
-                    condtional_returns.append(given_val <= compare_val)
-
-                elif condtional == "<":
-                    condtional_returns.append(given_val < compare_val)
-
-                elif condtional == ">=":
-                    condtional_returns.append(given_val >= compare_val)
-
-                elif condtional == ">":
-                    condtional_returns.append(given_val > compare_val)
-
-                elif condtional == "==":
-                    condtional_returns.append(given_val == compare_val)
-
-                elif condtional == "!=":
-                    condtional_returns.append(given_val != compare_val)
-                else:
-                    print("ERROR")
-                    return False
-            else:
-                print("ERROR")
-                return False
-
-        if not len(operators):
-            return condtional_returns[0]
-        else:
-            i = 0
-            final_return = None
-
-            for op in operators:
-                print(condtional_returns)
-                if op == "and":
-
-                    if final_return is None:
-                        final_return = condtional_returns[i] and \
-                                       condtional_returns[i + 1]
-                        i += 2
-                    else:
-                        final_return = final_return and condtional_returns[i]
-                        i += 1
-
-                else:
-                    if final_return is None:
-                        final_return = condtional_returns[i] or \
-                                       condtional_returns[i + 1]
-                        i += 2
-                    else:
-                        final_return = final_return or condtional_returns[i]
-                        i += 1
-
-            return final_return
-
+    ### Cleaning options ###
     def __ignore_feature(self,
                          df,
                          json_obj):
@@ -774,6 +725,6 @@ class DataCleaner:
         print("nan by count")
         pass
 
-    ### Getters
+    ### Getters ###
     def get_last_saved_json_file_path(self):
         return copy.deepcopy(self.__last_saved_json_file_path)
