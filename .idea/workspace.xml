@@ -3,37 +3,8 @@
   <component name="ChangeListManager">
     <list default="true" id="ed041e50-c9da-4464-8bcf-e2b46601487b" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Testing/.ipynb_checkpoints/Pre Production-checkpoint.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/Testing/.ipynb_checkpoints/Pre Production-checkpoint.ipynb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Testing/Pre Production.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/Testing/Pre Production.ipynb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Testing/Production Data/JSON File Dump/Data Cleaning/.ipynb_checkpoints/Data_Cleaner-checkpoint.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Testing/Production Data/JSON File Dump/Data Cleaning/Data_Cleaner.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Testing/Production Data/Pre processing/Data Cleaning/Missing_Data/Graphics/Missing_Data_Bar_Graph.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Testing/Production Data/Pre processing/Data Cleaning/Missing_Data/Graphics/Missing_Data_Dendrogram_Graph.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Testing/Production Data/Pre processing/Data Cleaning/Missing_Data/Graphics/Missing_Data_Heatmap.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Testing/Production Data/Pre processing/Data Cleaning/Missing_Data/Graphics/Missing_Data_Matrix_Graph.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Testing/Production Data/Pre processing/Data Cleaning/Missing_Data/Tables/Missing_Data_Table.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Testing/Production Data/Pre processing/General Analysis/Feature Analysis/Graphics/Count_Plot_Cabin.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Testing/Production Data/Pre processing/General Analysis/Feature Analysis/Graphics/Count_Plot_Parch.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Testing/Production Data/Pre processing/General Analysis/Feature Analysis/Graphics/Count_Plot_Pclass.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Testing/Production Data/Pre processing/General Analysis/Feature Analysis/Graphics/Count_Plot_SibSp.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Testing/Production Data/Pre processing/General Analysis/Feature Analysis/Graphics/Distance_Plot_Age.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Testing/Production Data/Pre processing/General Analysis/Feature Analysis/Graphics/Distance_Plot_Fare.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Testing/Production Data/Pre processing/General Analysis/Feature Analysis/Graphics/Pie_Chart_Embarked.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Testing/Production Data/Pre processing/General Analysis/Feature Analysis/Graphics/Pie_Chart_Sex.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Testing/Production Data/Pre processing/General Analysis/Feature Analysis/Graphics/Pie_Chart_Survived.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Testing/Production Data/Pre processing/General Analysis/Feature Analysis/Tables/Age_Descr.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Testing/Production Data/Pre processing/General Analysis/Feature Analysis/Tables/Cabin_Value_Counts.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Testing/Production Data/Pre processing/General Analysis/Feature Analysis/Tables/Embarked_Value_Counts.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Testing/Production Data/Pre processing/General Analysis/Feature Analysis/Tables/Fare_Descr.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Testing/Production Data/Pre processing/General Analysis/Feature Analysis/Tables/Parch_Value_Counts.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Testing/Production Data/Pre processing/General Analysis/Feature Analysis/Tables/Pclass_Value_Counts.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Testing/Production Data/Pre processing/General Analysis/Feature Analysis/Tables/Sex_Value_Counts.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Testing/Production Data/Pre processing/General Analysis/Feature Analysis/Tables/SibSp_Value_Counts.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Testing/Production Data/Pre processing/General Analysis/Feature Analysis/Tables/Survived_Value_Counts.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Testing/Production Data/Pre processing/General Analysis/Missing Data/Tables/Missing_Data_Table.png" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/eFlow/DataCleaner.py" beforeDir="false" afterPath="$PROJECT_DIR$/eFlow/DataCleaner.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/eFlow/Utils/Constants.py" beforeDir="false" afterPath="$PROJECT_DIR$/eFlow/Utils/Constants.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/eFlow/Utils/Sys_Utils.py" beforeDir="false" afterPath="$PROJECT_DIR$/eFlow/Utils/Sys_Utils.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -49,7 +20,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/eFlow/DataAnalysis.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="208">
+            <state relative-caret-position="885">
               <caret line="59" column="76" selection-start-line="59" selection-start-column="51" selection-end-line="59" selection-end-column="76" />
               <folding>
                 <element signature="e#0#19#0" expanded="true" />
@@ -61,7 +32,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/eFlow/Utils/Sys_Utils.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-85">
+            <state relative-caret-position="570">
               <caret line="38" column="13" selection-start-line="38" selection-start-column="13" selection-end-line="38" selection-end-column="13" />
               <folding>
                 <element signature="e#0#19#0" expanded="true" />
@@ -73,8 +44,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/eFlow/DataCleaner.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="733">
-              <caret line="183" column="43" selection-start-line="183" selection-start-column="43" selection-end-line="183" selection-end-column="43" />
+            <state relative-caret-position="785">
+              <caret line="776" column="15" selection-start-line="776" selection-start-column="15" selection-end-line="776" selection-end-column="15" />
               <folding>
                 <element signature="e#0#19#0" expanded="true" />
               </folding>
@@ -90,8 +61,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/eFlow/Utils/Multi_Threading_Functions.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="925">
-              <caret line="69" column="15" lean-forward="true" selection-start-line="69" selection-start-column="15" selection-end-line="69" selection-end-column="15" />
+            <state relative-caret-position="1035">
+              <caret line="69" column="15" selection-start-line="69" selection-start-column="15" selection-end-line="69" selection-end-column="15" />
               <folding>
                 <element signature="e#0#46#0" expanded="true" />
               </folding>
@@ -102,7 +73,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/eFlow/ClusterMaster.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="903">
+            <state relative-caret-position="9300">
               <caret line="620" column="39" selection-start-line="620" selection-start-column="39" selection-end-line="620" selection-end-column="53" />
               <folding>
                 <element signature="e#25#62#0" expanded="true" />
@@ -131,13 +102,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>self.__text_w =</find>
-      <find>__submit_button</find>
-      <find>__file_name_w</find>
-      <find>__validate</find>
-      <find>validate</find>
-      <find>int</find>
-      <find>__string_condtional</find>
       <find>self.__require_input</find>
       <find>Unknown</find>
       <find>__zcore_remove_outliers</find>
@@ -161,6 +125,13 @@
       <find>zscore</find>
       <find>Text_Input</find>
       <find>self.__zscore_w.value =</find>
+      <find>notebook_mode</find>
+      <find>max_zscore</find>
+      <find>__zscore_condtional</find>
+      <find>self.a</find>
+      <find>data_cleaning_csv_path</find>
+      <find>__data_cleaning_widget_save_option</find>
+      <find>__create_data_cleaning_json_file</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -208,6 +179,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -224,7 +196,6 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -329,13 +300,13 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="360960000" />
+    <option name="totallyTimeSpent" value="366660000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1680" height="1050" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.17399268" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.17765568" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -438,7 +409,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/eFlow/DataAnalysis.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="208">
+        <state relative-caret-position="885">
           <caret line="59" column="76" selection-start-line="59" selection-start-column="51" selection-end-line="59" selection-end-column="76" />
           <folding>
             <element signature="e#0#19#0" expanded="true" />
@@ -455,7 +426,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/eFlow/ClusterMaster.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="903">
+        <state relative-caret-position="9300">
           <caret line="620" column="39" selection-start-line="620" selection-start-column="39" selection-end-line="620" selection-end-column="53" />
           <folding>
             <element signature="e#25#62#0" expanded="true" />
@@ -468,8 +439,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/eFlow/Utils/Multi_Threading_Functions.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="925">
-          <caret line="69" column="15" lean-forward="true" selection-start-line="69" selection-start-column="15" selection-end-line="69" selection-end-column="15" />
+        <state relative-caret-position="1035">
+          <caret line="69" column="15" selection-start-line="69" selection-start-column="15" selection-end-line="69" selection-end-column="15" />
           <folding>
             <element signature="e#0#46#0" expanded="true" />
           </folding>
@@ -478,7 +449,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/eFlow/Utils/Sys_Utils.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-85">
+        <state relative-caret-position="570">
           <caret line="38" column="13" selection-start-line="38" selection-start-column="13" selection-end-line="38" selection-end-column="13" />
           <folding>
             <element signature="e#0#19#0" expanded="true" />
@@ -488,8 +459,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/eFlow/DataCleaner.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="733">
-          <caret line="183" column="43" selection-start-line="183" selection-start-column="43" selection-end-line="183" selection-end-column="43" />
+        <state relative-caret-position="785">
+          <caret line="776" column="15" selection-start-line="776" selection-start-column="15" selection-end-line="776" selection-end-column="15" />
           <folding>
             <element signature="e#0#19#0" expanded="true" />
           </folding>
