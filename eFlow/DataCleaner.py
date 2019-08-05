@@ -309,6 +309,8 @@ class DataCleaner:
         self.__file_name_w.observe(self.__validate_file_name)
         self.__text_w.observe(self.__validate_save_text_w)
         self.__submit_button.on_click(self.__create_data_cleaning_json_file)
+        self.__options_w.observe(self.__hide_init_text_w,
+                                 "new")
 
         # Setup and display full UI
         self.__full_widgets_ui = widgets.interactive(
@@ -427,9 +429,10 @@ class DataCleaner:
             self.__feature_input_holder[self.__features_w.value] = \
                 self.__text_w.value
 
-            if self.__get_dtype_key(
+            feature_type = self.__get_dtype_key(
                     self.__tmp_df_features,
-                    self.__features_w.value) != "Category" and len(self.__text_w.value):
+                    self.__features_w.value)
+            if feature_type == "Number" and len(self.__text_w.value):
 
                 self.__text_w.value = ''.join(
                     [i for i in self.__text_w.value if i.isdigit() or i == '.'])
@@ -472,23 +475,21 @@ class DataCleaner:
                            _):
 
         if self.__options_w.value in self.__require_input:
+            self.__text_w.value = ""
             self.__text_w.layout.visibility = 'visible'
         else:
             self.__text_w.layout.visibility = 'hidden'
 
         if self.__features_w.value in self.__feature_input_holder:
             self.__text_w.value = self.__feature_input_holder[
-                self.__features_w.value]
+                self.__features_w.value ]
 
     def __data_cleaning_widget_save_option(self,
                                            **func_kwargs):
         if not self.__selected_options:
             return None
 
-        self.__hide_init_text_w(None)
-
-        self.__selected_options[func_kwargs["Features"]] = func_kwargs[
-            "Options"]
+        self.__selected_options[func_kwargs["Features"]] = self.__options_w.value
 
         print(func_kwargs["Features"])
         print("\n\n\t     Feature option Review\n\t   " + "*" * 25)
@@ -501,6 +502,8 @@ class DataCleaner:
                 feature,
                 option)
                   + "           " + "----" * 7)
+
+        self.__hide_init_text_w(None)
 
     def __create_data_cleaning_json_file(self,
                                          _):
@@ -578,26 +581,28 @@ class DataCleaner:
         if self.__get_dtype_key(self.__tmp_df_features,
                                 feature["new"]) == "Number":
             self.__zscore_w.layout.visibility = "visible"
-
         else:
             self.__zscore_w.layout.visibility = "hidden"
-
-        # self.__text_w.layout.visibility = "hidden"
-        self.__hide_init_text_w(None)
 
         if feature["new"] in self.__zscore_feature_holder and \
                 self.__zscore_feature_holder[feature["new"]]:
             self.__zscore_w.value = str(
                 self.__zscore_feature_holder[feature["new"]])
 
+        write_object_to_file("testing.txt",
+                             [feature["new"],
+                              self.__selected_options])
+
+        self.__options_w = self.__feature_cleaning_options_w[feature["new"]]
+        self.__options_w.observe(self.__hide_init_text_w,
+                                 "new")
+
         new_i = widgets.interactive(self.__data_cleaning_widget_save_option,
                                     Features=self.__features_w,
-                                    Options=self.__feature_cleaning_options_w[
-                                        feature["new"]],
+                                    Options=self.__options_w,
                                     Text_Input=self.__text_w,
                                     Z_Score_Input=self.__zscore_w)
 
-        # self.__options_w.observe(self.__hide_init_text_w)
         self.__full_widgets_ui.children = new_i.children
 
 

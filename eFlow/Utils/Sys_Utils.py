@@ -183,3 +183,9 @@ def string_condtional(given_val,
                     i += 1
 
         return final_return
+
+
+def write_object_to_file(filename,obj):
+    f = open(filename, 'w')
+    f.write('obj = ' + repr(obj) + '\n')
+    f.close()
