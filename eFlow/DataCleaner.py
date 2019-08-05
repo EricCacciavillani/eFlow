@@ -5,7 +5,6 @@ import ipywidgets as widgets
 from IPython.display import display
 from ipywidgets import Layout
 import json
-import itertools
 from scipy import stats
 import uuid
 import os.path
@@ -177,6 +176,7 @@ class DataCleaner:
         space_counters = {i for i in range(1, 50)}
         self.__data_cleaning_options["Category"] = dict()
         self.__data_cleaning_options["Category"]["Ignore feature"] = self.__ignore_feature
+        self.__data_cleaning_options["Category"]["Fill nan with x% value of distribution"] = self.__ignore_feature
         self.__data_cleaning_options["Category"]["Drop feature"] = \
             self.__drop_feature
 
@@ -216,10 +216,10 @@ class DataCleaner:
         # ---
         self.__selected_options = None
         self.__tmp_df_features = None
-        self.__feature_option_req_input = None
         self.__last_saved_json_file_path = None
+        self.__feature_input_holder = dict()
         self.__zscore_feature_holder = dict()
-        self.a = 0
+
 
     def data_cleaning_widget(self,
                              df,
@@ -235,7 +235,7 @@ class DataCleaner:
             Returns a UI widget to create a JSON file for cleaning.
         """
         self.__tmp_df_features = df_features
-        self.__feature_option_req_input = dict()
+        self.__feature_input_holder = dict()
 
         nan_feature_names = df.columns[df.isna().any()].tolist()
 
@@ -307,6 +307,7 @@ class DataCleaner:
                                   'value')
         self.__zscore_w.observe(self.__validate_save_zscore)
         self.__file_name_w.observe(self.__validate_file_name)
+        self.__text_w.observe(self.__validate_save_text_w)
         self.__submit_button.on_click(self.__create_data_cleaning_json_file)
 
         # Setup and display full UI
@@ -414,54 +415,35 @@ class DataCleaner:
             # ---
             self.__file_name_w.value = tmp_file_name
 
-    def __data_cleaning_widget_save_option(self,
-                                           **func_kwargs):
-        if not self.__selected_options:
-            return None
+    def __validate_save_text_w(self,
+                               _):
+        """
+        Returns/Descr:
+            Ensures the input field is within specified parameters defined
+            by the 'require_input' dictionary.
+        """
 
-        self.__selected_options[func_kwargs["Features"]] = func_kwargs[
-            "Options"]
-
-        if func_kwargs["Options"] in self.__require_input:
-            self.__feature_option_req_input[func_kwargs["Features"]] = self.__text_w.value
-            self.__text_w.layout.visibility = 'visible'
-
-            self.a += 1
+        if self.__options_w.value in self.__require_input:
+            self.__feature_input_holder[self.__features_w.value] = \
+                self.__text_w.value
 
             if self.__get_dtype_key(
                     self.__tmp_df_features,
-                    func_kwargs["Features"]) != "Category" and len(self.__text_w.value):
+                    self.__features_w.value) != "Category" and len(self.__text_w.value):
 
                 self.__text_w.value = ''.join(
                     [i for i in self.__text_w.value if i.isdigit() or i == '.'])
 
-                if self.__require_input[
-                           func_kwargs["Options"]] is not None \
+                if self.__require_input[self.__options_w.value] is not None \
                         and not string_condtional(float(self.__text_w.value),
                                                   self.__require_input[
-                        func_kwargs["Options"]]):
+                                                      self.__options_w.value]):
                     self.__text_w.value = self.__text_w.value[:-1]
 
         else:
-            if func_kwargs["Features"] in self.__feature_option_req_input:
-                self.__feature_option_req_input.pop(func_kwargs["Features"],
-                                                    None)
-
-            self.__text_w.layout.visibility = 'hidden'
-            self.__text_w.value = ""
-            print(func_kwargs["Options"])
-
-        print(func_kwargs["Features"])
-        print("\n\n\t     Feature option Review\n\t   " + "*" * 25)
-        for feature, option in self.__selected_options.items():
-
-            if option[0:3] == "---":
-                option = "Ignore Feature"
-
-            print("\n\t   Feature: {0}\n\t   Option:  {1}\n".format(
-                feature,
-                option)
-                  + "           " + "----" * 7)
+            if self.__features_w.value in self.__feature_input_holder:
+                self.__feature_input_holder.pop(self.__features_w.value,
+                                                None)
 
     def __validate_save_zscore(self,
                                _):
@@ -486,6 +468,39 @@ class DataCleaner:
         else:
             self.__zscore_feature_holder[self.__features_w.value] = None
 
+    def __hide_init_text_w(self,
+                           _):
+
+        if self.__options_w.value in self.__require_input:
+            self.__text_w.layout.visibility = 'visible'
+        else:
+            self.__text_w.layout.visibility = 'hidden'
+
+        if self.__features_w.value in self.__feature_input_holder:
+            self.__text_w.value = self.__feature_input_holder[
+                self.__features_w.value]
+
+    def __data_cleaning_widget_save_option(self,
+                                           **func_kwargs):
+        if not self.__selected_options:
+            return None
+
+        self.__hide_init_text_w(None)
+
+        self.__selected_options[func_kwargs["Features"]] = func_kwargs[
+            "Options"]
+
+        print(func_kwargs["Features"])
+        print("\n\n\t     Feature option Review\n\t   " + "*" * 25)
+        for feature, option in self.__selected_options.items():
+
+            if option[0:3] == "---":
+                option = "Ignore Feature"
+
+            print("\n\t   Feature: {0}\n\t   Option:  {1}\n".format(
+                feature,
+                option)
+                  + "           " + "----" * 7)
 
     def __create_data_cleaning_json_file(self,
                                          _):
@@ -505,10 +520,10 @@ class DataCleaner:
             json_dict[feature]["Option"] = option
             json_dict[feature]["Extra"] = dict()
 
-            if option == "Fill null with specfic value" and feature in self.__feature_option_req_input.keys():
-                json_dict[feature]["Extra"]["Replace value"] = self.__feature_option_req_input[feature]
-            elif option == "Fill nan with x% value of distribution" and feature in self.__feature_option_req_input.keys():
-                json_dict[feature]["Extra"]["Percentage of distribution"] = self.__feature_option_req_input[feature]
+            if option == "Fill null with specfic value" and feature in self.__feature_input_holder.keys():
+                json_dict[feature]["Extra"]["Replace value"] = self.__feature_input_holder[feature]
+            elif option == "Fill nan with x% value of distribution" and feature in self.__feature_input_holder.keys():
+                json_dict[feature]["Extra"]["Percentage of distribution"] = self.__feature_input_holder[feature]
 
         json_path = self.__PROJECT.PATH_TO_OUTPUT_FOLDER[0:
                                                          self.__PROJECT.PATH_TO_OUTPUT_FOLDER.find(
@@ -557,7 +572,7 @@ class DataCleaner:
             layout=Layout(left='510px',
                           bottom="330px", )
         )
-
+        self.__text_w.observe(self.__validate_save_text_w)
         self.__zscore_w.observe(self.__validate_save_zscore)
 
         if self.__get_dtype_key(self.__tmp_df_features,
@@ -567,14 +582,13 @@ class DataCleaner:
         else:
             self.__zscore_w.layout.visibility = "hidden"
 
+        # self.__text_w.layout.visibility = "hidden"
+        self.__hide_init_text_w(None)
+
         if feature["new"] in self.__zscore_feature_holder and \
                 self.__zscore_feature_holder[feature["new"]]:
-            self.__zscore_w.value = str(self.__zscore_feature_holder[feature["new"]])
-        # else:
-        #     self.__zscore_feature_holder[feature["new"]] = ""
-
-        self.__text_w.layout.visibility = "hidden"
-        self.__text_w.value = self.__zscore_w.value
+            self.__zscore_w.value = str(
+                self.__zscore_feature_holder[feature["new"]])
 
         new_i = widgets.interactive(self.__data_cleaning_widget_save_option,
                                     Features=self.__features_w,
@@ -582,6 +596,8 @@ class DataCleaner:
                                         feature["new"]],
                                     Text_Input=self.__text_w,
                                     Z_Score_Input=self.__zscore_w)
+
+        # self.__options_w.observe(self.__hide_init_text_w)
         self.__full_widgets_ui.children = new_i.children
 
 

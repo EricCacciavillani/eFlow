@@ -3,8 +3,13 @@
   <component name="ChangeListManager">
     <list default="true" id="ed041e50-c9da-4464-8bcf-e2b46601487b" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.ipynb_checkpoints/Pre Production-checkpoint.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/.ipynb_checkpoints/Pre Production-checkpoint.ipynb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Pre Production.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/Pre Production.ipynb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Testing/.ipynb_checkpoints/Pre Production-checkpoint.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/Testing/.ipynb_checkpoints/Pre Production-checkpoint.ipynb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Testing/Pre Production.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/Testing/Pre Production.ipynb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Testing/eFlow Created Data/Pre processing/Data Cleaning/Missing_Data/Graphics/Missing_Data_Bar_Graph.png" beforeDir="false" afterPath="$PROJECT_DIR$/Testing/eFlow Created Data/Pre processing/Data Cleaning/Missing_Data/Graphics/Missing_Data_Bar_Graph.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Testing/eFlow Created Data/Pre processing/Data Cleaning/Missing_Data/Graphics/Missing_Data_Dendrogram_Graph.png" beforeDir="false" afterPath="$PROJECT_DIR$/Testing/eFlow Created Data/Pre processing/Data Cleaning/Missing_Data/Graphics/Missing_Data_Dendrogram_Graph.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Testing/eFlow Created Data/Pre processing/Data Cleaning/Missing_Data/Graphics/Missing_Data_Heatmap.png" beforeDir="false" afterPath="$PROJECT_DIR$/Testing/eFlow Created Data/Pre processing/Data Cleaning/Missing_Data/Graphics/Missing_Data_Heatmap.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Testing/eFlow Created Data/Pre processing/Data Cleaning/Missing_Data/Graphics/Missing_Data_Matrix_Graph.png" beforeDir="false" afterPath="$PROJECT_DIR$/Testing/eFlow Created Data/Pre processing/Data Cleaning/Missing_Data/Graphics/Missing_Data_Matrix_Graph.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Testing/eFlow Created Data/Pre processing/Data Cleaning/Missing_Data/Tables/Missing_Data_Table.png" beforeDir="false" afterPath="$PROJECT_DIR$/Testing/eFlow Created Data/Pre processing/Data Cleaning/Missing_Data/Tables/Missing_Data_Table.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/eFlow/DataCleaner.py" beforeDir="false" afterPath="$PROJECT_DIR$/eFlow/DataCleaner.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/eFlow/Utils/Sys_Utils.py" beforeDir="false" afterPath="$PROJECT_DIR$/eFlow/Utils/Sys_Utils.py" afterDir="false" />
     </list>
@@ -34,8 +39,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/eFlow/Utils/Sys_Utils.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="274">
-              <caret line="101" column="21" selection-start-line="101" selection-start-column="4" selection-end-line="101" selection-end-column="21" />
+            <state relative-caret-position="-274">
+              <caret line="6" column="16" selection-start-line="6" selection-start-column="16" selection-end-line="6" selection-end-column="16" />
               <folding>
                 <element signature="e#0#19#0" expanded="true" />
               </folding>
@@ -46,8 +51,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/eFlow/DataCleaner.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="10790">
-              <caret line="727" column="19" selection-start-line="727" selection-start-column="19" selection-end-line="727" selection-end-column="19" />
+            <state relative-caret-position="301">
+              <caret line="585" column="31" selection-start-line="585" selection-start-column="8" selection-end-line="585" selection-end-column="31" />
               <folding>
                 <element signature="e#0#19#0" expanded="true" />
               </folding>
@@ -104,36 +109,36 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>Unknown</find>
-      <find>__zcore_remove_outliers</find>
-      <find>self.__text_w</find>
-      <find>__feature_option_req_input</find>
-      <find>__validate_file_name</find>
-      <find>__validate_</find>
-      <find>__features_w</find>
-      <find>feature_holder</find>
-      <find>nan</find>
-      <find>__zscore_w</find>
-      <find>__testing</find>
-      <find>__data_cleaning_widget_select_feature</find>
-      <find>__zscore_feature_holder</find>
-      <find>self.__zscore_w</find>
-      <find>.show</find>
-      <find>visibility</find>
-      <find>__get_dtype_key</find>
-      <find>visible</find>
-      <find>'visible</find>
-      <find>zscore</find>
-      <find>Text_Input</find>
-      <find>self.__zscore_w.value =</find>
-      <find>notebook_mode</find>
-      <find>max_zscore</find>
       <find>__zscore_condtional</find>
       <find>self.a</find>
       <find>data_cleaning_csv_path</find>
       <find>__data_cleaning_widget_save_option</find>
       <find>__create_data_cleaning_json_file</find>
+      <find>__options_w</find>
+      <find>= &quot;&quot;</find>
       <find>string_condtional</find>
+      <find>__require_input =</find>
+      <find>__require_input</find>
+      <find>itertools</find>
+      <find>__feature_option_req_input</find>
+      <find>self.__re</find>
+      <find>self.__feature_option_req_input</find>
+      <find>self.__feature_input_holder</find>
+      <find>elf.__feature_option_req_input</find>
+      <find>__hide_text_w</find>
+      <find>__feature_input_holder</find>
+      <find>__hide_</find>
+      <find>__text_w</find>
+      <find>layout.visibility</find>
+      <find>self.__text_w</find>
+      <find>__validate_save_text_w</find>
+      <find>visible</find>
+      <find>__data_cleaning_widget_select_feature</find>
+      <find>hide_init</find>
+      <find>hidden</find>
+      <find>__feature_cleaning_options_w</find>
+      <find>__hide_init_text_w</find>
+      <find>self.__hide_init_text_w()</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -193,6 +198,12 @@
               <item name="eFlowMaster" type="b2602c69:ProjectViewProjectNode" />
               <item name="eFlowMaster" type="462c0819:PsiDirectoryNode" />
               <item name="eFlow" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="eFlowMaster" type="b2602c69:ProjectViewProjectNode" />
+              <item name="eFlowMaster" type="462c0819:PsiDirectoryNode" />
+              <item name="eFlow" type="462c0819:PsiDirectoryNode" />
+              <item name="Utils" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -302,7 +313,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="368302000" />
+    <option name="totallyTimeSpent" value="376804000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1680" height="1050" extended-state="0" />
@@ -451,8 +462,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/eFlow/Utils/Sys_Utils.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="274">
-          <caret line="101" column="21" selection-start-line="101" selection-start-column="4" selection-end-line="101" selection-end-column="21" />
+        <state relative-caret-position="-274">
+          <caret line="6" column="16" selection-start-line="6" selection-start-column="16" selection-end-line="6" selection-end-column="16" />
           <folding>
             <element signature="e#0#19#0" expanded="true" />
           </folding>
@@ -461,8 +472,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/eFlow/DataCleaner.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="10790">
-          <caret line="727" column="19" selection-start-line="727" selection-start-column="19" selection-end-line="727" selection-end-column="19" />
+        <state relative-caret-position="301">
+          <caret line="585" column="31" selection-start-line="585" selection-start-column="8" selection-end-line="585" selection-end-column="31" />
           <folding>
             <element signature="e#0#19#0" expanded="true" />
           </folding>

@@ -4,6 +4,7 @@ from matplotlib import pyplot as plt
 import os
 import copy
 import six
+import itertools
 
 
 def enum(**enums):
