@@ -209,7 +209,7 @@ class DataCleaner:
         self.__feature_cleaning_options_w = None
         self.__features_w = None
         self.__options_w = None
-        self.__text_w = None
+        self.__input_w = None
         self.__full_widgets_ui = None
         self.__submit_button = None
 
@@ -259,19 +259,7 @@ class DataCleaner:
                           height='175px')
         )
 
-        init = self.__features_w.value
-        self.__options_w = self.__feature_cleaning_options_w[init]
-
-        # Init widgets/interactables
-        self.__text_w = widgets.Text(
-            value='',
-            placeholder='Replace Value',
-            description='Input:',
-            disabled=False,
-            visible=False,
-            layout=Layout(left='510px',
-                          bottom='250px')
-        )
+        self.__init_update_updateable_widgets()
 
         # ---
         self.__file_name_w = widgets.Text(
@@ -284,17 +272,6 @@ class DataCleaner:
         )
 
         # ---
-        self.__zscore_w =  widgets.Text(
-            value='',
-            placeholder='Z-Score Value',
-            description='Z Score:',
-            disabled=False,
-            visible=False,
-            layout=Layout(left='510px',
-                          bottom="330px",)
-        )
-
-        # ---
         self.__submit_button = widgets.Button(
             description='Create JSON File from options',
             color="#ff1122",
@@ -302,22 +279,20 @@ class DataCleaner:
                           bottom="5px",
                           width='40%', ))
 
-        # Link functions with interactables
+        # Link functions with non-updateable widgets
         self.__features_w.observe(self.__data_cleaning_widget_select_feature,
                                   'value')
-        self.__zscore_w.observe(self.__validate_save_zscore)
+        self.__features_w.observe(self.__hide_init_zscore_w,
+                                  'value')
         self.__file_name_w.observe(self.__validate_file_name)
-        self.__text_w.observe(self.__validate_save_text_w)
         self.__submit_button.on_click(self.__create_data_cleaning_json_file)
-        self.__options_w.observe(self.__hide_init_text_w,
-                                 "new")
 
         # Setup and display full UI
         self.__full_widgets_ui = widgets.interactive(
             self.__data_cleaning_widget_save_option,
             Features=self.__features_w,
             Options=self.__options_w,
-            Text_Input=self.__text_w,
+            Text_Input=self.__input_w,
             Z_Score_Input=self.__zscore_w,
         )
         display(self.__file_name_w)
@@ -384,6 +359,37 @@ class DataCleaner:
 
         return mis_val_table_ren_columns
 
+    def __init_update_updateable_widgets(self):
+        init = self.__features_w.value
+        self.__options_w = None
+        self.__options_w = self.__feature_cleaning_options_w[init]
+
+        # Init widgets/interactables
+        self.__input_w = widgets.Text(
+            value='',
+            placeholder='Replace Value',
+            description='Input:',
+            disabled=False,
+            visible=False,
+            layout=Layout(left='48%',
+                          bottom='250px')
+        )
+
+        # ---
+        self.__zscore_w = widgets.Text(
+            value='',
+            placeholder='Z-Score Value',
+            description='Z Score:',
+            disabled=False,
+            visible=False,
+            layout=Layout(left='48%',
+                          bottom="330px", )
+        )
+
+        self.__zscore_w.observe(self.__validate_save_zscore)
+        self.__input_w.observe(self.__validate_save_input_w)
+
+
     ### Widget controllers ###
     def __validate_file_name(self,
                              _):
@@ -417,8 +423,8 @@ class DataCleaner:
             # ---
             self.__file_name_w.value = tmp_file_name
 
-    def __validate_save_text_w(self,
-                               _):
+    def __validate_save_input_w(self,
+                                _):
         """
         Returns/Descr:
             Ensures the input field is within specified parameters defined
@@ -427,21 +433,21 @@ class DataCleaner:
 
         if self.__options_w.value in self.__require_input:
             self.__feature_input_holder[self.__features_w.value] = \
-                self.__text_w.value
+                self.__input_w.value
 
             feature_type = self.__get_dtype_key(
                     self.__tmp_df_features,
                     self.__features_w.value)
-            if feature_type == "Number" and len(self.__text_w.value):
+            if feature_type == "Number" and len(self.__input_w.value):
 
-                self.__text_w.value = ''.join(
-                    [i for i in self.__text_w.value if i.isdigit() or i == '.'])
+                self.__input_w.value = ''.join(
+                    [i for i in self.__input_w.value if i.isdigit() or i == '.'])
 
                 if self.__require_input[self.__options_w.value] is not None \
-                        and not string_condtional(float(self.__text_w.value),
+                        and not string_condtional(float(self.__input_w.value),
                                                   self.__require_input[
                                                       self.__options_w.value]):
-                    self.__text_w.value = self.__text_w.value[:-1]
+                    self.__input_w.value = self.__input_w.value[:-1]
 
         else:
             if self.__features_w.value in self.__feature_input_holder:
@@ -471,18 +477,32 @@ class DataCleaner:
         else:
             self.__zscore_feature_holder[self.__features_w.value] = None
 
-    def __hide_init_text_w(self,
+    def __hide_init_input_w(self,
                            _):
 
         if self.__options_w.value in self.__require_input:
-            self.__text_w.value = ""
-            self.__text_w.layout.visibility = 'visible'
+            self.__input_w.value = ""
+            self.__input_w.layout.visibility = 'visible'
         else:
-            self.__text_w.layout.visibility = 'hidden'
+            self.__input_w.layout.visibility = 'hidden'
 
         if self.__features_w.value in self.__feature_input_holder:
-            self.__text_w.value = self.__feature_input_holder[
+            self.__input_w.value = self.__feature_input_holder[
                 self.__features_w.value ]
+
+
+    def __hide_init_zscore_w(self,
+                             _):
+        if self.__get_dtype_key(self.__tmp_df_features,
+                                self.__features_w.value) == "Number":
+            self.__zscore_w.layout.visibility = "visible"
+        else:
+            self.__zscore_w.layout.visibility = "hidden"
+
+        if self.__features_w.value in self.__zscore_feature_holder and \
+                self.__zscore_feature_holder[self.__features_w.value]:
+            self.__zscore_w.value = str(
+                self.__zscore_feature_holder[self.__features_w.value])
 
     def __data_cleaning_widget_save_option(self,
                                            **func_kwargs):
@@ -503,7 +523,7 @@ class DataCleaner:
                 option)
                   + "           " + "----" * 7)
 
-        self.__hide_init_text_w(None)
+        self.__hide_init_input_w(None)
 
     def __create_data_cleaning_json_file(self,
                                          _):
@@ -557,50 +577,12 @@ class DataCleaner:
             re-initialized.
         """
 
-        self.__text_w = widgets.Text(
-            value='',
-            placeholder='Replace Value',
-            description='Input:',
-            disabled=False,
-            visible=False,
-            layout=Layout(left='510px',
-                          bottom='250px')
-        )
-        self.__zscore_w = widgets.Text(
-            value='',
-            placeholder='Z-Score Value',
-            description='Z Score:',
-            disabled=False,
-            visible=False,
-            layout=Layout(left='510px',
-                          bottom="330px", )
-        )
-        self.__text_w.observe(self.__validate_save_text_w)
-        self.__zscore_w.observe(self.__validate_save_zscore)
-
-        if self.__get_dtype_key(self.__tmp_df_features,
-                                feature["new"]) == "Number":
-            self.__zscore_w.layout.visibility = "visible"
-        else:
-            self.__zscore_w.layout.visibility = "hidden"
-
-        if feature["new"] in self.__zscore_feature_holder and \
-                self.__zscore_feature_holder[feature["new"]]:
-            self.__zscore_w.value = str(
-                self.__zscore_feature_holder[feature["new"]])
-
-        write_object_to_file("testing.txt",
-                             [feature["new"],
-                              self.__selected_options])
-
-        self.__options_w = self.__feature_cleaning_options_w[feature["new"]]
-        self.__options_w.observe(self.__hide_init_text_w,
-                                 "new")
+        self.__init_update_updateable_widgets()
 
         new_i = widgets.interactive(self.__data_cleaning_widget_save_option,
                                     Features=self.__features_w,
                                     Options=self.__options_w,
-                                    Text_Input=self.__text_w,
+                                    Text_Input=self.__input_w,
                                     Z_Score_Input=self.__zscore_w)
 
         self.__full_widgets_ui.children = new_i.children
