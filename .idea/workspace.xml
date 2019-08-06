@@ -2,9 +2,16 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ed041e50-c9da-4464-8bcf-e2b46601487b" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/eFlow/Widgets/DataCleaningWidget.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/eFlow/Widgets/__init__.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Testing/.ipynb_checkpoints/Pre Production-checkpoint.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/Testing/.ipynb_checkpoints/Pre Production-checkpoint.ipynb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Testing/Pre Production.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/Testing/Pre Production.ipynb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Testing/eFlow Created Data/JSON File Dump/Data Cleaning/.ipynb_checkpoints/3BB4C06D5D184C2A-checkpoint.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Testing/eFlow Created Data/JSON File Dump/Data Cleaning/3BB4C06D5D184C2A.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Testing/eFlow Created Data/JSON File Dump/Data Cleaning/Default Data Cleaning.json" beforeDir="false" afterPath="$PROJECT_DIR$/Testing/eFlow Created Data/JSON File Dump/Data Cleaning/Default Data Cleaning.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/eFlow/DataCleaner.py" beforeDir="false" afterPath="$PROJECT_DIR$/eFlow/DataCleaner.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/eFlow/Utils/Sys_Utils.py" beforeDir="false" afterPath="$PROJECT_DIR$/eFlow/Utils/Sys_Utils.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -29,11 +36,40 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/eFlow/DataCleaner.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="214">
-              <caret line="362" column="38" selection-start-line="362" selection-start-column="38" selection-end-line="362" selection-end-column="38" />
+            <state relative-caret-position="-520">
+              <caret line="329" column="37" selection-start-line="329" selection-start-column="31" selection-end-line="329" selection-end-column="37" />
+              <folding>
+                <element signature="e#0#19#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/eFlow/Widgets/DataCleaningWidget.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="638">
+              <caret line="165" column="40" selection-start-line="165" selection-start-column="40" selection-end-line="165" selection-end-column="40" />
+              <folding>
+                <element signature="e#0#19#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Testing/test1.text">
+          <provider selected="true" editor-type-id="text-editor" />
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/eFlow/Utils/Sys_Utils.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="783">
+              <caret line="187" column="24" selection-start-line="187" selection-start-column="4" selection-end-line="187" selection-end-column="24" />
               <folding>
                 <element signature="e#0#19#0" expanded="true" />
               </folding>
@@ -52,39 +88,41 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>__validate_save_text_w</find>
-      <find>visible</find>
       <find>__data_cleaning_widget_select_feature</find>
-      <find>hidden</find>
-      <find>self.__hide_init_text_w()</find>
-      <find>fill nan by distribution</find>
-      <find>__fill_nan_by_distribution</find>
-      <find>Fill nan by distribution</find>
-      <find>self.__require_</find>
-      <find>func_kw</find>
-      <find>__require_input</find>
-      <find>self.__selected_options</find>
+      <find>__create_data_cleaning_json_file</find>
       <find>__data_cleaning_widget_save_option</find>
-      <find>self.__options_w =</find>
-      <find>self.__options_w</find>
-      <find>__selected_options</find>
-      <find>__feature_cleaning_options_w</find>
-      <find>__options_w</find>
-      <find>tions_w.obse</find>
-      <find>self.__options_w.observe</find>
-      <find>__init_update_updateable_widgets</find>
-      <find>copy.deepcopy</find>
-      <find>__zscore_w = wid</find>
-      <find>self.__text_w</find>
-      <find>general_input_w</find>
-      <find>general_input</find>
-      <find>__hide_init</find>
-      <find>hide_init</find>
+      <find>__submit_button</find>
+      <find>__PROJECT</find>
+      <find>test</find>
+      <find>run_widget</find>
+      <find>__data_cleaning_widget</find>
+      <find>_save_option</find>
+      <find>__last_saved_json_file_path</find>
+      <find>validate_</find>
+      <find>self.__input_w.value</find>
+      <find>__save_option</find>
       <find>__hide_init_input_w</find>
-      <find>__hide_init_text_w</find>
+      <find>= &quot;&quot;</find>
+      <find>_w.value = &quot;&quot;</find>
+      <find>input_w.value = &quot;&quot;</find>
+      <find>input_w.value</find>
+      <find>self.__input_w.value</find>
+      <find>write_object_to_file</find>
+      <find>input_w</find>
+      <find>__validate_save_input_w</find>
+      <find>ui_widget</find>
+      <find>zscore_w</find>
+      <find>__zscore_w</find>
+      <find>init_</find>
+      <find>__hide_init_zscore_w</find>
+      <find>self.__input_w</find>
+      <find>__validate_save_zscore</find>
+      <find>__init_update_updateable_widgets</find>
     </findStrings>
     <replaceStrings>
       <replace>self.__general_input</replace>
+      <replace>self.__input_w</replace>
+      <replace>_input_w</replace>
     </replaceStrings>
   </component>
   <component name="Git.Settings">
@@ -118,8 +156,10 @@
         <option value="$PROJECT_DIR$/eFlow/DataAnalysis.py" />
         <option value="$PROJECT_DIR$/eFlow/ClusterMaster.py" />
         <option value="$PROJECT_DIR$/eFlow/Utils/Constants.py" />
+        <option value="$PROJECT_DIR$/eFlow/DataCleaningWidget.py" />
         <option value="$PROJECT_DIR$/eFlow/Utils/Sys_Utils.py" />
         <option value="$PROJECT_DIR$/eFlow/DataCleaner.py" />
+        <option value="$PROJECT_DIR$/eFlow/Widgets/DataCleaningWidget.py" />
       </list>
     </option>
   </component>
@@ -143,6 +183,23 @@
               <item name="eFlowMaster" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
               <item name="" type="442cc68d:ScopeViewTreeModel$RootNode" />
               <item name="eFlow" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+            </path>
+            <path>
+              <item name="eFlowMaster" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
+              <item name="" type="442cc68d:ScopeViewTreeModel$RootNode" />
+              <item name="eFlow" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="Utils" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+            </path>
+            <path>
+              <item name="eFlowMaster" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
+              <item name="" type="442cc68d:ScopeViewTreeModel$RootNode" />
+              <item name="eFlow" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="Widgets" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+            </path>
+            <path>
+              <item name="eFlowMaster" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
+              <item name="" type="442cc68d:ScopeViewTreeModel$RootNode" />
+              <item name="Figures" type="9f88c78c:ScopeViewTreeModel$FileNode" />
             </path>
             <path>
               <item name="eFlowMaster" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
@@ -186,6 +243,7 @@
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/eFlow/Widgets" />
       <recent name="$PROJECT_DIR$/eFlow/Utils" />
       <recent name="$PROJECT_DIR$" />
       <recent name="$PROJECT_DIR$/Libraries" />
@@ -279,7 +337,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="385144000" />
+    <option name="totallyTimeSpent" value="395294000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1680" height="1050" extended-state="0" />
@@ -314,8 +372,6 @@
     <option name="version" value="1" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/Figures/Default/Analysis/Rank_Graph_Average_Feature_Correlation.png" />
-    <entry file="file://$PROJECT_DIR$/83490254.html" />
     <entry file="file://$PROJECT_DIR$/mytable.png" />
     <entry file="file://$PROJECT_DIR$/sgd_method.png" />
     <entry file="file://$PROJECT_DIR$/Figures/pca_variance_ratio.png" />
@@ -428,7 +484,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/eFlow/Utils/Sys_Utils.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="798">
+        <state relative-caret-position="783">
           <caret line="187" column="24" selection-start-line="187" selection-start-column="4" selection-end-line="187" selection-end-column="24" />
           <folding>
             <element signature="e#0#19#0" expanded="true" />
@@ -436,10 +492,23 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/Testing/test1.text">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
     <entry file="file://$PROJECT_DIR$/eFlow/DataCleaner.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="214">
-          <caret line="362" column="38" selection-start-line="362" selection-start-column="38" selection-end-line="362" selection-end-column="38" />
+        <state relative-caret-position="-520">
+          <caret line="329" column="37" selection-start-line="329" selection-start-column="31" selection-end-line="329" selection-end-column="37" />
+          <folding>
+            <element signature="e#0#19#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/eFlow/Widgets/DataCleaningWidget.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="638">
+          <caret line="165" column="40" selection-start-line="165" selection-start-column="40" selection-end-line="165" selection-end-column="40" />
           <folding>
             <element signature="e#0#19#0" expanded="true" />
           </folding>

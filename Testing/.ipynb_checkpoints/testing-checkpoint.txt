@@ -1,0 +1,1 @@
+obj = ['Embarked', {'Age': 'Fill nan with x% value of distribution after removing outliers', 'Cabin': 'Ignore feature', 'Embarked': 'Ignore feature'}]

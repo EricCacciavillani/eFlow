@@ -1,10 +1,8 @@
 {
   "Age": {
     "Type": "Number",
-    "Option": "Fill nan with x% value of distribution",
-    "Extra": {
-      "Percentage of distribution": "55"
-    }
+    "Option": "Fill null with specfic value",
+    "Extra": {}
   },
   "Cabin": {
     "Type": "Category",
@@ -13,7 +11,7 @@
   },
   "Embarked": {
     "Type": "Category",
-    "Option": "Ignore feature",
+    "Option": "Fill nan with x% value of distribution",
     "Extra": "/Users/ericcacciavillani/Desktop/Coding/Python_Files/Artificial_Intelligence/Data Mining/eFlowMaster/Testing/eFlow Created Data"
   }
 }

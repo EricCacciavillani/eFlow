@@ -185,7 +185,8 @@ def string_condtional(given_val,
         return final_return
 
 
-def write_object_to_file(filename,obj):
+def write_object_to_file(obj,
+                         filename,):
     f = open(filename, 'w')
     f.write('obj = ' + repr(obj) + '\n')
     f.close()

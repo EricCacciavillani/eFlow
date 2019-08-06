@@ -1,7 +1,7 @@
 {
   "Age": {
     "Type": "Number",
-    "Option": "Fill nan with average value of distribution",
+    "Option": "Peform interpolation",
     "Extra": {}
   },
   "Cabin": {
