@@ -2,16 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ed041e50-c9da-4464-8bcf-e2b46601487b" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/eFlow/Widgets/DataCleaningWidget.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/eFlow/Widgets/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Testing/.ipynb_checkpoints/Pre Production-checkpoint.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/Testing/.ipynb_checkpoints/Pre Production-checkpoint.ipynb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Testing/Pre Production.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/Testing/Pre Production.ipynb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Testing/eFlow Created Data/JSON File Dump/Data Cleaning/.ipynb_checkpoints/3BB4C06D5D184C2A-checkpoint.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Testing/eFlow Created Data/JSON File Dump/Data Cleaning/3BB4C06D5D184C2A.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Testing/eFlow Created Data/JSON File Dump/Data Cleaning/Default Data Cleaning.json" beforeDir="false" afterPath="$PROJECT_DIR$/Testing/eFlow Created Data/JSON File Dump/Data Cleaning/Default Data Cleaning.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/eFlow/DataCleaner.py" beforeDir="false" afterPath="$PROJECT_DIR$/eFlow/DataCleaner.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/eFlow/Utils/Sys_Utils.py" beforeDir="false" afterPath="$PROJECT_DIR$/eFlow/Utils/Sys_Utils.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/eFlow/Widgets/DataCleaningWidget.py" beforeDir="false" afterPath="$PROJECT_DIR$/eFlow/Widgets/DataCleaningWidget.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -51,8 +42,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/eFlow/Widgets/DataCleaningWidget.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="638">
-              <caret line="165" column="40" selection-start-line="165" selection-start-column="40" selection-end-line="165" selection-end-column="40" />
+            <state relative-caret-position="5595">
+              <caret line="373" column="56" selection-start-line="373" selection-start-column="56" selection-end-line="373" selection-end-column="56" />
               <folding>
                 <element signature="e#0#19#0" expanded="true" />
               </folding>
@@ -107,7 +98,6 @@
       <find>input_w.value = &quot;&quot;</find>
       <find>input_w.value</find>
       <find>self.__input_w.value</find>
-      <find>write_object_to_file</find>
       <find>input_w</find>
       <find>__validate_save_input_w</find>
       <find>ui_widget</find>
@@ -118,6 +108,7 @@
       <find>self.__input_w</find>
       <find>__validate_save_zscore</find>
       <find>__init_update_updateable_widgets</find>
+      <find>write_object_to_file</find>
     </findStrings>
     <replaceStrings>
       <replace>self.__general_input</replace>
@@ -337,7 +328,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="395294000" />
+    <option name="totallyTimeSpent" value="395682000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1680" height="1050" extended-state="0" />
@@ -507,8 +498,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/eFlow/Widgets/DataCleaningWidget.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="638">
-          <caret line="165" column="40" selection-start-line="165" selection-start-column="40" selection-end-line="165" selection-end-column="40" />
+        <state relative-caret-position="5595">
+          <caret line="373" column="56" selection-start-line="373" selection-start-column="56" selection-end-line="373" selection-end-column="56" />
           <folding>
             <element signature="e#0#19#0" expanded="true" />
           </folding>

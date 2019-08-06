@@ -269,8 +269,6 @@ class DataCleaningWidget:
             feature_type = self.__get_dtype_key(
                     self.__tmp_df_features,
                     self.__features_w.value)
-            write_object_to_file(feature_type,
-                                 "fuck_you1.text")
             if feature_type == "Number" and len(self.__input_w.value) > 0:
                 self.__input_w.value = ''.join(
                     [i for i in self.__input_w.value if i.isdigit() or i == '.'])
@@ -280,11 +278,6 @@ class DataCleaningWidget:
                                                   self.__require_input[
                                                       self.__options_w.value]):
                     self.__input_w.value = self.__input_w.value[:-1]
-
-            else:
-                write_object_to_file(feature_type,
-                                     "fuck_you.text")
-
         else:
             pass
             if self.__features_w.value in self.__feature_input_holder:
@@ -379,10 +372,6 @@ class DataCleaningWidget:
                                     Z_Score_Input=self.__zscore_w)
 
         self.__full_widgets_ui.children = new_i.children
-
-
-        write_object_to_file(self.__full_widgets_ui.children,
-                             "fucjfndjjndsns.txt")
 
 
     ### General functionality ###
