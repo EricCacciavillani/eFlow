@@ -2,208 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ed041e50-c9da-4464-8bcf-e2b46601487b" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/eFlow/PipelineSegment.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/Custom Sklearn Objects.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/Custom Sklearn Objects.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.ipynb_checkpoints/Pre Production-checkpoint.ipynb" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Figures/Default/Clustering_PCA=0.8/Hierarchical_Clustering/Hierarchical_Clustering_Method_complete.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Figures/Default/Clustering_PCA=0.8/Hierarchical_Clustering/Hierarchical_Clustering_Method_ward.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Figures/Default/Clustering_PCA=0.8/Hierarchical_Clustering/Hierarchical_Clustering_Method_weighted.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Figures/Default/Clustering_PCA=0.8/Kmeans/Kmeans_Cluster_12/All_Clusters.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Figures/Default/Clustering_PCA=0.8/Kmeans/Kmeans_Cluster_12/Cluster:0_Eval_Df.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Figures/Default/Clustering_PCA=0.8/Kmeans/Kmeans_Cluster_12/Cluster:0_Means_Rounded_To_Nearest_Real_Numbers.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Figures/Default/Clustering_PCA=0.8/Kmeans/Kmeans_Cluster_12/Cluster:10_Eval_Df.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Figures/Default/Clustering_PCA=0.8/Kmeans/Kmeans_Cluster_12/Cluster:10_Means_Rounded_To_Nearest_Real_Numbers.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Figures/Default/Clustering_PCA=0.8/Kmeans/Kmeans_Cluster_12/Cluster:11_Eval_Df.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Figures/Default/Clustering_PCA=0.8/Kmeans/Kmeans_Cluster_12/Cluster:11_Means_Rounded_To_Nearest_Real_Numbers.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Figures/Default/Clustering_PCA=0.8/Kmeans/Kmeans_Cluster_12/Cluster:1_Eval_Df.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Figures/Default/Clustering_PCA=0.8/Kmeans/Kmeans_Cluster_12/Cluster:1_Means_Rounded_To_Nearest_Real_Numbers.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Figures/Default/Clustering_PCA=0.8/Kmeans/Kmeans_Cluster_12/Cluster:2_Eval_Df.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Figures/Default/Clustering_PCA=0.8/Kmeans/Kmeans_Cluster_12/Cluster:2_Means_Rounded_To_Nearest_Real_Numbers.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Figures/Default/Clustering_PCA=0.8/Kmeans/Kmeans_Cluster_12/Cluster:3_Eval_Df.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Figures/Default/Clustering_PCA=0.8/Kmeans/Kmeans_Cluster_12/Cluster:3_Means_Rounded_To_Nearest_Real_Numbers.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Figures/Default/Clustering_PCA=0.8/Kmeans/Kmeans_Cluster_12/Cluster:4_Eval_Df.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Figures/Default/Clustering_PCA=0.8/Kmeans/Kmeans_Cluster_12/Cluster:4_Means_Rounded_To_Nearest_Real_Numbers.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Figures/Default/Clustering_PCA=0.8/Kmeans/Kmeans_Cluster_12/Cluster:5_Eval_Df.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Figures/Default/Clustering_PCA=0.8/Kmeans/Kmeans_Cluster_12/Cluster:5_Means_Rounded_To_Nearest_Real_Numbers.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Figures/Default/Clustering_PCA=0.8/Kmeans/Kmeans_Cluster_12/Cluster:6_Eval_Df.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Figures/Default/Clustering_PCA=0.8/Kmeans/Kmeans_Cluster_12/Cluster:6_Means_Rounded_To_Nearest_Real_Numbers.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Figures/Default/Clustering_PCA=0.8/Kmeans/Kmeans_Cluster_12/Cluster:7_Eval_Df.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Figures/Default/Clustering_PCA=0.8/Kmeans/Kmeans_Cluster_12/Cluster:7_Means_Rounded_To_Nearest_Real_Numbers.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Figures/Default/Clustering_PCA=0.8/Kmeans/Kmeans_Cluster_12/Cluster:8_Eval_Df.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Figures/Default/Clustering_PCA=0.8/Kmeans/Kmeans_Cluster_12/Cluster:8_Means_Rounded_To_Nearest_Real_Numbers.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Figures/Default/Clustering_PCA=0.8/Kmeans/Kmeans_Cluster_12/Cluster:9_Eval_Df.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Figures/Default/Clustering_PCA=0.8/Kmeans/Kmeans_Cluster_12/Cluster:9_Means_Rounded_To_Nearest_Real_Numbers.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Figures/Default/Clustering_PCA=0.8/Kmeans/Kmeans_Cluster_12/Kmeans_Cluster_12_Cluster_Count.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Figures/Default/Clustering_PCA=0.8/Kmeans/Kmeans_Cluster_12/Kmeans_Cluster_12_Visualized_Cluster.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Figures/Default/Clustering_PCA=0.8/Kmeans/Kmeans_Cluster_2/All_Clusters.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Figures/Default/Clustering_PCA=0.8/Kmeans/Kmeans_Cluster_2/Cluster:0_Eval_Df.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Figures/Default/Clustering_PCA=0.8/Kmeans/Kmeans_Cluster_2/Cluster:0_Means_Rounded_To_Nearest_Real_Numbers.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Figures/Default/Clustering_PCA=0.8/Kmeans/Kmeans_Cluster_2/Cluster:1_Eval_Df.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Figures/Default/Clustering_PCA=0.8/Kmeans/Kmeans_Cluster_2/Cluster:1_Means_Rounded_To_Nearest_Real_Numbers.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Figures/Default/Clustering_PCA=0.8/Kmeans/Kmeans_Cluster_2/Kmeans_Cluster_2_Cluster_Count.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Figures/Default/Clustering_PCA=0.8/Kmeans/Kmeans_Cluster_2/Kmeans_Cluster_2_Visualized_Cluster.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Figures/Default/Clustering_PCA=0.8/Kmeans/Kmeans_Cluster_3/All_Clusters.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Figures/Default/Clustering_PCA=0.8/Kmeans/Kmeans_Cluster_3/Cluster:0_Eval_Df.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Figures/Default/Clustering_PCA=0.8/Kmeans/Kmeans_Cluster_3/Cluster:0_Means_Rounded_To_Nearest_Real_Numbers.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Figures/Default/Clustering_PCA=0.8/Kmeans/Kmeans_Cluster_3/Cluster:1_Eval_Df.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Figures/Default/Clustering_PCA=0.8/Kmeans/Kmeans_Cluster_3/Cluster:1_Means_Rounded_To_Nearest_Real_Numbers.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Figures/Default/Clustering_PCA=0.8/Kmeans/Kmeans_Cluster_3/Cluster:2_Eval_Df.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Figures/Default/Clustering_PCA=0.8/Kmeans/Kmeans_Cluster_3/Cluster:2_Means_Rounded_To_Nearest_Real_Numbers.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Figures/Default/Clustering_PCA=0.8/Kmeans/Kmeans_Cluster_3/Kmeans_Cluster_3_Cluster_Count.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Figures/Default/Clustering_PCA=0.8/Kmeans/Kmeans_Cluster_3/Kmeans_Cluster_3_Visualized_Cluster.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Figures/Default/Clustering_PCA=0.8/Kmeans/Kmeans_Cluster_4/All_Clusters.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Figures/Default/Clustering_PCA=0.8/Kmeans/Kmeans_Cluster_4/Cluster:0_Eval_Df.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Figures/Default/Clustering_PCA=0.8/Kmeans/Kmeans_Cluster_4/Cluster:0_Means_Rounded_To_Nearest_Real_Numbers.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Figures/Default/Clustering_PCA=0.8/Kmeans/Kmeans_Cluster_4/Cluster:1_Eval_Df.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Figures/Default/Clustering_PCA=0.8/Kmeans/Kmeans_Cluster_4/Cluster:1_Means_Rounded_To_Nearest_Real_Numbers.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Figures/Default/Clustering_PCA=0.8/Kmeans/Kmeans_Cluster_4/Cluster:2_Eval_Df.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Figures/Default/Clustering_PCA=0.8/Kmeans/Kmeans_Cluster_4/Cluster:2_Means_Rounded_To_Nearest_Real_Numbers.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Figures/Default/Clustering_PCA=0.8/Kmeans/Kmeans_Cluster_4/Cluster:3_Eval_Df.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Figures/Default/Clustering_PCA=0.8/Kmeans/Kmeans_Cluster_4/Cluster:3_Means_Rounded_To_Nearest_Real_Numbers.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Figures/Default/Clustering_PCA=0.8/Kmeans/Kmeans_Cluster_4/Kmeans_Cluster_4_Cluster_Count.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Figures/Default/Clustering_PCA=0.8/Kmeans/Kmeans_Cluster_4/Kmeans_Cluster_4_Visualized_Cluster.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Figures/Default/Clustering_PCA=0.8/Kmeans/Kmeans_Cluster_8/All_Clusters.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Figures/Default/Clustering_PCA=0.8/Kmeans/Kmeans_Cluster_8/Cluster:0_Eval_Df.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Figures/Default/Clustering_PCA=0.8/Kmeans/Kmeans_Cluster_8/Cluster:0_Means_Rounded_To_Nearest_Real_Numbers.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Figures/Default/Clustering_PCA=0.8/Kmeans/Kmeans_Cluster_8/Cluster:1_Eval_Df.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Figures/Default/Clustering_PCA=0.8/Kmeans/Kmeans_Cluster_8/Cluster:1_Means_Rounded_To_Nearest_Real_Numbers.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Figures/Default/Clustering_PCA=0.8/Kmeans/Kmeans_Cluster_8/Cluster:2_Eval_Df.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Figures/Default/Clustering_PCA=0.8/Kmeans/Kmeans_Cluster_8/Cluster:2_Means_Rounded_To_Nearest_Real_Numbers.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Figures/Default/Clustering_PCA=0.8/Kmeans/Kmeans_Cluster_8/Cluster:3_Eval_Df.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Figures/Default/Clustering_PCA=0.8/Kmeans/Kmeans_Cluster_8/Cluster:3_Means_Rounded_To_Nearest_Real_Numbers.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Figures/Default/Clustering_PCA=0.8/Kmeans/Kmeans_Cluster_8/Cluster:4_Eval_Df.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Figures/Default/Clustering_PCA=0.8/Kmeans/Kmeans_Cluster_8/Cluster:4_Means_Rounded_To_Nearest_Real_Numbers.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Figures/Default/Clustering_PCA=0.8/Kmeans/Kmeans_Cluster_8/Cluster:5_Eval_Df.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Figures/Default/Clustering_PCA=0.8/Kmeans/Kmeans_Cluster_8/Cluster:5_Means_Rounded_To_Nearest_Real_Numbers.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Figures/Default/Clustering_PCA=0.8/Kmeans/Kmeans_Cluster_8/Cluster:6_Eval_Df.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Figures/Default/Clustering_PCA=0.8/Kmeans/Kmeans_Cluster_8/Cluster:6_Means_Rounded_To_Nearest_Real_Numbers.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Figures/Default/Clustering_PCA=0.8/Kmeans/Kmeans_Cluster_8/Cluster:7_Eval_Df.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Figures/Default/Clustering_PCA=0.8/Kmeans/Kmeans_Cluster_8/Cluster:7_Means_Rounded_To_Nearest_Real_Numbers.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Figures/Default/Clustering_PCA=0.8/Kmeans/Kmeans_Cluster_8/Kmeans_Cluster_8_Cluster_Count.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Figures/Default/Clustering_PCA=0.8/Kmeans/Kmeans_Cluster_8/Kmeans_Cluster_8_Visualized_Cluster.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Figures/Default/Clustering_PCA=0.8/Kmeans/Kmeans_Visualized_Cluster.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Figures/Default/Clustering_PCA=0.8/PCA/PCA_Cumulative_Sum_of_Variances.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Figures/Default/Clustering_PCA=0.8/PCA/PCA_Feature_Variance_Ratio.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Figures/Default/SampleRemoval_PCA_Features=2/Data_Point_Removal_Weight=1/Sample_removal_Visualized_Cluster_n=50.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Figures/Default/SampleRemoval_PCA_Features=2/Data_Point_Removal_Zscore=1.7_Weight=0.2/Noise Reduction.gif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Figures/Default/SampleRemoval_PCA_Features=2/Data_Point_Removal_Zscore=1.7_Weight=0.2/Noise and Similar Reduction.gif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Figures/Default/SampleRemoval_PCA_Features=2/Data_Point_Removal_Zscore=1.7_Weight=0.2/Sample_removal_Visualized_Cluster_n=22.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Figures/Default/SampleRemoval_PCA_Features=2/Data_Point_Removal_Zscore=1.7_Weight=0.2/Sample_removal_Visualized_Cluster_n=22_White_Outed.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Figures/Default/SampleRemoval_PCA_Features=2/Data_Point_Removal_Zscore=1.7_Weight=0.2/Sample_removal_Visualized_Cluster_n=23.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Figures/Default/SampleRemoval_PCA_Features=2/Data_Point_Removal_Zscore=1.7_Weight=0.2/Sample_removal_Visualized_Cluster_n=24.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Figures/Default/SampleRemoval_PCA_Features=2/Data_Point_Removal_Zscore=1.7_Weight=0.2/Sample_removal_Visualized_Cluster_n=25.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Figures/Default/SampleRemoval_PCA_Features=2/Data_Point_Removal_Zscore=1.7_Weight=0.2/Sample_removal_Visualized_Cluster_n=26.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Figures/Default/SampleRemoval_PCA_Features=2/Data_Point_Removal_Zscore=1.7_Weight=0.2/Sample_removal_Visualized_Cluster_n=27.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Figures/Default/SampleRemoval_PCA_Features=2/Data_Point_Removal_Zscore=1.7_Weight=0.2/Sample_removal_Visualized_Cluster_n=28.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Figures/Default/SampleRemoval_PCA_Features=2/Data_Point_Removal_Zscore=1.7_Weight=0.2/Sample_removal_Visualized_Cluster_n=29.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Figures/Default/SampleRemoval_PCA_Features=2/Data_Point_Removal_Zscore=1.7_Weight=0.2/Sample_removal_Visualized_Cluster_n=30.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Figures/Default/SampleRemoval_PCA_Features=2/Data_Point_Removal_Zscore=1.7_Weight=0.2/Sample_removal_Visualized_Cluster_n=31.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Figures/Default/SampleRemoval_PCA_Features=2/Data_Point_Removal_Zscore=1.7_Weight=0.2/Sample_removal_Visualized_Cluster_n=32.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Figures/Default/SampleRemoval_PCA_Features=2/Data_Point_Removal_Zscore=1.7_Weight=0.2/Sample_removal_Visualized_Cluster_n=33.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Figures/Default/SampleRemoval_PCA_Features=2/Data_Point_Removal_Zscore=1.7_Weight=0.2/Sample_removal_Visualized_Cluster_n=34.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Figures/Default/SampleRemoval_PCA_Features=2/Data_Point_Removal_Zscore=1.7_Weight=0.2/Sample_removal_Visualized_Cluster_n=35.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Figures/Default/SampleRemoval_PCA_Features=2/Data_Point_Removal_Zscore=1.7_Weight=0.2/Sample_removal_Visualized_Cluster_n=36.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Figures/Default/SampleRemoval_PCA_Features=2/Data_Point_Removal_Zscore=1.7_Weight=0.2/Sample_removal_Visualized_Cluster_n=37.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Figures/Default/SampleRemoval_PCA_Features=2/Data_Point_Removal_Zscore=1.7_Weight=0.2/Sample_removal_Visualized_Cluster_n=38.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Figures/Default/SampleRemoval_PCA_Features=2/Data_Point_Removal_Zscore=1.7_Weight=0.2/Sample_removal_Visualized_Cluster_n=39.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Figures/Default/SampleRemoval_PCA_Features=2/Data_Point_Removal_Zscore=1.7_Weight=0.2/Sample_removal_Visualized_Cluster_n=40.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Figures/Default/SampleRemoval_PCA_Features=2/Data_Point_Removal_Zscore=1.7_Weight=0.2/Sample_removal_Visualized_Cluster_n=41.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Figures/Default/SampleRemoval_PCA_Features=2/Data_Point_Removal_Zscore=1.7_Weight=0.2/Sample_removal_Visualized_Cluster_n=42.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Figures/Default/SampleRemoval_PCA_Features=2/Data_Point_Removal_Zscore=1.7_Weight=0.2/Sample_removal_Visualized_Cluster_n=43.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Figures/Default/SampleRemoval_PCA_Features=2/Data_Point_Removal_Zscore=1.7_Weight=0.2/Sample_removal_Visualized_Cluster_n=44.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Figures/Default/SampleRemoval_PCA_Features=2/Data_Point_Removal_Zscore=1.7_Weight=0.2/Sample_removal_Visualized_Cluster_n=45.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Figures/Default/SampleRemoval_PCA_Features=2/Data_Point_Removal_Zscore=1.7_Weight=0.2/Sample_removal_Visualized_Cluster_n=46.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Figures/Default/SampleRemoval_PCA_Features=2/Data_Point_Removal_Zscore=1.7_Weight=0.2/Sample_removal_Visualized_Cluster_n=47.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Figures/Default/SampleRemoval_PCA_Features=2/Data_Point_Removal_Zscore=1.7_Weight=0.2/Sample_removal_Visualized_Cluster_n=48.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Figures/Default/SampleRemoval_PCA_Features=2/Data_Point_Removal_Zscore=1.7_Weight=0.2/Sample_removal_Visualized_Cluster_n=49.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Figures/Default/SampleRemoval_PCA_Features=2/Data_Point_Removal_Zscore=1.7_Weight=0.2/Sample_removal_Visualized_Cluster_n=50.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Figures/Default/SampleRemoval_PCA_Features=2/Data_Point_Removal_Zscore=1.7_Weight=0.2/Similar Reduction.gif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Figures/Default/SampleRemoval_PCA_Features=2/Data_Point_Removal_Zscore=1.7_Weight=1/.ipynb_checkpoints/Sample_removal_Visualized_Cluster_n=1-checkpoint.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Figures/Default/SampleRemoval_PCA_Features=2/Data_Point_Removal_Zscore=1.7_Weight=1/.ipynb_checkpoints/Sample_removal_Visualized_Cluster_n=2-checkpoint.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Figures/Default/SampleRemoval_PCA_Features=2/Data_Point_Removal_Zscore=1.7_Weight=1/.ipynb_checkpoints/Sample_removal_Visualized_Cluster_n=38-checkpoint.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Figures/Default/SampleRemoval_PCA_Features=2/Data_Point_Removal_Zscore=1.7_Weight=1/.ipynb_checkpoints/Sample_removal_Visualized_Cluster_n=39-checkpoint.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Figures/Default/SampleRemoval_PCA_Features=2/Data_Point_Removal_Zscore=1.7_Weight=1/.ipynb_checkpoints/Sample_removal_Visualized_Cluster_n=4-checkpoint.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Figures/Default/SampleRemoval_PCA_Features=2/Data_Point_Removal_Zscore=1.7_Weight=1/.ipynb_checkpoints/Sample_removal_Visualized_Cluster_n=8-checkpoint.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Figures/Default/SampleRemoval_PCA_Features=2/Data_Point_Removal_Zscore=1.7_Weight=1/Noise Reduction.gif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Figures/Default/SampleRemoval_PCA_Features=2/Data_Point_Removal_Zscore=1.7_Weight=1/Noise and Similar Reduction.gif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Figures/Default/SampleRemoval_PCA_Features=2/Data_Point_Removal_Zscore=1.7_Weight=1/Sample_removal_Visualized_Cluster_n=1.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Figures/Default/SampleRemoval_PCA_Features=2/Data_Point_Removal_Zscore=1.7_Weight=1/Sample_removal_Visualized_Cluster_n=10.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Figures/Default/SampleRemoval_PCA_Features=2/Data_Point_Removal_Zscore=1.7_Weight=1/Sample_removal_Visualized_Cluster_n=11.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Figures/Default/SampleRemoval_PCA_Features=2/Data_Point_Removal_Zscore=1.7_Weight=1/Sample_removal_Visualized_Cluster_n=12.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Figures/Default/SampleRemoval_PCA_Features=2/Data_Point_Removal_Zscore=1.7_Weight=1/Sample_removal_Visualized_Cluster_n=13.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Figures/Default/SampleRemoval_PCA_Features=2/Data_Point_Removal_Zscore=1.7_Weight=1/Sample_removal_Visualized_Cluster_n=14.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Figures/Default/SampleRemoval_PCA_Features=2/Data_Point_Removal_Zscore=1.7_Weight=1/Sample_removal_Visualized_Cluster_n=15.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Figures/Default/SampleRemoval_PCA_Features=2/Data_Point_Removal_Zscore=1.7_Weight=1/Sample_removal_Visualized_Cluster_n=16.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Figures/Default/SampleRemoval_PCA_Features=2/Data_Point_Removal_Zscore=1.7_Weight=1/Sample_removal_Visualized_Cluster_n=17.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Figures/Default/SampleRemoval_PCA_Features=2/Data_Point_Removal_Zscore=1.7_Weight=1/Sample_removal_Visualized_Cluster_n=18.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Figures/Default/SampleRemoval_PCA_Features=2/Data_Point_Removal_Zscore=1.7_Weight=1/Sample_removal_Visualized_Cluster_n=19.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Figures/Default/SampleRemoval_PCA_Features=2/Data_Point_Removal_Zscore=1.7_Weight=1/Sample_removal_Visualized_Cluster_n=1_White_Outed.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Figures/Default/SampleRemoval_PCA_Features=2/Data_Point_Removal_Zscore=1.7_Weight=1/Sample_removal_Visualized_Cluster_n=2.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Figures/Default/SampleRemoval_PCA_Features=2/Data_Point_Removal_Zscore=1.7_Weight=1/Sample_removal_Visualized_Cluster_n=20.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Figures/Default/SampleRemoval_PCA_Features=2/Data_Point_Removal_Zscore=1.7_Weight=1/Sample_removal_Visualized_Cluster_n=21.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Figures/Default/SampleRemoval_PCA_Features=2/Data_Point_Removal_Zscore=1.7_Weight=1/Sample_removal_Visualized_Cluster_n=22.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Figures/Default/SampleRemoval_PCA_Features=2/Data_Point_Removal_Zscore=1.7_Weight=1/Sample_removal_Visualized_Cluster_n=23.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Figures/Default/SampleRemoval_PCA_Features=2/Data_Point_Removal_Zscore=1.7_Weight=1/Sample_removal_Visualized_Cluster_n=24.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Figures/Default/SampleRemoval_PCA_Features=2/Data_Point_Removal_Zscore=1.7_Weight=1/Sample_removal_Visualized_Cluster_n=25.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Figures/Default/SampleRemoval_PCA_Features=2/Data_Point_Removal_Zscore=1.7_Weight=1/Sample_removal_Visualized_Cluster_n=26.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Figures/Default/SampleRemoval_PCA_Features=2/Data_Point_Removal_Zscore=1.7_Weight=1/Sample_removal_Visualized_Cluster_n=27.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Figures/Default/SampleRemoval_PCA_Features=2/Data_Point_Removal_Zscore=1.7_Weight=1/Sample_removal_Visualized_Cluster_n=28.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Figures/Default/SampleRemoval_PCA_Features=2/Data_Point_Removal_Zscore=1.7_Weight=1/Sample_removal_Visualized_Cluster_n=29.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Figures/Default/SampleRemoval_PCA_Features=2/Data_Point_Removal_Zscore=1.7_Weight=1/Sample_removal_Visualized_Cluster_n=3.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Figures/Default/SampleRemoval_PCA_Features=2/Data_Point_Removal_Zscore=1.7_Weight=1/Sample_removal_Visualized_Cluster_n=30.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Figures/Default/SampleRemoval_PCA_Features=2/Data_Point_Removal_Zscore=1.7_Weight=1/Sample_removal_Visualized_Cluster_n=31.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Figures/Default/SampleRemoval_PCA_Features=2/Data_Point_Removal_Zscore=1.7_Weight=1/Sample_removal_Visualized_Cluster_n=32.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Figures/Default/SampleRemoval_PCA_Features=2/Data_Point_Removal_Zscore=1.7_Weight=1/Sample_removal_Visualized_Cluster_n=33.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Figures/Default/SampleRemoval_PCA_Features=2/Data_Point_Removal_Zscore=1.7_Weight=1/Sample_removal_Visualized_Cluster_n=34.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Figures/Default/SampleRemoval_PCA_Features=2/Data_Point_Removal_Zscore=1.7_Weight=1/Sample_removal_Visualized_Cluster_n=35.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Figures/Default/SampleRemoval_PCA_Features=2/Data_Point_Removal_Zscore=1.7_Weight=1/Sample_removal_Visualized_Cluster_n=36.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Figures/Default/SampleRemoval_PCA_Features=2/Data_Point_Removal_Zscore=1.7_Weight=1/Sample_removal_Visualized_Cluster_n=37.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Figures/Default/SampleRemoval_PCA_Features=2/Data_Point_Removal_Zscore=1.7_Weight=1/Sample_removal_Visualized_Cluster_n=38.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Figures/Default/SampleRemoval_PCA_Features=2/Data_Point_Removal_Zscore=1.7_Weight=1/Sample_removal_Visualized_Cluster_n=38_White_Outed.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Figures/Default/SampleRemoval_PCA_Features=2/Data_Point_Removal_Zscore=1.7_Weight=1/Sample_removal_Visualized_Cluster_n=39.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Figures/Default/SampleRemoval_PCA_Features=2/Data_Point_Removal_Zscore=1.7_Weight=1/Sample_removal_Visualized_Cluster_n=4.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Figures/Default/SampleRemoval_PCA_Features=2/Data_Point_Removal_Zscore=1.7_Weight=1/Sample_removal_Visualized_Cluster_n=40.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Figures/Default/SampleRemoval_PCA_Features=2/Data_Point_Removal_Zscore=1.7_Weight=1/Sample_removal_Visualized_Cluster_n=41.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Figures/Default/SampleRemoval_PCA_Features=2/Data_Point_Removal_Zscore=1.7_Weight=1/Sample_removal_Visualized_Cluster_n=42.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Figures/Default/SampleRemoval_PCA_Features=2/Data_Point_Removal_Zscore=1.7_Weight=1/Sample_removal_Visualized_Cluster_n=43.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Figures/Default/SampleRemoval_PCA_Features=2/Data_Point_Removal_Zscore=1.7_Weight=1/Sample_removal_Visualized_Cluster_n=44.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Figures/Default/SampleRemoval_PCA_Features=2/Data_Point_Removal_Zscore=1.7_Weight=1/Sample_removal_Visualized_Cluster_n=45.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Figures/Default/SampleRemoval_PCA_Features=2/Data_Point_Removal_Zscore=1.7_Weight=1/Sample_removal_Visualized_Cluster_n=46.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Figures/Default/SampleRemoval_PCA_Features=2/Data_Point_Removal_Zscore=1.7_Weight=1/Sample_removal_Visualized_Cluster_n=47.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Figures/Default/SampleRemoval_PCA_Features=2/Data_Point_Removal_Zscore=1.7_Weight=1/Sample_removal_Visualized_Cluster_n=48.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Figures/Default/SampleRemoval_PCA_Features=2/Data_Point_Removal_Zscore=1.7_Weight=1/Sample_removal_Visualized_Cluster_n=49.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Figures/Default/SampleRemoval_PCA_Features=2/Data_Point_Removal_Zscore=1.7_Weight=1/Sample_removal_Visualized_Cluster_n=5.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Figures/Default/SampleRemoval_PCA_Features=2/Data_Point_Removal_Zscore=1.7_Weight=1/Sample_removal_Visualized_Cluster_n=50.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Figures/Default/SampleRemoval_PCA_Features=2/Data_Point_Removal_Zscore=1.7_Weight=1/Sample_removal_Visualized_Cluster_n=6.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Figures/Default/SampleRemoval_PCA_Features=2/Data_Point_Removal_Zscore=1.7_Weight=1/Sample_removal_Visualized_Cluster_n=7.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Figures/Default/SampleRemoval_PCA_Features=2/Data_Point_Removal_Zscore=1.7_Weight=1/Sample_removal_Visualized_Cluster_n=8.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Figures/Default/SampleRemoval_PCA_Features=2/Data_Point_Removal_Zscore=1.7_Weight=1/Sample_removal_Visualized_Cluster_n=9.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Figures/Default/SampleRemoval_PCA_Features=2/Data_Point_Removal_Zscore=1.7_Weight=1/Similar Reduction.gif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/JupterLab Extensions.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Pre Production.ipynb" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Shelves/Removal_df_indexes.db" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Testing/.ipynb_checkpoints/Pre Production-checkpoint.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/Testing/.ipynb_checkpoints/Pre Production-checkpoint.ipynb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Testing/.ipynb_checkpoints/testing-checkpoint.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Testing/I_hate_this.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Testing/I_hate_this1.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Testing/Pre Production.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/Testing/Pre Production.ipynb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Testing/Set up/Commands.sh" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Testing/Set up/Pip Requirements.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Testing/eFlow Created Data/JSON File Dump/Data Cleaning/Default Data Cleaning.json" beforeDir="false" afterPath="$PROJECT_DIR$/Testing/eFlow Created Data/JSON File Dump/Data Cleaning/Default Data Cleaning.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Testing/eFlow Created Data/Pre processing/Data Cleaning/Missing_Data/Graphics/Missing_Data_Bar_Graph.png" beforeDir="false" afterPath="$PROJECT_DIR$/Testing/eFlow Created Data/Pre processing/Data Cleaning/Missing_Data/Graphics/Missing_Data_Bar_Graph.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Testing/eFlow Created Data/Pre processing/Data Cleaning/Missing_Data/Graphics/Missing_Data_Dendrogram_Graph.png" beforeDir="false" afterPath="$PROJECT_DIR$/Testing/eFlow Created Data/Pre processing/Data Cleaning/Missing_Data/Graphics/Missing_Data_Dendrogram_Graph.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Testing/eFlow Created Data/Pre processing/Data Cleaning/Missing_Data/Graphics/Missing_Data_Heatmap.png" beforeDir="false" afterPath="$PROJECT_DIR$/Testing/eFlow Created Data/Pre processing/Data Cleaning/Missing_Data/Graphics/Missing_Data_Heatmap.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Testing/eFlow Created Data/Pre processing/Data Cleaning/Missing_Data/Graphics/Missing_Data_Matrix_Graph.png" beforeDir="false" afterPath="$PROJECT_DIR$/Testing/eFlow Created Data/Pre processing/Data Cleaning/Missing_Data/Graphics/Missing_Data_Matrix_Graph.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Testing/eFlow Created Data/Pre processing/Data Cleaning/Missing_Data/Tables/Missing_Data_Table.png" beforeDir="false" afterPath="$PROJECT_DIR$/Testing/eFlow Created Data/Pre processing/Data Cleaning/Missing_Data/Tables/Missing_Data_Table.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Testing/fucjfndjjndsns.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Testing/fuck_you.text" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Testing/fuck_you1.text" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Testing/test1.text" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Testing/testing.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/eFlow/DataCleaner.py" beforeDir="false" afterPath="$PROJECT_DIR$/eFlow/DataCleaner.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/eFlow/DataFrameTypes.py" beforeDir="false" afterPath="$PROJECT_DIR$/eFlow/DataFrameTypes.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/eFlow/Widgets/DataCleaningWidget.py" beforeDir="false" afterPath="$PROJECT_DIR$/eFlow/Widgets/DataCleaningWidget.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -215,11 +15,11 @@
     <SUITE FILE_PATH="coverage/Master_Universal_Data_Analytics$Global_Utils.coverage" NAME="Global_Utils Coverage Results" MODIFIED="1551580422168" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Libraries/Utils" />
   </component>
   <component name="FileEditorManager">
-    <leaf>
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/eFlow/DataCleaner.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="844">
+            <state relative-caret-position="7725">
               <caret line="531" column="78" selection-start-line="531" selection-start-column="49" selection-end-line="531" selection-end-column="78" />
               <folding>
                 <element signature="e#0#19#0" expanded="true" />
@@ -228,11 +28,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/eFlow/DataFrameTypes.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-2004">
-              <caret line="39" column="17" selection-start-line="39" selection-start-column="17" selection-end-line="39" selection-end-column="17" />
+            <state relative-caret-position="753">
+              <caret line="237" column="28" selection-start-line="237" selection-start-column="28" selection-end-line="237" selection-end-column="28" />
               <folding>
                 <element signature="e#0#11#0" expanded="true" />
               </folding>
@@ -242,17 +42,13 @@
       </file>
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/eFlow/PipelineSegment.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state>
-              <caret lean-forward="true" />
-            </state>
-          </provider>
+          <provider selected="true" editor-type-id="text-editor" />
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/eFlow/Widgets/DataCleaningWidget.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="815">
+            <state relative-caret-position="843">
               <caret line="490" column="50" selection-start-line="490" selection-start-column="50" selection-end-line="490" selection-end-column="50" />
               <folding>
                 <element signature="e#0#19#0" expanded="true" />
@@ -264,7 +60,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/eFlow/Utils/Sys_Utils.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="783">
+            <state relative-caret-position="2715">
               <caret line="187" column="24" selection-start-line="187" selection-start-column="4" selection-end-line="187" selection-end-column="24" />
               <folding>
                 <element signature="e#0#19#0" expanded="true" />
@@ -354,10 +150,10 @@
         <option value="$PROJECT_DIR$/eFlow/Utils/Constants.py" />
         <option value="$PROJECT_DIR$/eFlow/DataCleaningWidget.py" />
         <option value="$PROJECT_DIR$/eFlow/Utils/Sys_Utils.py" />
-        <option value="$PROJECT_DIR$/eFlow/DataFrameTypes.py" />
         <option value="$PROJECT_DIR$/eFlow/PipelineSegment.py" />
         <option value="$PROJECT_DIR$/eFlow/DataCleaner.py" />
         <option value="$PROJECT_DIR$/eFlow/Widgets/DataCleaningWidget.py" />
+        <option value="$PROJECT_DIR$/eFlow/DataFrameTypes.py" />
       </list>
     </option>
   </component>
@@ -525,16 +321,18 @@
       <workItem from="1565265010712" duration="148000" />
       <workItem from="1565265423252" duration="165000" />
       <workItem from="1565399147876" duration="27536000" />
+      <workItem from="1565638412621" duration="361000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="423947000" />
+    <option name="totallyTimeSpent" value="424308000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1680" height="1050" extended-state="0" />
+    <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.16910867" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.17094018" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -665,10 +463,10 @@
     <entry file="file://$PROJECT_DIR$/eFlow/My_Encoder.py">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/eFlow/Utils/Sys_Utils.py">
+    <entry file="file://$PROJECT_DIR$/eFlow/DataCleaner.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="783">
-          <caret line="187" column="24" selection-start-line="187" selection-start-column="4" selection-end-line="187" selection-end-column="24" />
+        <state relative-caret-position="7725">
+          <caret line="531" column="78" selection-start-line="531" selection-start-column="49" selection-end-line="531" selection-end-column="78" />
           <folding>
             <element signature="e#0#19#0" expanded="true" />
           </folding>
@@ -676,26 +474,12 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/eFlow/PipelineSegment.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret lean-forward="true" />
-        </state>
-      </provider>
+      <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/eFlow/DataFrameTypes.py">
+    <entry file="file://$PROJECT_DIR$/eFlow/Utils/Sys_Utils.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-2004">
-          <caret line="39" column="17" selection-start-line="39" selection-start-column="17" selection-end-line="39" selection-end-column="17" />
-          <folding>
-            <element signature="e#0#11#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/eFlow/DataCleaner.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="844">
-          <caret line="531" column="78" selection-start-line="531" selection-start-column="49" selection-end-line="531" selection-end-column="78" />
+        <state relative-caret-position="2715">
+          <caret line="187" column="24" selection-start-line="187" selection-start-column="4" selection-end-line="187" selection-end-column="24" />
           <folding>
             <element signature="e#0#19#0" expanded="true" />
           </folding>
@@ -704,10 +488,20 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/eFlow/Widgets/DataCleaningWidget.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="815">
+        <state relative-caret-position="843">
           <caret line="490" column="50" selection-start-line="490" selection-start-column="50" selection-end-line="490" selection-end-column="50" />
           <folding>
             <element signature="e#0#19#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/eFlow/DataFrameTypes.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="753">
+          <caret line="237" column="28" selection-start-line="237" selection-start-column="28" selection-end-line="237" selection-end-column="28" />
+          <folding>
+            <element signature="e#0#11#0" expanded="true" />
           </folding>
         </state>
       </provider>

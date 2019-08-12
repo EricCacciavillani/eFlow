@@ -219,7 +219,6 @@ class DataFrameTypes:
     def __make_type_assertion_after_ignore_nan(self,
                                                df,
                                                nan_columns):
-        integer_features = set(df.select_dtypes(include=["int"]).columns)
         float_features = set(
             df.select_dtypes(include=["float"]).columns)
         for feature in nan_columns:
@@ -229,13 +228,14 @@ class DataFrameTypes:
             elif len(feature_values) == 2 and (0.0 in feature_values and 1.0 in feature_values):
                 df[feature] = df[feature].astype(bool)
 
-            elif feature in integer_features or feature in float_features:
+            elif feature in float_features:
                 feature_values = [str(i) for i in feature_values]
                 convert_to_float = False
                 for str_val in feature_values:
                     tokens = str_val.split(".")
 
-                    if len(tokens) > 1 and len(tokens[1]) > 1:
+                    if len(tokens) > 1 and len(tokens[1]) > 1 or \
+                            int(tokens[1]) > 0:
                         convert_to_float = True
                 if convert_to_float:
                     df[feature].fillna(0, inplace=True)
