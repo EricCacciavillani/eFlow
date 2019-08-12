@@ -1,8 +1,10 @@
 {
   "Pclass": {
     "Type": "Number",
-    "Option": "Fill nan with min value of distribution",
-    "Extra": {}
+    "Option": "Ignore feature",
+    "Extra": {
+      "Zscore": null
+    }
   },
   "Age": {
     "Type": "Number",

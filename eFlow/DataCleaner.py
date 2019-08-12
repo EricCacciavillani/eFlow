@@ -8,19 +8,23 @@ import json
 from scipy import stats
 import uuid
 import os.path
+import inspect
 
 from eFlow.Utils.Sys_Utils import *
 from eFlow.Utils.Constants import *
 from eFlow.Widgets.DataCleaningWidget import *
+from eFlow.DataFrameTypes import *
+from eFlow.PipelineSegment import *
 
-class DataCleaner:
+class DataCleaner(PipelineSegment):
 
     def __init__(self,
                  df=None,
                  project_name="Default_Data_Cleaner",
                  overwrite_full_path=None,
                  notebook_mode=True,
-                 missing_data_visuals=True):
+                 missing_data_visuals=True,
+                 make_nan_assertions=True):
         """
 
         df:
@@ -48,7 +52,7 @@ class DataCleaner:
             parent_structure = "/" + SYS_CONSTANTS.PARENT_OUTPUT_FOLDER_NAME \
                                + "/" + project_name + "/"
             self.__PROJECT = enum(PATH_TO_OUTPUT_FOLDER=
-                os.getcwd()  + parent_structure)
+                os.getcwd() + parent_structure)
         else:
             self.__PROJECT = enum(PATH_TO_OUTPUT_FOLDER=overwrite_full_path)
 
@@ -139,16 +143,13 @@ class DataCleaner:
             "Fill nan with max value of distribution"] = \
             self.__fill_nan_by_distribution
         self.__data_cleaning_options["Number"][
-            "Fill nan with x% value of distribution after removing outliers"] = \
-            self.__fill_nan_by_distribution
-        self.__data_cleaning_options["Number"][
             "---------------------" + (" " * space_counters.pop())] = \
             self.__ignore_feature
 
         self.__data_cleaning_options["Number"][
-            "Fill nan with average value of distribution"] = self.__fill_nan_by_distribution
-        self.__data_cleaning_options["Number"]["Peform interpolation"] = \
-            self.__peform_interpolation
+            "Fill nan with average value of distribution"] = self.__fill_nan_by_average
+        self.__data_cleaning_options["Number"][
+            "Fill nan with mode of distribution"] = self.__fill_nan_by_mode
         self.__data_cleaning_options["Number"][
             "Fill null with specfic value"] = self.__fill_nan_with_specfic_value
         self.__data_cleaning_options["Number"][
@@ -157,23 +158,15 @@ class DataCleaner:
 
         self.__data_cleaning_options["Number"][
             "Fill with least common count of distribution"] = \
-            self.__fill_nan_by_count_distrubtion
-
-        self.__data_cleaning_options["Number"][
-            "Fill with 25% common count of distribution"] = \
-            self.__fill_nan_by_count_distrubtion
-
-        self.__data_cleaning_options["Number"][
-            "Fill with median common count of distribution"] = \
-            self.__fill_nan_by_count_distrubtion
-
-        self.__data_cleaning_options["Number"][
-            "Fill with 75% common count of distribution"] = \
-            self.__fill_nan_by_count_distrubtion
-
+            self.__fill_nan_by_occurance_percentaile
         self.__data_cleaning_options["Number"][
             "Fill with most common count of distribution"] = \
-            self.__fill_nan_by_count_distrubtion
+            self.__fill_nan_by_occurance_percentaile
+        self.__data_cleaning_options["Number"][
+            "Fill with x% count distribution"] = \
+            self.__fill_nan_by_occurance_percentaile
+        self.__data_cleaning_options["Number"]["Fill with random existing values"] = \
+            self.__fill_nan_with_existing_values
 
         # Set up category cleaning options
         space_counters = {i for i in range(1, 50)}
@@ -200,17 +193,37 @@ class DataCleaner:
             "Ignore feature"] = self.__ignore_feature
         self.__data_cleaning_options["Unknown"]["Drop feature"] = \
             self.__ignore_feature
+        self.__data_cleaning_options["Unknown"]["Remove all nans"] = \
+            self.__remove_nans
 
         # Written conditionals for functions requiring input fields
         self.__require_input = {"Fill null with specfic value":None,
                                 "Fill nan with x% value of distribution":
                                     'x >= 0 and x <=100',
-                                "Fill nan with x% value of distribution "
-                                "after removing outliers":'x >= 0 and x <=100'}
+                                "Fill with random existing values": 'x > 0',
+                                "Fill with x% count distribution":
+                                    'x >= 0 and x <=100'}
 
         # ---
         self.__notebook_mode = notebook_mode
         self.__ui_widget = None
+
+        if make_nan_assertions:
+            df_features = DataFrameTypes(df,
+                                         display_init=False)
+            self.__make_nan_assertions(df,
+                                       df_features)
+
+    def init_json_file_name(self,
+                            filename):
+
+        if not isinstance(filename,str):
+            print("THROW ERROR Filename must be a string")
+        filename = filename.split(".", 1)[0]
+        filename += ".json"
+
+        self.__filename = filename
+
 
 
     def data_cleaning_widget(self,
@@ -255,12 +268,11 @@ class DataCleaner:
         with open(json_file_path) as json_file:
             data = json.load(json_file)
             for feature, json_obj in data.items():
-                print(feature)
-                print(json_obj["Option"])
                 self.__data_cleaning_options[json_obj["Type"]][
                     json_obj["Option"]](df,
+                                        feature,
                                         json_obj)
-                print()
+                print("**"*30 + "\n")
 
     def __missing_values_table(self,
                                df):
@@ -296,20 +308,41 @@ class DataCleaner:
 
         return mis_val_table_ren_columns
 
+    def __make_nan_assertions(self,
+                              df,
+                              df_features):
+        print("Hit")
+        for bool_feature in df_features.get_bool_features():
+            if len(df[bool_feature].dropna().value_counts().values) != 2:
+                print("Testing")
+
     ### Cleaning options ###
+    def __zcore_remove_outliers(self,
+                                df,
+                                feature,
+                                zscore_val):
+
+        z_score_return = stats.zscore(((df[feature].dropna())))
+        return df[feature].dropna()[
+            (z_score_return >= (zscore_val * -1)) & (
+                    z_score_return <= zscore_val)]
+
     def __ignore_feature(self,
                          df,
+                         feature,
                          json_obj):
         """
         Do nothing to this feature for nan removal
         """
-        print("Ignoring Feature: ", json_obj["Feature"])
+        print(inspect.stack()[0][3])
+        print("Ignoring Feature: ", feature)
 
     def __drop_feature(self,
                        df,
+                       feature,
                        json_obj):
-        print("Droping Feature: ", json_obj["Feature"])
-        df.drop(columns=json_obj["Feature"],
+        print("Droping Feature: ", feature)
+        df.drop(columns=feature,
                 inplace=True)
         df.reset_index(drop=True,
                        inplace=True)
@@ -317,34 +350,25 @@ class DataCleaner:
     def __remove_nans(self,
                       df,
                       json_obj):
-        print("Removing Nans: ", json_obj["Feature"])
-        df[json_obj["Feature"]].dropna(inplace=True)
+        print("Removing Nans: ",feature)
+        df[feature].dropna(inplace=True)
         df.reset_index(drop=True,
                        inplace=True)
 
-
-    def __zcore_remove_outliers(self,
-                                df,
-                                feature):
-
-        z_score_return = stats.zscore(((df[feature].dropna())))
-        return df[feature].dropna()[
-            (z_score_return >= -2) & (z_score_return <= 2)]
-
-
     def __fill_nan_by_distribution(self,
                                    df,
+                                   feature,
                                    json_obj):
 
-        print("Fill nan by distribution for feature {0} by ".format(
-            json_obj["Feature"]),
-              end='')
+        print("Fill nan by distribution")
 
-        if "removing outliers" in json_obj["Option"]:
+        if "Zscore" in json_obj["Extra"]:
             series_obj = self.__zcore_remove_outliers(df,
-                                                      json_obj["Feature"])
+                                                      feature,
+                                                      json_obj["Extra"][
+                                                          "Zscore"])
         else:
-            series_obj = df[json_obj["Feature"]].dropna()
+            series_obj = df[feature].dropna()
 
         if "min" in json_obj["Option"]:
             fill_na_val = np.percentile(series_obj, 0)
@@ -359,61 +383,151 @@ class DataCleaner:
             fill_na_val = np.percentile(series_obj,
                                         float(
                                             json_obj["Extra"]
-                                            ["Percentage of distribution"]))
+                                            ["Input"]))
             print("{0}%".format(float(json_obj["Extra"]
-                                      ["Percentage of distribution"])))
+                                      ["Input"])))
 
-        df[json_obj["Feature"]].fillna(fill_na_val,
-                                       inplace=True)
+        if "Zscore" in json_obj["Extra"]:
+            print("After the zscore applied of {0} to -{0}".format(
+                json_obj["Extra"]["Zscore"]))
+
+        print("Replace nan with {0} on feature: {1}".format(
+            fill_na_val,
+            feature))
+
+        df[feature].fillna(fill_na_val,
+                           inplace=True)
 
     def __fill_nan_by_average(self,
                               df,
+                              feature,
                               json_obj):
 
-        print("Fill nan by average ",end='')
+        print("Fill nan by average")
 
-        if "removing outliers" in json_obj["Option"]:
-            print("after removing outliers by feature: {0}".format(
-                json_obj["Feature"]))
+        if "Zscore" in json_obj["Extra"]:
             series_obj = self.__zcore_remove_outliers(df,
-                                                      json_obj["Feature"])
+                                                      feature,
+                                                      json_obj["Extra"][
+                                                          "Zscore"])
         else:
-            print("by feature: {0}".format(json_obj["Feature"]))
-            series_obj = df[json_obj["Feature"]].dropna()
+            series_obj = df[feature].dropna()
 
-        df[json_obj["Feature"]].fillna(
-            series_obj.mean(),
+        replace_value = series_obj.mean()
+
+        print("Replace nan with {0} on feature: {1}".format(
+            replace_value,
+            feature))
+
+        if "Zscore" in json_obj["Extra"]:
+            print("After the zscore applied of {0} to -{0}".format(
+                json_obj["Extra"]["Zscore"]))
+
+        df[feature].fillna(
+            replace_value,
             inplace=True)
 
-    def __peform_interpolation(self,
-                               df,
-                               json_obj):
-        print("peform interpolation")
-        pass
+    def __fill_nan_by_mode(self,
+                           df,
+                           feature,
+                           json_obj):
+
+        print("Fill nan by mode")
+        if "Zscore" in json_obj["Extra"]:
+            series_obj = self.__zcore_remove_outliers(df,
+                                                      feature,
+                                                      json_obj["Extra"][
+                                                          "Zscore"])
+        else:
+            series_obj = df[feature].dropna()
+
+        replace_value = series_obj.mode()[0]
+
+        print("Replace nan with {0} on feature: {1}".format(
+            replace_value,
+            feature))
+
+        if "Zscore" in json_obj["Extra"]:
+            print("After the zscore applied of {0} to -{0}".formt(
+                json_obj["Extra"]["Zscore"]))
+
+        df[feature].fillna(
+            replace_value,
+            inplace=True)
 
     def __fill_nan_with_specfic_value(self,
                                       df,
                                       json_obj):
-        print("Replace nan with {0} on feature: {1}".format(json_obj["Extra"]["Replace value"],
-                                         json_obj["Feature"]))
 
-        if json_obj["Type"] == "Number":
+        print("Replace nan with {0} on feature: {1}".format(
+            json_obj["Extra"]["Replace value"],
+            feature))
 
-            if "." in json_obj["Extra"]["Replace value"]:
-                fill_nan_val = float(json_obj["Extra"]["Replace value"])
-            else:
-                fill_nan_val = int(json_obj["Extra"]["Replace value"])
-        else:
-            fill_nan_val = json_obj["Extra"]["Replace value"]
-        df[json_obj["Feature"]].fillna(fill_nan_val,
+        fill_nan_val = json_obj["Extra"]["Input"]
+        df[feature].fillna(fill_nan_val,
                                        inplace=True)
 
-    def __fill_nan_by_count_distrubtion(self,
+    def __fill_nan_by_occurance_percentaile(self,
+                                            df,
+                                            json_obj):
+
+        print("Fill nan by occurance percentaile")
+
+        if "Zscore" in json_obj["Extra"]:
+            series_obj = self.__zcore_remove_outliers(df,
+                                                      feature,
+                                                      json_obj["Extra"][
+                                                          "Zscore"])
+        else:
+            series_obj = df[feature].dropna()
+
+        if "most" in json_obj["Option"]:
+            target_value = 100
+        elif "least" in json_obj["Option"]:
+            target_value = 0
+        else:
+            target_value = json_obj["Extra"]["Input"]
+
+        array = np.asarray(series_obj.value_counts() / df.shape[0])
+        idx = (np.abs(array - target_value)).argmin()
+        replace_value = series_obj.value_counts().keys()[idx]
+
+        print("Replace nan with {0} on feature: {1}".format(
+            replace_value,
+            feature))
+
+        if "Zscore" in json_obj["Extra"]:
+            print("After the zscore applied of {0} to -{0}".formt(
+                json_obj["Extra"]["Zscore"]))
+
+        df[feature].fillna(replace_value,
+                           inplace=True)
+
+    def __fill_nan_with_existing_values(self,
                                         df,
+                                        feature,
                                         json_obj):
-        print("nan by count")
-        pass
+        print("Fill nan with random existing values on feature {0}".format(feature))
+
+        if "Zscore" in json_obj["Extra"]:
+            series_obj = self.__zcore_remove_outliers(df,
+                                                      feature,
+                                                      json_obj["Extra"][
+                                                          "Zscore"])
+        else:
+            series_obj = df[feature].dropna()
+
+        if "Zscore" in json_obj["Extra"]:
+            print("After the zscore applied of {0} to -{0}".formt(
+                json_obj["Extra"]["Zscore"]))
+        df[feature].fillna(
+            pd.Series(np.random.choice(list(series_obj.value_counts().keys()),
+                                       size=len(df.index))))
+
 
     ### Getters ###
-    def get_last_saved_json_file_path(self):
-        return copy.deepcopy(self.__ui_widget.get_last_saved_json_file_path())
+    def json_file_path(self):
+
+        self.__json_filename =
+        self.__json_file_path = self.__ui_widget.get_last_saved_json_file_path()
+        return copy.deepcopy()
