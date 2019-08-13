@@ -7,8 +7,7 @@ class DataFrameTypes:
 
     """
         Seperates the features based off of dtypes
-        to better keep track of feature changes over time.
-        Should only be used for manipulation of features.
+        to better keep track of feature types.
     """
 
     def __init__(self,
@@ -16,16 +15,35 @@ class DataFrameTypes:
                  target_col=None,
                  ignore_nulls=True,
                  display_init=True):
+        """
 
+        df:
+            Pandas dataframe object.
+
+        target_col:
+            If the project is using a supervised learning approach we can
+            specify the target column. (Note: Not required)
+
+        ignore_nulls:
+            If set to true than a temporary dataframe is created with each
+            feature removes it's nan values to assert what data type the series
+            object would be without nans existing inside it.
+
+        display_init:
+            Display results when object init
+        """
+
+        # Data type assertions without nulls
         if ignore_nulls and df.isnull().values.any():
             tmp_df = copy.deepcopy(df)
             nan_columns = [feature for feature, nan_found in
                            tmp_df.isna().any().items() if nan_found]
-            self.__make_type_assertion_after_ignore_nan(tmp_df,
-                                                        nan_columns)
+            self.__make_type_assertions_after_ignore_nan(tmp_df,
+                                                         nan_columns)
         else:
             tmp_df = df
 
+        # Grab features based on there types
         self.__bool_features = set(tmp_df.select_dtypes(include=["bool"]).columns)
         self.__categorical_features = set(
             tmp_df.select_dtypes(include=["object"]).columns)
@@ -34,9 +52,12 @@ class DataFrameTypes:
         self.__numerical_features = self.__float_features | self.__integer_features
         self.__datetime_features = set(
             tmp_df.select_dtypes(include=["datetime"]).columns)
+
+        # Extra functionality
         self.__target_feature = None
         self.__one_hot_encoded_names = dict()
 
+        # Attempt to init target column
         if target_col:
             if target_col in tmp_df.columns:
                 self.__target_feature = target_col
@@ -44,6 +65,7 @@ class DataFrameTypes:
                 print("WARNING!!!: THE FEATURE {0} "
                       "DOES NOT EXIST IN THIS DATASET!".format(target_col))
 
+        # Create one hot encoded features
         if self.__categorical_features:
             for col_feature in self.__categorical_features:
                 
@@ -132,14 +154,18 @@ class DataFrameTypes:
     def get_target(self):
         return copy.deepcopy(self.__target_feature)
 
-    # --- Appenders
+    # --- Appender
     def append_categorical_features(self,
                                     feature_name):
         self.__categorical_features |= set(feature_name)
 
-    def append_categorical_features(self,
-                                    feature_name):
+    def append_bool_features(self,
+                             feature_name):
         self.__bool_features |= set(feature_name)
+
+    def append_datetime_features(self,
+                                 feature_name):
+        self.__datetime_features |= set(feature_name)
 
     def append_float_features(self,
                               feature_name):
@@ -162,11 +188,7 @@ class DataFrameTypes:
         #     else:
         #         print("Error")
 
-    def set_date_columns(self):
-        pass
-
-
-    # ---Remover
+    # --- Remover
     def remove(self,
                feature_name):
         try:
@@ -200,6 +222,9 @@ class DataFrameTypes:
             pass
 
     def display_all(self):
+        """
+            Display all sets
+        """
 
         # Display category based features
         if self.__categorical_features:
@@ -233,23 +258,30 @@ class DataFrameTypes:
             print("Datetime Features: {0}\n".format(
                 self.__datetime_features))
 
-
         if self.__target_feature:
             print("Target Feature: {0}\n".format(
                 self.__target_feature))
 
-    def __make_type_assertion_after_ignore_nan(self,
-                                               df,
-                                               nan_columns):
+    def __make_type_assertions_after_ignore_nan(self,
+                                                df,
+                                                nan_columns):
         float_features = set(
             df.select_dtypes(include=["float"]).columns)
+
         for feature in nan_columns:
             feature_values = list(df[feature].dropna().value_counts().keys())
-            if len(feature_values) == 1 and (0.0 in feature_values or 1.0 in feature_values):
-                df[feature] = df[feature].astype(bool)
-            elif len(feature_values) == 2 and (0.0 in feature_values and 1.0 in feature_values):
+
+            # Convert to bool if possible
+            if len(feature_values) == 1 and (
+                    0.0 in feature_values or 1.0 in feature_values):
                 df[feature] = df[feature].astype(bool)
 
+            # ^^^
+            elif len(feature_values) == 2 and (
+                    0.0 in feature_values and 1.0 in feature_values):
+                df[feature] = df[feature].astype(bool)
+
+            # Convert numeric to proper types (int,float)
             elif feature in float_features:
                 feature_values = [str(i) for i in feature_values]
                 convert_to_float = False
@@ -265,18 +297,15 @@ class DataFrameTypes:
                 else:
                     df[feature].fillna(0, inplace=True)
                     df[feature] = df[feature].dropna().astype(int)
+
+            # Attempt to convert categorical to datetime
             else:
                 try:
-                    print("hit")
-                    print(feature)
                     _ = [parser.parse(val) for val in feature_values]
                     df[feature].fillna(feature_values[0],
                                        inplace=True)
                     df[feature] = [parser.parse(val)
                                    for val in
                                    df[feature]]
-                    print(df[feature])
-                    print("pass")
-
                 except ValueError:
                     pass

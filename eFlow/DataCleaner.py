@@ -10,13 +10,18 @@ import uuid
 import os.path
 import inspect
 
-from eFlow.Utils.Sys_Utils import *
+from eFlow.Utils.SysUtils import *
 from eFlow.Utils.Constants import *
 from eFlow.Widgets.DataCleaningWidget import *
 from eFlow.DataFrameTypes import *
 from eFlow.PipelineSegment import *
+from eFlow.GeneralUtils import string_condtional
+from eFlow.Utils.Objects import enum
 
 class DataCleaner(PipelineSegment):
+    """
+    Designed for a multipurpose data cleaner.
+    """
 
     def __init__(self,
                  df=None,
@@ -52,7 +57,7 @@ class DataCleaner(PipelineSegment):
             parent_structure = "/" + SYS_CONSTANTS.PARENT_OUTPUT_FOLDER_NAME \
                                + "/" + project_name + "/"
             self.__PROJECT = enum(PATH_TO_OUTPUT_FOLDER=
-                os.getcwd() + parent_structure)
+                                  os.getcwd() + parent_structure)
         else:
             self.__PROJECT = enum(PATH_TO_OUTPUT_FOLDER=overwrite_full_path)
 
@@ -105,7 +110,7 @@ class DataCleaner(PipelineSegment):
 
             print(self.__PROJECT.PATH_TO_OUTPUT_FOLDER)
 
-        ### Setting up widget options
+        # --- Setting up widget options
 
         # Dummy line to show in the menu for cleaner viewing
         # self.__data_cleaning_options["TYPE"][
@@ -182,6 +187,14 @@ class DataCleaner(PipelineSegment):
         self.__data_cleaning_options["Bool"][
             "Ignore feature"] = self.__ignore_feature
         self.__data_cleaning_options["Bool"]["Drop feature"] = \
+            self.__drop_feature
+
+        # Set up boolean cleaning options
+        space_counters = {i for i in range(1, 50)}
+        self.__data_cleaning_options["Date"] = dict()
+        self.__data_cleaning_options["Date"][
+            "Ignore feature"] = self.__ignore_feature
+        self.__data_cleaning_options["Date"]["Drop feature"] = \
             self.__drop_feature
 
         # Error case on data types
@@ -332,9 +345,8 @@ class DataCleaner(PipelineSegment):
                          feature,
                          json_obj):
         """
-        Do nothing to this feature for nan removal
+            Do nothing to this feature for nan removal
         """
-        print(inspect.stack()[0][3])
         print("Ignoring Feature: ", feature)
 
     def __drop_feature(self,
