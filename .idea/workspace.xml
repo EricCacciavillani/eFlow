@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ed041e50-c9da-4464-8bcf-e2b46601487b" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/eFlow/DataCleaner.py" beforeDir="false" afterPath="$PROJECT_DIR$/eFlow/DataCleaner.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/eFlow/DataFrameTypes.py" beforeDir="false" afterPath="$PROJECT_DIR$/eFlow/DataFrameTypes.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -19,8 +19,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/eFlow/DataCleaner.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="7725">
-              <caret line="531" column="78" selection-start-line="531" selection-start-column="49" selection-end-line="531" selection-end-column="78" />
+            <state relative-caret-position="275">
+              <caret line="496" column="21" lean-forward="true" selection-start-line="496" selection-start-column="21" selection-end-line="496" selection-end-column="21" />
               <folding>
                 <element signature="e#0#19#0" expanded="true" />
               </folding>
@@ -31,8 +31,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/eFlow/DataFrameTypes.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="753">
-              <caret line="237" column="28" selection-start-line="237" selection-start-column="28" selection-end-line="237" selection-end-column="28" />
+            <state relative-caret-position="815">
+              <caret line="281" column="24" lean-forward="true" selection-start-line="281" selection-start-column="24" selection-end-line="281" selection-end-column="24" />
               <folding>
                 <element signature="e#0#11#0" expanded="true" />
               </folding>
@@ -80,8 +80,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>self.__data_cleaning_options[&quot;Number&quot;]</find>
-      <find>__fill_nan_with_existing_values</find>
       <find>__fill_nan_by_count_distrubtion</find>
       <find>__fill_nan_by_average</find>
       <find>__fill_nan_by_occurance_percentaile</find>
@@ -92,10 +90,8 @@
       <find>make_nan_assertions</find>
       <find>get_bool</find>
       <find>__make_type_assertion_after_ignore</find>
-      <find>__make_type_assertion_after_ignore_nan</find>
       <find>__make_nan_assertions</find>
       <find>&quot;=&quot;</find>
-      <find>get_last_saved_json_file_path</find>
       <find>json_obj</find>
       <find>ignore_feature</find>
       <find>rint(&quot;Ignoring Feature: &quot;, json_obj[&quot;Feature&quot;])</find>
@@ -110,6 +106,10 @@
       <find>__json</find>
       <find>__last_saved_json_file_path</find>
       <find>get_json_file_path</find>
+      <find>self.__json_filename =</find>
+      <find>get_last_saved_json_file_path</find>
+      <find>display</find>
+      <find>__make_type_assertion_after_ignore_nan</find>
     </findStrings>
     <replaceStrings>
       <replace>self.__general_input</replace>
@@ -151,8 +151,8 @@
         <option value="$PROJECT_DIR$/eFlow/DataCleaningWidget.py" />
         <option value="$PROJECT_DIR$/eFlow/Utils/Sys_Utils.py" />
         <option value="$PROJECT_DIR$/eFlow/PipelineSegment.py" />
-        <option value="$PROJECT_DIR$/eFlow/DataCleaner.py" />
         <option value="$PROJECT_DIR$/eFlow/Widgets/DataCleaningWidget.py" />
+        <option value="$PROJECT_DIR$/eFlow/DataCleaner.py" />
         <option value="$PROJECT_DIR$/eFlow/DataFrameTypes.py" />
       </list>
     </option>
@@ -321,12 +321,12 @@
       <workItem from="1565265010712" duration="148000" />
       <workItem from="1565265423252" duration="165000" />
       <workItem from="1565399147876" duration="27536000" />
-      <workItem from="1565638412621" duration="361000" />
+      <workItem from="1565638412621" duration="3974000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="424308000" />
+    <option name="totallyTimeSpent" value="427921000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1680" height="1050" extended-state="0" />
@@ -463,16 +463,6 @@
     <entry file="file://$PROJECT_DIR$/eFlow/My_Encoder.py">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/eFlow/DataCleaner.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="7725">
-          <caret line="531" column="78" selection-start-line="531" selection-start-column="49" selection-end-line="531" selection-end-column="78" />
-          <folding>
-            <element signature="e#0#19#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/eFlow/PipelineSegment.py">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
@@ -496,10 +486,20 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/eFlow/DataCleaner.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="275">
+          <caret line="496" column="21" lean-forward="true" selection-start-line="496" selection-start-column="21" selection-end-line="496" selection-end-column="21" />
+          <folding>
+            <element signature="e#0#19#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/eFlow/DataFrameTypes.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="753">
-          <caret line="237" column="28" selection-start-line="237" selection-start-column="28" selection-end-line="237" selection-end-column="28" />
+        <state relative-caret-position="815">
+          <caret line="281" column="24" lean-forward="true" selection-start-line="281" selection-start-column="24" selection-end-line="281" selection-end-column="24" />
           <folding>
             <element signature="e#0#11#0" expanded="true" />
           </folding>

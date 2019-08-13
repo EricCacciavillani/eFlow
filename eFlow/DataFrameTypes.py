@@ -1,5 +1,6 @@
 import copy
 from IPython.display import display, HTML
+from dateutil import parser
 
 
 class DataFrameTypes:
@@ -31,6 +32,8 @@ class DataFrameTypes:
         self.__integer_features = set(tmp_df.select_dtypes(include=["int"]).columns)
         self.__float_features = set(tmp_df.select_dtypes(include=["float"]).columns)
         self.__numerical_features = self.__float_features | self.__integer_features
+        self.__datetime_features = set(
+            tmp_df.select_dtypes(include=["datetime"]).columns)
         self.__target_feature = None
         self.__one_hot_encoded_names = dict()
 
@@ -56,11 +59,12 @@ class DataFrameTypes:
         features_not_captured = set(tmp_df.columns)
         for col_feature in (self.__numerical_features |
                             self.__categorical_features |
-                            self.__bool_features):
+                            self.__bool_features |
+                            self.__datetime_features):
             features_not_captured.remove(col_feature)
 
         if features_not_captured:
-            print("ERROR MISSING FEATURE(S)!\n{0}".format(
+            print("ERROR UNKNOWN FEATURE(S) TYPE(S) FOUND!\n{0}".format(
                 features_not_captured))
 
     # --- Getters
@@ -104,6 +108,14 @@ class DataFrameTypes:
                     if col_feature != self.__target_feature]
         else:
             return list(self.__bool_features)
+
+    def get_datetime_features(self,
+                              exclude_target):
+        if exclude_target:
+            return [col_feature for col_feature in self.__datetime_features
+                    if col_feature != self.__target_feature]
+        else:
+            return list(self.__datetime_features)
     
     def get_all_features(self,
                          exclude_target=False):
@@ -178,6 +190,11 @@ class DataFrameTypes:
             pass
 
         try:
+            self.__datetime_features.remove(feature_name)
+        except KeyError:
+            pass
+
+        try:
             self.__bool_features.remove(feature_name)
         except KeyError:
             pass
@@ -212,6 +229,11 @@ class DataFrameTypes:
             print("Float Features: {0}\n".format(
                 self.__float_features))
 
+        if self.__datetime_features:
+            print("Datetime Features: {0}\n".format(
+                self.__datetime_features))
+
+
         if self.__target_feature:
             print("Target Feature: {0}\n".format(
                 self.__target_feature))
@@ -243,3 +265,18 @@ class DataFrameTypes:
                 else:
                     df[feature].fillna(0, inplace=True)
                     df[feature] = df[feature].dropna().astype(int)
+            else:
+                try:
+                    print("hit")
+                    print(feature)
+                    _ = [parser.parse(val) for val in feature_values]
+                    df[feature].fillna(feature_values[0],
+                                       inplace=True)
+                    df[feature] = [parser.parse(val)
+                                   for val in
+                                   df[feature]]
+                    print(df[feature])
+                    print("pass")
+
+                except ValueError:
+                    pass

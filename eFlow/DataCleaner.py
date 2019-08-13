@@ -528,6 +528,6 @@ class DataCleaner(PipelineSegment):
     ### Getters ###
     def json_file_path(self):
 
-        self.__json_filename =
+        # self.__json_filename =
         self.__json_file_path = self.__ui_widget.get_last_saved_json_file_path()
         return copy.deepcopy()
