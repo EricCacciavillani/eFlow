@@ -1,9 +1,14 @@
 import pandas as pd
 import seaborn as sns
 import missingno as msno
-from IPython.display import display
 import random
+import numpy as np
+from matplotlib import pyplot as plt
+import copy
+from IPython.display import display
 
+
+from eFlow.Utils.Objects import enum
 from eFlow.Utils.SysUtils import *
 from eFlow.Utils.Constants import *
 
@@ -65,8 +70,6 @@ class DataAnalysis:
         else:
             self.__PROJECT = enum(PATH_TO_OUTPUT_FOLDER=overwrite_full_path)
 
-        print(self.__PROJECT.PATH_TO_OUTPUT_FOLDER)
-
         if df is not None and df_features is not None:
 
             # Visualize and save missing data graphics if specified
@@ -117,7 +120,7 @@ class DataAnalysis:
                     plt.show()
                 plt.close()
 
-            print("*" * 80 + "\n" * 2)
+                print("*" * 80 + "\n" * 2)
 
             # Iterate through DataFrame columns and graph based on data types
             for col_feature_name in df.columns:
@@ -412,7 +415,8 @@ class DataAnalysis:
             print("\n"*3)
 
         col_vc_df.set_index('Unique Values',
-                 inplace=True)
+                            inplace=True)
+
         # Convert DataFrame table to image
         df_to_image(col_vc_df,
                     self.__PROJECT.PATH_TO_OUTPUT_FOLDER,

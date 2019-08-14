@@ -6,6 +6,8 @@ import copy
 import six
 import itertools
 
+from eFlow.ToolBox.ImageProcessing import adjust_sharpness
+
 def check_create_dir_structure(directory_pth,
                                sub_dir):
     """
@@ -23,7 +25,8 @@ def check_create_dir_structure(directory_pth,
 
 def create_plt_png(directory_pth,
                    sub_dir,
-                   filename):
+                   filename,
+                   sharpness=1.7):
     """
         Saves the plt based image in the correct directory.
     """
@@ -39,11 +42,18 @@ def create_plt_png(directory_pth,
     fig = plt.figure(1)
     fig.savefig(abs_path + "/" + filename, bbox_inches='tight')
 
+    if sharpness:
+        full_path = directory_pth + sub_dir + "/" + filename
+        adjust_sharpness(full_path,
+                         full_path,
+                         sharpness)
+
 
 def df_to_image(df,
                 directory_pth,
                 sub_dir,
                 filename,
+                sharpness=1.7,
                 col_width=5.0,
                 row_height=0.625,
                 font_size=14,
@@ -92,7 +102,9 @@ def df_to_image(df,
 
     create_plt_png(directory_pth,
                    sub_dir,
-                   filename)
+                   filename,
+                   sharpness)
+
     plt.close()
 
 
