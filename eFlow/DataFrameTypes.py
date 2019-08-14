@@ -20,7 +20,7 @@ class DataFrameTypes:
         df:
             Pandas dataframe object.
 
-        target_col:
+        target_column:
             If the project is using a supervised learning approach we can
             specify the target column. (Note: Not required)
 
@@ -58,12 +58,12 @@ class DataFrameTypes:
         self.__one_hot_encoded_names = dict()
 
         # Attempt to init target column
-        if target_col:
-            if target_col in tmp_df.columns:
-                self.__target_feature = target_col
+        if target_column:
+            if target_column in tmp_df.columns:
+                self.__target_feature = target_column
             else:
                 print("WARNING!!!: THE FEATURE {0} "
-                      "DOES NOT EXIST IN THIS DATASET!".format(target_col))
+                      "DOES NOT EXIST IN THIS DATASET!".format(target_column))
 
         # Create one hot encoded features
         if self.__categorical_features:

@@ -56,24 +56,27 @@ class DataAnalysis:
 
         self.__notebook_mode = notebook_mode
 
+        # Setup project structure
         if not overwrite_full_path:
-            parent_structure = "/" + SYS_CONSTANTS.PARENT_OUTPUT_FOLDER_NAME\
+            parent_structure = "/" + SYS_CONSTANTS.PARENT_OUTPUT_FOLDER_NAME \
                                + "/" + project_name + "/"
-            self.__PROJECT = enum(PATH_TO_OUTPUT_FOLDER=''.join(
-                os.getcwd().partition('/eFlow')[0:1]) + parent_structure)
+            self.__PROJECT = enum(PATH_TO_OUTPUT_FOLDER=
+                                  os.getcwd() + parent_structure)
         else:
             self.__PROJECT = enum(PATH_TO_OUTPUT_FOLDER=overwrite_full_path)
 
+        print(self.__PROJECT.PATH_TO_OUTPUT_FOLDER)
+
         if df is not None and df_features is not None:
-            # ---
 
-            if self.__notebook_mode:
-                display(df.dtypes)
-                print("\n\n")
-                display(self.__missing_values_table(df))
-                print("\n")
-
+            # Visualize and save missing data graphics if specified
             if missing_data_visuals and df.isnull().values.any():
+
+                if self.__notebook_mode:
+                    display(df.dtypes)
+                    print("\n\n")
+                    display(self.__missing_values_table(df))
+                    print("\n")
 
                 # ---
                 msno.matrix(df)
@@ -119,7 +122,8 @@ class DataAnalysis:
             # Iterate through DataFrame columns and graph based on data types
             for col_feature_name in df.columns:
 
-                if len(df[col_feature_name].value_counts().values) <= 3 and \
+                feature_values = df[col_feature_name].value_counts().keys()
+                if len(feature_values) <= 3 and \
                         not col_feature_name in df_features.get_numerical_features():
 
                     self.pie_graph(df,
@@ -130,7 +134,7 @@ class DataAnalysis:
                     self.count_plot_graph(df, col_feature_name)
 
                 elif col_feature_name in df_features.get_integer_features():
-                    if len(df[col_feature_name].dropna().unique()) <= 13:
+                    if len(feature_values) <= 13:
                         self.count_plot_graph(df,
                                               col_feature_name)
                     else:
@@ -407,10 +411,12 @@ class DataAnalysis:
             display(col_vc_df)
             print("\n"*3)
 
+        col_vc_df.set_index('Unique Values',
+                 inplace=True)
         # Convert DataFrame table to image
         df_to_image(col_vc_df,
                     self.__PROJECT.PATH_TO_OUTPUT_FOLDER,
-                    "Feature Analysis/Tables",
+                    "Feature Analysis/Tables/Value Counts",
                     col_feature_name + "_Value_Counts",
                     show_index=True,
                     format_float_pos=format_float_pos)
@@ -441,7 +447,7 @@ class DataAnalysis:
 
         # Numerical summary of the column stored in a DataFrame Object.
         col_desc_df = df[col_feature_name].describe().to_frame()
-        col_desc_df["var"] = df[col_feature_name].var()
+        col_desc_df.loc["var"] = df[col_feature_name].var()
 
         if display_table and self.__notebook_mode:
             display(col_desc_df)
@@ -450,7 +456,7 @@ class DataAnalysis:
         # Convert DataFrame table to image
         df_to_image(col_desc_df,
                     self.__PROJECT.PATH_TO_OUTPUT_FOLDER,
-                    "Feature Analysis/Tables",
+                    "Feature Analysis/Tables/Descriptions",
                     col_feature_name + "_Descr",
                     show_index=True,
                     format_float_pos=format_float_pos)

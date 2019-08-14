@@ -3,10 +3,11 @@
   <component name="ChangeListManager">
     <list default="true" id="ed041e50-c9da-4464-8bcf-e2b46601487b" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Testing/.ipynb_checkpoints/Pre Production-checkpoint.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/Testing/.ipynb_checkpoints/Pre Production-checkpoint.ipynb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Testing/Pre Production.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/Testing/Pre Production.ipynb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/eFlow/DataAnalysis.py" beforeDir="false" afterPath="$PROJECT_DIR$/eFlow/DataAnalysis.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/eFlow/DataCleaner.py" beforeDir="false" afterPath="$PROJECT_DIR$/eFlow/DataCleaner.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/eFlow/DataFrameTypes.py" beforeDir="false" afterPath="$PROJECT_DIR$/eFlow/DataFrameTypes.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/eFlow/Widgets/DataCleaningWidget.py" beforeDir="false" afterPath="$PROJECT_DIR$/eFlow/Widgets/DataCleaningWidget.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/eFlow/Utils/Constants.py" beforeDir="false" afterPath="$PROJECT_DIR$/eFlow/Utils/Constants.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -20,36 +21,10 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/eFlow/AutoModeler.py">
-          <provider selected="true" editor-type-id="text-editor" />
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/eFlow/ClusterMaster.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="8985">
-              <caret line="620" column="39" selection-start-line="620" selection-start-column="39" selection-end-line="620" selection-end-column="53" />
-              <folding>
-                <element signature="e#25#62#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/eFlow/DataAnalysis.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="90">
-              <caret line="6" column="20" lean-forward="true" selection-start-line="6" selection-start-column="20" selection-end-line="6" selection-end-column="20" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/eFlow/Widgets/DataCleaningWidget.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="420">
-              <caret line="28" column="29" lean-forward="true" selection-start-line="28" selection-start-column="29" selection-end-line="28" selection-end-column="29" />
+            <state relative-caret-position="6630">
+              <caret line="449" column="59" selection-start-line="449" selection-start-column="59" selection-end-line="449" selection-end-column="59" />
               <folding>
                 <element signature="e#0#19#0" expanded="true" />
               </folding>
@@ -57,11 +32,76 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/eFlow/Utils/GeneralUtils.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="195">
+              <caret line="13" column="7" lean-forward="true" selection-start-line="13" selection-start-column="7" selection-end-line="13" selection-end-column="7" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/eFlow/Utils/Multi_Threading_Functions.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="960">
+              <caret line="69" column="15" selection-start-line="69" selection-start-column="15" selection-end-line="69" selection-end-column="15" />
+              <folding>
+                <element signature="e#0#46#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/eFlow/Utils/Objects.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state>
+              <caret column="18" selection-start-column="18" selection-end-column="18" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/eFlow/Utils/SysUtils.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state>
+              <caret column="19" selection-start-column="19" selection-end-column="19" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/eFlow/Utils/Constants.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="15">
+              <caret line="1" column="53" selection-start-line="1" selection-start-column="53" selection-end-line="1" selection-end-column="53" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/eFlow/Utils/Custom_Exc.py">
+          <provider selected="true" editor-type-id="text-editor" />
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/eFlow/Widgets/DataCleaningWidget.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="240">
+              <caret line="28" column="29" selection-start-line="28" selection-start-column="29" selection-end-line="28" selection-end-column="29" />
+              <folding>
+                <element signature="e#0#19#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/eFlow/DataFrameTypes.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="210">
-              <caret line="14" column="30" selection-start-line="14" selection-start-column="30" selection-end-line="14" selection-end-column="30" />
+            <state relative-caret-position="435">
+              <caret line="31" column="21" selection-start-line="31" selection-start-column="21" selection-end-line="31" selection-end-column="21" />
               <folding>
                 <element signature="e#0#11#0" expanded="true" />
               </folding>
@@ -69,11 +109,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/eFlow/DataCleaner.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="405">
-              <caret line="27" column="31" lean-forward="true" selection-start-line="27" selection-start-column="31" selection-end-line="27" selection-end-column="44" />
+            <state relative-caret-position="147">
+              <caret line="54" column="8" selection-start-line="54" selection-start-column="8" selection-end-line="62" />
               <folding>
                 <element signature="e#0#19#0" expanded="true" />
               </folding>
@@ -92,10 +132,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>df_features</find>
-      <find>make_nan_assertions</find>
-      <find>get_bool</find>
-      <find>__make_type_assertion_after_ignore</find>
       <find>__make_nan_assertions</find>
       <find>&quot;=&quot;</find>
       <find>json_obj</find>
@@ -118,10 +154,14 @@
       <find>get_last_saved_json_file_path</find>
       <find>__make_type_assertion</find>
       <find>enum</find>
-      <find>rom eFlow.Utils.Sys_Utils import *</find>
       <find>DataCleaner</find>
+      <find>target_col</find>
       <find>DataCleaningWidget</find>
       <find>Flow.Utils.Sys_Utils</find>
+      <find>rom eFlow.Utils.Sys_Utils import *</find>
+      <find>missing_data_visuals</find>
+      <find>__missing_values_table</find>
+      <find>var&quot;</find>
     </findStrings>
     <replaceStrings>
       <replace>self.__general_input</replace>
@@ -163,11 +203,11 @@
         <option value="$PROJECT_DIR$/eFlow/Utils/General_Utils.py" />
         <option value="$PROJECT_DIR$/eFlow/Utils/Sys_Utils.py" />
         <option value="$PROJECT_DIR$/eFlow/Utils/Enum.py" />
-        <option value="$PROJECT_DIR$/eFlow/Utils/Constants.py" />
-        <option value="$PROJECT_DIR$/eFlow/DataAnalysis.py" />
         <option value="$PROJECT_DIR$/eFlow/DataCleaner.py" />
         <option value="$PROJECT_DIR$/eFlow/Widgets/DataCleaningWidget.py" />
         <option value="$PROJECT_DIR$/eFlow/DataFrameTypes.py" />
+        <option value="$PROJECT_DIR$/eFlow/Utils/Constants.py" />
+        <option value="$PROJECT_DIR$/eFlow/DataAnalysis.py" />
       </list>
     </option>
   </component>
@@ -180,34 +220,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope">
-        <subPane subId="Scope 'Project Files'; set:Project Files; class com.intellij.psi.search.scope.ProjectFilesScope">
-          <expand>
-            <path>
-              <item name="eFlowMaster" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
-              <item name="" type="442cc68d:ScopeViewTreeModel$RootNode" />
-            </path>
-            <path>
-              <item name="eFlowMaster" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
-              <item name="" type="442cc68d:ScopeViewTreeModel$RootNode" />
-              <item name="eFlow" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-            </path>
-            <path>
-              <item name="eFlowMaster" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
-              <item name="" type="442cc68d:ScopeViewTreeModel$RootNode" />
-              <item name="eFlow" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="Utils" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-            </path>
-            <path>
-              <item name="eFlowMaster" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
-              <item name="" type="442cc68d:ScopeViewTreeModel$RootNode" />
-              <item name="eFlow" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="Widgets" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-            </path>
-          </expand>
-          <select />
-        </subPane>
-      </pane>
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -225,6 +237,28 @@
               <item name="eFlowMaster" type="462c0819:PsiDirectoryNode" />
               <item name="eFlow" type="462c0819:PsiDirectoryNode" />
               <item name="Utils" type="462c0819:PsiDirectoryNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
+      <pane id="Scope">
+        <subPane subId="Scope 'Project Files'; set:Project Files; class com.intellij.psi.search.scope.ProjectFilesScope">
+          <expand>
+            <path>
+              <item name="eFlowMaster" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
+              <item name="" type="442cc68d:ScopeViewTreeModel$RootNode" />
+            </path>
+            <path>
+              <item name="eFlowMaster" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
+              <item name="" type="442cc68d:ScopeViewTreeModel$RootNode" />
+              <item name="eFlow" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+            </path>
+            <path>
+              <item name="eFlowMaster" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
+              <item name="" type="442cc68d:ScopeViewTreeModel$RootNode" />
+              <item name="eFlow" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="Widgets" type="9f88c78c:ScopeViewTreeModel$FileNode" />
             </path>
           </expand>
           <select />
@@ -338,18 +372,18 @@
       <workItem from="1565638412621" duration="7978000" />
       <workItem from="1565709268349" duration="1492000" />
       <workItem from="1565790496594" duration="62000" />
-      <workItem from="1565790651215" duration="810000" />
+      <workItem from="1565790651215" duration="3215000" />
+      <workItem from="1565807387961" duration="79000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="434289000" />
+    <option name="totallyTimeSpent" value="436773000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1680" height="1050" extended-state="0" />
-    <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.17643468" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.17826618" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -438,53 +472,12 @@
     <entry file="file://$PROJECT_DIR$/eFlow/PipelineSegment.py">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/eFlow/Utils/SysUtils.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret column="19" lean-forward="true" selection-start-column="19" selection-end-column="19" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/eFlow/Utils/GeneralUtils.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret column="21" selection-start-column="4" selection-end-column="21" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/eFlow/Utils/Objects.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret column="18" lean-forward="true" selection-start-column="18" selection-end-column="18" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/eFlow/Utils/Custom_Exc.py">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/eFlow/Utils/Constants.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret selection-end-column="36" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/eFlow/Utils/Multi_Threading_Functions.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="843">
-          <caret line="69" column="15" selection-start-line="69" selection-start-column="15" selection-end-line="69" selection-end-column="15" />
-          <folding>
-            <element signature="e#0#46#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/eFlow/AutoModeler.py">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
     <entry file="file://$PROJECT_DIR$/eFlow/ClusterMaster.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="8985">
+        <state relative-caret-position="903">
           <caret line="620" column="39" selection-start-line="620" selection-start-column="39" selection-end-line="620" selection-end-column="53" />
           <folding>
             <element signature="e#25#62#0" expanded="true" />
@@ -494,25 +487,52 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/eFlow/DataAnalysis.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="90">
-          <caret line="6" column="20" lean-forward="true" selection-start-line="6" selection-start-column="20" selection-end-line="6" selection-end-column="20" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/eFlow/DataCleaner.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="405">
-          <caret line="27" column="31" lean-forward="true" selection-start-line="27" selection-start-column="31" selection-end-line="27" selection-end-column="44" />
+        <state relative-caret-position="6630">
+          <caret line="449" column="59" selection-start-line="449" selection-start-column="59" selection-end-line="449" selection-end-column="59" />
           <folding>
             <element signature="e#0#19#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/eFlow/Utils/Multi_Threading_Functions.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="960">
+          <caret line="69" column="15" selection-start-line="69" selection-start-column="15" selection-end-line="69" selection-end-column="15" />
+          <folding>
+            <element signature="e#0#46#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/eFlow/Utils/Objects.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret column="18" selection-start-column="18" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/eFlow/Utils/SysUtils.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret column="19" selection-start-column="19" selection-end-column="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/eFlow/Utils/Constants.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="15">
+          <caret line="1" column="53" selection-start-line="1" selection-start-column="53" selection-end-line="1" selection-end-column="53" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/eFlow/Utils/Custom_Exc.py">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
     <entry file="file://$PROJECT_DIR$/eFlow/Widgets/DataCleaningWidget.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="420">
-          <caret line="28" column="29" lean-forward="true" selection-start-line="28" selection-start-column="29" selection-end-line="28" selection-end-column="29" />
+        <state relative-caret-position="240">
+          <caret line="28" column="29" selection-start-line="28" selection-start-column="29" selection-end-line="28" selection-end-column="29" />
           <folding>
             <element signature="e#0#19#0" expanded="true" />
           </folding>
@@ -521,10 +541,27 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/eFlow/DataFrameTypes.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="210">
-          <caret line="14" column="30" selection-start-line="14" selection-start-column="30" selection-end-line="14" selection-end-column="30" />
+        <state relative-caret-position="435">
+          <caret line="31" column="21" selection-start-line="31" selection-start-column="21" selection-end-line="31" selection-end-column="21" />
           <folding>
             <element signature="e#0#11#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/eFlow/Utils/GeneralUtils.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="195">
+          <caret line="13" column="7" lean-forward="true" selection-start-line="13" selection-start-column="7" selection-end-line="13" selection-end-column="7" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/eFlow/DataCleaner.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="147">
+          <caret line="54" column="8" selection-start-line="54" selection-start-column="8" selection-end-line="62" />
+          <folding>
+            <element signature="e#0#19#0" expanded="true" />
           </folding>
         </state>
       </provider>
