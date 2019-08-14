@@ -4,7 +4,7 @@ import missingno as msno
 from IPython.display import display
 import random
 
-from eFlow.Utils.Sys_Utils import *
+from eFlow.Utils.SysUtils import *
 from eFlow.Utils.Constants import *
 
 class DataAnalysis:
@@ -48,8 +48,8 @@ class DataAnalysis:
                                              ["Male", "M", "#7EAED3"],
                                              ["Female", "F", "#FFB6C1"]])
         self.__defined_column_colors.append([[" "],
-                                             ["Y", "yes", "#55a868"],
-                                             ["N", "No", "#ff8585"]])
+                                             ["Y", "yes", "Yes", "#55a868"],
+                                             ["N", "no", "No", "#ff8585"]])
         self.__defined_column_colors.append([[" "],
                                              [True, "#55a868"],
                                              [False, "#ff8585"]])

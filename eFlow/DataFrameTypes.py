@@ -12,7 +12,7 @@ class DataFrameTypes:
 
     def __init__(self,
                  df,
-                 target_col=None,
+                 target_column=None,
                  ignore_nulls=True,
                  display_init=True):
         """

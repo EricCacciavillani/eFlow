@@ -9,7 +9,7 @@ from scipy import stats
 import uuid
 import os.path
 
-from eFlow.Utils.Sys_Utils import *
+from eFlow.Utils.SysUtils import *
 from eFlow.Utils.Constants import *
 
 
@@ -18,7 +18,7 @@ class DataCleaningWidget:
     def __init__(self,
                  require_input=None,
                  data_cleaning_options=None,
-                 project_name="Default_Data_Cleaner",
+                 project_name="Data Cleaning",
                  overwrite_full_path=None):
         """
         df:

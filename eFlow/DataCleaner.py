@@ -11,11 +11,11 @@ import os.path
 import inspect
 
 from eFlow.Utils.SysUtils import *
+from eFlow.Utils.GeneralUtils import string_condtional
 from eFlow.Utils.Constants import *
 from eFlow.Widgets.DataCleaningWidget import *
 from eFlow.DataFrameTypes import *
 from eFlow.PipelineSegment import *
-from eFlow.GeneralUtils import string_condtional
 from eFlow.Utils.Objects import enum
 
 class DataCleaner(PipelineSegment):
@@ -25,7 +25,7 @@ class DataCleaner(PipelineSegment):
 
     def __init__(self,
                  df=None,
-                 project_name="Default_Data_Cleaner",
+                 project_name="Data Cleaning",
                  overwrite_full_path=None,
                  notebook_mode=True,
                  missing_data_visuals=True,
