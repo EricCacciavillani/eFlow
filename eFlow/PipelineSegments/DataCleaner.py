@@ -15,8 +15,8 @@ from eFlow.Utils.GeneralUtils import string_condtional
 from eFlow.Utils.Constants import *
 from eFlow.Widgets.DataCleaningWidget import *
 from eFlow.DataFrameTypes import *
-from eFlow.PipelineSegment import *
-from eFlow.Utils.Objects import enum
+from eFlow._Hidden.Objects.PipelineSegment import *
+from eFlow._Hidden.Objects.enum import *
 
 class DataCleaner(PipelineSegment):
     """
@@ -469,6 +469,7 @@ class DataCleaner(PipelineSegment):
 
     def __fill_nan_with_specfic_value(self,
                                       df,
+                                      feature,
                                       json_obj):
 
         print("Replace nan with {0} on feature: {1}".format(
@@ -481,6 +482,7 @@ class DataCleaner(PipelineSegment):
 
     def __fill_nan_by_occurance_percentaile(self,
                                             df,
+                                            feature,
                                             json_obj):
 
         print("Fill nan by occurance percentaile")

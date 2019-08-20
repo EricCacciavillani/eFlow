@@ -107,6 +107,12 @@ def df_to_image(df,
 
     plt.close()
 
+def convert_to_file_name(filename):
+    return "".join(x for x in str(
+        filename) if x.isalnum() or x == "_" or x == "("
+            or x == ")" or x == " " or x == "-")
+
+
 
 def write_object_to_file(obj,
                          filename,):

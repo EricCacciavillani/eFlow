@@ -5,10 +5,10 @@ import random
 import numpy as np
 from matplotlib import pyplot as plt
 import copy
+import os
 from IPython.display import display
 
-
-from eFlow.Utils.Objects import enum
+from eFlow._Hidden.Objects.enum import enum
 from eFlow.Utils.SysUtils import *
 from eFlow.Utils.Constants import *
 
@@ -17,7 +17,7 @@ class DataAnalysis:
     def __init__(self,
                  df=None,
                  df_features=None,
-                 project_name="Default_Project_Name_Data_Analysis",
+                 project_name="Data Analysis",
                  overwrite_full_path=None,
                  notebook_mode=True,
                  missing_data_visuals=False):
@@ -333,7 +333,7 @@ class DataAnalysis:
            directory.
         """
         # Find value counts
-        value_counts = df[col_feature_name].value_counts()
+        value_counts = df[col_feature_name].dropna().value_counts()
         value_list = value_counts.index.tolist()
         value_count_list = value_counts.values.tolist()
 
@@ -409,6 +409,10 @@ class DataAnalysis:
         # Value counts DataFrame
         col_vc_df = df[col_feature_name].value_counts().rename_axis(
             'Unique Values').reset_index(name='Counts')
+
+        col_vc_df["Percantage"] = ["{0:.2f}%".format(count/df.shape[0] * 100 )
+                                   for value, count in
+                                   df[col_feature_name].value_counts().items()]
 
         if display_table and self.__notebook_mode:
             display(col_vc_df)

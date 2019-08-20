@@ -40,7 +40,7 @@ from multiprocessing import Pool as ThreadPool
 import multiprocessing as mp
 from tqdm import tqdm
 
-from eFlow.Utils.Multi_Threading_Functions import *
+from eFlow._Hidden.Functionality.Multi_Threading_Functions import *
 
 
 class TargetSampleRemoval:
