@@ -8,15 +8,13 @@ import json
 from scipy import stats
 import uuid
 import os.path
-import inspect
+import numpy as np
 
 from eFlow.Utils.SysUtils import *
 from eFlow.Utils.GeneralUtils import string_condtional
-from eFlow.Utils.Constants import *
-from eFlow.Widgets.DataCleaningWidget import *
+from eFlow._Hidden.Widgets.DataCleaningWidget import *
 from eFlow.DataFrameTypes import *
 from eFlow._Hidden.Objects.PipelineSegment import *
-from eFlow._Hidden.Objects.enum import *
 
 class DataCleaner(PipelineSegment):
     """
@@ -52,14 +50,9 @@ class DataCleaner(PipelineSegment):
         self.__requires_nan_removal = df.isnull().values.any()
         self.__notebook_mode = notebook_mode
 
-        # Setup project structure
-        if not overwrite_full_path:
-            parent_structure = "/" + SYS_CONSTANTS.PARENT_OUTPUT_FOLDER_NAME \
-                               + "/" + project_name + "/"
-            self.__PROJECT = enum(PATH_TO_OUTPUT_FOLDER=
-                                  os.getcwd() + parent_structure)
-        else:
-            self.__PROJECT = enum(PATH_TO_OUTPUT_FOLDER=overwrite_full_path)
+        FileOutput.__init__(self,
+                            project_name,
+                            overwrite_full_path)
 
         # Throw error here
         if df is None:
@@ -71,7 +64,7 @@ class DataCleaner(PipelineSegment):
 
             # ---
             msno.matrix(df)
-            create_plt_png(self.__PROJECT.PATH_TO_OUTPUT_FOLDER,
+            create_plt_png(PipelineSegment.get_output_folder(self),
                            "Missing_Data/Graphics",
                            "Missing_Data_Matrix_Graph")
 
@@ -83,7 +76,7 @@ class DataCleaner(PipelineSegment):
             msno.bar(df,
                      color="#072F5F")
 
-            create_plt_png(self.__PROJECT.PATH_TO_OUTPUT_FOLDER,
+            create_plt_png(PipelineSegment.get_output_folder(self),
                            "Missing_Data/Graphics",
                            "Missing_Data_Bar_Graph")
             if self.__notebook_mode:
@@ -92,7 +85,7 @@ class DataCleaner(PipelineSegment):
 
             # ---
             msno.heatmap(df)
-            create_plt_png(self.__PROJECT.PATH_TO_OUTPUT_FOLDER,
+            create_plt_png(PipelineSegment.get_output_folder(self),
                            "Missing_Data/Graphics",
                            "Missing_Data_Heatmap")
             if self.__notebook_mode:
@@ -101,14 +94,12 @@ class DataCleaner(PipelineSegment):
 
             # ---
             msno.dendrogram(df)
-            create_plt_png(self.__PROJECT.PATH_TO_OUTPUT_FOLDER,
+            create_plt_png(PipelineSegment.get_output_folder(self),
                            "Missing_Data/Graphics",
                            "Missing_Data_Dendrogram_Graph")
             if self.__notebook_mode:
                 plt.show()
             plt.close()
-
-            print(self.__PROJECT.PATH_TO_OUTPUT_FOLDER)
 
         # --- Setting up widget options
 
@@ -259,7 +250,7 @@ class DataCleaner(PipelineSegment):
             self.__ui_widget = DataCleaningWidget(
                 require_input=self.__require_input,
                 data_cleaning_options=self.__data_cleaning_options,
-                overwrite_full_path=self.__PROJECT.PATH_TO_OUTPUT_FOLDER)
+                overwrite_full_path=FileOutput.get_output_folder(self))
             self.__ui_widget.run_widget(df,
                                  df_features)
         else:
@@ -313,7 +304,7 @@ class DataCleaner(PipelineSegment):
 
         # ---
         df_to_image(mis_val_table_ren_columns,
-                    self.__PROJECT.PATH_TO_OUTPUT_FOLDER,
+                    FileOutput.get_output_folder(self),
                     "Missing_Data/Tables",
                     "Missing_Data_Table",
                     show_index=True,
@@ -324,12 +315,12 @@ class DataCleaner(PipelineSegment):
     def __make_nan_assertions(self,
                               df,
                               df_features):
-        print("Hit")
+
         for bool_feature in df_features.get_bool_features():
             if len(df[bool_feature].dropna().value_counts().values) != 2:
                 print("Testing")
 
-    ### Cleaning options ###
+    # --- Cleaning options
     def __zcore_remove_outliers(self,
                                 df,
                                 feature,

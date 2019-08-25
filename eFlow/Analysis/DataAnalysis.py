@@ -10,9 +10,9 @@ from IPython.display import display
 
 from eFlow._Hidden.Objects.enum import enum
 from eFlow.Utils.SysUtils import *
-from eFlow.Utils.Constants import *
+from eFlow._Hidden.Objects.FileOutput import *
 
-class DataAnalysis:
+class DataAnalysis(FileOutput):
 
     def __init__(self,
                  df=None,
@@ -36,6 +36,9 @@ class DataAnalysis:
         overwrite_full_path:
             Overwrites the path to the parent folder.
 
+        notebook_mode:
+            If in a python notebook display in the notebook.
+
         Returns/Descr:
             Designed to increase workflow and overall attempt to automate the
             routine of graphing/generating tables. Will be adding interactive
@@ -45,6 +48,10 @@ class DataAnalysis:
             I will continue to expand on different ways of exploring data and
             automating that process.
         """
+
+        FileOutput.__init__(self,
+                            project_name,
+                            overwrite_full_path)
 
         # Pre-defined colors for column's with set names.
         # Multiple names/values are allowed
@@ -61,15 +68,6 @@ class DataAnalysis:
 
         self.__notebook_mode = notebook_mode
 
-        # Setup project structure
-        if not overwrite_full_path:
-            parent_structure = "/" + SYS_CONSTANTS.PARENT_OUTPUT_FOLDER_NAME \
-                               + "/" + project_name + "/"
-            self.__PROJECT = enum(PATH_TO_OUTPUT_FOLDER=
-                                  os.getcwd() + parent_structure)
-        else:
-            self.__PROJECT = enum(PATH_TO_OUTPUT_FOLDER=overwrite_full_path)
-
         if df is not None and df_features is not None:
 
             # Visualize and save missing data graphics if specified
@@ -83,7 +81,7 @@ class DataAnalysis:
 
                 # ---
                 msno.matrix(df)
-                create_plt_png(self.__PROJECT.PATH_TO_OUTPUT_FOLDER,
+                create_plt_png(FileOutput.get_output_folder(self),
                                "Missing Data/Graphics",
                                "Missing_Data_Matrix_Graph")
 
@@ -95,7 +93,7 @@ class DataAnalysis:
                 msno.bar(df,
                          color="#072F5F")
 
-                create_plt_png(self.__PROJECT.PATH_TO_OUTPUT_FOLDER,
+                create_plt_png(FileOutput.get_output_folder(self),
                                "Missing Data/Graphics",
                                "Missing_Data_Bar_Graph")
                 if self.__notebook_mode:
@@ -104,7 +102,7 @@ class DataAnalysis:
 
                 # ---
                 msno.heatmap(df)
-                create_plt_png(self.__PROJECT.PATH_TO_OUTPUT_FOLDER,
+                create_plt_png(FileOutput.get_output_folder(self),
                                "Missing Data/Graphics",
                                "Missing_Data_Heatmap")
                 if self.__notebook_mode:
@@ -113,7 +111,7 @@ class DataAnalysis:
 
                 # ---
                 msno.dendrogram(df)
-                create_plt_png(self.__PROJECT.PATH_TO_OUTPUT_FOLDER,
+                create_plt_png(FileOutput.get_output_folder(self),
                                "Missing Data/Graphics",
                                "Missing_Data_Dendrogram_Graph")
                 if self.__notebook_mode:
@@ -178,7 +176,7 @@ class DataAnalysis:
 
         # ---
         df_to_image(mis_val_table_ren_columns,
-                    self.__PROJECT.PATH_TO_OUTPUT_FOLDER,
+                    FileOutput.get_output_folder(self),
                     "Missing Data/Tables",
                     "Missing_Data_Table",
                     show_index=True,
@@ -214,7 +212,7 @@ class DataAnalysis:
         sns.distplot(df[col_feature_name].dropna())
 
         # Generate image in proper directory structure
-        create_plt_png(self.__PROJECT.PATH_TO_OUTPUT_FOLDER,
+        create_plt_png(FileOutput.get_output_folder(self),
                        "Feature Analysis/Graphics",
                        "Distance_Plot_" + col_feature_name)
         if self.__notebook_mode:
@@ -288,7 +286,7 @@ class DataAnalysis:
                     ha="center")
 
         # Save graph in proper directory structure
-        create_plt_png(self.__PROJECT.PATH_TO_OUTPUT_FOLDER,
+        create_plt_png(FileOutput.get_output_folder(self),
                        "Feature Analysis/Graphics",
                        "Count_Plot_" + col_feature_name)
         if self.__notebook_mode:
@@ -368,7 +366,7 @@ class DataAnalysis:
         plt.figure(figsize=(20, 20))
 
         # Save graph in proper directory structure
-        create_plt_png(self.__PROJECT.PATH_TO_OUTPUT_FOLDER,
+        create_plt_png(FileOutput.get_output_folder(self),
                        "Feature Analysis/Graphics",
                        "Pie_Chart_" + col_feature_name)
         if self.__notebook_mode:
@@ -423,7 +421,7 @@ class DataAnalysis:
 
         # Convert DataFrame table to image
         df_to_image(col_vc_df,
-                    self.__PROJECT.PATH_TO_OUTPUT_FOLDER,
+                    FileOutput.get_output_folder(self),
                     "Feature Analysis/Tables/Value Counts",
                     col_feature_name + "_Value_Counts",
                     show_index=True,
@@ -463,7 +461,7 @@ class DataAnalysis:
 
         # Convert DataFrame table to image
         df_to_image(col_desc_df,
-                    self.__PROJECT.PATH_TO_OUTPUT_FOLDER,
+                    FileOutput.get_output_folder(self),
                     "Feature Analysis/Tables/Descriptions",
                     col_feature_name + "_Descr",
                     show_index=True,

@@ -22,8 +22,7 @@ import numpy as np
 import os
 import copy
 
-sys.path.append('..')
-from eFlow.Utils.Constants import *
+# from eFlow.Utils.Constants import *
 
 
 class ClusterMaster:

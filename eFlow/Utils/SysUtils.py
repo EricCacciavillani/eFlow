@@ -100,12 +100,16 @@ def df_to_image(df,
             else:
                 cell.set_facecolor(row_colors[k[0] % len(row_colors)])
 
+    if not sub_dir:
+        sub_dir = ""
+
     create_plt_png(directory_pth,
                    sub_dir,
                    filename,
                    sharpness)
 
     plt.close()
+
 
 def convert_to_file_name(filename):
     return "".join(x for x in str(
