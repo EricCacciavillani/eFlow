@@ -2,41 +2,15 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="2c7eb1b5-0ad0-44e5-9a99-f4de30bca398" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/_Hidden/Constants.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/_Hidden/Widgets/__init__.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../Testing/.ipynb_checkpoints/Pre Production-checkpoint.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/../Testing/.ipynb_checkpoints/Pre Production-checkpoint.ipynb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../Testing/Pre Production.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/../Testing/Pre Production.ipynb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Testing/eFlow Data/Pre processing/Data Cleaning/Missing_Data/Graphics/.ipynb_checkpoints/Missing_Data_Heatmap-checkpoint.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Testing/eFlow Data/Pre processing/Data Cleaning/Missing_Data/Tables/.ipynb_checkpoints/Missing_Data_Table-checkpoint.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Testing/eFlow Data/Pre processing/General Analysis (Before Cleaning)/Feature Analysis/Graphics/.ipynb_checkpoints/Count_Plot_Cabin-checkpoint.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Testing/eFlow Data/Pre processing/General Analysis (Before Cleaning)/Feature Analysis/Graphics/.ipynb_checkpoints/Count_Plot_Parch-checkpoint.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Testing/eFlow Data/Pre processing/General Analysis (Before Cleaning)/Feature Analysis/Graphics/.ipynb_checkpoints/Count_Plot_Pclass-checkpoint.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Testing/eFlow Data/Pre processing/General Analysis (Before Cleaning)/Feature Analysis/Graphics/.ipynb_checkpoints/Count_Plot_Survived-checkpoint.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Testing/eFlow Data/Pre processing/General Analysis (Before Cleaning)/Feature Analysis/Graphics/.ipynb_checkpoints/Distance_Plot_Age-checkpoint.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Testing/eFlow Data/Pre processing/General Analysis (Before Cleaning)/Feature Analysis/Graphics/.ipynb_checkpoints/Pie_Chart_Date_test-checkpoint.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Testing/eFlow Data/Pre processing/General Analysis (Before Cleaning)/Feature Analysis/Graphics/.ipynb_checkpoints/Pie_Chart_Embarked-checkpoint.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Testing/eFlow Data/Pre processing/General Analysis (Before Cleaning)/Feature Analysis/Tables/Value Counts/.ipynb_checkpoints/Embarked_Value_Counts-checkpoint.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Testing/eFlow Data/Pre processing/SupervisedAnalysis/DecisionTreeClassifier/Confusion_Matrix_Testing_Data.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Testing/eFlow Data/Pre processing/SupervisedAnalysis/DecisionTreeClassifier/Confusion_Matrix_Training_Data.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Testing/eFlow Data/Supervised Analysis/DecisionTreeClassifier/.ipynb_checkpoints/Confusion_Matrix_Training_Data-checkpoint.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Testing/eFlow Data/Supervised Analysis/DecisionTreeClassifier/Confusion_Matrix_Training_Data.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Testing/imputer_model/fit-test-metrics.json" beforeDir="false" afterPath="$PROJECT_DIR$/../Testing/imputer_model/fit-test-metrics.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Testing/imputer_model/imputer.log" beforeDir="false" afterPath="$PROJECT_DIR$/../Testing/imputer_model/imputer.log" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Testing/imputer_model/imputer.pickle" beforeDir="false" afterPath="$PROJECT_DIR$/../Testing/imputer_model/imputer.pickle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Testing/imputer_model/model-0007.params" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Testing/imputer_model/model-symbol.json" beforeDir="false" afterPath="$PROJECT_DIR$/../Testing/imputer_model/model-symbol.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Testing/imputer_model/simple_imputer.pickle" beforeDir="false" afterPath="$PROJECT_DIR$/../Testing/imputer_model/simple_imputer.pickle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Testing/eFlow Data/Pre processing/Supervised Analysis/DecisionTreeClassifier/Test data/Evaluation on Test data.png" beforeDir="false" afterPath="$PROJECT_DIR$/../Testing/eFlow Data/Pre processing/Supervised Analysis/DecisionTreeClassifier/Test data/Evaluation on Test data.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Testing/eFlow Data/Pre processing/Supervised Analysis/DecisionTreeClassifier/Test data/Precision Recall Curve with Probabilities on Test data.png" beforeDir="false" afterPath="$PROJECT_DIR$/../Testing/eFlow Data/Pre processing/Supervised Analysis/DecisionTreeClassifier/Test data/Precision Recall Curve with Probabilities on Test data.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Testing/eFlow Data/Pre processing/Supervised Analysis/DecisionTreeClassifier/Train data/Evaluation on Train data.png" beforeDir="false" afterPath="$PROJECT_DIR$/../Testing/eFlow Data/Pre processing/Supervised Analysis/DecisionTreeClassifier/Train data/Evaluation on Train data.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Testing/eFlow Data/Pre processing/Supervised Analysis/DecisionTreeClassifier/Train data/Precision Recall Curve with Probabilities on Train data.png" beforeDir="false" afterPath="$PROJECT_DIR$/../Testing/eFlow Data/Pre processing/Supervised Analysis/DecisionTreeClassifier/Train data/Precision Recall Curve with Probabilities on Train data.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Analysis/DataAnalysis.py" beforeDir="false" afterPath="$PROJECT_DIR$/Analysis/DataAnalysis.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Analysis/ModelAnalysis.py" beforeDir="false" afterPath="$PROJECT_DIR$/Analysis/ModelAnalysis.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ClusterMaster.py" beforeDir="false" afterPath="$PROJECT_DIR$/ClusterMaster.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PipelineSegments/DataCleaner.py" beforeDir="false" afterPath="$PROJECT_DIR$/PipelineSegments/DataCleaner.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Utils/Constants.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Utils/Custom_Exc.py" beforeDir="false" afterPath="$PROJECT_DIR$/_Hidden/CustomExc.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Utils/SysUtils.py" beforeDir="false" afterPath="$PROJECT_DIR$/Utils/SysUtils.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Widgets/DataCleaningWidget.py" beforeDir="false" afterPath="$PROJECT_DIR$/_Hidden/Widgets/DataCleaningWidget.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Widgets/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/_Hidden/Objects/FileOutput.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_Hidden/Objects/PipelineSegment.py" beforeDir="false" afterPath="$PROJECT_DIR$/_Hidden/Objects/PipelineSegment.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Analysis/SupervisedModelAnalysis.py" beforeDir="false" afterPath="$PROJECT_DIR$/Analysis/SupervisedModelAnalysis.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -49,7 +23,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Utils/SysUtils.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="468">
+            <state relative-caret-position="1530">
               <caret line="102" column="18" selection-start-line="102" selection-start-column="11" selection-end-line="102" selection-end-column="18" />
               <folding>
                 <element signature="e#0#19#0" expanded="true" />
@@ -61,8 +35,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Analysis/DataAnalysis.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="7590">
-              <caret line="506" column="23" selection-start-line="506" selection-start-column="23" selection-end-line="506" selection-end-column="23" />
+            <state relative-caret-position="286">
+              <caret line="463" column="42" selection-start-line="463" selection-start-column="24" selection-end-line="463" selection-end-column="42" />
               <folding>
                 <element signature="e#0#19#0" expanded="true" />
               </folding>
@@ -71,24 +45,12 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/Analysis/ModelAnalysis.py">
+        <entry file="file://$PROJECT_DIR$/Analysis/SupervisedModelAnalysis.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="526">
-              <caret line="221" column="47" selection-start-line="221" selection-start-column="26" selection-end-line="221" selection-end-column="47" />
+            <state relative-caret-position="514">
+              <caret line="153" column="56" selection-start-line="153" selection-start-column="56" selection-end-line="153" selection-end-column="56" />
               <folding>
                 <element signature="e#0#43#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/ClusterMaster.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="345">
-              <caret line="23" selection-start-line="23" selection-end-line="23" />
-              <folding>
-                <element signature="e#25#62#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -105,16 +67,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>full</find>
-      <find>adjust_sharpness</find>
-      <find>create_value_counts_table</find>
-      <find>dropna</find>
-      <find>value_counts()</find>
-      <find>percentage</find>
-      <find>validate_file_name</find>
-      <find>output</find>
-      <find>SYS_CONSTANTS</find>
-      <find>get_output_folder</find>
       <find>OutputFolder</find>
       <find>display</find>
       <find>plt</find>
@@ -131,10 +83,20 @@
       <find>normalize_confusion_matrix</find>
       <find>y</find>
       <find>ERROR</find>
-      <find>plot_precision_recall_curve</find>
       <find>self.__model_name</find>
       <find>self.__PROJECT.PATH_TO_OUTPUT_FOLDER</find>
       <find>df_to_image</find>
+      <find>FileOutput.get_output_folder</find>
+      <find>.get_output_folder</find>
+      <find>plot_precision_recall_curve</find>
+      <find>self.__model</find>
+      <find>__classified_target_values</find>
+      <find>model_pred_function</find>
+      <find>__check_thresholds</find>
+      <find>thresholds</find>
+      <find>classification_analysis</find>
+      <find>model.predict</find>
+      <find>__get_model_prediction</find>
     </findStrings>
     <replaceStrings>
       <replace>PipelineSegment</replace>
@@ -169,9 +131,10 @@
         <option value="$PROJECT_DIR$/_Hidden/Constants.py" />
         <option value="$PROJECT_DIR$/Widgets/DataCleaningWidget.py" />
         <option value="$PROJECT_DIR$/PipelineSegments/DataCleaner.py" />
-        <option value="$PROJECT_DIR$/Analysis/DataAnalysis.py" />
         <option value="$PROJECT_DIR$/_Hidden/Widgets/DataCleaningWidget.py" />
         <option value="$PROJECT_DIR$/Analysis/ModelAnalysis.py" />
+        <option value="$PROJECT_DIR$/Analysis/DataAnalysis.py" />
+        <option value="$PROJECT_DIR$/Analysis/SupervisedModelAnalysis.py" />
       </list>
     </option>
   </component>
@@ -187,6 +150,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -194,11 +158,15 @@
               <item name="eFlow" type="b2602c69:ProjectViewProjectNode" />
               <item name="eFlow" type="462c0819:PsiDirectoryNode" />
             </path>
+            <path>
+              <item name="eFlow" type="b2602c69:ProjectViewProjectNode" />
+              <item name="eFlow" type="462c0819:PsiDirectoryNode" />
+              <item name="Analysis" type="462c0819:PsiDirectoryNode" />
+            </path>
           </expand>
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -244,18 +212,20 @@
       <workItem from="1566399107063" duration="414000" />
       <workItem from="1566421116930" duration="1246000" />
       <workItem from="1566488935256" duration="13866000" />
-      <workItem from="1566703221951" duration="2837000" />
+      <workItem from="1566703221951" duration="3068000" />
+      <workItem from="1566755325768" duration="697000" />
+      <workItem from="1566848003687" duration="7264000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="33275000" />
+    <option name="totallyTimeSpent" value="41467000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="69" y="23" width="1611" height="1027" extended-state="6" />
+    <frame x="68" y="23" width="1612" height="1027" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.26959848" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.2764331" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -393,16 +363,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Utils/SysUtils.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="468">
-          <caret line="102" column="18" selection-start-line="102" selection-start-column="11" selection-end-line="102" selection-end-column="18" />
-          <folding>
-            <element signature="e#0#19#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/_Hidden/Constants.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="45">
@@ -410,9 +370,29 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/Utils/SysUtils.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1530">
+          <caret line="102" column="18" selection-start-line="102" selection-start-column="11" selection-end-line="102" selection-end-column="18" />
+          <folding>
+            <element signature="e#0#19#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Analysis/DataAnalysis.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="286">
+          <caret line="463" column="42" selection-start-line="463" selection-start-column="24" selection-end-line="463" selection-end-column="42" />
+          <folding>
+            <element signature="e#0#19#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/ClusterMaster.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="345">
+        <state relative-caret-position="139">
           <caret line="23" selection-start-line="23" selection-end-line="23" />
           <folding>
             <element signature="e#25#62#0" expanded="true" />
@@ -420,20 +400,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Analysis/DataAnalysis.py">
+    <entry file="file://$PROJECT_DIR$/Analysis/SupervisedModelAnalysis.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="7590">
-          <caret line="506" column="23" selection-start-line="506" selection-start-column="23" selection-end-line="506" selection-end-column="23" />
-          <folding>
-            <element signature="e#0#19#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Analysis/ModelAnalysis.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="526">
-          <caret line="221" column="47" selection-start-line="221" selection-start-column="26" selection-end-line="221" selection-end-column="47" />
+        <state relative-caret-position="514">
+          <caret line="153" column="56" selection-start-line="153" selection-start-column="56" selection-end-line="153" selection-end-column="56" />
           <folding>
             <element signature="e#0#43#0" expanded="true" />
           </folding>

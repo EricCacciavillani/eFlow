@@ -21,6 +21,8 @@ class SupervisedModelAnalysis(FileOutput):
     def __init__(self,
                  model,
                  model_name,
+                 model_pred_function,
+                 model_prob_function=None,
                  X_train=None,
                  y_train=None,
                  X_test=None,
@@ -30,7 +32,9 @@ class SupervisedModelAnalysis(FileOutput):
                  prediction_type=PREDICTION_TYPES.CLASSIFICATION,
                  project_name="Supervised Analysis",
                  overwrite_full_path=None,
-                 notebook_mode=True):
+                 notebook_mode=True,
+                 thresholds=None,
+                 overwrite_target_classes=None):
         """
         model:
             A fitted supervised machine learning model.
@@ -67,40 +71,58 @@ class SupervisedModelAnalysis(FileOutput):
         # Init objectss by pass by refrence
         self.__model = copy.deepcopy(model)
         self.__model_name = copy.deepcopy(model_name)
+        self.__model_pred_function = copy.deepcopy(model_pred_function)
+        self.__model_prob_function = copy.deepcopy(model_prob_function)
         self.__notebook_mode = copy.deepcopy(notebook_mode)
         self.__prediction_type = copy.deepcopy(prediction_type)
-        self.__binary_classification = None
+        self.__target_values = None
+        self.__model_output_proba = None
+
+        model_output = self.__model_pred_function(X_train)
+
+        # Regression or Classification return
+        if isinstance(model_output[0], int) or isinstance(model_output[0],
+                                                          float):
+            self.__model_output_proba = False
+        # Must be a confidence probability output
+        else:
+            if isinstance(model_output[0], list) or \
+                    isinstance(model_output[0], np.ndarray):
+                self.__model_output_proba = True
 
         # Classification model
         if prediction_type == PREDICTION_TYPES.CLASSIFICATION:
 
-            self.__classified_target_values = set()
-            for y in [y_train, y_test, y_val]:
-                if y is not None:
-                    self.__classified_target_values |= set(y)
+            if not overwrite_target_classes:
+                self.__target_values = model.classes_
+            else:
+                self.__target_values = overwrite_target_classes
 
-            if len(self.__classified_target_values) == 2:
+            if len(self.__target_values) == 2:
                 self.__binary_classification = True
             else:
                 self.__binary_classification = False
 
 
             if X_train is not None and y_train is not None:
-                print("\n\n---" * 10 + "Training data" + "---" * 10)
+                print("\n\n" + "---" * 10 + "Training data" + "---" * 10)
                 self.classification_analysis(X_train,
                                              y_train,
-                                             dataset_name="Train data")
+                                             dataset_name="Train data",
+                                             thresholds=thresholds)
 
             if X_test is not None and y_test is not None:
                 print("\n\n" + "---" * 10 + "Test data" + "---" * 10)
                 self.classification_analysis(X_test,
                                              y_test,
-                                             dataset_name="Test data")
+                                             dataset_name="Test data",
+                                             thresholds=thresholds)
             if X_val is not None and y_val is not None:
                 print("\n\n" + "---" * 10 + "Validation data" + "---" * 10)
                 self.classification_analysis(X_val,
                                              y_val,
-                                             dataset_name="Validation data")
+                                             dataset_name="Validation data",
+                                             thresholds=thresholds)
 
 
         # Regression model
@@ -108,6 +130,48 @@ class SupervisedModelAnalysis(FileOutput):
             pass
         else:
             print("ERROR")
+
+    def __get_model_prediction(self,
+                               X,
+                               thresholds=None,
+                               return_probas=False):
+        """
+        X:
+            Feature matrix
+
+        Returns/Desc:
+            Performs
+        """
+        if isinstance(thresholds, list):
+            if sum(thresholds) != 1:
+                print(
+                    "WARNING: Thresholds didn't add up to 100%! This may cause issues in your results!")
+            if len(thresholds) != len(self.__target_values):
+                print(
+                    "ERROR: Thresholds didn't have the same vector length as target values.")
+
+        if return_probas:
+            model_output = self.__model_pred_function(X)
+            if self.__model_output_proba:
+                if isinstance(model_output[0], list):
+                    return np.asarray(self.__model_pred_function(X))
+
+            elif self.__model_prob_function:
+                if isinstance(model_output[0], list):
+                    return np.asarray(self.__model_pred_function(X))
+
+
+        if self.__model_output_proba:
+            if isinstance(model_output[0], list):
+                model_output = np.asarray(model_output)
+            if isinstance(model_output[0], np.ndarray):
+
+                if thresholds:
+                    model_output = model_output - np.asarray(thresholds)
+                return np.asarray([np.argmax(proba)
+                                   for proba in model_output])
+        else:
+            return model_output
 
     def classification_analysis(self,
                                 X,
@@ -118,7 +182,8 @@ class SupervisedModelAnalysis(FileOutput):
                                 custom_metrics=dict(),
                                 average_scoring=["micro",
                                                  "macro",
-                                                 "weighted"]):
+                                                 "weighted"],
+                                thresholds=None):
         """
         X/y:
             Feature matrix/Target data vector
@@ -160,7 +225,8 @@ class SupervisedModelAnalysis(FileOutput):
                                              y,
                                              sub_dir=f'{dataset_name}',
                                              title=tmp_file_name,
-                                             filename=tmp_file_name)
+                                             filename=tmp_file_name,
+                                             thresholds=thresholds)
 
             self.classification_evaluation(X,
                                            y,
@@ -179,11 +245,9 @@ class SupervisedModelAnalysis(FileOutput):
                                        f'{dataset_name}',
                                        normalize=normalize_confusion_matrix)
 
-            y_probas = self.__model.predict_proba(X)
-
             if self.__binary_classification:
                 skplt.metrics.plot_ks_statistic(y,
-                                                y_probas,
+                                                self.__model.predict_proba(X),
                                                 figsize=(10, 8))
 
         else:
@@ -197,7 +261,9 @@ class SupervisedModelAnalysis(FileOutput):
                                     sub_dir="",
                                     figsize=(10, 8),
                                     title=None,
-                                    filename=None):
+                                    filename=None,
+                                    return_probas=False,
+                                    thresholds=None):
         """
         X/y:
             Feature matrix/Target data vector.
@@ -220,7 +286,7 @@ class SupervisedModelAnalysis(FileOutput):
 
         if title:
             skplt.metrics.plot_precision_recall(y,
-                                                self.__model.predict_proba(X),
+                                                self.__get_model_prediction(X),
                                                 figsize=figsize,
                                                 title=title)
         else:
@@ -229,7 +295,7 @@ class SupervisedModelAnalysis(FileOutput):
                                                 figsize=figsize)
 
         if filename:
-            create_plt_png(FileOutput.get_output_folder(self),
+            create_plt_png(self.get_output_folder(),
                            sub_dir,
                            convert_to_file_name(filename))
 
@@ -244,7 +310,9 @@ class SupervisedModelAnalysis(FileOutput):
                               figsize=(10, 8),
                               title=None,
                               file_name=None,
-                              normalize=True):
+                              normalize=True,
+                              thresholds=None):
+
         warnings.filterwarnings('ignore')
         if title:
             skplt.metrics.plot_confusion_matrix(self.__model.predict(X),
@@ -260,7 +328,7 @@ class SupervisedModelAnalysis(FileOutput):
         warnings.filterwarnings('default')
 
         if file_name:
-            create_plt_png(FileOutput.get_output_folder(self),
+            create_plt_png(self.get_output_folder,
                            sub_dir,
                            convert_to_file_name(file_name))
 
@@ -278,7 +346,8 @@ class SupervisedModelAnalysis(FileOutput):
                                   ignore_metrics=[],
                                   average_scoring=["micro",
                                                    "macro",
-                                                   "weighted"]):
+                                                   "weighted"],
+                                  thresholds=None):
         """
         X/y:
             Feature matrix/Target data vector.
@@ -380,7 +449,7 @@ class SupervisedModelAnalysis(FileOutput):
         # Create image file
         if file_name:
             df_to_image(evaluation_report,
-                        FileOutput.get_output_folder(self),
+                        self.get_output_folder(),
                         sub_dir,
                         convert_to_file_name(file_name),
                         show_index=True,

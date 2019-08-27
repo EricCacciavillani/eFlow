@@ -81,7 +81,7 @@ class DataAnalysis(FileOutput):
 
                 # ---
                 msno.matrix(df)
-                create_plt_png(FileOutput.get_output_folder(self),
+                create_plt_png(self.get_output_folder(),
                                "Missing Data/Graphics",
                                "Missing_Data_Matrix_Graph")
 
@@ -93,7 +93,7 @@ class DataAnalysis(FileOutput):
                 msno.bar(df,
                          color="#072F5F")
 
-                create_plt_png(FileOutput.get_output_folder(self),
+                create_plt_png(self.get_output_folder(),
                                "Missing Data/Graphics",
                                "Missing_Data_Bar_Graph")
                 if self.__notebook_mode:
@@ -102,7 +102,7 @@ class DataAnalysis(FileOutput):
 
                 # ---
                 msno.heatmap(df)
-                create_plt_png(FileOutput.get_output_folder(self),
+                create_plt_png(self.get_output_folder(),
                                "Missing Data/Graphics",
                                "Missing_Data_Heatmap")
                 if self.__notebook_mode:
@@ -111,7 +111,7 @@ class DataAnalysis(FileOutput):
 
                 # ---
                 msno.dendrogram(df)
-                create_plt_png(FileOutput.get_output_folder(self),
+                create_plt_png(self.get_output_folder(),
                                "Missing Data/Graphics",
                                "Missing_Data_Dendrogram_Graph")
                 if self.__notebook_mode:
@@ -176,7 +176,7 @@ class DataAnalysis(FileOutput):
 
         # ---
         df_to_image(mis_val_table_ren_columns,
-                    FileOutput.get_output_folder(self),
+                    self.get_output_folder(),
                     "Missing Data/Tables",
                     "Missing_Data_Table",
                     show_index=True,
@@ -212,7 +212,7 @@ class DataAnalysis(FileOutput):
         sns.distplot(df[col_feature_name].dropna())
 
         # Generate image in proper directory structure
-        create_plt_png(FileOutput.get_output_folder(self),
+        create_plt_png(self.get_output_folder(),
                        "Feature Analysis/Graphics",
                        "Distance_Plot_" + col_feature_name)
         if self.__notebook_mode:
@@ -286,7 +286,7 @@ class DataAnalysis(FileOutput):
                     ha="center")
 
         # Save graph in proper directory structure
-        create_plt_png(FileOutput.get_output_folder(self),
+        create_plt_png(self.get_output_folder(),
                        "Feature Analysis/Graphics",
                        "Count_Plot_" + col_feature_name)
         if self.__notebook_mode:
@@ -366,7 +366,7 @@ class DataAnalysis(FileOutput):
         plt.figure(figsize=(20, 20))
 
         # Save graph in proper directory structure
-        create_plt_png(FileOutput.get_output_folder(self),
+        create_plt_png(self.get_output_folder(),
                        "Feature Analysis/Graphics",
                        "Pie_Chart_" + col_feature_name)
         if self.__notebook_mode:
@@ -421,7 +421,7 @@ class DataAnalysis(FileOutput):
 
         # Convert DataFrame table to image
         df_to_image(col_vc_df,
-                    FileOutput.get_output_folder(self),
+                    self.get_output_folder(),
                     "Feature Analysis/Tables/Value Counts",
                     col_feature_name + "_Value_Counts",
                     show_index=True,
@@ -461,7 +461,7 @@ class DataAnalysis(FileOutput):
 
         # Convert DataFrame table to image
         df_to_image(col_desc_df,
-                    FileOutput.get_output_folder(self),
+                    self.get_output_folder(),
                     "Feature Analysis/Tables/Descriptions",
                     col_feature_name + "_Descr",
                     show_index=True,
