@@ -123,6 +123,8 @@ class DataAnalysis(FileOutput):
             # Iterate through DataFrame columns and graph based on data types
             for col_feature_name in df.columns:
 
+                print(f"Generating graph for {col_feature_name}.")
+
                 feature_values = df[col_feature_name].value_counts().keys()
                 if len(feature_values) <= 3 and \
                         not col_feature_name in df_features.get_numerical_features():
@@ -147,6 +149,7 @@ class DataAnalysis(FileOutput):
                                              col_feature_name)
 
                 print("-" * 80 + "\n" * 2)
+                plt.close()
         else:
             print("Object didn't receive a Pandas Dataframe object or a DataFrameTypes object")
 
@@ -182,6 +185,7 @@ class DataAnalysis(FileOutput):
                     show_index=True,
                     format_float_pos=2)
 
+        plt.close()
         return mis_val_table_ren_columns
 
     def distance_plot_graph(self,
@@ -427,6 +431,8 @@ class DataAnalysis(FileOutput):
                     show_index=True,
                     format_float_pos=format_float_pos)
 
+        plt.close()
+
     def create_descr_table(self,
                            df,
                            col_feature_name,
@@ -466,6 +472,7 @@ class DataAnalysis(FileOutput):
                     col_feature_name + "_Descr",
                     show_index=True,
                     format_float_pos=format_float_pos)
+        plt.close()
 
     def __check_specfied_column_colors(self,
                                        df,

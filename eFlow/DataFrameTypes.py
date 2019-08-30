@@ -43,6 +43,7 @@ class DataFrameTypes:
         else:
             tmp_df = df
 
+        self.__all_columns = df.columns.tolist()
         # Grab features based on there types
         self.__bool_features = set(tmp_df.select_dtypes(include=["bool"]).columns)
         self.__categorical_features = set(
@@ -139,17 +140,21 @@ class DataFrameTypes:
         else:
             return list(self.__datetime_features)
     
-    def get_all_features(self,
-                         exclude_target=False):
-        if exclude_target:
-            return [col_feature for col_feature in
-                    list(self.__integer_features | self.__float_features 
-                         | self.__categorical_features | self.__bool_features)
-                    if col_feature != self.__target_feature]
-        
-        else:
-            return list(self.__integer_features | self.__float_features
-                        | self.__categorical_features | self.__bool_features)
+    # def get_all_features(self,
+    #                      exclude_target=False):
+    #     if exclude_target:
+    #         return [col_feature for col_feature in
+    #                 list(self.__integer_features | self.__float_features
+    #                      | self.__categorical_features | self.__bool_features)
+    #                 if col_feature != self.__target_feature]
+    #
+    #     else:
+    #         return list(self.__integer_features | self.__float_features
+    #                     | self.__categorical_features | self.__bool_features)
+
+    def get_all_features(self):
+        return copy.deepcopy(self.__all_columns)
+
 
     def get_target(self):
         return copy.deepcopy(self.__target_feature)
