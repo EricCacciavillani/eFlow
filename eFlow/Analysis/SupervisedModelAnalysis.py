@@ -10,10 +10,12 @@ from sklearn.metrics import f1_score
 from sklearn.metrics import matthews_corrcoef
 from sklearn.metrics import recall_score
 from sklearn.metrics import precision_score
+from sklearn.metrics import classification_report
 import scikitplot as skplt
 import numpy as np
 import warnings
 import copy
+import pickle
 import pandas as pd
 from IPython.display import display
 import matplotlib.pyplot as plt
@@ -70,7 +72,6 @@ class SupervisedModelAnalysis(FileOutput):
                             f'{project_name}/{model_name}',
                             overwrite_full_path)
 
-        print(self.get_output_folder())
         # Init objectss by pass by refrence
         self.__model = copy.deepcopy(model)
         self.__model_name = copy.deepcopy(model_name)
@@ -81,6 +82,12 @@ class SupervisedModelAnalysis(FileOutput):
         self.__pred_func = None
         self.__proba_func = None
         self.__df_features = copy.deepcopy(df_features)
+
+        # Save model
+        list_pickle = open(self.get_output_folder()
+                           + f'{self.__model_name}.pkl', 'wb')
+        pickle.dump(self.__model, list_pickle)
+        list_pickle.close()
 
         if pred_func:
             model_output = pred_func(
@@ -111,22 +118,22 @@ class SupervisedModelAnalysis(FileOutput):
                 self.__binary_classification = False
 
             if X_train is not None and y_train is not None:
-                self.classification_analysis(X_train,
-                                             y_train,
-                                             dataset_name="Train data",
-                                             thresholds=thresholds)
+                self.full_classification_analysis(X_train,
+                                                y_train,
+                                                dataset_name="Train data",
+                                                thresholds=thresholds)
 
             if X_test is not None and y_test is not None:
-                self.classification_analysis(X_test,
-                                             y_test,
-                                             dataset_name="Test data",
-                                             thresholds=thresholds)
+                self.full_classification_analysis(X_test,
+                                                  y_test,
+                                                  dataset_name="Test data",
+                                                  thresholds=thresholds)
 
             if X_val is not None and y_val is not None:
-                self.classification_analysis(X_val,
-                                             y_val,
-                                             dataset_name="Validation data",
-                                             thresholds=thresholds)
+                self.full_classification_analysis(X_val,
+                                                  y_val,
+                                                  dataset_name="Validation data",
+                                                  thresholds=thresholds)
 
         # Regression model
         elif prediction_type == PREDICTION_TYPES.REGRESSION:
@@ -182,18 +189,18 @@ class SupervisedModelAnalysis(FileOutput):
         else:
             raise ProbasNotPossible
 
-    def classification_analysis(self,
-                                X,
-                                y,
-                                dataset_name,
-                                normalize_confusion_matrix=True,
-                                ignore_metrics=[],
-                                custom_metrics=dict(),
-                                average_scoring=["micro",
-                                                 "macro",
-                                                 "weighted"],
-                                thresholds=None,
-                                display_graphs=False):
+    def full_classification_analysis(self,
+                                     X,
+                                     y,
+                                     dataset_name,
+                                     thresholds=None,
+                                     normalize_confusion_matrix=True,
+                                     ignore_metrics=[],
+                                     custom_metrics=dict(),
+                                     average_scoring=["micro",
+                                                      "macro",
+                                                      "weighted"],
+                                     display_graphs=False):
         """
         X/y:
             Feature matrix/Target data vector
@@ -240,13 +247,14 @@ class SupervisedModelAnalysis(FileOutput):
             else:
                 predict_dir = "Unknown Classification Type"
 
+            sub_dir = f'{dataset_name}/{predict_dir}'
 
             if self.__proba_func:
                 tmp_file_name = f'Precision Recall Curve with Scores ' + \
                                 f'on {dataset_name}'
                 self.plot_precision_recall_curve(X,
                                                  y,
-                                                 sub_dir=f'{dataset_name}/{predict_dir}',
+                                                 sub_dir=sub_dir,
                                                  title=tmp_file_name,
                                                  filename=tmp_file_name,
                                                  thresholds=thresholds)
@@ -254,7 +262,7 @@ class SupervisedModelAnalysis(FileOutput):
             self.classification_metrics(X,
                                         y,
                                         title=dataset_name,
-                                        sub_dir=f'{dataset_name}/{predict_dir}',
+                                        sub_dir=sub_dir,
                                         ignore_metrics=ignore_metrics,
                                         custom_metrics=custom_metrics,
                                         file_name=f'Evaluation on ' + \
@@ -264,10 +272,15 @@ class SupervisedModelAnalysis(FileOutput):
             tmp_file_name = f'Confusion Matrix: {dataset_name}'
             self.plot_confusion_matrix(X,
                                        y,
-                                       sub_dir=f'{dataset_name}/{predict_dir}',
+                                       sub_dir=sub_dir,
                                        title=tmp_file_name,
                                        normalize=normalize_confusion_matrix,
                                        file_name=tmp_file_name)
+
+            self.classification_report(X,
+                                       y,
+                                       thresholds,
+                                       sub_dir=sub_dir)
 
             if self.__binary_classification:
                 skplt.metrics.plot_ks_statistic(y,
@@ -276,10 +289,9 @@ class SupervisedModelAnalysis(FileOutput):
             if self.__df_features:
                 self.classification_error_analysis(X,
                                                    y,
-                                                   sub_dir=f'{dataset_name}/{predict_dir}',
+                                                   sub_dir=sub_dir,
                                                    thresholds=thresholds,
                                                    display_graphs=display_graphs)
-
         else:
             print(f'Model prediction is not a classification problem.' + \
                   f'It is a {self.__prediction_type}')
@@ -288,11 +300,11 @@ class SupervisedModelAnalysis(FileOutput):
     def plot_precision_recall_curve(self,
                                     X,
                                     y,
+                                    thresholds=None,
                                     sub_dir="",
                                     figsize=(10, 8),
                                     title=None,
-                                    filename=None,
-                                    thresholds=None):
+                                    filename=None):
         """
         X/y:
             Feature matrix/Target data vector.
@@ -334,12 +346,12 @@ class SupervisedModelAnalysis(FileOutput):
     def plot_confusion_matrix(self,
                               X,
                               y,
+                              thresholds=None,
                               sub_dir="",
                               figsize=(10, 8),
                               title=None,
                               file_name=None,
                               normalize=True,
-                              thresholds=None,
                               ):
 
         warnings.filterwarnings('ignore')
@@ -370,6 +382,7 @@ class SupervisedModelAnalysis(FileOutput):
     def classification_metrics(self,
                                X,
                                y,
+                               thresholds=None,
                                title="",
                                sub_dir="",
                                file_name=None,
@@ -377,8 +390,7 @@ class SupervisedModelAnalysis(FileOutput):
                                ignore_metrics=[],
                                average_scoring=["micro",
                                                 "macro",
-                                                "weighted"],
-                               thresholds=None):
+                                                "weighted"]):
         """
         X/y:
             Feature matrix/Target data vector.
@@ -532,5 +544,27 @@ class SupervisedModelAnalysis(FileOutput):
                      missing_data_visuals=False,
                      notebook_mode=display_graphs)
 
+    def classification_report(self,
+                              X,
+                              y,
+                              thresholds=None,
+                              sub_dir="",
+                              file_name=None):
+        report_df = pd.DataFrame(classification_report(y,
+                                                       self.get_model_prediction(X,
+                                                                                 thresholds),
+                                                       output_dict=True))
+
+        if self.__notebook_mode:
+            display(report_df)
+
+        if file_name:
+            df_to_image(report_df,
+                        self.get_output_folder(),
+                        sub_dir,
+                        file_name,
+                        col_width=20,
+                        show_index=True,
+                        format_float_pos=4)
 
 

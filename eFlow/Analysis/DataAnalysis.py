@@ -1,3 +1,7 @@
+from eFlow._Hidden.Objects.enum import enum
+from eFlow.Utils.SysUtils import *
+from eFlow._Hidden.Objects.FileOutput import *
+
 import pandas as pd
 import seaborn as sns
 import missingno as msno
@@ -7,10 +11,6 @@ from matplotlib import pyplot as plt
 import copy
 import os
 from IPython.display import display
-
-from eFlow._Hidden.Objects.enum import enum
-from eFlow.Utils.SysUtils import *
-from eFlow._Hidden.Objects.FileOutput import *
 
 class DataAnalysis(FileOutput):
 
