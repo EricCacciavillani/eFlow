@@ -8,12 +8,41 @@ import itertools
 
 from eFlow.ToolBox.ImageProcessing import adjust_sharpness
 
+
+def create_unique_directory(directory_pth,
+                            folder_name):
+
+    os.makedirs(get_unique_directory_path(directory_pth,
+                                     folder_name))
+
+def get_unique_directory_path(directory_pth,
+                              folder_name):
+
+    directory_pth = correct_directory_path(directory_pth)
+    check_create_dir_structure(directory_pth=directory_pth,
+                               sub_dir="")
+    iterable = 0
+    while True:
+        if iterable != 0:
+            created_path = f'{directory_pth}{folder_name} {iterable}'
+        else:
+            created_path = f'{directory_pth}{folder_name}'
+
+        if not os.path.exists(created_path):
+            break
+
+        iterable += 1
+
+    return created_path
+
+
 def check_create_dir_structure(directory_pth,
                                sub_dir):
     """
         Checks/Creates required directory structures inside
         the parent directory figures.
     """
+    directory_pth = correct_directory_path(directory_pth)
 
     for dir in sub_dir.split("/"):
         directory_pth += "/" + dir
@@ -30,6 +59,7 @@ def create_plt_png(directory_pth,
     """
         Saves the plt based image in the correct directory.
     """
+    directory_pth = correct_directory_path(directory_pth)
 
     # Ensure directory structure is init correctly
     abs_path = check_create_dir_structure(directory_pth,
@@ -67,6 +97,8 @@ def df_to_image(df,
                 index_color="#add8e6",
                 format_float_pos=None,
                 **kwargs):
+
+    directory_pth = correct_directory_path(directory_pth)
     df = copy.deepcopy(df)
 
     if format_float_pos and format_float_pos > 1:
@@ -110,16 +142,29 @@ def df_to_image(df,
 
     plt.close()
 
+def correct_directory_path(directory_pth):
+    last_char = None
+    new_string = ""
+    for char in directory_pth:
+        if last_char and (last_char == "/" and char == "/"):
+            pass
+        else:
+            new_string += char
 
-def convert_to_file_name(filename):
+        last_char = char
+
+    if new_string[-1] != "/":
+        new_string += "/"
+    return new_string
+
+def convert_to_filename(filename):
     return "".join(x for x in str(
         filename) if x.isalnum() or x == "_" or x == "("
             or x == ")" or x == " " or x == "-")
 
 
-
 def write_object_to_file(obj,
-                         filename,):
+                         filename):
     f = open(filename, 'w')
     f.write('obj = ' + repr(obj) + '\n')
     f.close()

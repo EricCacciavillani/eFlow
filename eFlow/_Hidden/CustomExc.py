@@ -30,3 +30,7 @@ class ThresholdType(DefaultException):
     def __init__(self):
         super().__init__(error_message="Thersholds must be a list or"
                                        " numpy array!")
+
+class RequiresPredictionMethods(DefaultException):
+    def __init__(self):
+        super().__init__(error_message="Prediction methods of the model were not passed in as expected")

@@ -1,5 +1,5 @@
 from eFlow._Hidden.Objects.enum import enum
-from eFlow.Utils.SysUtils import create_plt_png, convert_to_file_name, df_to_image
+from eFlow.Utils.SysUtils import create_plt_png, convert_to_file_name, df_to_image, write_object_to_file
 from eFlow._Hidden.Objects.FileOutput import *
 from eFlow._Hidden.Constants import PREDICTION_TYPES
 from eFlow._Hidden.CustomExc import *
@@ -241,23 +241,29 @@ class SupervisedModelAnalysis(FileOutput):
             print("\n\n" + "---" * 10 + f'{dataset_name}' + "---" * 10)
 
             if self.__pred_func:
-                predict_dir = "Prediction Classification"
+                sub_dir = "Prediction Classification"
             elif self.__proba_func:
-                predict_dir = "Probability Classification"
+                sub_dir = "Probability Classification"
+
+                if thresholds:
+                    write_object_to_file(thresholds,
+                                         self.get_output_folder() +
+                                         f'{dataset_name}/{sub_dir}' +
+                                         "/Thresholds.txt")
             else:
-                predict_dir = "Unknown Classification Type"
+                sub_dir = "Unknown Classification Type"
 
-            sub_dir = f'{dataset_name}/{predict_dir}'
-
-            if self.__proba_func:
-                tmp_file_name = f'Precision Recall Curve with Scores ' + \
-                                f'on {dataset_name}'
-                self.plot_precision_recall_curve(X,
-                                                 y,
-                                                 sub_dir=sub_dir,
-                                                 title=tmp_file_name,
-                                                 filename=tmp_file_name,
-                                                 thresholds=thresholds)
+            sub_dir = f'{dataset_name}/{sub_dir}'
+            #
+            # if self.__proba_func:
+            #     tmp_file_name = f'Precision Recall Curve with Scores ' + \
+            #                     f'on {dataset_name}'
+            #     self.plot_precision_recall_curve(X,
+            #                                      y,
+            #                                      sub_dir=sub_dir,
+            #                                      title=tmp_file_name,
+            #                                      filename=tmp_file_name,
+            #                                      thresholds=thresholds)
 
             self.classification_metrics(X,
                                         y,

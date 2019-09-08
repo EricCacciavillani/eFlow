@@ -4,91 +4,29 @@
     <list default="true" id="2c7eb1b5-0ad0-44e5-9a99-f4de30bca398" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/../Testing/.ipynb_checkpoints/Pre Production-checkpoint.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/../Testing/.ipynb_checkpoints/Pre Production-checkpoint.ipynb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../Testing/Pre Production.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/../Testing/Pre Production.ipynb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Testing/eFlow Data/Correctly predicted/Feature Analysis/Graphics/Count_Plot_Parch.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Testing/eFlow Data/Correctly predicted/Feature Analysis/Graphics/Count_Plot_Pclass.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Testing/eFlow Data/Correctly predicted/Feature Analysis/Graphics/Count_Plot_SibSp.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Testing/eFlow Data/Correctly predicted/Feature Analysis/Graphics/Count_Plot_Survived.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Testing/eFlow Data/Correctly predicted/Feature Analysis/Graphics/Distance_Plot_Age.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Testing/eFlow Data/Correctly predicted/Feature Analysis/Graphics/Distance_Plot_Fare.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Testing/eFlow Data/Correctly predicted/Feature Analysis/Graphics/Pie_Chart_Cabin.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Testing/eFlow Data/Correctly predicted/Feature Analysis/Graphics/Pie_Chart_Sex.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Testing/eFlow Data/Correctly predicted/Feature Analysis/Tables/Descriptions/Age_Descr.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Testing/eFlow Data/Correctly predicted/Feature Analysis/Tables/Descriptions/Fare_Descr.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Testing/eFlow Data/Correctly predicted/Feature Analysis/Tables/Value Counts/Cabin_Value_Counts.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Testing/eFlow Data/Correctly predicted/Feature Analysis/Tables/Value Counts/Parch_Value_Counts.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Testing/eFlow Data/Correctly predicted/Feature Analysis/Tables/Value Counts/Pclass_Value_Counts.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Testing/eFlow Data/Correctly predicted/Feature Analysis/Tables/Value Counts/Sex_Value_Counts.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Testing/eFlow Data/Correctly predicted/Feature Analysis/Tables/Value Counts/SibSp_Value_Counts.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Testing/eFlow Data/Correctly predicted/Feature Analysis/Tables/Value Counts/Survived_Value_Counts.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Testing/eFlow Data/Incorrectly predicted/Feature Analysis/Graphics/Count_Plot_Parch.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Testing/eFlow Data/Incorrectly predicted/Feature Analysis/Graphics/Count_Plot_Pclass.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Testing/eFlow Data/Incorrectly predicted/Feature Analysis/Graphics/Count_Plot_SibSp.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Testing/eFlow Data/Incorrectly predicted/Feature Analysis/Graphics/Count_Plot_Survived.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Testing/eFlow Data/Incorrectly predicted/Feature Analysis/Graphics/Distance_Plot_Age.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Testing/eFlow Data/Incorrectly predicted/Feature Analysis/Graphics/Distance_Plot_Fare.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Testing/eFlow Data/Incorrectly predicted/Feature Analysis/Graphics/Pie_Chart_Cabin.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Testing/eFlow Data/Incorrectly predicted/Feature Analysis/Graphics/Pie_Chart_Sex.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Testing/eFlow Data/Incorrectly predicted/Feature Analysis/Tables/Descriptions/Age_Descr.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Testing/eFlow Data/Incorrectly predicted/Feature Analysis/Tables/Descriptions/Fare_Descr.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Testing/eFlow Data/Incorrectly predicted/Feature Analysis/Tables/Value Counts/Cabin_Value_Counts.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Testing/eFlow Data/Incorrectly predicted/Feature Analysis/Tables/Value Counts/Parch_Value_Counts.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Testing/eFlow Data/Incorrectly predicted/Feature Analysis/Tables/Value Counts/Pclass_Value_Counts.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Testing/eFlow Data/Incorrectly predicted/Feature Analysis/Tables/Value Counts/Sex_Value_Counts.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Testing/eFlow Data/Incorrectly predicted/Feature Analysis/Tables/Value Counts/SibSp_Value_Counts.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Testing/eFlow Data/Incorrectly predicted/Feature Analysis/Tables/Value Counts/Survived_Value_Counts.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Testing/eFlow Data/Pre processing/Data Cleaning/Missing_Data/Graphics/Missing_Data_Bar_Graph.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Testing/eFlow Data/Pre processing/Data Cleaning/Missing_Data/Graphics/Missing_Data_Dendrogram_Graph.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Testing/eFlow Data/Pre processing/Data Cleaning/Missing_Data/Graphics/Missing_Data_Heatmap.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Testing/eFlow Data/Pre processing/Data Cleaning/Missing_Data/Graphics/Missing_Data_Matrix_Graph.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Testing/eFlow Data/Pre processing/Data Cleaning/Missing_Data/Tables/Missing_Data_Table.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Testing/eFlow Data/Pre processing/General Analysis (Before Cleaning)/Feature Analysis/Graphics/Count_Plot_Cabin.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Testing/eFlow Data/Pre processing/General Analysis (Before Cleaning)/Feature Analysis/Graphics/Count_Plot_Parch.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Testing/eFlow Data/Pre processing/General Analysis (Before Cleaning)/Feature Analysis/Graphics/Count_Plot_Pclass.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Testing/eFlow Data/Pre processing/General Analysis (Before Cleaning)/Feature Analysis/Graphics/Count_Plot_SibSp.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Testing/eFlow Data/Pre processing/General Analysis (Before Cleaning)/Feature Analysis/Graphics/Count_Plot_Survived.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Testing/eFlow Data/Pre processing/General Analysis (Before Cleaning)/Feature Analysis/Graphics/Distance_Plot_Age.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Testing/eFlow Data/Pre processing/General Analysis (Before Cleaning)/Feature Analysis/Graphics/Distance_Plot_Fare.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Testing/eFlow Data/Pre processing/General Analysis (Before Cleaning)/Feature Analysis/Graphics/Pie_Chart_Date_test.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Testing/eFlow Data/Pre processing/General Analysis (Before Cleaning)/Feature Analysis/Graphics/Pie_Chart_Embarked.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Testing/eFlow Data/Pre processing/General Analysis (Before Cleaning)/Feature Analysis/Graphics/Pie_Chart_Sex.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Testing/eFlow Data/Pre processing/General Analysis (Before Cleaning)/Feature Analysis/Tables/Descriptions/Age_Descr.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Testing/eFlow Data/Pre processing/General Analysis (Before Cleaning)/Feature Analysis/Tables/Descriptions/Fare_Descr.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Testing/eFlow Data/Pre processing/General Analysis (Before Cleaning)/Feature Analysis/Tables/Value Counts/Cabin_Value_Counts.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Testing/eFlow Data/Pre processing/General Analysis (Before Cleaning)/Feature Analysis/Tables/Value Counts/Date_test_Value_Counts.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Testing/eFlow Data/Pre processing/General Analysis (Before Cleaning)/Feature Analysis/Tables/Value Counts/Embarked_Value_Counts.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Testing/eFlow Data/Pre processing/General Analysis (Before Cleaning)/Feature Analysis/Tables/Value Counts/Parch_Value_Counts.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Testing/eFlow Data/Pre processing/General Analysis (Before Cleaning)/Feature Analysis/Tables/Value Counts/Pclass_Value_Counts.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Testing/eFlow Data/Pre processing/General Analysis (Before Cleaning)/Feature Analysis/Tables/Value Counts/Sex_Value_Counts.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Testing/eFlow Data/Pre processing/General Analysis (Before Cleaning)/Feature Analysis/Tables/Value Counts/SibSp_Value_Counts.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Testing/eFlow Data/Pre processing/General Analysis (Before Cleaning)/Feature Analysis/Tables/Value Counts/Survived_Value_Counts.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Testing/eFlow Data/Pre processing/Supervised Analysis/DecisionTreeClassifier/Test data/Prediction Classification/Confusion Matrix Test data.png" beforeDir="false" afterPath="$PROJECT_DIR$/../Testing/eFlow Data/Pre processing/Supervised Analysis/DecisionTreeClassifier/Test data/Prediction Classification/Confusion Matrix Test data.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Testing/eFlow Data/Pre processing/Supervised Analysis/DecisionTreeClassifier/Test data/Prediction Classification/Correctly Predicted Data/Feature Analysis/Graphics/.ipynb_checkpoints/Count_Plot_Parch-checkpoint.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Testing/eFlow Data/Pre processing/Supervised Analysis/DecisionTreeClassifier/Test data/Prediction Classification/Correctly Predicted Data/Feature Analysis/Graphics/.ipynb_checkpoints/Count_Plot_Pclass-checkpoint.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Testing/eFlow Data/Pre processing/Supervised Analysis/DecisionTreeClassifier/Test data/Prediction Classification/Correctly Predicted Data/Feature Analysis/Graphics/.ipynb_checkpoints/Count_Plot_SibSp-checkpoint.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Testing/eFlow Data/Pre processing/Supervised Analysis/DecisionTreeClassifier/Test data/Prediction Classification/Correctly Predicted Data/Feature Analysis/Graphics/.ipynb_checkpoints/Count_Plot_Survived-checkpoint.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Testing/eFlow Data/Pre processing/Supervised Analysis/DecisionTreeClassifier/Test data/Prediction Classification/Correctly Predicted Data/Feature Analysis/Graphics/.ipynb_checkpoints/Distance_Plot_Age-checkpoint.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Testing/eFlow Data/Pre processing/Supervised Analysis/DecisionTreeClassifier/Test data/Prediction Classification/Correctly Predicted Data/Feature Analysis/Graphics/.ipynb_checkpoints/Distance_Plot_Fare-checkpoint.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Testing/eFlow Data/Pre processing/Supervised Analysis/DecisionTreeClassifier/Test data/Prediction Classification/Correctly Predicted Data/Feature Analysis/Graphics/.ipynb_checkpoints/Pie_Chart_Cabin-checkpoint.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Testing/eFlow Data/Pre processing/Supervised Analysis/DecisionTreeClassifier/Test data/Prediction Classification/Correctly Predicted Data/Feature Analysis/Graphics/.ipynb_checkpoints/Pie_Chart_Sex-checkpoint.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Testing/eFlow Data/Pre processing/Supervised Analysis/DecisionTreeClassifier/Test data/Prediction Classification/Correctly Predicted Data/Feature Analysis/Graphics/Count_Plot_Parch.png" beforeDir="false" afterPath="$PROJECT_DIR$/../Testing/eFlow Data/Pre processing/Supervised Analysis/DecisionTreeClassifier/Test data/Prediction Classification/Correctly Predicted Data/Feature Analysis/Graphics/Count_Plot_Parch.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Testing/eFlow Data/Pre processing/Supervised Analysis/DecisionTreeClassifier/Test data/Prediction Classification/Correctly Predicted Data/Feature Analysis/Graphics/Count_Plot_Pclass.png" beforeDir="false" afterPath="$PROJECT_DIR$/../Testing/eFlow Data/Pre processing/Supervised Analysis/DecisionTreeClassifier/Test data/Prediction Classification/Correctly Predicted Data/Feature Analysis/Graphics/Count_Plot_Pclass.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Testing/eFlow Data/Pre processing/Supervised Analysis/DecisionTreeClassifier/Test data/Prediction Classification/Correctly Predicted Data/Feature Analysis/Graphics/Count_Plot_SibSp.png" beforeDir="false" afterPath="$PROJECT_DIR$/../Testing/eFlow Data/Pre processing/Supervised Analysis/DecisionTreeClassifier/Test data/Prediction Classification/Correctly Predicted Data/Feature Analysis/Graphics/Count_Plot_SibSp.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Testing/eFlow Data/Pre processing/Supervised Analysis/DecisionTreeClassifier/Test data/Prediction Classification/Correctly Predicted Data/Feature Analysis/Graphics/Count_Plot_Survived.png" beforeDir="false" afterPath="$PROJECT_DIR$/../Testing/eFlow Data/Pre processing/Supervised Analysis/DecisionTreeClassifier/Test data/Prediction Classification/Correctly Predicted Data/Feature Analysis/Graphics/Count_Plot_Survived.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Testing/eFlow Data/Pre processing/Supervised Analysis/DecisionTreeClassifier/Test data/Prediction Classification/Correctly Predicted Data/Feature Analysis/Graphics/Distance_Plot_Age.png" beforeDir="false" afterPath="$PROJECT_DIR$/../Testing/eFlow Data/Pre processing/Supervised Analysis/DecisionTreeClassifier/Test data/Prediction Classification/Correctly Predicted Data/Feature Analysis/Graphics/Distance_Plot_Age.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Testing/eFlow Data/Pre processing/Supervised Analysis/DecisionTreeClassifier/Test data/Prediction Classification/Correctly Predicted Data/Feature Analysis/Graphics/Distance_Plot_Fare.png" beforeDir="false" afterPath="$PROJECT_DIR$/../Testing/eFlow Data/Pre processing/Supervised Analysis/DecisionTreeClassifier/Test data/Prediction Classification/Correctly Predicted Data/Feature Analysis/Graphics/Distance_Plot_Fare.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Testing/eFlow Data/Pre processing/Supervised Analysis/DecisionTreeClassifier/Test data/Prediction Classification/Correctly Predicted Data/Feature Analysis/Graphics/Pie_Chart_Cabin.png" beforeDir="false" afterPath="$PROJECT_DIR$/../Testing/eFlow Data/Pre processing/Supervised Analysis/DecisionTreeClassifier/Test data/Prediction Classification/Correctly Predicted Data/Feature Analysis/Graphics/Pie_Chart_Cabin.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Testing/eFlow Data/Pre processing/Supervised Analysis/DecisionTreeClassifier/Test data/Prediction Classification/Correctly Predicted Data/Feature Analysis/Graphics/Pie_Chart_Sex.png" beforeDir="false" afterPath="$PROJECT_DIR$/../Testing/eFlow Data/Pre processing/Supervised Analysis/DecisionTreeClassifier/Test data/Prediction Classification/Correctly Predicted Data/Feature Analysis/Graphics/Pie_Chart_Sex.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Testing/eFlow Data/Pre processing/Supervised Analysis/DecisionTreeClassifier/Test data/Prediction Classification/Correctly Predicted Data/Feature Analysis/Tables/Descriptions/Age_Descr.png" beforeDir="false" afterPath="$PROJECT_DIR$/../Testing/eFlow Data/Pre processing/Supervised Analysis/DecisionTreeClassifier/Test data/Prediction Classification/Correctly Predicted Data/Feature Analysis/Tables/Descriptions/Age_Descr.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Testing/eFlow Data/Pre processing/Supervised Analysis/DecisionTreeClassifier/Test data/Prediction Classification/Correctly Predicted Data/Feature Analysis/Tables/Descriptions/Fare_Descr.png" beforeDir="false" afterPath="$PROJECT_DIR$/../Testing/eFlow Data/Pre processing/Supervised Analysis/DecisionTreeClassifier/Test data/Prediction Classification/Correctly Predicted Data/Feature Analysis/Tables/Descriptions/Fare_Descr.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Testing/eFlow Data/Pre processing/Supervised Analysis/DecisionTreeClassifier/Test data/Prediction Classification/Correctly Predicted Data/Feature Analysis/Tables/Value Counts/Parch_Value_Counts.png" beforeDir="false" afterPath="$PROJECT_DIR$/../Testing/eFlow Data/Pre processing/Supervised Analysis/DecisionTreeClassifier/Test data/Prediction Classification/Correctly Predicted Data/Feature Analysis/Tables/Value Counts/Parch_Value_Counts.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Testing/eFlow Data/Pre processing/Supervised Analysis/DecisionTreeClassifier/Test data/Prediction Classification/Correctly Predicted Data/Feature Analysis/Tables/Value Counts/Pclass_Value_Counts.png" beforeDir="false" afterPath="$PROJECT_DIR$/../Testing/eFlow Data/Pre processing/Supervised Analysis/DecisionTreeClassifier/Test data/Prediction Classification/Correctly Predicted Data/Feature Analysis/Tables/Value Counts/Pclass_Value_Counts.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Testing/eFlow Data/Pre processing/Supervised Analysis/DecisionTreeClassifier/Test data/Prediction Classification/Correctly Predicted Data/Feature Analysis/Tables/Value Counts/SibSp_Value_Counts.png" beforeDir="false" afterPath="$PROJECT_DIR$/../Testing/eFlow Data/Pre processing/Supervised Analysis/DecisionTreeClassifier/Test data/Prediction Classification/Correctly Predicted Data/Feature Analysis/Tables/Value Counts/SibSp_Value_Counts.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Testing/eFlow Data/Pre processing/Supervised Analysis/DecisionTreeClassifier/Test data/Prediction Classification/Correctly Predicted Data/Feature Analysis/Tables/Value Counts/Survived_Value_Counts.png" beforeDir="false" afterPath="$PROJECT_DIR$/../Testing/eFlow Data/Pre processing/Supervised Analysis/DecisionTreeClassifier/Test data/Prediction Classification/Correctly Predicted Data/Feature Analysis/Tables/Value Counts/Survived_Value_Counts.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Testing/eFlow Data/Pre processing/Supervised Analysis/DecisionTreeClassifier/Test data/Prediction Classification/Evaluation on Test data.png" beforeDir="false" afterPath="$PROJECT_DIR$/../Testing/eFlow Data/Pre processing/Supervised Analysis/DecisionTreeClassifier/Test data/Prediction Classification/Evaluation on Test data.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Testing/eFlow Data/Pre processing/Supervised Analysis/DecisionTreeClassifier/DecisionTreeClassifier.pkl" beforeDir="false" afterPath="$PROJECT_DIR$/../Testing/eFlow Data/Pre processing/Supervised Analysis/DecisionTreeClassifier/DecisionTreeClassifier.pkl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Testing/eFlow Data/Pre processing/Supervised Analysis/DecisionTreeClassifier/Test data/Prediction Classification/Confusion Matrix Test data.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Testing/eFlow Data/Pre processing/Supervised Analysis/DecisionTreeClassifier/Test data/Prediction Classification/Correctly Predicted Data/Feature Analysis/Graphics/Count_Plot_Parch.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Testing/eFlow Data/Pre processing/Supervised Analysis/DecisionTreeClassifier/Test data/Prediction Classification/Correctly Predicted Data/Feature Analysis/Graphics/Count_Plot_Pclass.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Testing/eFlow Data/Pre processing/Supervised Analysis/DecisionTreeClassifier/Test data/Prediction Classification/Correctly Predicted Data/Feature Analysis/Graphics/Count_Plot_SibSp.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Testing/eFlow Data/Pre processing/Supervised Analysis/DecisionTreeClassifier/Test data/Prediction Classification/Correctly Predicted Data/Feature Analysis/Graphics/Count_Plot_Survived.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Testing/eFlow Data/Pre processing/Supervised Analysis/DecisionTreeClassifier/Test data/Prediction Classification/Correctly Predicted Data/Feature Analysis/Graphics/Distance_Plot_Age.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Testing/eFlow Data/Pre processing/Supervised Analysis/DecisionTreeClassifier/Test data/Prediction Classification/Correctly Predicted Data/Feature Analysis/Graphics/Distance_Plot_Fare.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Testing/eFlow Data/Pre processing/Supervised Analysis/DecisionTreeClassifier/Test data/Prediction Classification/Correctly Predicted Data/Feature Analysis/Graphics/Pie_Chart_Cabin.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Testing/eFlow Data/Pre processing/Supervised Analysis/DecisionTreeClassifier/Test data/Prediction Classification/Correctly Predicted Data/Feature Analysis/Graphics/Pie_Chart_Sex.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Testing/eFlow Data/Pre processing/Supervised Analysis/DecisionTreeClassifier/Test data/Prediction Classification/Correctly Predicted Data/Feature Analysis/Tables/Descriptions/Age_Descr.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Testing/eFlow Data/Pre processing/Supervised Analysis/DecisionTreeClassifier/Test data/Prediction Classification/Correctly Predicted Data/Feature Analysis/Tables/Descriptions/Fare_Descr.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Testing/eFlow Data/Pre processing/Supervised Analysis/DecisionTreeClassifier/Test data/Prediction Classification/Correctly Predicted Data/Feature Analysis/Tables/Value Counts/Cabin_Value_Counts.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Testing/eFlow Data/Pre processing/Supervised Analysis/DecisionTreeClassifier/Test data/Prediction Classification/Correctly Predicted Data/Feature Analysis/Tables/Value Counts/Parch_Value_Counts.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Testing/eFlow Data/Pre processing/Supervised Analysis/DecisionTreeClassifier/Test data/Prediction Classification/Correctly Predicted Data/Feature Analysis/Tables/Value Counts/Pclass_Value_Counts.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Testing/eFlow Data/Pre processing/Supervised Analysis/DecisionTreeClassifier/Test data/Prediction Classification/Correctly Predicted Data/Feature Analysis/Tables/Value Counts/Sex_Value_Counts.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Testing/eFlow Data/Pre processing/Supervised Analysis/DecisionTreeClassifier/Test data/Prediction Classification/Correctly Predicted Data/Feature Analysis/Tables/Value Counts/SibSp_Value_Counts.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Testing/eFlow Data/Pre processing/Supervised Analysis/DecisionTreeClassifier/Test data/Prediction Classification/Correctly Predicted Data/Feature Analysis/Tables/Value Counts/Survived_Value_Counts.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Testing/eFlow Data/Pre processing/Supervised Analysis/DecisionTreeClassifier/Test data/Prediction Classification/Evaluation on Test data.png" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/../Testing/eFlow Data/Pre processing/Supervised Analysis/DecisionTreeClassifier/Test data/Prediction Classification/Incorrectly Predicted Data/Feature Analysis/Graphics/Count_Plot_Parch.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Testing/eFlow Data/Pre processing/Supervised Analysis/DecisionTreeClassifier/Test data/Prediction Classification/Incorrectly Predicted Data/Feature Analysis/Graphics/Count_Plot_Pclass.png" beforeDir="false" afterPath="$PROJECT_DIR$/../Testing/eFlow Data/Pre processing/Supervised Analysis/DecisionTreeClassifier/Test data/Prediction Classification/Incorrectly Predicted Data/Feature Analysis/Graphics/Count_Plot_Pclass.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Testing/eFlow Data/Pre processing/Supervised Analysis/DecisionTreeClassifier/Test data/Prediction Classification/Incorrectly Predicted Data/Feature Analysis/Graphics/Count_Plot_Pclass.png" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/../Testing/eFlow Data/Pre processing/Supervised Analysis/DecisionTreeClassifier/Test data/Prediction Classification/Incorrectly Predicted Data/Feature Analysis/Graphics/Count_Plot_SibSp.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Testing/eFlow Data/Pre processing/Supervised Analysis/DecisionTreeClassifier/Test data/Prediction Classification/Incorrectly Predicted Data/Feature Analysis/Graphics/Count_Plot_Survived.png" beforeDir="false" afterPath="$PROJECT_DIR$/../Testing/eFlow Data/Pre processing/Supervised Analysis/DecisionTreeClassifier/Test data/Prediction Classification/Incorrectly Predicted Data/Feature Analysis/Graphics/Count_Plot_Survived.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Testing/eFlow Data/Pre processing/Supervised Analysis/DecisionTreeClassifier/Test data/Prediction Classification/Incorrectly Predicted Data/Feature Analysis/Graphics/Count_Plot_Survived.png" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/../Testing/eFlow Data/Pre processing/Supervised Analysis/DecisionTreeClassifier/Test data/Prediction Classification/Incorrectly Predicted Data/Feature Analysis/Graphics/Distance_Plot_Age.png" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/../Testing/eFlow Data/Pre processing/Supervised Analysis/DecisionTreeClassifier/Test data/Prediction Classification/Incorrectly Predicted Data/Feature Analysis/Graphics/Distance_Plot_Fare.png" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/../Testing/eFlow Data/Pre processing/Supervised Analysis/DecisionTreeClassifier/Test data/Prediction Classification/Incorrectly Predicted Data/Feature Analysis/Graphics/Pie_Chart_Cabin.png" beforeDir="false" />
@@ -100,49 +38,46 @@
       <change beforePath="$PROJECT_DIR$/../Testing/eFlow Data/Pre processing/Supervised Analysis/DecisionTreeClassifier/Test data/Prediction Classification/Incorrectly Predicted Data/Feature Analysis/Tables/Value Counts/Pclass_Value_Counts.png" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/../Testing/eFlow Data/Pre processing/Supervised Analysis/DecisionTreeClassifier/Test data/Prediction Classification/Incorrectly Predicted Data/Feature Analysis/Tables/Value Counts/Sex_Value_Counts.png" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/../Testing/eFlow Data/Pre processing/Supervised Analysis/DecisionTreeClassifier/Test data/Prediction Classification/Incorrectly Predicted Data/Feature Analysis/Tables/Value Counts/SibSp_Value_Counts.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Testing/eFlow Data/Pre processing/Supervised Analysis/DecisionTreeClassifier/Test data/Prediction Classification/Incorrectly Predicted Data/Feature Analysis/Tables/Value Counts/Survived_Value_Counts.png" beforeDir="false" afterPath="$PROJECT_DIR$/../Testing/eFlow Data/Pre processing/Supervised Analysis/DecisionTreeClassifier/Test data/Prediction Classification/Incorrectly Predicted Data/Feature Analysis/Tables/Value Counts/Survived_Value_Counts.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Testing/eFlow Data/Pre processing/Supervised Analysis/DecisionTreeClassifier/Test data/Probability Classification/.ipynb_checkpoints/Confusion Matrix Test data-checkpoint.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Testing/eFlow Data/Pre processing/Supervised Analysis/DecisionTreeClassifier/Test data/Probability Classification/.ipynb_checkpoints/Evaluation on Test data-checkpoint.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Testing/eFlow Data/Pre processing/Supervised Analysis/DecisionTreeClassifier/Test data/Probability Classification/Confusion Matrix Test data.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Testing/eFlow Data/Pre processing/Supervised Analysis/DecisionTreeClassifier/Test data/Probability Classification/Evaluation on Test data.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Testing/eFlow Data/Pre processing/Supervised Analysis/DecisionTreeClassifier/Train data/Prediction Classification/Confusion Matrix Train data.png" beforeDir="false" afterPath="$PROJECT_DIR$/../Testing/eFlow Data/Pre processing/Supervised Analysis/DecisionTreeClassifier/Train data/Prediction Classification/Confusion Matrix Train data.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Testing/eFlow Data/Pre processing/Supervised Analysis/DecisionTreeClassifier/Train data/Prediction Classification/Correctly Predicted Data/Feature Analysis/Graphics/.ipynb_checkpoints/Distance_Plot_Fare-checkpoint.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Testing/eFlow Data/Pre processing/Supervised Analysis/DecisionTreeClassifier/Train data/Prediction Classification/Correctly Predicted Data/Feature Analysis/Graphics/.ipynb_checkpoints/Pie_Chart_Cabin-checkpoint.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Testing/eFlow Data/Pre processing/Supervised Analysis/DecisionTreeClassifier/Train data/Prediction Classification/Correctly Predicted Data/Feature Analysis/Graphics/Count_Plot_Parch.png" beforeDir="false" afterPath="$PROJECT_DIR$/../Testing/eFlow Data/Pre processing/Supervised Analysis/DecisionTreeClassifier/Train data/Prediction Classification/Correctly Predicted Data/Feature Analysis/Graphics/Count_Plot_Parch.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Testing/eFlow Data/Pre processing/Supervised Analysis/DecisionTreeClassifier/Train data/Prediction Classification/Correctly Predicted Data/Feature Analysis/Graphics/Count_Plot_Pclass.png" beforeDir="false" afterPath="$PROJECT_DIR$/../Testing/eFlow Data/Pre processing/Supervised Analysis/DecisionTreeClassifier/Train data/Prediction Classification/Correctly Predicted Data/Feature Analysis/Graphics/Count_Plot_Pclass.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Testing/eFlow Data/Pre processing/Supervised Analysis/DecisionTreeClassifier/Train data/Prediction Classification/Correctly Predicted Data/Feature Analysis/Graphics/Count_Plot_SibSp.png" beforeDir="false" afterPath="$PROJECT_DIR$/../Testing/eFlow Data/Pre processing/Supervised Analysis/DecisionTreeClassifier/Train data/Prediction Classification/Correctly Predicted Data/Feature Analysis/Graphics/Count_Plot_SibSp.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Testing/eFlow Data/Pre processing/Supervised Analysis/DecisionTreeClassifier/Train data/Prediction Classification/Correctly Predicted Data/Feature Analysis/Graphics/Count_Plot_Survived.png" beforeDir="false" afterPath="$PROJECT_DIR$/../Testing/eFlow Data/Pre processing/Supervised Analysis/DecisionTreeClassifier/Train data/Prediction Classification/Correctly Predicted Data/Feature Analysis/Graphics/Count_Plot_Survived.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Testing/eFlow Data/Pre processing/Supervised Analysis/DecisionTreeClassifier/Train data/Prediction Classification/Correctly Predicted Data/Feature Analysis/Graphics/Distance_Plot_Age.png" beforeDir="false" afterPath="$PROJECT_DIR$/../Testing/eFlow Data/Pre processing/Supervised Analysis/DecisionTreeClassifier/Train data/Prediction Classification/Correctly Predicted Data/Feature Analysis/Graphics/Distance_Plot_Age.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Testing/eFlow Data/Pre processing/Supervised Analysis/DecisionTreeClassifier/Train data/Prediction Classification/Correctly Predicted Data/Feature Analysis/Graphics/Distance_Plot_Fare.png" beforeDir="false" afterPath="$PROJECT_DIR$/../Testing/eFlow Data/Pre processing/Supervised Analysis/DecisionTreeClassifier/Train data/Prediction Classification/Correctly Predicted Data/Feature Analysis/Graphics/Distance_Plot_Fare.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Testing/eFlow Data/Pre processing/Supervised Analysis/DecisionTreeClassifier/Train data/Prediction Classification/Correctly Predicted Data/Feature Analysis/Graphics/Pie_Chart_Cabin.png" beforeDir="false" afterPath="$PROJECT_DIR$/../Testing/eFlow Data/Pre processing/Supervised Analysis/DecisionTreeClassifier/Train data/Prediction Classification/Correctly Predicted Data/Feature Analysis/Graphics/Pie_Chart_Cabin.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Testing/eFlow Data/Pre processing/Supervised Analysis/DecisionTreeClassifier/Train data/Prediction Classification/Correctly Predicted Data/Feature Analysis/Graphics/Pie_Chart_Sex.png" beforeDir="false" afterPath="$PROJECT_DIR$/../Testing/eFlow Data/Pre processing/Supervised Analysis/DecisionTreeClassifier/Train data/Prediction Classification/Correctly Predicted Data/Feature Analysis/Graphics/Pie_Chart_Sex.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Testing/eFlow Data/Pre processing/Supervised Analysis/DecisionTreeClassifier/Train data/Prediction Classification/Correctly Predicted Data/Feature Analysis/Tables/Descriptions/Age_Descr.png" beforeDir="false" afterPath="$PROJECT_DIR$/../Testing/eFlow Data/Pre processing/Supervised Analysis/DecisionTreeClassifier/Train data/Prediction Classification/Correctly Predicted Data/Feature Analysis/Tables/Descriptions/Age_Descr.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Testing/eFlow Data/Pre processing/Supervised Analysis/DecisionTreeClassifier/Train data/Prediction Classification/Correctly Predicted Data/Feature Analysis/Tables/Descriptions/Fare_Descr.png" beforeDir="false" afterPath="$PROJECT_DIR$/../Testing/eFlow Data/Pre processing/Supervised Analysis/DecisionTreeClassifier/Train data/Prediction Classification/Correctly Predicted Data/Feature Analysis/Tables/Descriptions/Fare_Descr.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Testing/eFlow Data/Pre processing/Supervised Analysis/DecisionTreeClassifier/Train data/Prediction Classification/Correctly Predicted Data/Feature Analysis/Tables/Value Counts/Parch_Value_Counts.png" beforeDir="false" afterPath="$PROJECT_DIR$/../Testing/eFlow Data/Pre processing/Supervised Analysis/DecisionTreeClassifier/Train data/Prediction Classification/Correctly Predicted Data/Feature Analysis/Tables/Value Counts/Parch_Value_Counts.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Testing/eFlow Data/Pre processing/Supervised Analysis/DecisionTreeClassifier/Train data/Prediction Classification/Correctly Predicted Data/Feature Analysis/Tables/Value Counts/Pclass_Value_Counts.png" beforeDir="false" afterPath="$PROJECT_DIR$/../Testing/eFlow Data/Pre processing/Supervised Analysis/DecisionTreeClassifier/Train data/Prediction Classification/Correctly Predicted Data/Feature Analysis/Tables/Value Counts/Pclass_Value_Counts.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Testing/eFlow Data/Pre processing/Supervised Analysis/DecisionTreeClassifier/Train data/Prediction Classification/Correctly Predicted Data/Feature Analysis/Tables/Value Counts/SibSp_Value_Counts.png" beforeDir="false" afterPath="$PROJECT_DIR$/../Testing/eFlow Data/Pre processing/Supervised Analysis/DecisionTreeClassifier/Train data/Prediction Classification/Correctly Predicted Data/Feature Analysis/Tables/Value Counts/SibSp_Value_Counts.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Testing/eFlow Data/Pre processing/Supervised Analysis/DecisionTreeClassifier/Train data/Prediction Classification/Correctly Predicted Data/Feature Analysis/Tables/Value Counts/Survived_Value_Counts.png" beforeDir="false" afterPath="$PROJECT_DIR$/../Testing/eFlow Data/Pre processing/Supervised Analysis/DecisionTreeClassifier/Train data/Prediction Classification/Correctly Predicted Data/Feature Analysis/Tables/Value Counts/Survived_Value_Counts.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Testing/eFlow Data/Pre processing/Supervised Analysis/DecisionTreeClassifier/Train data/Prediction Classification/Evaluation on Train data.png" beforeDir="false" afterPath="$PROJECT_DIR$/../Testing/eFlow Data/Pre processing/Supervised Analysis/DecisionTreeClassifier/Train data/Prediction Classification/Evaluation on Train data.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Testing/eFlow Data/Pre processing/Supervised Analysis/DecisionTreeClassifier/Train data/Prediction Classification/Incorrectly Predicted Data/Feature Analysis/Graphics/.ipynb_checkpoints/Pie_Chart_Cabin-checkpoint.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Testing/eFlow Data/Pre processing/Supervised Analysis/DecisionTreeClassifier/Train data/Prediction Classification/Incorrectly Predicted Data/Feature Analysis/Graphics/Count_Plot_Parch.png" beforeDir="false" afterPath="$PROJECT_DIR$/../Testing/eFlow Data/Pre processing/Supervised Analysis/DecisionTreeClassifier/Train data/Prediction Classification/Incorrectly Predicted Data/Feature Analysis/Graphics/Count_Plot_Parch.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Testing/eFlow Data/Pre processing/Supervised Analysis/DecisionTreeClassifier/Train data/Prediction Classification/Incorrectly Predicted Data/Feature Analysis/Graphics/Count_Plot_Pclass.png" beforeDir="false" afterPath="$PROJECT_DIR$/../Testing/eFlow Data/Pre processing/Supervised Analysis/DecisionTreeClassifier/Train data/Prediction Classification/Incorrectly Predicted Data/Feature Analysis/Graphics/Count_Plot_Pclass.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Testing/eFlow Data/Pre processing/Supervised Analysis/DecisionTreeClassifier/Train data/Prediction Classification/Incorrectly Predicted Data/Feature Analysis/Graphics/Count_Plot_SibSp.png" beforeDir="false" afterPath="$PROJECT_DIR$/../Testing/eFlow Data/Pre processing/Supervised Analysis/DecisionTreeClassifier/Train data/Prediction Classification/Incorrectly Predicted Data/Feature Analysis/Graphics/Count_Plot_SibSp.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Testing/eFlow Data/Pre processing/Supervised Analysis/DecisionTreeClassifier/Train data/Prediction Classification/Incorrectly Predicted Data/Feature Analysis/Graphics/Count_Plot_Survived.png" beforeDir="false" afterPath="$PROJECT_DIR$/../Testing/eFlow Data/Pre processing/Supervised Analysis/DecisionTreeClassifier/Train data/Prediction Classification/Incorrectly Predicted Data/Feature Analysis/Graphics/Count_Plot_Survived.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Testing/eFlow Data/Pre processing/Supervised Analysis/DecisionTreeClassifier/Train data/Prediction Classification/Incorrectly Predicted Data/Feature Analysis/Graphics/Distance_Plot_Age.png" beforeDir="false" afterPath="$PROJECT_DIR$/../Testing/eFlow Data/Pre processing/Supervised Analysis/DecisionTreeClassifier/Train data/Prediction Classification/Incorrectly Predicted Data/Feature Analysis/Graphics/Distance_Plot_Age.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Testing/eFlow Data/Pre processing/Supervised Analysis/DecisionTreeClassifier/Train data/Prediction Classification/Incorrectly Predicted Data/Feature Analysis/Graphics/Distance_Plot_Fare.png" beforeDir="false" afterPath="$PROJECT_DIR$/../Testing/eFlow Data/Pre processing/Supervised Analysis/DecisionTreeClassifier/Train data/Prediction Classification/Incorrectly Predicted Data/Feature Analysis/Graphics/Distance_Plot_Fare.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Testing/eFlow Data/Pre processing/Supervised Analysis/DecisionTreeClassifier/Train data/Prediction Classification/Incorrectly Predicted Data/Feature Analysis/Graphics/Pie_Chart_Cabin.png" beforeDir="false" afterPath="$PROJECT_DIR$/../Testing/eFlow Data/Pre processing/Supervised Analysis/DecisionTreeClassifier/Train data/Prediction Classification/Incorrectly Predicted Data/Feature Analysis/Graphics/Pie_Chart_Cabin.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Testing/eFlow Data/Pre processing/Supervised Analysis/DecisionTreeClassifier/Train data/Prediction Classification/Incorrectly Predicted Data/Feature Analysis/Graphics/Pie_Chart_Sex.png" beforeDir="false" afterPath="$PROJECT_DIR$/../Testing/eFlow Data/Pre processing/Supervised Analysis/DecisionTreeClassifier/Train data/Prediction Classification/Incorrectly Predicted Data/Feature Analysis/Graphics/Pie_Chart_Sex.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Testing/eFlow Data/Pre processing/Supervised Analysis/DecisionTreeClassifier/Train data/Prediction Classification/Incorrectly Predicted Data/Feature Analysis/Tables/Descriptions/Age_Descr.png" beforeDir="false" afterPath="$PROJECT_DIR$/../Testing/eFlow Data/Pre processing/Supervised Analysis/DecisionTreeClassifier/Train data/Prediction Classification/Incorrectly Predicted Data/Feature Analysis/Tables/Descriptions/Age_Descr.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Testing/eFlow Data/Pre processing/Supervised Analysis/DecisionTreeClassifier/Train data/Prediction Classification/Incorrectly Predicted Data/Feature Analysis/Tables/Descriptions/Fare_Descr.png" beforeDir="false" afterPath="$PROJECT_DIR$/../Testing/eFlow Data/Pre processing/Supervised Analysis/DecisionTreeClassifier/Train data/Prediction Classification/Incorrectly Predicted Data/Feature Analysis/Tables/Descriptions/Fare_Descr.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Testing/eFlow Data/Pre processing/Supervised Analysis/DecisionTreeClassifier/Train data/Prediction Classification/Incorrectly Predicted Data/Feature Analysis/Tables/Value Counts/Parch_Value_Counts.png" beforeDir="false" afterPath="$PROJECT_DIR$/../Testing/eFlow Data/Pre processing/Supervised Analysis/DecisionTreeClassifier/Train data/Prediction Classification/Incorrectly Predicted Data/Feature Analysis/Tables/Value Counts/Parch_Value_Counts.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Testing/eFlow Data/Pre processing/Supervised Analysis/DecisionTreeClassifier/Train data/Prediction Classification/Incorrectly Predicted Data/Feature Analysis/Tables/Value Counts/Pclass_Value_Counts.png" beforeDir="false" afterPath="$PROJECT_DIR$/../Testing/eFlow Data/Pre processing/Supervised Analysis/DecisionTreeClassifier/Train data/Prediction Classification/Incorrectly Predicted Data/Feature Analysis/Tables/Value Counts/Pclass_Value_Counts.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Testing/eFlow Data/Pre processing/Supervised Analysis/DecisionTreeClassifier/Train data/Prediction Classification/Incorrectly Predicted Data/Feature Analysis/Tables/Value Counts/SibSp_Value_Counts.png" beforeDir="false" afterPath="$PROJECT_DIR$/../Testing/eFlow Data/Pre processing/Supervised Analysis/DecisionTreeClassifier/Train data/Prediction Classification/Incorrectly Predicted Data/Feature Analysis/Tables/Value Counts/SibSp_Value_Counts.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Testing/eFlow Data/Pre processing/Supervised Analysis/DecisionTreeClassifier/Train data/Prediction Classification/Incorrectly Predicted Data/Feature Analysis/Tables/Value Counts/Survived_Value_Counts.png" beforeDir="false" afterPath="$PROJECT_DIR$/../Testing/eFlow Data/Pre processing/Supervised Analysis/DecisionTreeClassifier/Train data/Prediction Classification/Incorrectly Predicted Data/Feature Analysis/Tables/Value Counts/Survived_Value_Counts.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Testing/imputer_model/imputer.log" beforeDir="false" afterPath="$PROJECT_DIR$/../Testing/imputer_model/imputer.log" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Testing/imputer_model/imputer.pickle" beforeDir="false" afterPath="$PROJECT_DIR$/../Testing/imputer_model/imputer.pickle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Testing/eFlow Data/Pre processing/Supervised Analysis/DecisionTreeClassifier/Test data/Prediction Classification/Incorrectly Predicted Data/Feature Analysis/Tables/Value Counts/Survived_Value_Counts.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Testing/eFlow Data/Pre processing/Supervised Analysis/DecisionTreeClassifier/Train data/Prediction Classification/Confusion Matrix Train data.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Testing/eFlow Data/Pre processing/Supervised Analysis/DecisionTreeClassifier/Train data/Prediction Classification/Correctly Predicted Data/Feature Analysis/Graphics/Count_Plot_Parch.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Testing/eFlow Data/Pre processing/Supervised Analysis/DecisionTreeClassifier/Train data/Prediction Classification/Correctly Predicted Data/Feature Analysis/Graphics/Count_Plot_Pclass.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Testing/eFlow Data/Pre processing/Supervised Analysis/DecisionTreeClassifier/Train data/Prediction Classification/Correctly Predicted Data/Feature Analysis/Graphics/Count_Plot_SibSp.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Testing/eFlow Data/Pre processing/Supervised Analysis/DecisionTreeClassifier/Train data/Prediction Classification/Correctly Predicted Data/Feature Analysis/Graphics/Count_Plot_Survived.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Testing/eFlow Data/Pre processing/Supervised Analysis/DecisionTreeClassifier/Train data/Prediction Classification/Correctly Predicted Data/Feature Analysis/Graphics/Distance_Plot_Age.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Testing/eFlow Data/Pre processing/Supervised Analysis/DecisionTreeClassifier/Train data/Prediction Classification/Correctly Predicted Data/Feature Analysis/Graphics/Distance_Plot_Fare.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Testing/eFlow Data/Pre processing/Supervised Analysis/DecisionTreeClassifier/Train data/Prediction Classification/Correctly Predicted Data/Feature Analysis/Graphics/Pie_Chart_Cabin.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Testing/eFlow Data/Pre processing/Supervised Analysis/DecisionTreeClassifier/Train data/Prediction Classification/Correctly Predicted Data/Feature Analysis/Graphics/Pie_Chart_Sex.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Testing/eFlow Data/Pre processing/Supervised Analysis/DecisionTreeClassifier/Train data/Prediction Classification/Correctly Predicted Data/Feature Analysis/Tables/Descriptions/Age_Descr.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Testing/eFlow Data/Pre processing/Supervised Analysis/DecisionTreeClassifier/Train data/Prediction Classification/Correctly Predicted Data/Feature Analysis/Tables/Descriptions/Fare_Descr.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Testing/eFlow Data/Pre processing/Supervised Analysis/DecisionTreeClassifier/Train data/Prediction Classification/Correctly Predicted Data/Feature Analysis/Tables/Value Counts/Cabin_Value_Counts.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Testing/eFlow Data/Pre processing/Supervised Analysis/DecisionTreeClassifier/Train data/Prediction Classification/Correctly Predicted Data/Feature Analysis/Tables/Value Counts/Parch_Value_Counts.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Testing/eFlow Data/Pre processing/Supervised Analysis/DecisionTreeClassifier/Train data/Prediction Classification/Correctly Predicted Data/Feature Analysis/Tables/Value Counts/Pclass_Value_Counts.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Testing/eFlow Data/Pre processing/Supervised Analysis/DecisionTreeClassifier/Train data/Prediction Classification/Correctly Predicted Data/Feature Analysis/Tables/Value Counts/Sex_Value_Counts.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Testing/eFlow Data/Pre processing/Supervised Analysis/DecisionTreeClassifier/Train data/Prediction Classification/Correctly Predicted Data/Feature Analysis/Tables/Value Counts/SibSp_Value_Counts.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Testing/eFlow Data/Pre processing/Supervised Analysis/DecisionTreeClassifier/Train data/Prediction Classification/Correctly Predicted Data/Feature Analysis/Tables/Value Counts/Survived_Value_Counts.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Testing/eFlow Data/Pre processing/Supervised Analysis/DecisionTreeClassifier/Train data/Prediction Classification/Evaluation on Train data.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Testing/eFlow Data/Pre processing/Supervised Analysis/DecisionTreeClassifier/Train data/Prediction Classification/Incorrectly Predicted Data/Feature Analysis/Graphics/Count_Plot_Parch.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Testing/eFlow Data/Pre processing/Supervised Analysis/DecisionTreeClassifier/Train data/Prediction Classification/Incorrectly Predicted Data/Feature Analysis/Graphics/Count_Plot_Pclass.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Testing/eFlow Data/Pre processing/Supervised Analysis/DecisionTreeClassifier/Train data/Prediction Classification/Incorrectly Predicted Data/Feature Analysis/Graphics/Count_Plot_SibSp.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Testing/eFlow Data/Pre processing/Supervised Analysis/DecisionTreeClassifier/Train data/Prediction Classification/Incorrectly Predicted Data/Feature Analysis/Graphics/Count_Plot_Survived.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Testing/eFlow Data/Pre processing/Supervised Analysis/DecisionTreeClassifier/Train data/Prediction Classification/Incorrectly Predicted Data/Feature Analysis/Graphics/Distance_Plot_Age.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Testing/eFlow Data/Pre processing/Supervised Analysis/DecisionTreeClassifier/Train data/Prediction Classification/Incorrectly Predicted Data/Feature Analysis/Graphics/Distance_Plot_Fare.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Testing/eFlow Data/Pre processing/Supervised Analysis/DecisionTreeClassifier/Train data/Prediction Classification/Incorrectly Predicted Data/Feature Analysis/Graphics/Pie_Chart_Cabin.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Testing/eFlow Data/Pre processing/Supervised Analysis/DecisionTreeClassifier/Train data/Prediction Classification/Incorrectly Predicted Data/Feature Analysis/Graphics/Pie_Chart_Sex.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Testing/eFlow Data/Pre processing/Supervised Analysis/DecisionTreeClassifier/Train data/Prediction Classification/Incorrectly Predicted Data/Feature Analysis/Tables/Descriptions/Age_Descr.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Testing/eFlow Data/Pre processing/Supervised Analysis/DecisionTreeClassifier/Train data/Prediction Classification/Incorrectly Predicted Data/Feature Analysis/Tables/Descriptions/Fare_Descr.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Testing/eFlow Data/Pre processing/Supervised Analysis/DecisionTreeClassifier/Train data/Prediction Classification/Incorrectly Predicted Data/Feature Analysis/Tables/Value Counts/Cabin_Value_Counts.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Testing/eFlow Data/Pre processing/Supervised Analysis/DecisionTreeClassifier/Train data/Prediction Classification/Incorrectly Predicted Data/Feature Analysis/Tables/Value Counts/Parch_Value_Counts.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Testing/eFlow Data/Pre processing/Supervised Analysis/DecisionTreeClassifier/Train data/Prediction Classification/Incorrectly Predicted Data/Feature Analysis/Tables/Value Counts/Pclass_Value_Counts.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Testing/eFlow Data/Pre processing/Supervised Analysis/DecisionTreeClassifier/Train data/Prediction Classification/Incorrectly Predicted Data/Feature Analysis/Tables/Value Counts/Sex_Value_Counts.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Testing/eFlow Data/Pre processing/Supervised Analysis/DecisionTreeClassifier/Train data/Prediction Classification/Incorrectly Predicted Data/Feature Analysis/Tables/Value Counts/SibSp_Value_Counts.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Testing/eFlow Data/Pre processing/Supervised Analysis/DecisionTreeClassifier/Train data/Prediction Classification/Incorrectly Predicted Data/Feature Analysis/Tables/Value Counts/Survived_Value_Counts.png" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Analysis/DataAnalysis.py" beforeDir="false" afterPath="$PROJECT_DIR$/Analysis/DataAnalysis.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Analysis/SupervisedModelAnalysis.py" beforeDir="false" afterPath="$PROJECT_DIR$/Analysis/SupervisedModelAnalysis.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Utils/SysUtils.py" beforeDir="false" afterPath="$PROJECT_DIR$/Utils/SysUtils.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_Hidden/Constants.py" beforeDir="false" afterPath="$PROJECT_DIR$/_Hidden/Constants.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_Hidden/CustomExc.py" beforeDir="false" afterPath="$PROJECT_DIR$/_Hidden/CustomExc.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/_Hidden/Objects/FileOutput.py" beforeDir="false" afterPath="$PROJECT_DIR$/_Hidden/Objects/FileOutput.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -156,8 +91,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Utils/SysUtils.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="510">
-              <caret line="34" column="55" selection-start-line="34" selection-start-column="42" selection-end-line="34" selection-end-column="55" />
+            <state relative-caret-position="434">
+              <caret line="144" column="26" selection-start-line="144" selection-start-column="4" selection-end-line="144" selection-end-column="26" />
               <folding>
                 <element signature="e#0#19#0" expanded="true" />
               </folding>
@@ -166,9 +101,18 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/_Hidden/Constants.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="30">
+              <caret line="2" column="60" selection-start-line="2" selection-start-column="60" selection-end-line="2" selection-end-column="60" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Analysis/DataAnalysis.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="830">
+            <state relative-caret-position="-4557">
               <caret line="187" selection-start-line="187" selection-end-line="187" />
               <folding>
                 <element signature="e#0#43#0" expanded="true" />
@@ -177,11 +121,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Analysis/SupervisedModelAnalysis.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-2006">
-              <caret line="282" column="55" selection-start-line="282" selection-start-column="55" selection-end-line="282" selection-end-column="55" />
+            <state relative-caret-position="-12">
+              <caret line="197" column="2" selection-start-line="197" selection-start-column="2" selection-end-line="197" selection-end-column="2" />
               <folding>
                 <element signature="e#0#43#0" expanded="true" />
               </folding>
@@ -192,7 +136,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/DataFrameTypes.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-1660">
+            <state relative-caret-position="858">
               <caret line="154" column="24" selection-start-line="154" selection-start-column="8" selection-end-line="154" selection-end-column="24" />
               <folding>
                 <element signature="e#0#11#0" expanded="true" />
@@ -204,8 +148,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/_Hidden/Objects/FileOutput.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="315">
-              <caret line="21" column="36" lean-forward="true" selection-start-line="21" selection-start-column="36" selection-end-line="21" selection-end-column="36" />
+            <state relative-caret-position="285">
+              <caret line="19" column="100" selection-start-line="19" selection-start-column="100" selection-end-line="19" selection-end-column="100" />
               <folding>
                 <element signature="e#0#40#0" expanded="true" />
               </folding>
@@ -216,8 +160,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/_Hidden/CustomExc.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="480">
-              <caret line="32" lean-forward="true" selection-start-line="32" selection-end-line="32" />
+            <state relative-caret-position="495">
+              <caret line="33" column="31" selection-start-line="33" selection-start-column="6" selection-end-line="33" selection-end-column="31" />
             </state>
           </provider>
         </entry>
@@ -226,7 +170,7 @@
         <entry file="file://$PROJECT_DIR$/_Hidden/Objects/DefaultException.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="135">
-              <caret line="9" column="45" lean-forward="true" selection-start-line="9" selection-start-column="45" selection-end-line="9" selection-end-column="45" />
+              <caret line="9" column="45" selection-start-line="9" selection-start-column="45" selection-end-line="9" selection-end-column="45" />
             </state>
           </provider>
         </entry>
@@ -242,11 +186,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>os.path</find>
-      <find>get_</find>
-      <find>get_model_pr</find>
-      <find>plot_confusion_matrix</find>
-      <find>classify_by_probas</find>
       <find>classif</find>
       <find>eval</find>
       <find>pre</find>
@@ -269,16 +208,21 @@
       <find>self.__all_columns</find>
       <find>ProbasNotPossible</find>
       <find>pickle</find>
-      <find>check_create_dir_structure</find>
       <find>df_features</find>
       <find>classification_error_analysis</find>
+      <find>check_create_dir_structure</find>
+      <find>sysUt</find>
+      <find>thresholds.txt</find>
+      <find>sub_dir =</find>
+      <find>convert_to_filename</find>
+      <find>write_object_to_file</find>
     </findStrings>
     <replaceStrings>
       <replace>PipelineSegment</replace>
       <replace>FileOutput.get_output_folder(self)</replace>
       <replace>classify_by_probas</replace>
-      <replace>10</replace>
       <replace>__proba_func</replace>
+      <replace>10</replace>
     </replaceStrings>
   </component>
   <component name="Git.Settings">
@@ -304,22 +248,22 @@
         <option value="$PROJECT_DIR$/_Hidden/Objects/PipelineSegment.py" />
         <option value="$PROJECT_DIR$/Utils/Constants.py" />
         <option value="$PROJECT_DIR$/ClusterMaster.py" />
-        <option value="$PROJECT_DIR$/_Hidden/Constants.py" />
         <option value="$PROJECT_DIR$/Widgets/DataCleaningWidget.py" />
         <option value="$PROJECT_DIR$/PipelineSegments/DataCleaner.py" />
         <option value="$PROJECT_DIR$/_Hidden/Widgets/DataCleaningWidget.py" />
         <option value="$PROJECT_DIR$/Analysis/ModelAnalysis.py" />
         <option value="$PROJECT_DIR$/_Hidden/Objects/DefaultException.py" />
-        <option value="$PROJECT_DIR$/_Hidden/CustomExc.py" />
-        <option value="$PROJECT_DIR$/Utils/SysUtils.py" />
         <option value="$PROJECT_DIR$/DataFrameTypes.py" />
         <option value="$PROJECT_DIR$/Analysis/DataAnalysis.py" />
-        <option value="$PROJECT_DIR$/_Hidden/Objects/FileOutput.py" />
         <option value="$PROJECT_DIR$/Analysis/SupervisedModelAnalysis.py" />
+        <option value="$PROJECT_DIR$/_Hidden/CustomExc.py" />
+        <option value="$PROJECT_DIR$/_Hidden/Constants.py" />
+        <option value="$PROJECT_DIR$/_Hidden/Objects/FileOutput.py" />
+        <option value="$PROJECT_DIR$/Utils/SysUtils.py" />
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds">
+  <component name="ProjectFrameBounds" extendedState="6">
     <option name="x" value="66" />
     <option name="y" value="23" />
     <option name="width" value="1614" />
@@ -331,6 +275,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -346,29 +291,7 @@
             <path>
               <item name="eFlow" type="b2602c69:ProjectViewProjectNode" />
               <item name="eFlow" type="462c0819:PsiDirectoryNode" />
-              <item name="_Hidden" type="462c0819:PsiDirectoryNode" />
-              <item name="Objects" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="eFlow" type="b2602c69:ProjectViewProjectNode" />
-              <item name="eFlow" type="462c0819:PsiDirectoryNode" />
-              <item name="_Hidden" type="462c0819:PsiDirectoryNode" />
-              <item name="Widgets" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="eFlow" type="b2602c69:ProjectViewProjectNode" />
-              <item name="eFlow" type="462c0819:PsiDirectoryNode" />
               <item name="Analysis" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="eFlow" type="b2602c69:ProjectViewProjectNode" />
-              <item name="eFlow" type="462c0819:PsiDirectoryNode" />
-              <item name="PipelineSegments" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="eFlow" type="b2602c69:ProjectViewProjectNode" />
-              <item name="eFlow" type="462c0819:PsiDirectoryNode" />
-              <item name="ToolBox" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="eFlow" type="b2602c69:ProjectViewProjectNode" />
@@ -379,7 +302,6 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -428,18 +350,22 @@
       <workItem from="1566703221951" duration="3068000" />
       <workItem from="1566755325768" duration="697000" />
       <workItem from="1566848003687" duration="7390000" />
-      <workItem from="1566963803707" duration="22553000" />
+      <workItem from="1566963803707" duration="24930000" />
+      <workItem from="1567533016192" duration="1425000" />
+      <workItem from="1567621533270" duration="2000" />
+      <workItem from="1567780096974" duration="207000" />
+      <workItem from="1567796612295" duration="4209000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="64146000" />
+    <option name="totallyTimeSpent" value="72366000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="66" y="23" width="1614" height="1027" extended-state="6" />
+    <frame x="69" y="23" width="1611" height="1027" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.28180662" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.2976418" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -557,13 +483,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/_Hidden/Constants.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="45">
-          <caret line="3" column="38" selection-start-line="3" selection-start-column="24" selection-end-line="3" selection-end-column="38" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/ClusterMaster.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="139">
@@ -574,9 +493,40 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/_Hidden/CustomExc.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="495">
+          <caret line="33" column="31" selection-start-line="33" selection-start-column="6" selection-end-line="33" selection-end-column="31" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/_Hidden/Objects/DefaultException.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="135">
+          <caret line="9" column="45" selection-start-line="9" selection-start-column="45" selection-end-line="9" selection-end-column="45" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/_Hidden/Constants.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="30">
+          <caret line="2" column="60" selection-start-line="2" selection-start-column="60" selection-end-line="2" selection-end-column="60" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Analysis/SupervisedModelAnalysis.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-12">
+          <caret line="197" column="2" selection-start-line="197" selection-start-column="2" selection-end-line="197" selection-end-column="2" />
+          <folding>
+            <element signature="e#0#43#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/DataFrameTypes.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1660">
+        <state relative-caret-position="858">
           <caret line="154" column="24" selection-start-line="154" selection-start-column="8" selection-end-line="154" selection-end-column="24" />
           <folding>
             <element signature="e#0#11#0" expanded="true" />
@@ -586,52 +536,28 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/_Hidden/Objects/FileOutput.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="315">
-          <caret line="21" column="36" lean-forward="true" selection-start-line="21" selection-start-column="36" selection-end-line="21" selection-end-column="36" />
+        <state relative-caret-position="285">
+          <caret line="19" column="100" selection-start-line="19" selection-start-column="100" selection-end-line="19" selection-end-column="100" />
           <folding>
             <element signature="e#0#40#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/_Hidden/CustomExc.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="480">
-          <caret line="32" lean-forward="true" selection-start-line="32" selection-end-line="32" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/_Hidden/Objects/DefaultException.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="135">
-          <caret line="9" column="45" lean-forward="true" selection-start-line="9" selection-start-column="45" selection-end-line="9" selection-end-column="45" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Analysis/DataAnalysis.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="830">
-          <caret line="187" selection-start-line="187" selection-end-line="187" />
-          <folding>
-            <element signature="e#0#43#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Utils/SysUtils.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="510">
-          <caret line="34" column="55" selection-start-line="34" selection-start-column="42" selection-end-line="34" selection-end-column="55" />
+        <state relative-caret-position="434">
+          <caret line="144" column="26" selection-start-line="144" selection-start-column="4" selection-end-line="144" selection-end-column="26" />
           <folding>
             <element signature="e#0#19#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Analysis/SupervisedModelAnalysis.py">
+    <entry file="file://$PROJECT_DIR$/Analysis/DataAnalysis.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-2006">
-          <caret line="282" column="55" selection-start-line="282" selection-start-column="55" selection-end-line="282" selection-end-column="55" />
+        <state relative-caret-position="-4557">
+          <caret line="187" selection-start-line="187" selection-end-line="187" />
           <folding>
             <element signature="e#0#43#0" expanded="true" />
           </folding>

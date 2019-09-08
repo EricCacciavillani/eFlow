@@ -1,6 +1,6 @@
 from eFlow._Hidden.Objects.enum import *
 from eFlow._Hidden.Constants import *
-from eFlow.Utils.SysUtils import check_create_dir_structure
+from eFlow.Utils.SysUtils import check_create_dir_structure, correct_directory_path
 import os
 import copy
 
@@ -14,13 +14,13 @@ class FileOutput:
             parent_structure = "/" + SYS_CONSTANTS.PARENT_OUTPUT_FOLDER_NAME \
                                + "/" + project_name + "/"
             self.__PROJECT = enum(PATH_TO_OUTPUT_FOLDER=
-                                  os.getcwd() + parent_structure)
+                                  correct_directory_path(
+                                      os.getcwd() + parent_structure))
         else:
-            self.__PROJECT = enum(PATH_TO_OUTPUT_FOLDER=overwrite_full_path)
+            self.__PROJECT = enum(PATH_TO_OUTPUT_FOLDER=correct_directory_path(overwrite_full_path))
 
         check_create_dir_structure(self.__PROJECT.PATH_TO_OUTPUT_FOLDER,
                                    "")
-
 
     def get_output_folder(self):
         return copy.deepcopy(self.__PROJECT.PATH_TO_OUTPUT_FOLDER)
