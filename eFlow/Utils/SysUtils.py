@@ -5,7 +5,7 @@ import os
 import copy
 import six
 import itertools
-
+import pickle
 from eFlow.ToolBox.ImageProcessing import adjust_sharpness
 
 
@@ -163,8 +163,26 @@ def convert_to_filename(filename):
             or x == ")" or x == " " or x == "-")
 
 
-def write_object_to_file(obj,
-                         filename):
-    f = open(filename, 'w')
+def write_object_text_to_file(obj,
+                              directory_pth,
+                              filename):
+    filename = filename.split(".")[0]
+
+    file_dir = correct_directory_path(directory_pth) + \
+               convert_to_filename(filename) + ".txt"
+
+    f = open(file_dir, 'w')
     f.write('obj = ' + repr(obj) + '\n')
     f.close()
+
+def pickle_object_to_file(obj,
+                          directory_pth,
+                          filename):
+    filename = filename.split(".")[0]
+
+    file_dir = correct_directory_path(directory_pth) + \
+               convert_to_filename(filename) + ".pkl"
+    list_pickle = open(file_dir, 'wb')
+    pickle.dump(obj,
+                list_pickle)
+    list_pickle.close()

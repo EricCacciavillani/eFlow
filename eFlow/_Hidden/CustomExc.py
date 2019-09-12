@@ -33,4 +33,4 @@ class ThresholdType(DefaultException):
 
 class RequiresPredictionMethods(DefaultException):
     def __init__(self):
-        super().__init__(error_message="Prediction methods of the model were not passed in as expected")
+        super().__init__(error_message="Prediction methods must be passed as a dictionary.")

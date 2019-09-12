@@ -53,18 +53,18 @@ class DataAnalysis(FileOutput):
                             project_name,
                             overwrite_full_path)
 
-        # Pre-defined colors for column's with set names.
+        # Pre-defined colors for column's with set column names names.
         # Multiple names/values are allowed
         self.__defined_column_colors = list()
         self.__defined_column_colors.append([["gender", "sex"],
                                              ["Male", "M", "#7EAED3"],
                                              ["Female", "F", "#FFB6C1"]])
         self.__defined_column_colors.append([[" "],
-                                             ["Y", "yes", "Yes", "#55a868"],
-                                             ["N", "no", "No", "#ff8585"]])
+                                             ["Y", "y" "yes", "Yes", "#55a868"],
+                                             ["N", "n", "no", "No", "#ff8585"]])
         self.__defined_column_colors.append([[" "],
-                                             [True, "#55a868"],
-                                             [False, "#ff8585"]])
+                                             [True, "True", "#55a868"],
+                                             [False, "False", "#ff8585"]])
 
         self.__notebook_mode = notebook_mode
 

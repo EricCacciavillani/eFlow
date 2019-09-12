@@ -1,7 +1,8 @@
 from eFlow._Hidden.Objects.enum import enum
-from eFlow.Utils.SysUtils import create_plt_png, convert_to_file_name, df_to_image, write_object_to_file
+from eFlow.Utils.SysUtils import create_plt_png, convert_to_filename, \
+    df_to_image, write_object_text_to_file, get_unique_directory_path, \
+    pickle_object_to_file
 from eFlow._Hidden.Objects.FileOutput import *
-from eFlow._Hidden.Constants import PREDICTION_TYPES
 from eFlow._Hidden.CustomExc import *
 from eFlow.Analysis.DataAnalysis import *
 
@@ -20,37 +21,36 @@ import pandas as pd
 from IPython.display import display
 import matplotlib.pyplot as plt
 
-class SupervisedModelAnalysis(FileOutput):
+
+class ClassificationAnalysis(FileOutput):
 
     def __init__(self,
                  model,
                  model_name,
-                 pred_func,
-                 X_train,
-                 y_train,
-                 X_test=None,
-                 y_test=None,
-                 X_val=None,
-                 y_val=None,
-                 prediction_type=PREDICTION_TYPES.CLASSIFICATION,
-                 project_name="Supervised Analysis",
+                 pred_funcs_dict,
+                 project_name="Classification Analysis",
                  overwrite_full_path=None,
                  notebook_mode=True,
-                 thresholds=None,
-                 overwrite_target_classes=None,
-                 df_features=None):
+                 target_classes=None,
+                 df_features=None,
+                 columns=[],
+                 save_model=True):
         """
         model:
             A fitted supervised machine learning model.
 
         model_name:
-            The name of the model.
+            The name of the model in string form.
 
-        X_train/y_train | X_test/y_test | X_val/y_val:
-            Feature matrix/Target data.
+        pred_funcs_dict:
+            A dict of the name of the function and the function defintion for the
+            model prediction methods.
+            (Can handle either a return of probabilities or a singile value.)
 
-        prediction_type:
-            Must be a 'Classification' or 'Regression' based model
+            Init Example:
+            pred_funcs = dict()
+            pred_funcs["Predictions"] = model.predict
+            pred_funcs["Probabilities"] = model.probas
 
         project_name:
             Creates a parent or "project" folder in which all sub-directories
@@ -62,9 +62,22 @@ class SupervisedModelAnalysis(FileOutput):
         notebook_mode:
             If in a python notebook display in the notebook.
 
+        target_classes:
+            Specfied list/np.array of targeted classes the model predicts. If set to
+            none then it will attempt to pull from the sklearn's default attribute
+            '.classes_'.
+
+        df_features:
+            DataFrameTypeHolder object. If initalized we can run correct/error
+            analysis on the dataframe. Will save object in a pickle file and provided columns
+            if initalized and df_features is not initalized.
+
+        columns:
+            Will overwrite over df_features (DataFrameTypeHolder) regardless of wether
+
         Returns/Desc:
-            Creates plots and dataframes for display and saves them in a
-            directory path.
+            Evaluates the given model based on the prediction functions pased to it.
+            Saves the model and other various graphs/dataframes for evaluation.
         """
 
         # Init any parent objects
@@ -72,147 +85,277 @@ class SupervisedModelAnalysis(FileOutput):
                             f'{project_name}/{model_name}',
                             overwrite_full_path)
 
-        # Init objectss by pass by refrence
+        # Init objects without pass by refrence
         self.__model = copy.deepcopy(model)
         self.__model_name = copy.deepcopy(model_name)
         self.__notebook_mode = copy.deepcopy(notebook_mode)
-        self.__prediction_type = copy.deepcopy(prediction_type)
-        self.__target_values = None
-
-        self.__pred_func = None
-        self.__proba_func = None
+        self.__target_values = copy.deepcopy(target_classes)
         self.__df_features = copy.deepcopy(df_features)
+        self.__pred_funcs_dict = copy.deepcopy(pred_funcs_dict)
+        self.__pred_funcs_types = dict()
 
-        # Save model
-        list_pickle = open(self.get_output_folder()
-                           + f'{self.__model_name}.pkl', 'wb')
-        pickle.dump(self.__model, list_pickle)
-        list_pickle.close()
-
-        if pred_func:
-            model_output = pred_func(
-                np.reshape(X_train[0],
-                           (-1, X_train.shape[1])))[0]
-            # Must be a confidence probability output (continuous values)
-
-            if isinstance(model_output, list) or isinstance(model_output,
-                                                            np.ndarray):
-                self.__proba_func = copy.deepcopy(pred_func)
-
-            # Regression or Classification
-            else:
-                self.__pred_func = copy.deepcopy(pred_func)
-
-
-        # Classification model
-        if prediction_type == PREDICTION_TYPES.CLASSIFICATION:
-
-            if not overwrite_target_classes:
-                self.__target_values = model.classes_
-            else:
-                self.__target_values = overwrite_target_classes
-
-            if len(self.__target_values) == 2:
-                self.__binary_classification = True
-            else:
-                self.__binary_classification = False
-
-            if X_train is not None and y_train is not None:
-                self.full_classification_analysis(X_train,
-                                                y_train,
-                                                dataset_name="Train data",
-                                                thresholds=thresholds)
-
-            if X_test is not None and y_test is not None:
-                self.full_classification_analysis(X_test,
-                                                  y_test,
-                                                  dataset_name="Test data",
-                                                  thresholds=thresholds)
-
-            if X_val is not None and y_val is not None:
-                self.full_classification_analysis(X_val,
-                                                  y_val,
-                                                  dataset_name="Validation data",
-                                                  thresholds=thresholds)
-
-        # Regression model
-        elif prediction_type == PREDICTION_TYPES.REGRESSION:
-            pass
+        # Init on sklearns default target classes attribute
+        if not self.__target_values:
+            self.__target_values = copy.deepcopy(model.classes_)
+        # ---
+        if len(self.__target_values) != 2:
+            self.__binary_classifcation = False
         else:
-            raise UnknownPredictionType
+            self.__binary_classifcation = True
 
-    def get_model_prediction(self,
-                             X,
-                             thresholds=None):
+        # Save machine learning model
+        if save_model:
+            pickle_object_to_file(self.__model,
+                                  self.get_output_folder(),
+                                  f'{self.__model_name}')
+
+        # ---
+        check_create_dir_structure(self.get_output_folder(),
+                                   "Extras")
+        # Save predicted classes
+        write_object_text_to_file(self.__target_values,
+                                  self.get_output_folder() + "Extras",
+                                  "_Classes")
+
+        # Save features and or df_features object
+        if columns or df_features:
+            if columns:
+                write_object_text_to_file(columns,
+                                          self.get_output_folder() + "Extras",
+                                          "_Features")
+            else:
+                write_object_text_to_file(df_features.get_all_features(),
+                                          self.get_output_folder() + "Extras",
+                                          "_Features")
+                pickle_object_to_file(self.__model,
+                                      self.get_output_folder() + "Extras",
+                                      "_df_features")
+
+        # Find the 'type' of each prediction. Probabilities or Predictions
+        if self.__pred_funcs_dict:
+            for pred_name, pred_func in self.__pred_funcs_dict.items():
+                model_output = pred_func(
+                    np.reshape(X_train[0],
+                               (-1, X_train.shape[1])))[0]
+
+                # Confidence / Probability (Continuous output)
+                if isinstance(model_output, list) or isinstance(model_output,
+                                                                np.ndarray):
+                    self.__pred_funcs_types[pred_name] = "Probabilities"
+
+                    # Classification (Discrete output)
+                else:
+                    self.__pred_funcs_types[pred_name] = "Predictions"
+        else:
+            raise RequiresPredictionMethods
+
+    def __get_model_prediction(self,
+                               pred_name,
+                               X,
+                               thresholds=None):
         """
         X:
             Feature matrix.
 
-        Thresholds:
+        pred_name:
+            The name of the prediction function in questioned stored in 'self.__pred_funcs_dict'
+
+        thresholds:
             If the model outputs a probability list/numpy array then we apply
-            thresholds to each classification.
+            thresholds to the ouput of the model.
 
         Returns/Desc:
             Returns back a predicted value based for a given matrix.
+            Handles prediction function 'types' Predictions and Probabilities.
+            Helps streamline the entire process of evaluating classes.
         """
 
-        if self.__pred_func:
-            return self.__pred_func(X)
+        # Must be a prediction function
+        if self.__pred_funcs_types[pred_name] == "Predictions":
+            return self.__pred_funcs_dict[pred_name](X)
+
+        elif self.__pred_funcs_types[pred_name] == "Probabilities":
+            model_output = self.__get_model_probas(pred_name,
+                                                   X,
+                                                   thresholds)
+
+            return np.asarray([self.__target_values[np.argmax(proba)]
+                               for proba in model_output])
         else:
+            raise UnknownModelOutputType
+
+    def __get_model_probas(self,
+                           pred_name,
+                           X,
+                           thresholds=None):
+        """
+        X:
+            Feature matrix.
+
+        pred_name:
+            The name of the prediction function in questioned stored in 'self.__pred_funcs_dict'
+
+        thresholds:
+            If the model outputs a probability list/numpy array then we apply
+            thresholds to the ouput of the model.
+
+        Returns/Desc:
+            Returns back a series of values between 0-1 to represent it's confidence.
+            Invokes an error if the prediction function call is anything but a Probabilities
+            call.
+        """
+
+        if self.__pred_funcs_types[pred_name] == "Probabilities":
+            model_output = self.__pred_funcs_dict[pred_name](X)
+
+            # Validate probabilities
             if thresholds:
                 if isinstance(thresholds, list) or \
                         isinstance(thresholds, np.ndarray):
                     if sum(thresholds) != 1:
                         print("Thresholds didn't add up to 100%! "
                               "This may cause issues in your results!")
-                        pass
                     if len(thresholds) != len(self.__target_values):
                         raise ThresholdLength
                 else:
                     raise ThresholdType
 
-            model_output = self.get_model_probas(X)
+            # ---
             if isinstance(model_output, list):
                 model_output = np.asarray(model_output)
 
             if isinstance(model_output, np.ndarray):
                 if thresholds:
                     model_output = model_output - np.asarray(thresholds)
-                return np.asarray([self.__target_values[np.argmax(proba)]
-                                   for proba in model_output])
-            raise UnknownModelOutputType
 
-    def get_model_probas(self,
-                         X):
-        if self.__proba_func:
-            return self.__proba_func(X)
+            return model_output
         else:
             raise ProbasNotPossible
 
-    def full_classification_analysis(self,
-                                     X,
-                                     y,
-                                     dataset_name,
-                                     thresholds=None,
-                                     normalize_confusion_matrix=True,
-                                     ignore_metrics=[],
-                                     custom_metrics=dict(),
-                                     average_scoring=["micro",
-                                                      "macro",
-                                                      "weighted"],
-                                     display_graphs=False):
+    def __create_sub_dir_with_thresholds(self,
+                                         pred_name,
+                                         dataset_name,
+                                         thresholds):
         """
-        X/y:
-            Feature matrix/Target data vector
+        pred_name:
+            The prediction function's name.
 
         dataset_name:
-            The dataset's name
+            The passed in dataset's name.
+
+        thresholds:
+            If the model outputs a probability list/numpy array then we apply
+            thresholds to the ouput of the model.
+
+        Returns/Desc:
+            Looking at the root of the starting directory and looking at each
+            '_Thresholds.txt' file to determine if the files can be outputed
+            to that directory. The content of the file must match the content
+            of the list/numpy array 'thresholds'.
+        """
+        sub_dir = f'{dataset_name}/{pred_name}'
+
+        # Only generate extra folder structure if function type is Probabilities
+        if self.__pred_funcs_types[pred_name] == "Probabilities":
+
+            # ------
+            if not thresholds:
+                sub_dir = f'{sub_dir}/No Thresholds'
+            else:
+                i = 0
+                sub_dir = f'{sub_dir}/Thresholds'
+                tmp_sub_dir = copy.deepcopy(sub_dir)
+                while True:
+                    threshold_dir = self.get_output_folder()
+                    if i > 0:
+                        tmp_sub_dir = (sub_dir + f' {i}')
+                    threshold_dir += tmp_sub_dir
+
+                    # If file exists with the same thresholds; than use this directory
+                    if os.path.exists(threshold_dir):
+                        if self.__compare_thresholds_to_saved_thresholds(
+                                threshold_dir,
+                                thresholds):
+                            sub_dir = tmp_sub_dir
+                            break
+
+                    # Create new directory
+                    else:
+                        os.makedirs(threshold_dir)
+                        write_object_text_to_file(thresholds,
+                                                  threshold_dir,
+                                                  "_Thresholds")
+                        sub_dir = tmp_sub_dir
+                        break
+
+                    # Iterate for directory name change
+                    i += 1
+
+        return sub_dir
+
+    def __compare_thresholds_to_saved_thresholds(self,
+                                                 directory_pth,
+                                                 thresholds):
+        """
+        directory_pth:
+            Path to the given folder where the "_Thresholds.txt"
+
+        thresholds:
+            If the model outputs a probability list/numpy array then we apply
+            thresholds to the ouput of the model.
+
+        Returns/Desc:
+            Compare the thresholds object to the text file; returns true if
+            the file exists and the object's value matches up.
+        """
+
+        file_directory = correct_directory_path(directory_pth)
+
+        if os.path.exists(file_directory):
+
+            # Extract file contents and convert to a list object
+            file = open(file_directory + "_Thresholds.txt", "r")
+            line = file.read()
+            converted_list = line.split("=")[-1].strip().strip('][').split(
+                ', ')
+            converted_list = [float(val) for val in converted_list]
+            file.close()
+
+            if thresholds == converted_list:
+                return True
+            else:
+                return False
+        else:
+            return False
+
+    def peform_analysis(self,
+                        X,
+                        y,
+                        dataset_name,
+                        thresholds_matrix=None,
+                        normalize_confusion_matrix=True,
+                        ignore_metrics=[],
+                        custom_metrics=dict(),
+                        average_scoring=["micro",
+                                         "macro",
+                                         "weighted"],
+                        display_analysis_graphs=False):
+        """
+        X/y:
+            Feature matrix/Target data vector.
+
+        dataset_name:
+            The dataset's name.
+
+        thresholds_matrix:
+            Lists of list objects containing thresholds to iterate through
+            for a model functon that is of type "Probabilities".
 
         normalize_confusion_matrix:
             Normalize the confusion matrix buckets.
 
         ignore_metrics:
-            Specify set metrics to ignore. (F1-Score, Accuracy etc)
+            Specify set metrics to ignore. (F1-Score, Accuracy etc).
 
         ignore_metrics:
             Specify the default metrics to not apply to the classification
@@ -223,8 +366,15 @@ class SupervisedModelAnalysis(FileOutput):
                 * F1-Score
                 * Accuracy
 
+        custom_metrics:
+            Pass the name of metric(s) and the function definition(s) in a
+            dictionary.
+
         average_scoring:
             Determines the type of averaging performed on the data.
+
+        display_analysis_graphs:
+            Controls visual display of error error analysis if it is able to run.
 
         Returns/Desc:
             Performs all classification functionality with the provided feature
@@ -233,153 +383,173 @@ class SupervisedModelAnalysis(FileOutput):
                 * classification_evaluation
                 * plot_confusion_matrix
         """
+        if isinstance(thresholds_matrix, np.ndarray):
+            thresholds_matrix = thresholds_matrix.tolist()
 
-        if self.__prediction_type == PREDICTION_TYPES.CLASSIFICATION:
+        if not thresholds_matrix:
+            thresholds_matrix = list()
 
+        if isinstance(thresholds_matrix, list) and not isinstance(
+                thresholds_matrix[0], list):
+            thresholds_matrix = list(thresholds_matrix)
 
+        thresholds_matrix.append(None)
 
-            print("\n\n" + "---" * 10 + f'{dataset_name}' + "---" * 10)
+        print("\n\n" + "---" * 10 + f'{dataset_name}' + "---" * 10)
 
-            if self.__pred_func:
-                sub_dir = "Prediction Classification"
-            elif self.__proba_func:
-                sub_dir = "Probability Classification"
+        for pred_name, pred_type in self.__pred_funcs_types.items():
+            print(f"Now running classification on {pred_name}")
 
-                if thresholds:
-                    write_object_to_file(thresholds,
-                                         self.get_output_folder() +
-                                         f'{dataset_name}/{sub_dir}' +
-                                         "/Thresholds.txt")
-            else:
-                sub_dir = "Unknown Classification Type"
+            for thresholds in thresholds_matrix:
+                if pred_type == "Predictions":
+                    thresholds = None
 
-            sub_dir = f'{dataset_name}/{sub_dir}'
-            #
-            # if self.__proba_func:
-            #     tmp_file_name = f'Precision Recall Curve with Scores ' + \
-            #                     f'on {dataset_name}'
-            #     self.plot_precision_recall_curve(X,
-            #                                      y,
-            #                                      sub_dir=sub_dir,
-            #                                      title=tmp_file_name,
-            #                                      filename=tmp_file_name,
-            #                                      thresholds=thresholds)
+                self.classification_metrics(X,
+                                            y,
+                                            pred_name=pred_name,
+                                            dataset_name=dataset_name,
+                                            thresholds=thresholds,
+                                            ignore_metrics=ignore_metrics,
+                                            custom_metrics=custom_metrics,
+                                            average_scoring=average_scoring)
 
-            self.classification_metrics(X,
-                                        y,
-                                        title=dataset_name,
-                                        sub_dir=sub_dir,
-                                        ignore_metrics=ignore_metrics,
-                                        custom_metrics=custom_metrics,
-                                        file_name=f'Evaluation on ' + \
-                                        f'{dataset_name}',
-                                        average_scoring=average_scoring)
+                self.plot_confusion_matrix(X,
+                                           y,
+                                           pred_name=pred_name,
+                                           dataset_name=dataset_name,
+                                           title=tmp_filename,
+                                           thresholds=thresholds,
+                                           normalize=normalize_confusion_matrix)
 
-            tmp_file_name = f'Confusion Matrix: {dataset_name}'
-            self.plot_confusion_matrix(X,
-                                       y,
-                                       sub_dir=sub_dir,
-                                       title=tmp_file_name,
-                                       normalize=normalize_confusion_matrix,
-                                       file_name=tmp_file_name)
+                self.plot_classification_error_analysis(X,
+                                                        y,
+                                                        pred_name=pred_name,
+                                                        dataset_name=dataset_name,
+                                                        thresholds=thresholds)
 
-            self.classification_report(X,
-                                       y,
-                                       thresholds,
-                                       sub_dir=sub_dir)
+                if pred_type == "Probabilities":
+                    self.plot_precision_recall_curve(X,
+                                                     y,
+                                                     sub_dir=sub_dir,
+                                                     title=tmp_filename,
+                                                     filename=tmp_filename,
+                                                     thresholds=thresholds)
+                if self.__df_features:
+                    self.classification_error_analysis(X,
+                                                       y,
+                                                       pred_name=pred_name,
+                                                       dataset_name=dataset_name,
+                                                       thresholds=thresholds,
+                                                       display_graphs=display_graphs)
 
-            if self.__binary_classification:
-                skplt.metrics.plot_ks_statistic(y,
-                                                self.__model.predict_proba(X),
-                                                figsize=(10, 8))
-            if self.__df_features:
-                self.classification_error_analysis(X,
-                                                   y,
-                                                   sub_dir=sub_dir,
-                                                   thresholds=thresholds,
-                                                   display_graphs=display_graphs)
-        else:
-            print(f'Model prediction is not a classification problem.' + \
-                  f'It is a {self.__prediction_type}')
+                    if pred_type == "Predictions":
+                        break
 
+    #     def plot_precision_recall_curve(self,
+    #                                     X,
+    #                                     y,
+    #                                     pred_name,
+    #                                     dataset_name,
+    #                                     thresholds=None,
+    #                                     sub_dir="",
+    #                                     figsize=(10, 8),
+    #                                     title=None,
+    #                                     filename=None):
+    #         """
+    #         X/y:
+    #             Feature matrix/Target data vector.
 
-    def plot_precision_recall_curve(self,
-                                    X,
-                                    y,
-                                    thresholds=None,
-                                    sub_dir="",
-                                    figsize=(10, 8),
-                                    title=None,
-                                    filename=None):
-        """
-        X/y:
-            Feature matrix/Target data vector.
+    #         sub_dir:
+    #             Specify a subdirectory to append to the output path of the file.
 
-        sub_dir:
-            Specify a subdirectory to append to the output path of the file.
+    #         figsize:
+    #             Plot's size.
 
-        figsize:
-            Plot's size.
+    #         title:
+    #             Title of the plot.
 
-        title:
-            Title of the plot.
+    #         filename:
+    #             Name of the file. If set to 'None' then don't create the file.
 
-        filename:
-            Name of the file. If set to 'None' then don't create the file.
+    #         Returns/Desc:
 
-        Returns/Desc:
+    #         """
+    #         if title:
+    #             skplt.metrics.plot_precision_recall(self.get_model_probas(X),
+    #                                                 y,
+    #                                                 figsize=figsize,
+    #                                                 title=title)
+    #         else:
+    #             skplt.metrics.plot_precision_recall(self.get_model_probas(X),
+    #                                                 y,
+    #                                                 figsize=figsize)
 
-        """
-        if title:
-            skplt.metrics.plot_precision_recall(self.get_model_probas(X),
-                                                y,
-                                                figsize=figsize,
-                                                title=title)
-        else:
-            skplt.metrics.plot_precision_recall(self.get_model_probas(X),
-                                                y,
-                                                figsize=figsize)
+    #         if filename:
+    #             create_plt_png(self.get_output_folder(),
+    #                            sub_dir,
+    #                            convert_to_filename(filename))
 
-        if filename:
-            create_plt_png(self.get_output_folder(),
-                           sub_dir,
-                           convert_to_file_name(filename))
-
-        if self.__notebook_mode:
-            plt.show()
-        plt.close()
+    #         if self.__notebook_mode:
+    #             plt.show()
+    #         plt.close()
 
     def plot_confusion_matrix(self,
                               X,
                               y,
+                              pred_name,
+                              dataset_name,
                               thresholds=None,
-                              sub_dir="",
                               figsize=(10, 8),
                               title=None,
-                              file_name=None,
-                              normalize=True,
-                              ):
+                              normalize=True):
+        """
+        X/y:
+            Feature matrix/Target data vector.
+
+        pred_name:
+
+        dataset_name:
+            The dataset's name.
+        thresholds:
+
+        figsize:
+
+        title:
+
+        normalize:
+
+        Returns/Descr:
+
+        """
+
+        filename = f'Confusion Matrix: {dataset_name} on {self.__model_name}'
+        sub_dir = self.__create_sub_dir_with_thresholds(pred_name,
+                                                        dataset_name,
+                                                        thresholds)
 
         warnings.filterwarnings('ignore')
         if title:
-            skplt.metrics.plot_confusion_matrix(self.get_model_prediction(X,
-                                                                          thresholds),
-                                                y,
-                                                figsize=figsize,
-                                                title=title,
-                                                normalize=normalize,)
+            skplt.metrics.plot_confusion_matrix(
+                self.__get_model_prediction(pred_name,
+                                            X,
+                                            thresholds),
+                y,
+                figsize=figsize,
+                title=title,
+                normalize=normalize, )
         else:
-            skplt.metrics.plot_confusion_matrix(self.get_model_prediction(X,
-                                                                          thresholds),
-                                                y,
-                                                figsize=figsize,
-                                                normalize=normalize)
+            skplt.metrics.plot_confusion_matrix(
+                self.__get_model_prediction(pred_name,
+                                            X,
+                                            thresholds),
+                y,
+                figsize=figsize,
+                normalize=normalize)
         warnings.filterwarnings('default')
 
-        if file_name:
-            create_plt_png(self.get_output_folder(),
-                           sub_dir,
-                           convert_to_file_name(file_name))
+        create_plt_png(self.get_output_folder(),
+                       sub_dir,
+                       convert_to_filename(filename))
 
         if self.__notebook_mode:
             plt.show()
@@ -388,10 +558,12 @@ class SupervisedModelAnalysis(FileOutput):
     def classification_metrics(self,
                                X,
                                y,
+                               pred_name,
+                               dataset_name,
                                thresholds=None,
                                title="",
                                sub_dir="",
-                               file_name=None,
+                               filename=None,
                                custom_metrics=dict(),
                                ignore_metrics=[],
                                average_scoring=["micro",
@@ -406,9 +578,6 @@ class SupervisedModelAnalysis(FileOutput):
 
         sub_dir:
             Specify a subdirectory to append to the output path of the file.
-
-        file_name:
-            Name of the file. If set to 'None' then don't create the file.
 
         custom_metrics:
             Pass the name of metric(s) and the function definition(s) in a
@@ -433,6 +602,10 @@ class SupervisedModelAnalysis(FileOutput):
             Creates/displays a dataframe object based on the model's
             predictions on the feature matrix compared to target data.
         """
+        filename = f'Metric Evaluation on {dataset_name} on {self.__model_name}'
+        sub_dir = self.__create_sub_dir_with_thresholds(pred_name,
+                                                        dataset_name,
+                                                        thresholds)
 
         if not isinstance(average_scoring, list):
             average_scoring = [average_scoring]
@@ -461,13 +634,14 @@ class SupervisedModelAnalysis(FileOutput):
         for metric_name in metric_functions:
             for average_score in average_scoring:
 
-                model_predictions = self.get_model_prediction(X,
-                                                              thresholds)
+                model_predictions = self.__get_model_prediction(pred_name,
+                                                                X,
+                                                                thresholds)
                 try:
                     evaluation_report[f'{metric_name}({average_score})'] = \
-                    metric_functions[metric_name](y_true=y,
-                                                  y_pred=model_predictions,
-                                                  average=average_score)
+                        metric_functions[metric_name](y_true=y,
+                                                      y_pred=model_predictions,
+                                                      average=average_score)
                 except TypeError:
                     evaluation_report[metric_name] = metric_functions[
                         metric_name](y,
@@ -497,24 +671,29 @@ class SupervisedModelAnalysis(FileOutput):
             print(evaluation_report)
 
         # Create image file
-        if file_name:
-            df_to_image(evaluation_report,
-                        self.get_output_folder(),
-                        sub_dir,
-                        convert_to_file_name(file_name),
-                        col_width=20,
-                        show_index=True,
-                        format_float_pos=4)
+        df_to_image(evaluation_report,
+                    self.get_output_folder(),
+                    sub_dir,
+                    convert_to_filename(filename),
+                    col_width=20,
+                    show_index=True,
+                    format_float_pos=4)
 
+    def plot_classification_error_analysis(self,
+                                           X,
+                                           y,
+                                           pred_name,
+                                           dataset_name,
+                                           thresholds=None,
+                                           display_graphs=False):
 
-    def classification_error_analysis(self,
-                                      X,
-                                      y,
-                                      sub_dir="",
-                                      thresholds=None,
-                                      display_graphs=False):
-        model_predictions = self.get_model_prediction(X,
-                                                      thresholds=thresholds)
+        sub_dir = self.__create_sub_dir_with_thresholds(pred_name,
+                                                        dataset_name,
+                                                        thresholds)
+
+        model_predictions = self.__get_model_prediction(pred_name,
+                                                        X,
+                                                        thresholds=thresholds)
 
         if display_graphs:
             print("\n\n" + "*" * 10 +
@@ -525,13 +704,12 @@ class SupervisedModelAnalysis(FileOutput):
                   "Generating graphs for model's correctly predicted..." +
                   "*" * 10 + "\n")
         DataAnalysis(pd.DataFrame(X[model_predictions == y],
-                     columns=self.__df_features.get_all_features()),
+                                  columns=self.__df_features.get_all_features()),
                      self.__df_features,
                      overwrite_full_path=self.get_output_folder() +
-                                         sub_dir+ "/Correctly Predicted Data/",
+                                         sub_dir + "/Correctly Predicted Data/",
                      missing_data_visuals=False,
                      notebook_mode=display_graphs)
-
 
         if display_graphs:
             print("\n\n" + "*" * 10 +
@@ -543,7 +721,7 @@ class SupervisedModelAnalysis(FileOutput):
                   "*" * 10 + "\n")
 
         DataAnalysis(pd.DataFrame(X[model_predictions != y],
-                     columns=self.__df_features.get_all_features()),
+                                  columns=self.__df_features.get_all_features()),
                      self.__df_features,
                      overwrite_full_path=self.get_output_folder() +
                                          sub_dir + "/Incorrectly Predicted Data/",
@@ -553,24 +731,39 @@ class SupervisedModelAnalysis(FileOutput):
     def classification_report(self,
                               X,
                               y,
-                              thresholds=None,
-                              sub_dir="",
-                              file_name=None):
+                              pred_name,
+                              dataset_name,
+                              thresholds=None):
+        """
+        X/y:
+
+        pred_name:
+
+        dataset_name:
+
+        thresholds:
+        """
+        filename = f'Classification Report {dataset_name} on {self.__model_name}'
+        sub_dir = self.__create_sub_dir_with_thresholds(pred_name,
+                                                        dataset_name,
+                                                        thresholds)
+
         report_df = pd.DataFrame(classification_report(y,
-                                                       self.get_model_prediction(X,
-                                                                                 thresholds),
+                                                       self.__get_model_prediction(
+                                                           pred_name,
+                                                           X,
+                                                           thresholds),
                                                        output_dict=True))
 
         if self.__notebook_mode:
             display(report_df)
+        else:
+            print(report_df)
 
-        if file_name:
-            df_to_image(report_df,
-                        self.get_output_folder(),
-                        sub_dir,
-                        file_name,
-                        col_width=20,
-                        show_index=True,
-                        format_float_pos=4)
-
-
+        df_to_image(report_df,
+                    self.get_output_folder(),
+                    sub_dir,
+                    filename,
+                    col_width=20,
+                    show_index=True,
+                    format_float_pos=4)
