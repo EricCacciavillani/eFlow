@@ -1,10 +1,8 @@
-from eflow._hidden.Objects.enum import enum
-from eflow.utils.sys_utils import create_plt_png, convert_to_filename, \
-    df_to_image, write_object_text_to_file, get_unique_directory_path, \
-    pickle_object_to_file
+from eflow.utils.sys_utils import *
 from eflow._hidden.Objects.FileOutput import *
-from eflow._hidden.CustomExc import *
+from eflow._hidden.custom_exception import *
 from eflow.analysis import DataAnalysis
+from eflow._hidden.Constants import GRAPH_DEFAULTS
 
 from sklearn.metrics import accuracy_score
 from sklearn.metrics import f1_score
@@ -16,7 +14,6 @@ import scikitplot as skplt
 import numpy as np
 import warnings
 import copy
-import pickle
 import pandas as pd
 from IPython.display import display
 import matplotlib.pyplot as plt
@@ -342,19 +339,19 @@ class ClassificationAnalysis(FileOutput):
         else:
             return False
 
-    def peform_analysis(self,
-                        X,
-                        y,
-                        dataset_name,
-                        thresholds_matrix=None,
-                        figsize=(10, 8),
-                        normalize_confusion_matrix=True,
-                        ignore_metrics=[],
-                        custom_metrics=dict(),
-                        average_scoring=["micro",
-                                         "macro",
-                                         "weighted"],
-                        display_analysis_graphs=False):
+    def perform_analysis(self,
+                         X,
+                         y,
+                         dataset_name,
+                         thresholds_matrix=None,
+                         figsize=GRAPH_DEFAULTS.FIGSIZE,
+                         normalize_confusion_matrix=True,
+                         ignore_metrics=[],
+                         custom_metrics=dict(),
+                         average_scoring=["micro",
+                                          "macro",
+                                          "weighted"],
+                         display_analysis_graphs=False):
         """
         X/y:
             Feature matrix/Target data vector.
@@ -511,7 +508,7 @@ class ClassificationAnalysis(FileOutput):
                                title=None,
                                ax=None,
                                cmap='nipy_spectral',
-                               figsize=None,
+                               figsize=GRAPH_DEFAULTS.FIGSIZE,
                                title_fontsize='large',
                                text_fontsize='medium'):
 
@@ -576,7 +573,7 @@ class ClassificationAnalysis(FileOutput):
                        save_file=True,
                        title=None,
                        ax=None,
-                       figsize=(10, 8),
+                       figsize=GRAPH_DEFAULTS.FIGSIZE,
                        title_fontsize='large',
                        text_fontsize='medium'):
 
@@ -639,7 +636,7 @@ class ClassificationAnalysis(FileOutput):
                              save_file=True,
                              title=None,
                              ax=None,
-                             figsize=(10, 8),
+                             figsize=GRAPH_DEFAULTS.FIGSIZE,
                              title_fontsize='large',
                              text_fontsize='medium'):
 
@@ -703,7 +700,7 @@ class ClassificationAnalysis(FileOutput):
                                     plot_micro=True,
                                     classes_to_plot=None,
                                     ax=None,
-                                    figsize=(10, 8),
+                                    figsize=GRAPH_DEFAULTS.FIGSIZE,
                                     cmap='nipy_spectral',
                                     title_fontsize='large',
                                     text_fontsize='medium'):
@@ -767,7 +764,7 @@ class ClassificationAnalysis(FileOutput):
                         save_file=True,
                         title=None,
                         ax=None,
-                        figsize=(10, 8),
+                        figsize=GRAPH_DEFAULTS.FIGSIZE,
                         title_fontsize='large',
                         text_fontsize='medium'):
         """
@@ -831,7 +828,7 @@ class ClassificationAnalysis(FileOutput):
                               hide_counts=False,
                               x_tick_rotation=0,
                               ax=None,
-                              figsize=(10, 8),
+                              figsize=GRAPH_DEFAULTS.FIGSIZE,
                               cmap='Blues',
                               title_fontsize='large',
                               text_fontsize='medium'):

@@ -1,2 +1,3 @@
 from .data_analysis import DataAnalysis
 from .classification_analysis import ClassificationAnalysis
+from .missing_data_analysis import MissingDataAnalysis
