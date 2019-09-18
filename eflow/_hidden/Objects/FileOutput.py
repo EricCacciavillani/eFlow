@@ -1,6 +1,6 @@
 from eflow._hidden.Objects.enum import *
 from eflow._hidden.Constants import *
-from eflow.utils.SysUtils import check_create_dir_structure, correct_directory_path
+from eflow.utils.sys_utils import check_create_dir_structure, correct_directory_path
 import os
 import copy
 

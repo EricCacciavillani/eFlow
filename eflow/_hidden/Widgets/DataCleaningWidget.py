@@ -1,6 +1,7 @@
-from eflow.Utils.SysUtils import *
+from eflow.utils.sys_utils import *
 from eflow._hidden.Constants import SYS_CONSTANTS
 from eflow._hidden.Objects.enum import *
+from eflow.utils.general_utils import string_condtional
 
 import pandas as pd
 import missingno as msno
