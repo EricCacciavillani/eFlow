@@ -122,7 +122,7 @@ class DataAnalysis(FileOutput):
             # Iterate through DataFrame columns and graph based on data types
             for col_feature_name in df.columns:
 
-                print(f"Generating graph for {col_feature_name}.")
+                print(f"Generating graph for {col_feature_name}...\n")
 
                 feature_values = df[col_feature_name].value_counts().keys()
                 if len(feature_values) <= 3 and \
@@ -147,7 +147,6 @@ class DataAnalysis(FileOutput):
                     self.distance_plot_graph(df,
                                              col_feature_name)
 
-                print("-" * 80 + "\n" * 2)
                 plt.close()
         else:
             print("Object didn't receive a Pandas Dataframe object or a DataFrameTypes object")
@@ -540,4 +539,3 @@ class DataAnalysis(FileOutput):
 
         # Return obj None for no matching colors
         return None
-

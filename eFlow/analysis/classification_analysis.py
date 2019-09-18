@@ -21,6 +21,7 @@ import pandas as pd
 from IPython.display import display
 import matplotlib.pyplot as plt
 
+
 class ClassificationAnalysis(FileOutput):
 
     def __init__(self,
@@ -160,43 +161,70 @@ class ClassificationAnalysis(FileOutput):
         """
         X:
             Feature matrix.
+
         pred_name:
             The name of the prediction function in questioned stored in 'self.__pred_funcs_dict'
+
         thresholds:
             If the model outputs a probability list/numpy array then we apply
             thresholds to the ouput of the model.
+            For classification only; will not affect the direct output of
+            the probabilities.
+
         Returns/Desc:
             Returns back a predicted value based for a given matrix.
             Handles prediction function 'types' Predictions and Probabilities.
             Helps streamline the entire process of evaluating classes.
         """
+        # DEBUG_MARKER
 
         # Must be a prediction function
         if self.__pred_funcs_types[pred_name] == "Predictions":
             return self.__pred_funcs_dict[pred_name](X)
 
         elif self.__pred_funcs_types[pred_name] == "Probabilities":
-            model_output = self.__get_model_probas(pred_name,
-                                                   X,
-                                                   thresholds)
 
-            return np.asarray([self.__target_values[np.argmax(proba)]
-                               for proba in model_output])
+            # Validate probabilities
+            if thresholds:
+                if isinstance(thresholds, list) or \
+                        isinstance(thresholds, np.ndarray):
+                    if len(thresholds) != len(self.__target_values):
+                        raise ThresholdLength
+                else:
+                    raise ThresholdType
+
+            model_output = self.__get_model_probas(pred_name,
+                                                   X)
+            if not thresholds:
+                return np.asarray([self.__target_values[np.argmax(proba)]
+                                   for proba in model_output])
+
+            bool_matrix_thresholds = model_output < thresholds
+
+            prob_passed_matrix = np.asarray([
+                np.asarray([model_output[i][0] if passed else float("-inf")
+                            for i, passed in enumerate(bool_vector)])
+                for bool_vector in bool_matrix_thresholds])
+
+            model_predictions = np.asarray(
+                [self.__target_values[np.argmax(proba_vector)]
+                 if sum(proba_vector != float("-inf")) > 0
+                 else self.__target_values[np.argmax(model_output)]
+                 for proba_vector in prob_passed_matrix])
+            return model_predictions
         else:
             raise UnknownModelOutputType
 
     def __get_model_probas(self,
                            pred_name,
-                           X,
-                           thresholds=None):
+                           X):
         """
         X:
             Feature matrix.
+
         pred_name:
             The name of the prediction function in questioned stored in 'self.__pred_funcs_dict'
-        thresholds:
-            If the model outputs a probability list/numpy array then we apply
-            thresholds to the ouput of the model.
+
         Returns/Desc:
             Returns back a series of values between 0-1 to represent it's confidence.
             Invokes an error if the prediction function call is anything but a Probabilities
@@ -206,25 +234,9 @@ class ClassificationAnalysis(FileOutput):
         if self.__pred_funcs_types[pred_name] == "Probabilities":
             model_output = self.__pred_funcs_dict[pred_name](X)
 
-            # Validate probabilities
-            if thresholds:
-                if isinstance(thresholds, list) or \
-                        isinstance(thresholds, np.ndarray):
-                    if sum(thresholds) < .98:
-                        print("Thresholds didn't add up to 98%-100%! "
-                              "This may cause issues in your results!")
-                    if len(thresholds) != len(self.__target_values):
-                        raise ThresholdLength
-                else:
-                    raise ThresholdType
-
             # ---
             if isinstance(model_output, list):
                 model_output = np.asarray(model_output)
-
-            if isinstance(model_output, np.ndarray):
-                if thresholds:
-                    model_output = model_output - np.asarray(thresholds)
 
             return model_output
         else:
@@ -237,11 +249,16 @@ class ClassificationAnalysis(FileOutput):
         """
         pred_name:
             The name of the prediction function in questioned stored in 'self.__pred_funcs_dict'
+
         dataset_name:
             The passed in dataset's name.
+
         thresholds:
             If the model outputs a probability list/numpy array then we apply
             thresholds to the ouput of the model.
+            For classification only; will not affect the direct output of
+            the probabilities.
+
         Returns/Desc:
             Looking at the root of the starting directory and looking at each
             '_Thresholds.txt' file to determine if the files can be outputed
@@ -294,9 +311,13 @@ class ClassificationAnalysis(FileOutput):
         """
         directory_pth:
             Path to the given folder where the "_Thresholds.txt"
+
         thresholds:
             If the model outputs a probability list/numpy array then we apply
             thresholds to the ouput of the model.
+            For classification only; will not affect the direct output of
+            the probabilities.
+
         Returns/Desc:
             Compare the thresholds object to the text file; returns true if
             the file exists and the object's value matches up.
@@ -337,17 +358,28 @@ class ClassificationAnalysis(FileOutput):
         """
         X/y:
             Feature matrix/Target data vector.
+
         dataset_name:
             The dataset's name.
+
         thresholds_matrix:
-            Lists of list objects containing thresholds to iterate through
-            for a model functon that is of type "Probabilities".
+            List of list/Matrix of thresholds
+
+            each thresholds:
+                If the model outputs a probability list/numpy array then we apply
+                thresholds to the ouput of the model.
+                For classification only; will not affect the direct output of
+                the probabilities.
+
         figsize:
             Plot's dimension's.
+
         normalize_confusion_matrix:
             Normalize the confusion matrix buckets.
+
         ignore_metrics:
             Specify set metrics to ignore. (F1-Score, Accuracy etc).
+
         ignore_metrics:
             Specify the default metrics to not apply to the classification
             analysis.
@@ -356,13 +388,17 @@ class ClassificationAnalysis(FileOutput):
                 * Recall
                 * F1-Score
                 * Accuracy
+
         custom_metrics:
             Pass the name of metric(s) and the function definition(s) in a
             dictionary.
+
         average_scoring:
             Determines the type of averaging performed on the data.
+
         display_analysis_graphs:
             Controls visual display of error error analysis if it is able to run.
+
         Returns/Desc:
             Performs all classification functionality with the provided feature
             data and target data.
@@ -380,16 +416,22 @@ class ClassificationAnalysis(FileOutput):
                 thresholds_matrix[0], list):
             thresholds_matrix = list(thresholds_matrix)
 
-        thresholds_matrix.append(None)
+        if None not in thresholds_matrix:
+            thresholds_matrix.append(None)
 
         print("\n\n" + "---" * 10 + f'{dataset_name}' + "---" * 10)
 
         for pred_name, pred_type in self.__pred_funcs_types.items():
-            print(f"Now running classification on {pred_name}")
-
+            print(f"Now running classification on {pred_name}", end = '')
+            print("hit")
             for thresholds in thresholds_matrix:
                 if pred_type == "Predictions":
                     thresholds = None
+                else:
+                    if thresholds:
+                        print(f"on thresholds:\n{thresholds}")
+                    else:
+                        print("No thresholds")
 
                 self.classification_metrics(X,
                                             y,
@@ -435,6 +477,19 @@ class ClassificationAnalysis(FileOutput):
                                                dataset_name=dataset_name,
                                                figsize=figsize,
                                                thresholds=thresholds)
+                        self.plot_calibration_curve(X,
+                                                    y,
+                                                    pred_name=pred_name,
+                                                    dataset_name=dataset_name,
+                                                    figsize=figsize,
+                                                    thresholds=thresholds)
+                        self.plot_cumulative_gain(X,
+                                                  y,
+                                                  pred_name=pred_name,
+                                                  dataset_name=dataset_name,
+                                                  figsize=figsize,
+                                                  thresholds=thresholds)
+
                 if self.__df_features:
                     self.classification_error_analysis(X,
                                                        y,
@@ -446,35 +501,71 @@ class ClassificationAnalysis(FileOutput):
                     if pred_type == "Predictions":
                         break
 
-    def plot_ks_statistic(self,
-                          X,
-                          y,
-                          pred_name,
-                          dataset_name,
-                          thresholds=None,
-                          save_file=True,
-                          title=None,
-                          ax=None,
-                          figsize=None,
-                          title_fontsize='large',
-                          text_fontsize='medium'):
+    def plot_calibration_curve(self,
+                               X,
+                               y,
+                               pred_name,
+                               dataset_name,
+                               thresholds=None,
+                               save_file=True,
+                               title=None,
+                               ax=None,
+                               cmap='nipy_spectral',
+                               figsize=None,
+                               title_fontsize='large',
+                               text_fontsize='medium'):
 
         """
         X/y:
             Feature matrix/Target data vector.
+
         pred_name:
             The name of the prediction function in questioned
             stored in 'self.__pred_funcs_dict'
+
         dataset_name:
             The dataset's name.
+
         thresholds:
             If the model outputs a probability list/numpy array then we apply
             thresholds to the ouput of the model.
+            For classification only; will not affect the direct output of
+            the probabilities.
+
+        save_file:
+            Boolean value to wether or not to save the file.
+
         From scikit-plot documentation (Note not all attributes are provided to you):
         Link: http://tinyurl.com/y3ym5pyc
         Returns/Descr:
+            Plots calibration curves for a set of classifier probability estimates.
         """
-        pass
+
+        filename = f'KS Statistic on {dataset_name} on {self.__model_name}'
+        sub_dir = self.__create_sub_dir_with_thresholds(pred_name,
+                                                        dataset_name,
+                                                        thresholds)
+        if not title:
+            title = filename
+
+        skplt.metrics.plot_calibration_curve(y,
+                                             self.__get_model_probas(pred_name,
+                                                                     X),
+                                             title=title,
+                                             ax=ax,
+                                             cmap=cmap,
+                                             figsize=figsize,
+                                             title_fontsize=title_fontsize,
+                                             text_fontsize=text_fontsize)
+
+        if save_file:
+            create_plt_png(self.get_output_folder(),
+                           sub_dir,
+                           convert_to_filename(filename))
+
+        if self.__notebook_mode:
+            plt.show()
+        plt.close()
 
     def plot_roc_curve(self,
                        X,
@@ -492,14 +583,23 @@ class ClassificationAnalysis(FileOutput):
         """
         X/y:
             Feature matrix/Target data vector.
+
         pred_name:
             The name of the prediction function in questioned
             stored in 'self.__pred_funcs_dict'
+
         dataset_name:
             The dataset's name.
+
         thresholds:
             If the model outputs a probability list/numpy array then we apply
             thresholds to the ouput of the model.
+            For classification only; will not affect the direct output of
+            the probabilities.
+
+        save_file:
+            Boolean value to wether or not to save the file.
+
         From scikit-plot documentation (Note not all attributes are provided to you):
         Link: http://tinyurl.com/y3ym5pyc
         Returns/Descr:
@@ -512,15 +612,14 @@ class ClassificationAnalysis(FileOutput):
         if not title:
             title = filename
 
-        skplt.metrics.plot_cumulative_gain(y,
-                                           self.__get_model_probas(pred_name,
-                                                                   X,
-                                                                   thresholds),
-                                           title=title,
-                                           ax=ax,
-                                           figsize=figsize,
-                                           title_fontsize=title_fontsize,
-                                           text_fontsize=text_fontsize)
+        skplt.metrics.plot_roc(y,
+                               self.__get_model_probas(pred_name,
+                                                       X),
+                               title=title,
+                               ax=ax,
+                               figsize=figsize,
+                               title_fontsize=title_fontsize,
+                               text_fontsize=text_fontsize)
 
         if save_file:
             create_plt_png(self.get_output_folder(),
@@ -547,14 +646,23 @@ class ClassificationAnalysis(FileOutput):
         """
         X/y:
             Feature matrix/Target data vector.
+
         pred_name:
             The name of the prediction function in questioned
-            stored in 'self.__pred_funcs_dict'
+            stored in 'self.__pred_funcs_dict'.
+
         dataset_name:
             The dataset's name.
+
         thresholds:
             If the model outputs a probability list/numpy array then we apply
             thresholds to the ouput of the model.
+            For classification only; will not affect the direct output of
+            the probabilities.
+
+        save_file:
+            Boolean value to wether or not to save the file.
+
         From scikit-plot documentation (Note not all attributes are provided to you):
         Link: http://tinyurl.com/y3ym5pyc
         Returns/Descr:
@@ -568,8 +676,7 @@ class ClassificationAnalysis(FileOutput):
 
         skplt.metrics.plot_cumulative_gain(y,
                                            self.__get_model_probas(pred_name,
-                                                                   X,
-                                                                   thresholds),
+                                                                   X),
                                            title=title,
                                            ax=ax,
                                            figsize=figsize,
@@ -603,14 +710,20 @@ class ClassificationAnalysis(FileOutput):
         """
         X/y:
             Feature matrix/Target data vector.
+
         pred_name:
             The name of the prediction function in questioned
             stored in 'self.__pred_funcs_dict'
+
         dataset_name:
             The dataset's name.
+
         thresholds:
             If the model outputs a probability list/numpy array then we apply
             thresholds to the ouput of the model.
+            For classification only; will not affect the direct output of
+            the probabilities.
+
         From scikit-plot documentation (Note not all attributes are provided to you):
         Link: http://tinyurl.com/y3ym5pyc
         Returns/Descr:
@@ -626,8 +739,7 @@ class ClassificationAnalysis(FileOutput):
 
         skplt.metrics.plot_precision_recall(y,
                                             self.__get_model_probas(pred_name,
-                                                                    X,
-                                                                    thresholds),
+                                                                    X),
                                             title=title,
                                             plot_micro=plot_micro,
                                             classes_to_plot=classes_to_plot,
@@ -661,14 +773,20 @@ class ClassificationAnalysis(FileOutput):
         """
         X/y:
             Feature matrix/Target data vector.
+
         pred_name:
             The name of the prediction function in questioned
             stored in 'self.__pred_funcs_dict'
+
         dataset_name:
             The dataset's name.
+
         thresholds:
             If the model outputs a probability list/numpy array then we apply
             thresholds to the ouput of the model.
+            For classification only; will not affect the direct output of
+            the probabilities.
+
         From scikit-plot documentation (Note not all attributes are provided to you):
         Link: http://tinyurl.com/y3ym5pyc
         Returns/Descr:
@@ -684,8 +802,7 @@ class ClassificationAnalysis(FileOutput):
 
         skplt.metrics.plot_lift_curve(y,
                                       self.__get_model_probas(pred_name,
-                                                              X,
-                                                              thresholds),
+                                                              X),
                                       thresholds=thresholds,
                                       title=title,
                                       ax=ax,
@@ -718,18 +835,23 @@ class ClassificationAnalysis(FileOutput):
                               cmap='Blues',
                               title_fontsize='large',
                               text_fontsize='medium'):
-
         """
         X/y:
             Feature matrix/Target data vector.
+
         pred_name:
             The name of the prediction function in questioned
             stored in 'self.__pred_funcs_dict'
+
         dataset_name:
             The dataset's name.
+
         thresholds:
             If the model outputs a probability list/numpy array then we apply
             thresholds to the ouput of the model.
+            For classification only; will not affect the direct output of
+            the probabilities.
+
         From scikit-plot documentation (Note not all attributes are provided to you):
         Link: http://tinyurl.com/y3ym5pyc
         Returns/Descr:
@@ -785,23 +907,33 @@ class ClassificationAnalysis(FileOutput):
         """
         X/y:
             Feature matrix/Target data vector.
+
         pred_name:
             The name of the prediction function in questioned stored
             in 'self.__pred_funcs_dict'
+
         dataset_name:
             The dataset's name.
+
         thresholds:
             If the model outputs a probability list/numpy array then we apply
-            thresholds to the output of the model.
+            thresholds to the ouput of the model.
+            For classification only; will not affect the direct output of
+            the probabilities.
+
         save_file:
             Determines whether or not to save the generated document.
+
         title:
             Adds to the column 'Metric Score'.
+
         sub_dir:
             Specify a subdirectory to append to the output path of the file.
+
         custom_metrics:
             Pass the name of metric(s) and the function definition(s) in a
             dictionary.
+
         ignore_metrics:
             Specify the default metrics to not apply to the classification
             analysis.
@@ -810,11 +942,13 @@ class ClassificationAnalysis(FileOutput):
                 * Recall
                 * F1-Score
                 * Accuracy
+
         average_scoring:
             Determines the type of averaging performed on the data.
                 * micro
                 * macro
                 * weighted
+
         Returns/Desc:
             Creates/displays a dataframe object based on the model's
             predictions on the feature matrix compared to target data.
@@ -908,18 +1042,26 @@ class ClassificationAnalysis(FileOutput):
         """
         X/y:
             Feature matrix/Target data vector.
+
         pred_name:
             The name of the prediction function in questioned
             stored in 'self.__pred_funcs_dict'
+
         dataset_name:
             The dataset's name.
+
         thresholds:
             If the model outputs a probability list/numpy array then we apply
-            thresholds to the output of the model.
+            thresholds to the ouput of the model.
+            For classification only; will not affect the direct output of
+            the probabilities.
+
         save_file:
             Determines whether or not to save the generated document.
+
         display_analysis_graphs:
             Controls visual display of graph generation.
+
         Returns/Descr:
             Creates a directory structure of subsetted data produced by all correctly/predicted.
         """
@@ -982,16 +1124,23 @@ class ClassificationAnalysis(FileOutput):
         """
         X/y:
             Feature matrix/Target data vector.
+
         pred_name:
             The name of the prediction function in questioned
             stored in 'self.__pred_funcs_dict'
+
         dataset_name:
             The dataset's name.
+
         thresholds:
             If the model outputs a probability list/numpy array then we apply
             thresholds to the ouput of the model.
+            For classification only; will not affect the direct output of
+            the probabilities.
+
         save_file:
             Determines whether or not to save the generated document.
+
         Returns/Descr:
             Creates a report of all target's metric evaluations
             based on the model's prediction output.
