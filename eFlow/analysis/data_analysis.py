@@ -64,87 +64,35 @@ class DataAnalysis(FileOutput):
 
         self.__notebook_mode = notebook_mode
 
-        if df is not None and df_features is not None:
+        # Iterate through DataFrame columns and graph based on data types
+        for col_feature_name in df.columns:
 
-            # Visualize and save missing data graphics if specified
-            if missing_data_visuals and df.isnull().values.any():
+            print(f"Generating graph for {col_feature_name}...\n")
 
-                if self.__notebook_mode:
-                    display(df.dtypes)
-                    print("\n\n")
-                    display(self.__missing_values_table(df))
-                    print("\n")
+            feature_values = df[col_feature_name].value_counts().keys()
+            if len(feature_values) <= 3 and \
+                    not col_feature_name in df_features.get_numerical_features():
 
-                # ---
-                msno.matrix(df)
-                create_plt_png(self.get_output_folder(),
-                               "Missing Data/Graphics",
-                               "Missing_Data_Matrix_Graph")
+                self.pie_graph(df,
+                               col_feature_name,
+                               init_default_color="#C0C0C0")
 
-                if self.__notebook_mode:
-                    plt.show()
-                plt.close()
+            elif col_feature_name in df_features.get_categorical_features():
+                self.count_plot_graph(df, col_feature_name)
 
-                # ---
-                msno.bar(df,
-                         color="#072F5F")
-
-                create_plt_png(self.get_output_folder(),
-                               "Missing Data/Graphics",
-                               "Missing_Data_Bar_Graph")
-                if self.__notebook_mode:
-                    plt.show()
-                plt.close()
-
-                # ---
-                msno.heatmap(df)
-                create_plt_png(self.get_output_folder(),
-                               "Missing Data/Graphics",
-                               "Missing_Data_Heatmap")
-                if self.__notebook_mode:
-                    plt.show()
-                plt.close()
-
-                # ---
-                msno.dendrogram(df)
-                create_plt_png(self.get_output_folder(),
-                               "Missing Data/Graphics",
-                               "Missing_Data_Dendrogram_Graph")
-                if self.__notebook_mode:
-                    plt.show()
-                plt.close()
-
-                print("*" * 80 + "\n" * 2)
-
-            # Iterate through DataFrame columns and graph based on data types
-            for col_feature_name in df.columns:
-
-                print(f"Generating graph for {col_feature_name}...\n")
-
-                feature_values = df[col_feature_name].value_counts().keys()
-                if len(feature_values) <= 3 and \
-                        not col_feature_name in df_features.get_numerical_features():
-
-                    self.pie_graph(df,
-                                   col_feature_name,
-                                   init_default_color="#C0C0C0")
-
-                elif col_feature_name in df_features.get_categorical_features():
-                    self.count_plot_graph(df, col_feature_name)
-
-                elif col_feature_name in df_features.get_integer_features():
-                    if len(feature_values) <= 13:
-                        self.count_plot_graph(df,
-                                              col_feature_name)
-                    else:
-                        self.distance_plot_graph(df,
-                                                 col_feature_name)
-
-                elif col_feature_name in df_features.get_float_features():
+            elif col_feature_name in df_features.get_integer_features():
+                if len(feature_values) <= 13:
+                    self.count_plot_graph(df,
+                                          col_feature_name)
+                else:
                     self.distance_plot_graph(df,
                                              col_feature_name)
 
-                plt.close()
+            elif col_feature_name in df_features.get_float_features():
+                self.distance_plot_graph(df,
+                                         col_feature_name)
+
+            plt.close()
         else:
             print("Object didn't receive a Pandas Dataframe object or a DataFrameTypes object")
 

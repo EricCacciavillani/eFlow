@@ -53,7 +53,7 @@ class MissingDataAnalysis(FileOutput):
                         df,
                         dataset_name,
                         df_features=None,
-                        display_visuals=True):
+                        display_visuals=None):
 
         self.__called_from_peform = False
 
@@ -67,33 +67,40 @@ class MissingDataAnalysis(FileOutput):
                 self.__called_from_peform = True
 
             self.data_types_table(df,
-                                  dataset_name)
+                                  dataset_name,
+                                  display_visuals=display_visuals)
             print("\n\n")
 
             self.missing_values_table(df,
-                                      dataset_name)
+                                      dataset_name,
+                                      display_visuals=display_visuals)
             print("\n\n")
 
             self.plot_null_bar_graph(df,
-                                     dataset_name)
+                                     dataset_name,
+                                     display_visuals=display_visuals)
             print("\n\n")
 
             self.plot_null_matrix_graph(df,
-                                        dataset_name)
+                                        dataset_name,
+                                        display_visuals=display_visuals)
             print("\n\n")
 
             self.plot_null_heatmap_graph(df,
-                                         dataset_name)
+                                         dataset_name,
+                                         display_visuals=display_visuals)
             print("\n\n")
 
             self.plot_null_dendrogram_graph(df,
-                                            dataset_name)
+                                            dataset_name,
+                                            display_visuals=display_visuals)
             print("\n\n")
 
     def plot_null_matrix_graph(self,
                                df,
                                dataset_name,
                                save_file=True,
+                               display_visuals=None,
                                filter=None,
                                n=0,
                                p=0,
@@ -130,6 +137,10 @@ class MissingDataAnalysis(FileOutput):
         if not self.__called_from_peform:
             self.__check_dataframe(df)
 
+        if not display_visuals:
+            display_visuals = self.__notebook_mode
+            print("Generating graph for null matrix graph...")
+
         msno.matrix(df,
                     filter=filter,
                     n=n,
@@ -149,7 +160,7 @@ class MissingDataAnalysis(FileOutput):
                            f"{dataset_name}/Graphics",
                            convert_to_filename("Missing data matrix graph"))
 
-        if self.__notebook_mode:
+        if display_visuals:
             plt.show()
         plt.close()
 
@@ -158,6 +169,7 @@ class MissingDataAnalysis(FileOutput):
                             df,
                             dataset_name,
                             save_file=True,
+                            display_visuals=None,
                             figsize=(24, 10),
                             fontsize=16,
                             labels=None,
@@ -192,6 +204,10 @@ class MissingDataAnalysis(FileOutput):
         if not self.__called_from_peform:
             self.__check_dataframe(df)
 
+        if not display_visuals:
+            display_visuals = self.__notebook_mode
+            print("Generating graph for null bar graph...")
+
         msno.bar(df,
                  figsize=figsize,
                  log=log,
@@ -209,7 +225,7 @@ class MissingDataAnalysis(FileOutput):
                            f"{dataset_name}/Graphics",
                            convert_to_filename("Missing data bar graph"))
 
-        if self.__notebook_mode:
+        if display_visuals:
             plt.show()
         plt.close()
 
@@ -217,6 +233,7 @@ class MissingDataAnalysis(FileOutput):
                                 df,
                                 dataset_name,
                                 save_file=True,
+                                display_visuals=None,
                                 inline=False,
                                 filter=None,
                                 n=0,
@@ -254,6 +271,10 @@ class MissingDataAnalysis(FileOutput):
         if not self.__called_from_peform:
             self.__check_dataframe(df)
 
+        if not display_visuals:
+            display_visuals = self.__notebook_mode
+            print("Generating graph for null heatmap...")
+
         msno.heatmap(df,
                      inline=inline,
                      filter=filter,
@@ -275,7 +296,7 @@ class MissingDataAnalysis(FileOutput):
                            convert_to_filename("Missing data heatmap graph on")
                            )
 
-        if self.__notebook_mode:
+        if display_visuals:
             plt.show()
         plt.close()
 
@@ -318,6 +339,9 @@ class MissingDataAnalysis(FileOutput):
         if not self.__called_from_peform:
             self.__check_dataframe(df)
 
+        if not self.__notebook_mode:
+            print("Generating graph for null dendrogram...")
+
         msno.dendrogram(df,
                         method=method,
                         filter=filter,
@@ -341,7 +365,8 @@ class MissingDataAnalysis(FileOutput):
     def data_types_table(self,
                          df,
                          dataset_name,
-                         save_file=True):
+                         save_file=True,
+                         display_visuals=True):
         """
         df:
             Pandas DataFrame object
@@ -362,6 +387,9 @@ class MissingDataAnalysis(FileOutput):
         print(f"Your selected dataframe has {df.shape[1]} features.")
         if self.__notebook_mode:
             display(dtypes_df)
+        else:
+            if display_visuals:
+                print(dtypes_df)
 
         if save_file:
             df_to_image(dtypes_df,
@@ -375,7 +403,8 @@ class MissingDataAnalysis(FileOutput):
     def missing_values_table(self,
                              df,
                              dataset_name,
-                             save_file=True):
+                             save_file=True,
+                             display_visuals=True):
         """
 
         df:
@@ -399,8 +428,13 @@ class MissingDataAnalysis(FileOutput):
             '% of Total Values', ascending=False).round(1)
         print(f"Your selected dataframe has {str(df.shape[1])} columns.\n"
               f"That are {str(mis_val_table_ren_columns.shape[0])} columns.\n")
+
         if self.__notebook_mode:
-            display(mis_val_table_ren_columns)
+            if display_visuals:
+                display(mis_val_table_ren_columns)
+        else:
+            if display_visuals:
+                print(mis_val_table_ren_columns)
 
         # ---
         if save_file:

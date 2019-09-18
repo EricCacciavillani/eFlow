@@ -351,7 +351,7 @@ class ClassificationAnalysis(FileOutput):
                          average_scoring=["micro",
                                           "macro",
                                           "weighted"],
-                         display_analysis_graphs=False):
+                         display_visuals=False):
         """
         X/y:
             Feature matrix/Target data vector.
