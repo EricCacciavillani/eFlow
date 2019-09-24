@@ -1,7 +1,40 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="2c7eb1b5-0ad0-44e5-9a99-f4de30bca398" name="Default Changelist" comment="" />
+    <list default="true" id="2c7eb1b5-0ad0-44e5-9a99-f4de30bca398" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/_Hidden/Backlogged Code/MyEncoder.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/_Hidden/Backlogged Code/SampleRemoval 2.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/_Hidden/Backlogged Code/SampleRemoval.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/_Hidden/Backlogged Code/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/_Hidden/Backlogged Code/data_manipulation.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/_Hidden/Objects/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/_Hidden/Objects/dataframe_idenity.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/_Hidden/Objects/default_exception.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/_Hidden/Objects/enum.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/_Hidden/Objects/file_output.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/_Hidden/Objects/pipeline_segment.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/_Hidden/custom_exceptions.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/_Hidden/custom_warnings.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/_Hidden/utils/Multi_Threading_Functions.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/_Hidden/utils/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/analysis/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/analysis/classification_analysis.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/analysis/data_analysis.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/analysis/missing_data_analysis.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/auto_modeler/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/auto_modeler/cluster_master.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data_frame_types.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pipeline_segments/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pipeline_segments/data_cleaner.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/utils/general_utils.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/utils/image_utils.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/utils/math_utils.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/utils/modeling_utils.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/utils/pandas_utils.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/utils/string_utils.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/utils/sys_utils.py" beforeDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -245,12 +278,12 @@
       <workItem from="1569245897773" duration="3601000" />
       <workItem from="1569250127069" duration="13835000" />
       <workItem from="1569273907496" duration="6347000" />
-      <workItem from="1569288945873" duration="14840000" />
+      <workItem from="1569288945873" duration="14996000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="158643000" />
+    <option name="totallyTimeSpent" value="158799000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1680" height="1050" extended-state="0" />
