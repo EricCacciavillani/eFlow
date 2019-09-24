@@ -13,7 +13,7 @@ import numpy as np
 from eflow.utils.sys_utils import *
 from eflow._hidden.Widgets.DataCleaningWidget import *
 from eflow import DataFrameTypes
-from eflow._hidden.Objects.PipelineSegment import *
+from eflow._hidden.objects.pipeline_segment import *
 
 class DataCleaner(PipelineSegment):
     """

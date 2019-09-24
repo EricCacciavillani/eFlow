@@ -65,6 +65,6 @@ def weighted_eudis(v1,
 
 def fast_eudis(v1,
                v2):
-    dist = [((a - b) ** 2) * w for a, b, w in zip(v1, v2)]
+    dist = [((a - b) ** 2) for a, b in zip(v1, v2)]
     dist = math.sqrt(sum(dist))
     return dist

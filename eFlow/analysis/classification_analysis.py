@@ -1,8 +1,8 @@
 from eflow.utils.sys_utils import *
-from eflow._hidden.Objects.FileOutput import *
-from eflow._hidden.custom_exception import *
+from eflow._hidden.objects import FileOutput
+from eflow._hidden.custom_exceptions import *
 from eflow.analysis import DataAnalysis
-from eflow._hidden.Constants import GRAPH_DEFAULTS
+from eflow._hidden.constants import GRAPH_DEFAULTS
 
 from sklearn.metrics import accuracy_score
 from sklearn.metrics import f1_score
@@ -20,6 +20,11 @@ import matplotlib.pyplot as plt
 
 
 class ClassificationAnalysis(FileOutput):
+
+    """
+        Analyzes a classification model's result's based on the prediction
+        function(s) passed to it.
+    """
 
     def __init__(self,
                  model,
@@ -248,7 +253,8 @@ class ClassificationAnalysis(FileOutput):
             The name of the prediction function in questioned stored in 'self.__pred_funcs_dict'
 
         dataset_name:
-            The passed in dataset's name.
+            The dataset's name; this will create a sub-directory in which your
+            generated graph will be inner-nested in.
 
         thresholds:
             If the model outputs a probability list/numpy array then we apply
@@ -357,7 +363,8 @@ class ClassificationAnalysis(FileOutput):
             Feature matrix/Target data vector.
 
         dataset_name:
-            The dataset's name.
+            The dataset's name; this will create a sub-directory in which your
+            generated graph will be inner-nested in.
 
         thresholds_matrix:
             List of list/Matrix of thresholds
@@ -521,7 +528,8 @@ class ClassificationAnalysis(FileOutput):
             stored in 'self.__pred_funcs_dict'
 
         dataset_name:
-            The dataset's name.
+            The dataset's name; this will create a sub-directory in which your
+            generated graph will be inner-nested in.
 
         thresholds:
             If the model outputs a probability list/numpy array then we apply
@@ -530,7 +538,7 @@ class ClassificationAnalysis(FileOutput):
             the probabilities.
 
         save_file:
-            Boolean value to wether or not to save the file.
+            Boolean value to whether or not to save the file.
 
         From scikit-plot documentation (Note not all attributes are provided to you):
         Link: http://tinyurl.com/y3ym5pyc
@@ -586,7 +594,8 @@ class ClassificationAnalysis(FileOutput):
             stored in 'self.__pred_funcs_dict'
 
         dataset_name:
-            The dataset's name.
+            The dataset's name; this will create a sub-directory in which your
+            generated graph will be inner-nested in.
 
         thresholds:
             If the model outputs a probability list/numpy array then we apply
@@ -595,7 +604,7 @@ class ClassificationAnalysis(FileOutput):
             the probabilities.
 
         save_file:
-            Boolean value to wether or not to save the file.
+            Boolean value to whether or not to save the file.
 
         From scikit-plot documentation (Note not all attributes are provided to you):
         Link: http://tinyurl.com/y3ym5pyc
@@ -649,7 +658,8 @@ class ClassificationAnalysis(FileOutput):
             stored in 'self.__pred_funcs_dict'.
 
         dataset_name:
-            The dataset's name.
+            The dataset's name; this will create a sub-directory in which your
+            generated graph will be inner-nested in.
 
         thresholds:
             If the model outputs a probability list/numpy array then we apply
@@ -658,7 +668,7 @@ class ClassificationAnalysis(FileOutput):
             the probabilities.
 
         save_file:
-            Boolean value to wether or not to save the file.
+            Boolean value to whether or not to save the file.
 
         From scikit-plot documentation (Note not all attributes are provided to you):
         Link: http://tinyurl.com/y3ym5pyc
@@ -713,7 +723,8 @@ class ClassificationAnalysis(FileOutput):
             stored in 'self.__pred_funcs_dict'
 
         dataset_name:
-            The dataset's name.
+            The dataset's name; this will create a sub-directory in which your
+            generated graph will be inner-nested in.
 
         thresholds:
             If the model outputs a probability list/numpy array then we apply
@@ -776,7 +787,8 @@ class ClassificationAnalysis(FileOutput):
             stored in 'self.__pred_funcs_dict'
 
         dataset_name:
-            The dataset's name.
+            The dataset's name; this will create a sub-directory in which your
+            generated graph will be inner-nested in.
 
         thresholds:
             If the model outputs a probability list/numpy array then we apply
@@ -841,7 +853,8 @@ class ClassificationAnalysis(FileOutput):
             stored in 'self.__pred_funcs_dict'
 
         dataset_name:
-            The dataset's name.
+            The dataset's name; this will create a sub-directory in which your
+            generated graph will be inner-nested in.
 
         thresholds:
             If the model outputs a probability list/numpy array then we apply
@@ -910,7 +923,8 @@ class ClassificationAnalysis(FileOutput):
             in 'self.__pred_funcs_dict'
 
         dataset_name:
-            The dataset's name.
+            The dataset's name; this will create a sub-directory in which your
+            generated graph will be inner-nested in.
 
         thresholds:
             If the model outputs a probability list/numpy array then we apply
@@ -1045,7 +1059,8 @@ class ClassificationAnalysis(FileOutput):
             stored in 'self.__pred_funcs_dict'
 
         dataset_name:
-            The dataset's name.
+            The dataset's name; this will create a sub-directory in which your
+            generated graph will be inner-nested in.
 
         thresholds:
             If the model outputs a probability list/numpy array then we apply
@@ -1127,7 +1142,8 @@ class ClassificationAnalysis(FileOutput):
             stored in 'self.__pred_funcs_dict'
 
         dataset_name:
-            The dataset's name.
+            The dataset's name; this will create a sub-directory in which your
+            generated graph will be inner-nested in.
 
         thresholds:
             If the model outputs a probability list/numpy array then we apply

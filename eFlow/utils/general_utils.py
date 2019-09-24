@@ -1,3 +1,6 @@
+# General/Misc somethings that don't quite fit it the other utils
+import itertools
+
 def string_condtional(given_val,
                       full_condtional):
     """
@@ -81,3 +84,4 @@ def string_condtional(given_val,
                     i += 1
 
         return final_return
+

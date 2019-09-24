@@ -5,7 +5,7 @@ def optimize_model_grid(model,
                         X_train,
                         y_train,
                         param_grid,
-                        cv=10):
+                        cv=5):
     """
         Finds the best parameters for a grid; returns the model and parameters.
     """

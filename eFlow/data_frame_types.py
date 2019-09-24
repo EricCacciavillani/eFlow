@@ -12,7 +12,7 @@ class DataFrameTypes:
     def __init__(self,
                  df,
                  target_column=None,
-                 ignore_nulls=True,
+                 ignore_nulls=False,
                  display_init=True):
         """
 
@@ -99,7 +99,7 @@ class DataFrameTypes:
             return list(self.__numerical_features)
 
     def get_integer_features(self,
-                            exclude_target=False):
+                             exclude_target=False):
         if exclude_target:
             return [col_feature for col_feature in self.__integer_features
                     if col_feature != self.__target_feature]
@@ -121,7 +121,6 @@ class DataFrameTypes:
                     if col_feature != self.__target_feature]
         else:
             return list(self.__categorical_features)
-            
 
     def get_bool_features(self,
                           exclude_target=False):
@@ -132,28 +131,15 @@ class DataFrameTypes:
             return list(self.__bool_features)
 
     def get_datetime_features(self,
-                              exclude_target):
+                              exclude_target=False):
         if exclude_target:
             return [col_feature for col_feature in self.__datetime_features
                     if col_feature != self.__target_feature]
         else:
             return list(self.__datetime_features)
-    
-    # def get_all_features(self,
-    #                      exclude_target=False):
-    #     if exclude_target:
-    #         return [col_feature for col_feature in
-    #                 list(self.__integer_features | self.__float_features
-    #                      | self.__categorical_features | self.__bool_features)
-    #                 if col_feature != self.__target_feature]
-    #
-    #     else:
-    #         return list(self.__integer_features | self.__float_features
-    #                     | self.__categorical_features | self.__bool_features)
 
     def get_all_features(self):
         return copy.deepcopy(self.__all_columns)
-
 
     def get_target(self):
         return copy.deepcopy(self.__target_feature)

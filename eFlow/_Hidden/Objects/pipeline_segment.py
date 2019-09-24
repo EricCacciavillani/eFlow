@@ -1,5 +1,5 @@
 from collections import deque
-from eflow._hidden.Objects.FileOutput import *
+from eflow._hidden.objects import FileOutput
 
 class PipelineSegment(FileOutput):
     def __init__(self,

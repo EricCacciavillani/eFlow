@@ -1,4 +1,11 @@
-from eflow._hidden.Objects.DefaultException import *
+from eflow._hidden.objects.default_exception import DefaultException
+
+class ValueNotAsExpected(DefaultException):
+    def __init__(self,
+                 error_message=None):
+        super().__init__(error_message=error_message)
+
+
 
 class UnknownPredictionType(DefaultException):
     def __init__(self):

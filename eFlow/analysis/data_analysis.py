@@ -1,5 +1,5 @@
 from eflow.utils.sys_utils import *
-from eflow._hidden.Objects.FileOutput import *
+from eflow._hidden.objects import FileOutput
 
 import pandas as pd
 import random
@@ -7,6 +7,7 @@ import numpy as np
 from matplotlib import pyplot as plt
 import copy
 from IPython.display import display
+import seaborn as sns
 
 class DataAnalysis(FileOutput):
 
@@ -33,7 +34,7 @@ class DataAnalysis(FileOutput):
             Overwrites the path to the parent folder.
 
         notebook_mode:
-            If in a python notebook display in the notebook.
+            If in a python notebook display visualizations in the notebook.
 
         Returns/Descr:
             Designed to increase workflow and overall attempt to automate the
