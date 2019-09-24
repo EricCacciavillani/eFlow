@@ -1,49 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="2c7eb1b5-0ad0-44e5-9a99-f4de30bca398" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/_Hidden/Objects/dataframe_idenity.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/_Hidden/Objects/default_exception.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/_Hidden/Objects/file_output.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/_Hidden/Objects/pipeline_segment.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/_Hidden/custom_exceptions.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/_Hidden/utils/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/utils/image_utils.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/utils/math_utils.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/utils/modeling_utils.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/utils/pandas_utils.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/utils/string_utils.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Testing/.ipynb_checkpoints/Pre Production-checkpoint.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/../Testing/.ipynb_checkpoints/Pre Production-checkpoint.ipynb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Testing/DecisionTreeClassifier" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Testing/Pre Production.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/../Testing/Pre Production.ipynb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Testing/eflow Data/Pre processing/Missing Data/All Data/Graphics/Missing data bar graph.png" beforeDir="false" afterPath="$PROJECT_DIR$/../Testing/eflow Data/Pre processing/Missing Data/All Data/Graphics/Missing data bar graph.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Testing/eflow Data/Pre processing/Missing Data/All Data/Graphics/Missing data dendrogram graph average.png" beforeDir="false" afterPath="$PROJECT_DIR$/../Testing/eflow Data/Pre processing/Missing Data/All Data/Graphics/Missing data dendrogram graph average.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Testing/eflow Data/Pre processing/Missing Data/All Data/Graphics/Missing data matrix graph.png" beforeDir="false" afterPath="$PROJECT_DIR$/../Testing/eflow Data/Pre processing/Missing Data/All Data/Graphics/Missing data matrix graph.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Testing/eflow Data/Pre processing/Missing Data/All Data/Tables/Data Types Table.png" beforeDir="false" afterPath="$PROJECT_DIR$/../Testing/eflow Data/Pre processing/Missing Data/All Data/Tables/Data Types Table.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_Hidden/Objects/DefaultException.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/_Hidden/Objects/FileOutput.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/_Hidden/Objects/PipelineSegment.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/_Hidden/Oobjects/__init__.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/_Hidden/custom_exception.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/analysis/classification_analysis.py" beforeDir="false" afterPath="$PROJECT_DIR$/analysis/classification_analysis.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/analysis/data_analysis.py" beforeDir="false" afterPath="$PROJECT_DIR$/analysis/data_analysis.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/analysis/missing_data_analysis.py" beforeDir="false" afterPath="$PROJECT_DIR$/analysis/missing_data_analysis.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data_frame_types.py" beforeDir="false" afterPath="$PROJECT_DIR$/data_frame_types.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/modeling/Modeling.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/modeling/__init__.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pipeline_segments/data_cleaner.py" beforeDir="false" afterPath="$PROJECT_DIR$/pipeline_segments/data_cleaner.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/utils/data_manipulation.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/utils/general_utils.py" beforeDir="false" afterPath="$PROJECT_DIR$/utils/general_utils.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/utils/image_processing.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/utils/misc_graphing.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/utils/sys_utils.py" beforeDir="false" afterPath="$PROJECT_DIR$/utils/sys_utils.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_hidden/Constants.py" beforeDir="false" afterPath="$PROJECT_DIR$/_hidden/constants.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_hidden/Functionality/Multi_Threading_Functions.py" beforeDir="false" afterPath="$PROJECT_DIR$/_Hidden/utils/Multi_Threading_Functions.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_hidden/Functionality/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/_Hidden/Objects/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_hidden/Objects/enum.py" beforeDir="false" afterPath="$PROJECT_DIR$/_Hidden/Objects/enum.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_hidden/Widgets/DataCleaningWidget.py" beforeDir="false" afterPath="$PROJECT_DIR$/_hidden/Widgets/DataCleaningWidget.py" afterDir="false" />
-    </list>
+    <list default="true" id="2c7eb1b5-0ad0-44e5-9a99-f4de30bca398" name="Default Changelist" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -55,8 +13,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/analysis/missing_data_analysis.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="10125">
-              <caret line="675" column="18" selection-start-line="675" selection-start-column="18" selection-end-line="675" selection-end-column="18" />
+            <state relative-caret-position="720">
+              <caret line="48" column="31" lean-forward="true" selection-start-line="48" selection-start-column="31" selection-end-line="48" selection-end-column="31" />
               <folding>
                 <element signature="e#0#47#0" expanded="true" />
               </folding>
@@ -84,7 +42,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>if self.__check_dataframe</find>
       <find>alpha</find>
       <find>six</find>
       <find>perf</find>
@@ -114,6 +71,7 @@
       <find>data_types_table</find>
       <find>panda_u</find>
       <find>pandas</find>
+      <find>file_output</find>
     </findStrings>
     <replaceStrings>
       <replace>PipelineSegment</replace>
@@ -134,8 +92,8 @@
       <replace>eflow._hidden.objects.default_exception</replace>
       <replace>eflow._hidden.objects.pipeline_segment</replace>
       <replace>if not self.__check_dataframe</replace>
-      <replace />
       <replace>custom_exceptions</replace>
+      <replace />
     </replaceStrings>
     <dirStrings>
       <dir>$PROJECT_DIR$/analysis_objects</dir>
@@ -148,7 +106,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/_Hidden/Constants.py" />
         <option value="$PROJECT_DIR$/Utils/SysUtils.py" />
         <option value="$PROJECT_DIR$/_Hidden/Objects/FileOutput.py" />
         <option value="$PROJECT_DIR$/_Hidden/CustomExc.py" />
@@ -179,9 +136,7 @@
         <option value="$PROJECT_DIR$/analysis/__init__.py" />
         <option value="$PROJECT_DIR$/_hidden/Constants.py" />
         <option value="$PROJECT_DIR$/modeling/modeling.py" />
-        <option value="$PROJECT_DIR$/analysis/classification_analysis.py" />
         <option value="$PROJECT_DIR$/utils/math_utils.py" />
-        <option value="$PROJECT_DIR$/analysis/data_analysis.py" />
         <option value="$PROJECT_DIR$/analysis/meta_analysis.py" />
         <option value="$PROJECT_DIR$/analysis/dataframe_meta_analysis.py" />
         <option value="$PROJECT_DIR$/_hidden/utils/Multi_Threading_Functions.py" />
@@ -199,6 +154,9 @@
         <option value="$PROJECT_DIR$/_hidden/objects/__init__.py" />
         <option value="$PROJECT_DIR$/utils/pandas_utils.py" />
         <option value="$PROJECT_DIR$/analysis/missing_data_analysis.py" />
+        <option value="$PROJECT_DIR$/_hidden/objects/pipeline_segment.py" />
+        <option value="$PROJECT_DIR$/analysis/data_analysis.py" />
+        <option value="$PROJECT_DIR$/analysis/classification_analysis.py" />
       </list>
     </option>
   </component>
@@ -219,21 +177,6 @@
             <path>
               <item name="eflow" type="b2602c69:ProjectViewProjectNode" />
               <item name="eflow" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="eflow" type="b2602c69:ProjectViewProjectNode" />
-              <item name="eflow" type="462c0819:PsiDirectoryNode" />
-              <item name="_hidden" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="eflow" type="b2602c69:ProjectViewProjectNode" />
-              <item name="eflow" type="462c0819:PsiDirectoryNode" />
-              <item name="analysis" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="eflow" type="b2602c69:ProjectViewProjectNode" />
-              <item name="eflow" type="462c0819:PsiDirectoryNode" />
-              <item name="utils" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -302,16 +245,15 @@
       <workItem from="1569245897773" duration="3601000" />
       <workItem from="1569250127069" duration="13835000" />
       <workItem from="1569273907496" duration="6347000" />
-      <workItem from="1569288945873" duration="14537000" />
+      <workItem from="1569288945873" duration="14840000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="158340000" />
+    <option name="totallyTimeSpent" value="158643000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1680" height="1050" extended-state="0" />
-    <editor active="true" />
     <layout>
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.23321123" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
@@ -595,8 +537,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/analysis/missing_data_analysis.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="10125">
-          <caret line="675" column="18" selection-start-line="675" selection-start-column="18" selection-end-line="675" selection-end-column="18" />
+        <state relative-caret-position="720">
+          <caret line="48" column="31" lean-forward="true" selection-start-line="48" selection-start-column="31" selection-end-line="48" selection-end-column="31" />
           <folding>
             <element signature="e#0#47#0" expanded="true" />
           </folding>
