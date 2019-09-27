@@ -11,8 +11,9 @@ from eflow._hidden.custom_warnings import DataFrameWarning
 from eflow._hidden.constants import GRAPH_DEFAULTS
 
 from eflow.utils.image_utils import create_plt_png
-from eflow.utils.string_utils import convert_to_filename
+from eflow.utils.string_utils import convert_to_filename, correct_directory_path
 from eflow.utils.pandas_utils import data_types_table, missing_values_table
+from eflow._hidden.objects import DataFrameSnapshot
 
 class MissingDataAnalysis(FileOutput):
     """
@@ -73,7 +74,7 @@ class MissingDataAnalysis(FileOutput):
 
         if not passed_check:
             print(
-                "All functionality belonging to this object requies null data!")
+                "All functionality belonging to this object requires null data!")
 
         return passed_check
 
@@ -118,7 +119,8 @@ class MissingDataAnalysis(FileOutput):
                          dataset_name,
                          null_features_only=False,
                          display_visuals=True,
-                         save_file=True):
+                         save_file=True,
+                         dataframe_snapshot=True):
         """
         df:
             Pandas Dataframe object.
@@ -153,9 +155,16 @@ class MissingDataAnalysis(FileOutput):
                 # following check; exit function
                 if not self.__check_dataframe(df):
                     print("Exiting perform analysis function call")
-                    return
-                else:
-                    self.__called_from_peform = True
+                    return None
+
+                if dataframe_snapshot:
+                    df_snapshot = DataFrameSnapshot()
+                    df_snapshot.check_create_snapshot(df,
+                                                      directory_pth=self.get_output_folder(),
+                                                      sub_dir=f"{dataset_name}/_Extras")
+
+
+                self.__called_from_peform = True
 
                 self.data_types_table(df,
                                       dataset_name,
@@ -195,7 +204,6 @@ class MissingDataAnalysis(FileOutput):
                                                 display_visuals=display_visuals,
                                                 save_file=save_file)
                 print("\n\n")
-                # --------------------------------------
 
         finally:
             self.__called_from_peform = False
@@ -208,6 +216,7 @@ class MissingDataAnalysis(FileOutput):
                                display_visuals=True,
                                filename=None,
                                save_file=True,
+                               dataframe_snapshot=True,
                                filter=None,
                                n=0,
                                p=0,
@@ -291,6 +300,14 @@ class MissingDataAnalysis(FileOutput):
 
 
         if save_file:
+
+            if not self.__called_from_peform:
+                if dataframe_snapshot:
+                    df_snapshot = DataFrameSnapshot()
+                    df_snapshot.check_create_snapshot(df,
+                                                      directory_pth=self.get_output_folder(),
+                                                      sub_dir=f"{dataset_name}/_Extras")
+
             create_plt_png(self.get_output_folder(),
                            f"{dataset_name}/Graphics",
                            convert_to_filename(filename))
@@ -308,6 +325,7 @@ class MissingDataAnalysis(FileOutput):
                             display_visuals=True,
                             filename=None,
                             save_file=True,
+                            dataframe_snapshot=True,
                             figsize=(24, 10),
                             fontsize=16,
                             labels=None,
@@ -393,6 +411,13 @@ class MissingDataAnalysis(FileOutput):
             filename = "Missing data bar graph"
 
         if save_file:
+            if not self.__called_from_peform:
+                if dataframe_snapshot:
+                    df_snapshot = DataFrameSnapshot()
+                    df_snapshot.check_create_snapshot(df,
+                                                      directory_pth=self.get_output_folder(),
+                                                      sub_dir=f"{dataset_name}/_Extras")
+
             create_plt_png(self.get_output_folder(),
                            f"{dataset_name}/Graphics",
                            convert_to_filename(filename))
@@ -408,6 +433,7 @@ class MissingDataAnalysis(FileOutput):
                                 display_visuals=True,
                                 filename=None,
                                 save_file=True,
+                                dataframe_snapshot=True,
                                 inline=False,
                                 filter=None,
                                 n=0,
@@ -480,6 +506,13 @@ class MissingDataAnalysis(FileOutput):
             filename = "Missing data heatmap graph"
 
         if save_file:
+            if not self.__called_from_peform:
+                if dataframe_snapshot:
+                    df_snapshot = DataFrameSnapshot()
+                    df_snapshot.check_create_snapshot(df,
+                                                      directory_pth=self.get_output_folder(),
+                                                      sub_dir=f"{dataset_name}/_Extras")
+
             create_plt_png(self.get_output_folder(),
                            f"{dataset_name}/Graphics",
                            convert_to_filename(filename))
@@ -496,6 +529,7 @@ class MissingDataAnalysis(FileOutput):
                                    display_visuals=True,
                                    filename=None,
                                    save_file=True,
+                                   dataframe_snapshot=True,
                                    method='average',
                                    filter=None,
                                    n=0,
@@ -568,6 +602,14 @@ class MissingDataAnalysis(FileOutput):
             filename = f"Missing data dendrogram graph {method}"
 
         if save_file:
+
+            if not self.__called_from_peform:
+                if dataframe_snapshot:
+                    df_snapshot = DataFrameSnapshot()
+                    df_snapshot.check_create_snapshot(df,
+                                                      directory_pth=self.get_output_folder(),
+                                                      sub_dir=f"{dataset_name}/_Extras")
+
             create_plt_png(self.get_output_folder(),
                            f"{dataset_name}/Graphics",
                            convert_to_filename(filename))
@@ -583,7 +625,8 @@ class MissingDataAnalysis(FileOutput):
                              dataset_name,
                              display_visuals=True,
                              filename=None,
-                             save_file=True):
+                             save_file=True,
+                             dataframe_snapshot=True):
         """
 
         df:
@@ -595,6 +638,12 @@ class MissingDataAnalysis(FileOutput):
 
         save_file:
             Boolean value to whether or not to save the file.
+
+        dataframe_snapshot:
+            Boolean value to determine whether or not generate and compare a
+            snapshot of the dataframe in the dataset's directory structure.
+            Helps ensure that data generated in that directory is correctly
+            associated to a dataframe.
 
         display_visuals:
             Boolean value to whether or not to display visualizations.
@@ -632,6 +681,15 @@ class MissingDataAnalysis(FileOutput):
 
         # ---
         if save_file:
+
+            if not self.__called_from_peform:
+                if dataframe_snapshot:
+                    df_snapshot = DataFrameSnapshot()
+                    df_snapshot.check_create_snapshot(df,
+                                                      directory_pth=self.get_output_folder(),
+                                                      sub_dir=f"{dataset_name}/_Extras")
+
+
             df_to_image(mis_val_table_ren_columns,
                         self.get_output_folder(),
                         f"{dataset_name}/Tables",
@@ -644,7 +702,8 @@ class MissingDataAnalysis(FileOutput):
                          dataset_name,
                          display_visuals=True,
                          filename=None,
-                         save_file=True):
+                         save_file=True,
+                         dataframe_snapshot=True):
         """
         df:
             Pandas DataFrame object
@@ -688,6 +747,12 @@ class MissingDataAnalysis(FileOutput):
             filename = "Data Types Table"
 
         if save_file:
+            if not self.__called_from_peform:
+                if dataframe_snapshot:
+                    df_snapshot = DataFrameSnapshot()
+                    df_snapshot.check_create_snapshot(df,
+                                                      directory_pth=self.get_output_folder(),
+                                                      sub_dir=f"{dataset_name}/_Extras")
             df_to_image(dtypes_df,
                         self.get_output_folder(),
                         f"{dataset_name}/Tables",

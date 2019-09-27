@@ -1,9 +1,3 @@
-from eflow.utils.sys_utils import *
-from eflow._hidden.objects import FileOutput
-from eflow._hidden.custom_exceptions import *
-from eflow.analysis import DataAnalysis
-from eflow._hidden.constants import GRAPH_DEFAULTS
-
 from sklearn.metrics import accuracy_score
 from sklearn.metrics import f1_score
 from sklearn.metrics import matthews_corrcoef
@@ -18,6 +12,11 @@ import pandas as pd
 from IPython.display import display
 import matplotlib.pyplot as plt
 
+from eflow.utils.sys_utils import *
+from eflow._hidden.objects import FileOutput
+from eflow._hidden.custom_exceptions import *
+from eflow.analysis import DataAnalysis
+from eflow._hidden.constants import GRAPH_DEFAULTS
 
 class ClassificationAnalysis(FileOutput):
 
@@ -268,6 +267,7 @@ class ClassificationAnalysis(FileOutput):
             to that directory. The content of the file must match the content
             of the list/numpy array 'thresholds'.
         """
+
         sub_dir = f'{dataset_name}/{pred_name}'
 
         # Only generate extra folder structure if function type is Probabilities

@@ -1,4 +1,3 @@
-from eflow._hidden.objects.enum import *
 from eflow._hidden.constants import *
 from eflow.utils.sys_utils import check_create_dir_structure
 from eflow.utils.string_utils import correct_directory_path
@@ -15,14 +14,18 @@ class FileOutput:
         if not overwrite_full_path:
             parent_structure = "/" + SYS_CONSTANTS.PARENT_OUTPUT_FOLDER_NAME \
                                + "/" + project_name + "/"
+
+            check_create_dir_structure(os.getcwd(),
+                                       parent_structure)
+
             self.__PROJECT = enum(PATH_TO_OUTPUT_FOLDER=
                                   correct_directory_path(
                                       os.getcwd() + parent_structure))
+
+
+        # This path must already exist
         else:
             self.__PROJECT = enum(PATH_TO_OUTPUT_FOLDER=correct_directory_path(overwrite_full_path))
-
-        check_create_dir_structure(self.__PROJECT.PATH_TO_OUTPUT_FOLDER,
-                                   "")
 
     def get_output_folder(self):
         return copy.deepcopy(self.__PROJECT.PATH_TO_OUTPUT_FOLDER)

@@ -52,6 +52,7 @@ def df_to_image(df,
                 show_index=False,
                 index_color="#add8e6",
                 format_float_pos=None,
+                show_plot=False,
                 **kwargs):
 
     directory_pth = correct_directory_path(directory_pth)
@@ -95,6 +96,8 @@ def df_to_image(df,
                    sub_dir,
                    filename,
                    sharpness)
+    if show_plot:
+        plt.show()
 
     plt.close()
 

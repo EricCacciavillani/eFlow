@@ -7,4 +7,4 @@ class DefaultException(Exception):
         if not self.__error_message:
             return "eflow has raised an undeclared exception"
         else:
-            return repr(self.__error_message)
+            return self.__error_message

@@ -57,49 +57,6 @@ class DataCleaner(PipelineSegment):
         if df is None:
             return
 
-        if self.__requires_nan_removal and missing_data_visuals:
-
-            display(self.__missing_values_table(df))
-
-            # ---
-            msno.matrix(df)
-            create_plt_png(PipelineSegment.get_output_folder(self),
-                           "Missing_Data/Graphics",
-                           "Missing_Data_Matrix_Graph")
-
-            if self.__notebook_mode:
-                plt.show()
-            plt.close()
-
-            # ---
-            msno.bar(df,
-                     color="#072F5F")
-
-            create_plt_png(PipelineSegment.get_output_folder(self),
-                           "Missing_Data/Graphics",
-                           "Missing_Data_Bar_Graph")
-            if self.__notebook_mode:
-                plt.show()
-            plt.close()
-
-            # ---
-            msno.heatmap(df)
-            create_plt_png(PipelineSegment.get_output_folder(self),
-                           "Missing_Data/Graphics",
-                           "Missing_Data_Heatmap")
-            if self.__notebook_mode:
-                plt.show()
-            plt.close()
-
-            # ---
-            msno.dendrogram(df)
-            create_plt_png(PipelineSegment.get_output_folder(self),
-                           "Missing_Data/Graphics",
-                           "Missing_Data_Dendrogram_Graph")
-            if self.__notebook_mode:
-                plt.show()
-            plt.close()
-
         # --- Setting up widget options
 
         # Dummy line to show in the menu for cleaner viewing

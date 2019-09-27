@@ -15,7 +15,7 @@ def get_unique_directory_path(directory_pth,
 
     directory_pth = correct_directory_path(directory_pth)
     check_create_dir_structure(directory_pth=directory_pth,
-                               sub_dir="")
+                               create_sub_dir="")
     iterable = 0
     while True:
         if iterable != 0:
@@ -32,19 +32,25 @@ def get_unique_directory_path(directory_pth,
 
 
 def check_create_dir_structure(directory_pth,
-                               sub_dir):
+                               create_sub_dir):
     """
         Checks/Creates required directory structures inside
         the parent directory figures.
     """
+
+    if not os.path.exists(directory_pth):
+        raise SystemError("Main directory path doesn't exist.\n"
+                          "To help ensure unwanted directories are created you "
+                          "must have a pre-defined path.")
+
     directory_pth = correct_directory_path(directory_pth)
 
-    for dir in sub_dir.split("/"):
+    for dir in create_sub_dir.split("/"):
         directory_pth += "/" + dir
         if not os.path.exists(directory_pth):
             os.makedirs(directory_pth)
 
-    return directory_pth
+    return correct_directory_path(directory_pth)
 
 
 def write_object_text_to_file(obj,
