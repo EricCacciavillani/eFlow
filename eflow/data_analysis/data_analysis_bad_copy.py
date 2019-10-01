@@ -14,7 +14,7 @@ class DataAnalysis(FileOutput):
     def __init__(self,
                  df=None,
                  df_features=None,
-                 project_name="Data analysis",
+                 project_name="Data data_analysis",
                  overwrite_full_path=None,
                  notebook_mode=True,
                  missing_data_visuals=False):
@@ -161,7 +161,7 @@ class DataAnalysis(FileOutput):
 
         # Generate image in proper directory structure
         create_plt_png(self.get_output_folder(),
-                       "Feature analysis/Graphics",
+                       "Feature data_analysis/Graphics",
                        "Distance_Plot_" + col_feature_name)
         if self.__notebook_mode:
             plt.show()
@@ -235,7 +235,7 @@ class DataAnalysis(FileOutput):
 
         # Save graph in proper directory structure
         create_plt_png(self.get_output_folder(),
-                       "Feature analysis/Graphics",
+                       "Feature data_analysis/Graphics",
                        "Count_Plot_" + col_feature_name)
         if self.__notebook_mode:
             plt.show()
@@ -315,7 +315,7 @@ class DataAnalysis(FileOutput):
 
         # Save graph in proper directory structure
         create_plt_png(self.get_output_folder(),
-                       "Feature analysis/Graphics",
+                       "Feature data_analysis/Graphics",
                        "Pie_Chart_" + col_feature_name)
         if self.__notebook_mode:
             plt.show()
@@ -370,7 +370,7 @@ class DataAnalysis(FileOutput):
         # Convert DataFrame table to image
         df_to_image(col_vc_df,
                     self.get_output_folder(),
-                    "Feature analysis/Tables/Value Counts",
+                    "Feature data_analysis/Tables/Value Counts",
                     col_feature_name + "_Value_Counts",
                     show_index=True,
                     format_float_pos=format_float_pos)
@@ -412,7 +412,7 @@ class DataAnalysis(FileOutput):
         # Convert DataFrame table to image
         df_to_image(col_desc_df,
                     self.get_output_folder(),
-                    "Feature analysis/Tables/Descriptions",
+                    "Feature data_analysis/Tables/Descriptions",
                     col_feature_name + "_Descr",
                     show_index=True,
                     format_float_pos=format_float_pos)

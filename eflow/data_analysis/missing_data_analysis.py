@@ -22,12 +22,12 @@ class MissingDataAnalysis(FileOutput):
     """
 
     def __init__(self,
-                 sub_dir="",
+                 project_sub_dir="",
                  project_name="Missing Data",
                  overwrite_full_path=None,
                  notebook_mode=True):
         """
-        sub_dir:
+        project_sub_dir:
             Appends to the absolute directory of the output folder
 
         project_name:
@@ -42,10 +42,10 @@ class MissingDataAnalysis(FileOutput):
         """
 
         FileOutput.__init__(self,
-                            f'{sub_dir}/{project_name}',
+                            f'{project_sub_dir}/{project_name}',
                             overwrite_full_path)
         self.__notebook_mode = copy.deepcopy(notebook_mode)
-        self.__called_from_peform = False
+        self.__called_from_perform = False
 
     def __check_dataframe(self,
                           df):
@@ -140,21 +140,21 @@ class MissingDataAnalysis(FileOutput):
 
         df_features:
             DataFrameTypeHolder object. If initalized we can run correct/error
-            analysis on the dataframe. Will save object in a pickle file and
+            data_analysis on the dataframe. Will save object in a pickle file and
             provided columns if initalized and df_features is not initialized.
 
         Returns/Desc:
-            Perform all functionality of the analysis object.
+            Perform all functionality of the data_analysis object.
         """
         try:
-            self.__called_from_peform = False
+            self.__called_from_perform = False
 
             if df is not None:
 
                 # All functionality is meaningless without getting past the
                 # following check; exit function
                 if not self.__check_dataframe(df):
-                    print("Exiting perform analysis function call")
+                    print("Exiting perform data_analysis function call")
                     return None
 
                 if dataframe_snapshot:
@@ -164,7 +164,7 @@ class MissingDataAnalysis(FileOutput):
                                                       sub_dir=f"{dataset_name}/_Extras")
 
 
-                self.__called_from_peform = True
+                self.__called_from_perform = True
 
                 self.data_types_table(df,
                                       dataset_name,
@@ -206,7 +206,7 @@ class MissingDataAnalysis(FileOutput):
                 print("\n\n")
 
         finally:
-            self.__called_from_peform = False
+            self.__called_from_perform = False
 
 
     def plot_null_matrix_graph(self,
@@ -264,7 +264,7 @@ class MissingDataAnalysis(FileOutput):
             A matrix visualization of the nullity of the given DataFrame.
         """
 
-        if not self.__called_from_peform:
+        if not self.__called_from_perform:
             if not self.__check_dataframe(df):
                 print("Null matrix couldn't be generated because there is "
                       "no missing data to display!")
@@ -301,7 +301,7 @@ class MissingDataAnalysis(FileOutput):
 
         if save_file:
 
-            if not self.__called_from_peform:
+            if not self.__called_from_perform:
                 if dataframe_snapshot:
                     df_snapshot = DataFrameSnapshot()
                     df_snapshot.check_create_snapshot(df,
@@ -367,7 +367,7 @@ class MissingDataAnalysis(FileOutput):
             A bar graph visualization of the nullity of the given DataFrame.
         """
 
-        if not self.__called_from_peform:
+        if not self.__called_from_perform:
             if not self.__check_dataframe(df):
                 print("Null bar graph couldn't be generated because there is "
                       "no missing data to display!")
@@ -411,7 +411,7 @@ class MissingDataAnalysis(FileOutput):
             filename = "Missing data bar graph"
 
         if save_file:
-            if not self.__called_from_peform:
+            if not self.__called_from_perform:
                 if dataframe_snapshot:
                     df_snapshot = DataFrameSnapshot()
                     df_snapshot.check_create_snapshot(df,
@@ -478,7 +478,7 @@ class MissingDataAnalysis(FileOutput):
             in the given DataFrame.
         """
 
-        if not self.__called_from_peform:
+        if not self.__called_from_perform:
             if not self.__check_dataframe(df):
                 print("Null heatmap graph couldn't be generated because there"
                       "is no missing data to display!")
@@ -506,7 +506,7 @@ class MissingDataAnalysis(FileOutput):
             filename = "Missing data heatmap graph"
 
         if save_file:
-            if not self.__called_from_peform:
+            if not self.__called_from_perform:
                 if dataframe_snapshot:
                     df_snapshot = DataFrameSnapshot()
                     df_snapshot.check_create_snapshot(df,
@@ -571,7 +571,7 @@ class MissingDataAnalysis(FileOutput):
             a `scipy` dendrogram.
         """
 
-        if not self.__called_from_peform:
+        if not self.__called_from_perform:
             if not self.__check_dataframe(df):
                 print("Null dendrogram graph couldn't be generated because"
                       " there is no missing data to display!")
@@ -603,7 +603,7 @@ class MissingDataAnalysis(FileOutput):
 
         if save_file:
 
-            if not self.__called_from_peform:
+            if not self.__called_from_perform:
                 if dataframe_snapshot:
                     df_snapshot = DataFrameSnapshot()
                     df_snapshot.check_create_snapshot(df,
@@ -653,7 +653,7 @@ class MissingDataAnalysis(FileOutput):
             the null data for the original DataFrame columns.
         """
 
-        if not self.__called_from_peform:
+        if not self.__called_from_perform:
             if not self.__check_dataframe(df):
                 print("Couldn't create missing values table because"
                       " there is no missing data to display!")
@@ -661,7 +661,7 @@ class MissingDataAnalysis(FileOutput):
 
         print("Creating missing values table...")
 
-        if not self.__called_from_peform:
+        if not self.__called_from_perform:
             self.__check_dataframe(df)
 
         mis_val_table_ren_columns = missing_values_table(df)
@@ -682,7 +682,7 @@ class MissingDataAnalysis(FileOutput):
         # ---
         if save_file:
 
-            if not self.__called_from_peform:
+            if not self.__called_from_perform:
                 if dataframe_snapshot:
                     df_snapshot = DataFrameSnapshot()
                     df_snapshot.check_create_snapshot(df,
@@ -747,7 +747,7 @@ class MissingDataAnalysis(FileOutput):
             filename = "Data Types Table"
 
         if save_file:
-            if not self.__called_from_peform:
+            if not self.__called_from_perform:
                 if dataframe_snapshot:
                     df_snapshot = DataFrameSnapshot()
                     df_snapshot.check_create_snapshot(df,

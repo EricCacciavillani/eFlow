@@ -79,3 +79,48 @@ def generate_meta_data(df,
                               "Dataframe Shape Text")
 
 
+def value_counts_table(df,
+                       feature_name):
+    """
+    df:
+        Pandas DataFrame object.
+
+    feature_name:
+        Specified feature column name.
+
+    Returns/Descr:
+        Returns back a pandas Dataframe object of a feature's value counts
+        with percentages.
+    """
+
+    # Value counts DataFrame
+    col_vc_df = df[feature_name].value_counts().rename_axis(
+        'Unique Values').reset_index(name='Counts')
+
+    col_vc_df["Percantage"] = ["{0:.4f}%".format(count/df.shape[0] * 100)
+                               for value, count in
+                               df[feature_name].value_counts().items()]
+
+    col_vc_df.set_index('Unique Values',
+                        inplace=True)
+
+    return col_vc_df
+
+
+def descr_table(df,
+                feature_name):
+    """
+    df:
+        Pandas DataFrame object.
+
+    feature_name:
+        Specified feature column name.
+
+    Returns/Descr:
+        Returns back a Dataframe object of a numerical feature's summary.
+    """
+
+    col_desc_df = df[feature_name].describe().to_frame()
+    col_desc_df.loc["var"] = df[feature_name].var()
+
+    return col_desc_df

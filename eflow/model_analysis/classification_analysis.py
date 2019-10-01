@@ -15,7 +15,7 @@ import matplotlib.pyplot as plt
 from eflow.utils.sys_utils import *
 from eflow._hidden.objects import FileOutput
 from eflow._hidden.custom_exceptions import *
-from eflow.analysis import DataAnalysis
+from eflow.data_analysis import DataAnalysis
 from eflow._hidden.constants import GRAPH_DEFAULTS
 
 class ClassificationAnalysis(FileOutput):
@@ -74,7 +74,7 @@ class ClassificationAnalysis(FileOutput):
 
         df_features:
             DataFrameTypeHolder object. If initalized we can run correct/error
-            analysis on the dataframe. Will save object in a pickle file and provided columns
+            data_analysis on the dataframe. Will save object in a pickle file and provided columns
             if initalized and df_features is not initalized.
 
         columns:
@@ -386,7 +386,7 @@ class ClassificationAnalysis(FileOutput):
 
         ignore_metrics:
             Specify the default metrics to not apply to the classification
-            analysis.
+            data_analysis.
                 * Precision
                 * MCC
                 * Recall
@@ -401,7 +401,7 @@ class ClassificationAnalysis(FileOutput):
             Determines the type of averaging performed on the data.
 
         display_analysis_graphs:
-            Controls visual display of error error analysis if it is able to run.
+            Controls visual display of error error data_analysis if it is able to run.
 
         Returns/Desc:
             Performs all classification functionality with the provided feature
@@ -947,7 +947,7 @@ class ClassificationAnalysis(FileOutput):
 
         ignore_metrics:
             Specify the default metrics to not apply to the classification
-            analysis.
+            data_analysis.
                 * Precision
                 * MCC
                 * Recall
@@ -1089,7 +1089,7 @@ class ClassificationAnalysis(FileOutput):
         if sum(model_predictions == y):
             if display_analysis_graphs:
                 print("\n\n" + "*" * 10 +
-                      "Correctly predicted analysis"
+                      "Correctly predicted data_analysis"
                       + "*" * 10 + "\n")
             else:
                 print("\n\n" + "*" * 10 +
@@ -1108,7 +1108,7 @@ class ClassificationAnalysis(FileOutput):
         if sum(model_predictions != y):
             if display_analysis_graphs:
                 print("\n\n" + "*" * 10 +
-                      "Incorrectly predicted analysis"
+                      "Incorrectly predicted data_analysis"
                       + "*" * 10 + "\n")
             else:
                 print("\n\n" + "*" * 10 +
