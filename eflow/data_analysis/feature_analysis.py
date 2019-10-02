@@ -178,7 +178,6 @@ class FeatureAnalysis(FileOutput):
                feature_values = df[feature_name].value_counts().keys()
                if len(feature_values) <= 3 and \
                        not feature_name in df_features.get_numerical_features():
-                   pass
                    self.pie_graph(df,
                                   feature_name,
                                   dataset_name=dataset_name,
