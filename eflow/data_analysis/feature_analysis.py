@@ -5,12 +5,20 @@ import copy
 from IPython.display import display
 import seaborn as sns
 
-from eflow._hidden.objects import FileOutput
+from eflow._hidden.objects import FileOutput, DataFrameSnapshot
 from eflow.utils.pandas_utils import descr_table,value_counts_table
 from eflow.utils.image_utils import create_plt_png, df_to_image
+from eflow.utils.string_utils import convert_to_filename
+from eflow._hidden.custom_exceptions import UnsatisfiedRequirments
 
 
-class DataAnalysis(FileOutput):
+class FeatureAnalysis(FileOutput):
+
+    """
+        Analyzes the feature data of a pandas Dataframe object.
+        (Only works on single features and ignores null data for displaying data.)
+    """
+
     def __init__(self,
                  project_sub_dir="",
                  project_name="Data Analysis",
@@ -55,319 +63,6 @@ class DataAnalysis(FileOutput):
 
         self.__notebook_mode = copy.deepcopy(notebook_mode)
         self.__called_from_perform = False
-
-
-    def perform_analysis(self,
-                         df,
-                         df_features):
-       try:
-           # Iterate through DataFrame columns and graph based on data types
-           for col_feature_name in df.columns:
-               print(f"Generating graph for {col_feature_name}...\n")
-
-               feature_values = df[col_feature_name].value_counts().keys()
-               if len(feature_values) <= 3 and \
-                       not col_feature_name in df_features.get_numerical_features():
-
-                   self.pie_graph(df,
-                                  col_feature_name,
-                                  init_default_color="#C0C0C0")
-
-               elif col_feature_name in df_features.get_categorical_features():
-                   self.count_plot_graph(df, col_feature_name)
-
-               elif col_feature_name in df_features.get_integer_features():
-                   if len(feature_values) <= 13:
-                       self.count_plot_graph(df,
-                                             col_feature_name)
-                   else:
-                       self.distance_plot_graph(df,
-                                                col_feature_name)
-
-               elif col_feature_name in df_features.get_float_features():
-                   self.distance_plot_graph(df,
-                                            col_feature_name)
-
-               plt.close()
-           else:
-               print(
-                   "Object didn't receive a Pandas Dataframe object or a DataFrameTypes object")
-       finally:
-           self.__called_from_perform = False
-
-    def distance_plot_graph(self,
-                            df,
-                            col_feature_name,
-                            display_table=True):
-        """
-        df:
-            Pandas DataFrame object.
-
-        col_feature_name:
-            Specified feature column name.
-
-        display_table:
-            Display table in python notebook.
-
-        Returns/Descr:
-            Display a distance plot and save the graph/table in the correct
-            directory.
-        """
-
-        if not self.__called_from_perform:
-            if np.sum()
-
-        # Set general graph info
-        sns.set(style="whitegrid")
-        plt.figure(figsize=(12, 8))
-        plt.title("Distance Plot: " + col_feature_name)
-
-        # Create seaborn graph
-        sns.distplot(df[col_feature_name].dropna())
-
-        # Generate image in proper directory structure
-        create_plt_png(self.get_output_folder(),
-                       "Feature data_analysis/Graphics",
-                       "Distance_Plot_" + col_feature_name)
-        if self.__notebook_mode:
-            plt.show()
-        plt.close()
-
-        # Numerical column's multi-metric evaluation
-        self.create_descr_table(df,
-                                col_feature_name,
-                                format_float_pos=3,
-                                display_table=display_table)
-
-    def count_plot_graph(self,
-                         df,
-                         col_feature_name,
-                         flip_axis=False,
-                         palette="PuBu",
-                         display_table=True):
-        """
-        df:
-            Pandas DataFrame object.
-
-        col_feature_name:
-            Specified feature column name.
-
-        display_table:
-            Display table in python notebook.
-
-        flip_axis:
-            Flip the x and y axis for visual representation.
-
-        palette:
-            Seaborn color palette, specifies the colors the graph will use.
-
-        Returns/Descr:
-            Display a count plot and save the graph/table in the correct
-            directory.
-        """
-
-        # Set general graph info
-        sns.set(style="whitegrid")
-        plt.figure(figsize=(12, 8))
-        plt.title("Category Count Plot: " + col_feature_name)
-
-        # Find and rank values based on counts for color variation of the graph
-        groupedvalues = df.groupby(col_feature_name).sum().reset_index()
-
-        pal = sns.color_palette(palette, len(groupedvalues))
-
-        rank_list = []
-        for target_value in df[col_feature_name].dropna().unique():
-            rank_list.append(sum(
-                df[col_feature_name] == target_value))
-
-        rank_list = np.argsort(-np.array(rank_list)).argsort()
-
-        # Flip the graph for visual flare
-        if flip_axis:
-            ax = sns.countplot(y=col_feature_name, data=df,
-                               palette=np.array(pal[::-1])[rank_list])
-        else:
-            ax = sns.countplot(x=col_feature_name, data=df,
-                               palette=np.array(pal[::-1])[rank_list])
-
-        # Labels for numerical count of each bar
-        for p in ax.patches:
-            height = p.get_height()
-            ax.text(p.get_x() + p.get_width() / 2.,
-                    height + 3,
-                    '{:1}'.format(height),
-                    ha="center")
-
-        # Save graph in proper directory structure
-        create_plt_png(self.get_output_folder(),
-                       "Feature data_analysis/Graphics",
-                       "Count_Plot_" + col_feature_name)
-        if self.__notebook_mode:
-            plt.show()
-        plt.close()
-
-        # Save table in proper directory structure
-        self.create_value_counts_table(df,
-                                       col_feature_name,
-                                       format_float_pos=3,
-                                       display_table=display_table)
-
-    def pie_graph(self,
-                  df,
-                  col_feature_name,
-                  colors=None,
-                  display_table=True,
-                  init_default_color=None):
-        """
-       df:
-           Pandas DataFrame object.
-
-       col_feature_name:
-           Specified feature column name.
-
-       colors:
-            Accepts an array of hex colors with the correct count of values
-            within the feature. If not init; then specified colors will be
-            assigned based on if the feature is Boolean or if the column name
-            is found in 'defined_column_colors'; else just init with
-            random colors.
-
-       display_table:
-           Display table in python notebook.
-
-       init_default_color:
-           A default color to assign unknown values when other values are
-           already assigned. Left to 'None' will init with random colors.
-
-       Returns/Descr:
-           Display a pie graph and save the graph/table in the correct
-           directory.
-        """
-        # Find value counts
-        value_counts = df[col_feature_name].dropna().value_counts()
-        value_list = value_counts.index.tolist()
-        value_count_list = value_counts.values.tolist()
-
-        # Init with proper color hex value based on conditionals. (Read Above)
-        if colors is None:
-            colors = self.__check_specfied_column_colors(df,
-                                                         col_feature_name,
-                                                         init_default_color)
-
-        # Explode the part of the pie graph that is the maximum of the graph
-        explode_array = [0] * len(value_list)
-        explode_array[np.array(value_count_list).argmax()] = .03
-
-        # Plot pie graph
-        plt.pie(
-            tuple(value_count_list),
-            labels=tuple(value_list),
-            shadow=False,
-            colors=colors,
-            explode=tuple(explode_array),
-            startangle=90,
-            autopct='%1.1f%%',
-        )
-
-        # Set general graph info
-        fig = plt.gcf()
-        fig.set_size_inches(12, 8)
-        plt.title("Pie Chart: " + col_feature_name)
-        plt.legend(fancybox=True)
-        plt.axis('equal')
-        plt.tight_layout()
-        plt.figure(figsize=(20, 20))
-
-        # Save graph in proper directory structure
-        create_plt_png(self.get_output_folder(),
-                       "Feature data_analysis/Graphics",
-                       "Pie_Chart_" + col_feature_name)
-        if self.__notebook_mode:
-            plt.show()
-        plt.close()
-
-        # Save table in proper directory structure
-        self.create_value_counts_table(df,
-                                       col_feature_name,
-                                       format_float_pos=3,
-                                       display_table=display_table)
-
-    def create_value_counts_table(self,
-                                  df,
-                                  feature_name,
-                                  format_float_pos=None,
-                                  display_table=True):
-        """
-        df:
-            Pandas DataFrame object.
-
-        col_feature_name:
-            Specified feature column name.
-
-        format_float_pos:
-            Any features that are floats will be rounded to the
-            specified decimal place.
-
-        display_table:
-            Display table in python notebook.
-
-        Returns/Descr:
-            Returns back a value counts DataFrame table and saves the png in
-            the right directory.
-        """
-        col_vc_df = value_counts_table(df,
-                                       feature_name)
-
-        # Convert DataFrame table to image
-        df_to_image(col_vc_df,
-                    self.get_output_folder(),
-                    "Feature data_analysis/Tables/Value Counts",
-                    feature_name + "_Value_Counts",
-                    show_index=True,
-                    format_float_pos=format_float_pos)
-
-        plt.close()
-
-    def create_descr_table(self,
-                           df,
-                           feature_name,
-                           format_float_pos=None,
-                           display_table=True):
-        """
-        df:
-            Pandas DataFrame object.
-
-        feature_name:
-            Specified feature column name.
-
-        format_float_pos:
-            Any features that are floats will be rounded to the
-            specified decimal place.
-
-        display_table:
-            Display table in python notebook.
-
-        Returns/Descr:
-            Returns back a numerical summary DataFrame table and saves the png
-            in the right directory.
-        """
-
-        # Numerical summary of the column stored in a DataFrame Object.
-        col_desc_df = descr_table(df,feature_name)
-
-        if display_table and self.__notebook_mode:
-            display(col_desc_df)
-            print("\n"*3)
-
-        # Convert DataFrame table to image
-        df_to_image(col_desc_df,
-                    self.get_output_folder(),
-                    "Feature data_analysis/Tables/Descriptions",
-                    col_feature_name + "_Descr",
-                    show_index=True,
-                    format_float_pos=format_float_pos)
-        plt.close()
 
     def __check_specfied_column_colors(self,
                                        df,
@@ -423,7 +118,6 @@ class DataAnalysis(FileOutput):
                     for column_value in {x for x in column_value_info}:
 
                         if str(column_value).upper() in specfied_column_values:
-
                             column_colors[specfied_column_values.index(str(
                                 column_value).upper())] = column_value_color
                             found_color_value = True
@@ -436,3 +130,539 @@ class DataAnalysis(FileOutput):
 
         # Return obj None for no matching colors
         return None
+
+    def perform_analysis(self,
+                         df,
+                         df_features,
+                         dataset_name,
+                         display_visuals=True,
+                         save_file=True,
+                         dataframe_snapshot=True):
+        """
+        df:
+            Pandas dataframe object
+
+        df_features:
+            DataFrameTypes object; organizes feature types into groups.
+
+        dataset_name:
+            The dataset's name; this will create a sub-directory in which your
+            generated graph will be inner-nested in.
+
+        display_visuals:
+            Boolean value to whether or not to display visualizations.
+
+        save_file:
+            Boolean value to whether or not to save the file.
+
+        dataframe_snapshot:
+            Boolean value to determine whether or not generate and compare a
+            snapshot of the dataframe in the dataset's directory structure.
+            Helps ensure that data generated in that directory is correctly
+            associated to a dataframe.
+        """
+        try:
+           self.__called_from_perform = False
+           if df.shape[0] == 0 or np.sum(np.sum(df.isnull()).values) == df.shape[0]:
+               raise UnsatisfiedRequirments("Dataframe must contain valid data and not be empty or filled with nulls!")
+           # Iterate through DataFrame columns and graph based on data types
+
+           if dataframe_snapshot:
+               df_snapshot = DataFrameSnapshot()
+               df_snapshot.check_create_snapshot(df,
+                                                 directory_pth=self.get_output_folder(),
+                                                 sub_dir=f"{dataset_name}/_Extras")
+
+           for feature_name in df.columns:
+
+               feature_values = df[feature_name].value_counts().keys()
+               if len(feature_values) <= 3 and \
+                       not feature_name in df_features.get_numerical_features():
+                   pass
+                   self.pie_graph(df,
+                                  feature_name,
+                                  dataset_name=dataset_name,
+                                  display_visuals=display_visuals,
+                                  save_file=save_file,
+                                  init_default_color="#C0C0C0")
+
+               elif feature_name in df_features.get_categorical_features():
+                   self.count_plot_graph(df,
+                                         feature_name,
+                                         dataset_name=dataset_name,
+                                         display_visuals=display_visuals,
+                                         save_file=save_file)
+
+               elif feature_name in df_features.get_integer_features():
+                   if len(feature_values) <= 13:
+                       self.count_plot_graph(df,
+                                             feature_name,
+                                             dataset_name=dataset_name,
+                                             display_visuals=display_visuals,
+                                             save_file=save_file)
+                   else:
+                       self.distance_plot_graph(df,
+                                                feature_name,
+                                                dataset_name=dataset_name,
+                                                display_visuals=display_visuals,
+                                                save_file=save_file)
+
+               elif feature_name in df_features.get_float_features():
+                   self.distance_plot_graph(df,
+                                            feature_name,
+                                            dataset_name=dataset_name,
+                                            display_visuals=display_visuals,
+                                            save_file=save_file)
+
+           else:
+               print(
+                   "Object didn't receive a Pandas Dataframe object or a DataFrameTypes object")
+        finally:
+           self.__called_from_perform = False
+
+    def distance_plot_graph(self,
+                            df,
+                            feature_name,
+                            dataset_name,
+                            display_visuals=True,
+                            filename=None,
+                            save_file=True,
+                            dataframe_snapshot=True):
+        """
+        df:
+            Pandas dataframe object
+
+        feature_name:
+            Specified feature column name.
+
+        dataset_name:
+            The dataset's name; this will create a sub-directory in which your
+            generated graph will be inner-nested in.
+
+        display_visuals:
+            Boolean value to whether or not to display visualizations.
+
+        save_file:
+            Boolean value to whether or not to save the file.
+
+        dataframe_snapshot:
+            Boolean value to determine whether or not generate and compare a
+            snapshot of the dataframe in the dataset's directory structure.
+            Helps ensure that data generated in that directory is correctly
+            associated to a dataframe.
+
+        Returns/Descr:
+            Display a distance plot and save the graph/table in the correct
+            directory.
+        """
+
+        if np.sum(df[feature_name].isnull()) == df.shape[0]:
+            raise UnsatisfiedRequirments(
+                "Distance plot graph couldn't be generated because " +
+                f"there is only missing data to display in {feature_name}!")
+
+        print(f"Generating graph for distance plot graph on {feature_name}")
+        plt.close()
+
+        # Set general graph info
+        sns.set(style="whitegrid")
+        plt.figure(figsize=(12, 8))
+        plt.title("Distance Plot: " + feature_name)
+
+        # Create seaborn graph
+        sns.distplot(df[feature_name].dropna())
+
+        if not filename:
+            filename = f"Distance plot graph on {feature_name}"
+
+        if save_file:
+
+            if not self.__called_from_perform:
+                if dataframe_snapshot:
+                    df_snapshot = DataFrameSnapshot()
+                    df_snapshot.check_create_snapshot(df,
+                                                      directory_pth=self.get_output_folder(),
+                                                      sub_dir=f"{dataset_name}/_Extras")
+
+            create_plt_png(self.get_output_folder(),
+                           f"{dataset_name}/Graphics",
+                           convert_to_filename(filename))
+
+
+        if self.__notebook_mode and display_visuals:
+            plt.show()
+
+        plt.close()
+
+
+    def count_plot_graph(self,
+                         df,
+                         feature_name,
+                         dataset_name,
+                         display_visuals=True,
+                         filename=None,
+                         save_file=True,
+                         dataframe_snapshot=True,
+                         flip_axis=False,
+                         palette="PuBu"):
+        """
+        df:
+            Pandas dataframe object
+
+        feature_name:
+            Specified feature column name.
+
+        dataset_name:
+            The dataset's name; this will create a sub-directory in which your
+            generated graph will be inner-nested in.
+
+        display_visuals:
+            Boolean value to whether or not to display visualizations.
+
+        save_file:
+            Boolean value to whether or not to save the file.
+
+        dataframe_snapshot:
+            Boolean value to determine whether or not generate and compare a
+            snapshot of the dataframe in the dataset's directory structure.
+            Helps ensure that data generated in that directory is correctly
+            associated to a dataframe.
+
+
+        flip_axis:
+            Flip the x and y axis for visual representation.
+
+        palette:
+            Seaborn color palette, specifies the colors the graph will use.
+
+        Returns/Descr:
+            Display a count plot and save the graph/table in the correct
+            directory.
+        """
+
+        if np.sum(df[feature_name].isnull()) == df.shape[0]:
+            raise UnsatisfiedRequirments("Count plot graph couldn't be generated because " +
+                  f"there is only missing data to display in {feature_name}!")
+        print(
+            f"Count plot graph for distance plot graph on {feature_name}")
+        plt.close()
+
+        # Set general graph info
+        sns.set(style="whitegrid")
+        plt.figure(figsize=(12, 8))
+        plt.title("Category Count Plot: " + feature_name)
+
+        # Find and rank values based on counts for color variation of the graph
+        groupedvalues = df.groupby(feature_name).sum().reset_index()
+
+        pal = sns.color_palette(palette, len(groupedvalues))
+
+        rank_list = []
+        for target_value in df[feature_name].dropna().unique():
+            rank_list.append(sum(
+                df[feature_name] == target_value))
+
+        rank_list = np.argsort(-np.array(rank_list)).argsort()
+
+        # Flip the graph for visual flare
+        if flip_axis:
+            ax = sns.countplot(y=feature_name, data=df,
+                               palette=np.array(pal[::-1])[rank_list])
+        else:
+            ax = sns.countplot(x=feature_name, data=df,
+                               palette=np.array(pal[::-1])[rank_list])
+
+        # Labels for numerical count of each bar
+        for p in ax.patches:
+            height = p.get_height()
+            ax.text(p.get_x() + p.get_width() / 2.,
+                    height + 3,
+                    '{:1}'.format(height),
+                    ha="center")
+
+        if not filename:
+            filename = f"Count plot graph on {feature_name}"
+
+        if save_file:
+
+            if not self.__called_from_perform:
+                if dataframe_snapshot:
+                    df_snapshot = DataFrameSnapshot()
+                    df_snapshot.check_create_snapshot(df,
+                                                      directory_pth=self.get_output_folder(),
+                                                      sub_dir=f"{dataset_name}/_Extras")
+
+            create_plt_png(self.get_output_folder(),
+                           f"{dataset_name}/Graphics",
+                           convert_to_filename(filename))
+
+
+        if self.__notebook_mode and display_visuals:
+            plt.show()
+
+        plt.close()
+
+
+    def pie_graph(self,
+                  df,
+                  feature_name,
+                  dataset_name,
+                  display_visuals=True,
+                  filename=None,
+                  save_file=True,
+                  dataframe_snapshot=True,
+                  colors=None,
+                  init_default_color=None):
+        """
+       df:
+           Pandas DataFrame object.
+
+       feature_name:
+           Specified feature column name.
+
+       dataset_name:
+           The dataset's name; this will create a sub-directory in which your
+           generated graph will be inner-nested in.
+
+       display_visuals:
+           Boolean value to whether or not to display visualizations.
+
+       save_file:
+           Boolean value to whether or not to save the file.
+
+       dataframe_snapshot:
+            Boolean value to determine whether or not generate and compare a
+            snapshot of the dataframe in the dataset's directory structure.
+            Helps ensure that data generated in that directory is correctly
+            associated to a dataframe.
+
+       colors:
+            Accepts an array of hex colors with the correct count of values
+            within the feature. If not init; then specified colors will be
+            assigned based on if the feature is Boolean or if the column name
+            is found in 'defined_column_colors'; else just init with
+            random colors.
+
+       init_default_color:
+           A default color to assign unknown values when other values are
+           already assigned. Left to 'None' will init with random colors.
+
+       Returns/Descr:
+           Display a pie graph and save the graph/table in the correct
+           directory.
+        """
+
+        if np.sum(df[feature_name].isnull()) == df.shape[0]:
+            raise UnsatisfiedRequirments("Pie graph couldn't be generated because " +
+                  f"there is only missing data to display in {feature_name}!")
+        print(
+            f"Pie graph for distance plot graph on {feature_name}")
+        plt.close()
+
+        # Find value counts
+        value_counts = df[feature_name].dropna().value_counts()
+        value_list = value_counts.index.tolist()
+        value_count_list = value_counts.values.tolist()
+
+        # Init with proper color hex value based on conditionals. (Read Above)
+        if colors is None:
+            colors = self.__check_specfied_column_colors(df,
+                                                         feature_name,
+                                                         init_default_color)
+
+        # Explode the part of the pie graph that is the maximum of the graph
+        explode_array = [0] * len(value_list)
+        explode_array[np.array(value_count_list).argmax()] = .03
+
+        # Plot pie graph
+        plt.pie(
+            tuple(value_count_list),
+            labels=tuple(value_list),
+            shadow=False,
+            colors=colors,
+            explode=tuple(explode_array),
+            startangle=90,
+            autopct='%1.1f%%',
+        )
+
+        # Set general graph info
+        fig = plt.gcf()
+        fig.set_size_inches(12, 8)
+        plt.title("Pie Chart: " + feature_name)
+        plt.legend(fancybox=True)
+        plt.axis('equal')
+        plt.tight_layout()
+        plt.figure(figsize=(20, 20))
+
+        if not filename:
+            filename = f"Pie graph on {feature_name}"
+
+        if save_file:
+
+            if not self.__called_from_perform:
+                if dataframe_snapshot:
+                    df_snapshot = DataFrameSnapshot()
+                    df_snapshot.check_create_snapshot(df,
+                                                      directory_pth=self.get_output_folder(),
+                                                      sub_dir=f"{dataset_name}/_Extras")
+
+            create_plt_png(self.get_output_folder(),
+                           f"{dataset_name}/Graphics",
+                           convert_to_filename(filename))
+
+
+        if self.__notebook_mode and display_visuals:
+            plt.show()
+
+        plt.close()
+
+
+
+    def value_counts_table(self,
+                           df,
+                           feature_name,
+                           dataset_name,
+                           display_visuals=True,
+                           filename=None,
+                           save_file=True,
+                           dataframe_snapshot=True):
+        """
+        df:
+            Pandas DataFrame object
+
+        feature_name:
+            Specified feature column name.
+
+        dataset_name:
+            The dataset's name; this will create a sub-directory in which your
+            generated graph will be inner-nested in.
+
+        display_visuals:
+            Boolean value to whether or not to display visualizations.
+
+        filename:
+            If set to 'None' will default to a pre-defined string;
+            unless it is set to an actual filename.
+
+        save_file:
+            Saves file if set to True; doesn't if set to False.
+
+        dataframe_snapshot:
+            Boolean value to determine whether or not generate and compare a
+            snapshot of the dataframe in the dataset's directory structure.
+            Helps ensure that data generated in that directory is correctly
+            associated to a dataframe.
+
+        Returns/Desc:
+            Creates/Saves a pandas dataframe of value counts of a dataframe.
+        """
+
+        if np.sum(df[feature_name].isnull()) == df.shape[0]:
+            raise UnsatisfiedRequirments("Values count table couldn't be generated because " +
+                                         f"there is only missing data to display in {feature_name}!")
+
+        print("Creating data description table...")
+
+        val_counts_df = value_counts_table(df,
+                                           feature_name)
+
+        if self.__notebook_mode:
+            if display_visuals:
+                display(val_counts_df)
+        else:
+            if display_visuals:
+                print(val_counts_df)
+
+        if not filename:
+            filename = f"{feature_name} Value Counts Table"
+
+        if save_file:
+            if not self.__called_from_perform:
+                if dataframe_snapshot:
+                    df_snapshot = DataFrameSnapshot()
+                    df_snapshot.check_create_snapshot(df,
+                                                      directory_pth=self.get_output_folder(),
+                                                      sub_dir=f"{dataset_name}/_Extras")
+            plt.close()
+            df_to_image(val_counts_df,
+                        self.get_output_folder(),
+                        f"{dataset_name}/Tables",
+                        convert_to_filename(filename),
+                        show_index=True,
+                        format_float_pos=2)
+
+    def descr_table(self,
+                    df,
+                    feature_name,
+                    dataset_name,
+                    display_visuals=True,
+                    filename=None,
+                    save_file=True,
+                    dataframe_snapshot=True):
+        """
+        df:
+            Pandas DataFrame object
+
+        feature_name:
+            Specified feature column name.
+
+        dataset_name:
+            The dataset's name; this will create a sub-directory in which your
+            generated graph will be inner-nested in.
+
+        display_visuals:
+            Boolean value to whether or not to display visualizations.
+
+        filename:
+            If set to 'None' will default to a pre-defined string;
+            unless it is set to an actual filename.
+
+        save_file:
+            Saves file if set to True; doesn't if set to False.
+
+        dataframe_snapshot:
+            Boolean value to determine whether or not generate and compare a
+            snapshot of the dataframe in the dataset's directory structure.
+            Helps ensure that data generated in that directory is correctly
+            associated to a dataframe.
+
+        Returns/Desc:
+            Creates/Saves a pandas dataframe of features and their found types
+            in the dataframe.
+        """
+        if np.sum(df[feature_name].isnull()) == df.shape[0]:
+            print("This function requires a dataframe"
+                  "in both rows and columns.")
+            raise UnsatisfiedRequirments("Count plot graph couldn't be generated because " +
+                  f"there is only missing data to display in {feature_name}!")
+            return None
+
+        print("Creating data description table...")
+
+        col_desc_df = descr_table(df,
+                                  feature_name)
+
+        if self.__notebook_mode:
+            if display_visuals:
+                display(col_desc_df)
+        else:
+            if display_visuals:
+                print(col_desc_df)
+
+        if not filename:
+            filename = f"{feature_name} Description Table"
+
+        if save_file:
+            if not self.__called_from_perform:
+                if dataframe_snapshot:
+                    df_snapshot = DataFrameSnapshot()
+                    df_snapshot.check_create_snapshot(df,
+                                                      directory_pth=self.get_output_folder(),
+                                                      sub_dir=f"{dataset_name}/_Extras")
+            plt.close()
+            df_to_image(col_desc_df,
+                        self.get_output_folder(),
+                        f"{dataset_name}/Tables",
+                        convert_to_filename(filename),
+                        show_index=True,
+                        format_float_pos=2)

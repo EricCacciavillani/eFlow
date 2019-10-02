@@ -1,2 +1,2 @@
-from .feature_analysis import DataAnalysis
-from .missing_data_analysis import MissingDataAnalysis
+from .null_analysis import NullAnalysis
+from .feature_analysis import FeatureAnalysis

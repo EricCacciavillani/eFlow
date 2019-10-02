@@ -55,7 +55,6 @@ class DataFrameTypes:
 
         # Extra functionality
         self.__target_feature = None
-        self.__one_hot_encoded_names = dict()
 
         # Attempt to init target column
         if target_column:
@@ -65,17 +64,17 @@ class DataFrameTypes:
                 print("WARNING!!!: THE FEATURE {0} "
                       "DOES NOT EXIST IN THIS DATASET!".format(target_column))
 
-        # Create one hot encoded features
-        if self.__categorical_features:
-            for col_feature in self.__categorical_features:
-                
-                if col_feature is not self.__target_feature: 
-                    self.__one_hot_encoded_names[col_feature] = list()
-                    for value_of_col in set(tmp_df[col_feature].values):
-                        if isinstance(value_of_col,str):
-                            self.__one_hot_encoded_names[col_feature].append(
-                                col_feature + "_" + value_of_col.replace(" ",
-                                                                         "_"))
+        # # Create one hot encoded features
+        # if self.__categorical_features:
+        #     for col_feature in self.__categorical_features:
+        #
+        #         if col_feature is not self.__target_feature:
+        #             self.__one_hot_encoded_names[col_feature] = list()
+        #             for value_of_col in set(tmp_df[col_feature].values):
+        #                 if isinstance(value_of_col,str):
+        #                     self.__one_hot_encoded_names[col_feature].append(
+        #                         col_feature + "_" + value_of_col.replace(" ",
+        #                                                                  "_"))
         if display_init:
             self.display_all()
         features_not_captured = set(tmp_df.columns)
@@ -144,40 +143,6 @@ class DataFrameTypes:
     def get_target(self):
         return copy.deepcopy(self.__target_feature)
 
-    # --- Appender
-    def append_categorical_features(self,
-                                    feature_name):
-        self.__categorical_features |= set(feature_name)
-
-    def append_bool_features(self,
-                             feature_name):
-        self.__bool_features |= set(feature_name)
-
-    def append_datetime_features(self,
-                                 feature_name):
-        self.__datetime_features |= set(feature_name)
-
-    def append_float_features(self,
-                              feature_name):
-        self.__float_features |= set(feature_name)
-        self.__numerical_features |= set(feature_name)
-
-    def append_integer_features(self,
-                                feature_name):
-        self.__integer_features |= set(feature_name)
-        self.__numerical_features |= set(feature_name)
-
-    def set_one_hot_encode_features(self,
-                                    categorical_features):
-        if not isinstance(categorical_features, list):
-            categorical_features = [categorical_features]
-        #
-        # for col_feature in categorical_features:
-        #     if col_feature in self.__categorical_features:
-        #         += self.__one_hot_encoded_names[col_feature]
-        #     else:
-        #         print("Error")
-
     # --- Remover
     def remove(self,
                feature_name):
@@ -224,10 +189,6 @@ class DataFrameTypes:
         if self.__bool_features:
             print("Bool Features: {0}\n".format(
                 self.__bool_features))
-
-        if self.__one_hot_encoded_names:
-            print("Possible One hot encoded feature names: {0}\n".format(
-                self.__one_hot_encoded_names))
 
         if self.__bool_features or self.__categorical_features:
             print("---------"*10)

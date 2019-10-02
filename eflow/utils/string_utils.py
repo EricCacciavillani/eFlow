@@ -1,10 +1,24 @@
 def convert_to_filename(filename):
+    """
+    filename:
+       String of a potential filename.
+
+    Returns/Desc:
+        Attempts to ensure the filename is valid for saving.
+    """
     return "".join(x for x in str(
         filename) if x.isalnum() or x == "_" or x == "("
             or x == ")" or x == " " or x == "-")
 
 
 def correct_directory_path(directory_pth):
+    """
+    directory_pth:
+        String of a potential directory path.
+
+    Returns/Desc:
+        Attempts to convert the directory path to a proper one.
+    """
     last_char = None
     new_string = ""
     for char in directory_pth:

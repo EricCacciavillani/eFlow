@@ -121,7 +121,7 @@ class DataFrameSnapshot:
                                     df_features):
         """
         df_features:
-            DataFrameTypeHolder object.
+            DataFrameTypes object; organizes feature types into groups.
 
         Returns/Desc:
             Creates a dict object of the feature types
@@ -143,7 +143,7 @@ class DataFrameSnapshot:
             Pandas dataframe object
 
         df_features:
-            DataFrameTypeHolder object.
+            DataFrameTypes object; organizes feature types into groups.
 
         Returns/Desc:
             Creates a dict of 10 random values for each value based on the

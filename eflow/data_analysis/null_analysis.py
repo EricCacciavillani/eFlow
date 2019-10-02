@@ -15,7 +15,7 @@ from eflow.utils.string_utils import convert_to_filename, correct_directory_path
 from eflow.utils.pandas_utils import data_types_table, missing_values_table
 from eflow._hidden.objects import DataFrameSnapshot
 
-class MissingDataAnalysis(FileOutput):
+class NullAnalysis(FileOutput):
     """
         Analyzes a pandas dataframe's object for null data; creates visuals
         like graphs and tables.
@@ -117,20 +117,24 @@ class MissingDataAnalysis(FileOutput):
     def perform_analysis(self,
                          df,
                          dataset_name,
-                         null_features_only=False,
                          display_visuals=True,
                          save_file=True,
-                         dataframe_snapshot=True):
+                         dataframe_snapshot=True,
+                         null_features_only=False):
         """
         df:
             Pandas Dataframe object.
 
+        df_features:
+            DataFrameTypes object; organizes feature types into groups.
+
+            If initalized we can run correct/error
+            data_analysis on the dataframe. Will save object in a pickle file and
+            provided columns if initialized and df_features is not initialized.
+
         dataset_name:
             The dataset's name; this will create a sub-directory in which your
             generated graph will be inner-nested in.
-
-        null_features_only:
-            Dataframe will pass on null features for the visualizations
 
         display_visuals:
             Boolean value to whether or not to display visualizations.
@@ -138,13 +142,17 @@ class MissingDataAnalysis(FileOutput):
         save_file:
             Boolean value to whether or not to save the file.
 
-        df_features:
-            DataFrameTypeHolder object. If initalized we can run correct/error
-            data_analysis on the dataframe. Will save object in a pickle file and
-            provided columns if initalized and df_features is not initialized.
+        dataframe_snapshot:
+            Boolean value to determine whether or not generate and compare a
+            snapshot of the dataframe in the dataset's directory structure.
+            Helps ensure that data generated in that directory is correctly
+            associated to a dataframe.
+
+        null_features_only:
+            Dataframe will pass on null features for the visualizations
 
         Returns/Desc:
-            Perform all functionality of the data_analysis object.
+            Perform all functionality of the MissingDataAnalysis object.
         """
         try:
             self.__called_from_perform = False
@@ -212,11 +220,11 @@ class MissingDataAnalysis(FileOutput):
     def plot_null_matrix_graph(self,
                                df,
                                dataset_name,
-                               null_features_only=False,
                                display_visuals=True,
                                filename=None,
                                save_file=True,
                                dataframe_snapshot=True,
+                               null_features_only=False,
                                filter=None,
                                n=0,
                                p=0,
@@ -240,9 +248,6 @@ class MissingDataAnalysis(FileOutput):
             The dataset's name; this will create a sub-directory in which your
             generated graph will be inner-nested in.
 
-        null_features_only:
-            Dataframe will pass on null features for the visualizations
-
         display_visuals:
             Boolean value to whether or not to display visualizations.
 
@@ -250,8 +255,17 @@ class MissingDataAnalysis(FileOutput):
             Boolean value to whether or not to save the file.
 
         filename:
-            If set to 'None' will default to a given filename;
-            else will use the passed string
+            If set to 'None' will default to a pre-defined string;
+            unless it is set to an actual filename.
+
+        dataframe_snapshot:
+            Boolean value to determine whether or not generate and compare a
+            snapshot of the dataframe in the dataset's directory structure.
+            Helps ensure that data generated in that directory is correctly
+            associated to a dataframe.
+
+        null_features_only:
+            Dataframe will pass on null features for the visualizations
 
         Please read the offical documentation at:
         Link: https://github.com/ResidentMario/missingno
@@ -280,6 +294,7 @@ class MissingDataAnalysis(FileOutput):
         if display_visuals:
             print("Generating graph for null matrix graph...")
 
+        plt.close()
         msno.matrix(df[selected_features],
                     filter=filter,
                     n=n,
@@ -321,11 +336,11 @@ class MissingDataAnalysis(FileOutput):
     def plot_null_bar_graph(self,
                             df,
                             dataset_name,
-                            null_features_only=False,
                             display_visuals=True,
                             filename=None,
                             save_file=True,
                             dataframe_snapshot=True,
+                            null_features_only=False,
                             figsize=(24, 10),
                             fontsize=16,
                             labels=None,
@@ -353,8 +368,18 @@ class MissingDataAnalysis(FileOutput):
         display_visuals:
             Boolean value to whether or not to display visualizations.
 
+        filename:
+            If set to 'None' will default to a pre-defined string;
+            unless it is set to an actual filename.
+
         save_file:
             Boolean value to whether or not to save the file.
+
+        dataframe_snapshot:
+            Boolean value to determine whether or not generate and compare a
+            snapshot of the dataframe in the dataset's directory structure.
+            Helps ensure that data generated in that directory is correctly
+            associated to a dataframe.
 
         Please read the offical documentation at:
         Link: https://github.com/ResidentMario/missingno
@@ -382,6 +407,7 @@ class MissingDataAnalysis(FileOutput):
 
         print("Generating graph for null bar graph...")
 
+        plt.close()
         ax = msno.bar(df[selected_features],
                       figsize=figsize,
                       log=log,
@@ -457,14 +483,21 @@ class MissingDataAnalysis(FileOutput):
             The dataset's name; this will create a sub-directory in which your
             generated graph will be inner-nested in.
 
-        null_features_only:
-            Dataframe will pass on null features for the visualizations
-
         display_visuals:
             Boolean value to whether or not to display visualizations.
 
+        filename:
+            If set to 'None' will default to a pre-defined string;
+            unless it is set to an actual filename.
+
         save_file:
             Boolean value to whether or not to save the file.
+
+        dataframe_snapshot:
+            Boolean value to determine whether or not generate and compare a
+            snapshot of the dataframe in the dataset's directory structure.
+            Helps ensure that data generated in that directory is correctly
+            associated to a dataframe.
 
         Please read the offical documentation at:
         Link: https://github.com/ResidentMario/missingno
@@ -486,6 +519,7 @@ class MissingDataAnalysis(FileOutput):
 
         print("Generating graph for null heatmap...")
 
+        plt.close()
         msno.heatmap(df,
                      inline=inline,
                      filter=filter,
@@ -499,8 +533,7 @@ class MissingDataAnalysis(FileOutput):
                      vmin=vmin,
                      vmax=vmax,
                      cbar=cbar,
-                     ax=ax
-                     )
+                     ax=ax)
 
         if not filename:
             filename = "Missing data heatmap graph"
@@ -525,11 +558,11 @@ class MissingDataAnalysis(FileOutput):
     def plot_null_dendrogram_graph(self,
                                    df,
                                    dataset_name,
-                                   null_features_only=False,
                                    display_visuals=True,
                                    filename=None,
                                    save_file=True,
                                    dataframe_snapshot=True,
+                                   null_features_only=False,
                                    method='average',
                                    filter=None,
                                    n=0,
@@ -549,14 +582,24 @@ class MissingDataAnalysis(FileOutput):
             The dataset's name; this will create a sub-directory in which your
             generated graph will be inner-nested in.
 
-        null_features_only:
-            Dataframe will pass on null features for the visualizations
-
         display_visuals:
             Boolean value to whether or not to display visualizations.
 
+        filename:
+            If set to 'None' will default to a pre-defined string;
+            unless it is set to an actual filename.
+
         save_file:
             Boolean value to whether or not to save the file.
+
+        dataframe_snapshot:
+            Boolean value to determine whether or not generate and compare a
+            snapshot of the dataframe in the dataset's directory structure.
+            Helps ensure that data generated in that directory is correctly
+            associated to a dataframe.
+
+        null_features_only:
+            Dataframe will pass on null features for the visualizations
 
         Please read the offical documentation at:
         Link: https://github.com/ResidentMario/missingno
@@ -586,7 +629,7 @@ class MissingDataAnalysis(FileOutput):
 
         print("Generating graph for null dendrogram graph...")
 
-
+        plt.close()
         msno.dendrogram(df[selected_features],
                         method=method,
                         filter=filter,
@@ -636,6 +679,13 @@ class MissingDataAnalysis(FileOutput):
             The dataset's name; this will create a sub-directory in which your
             generated graph will be inner-nested in.
 
+        display_visuals:
+                    Boolean value to whether or not to display visualizations.
+
+        filename:
+            If set to 'None' will default to a pre-defined string;
+            unless it is set to an actual filename.
+
         save_file:
             Boolean value to whether or not to save the file.
 
@@ -644,9 +694,6 @@ class MissingDataAnalysis(FileOutput):
             snapshot of the dataframe in the dataset's directory structure.
             Helps ensure that data generated in that directory is correctly
             associated to a dataframe.
-
-        display_visuals:
-            Boolean value to whether or not to display visualizations.
 
         Returns/Descr:
             Creates/Saves a Pandas DataFrame object giving the percentage of
@@ -689,7 +736,7 @@ class MissingDataAnalysis(FileOutput):
                                                       directory_pth=self.get_output_folder(),
                                                       sub_dir=f"{dataset_name}/_Extras")
 
-
+            plt.close()
             df_to_image(mis_val_table_ren_columns,
                         self.get_output_folder(),
                         f"{dataset_name}/Tables",
@@ -715,20 +762,28 @@ class MissingDataAnalysis(FileOutput):
         display_visuals:
             Boolean value to whether or not to display visualizations.
 
+        filename:
+            If set to 'None' will default to a pre-defined string;
+            unless it is set to an actual filename.
+
         save_file:
             Saves file if set to True; doesn't if set to False.
 
-        notebook_mode:
-            If in a python notebook display visualizations in the notebook.
+        dataframe_snapshot:
+            Boolean value to determine whether or not generate and compare a
+            snapshot of the dataframe in the dataset's directory structure.
+            Helps ensure that data generated in that directory is correctly
+            associated to a dataframe.
 
         Returns/Desc:
             Creates/Saves a pandas dataframe of features and their found types
             in the dataframe.
         """
-
-        if not df.shape[0]:
-            print("Empty dataframe found! This function requires a dataframe"
-                  "in both rows and columns.")
+        if not self.__called_from_perform:
+            if not df.shape[0]:
+                print("Empty dataframe found! This function requires a dataframe"
+                      "in both rows and columns.")
+                return None
 
         print("Creating data types table...")
 
@@ -753,9 +808,9 @@ class MissingDataAnalysis(FileOutput):
                     df_snapshot.check_create_snapshot(df,
                                                       directory_pth=self.get_output_folder(),
                                                       sub_dir=f"{dataset_name}/_Extras")
+            plt.close()
             df_to_image(dtypes_df,
                         self.get_output_folder(),
                         f"{dataset_name}/Tables",
                         convert_to_filename(filename),
-                        show_index=True,
-                        format_float_pos=2)
+                        show_index=True)

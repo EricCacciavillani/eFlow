@@ -469,7 +469,7 @@ class DataCleaningWidget:
                         col_feature_name):
         """
         df_features:
-            DataFrameTypes object.
+            DataFrameTypes object; organizes feature types into groups.
 
         col_feature_name:
             Pandas column name.

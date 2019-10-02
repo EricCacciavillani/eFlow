@@ -355,8 +355,7 @@ class ClusterMaster:
             Dataframe object
 
         df_features:
-            Personal object that encapsulates the dataframe col's name with
-            associated data types
+            DataFrameTypes object; organizes feature types into groups.
 
         output_folder:
             Sub directory to put the pngs

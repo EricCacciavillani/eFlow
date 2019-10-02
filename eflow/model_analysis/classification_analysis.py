@@ -73,9 +73,12 @@ class ClassificationAnalysis(FileOutput):
             '.classes_'.
 
         df_features:
-            DataFrameTypeHolder object. If initalized we can run correct/error
-            data_analysis on the dataframe. Will save object in a pickle file and provided columns
-            if initalized and df_features is not initalized.
+            df_features:
+            DataFrameTypes object; organizes feature types into groups.
+
+            If initalized we can run correct/error
+            data_analysis on the dataframe.Will save object in a pickle file
+            and provided columns if initalized and df_features is not initalized.
 
         columns:
             Will overwrite over df_features (DataFrameTypeHolder) regardless

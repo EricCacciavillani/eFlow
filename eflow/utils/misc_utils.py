@@ -6,7 +6,8 @@ def string_condtional(given_val,
     """
     Simple string
     given_val:
-        Numerical value to replace 'x'
+        Numerical value to replace 'x'.
+
     full_condtional:
         Specified string conditional.
         Ex: x >= 0 and x <=100
@@ -14,6 +15,9 @@ def string_condtional(given_val,
     Returns/Descr:
         Returns back a boolean value of whether or not the conditional the
         given value passes the condition.
+
+    Note:
+        Currently only handles and conditionals (no 'or' statements yet)
     """
     condtional_returns = []
     operators = [i for i in full_condtional.split(" ")
