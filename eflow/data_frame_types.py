@@ -1,6 +1,7 @@
 import copy
 from IPython.display import display, HTML
 from dateutil import parser
+import numpy as np
 
 class DataFrameTypes:
 
@@ -31,35 +32,35 @@ class DataFrameTypes:
         display_init:
             Display results when object init
         """
-
-        # Data type assertions without nulls
-        if ignore_nulls and df.isnull().values.any():
-            tmp_df = copy.deepcopy(df)
-            nan_columns = [feature for feature, nan_found in
-                           tmp_df.isna().any().items() if nan_found]
-            self.__make_type_assertions_after_ignore_nan(tmp_df,
-                                                         nan_columns)
-        else:
-            tmp_df = df
-
         self.__all_columns = df.columns.tolist()
         # Grab features based on there types
-        self.__bool_features = set(tmp_df.select_dtypes(include=["bool"]).columns)
+        self.__bool_features = set(
+            df.select_dtypes(include=["bool"]).columns)
         self.__string_features = set(
-            tmp_df.select_dtypes(include=["object"]).columns)
-        self.__categorical_features = set(df.select_dtypes(include=["category"]).columns)
-        self.__integer_features = set(tmp_df.select_dtypes(include=["int"]).columns)
-        self.__float_features = set(tmp_df.select_dtypes(include=["float"]).columns)
+            df.select_dtypes(include=["object"]).columns)
+        self.__categorical_features = set(
+            df.select_dtypes(include=["category"]).columns)
+        self.__integer_features = set(
+            df.select_dtypes(include=["int"]).columns)
+        self.__float_features = set(
+            df.select_dtypes(include=["float"]).columns)
         self.__numerical_features = self.__float_features | self.__integer_features
         self.__datetime_features = set(
-            tmp_df.select_dtypes(include=["datetime"]).columns)
+            df.select_dtypes(include=["datetime"]).columns)
 
         # Extra functionality
         self.__target_feature = None
 
+        # Data type assertions without nulls
+        if ignore_nulls and df.isnull().values.any():
+            nan_columns = [feature for feature, nan_found in
+                           df.isna().any().items() if nan_found]
+            self.__make_type_assertions_after_ignore_nan(df,
+                                                         nan_columns)
+
         # Attempt to init target column
         if target_feature:
-            if target_feature in tmp_df.columns:
+            if target_feature in df.columns:
                 self.__target_feature = target_feature
             else:
                 print("WARNING!!!: THE FEATURE {0} "
@@ -71,14 +72,14 @@ class DataFrameTypes:
         #
         #         if col_feature is not self.__target_feature:
         #             self.__one_hot_encoded_names[col_feature] = list()
-        #             for value_of_col in set(tmp_df[col_feature].values):
+        #             for value_of_col in set(df[col_feature].values):
         #                 if isinstance(value_of_col,str):
         #                     self.__one_hot_encoded_names[col_feature].append(
         #                         col_feature + "_" + value_of_col.replace(" ",
         #                                                                  "_"))
         if display_init:
             self.display_all()
-        features_not_captured = set(tmp_df.columns)
+        features_not_captured = set(df.columns)
         for col_feature in (self.__numerical_features |
                             self.__string_features |
                             self.__bool_features |
@@ -94,58 +95,65 @@ class DataFrameTypes:
     def get_numerical_features(self,
                                exclude_target=False):
         if exclude_target:
-            return [col_feature for col_feature in self.__numerical_features
-                    if col_feature != self.__target_feature]
+            tmp_set = copy.deepcopy(self.__numerical_features)
+            tmp_set.remove(self.__target_feature)
+            return tmp_set
         else:
-            return list(self.__numerical_features)
+            return copy.deepcopy(self.__numerical_features)
 
     def get_integer_features(self,
                              exclude_target=False):
         if exclude_target:
-            return [col_feature for col_feature in self.__integer_features
-                    if col_feature != self.__target_feature]
+            tmp_set = copy.deepcopy(self.__integer_features)
+            tmp_set.remove(self.__target_feature)
+            return tmp_set
         else:
-            return list(self.__integer_features)
+            return copy.deepcopy(self.__integer_features)
 
     def get_float_features(self,
                            exclude_target=False):
         if exclude_target:
-             return [col_feature for col_feature in self.__float_features
-                    if col_feature != self.__target_feature]
+            tmp_set = copy.deepcopy(self.__float_features)
+            tmp_set.remove(self.__target_feature)
+            return tmp_set
         else:
-            return list(self.__float_features)
+            return copy.deepcopy(self.__float_features)
 
     def get_categorical_features(self,
                                  exclude_target=False):
         if exclude_target:
-            return [col_feature for col_feature in self.__categorical_features
-                    if col_feature != self.__target_feature]
+            tmp_set = copy.deepcopy(self.__categorical_features)
+            tmp_set.remove(self.__target_feature)
+            return tmp_set
         else:
-            return list(self.__categorical_features)
+            return self.__categorical_features
 
     def get_string_features(self,
                             exclude_target=False):
         if exclude_target:
-            return [col_feature for col_feature in self.__string_features
-                    if col_feature != self.__target_feature]
+            tmp_set = copy.deepcopy(self.__string_features)
+            tmp_set.remove(self.__target_feature)
+            return tmp_set
         else:
-            return list(self.__string_features)
+            return self.__string_features
 
     def get_bool_features(self,
                           exclude_target=False):
         if exclude_target:
-            return [col_feature for col_feature in self.__bool_features
-                    if col_feature != self.__target_feature]
+            tmp_set = copy.deepcopy(self.__bool_features)
+            tmp_set.remove(self.__target_feature)
+            return tmp_set
         else:
-            return list(self.__bool_features)
+            return self.__bool_features
 
     def get_datetime_features(self,
                               exclude_target=False):
         if exclude_target:
-            return [col_feature for col_feature in self.__datetime_features
-                    if col_feature != self.__target_feature]
+            tmp_set = copy.deepcopy(self.__datetime_features)
+            tmp_set.remove(self.__target_feature)
+            return tmp_set
         else:
-            return list(self.__datetime_features)
+            return self.__datetime_features
 
     def get_all_features(self):
         return copy.deepcopy(self.__all_columns)
@@ -153,9 +161,9 @@ class DataFrameTypes:
     def get_target(self):
         return copy.deepcopy(self.__target_feature)
 
-    # --- Remover
-    def remove(self,
-               feature_name):
+    # ---
+    def remove_feature(self,
+                       feature_name):
         try:
             self.__string_features.remove(feature_name)
         except KeyError:
@@ -198,7 +206,7 @@ class DataFrameTypes:
 
         # Display category based features
         if self.__string_features:
-            print("Categorical Features: {0}\n".format(
+            print("String Features: {0}\n".format(
                 self.__string_features))
 
         if self.__categorical_features:
@@ -242,17 +250,20 @@ class DataFrameTypes:
             df.select_dtypes(include=["float"]).columns)
 
         for feature_name in nan_columns:
-            feature_values = list(set(df[feature_name].dropna()))
+            feature_values = list(set(df[feature_name].dropna().sort_values(
+                ascending=True)))
 
             # Convert to bool if possible
             if len(feature_values) == 1 and (
                     0.0 in feature_values or 1.0 in feature_values):
-                df[feature_name] = df[feature_name].astype(bool)
+                self.remove_feature(feature_name)
+                self.__bool_features.add(feature_name)
 
             # Second bool check
             elif len(feature_values) == 2 and (
                     0.0 in feature_values and 1.0 in feature_values):
-                df[feature_name] = df[feature_name].astype(bool)
+                self.remove_feature(feature_name)
+                self.__bool_features.add(feature_name)
 
             # Convert numeric to proper types (int,float,categorical)
             elif feature_name in float_features:
@@ -261,15 +272,33 @@ class DataFrameTypes:
                 for str_val in feature_values:
                     tokens = str_val.split(".")
 
-                    if len(tokens) > 1 and len(tokens[1]) > 1 or \
-                            int(tokens[1]) > 0:
+                    if len(tokens) > 1 and int(tokens[1]) > 0:
                         convert_to_float = True
+                        break
                 if convert_to_float:
-                    df[feature_name].fillna(0, inplace=True)
-                    df[feature_name] = df[feature_name].astype(float)
+                    self.remove_feature(feature_name)
+                    self.__numerical_features.add(feature_name)
+                    self.__float_features.add(feature_name)
                 else:
-                    df[feature_name].fillna(0, inplace=True)
-                    df[feature_name] = df[feature_name].dropna().astype(int)
+                    last_val = None
+                    convert_to_categorical = True
+                    for val in feature_values:
+                        if not last_val:
+                            last_val = val
+                            continue
+                        if np.abs(int(val.split(".")[0]) - int(last_val.split(".")[0])) != 1:
+                            convert_to_categorical = False
+                            break
+                        else:
+                            last_val = val
+
+                    if convert_to_categorical:
+                        self.remove_feature(feature_name)
+                        self.__categorical_features.add(feature_name)
+                    else:
+                        self.remove_feature(feature_name)
+                        self.__numerical_features.add(feature_name)
+                        self.__integer_features.add(feature_name)
 
             # Attempt to convert string to datetime
             else:
