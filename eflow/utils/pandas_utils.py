@@ -55,6 +55,17 @@ def missing_values_table(df):
 
 def generate_meta_data(df,
                        output_folder_path):
+    """
+
+    df:
+        Pandas DataFrame object
+
+    output_folder_path:
+        Pre defined path to already existing directory to output file(s).
+
+    Returns/Desc:
+        Creates meta data on the passed directory ### FUTURE ERIC COME BACK AND FINALIZE THE REST ASSHAT*
+    """
 
     shape_df = pd.DataFrame.from_dict({'Rows': [df.shape[0]],
                                        'Columns': [df.shape[1]]})
@@ -63,7 +74,6 @@ def generate_meta_data(df,
                 "_Extras",
                 "Dataframe Shape Table",
                 show_index=False)
-
 
     dtypes_df = data_types_table(df)
 
@@ -124,3 +134,19 @@ def descr_table(df,
     col_desc_df.loc["var"] = df[feature_name].var()
 
     return col_desc_df
+
+
+def suggest_removal_features(df):
+    """
+    df:
+        Pandas DataFrame object.
+
+    Returns/Desc:
+        Returns back a list of features to remove.
+    """
+    features_to_remove = set()
+    for feature in df.columns:
+        if len(df[feature].value_counts().index.tolist()) >= int(
+                df.shape[0] / 2):
+            features_to_remove.add(feature)
+    return features_to_remove

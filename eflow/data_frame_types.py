@@ -11,7 +11,7 @@ class DataFrameTypes:
 
     def __init__(self,
                  df,
-                 target_column=None,
+                 target_feature=None,
                  ignore_nulls=False,
                  display_init=True):
         """
@@ -19,7 +19,7 @@ class DataFrameTypes:
         df:
             Pandas dataframe object.
 
-        target_column:
+        target_feature:
             If the project is using a supervised learning approach we can
             specify the target column. (Note: Not required)
 
@@ -45,8 +45,9 @@ class DataFrameTypes:
         self.__all_columns = df.columns.tolist()
         # Grab features based on there types
         self.__bool_features = set(tmp_df.select_dtypes(include=["bool"]).columns)
-        self.__categorical_features = set(
+        self.__string_features = set(
             tmp_df.select_dtypes(include=["object"]).columns)
+        self.__categorical_features = set(df.select_dtypes(include=["category"]).columns)
         self.__integer_features = set(tmp_df.select_dtypes(include=["int"]).columns)
         self.__float_features = set(tmp_df.select_dtypes(include=["float"]).columns)
         self.__numerical_features = self.__float_features | self.__integer_features
@@ -57,16 +58,16 @@ class DataFrameTypes:
         self.__target_feature = None
 
         # Attempt to init target column
-        if target_column:
-            if target_column in tmp_df.columns:
-                self.__target_feature = target_column
+        if target_feature:
+            if target_feature in tmp_df.columns:
+                self.__target_feature = target_feature
             else:
                 print("WARNING!!!: THE FEATURE {0} "
-                      "DOES NOT EXIST IN THIS DATASET!".format(target_column))
+                      "DOES NOT EXIST IN THIS DATASET!".format(target_feature))
 
         # # Create one hot encoded features
-        # if self.__categorical_features:
-        #     for col_feature in self.__categorical_features:
+        # if self.__string_features and self.__categorical_features:
+        #     for col_feature in self.__string_features:
         #
         #         if col_feature is not self.__target_feature:
         #             self.__one_hot_encoded_names[col_feature] = list()
@@ -79,9 +80,10 @@ class DataFrameTypes:
             self.display_all()
         features_not_captured = set(tmp_df.columns)
         for col_feature in (self.__numerical_features |
-                            self.__categorical_features |
+                            self.__string_features |
                             self.__bool_features |
-                            self.__datetime_features):
+                            self.__datetime_features |
+                            self.__categorical_features):
             features_not_captured.remove(col_feature)
 
         if features_not_captured:
@@ -121,6 +123,14 @@ class DataFrameTypes:
         else:
             return list(self.__categorical_features)
 
+    def get_string_features(self,
+                            exclude_target=False):
+        if exclude_target:
+            return [col_feature for col_feature in self.__string_features
+                    if col_feature != self.__target_feature]
+        else:
+            return list(self.__string_features)
+
     def get_bool_features(self,
                           exclude_target=False):
         if exclude_target:
@@ -147,7 +157,12 @@ class DataFrameTypes:
     def remove(self,
                feature_name):
         try:
-            self.__categorical_features.remove(feature_name)
+            self.__string_features.remove(feature_name)
+        except KeyError:
+            pass
+
+        try:
+            self.__string_features.remove(feature_name)
         except KeyError:
             pass
 
@@ -182,16 +197,26 @@ class DataFrameTypes:
         """
 
         # Display category based features
+        if self.__string_features:
+            print("Categorical Features: {0}\n".format(
+                self.__string_features))
+
         if self.__categorical_features:
             print("Categorical Features: {0}\n".format(
                 self.__categorical_features))
 
+        if self.__string_features or self.__categorical_features:
+            print("---------"*10)
+
         if self.__bool_features:
             print("Bool Features: {0}\n".format(
                 self.__bool_features))
+            print("---------" * 10)
 
-        if self.__bool_features or self.__categorical_features:
-            print("---------"*10)
+        if self.__datetime_features:
+            print("Datetime Features: {0}\n".format(
+                self.__datetime_features))
+            print("---------" * 10)
 
         # ---
         if self.__numerical_features:
@@ -205,10 +230,7 @@ class DataFrameTypes:
             print("Float Features: {0}\n".format(
                 self.__float_features))
 
-        if self.__datetime_features:
-            print("Datetime Features: {0}\n".format(
-                self.__datetime_features))
-
+        print("---------" * 10)
         if self.__target_feature:
             print("Target Feature: {0}\n".format(
                 self.__target_feature))
@@ -219,21 +241,21 @@ class DataFrameTypes:
         float_features = set(
             df.select_dtypes(include=["float"]).columns)
 
-        for feature in nan_columns:
-            feature_values = list(df[feature].dropna().value_counts().keys())
+        for feature_name in nan_columns:
+            feature_values = list(set(df[feature_name].dropna()))
 
             # Convert to bool if possible
             if len(feature_values) == 1 and (
                     0.0 in feature_values or 1.0 in feature_values):
-                df[feature] = df[feature].astype(bool)
+                df[feature_name] = df[feature_name].astype(bool)
 
-            # ^^^
+            # Second bool check
             elif len(feature_values) == 2 and (
                     0.0 in feature_values and 1.0 in feature_values):
-                df[feature] = df[feature].astype(bool)
+                df[feature_name] = df[feature_name].astype(bool)
 
-            # Convert numeric to proper types (int,float)
-            elif feature in float_features:
+            # Convert numeric to proper types (int,float,categorical)
+            elif feature_name in float_features:
                 feature_values = [str(i) for i in feature_values]
                 convert_to_float = False
                 for str_val in feature_values:
@@ -243,20 +265,19 @@ class DataFrameTypes:
                             int(tokens[1]) > 0:
                         convert_to_float = True
                 if convert_to_float:
-                    df[feature].fillna(0, inplace=True)
-                    df[feature] = df[feature].astype(float)
+                    df[feature_name].fillna(0, inplace=True)
+                    df[feature_name] = df[feature_name].astype(float)
                 else:
-                    df[feature].fillna(0, inplace=True)
-                    df[feature] = df[feature].dropna().astype(int)
+                    df[feature_name].fillna(0, inplace=True)
+                    df[feature_name] = df[feature_name].dropna().astype(int)
 
-            # Attempt to convert categorical to datetime
+            # Attempt to convert string to datetime
             else:
                 try:
                     _ = [parser.parse(val) for val in feature_values]
-                    df[feature].fillna(feature_values[0],
-                                       inplace=True)
-                    df[feature] = [parser.parse(val)
-                                   for val in
-                                   df[feature]]
+                    df[feature_name].fillna(feature_values[0],
+                                            inplace=True)
+                    df[feature_name] = [parser.parse(val)
+                                        for val in df[feature_name]]
                 except ValueError:
                     pass

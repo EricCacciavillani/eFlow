@@ -15,7 +15,7 @@ import matplotlib.pyplot as plt
 from eflow.utils.sys_utils import *
 from eflow._hidden.objects import FileOutput
 from eflow._hidden.custom_exceptions import *
-from eflow.data_analysis import DataAnalysis
+from eflow.data_analysis import FeatureAnalysis
 from eflow._hidden.constants import GRAPH_DEFAULTS
 
 class ClassificationAnalysis(FileOutput):
@@ -56,6 +56,7 @@ class ClassificationAnalysis(FileOutput):
         sample_data:
             Given data to then pass into our prediction functions to get a
             resultant to get the classification prediction 'type'.
+            Can be a matrix or a vector.
 
         project_name:
             Creates a parent or "project" folder in which all sub-directories

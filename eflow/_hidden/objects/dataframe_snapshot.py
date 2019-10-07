@@ -130,7 +130,7 @@ class DataFrameSnapshot:
         feature_types["integer_features"] = sorted(list(df_features.get_integer_features()))
         feature_types["float_features"] = sorted(list(df_features.get_float_features()))
         feature_types["bool_features"] = sorted(list(df_features.get_bool_features()))
-        feature_types["categorical_features"] = sorted(list(df_features.get_categorical_features()))
+        feature_types["string_features"] = sorted(list(df_features.get_string_features()))
         feature_types["datetime_features"] = sorted(list(df_features.get_datetime_features()))
 
         return feature_types
