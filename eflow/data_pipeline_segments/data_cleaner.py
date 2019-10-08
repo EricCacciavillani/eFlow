@@ -1,12 +1,12 @@
-import pandas as pd
+from eflow._hidden.widgets.DataCleaningWidget import *
+from eflow._hidden.parents_objects.data_pipeline_segment import *
+from eflow.toolbox_objects import DataFrameTypes
 
+import pandas as pd
 import numpy as np
 
-from eflow._hidden.widgets.DataCleaningWidget import *
-from eflow import DataFrameTypes
-from eflow._hidden.parents_objects.data_pipeline_segment import *
 
-class DataCleaner(PipelineSegment):
+class DataCleaner(DataPipelineSegment):
     """
     Designed for a multipurpose data cleaner.
     """

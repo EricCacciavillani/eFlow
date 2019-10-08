@@ -1,15 +1,16 @@
 import os
 import pandas as pd
 import math
+from eflow.toolbox_objects import DataFrameTypes
+from eflow.utils.sys_utils import check_create_dir_structure, \
+    create_json_object_from_dict
+
+from eflow.utils.string_utils import correct_directory_path
+from eflow._hidden.custom_exceptions import *
 import copy
 import json
 import numpy as np
 
-from eflow.utils.sys_utils import check_create_dir_structure, \
-    create_json_object_from_dict
-from eflow import DataFrameTypes
-from eflow.utils.string_utils import correct_directory_path
-from eflow._hidden.custom_exceptions import *
 
 class DataFrameSnapshot:
     """
