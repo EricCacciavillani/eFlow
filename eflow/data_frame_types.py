@@ -63,22 +63,13 @@ class DataFrameTypes:
             if target_feature in df.columns:
                 self.__target_feature = target_feature
             else:
-                print("WARNING!!!: THE FEATURE {0} "
-                      "DOES NOT EXIST IN THIS DATASET!".format(target_feature))
+                raise KeyError(f"The given target feature: \'{target_feature}\' does not exist!")
 
-        # # Create one hot encoded features
-        # if self.__string_features and self.__categorical_features:
-        #     for col_feature in self.__string_features:
-        #
-        #         if col_feature is not self.__target_feature:
-        #             self.__one_hot_encoded_names[col_feature] = list()
-        #             for value_of_col in set(df[col_feature].values):
-        #                 if isinstance(value_of_col,str):
-        #                     self.__one_hot_encoded_names[col_feature].append(
-        #                         col_feature + "_" + value_of_col.replace(" ",
-        #                                                                  "_"))
+        # -------
         if display_init:
             self.display_all()
+
+        # Error
         features_not_captured = set(df.columns)
         for col_feature in (self.__numerical_features |
                             self.__string_features |
@@ -94,6 +85,14 @@ class DataFrameTypes:
     # --- Getters
     def get_numerical_features(self,
                                exclude_target=False):
+        """
+            exclude_target:
+                If the target feature is an numerical (int/float); then it will be ignored
+                when passing back the set.
+
+            Returns/Desc:
+                Returns a set of all numerical features
+        """
         if exclude_target:
             tmp_set = copy.deepcopy(self.__numerical_features)
             tmp_set.remove(self.__target_feature)
@@ -103,63 +102,172 @@ class DataFrameTypes:
 
     def get_integer_features(self,
                              exclude_target=False):
+        """
+        exclude_target:
+            If the target feature is an integer; then it will be ignored
+            when passing back the set.
+
+        Returns/Desc:
+            Returns a set of all integer features.
+        """
         if exclude_target:
             tmp_set = copy.deepcopy(self.__integer_features)
-            tmp_set.remove(self.__target_feature)
+
+            # Target feature never init
+            if self.__target_feature:
+                raise KeyError("Target feature was never initialized")
+
+            if len(tmp_set) != 0:
+                tmp_set.remove(self.__target_feature)
+
             return tmp_set
         else:
             return copy.deepcopy(self.__integer_features)
 
     def get_float_features(self,
                            exclude_target=False):
+        """
+        exclude_target:
+            If the target feature is an float; then it will be ignored
+            when passing back the set.
+
+        Returns/Desc:
+            Returns a set of all float features.
+        """
         if exclude_target:
             tmp_set = copy.deepcopy(self.__float_features)
-            tmp_set.remove(self.__target_feature)
+
+            # Target feature never init
+            if self.__target_feature:
+                raise KeyError("Target feature was never initialized")
+
+            if len(tmp_set) != 0:
+                tmp_set.remove(self.__target_feature)
+
             return tmp_set
         else:
             return copy.deepcopy(self.__float_features)
 
     def get_categorical_features(self,
                                  exclude_target=False):
+        """
+        exclude_target:
+            If the target feature is an categorical; then it will be ignored
+            when passing back the set.
+
+        Returns/Desc:
+            Returns a set of all categorical features.
+        """
         if exclude_target:
             tmp_set = copy.deepcopy(self.__categorical_features)
-            tmp_set.remove(self.__target_feature)
+
+            # Target feature never init
+            if self.__target_feature:
+                raise KeyError("Target feature was never initialized")
+
+            if len(tmp_set) != 0:
+                tmp_set.remove(self.__target_feature)
+
             return tmp_set
         else:
-            return self.__categorical_features
+            return copy.deepcopy(self.__categorical_features)
 
     def get_string_features(self,
                             exclude_target=False):
+        """
+        exclude_target:
+            If the target feature is an string; then it will be ignored
+            when passing back the set.
+
+        Returns/Desc:
+            Returns a set of all string features.
+        """
         if exclude_target:
             tmp_set = copy.deepcopy(self.__string_features)
-            tmp_set.remove(self.__target_feature)
+
+            # Target feature never init
+            if self.__target_feature:
+                raise KeyError("Target feature was never initialized")
+
+            if len(tmp_set) != 0:
+                tmp_set.remove(self.__target_feature)
+
             return tmp_set
         else:
-            return self.__string_features
+            return copy.deepcopy(self.__string_features)
 
     def get_bool_features(self,
                           exclude_target=False):
+
+        """
+        exclude_target:
+            If the target feature is an bool; then it will be ignored
+            when passing back the set.
+
+        Returns/Desc:
+            Returns a set of all bool features.
+        """
         if exclude_target:
             tmp_set = copy.deepcopy(self.__bool_features)
-            tmp_set.remove(self.__target_feature)
+
+            # Target feature never init
+            if self.__target_feature:
+                raise KeyError("Target feature was never initialized")
+
+            if len(tmp_set) != 0:
+                tmp_set.remove(self.__target_feature)
+
             return tmp_set
         else:
-            return self.__bool_features
+            return copy.deepcopy(self.__bool_features)
 
     def get_datetime_features(self,
                               exclude_target=False):
+        """
+        exclude_target:
+            If the target feature is an datetime; then it will be ignored
+            when passing back the set.
+
+        Returns/Desc:
+            Returns a set of all datetime features.
+        """
         if exclude_target:
             tmp_set = copy.deepcopy(self.__datetime_features)
-            tmp_set.remove(self.__target_feature)
+            # Target feature never init
+            if self.__target_feature:
+                raise KeyError("Target feature was never initialized")
+
+            if len(tmp_set) != 0:
+                tmp_set.remove(self.__target_feature)
+
             return tmp_set
         else:
-            return self.__datetime_features
+            return copy.deepcopy(self.__datetime_features)
 
     def get_all_features(self):
+        """
+        Returns/Desc:
+            Returns all found features
+        """
         return copy.deepcopy(self.__all_columns)
 
-    def get_target(self):
+    def get_target_feature(self):
+        """
+        Returns/Desc:
+            Get target feature
+        """
         return copy.deepcopy(self.__target_feature)
+
+    def set_target_feature(self,
+                           feature_name):
+        """
+        feature_name:
+            Set the target feature.
+
+        Returns/Desc:
+            Sets the value
+        """
+        self.__target_feature = copy.deepcopy(feature_name)
 
     # ---
     def remove_feature(self,

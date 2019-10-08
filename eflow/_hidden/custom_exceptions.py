@@ -1,4 +1,4 @@
-from eflow._hidden.objects import DefaultException
+from eflow._hidden.parents_objects import DefaultException
 
 class MismatchError(DefaultException):
     def __init__(self,

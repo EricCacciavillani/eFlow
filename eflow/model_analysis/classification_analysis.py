@@ -13,7 +13,7 @@ from IPython.display import display
 import matplotlib.pyplot as plt
 
 from eflow.utils.sys_utils import *
-from eflow._hidden.objects import FileOutput
+from eflow._hidden.parents_objects import FileOutput
 from eflow._hidden.custom_exceptions import *
 from eflow.data_analysis import FeatureAnalysis
 from eflow._hidden.constants import GRAPH_DEFAULTS

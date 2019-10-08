@@ -1,4 +1,4 @@
-from eflow._hidden.objects import FileOutput
+from eflow._hidden.parents_objects import FileOutput
 import copy
 from IPython.display import display
 
@@ -13,7 +13,7 @@ from eflow._hidden.constants import GRAPH_DEFAULTS
 from eflow.utils.image_utils import create_plt_png
 from eflow.utils.string_utils import convert_to_filename, correct_directory_path
 from eflow.utils.pandas_utils import data_types_table, missing_values_table
-from eflow._hidden.objects import DataFrameSnapshot
+from eflow._hidden.general_objects import DataFrameSnapshot
 
 class NullAnalysis(FileOutput):
     """

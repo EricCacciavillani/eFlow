@@ -5,7 +5,8 @@ import copy
 from IPython.display import display
 import seaborn as sns
 
-from eflow._hidden.objects import FileOutput, DataFrameSnapshot
+from eflow._hidden.parents_objects import FileOutput
+from eflow._hidden.general_objects import DataFrameSnapshot
 from eflow.utils.pandas_utils import descr_table,value_counts_table
 from eflow.utils.image_utils import create_plt_png, df_to_image
 from eflow.utils.string_utils import convert_to_filename
@@ -263,7 +264,7 @@ class FeatureAnalysis(FileOutput):
         print(f"Generating graph for distance plot graph on {feature_name}")
         plt.close()
 
-        # Set general graph info
+        # Set general_objects graph info
         sns.set(style="whitegrid")
         plt.figure(figsize=(12, 8))
         plt.title("Distance Plot: " + feature_name)
@@ -346,7 +347,7 @@ class FeatureAnalysis(FileOutput):
             f"Count plot graph for distance plot graph on {feature_name}")
         plt.close()
 
-        # Set general graph info
+        # Set general_objects graph info
         sns.set(style="whitegrid")
         plt.figure(figsize=(12, 8))
         plt.title("Category Count Plot: " + feature_name)
@@ -484,7 +485,7 @@ class FeatureAnalysis(FileOutput):
             autopct='%1.1f%%',
         )
 
-        # Set general graph info
+        # Set general_objects graph info
         fig = plt.gcf()
         fig.set_size_inches(12, 8)
         plt.title("Pie Chart: " + feature_name)
