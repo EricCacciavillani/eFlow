@@ -1,3 +1,4 @@
+import random
 def convert_to_filename(filename):
     """
     filename:
@@ -33,3 +34,6 @@ def correct_directory_path(directory_pth):
         new_string += "/"
 
     return new_string
+
+def create_hex_decimal_string(string_len=16):
+    return f'%0{string_len}x' % random.randrange(16 ** string_len)

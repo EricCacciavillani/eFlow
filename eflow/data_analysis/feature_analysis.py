@@ -5,7 +5,11 @@ import copy
 from IPython.display import display
 import seaborn as sns
 
-from eflow._hidden.parents_objects import FileOutput
+from eflow.utils.sys_utils import *
+from eflow._hidden.parent_objects import FileOutput
+from eflow._hidden.custom_exceptions import *
+
+from eflow._hidden.parent_objects import FileOutput
 from eflow._hidden.general_objects import DataFrameSnapshot
 from eflow.utils.pandas_utils import descr_table,value_counts_table
 from eflow.utils.image_utils import create_plt_png, df_to_image
@@ -171,7 +175,7 @@ class FeatureAnalysis(FileOutput):
            if dataframe_snapshot:
                df_snapshot = DataFrameSnapshot()
                df_snapshot.check_create_snapshot(df,
-                                                 directory_pth=self.get_output_folder(),
+                                                 directory_pth=self.folder_path,
                                                  sub_dir=f"{dataset_name}/_Extras")
 
            for feature_name in df.columns:
@@ -264,7 +268,7 @@ class FeatureAnalysis(FileOutput):
         print(f"Generating graph for distance plot graph on {feature_name}")
         plt.close()
 
-        # Set general_objects graph info
+        # Set foundation graph info
         sns.set(style="whitegrid")
         plt.figure(figsize=(12, 8))
         plt.title("Distance Plot: " + feature_name)
@@ -281,10 +285,10 @@ class FeatureAnalysis(FileOutput):
                 if dataframe_snapshot:
                     df_snapshot = DataFrameSnapshot()
                     df_snapshot.check_create_snapshot(df,
-                                                      directory_pth=self.get_output_folder(),
+                                                      directory_pth=self.folder_path,
                                                       sub_dir=f"{dataset_name}/_Extras")
 
-            create_plt_png(self.get_output_folder(),
+            create_plt_png(self.folder_path,
                            f"{dataset_name}/Graphics",
                            convert_to_filename(filename))
 
@@ -347,7 +351,7 @@ class FeatureAnalysis(FileOutput):
             f"Count plot graph for distance plot graph on {feature_name}")
         plt.close()
 
-        # Set general_objects graph info
+        # Set graph info
         sns.set(style="whitegrid")
         plt.figure(figsize=(12, 8))
         plt.title("Category Count Plot: " + feature_name)
@@ -389,10 +393,10 @@ class FeatureAnalysis(FileOutput):
                 if dataframe_snapshot:
                     df_snapshot = DataFrameSnapshot()
                     df_snapshot.check_create_snapshot(df,
-                                                      directory_pth=self.get_output_folder(),
+                                                      directory_pth=self.folder_path,
                                                       sub_dir=f"{dataset_name}/_Extras")
 
-            create_plt_png(self.get_output_folder(),
+            create_plt_png(self.folder_path,
                            f"{dataset_name}/Graphics",
                            convert_to_filename(filename))
 
@@ -485,7 +489,7 @@ class FeatureAnalysis(FileOutput):
             autopct='%1.1f%%',
         )
 
-        # Set general_objects graph info
+        # Set foundation graph info
         fig = plt.gcf()
         fig.set_size_inches(12, 8)
         plt.title("Pie Chart: " + feature_name)
@@ -503,10 +507,10 @@ class FeatureAnalysis(FileOutput):
                 if dataframe_snapshot:
                     df_snapshot = DataFrameSnapshot()
                     df_snapshot.check_create_snapshot(df,
-                                                      directory_pth=self.get_output_folder(),
+                                                      directory_pth=self.folder_path,
                                                       sub_dir=f"{dataset_name}/_Extras")
 
-            create_plt_png(self.get_output_folder(),
+            create_plt_png(self.folder_path,
                            f"{dataset_name}/Graphics",
                            convert_to_filename(filename))
 
@@ -581,11 +585,11 @@ class FeatureAnalysis(FileOutput):
                 if dataframe_snapshot:
                     df_snapshot = DataFrameSnapshot()
                     df_snapshot.check_create_snapshot(df,
-                                                      directory_pth=self.get_output_folder(),
+                                                      directory_pth=self.folder_path,
                                                       sub_dir=f"{dataset_name}/_Extras")
             plt.close()
             df_to_image(val_counts_df,
-                        self.get_output_folder(),
+                        self.folder_path,
                         f"{dataset_name}/Tables",
                         convert_to_filename(filename),
                         show_index=True,
@@ -657,11 +661,11 @@ class FeatureAnalysis(FileOutput):
                 if dataframe_snapshot:
                     df_snapshot = DataFrameSnapshot()
                     df_snapshot.check_create_snapshot(df,
-                                                      directory_pth=self.get_output_folder(),
+                                                      directory_pth=self.folder_path,
                                                       sub_dir=f"{dataset_name}/_Extras")
             plt.close()
             df_to_image(col_desc_df,
-                        self.get_output_folder(),
+                        self.folder_path,
                         f"{dataset_name}/Tables",
                         convert_to_filename(filename),
                         show_index=True,

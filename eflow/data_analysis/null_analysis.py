@@ -1,4 +1,4 @@
-from eflow._hidden.parents_objects import FileOutput
+from eflow._hidden.parent_objects import FileOutput
 import copy
 from IPython.display import display
 
@@ -168,7 +168,7 @@ class NullAnalysis(FileOutput):
                 if dataframe_snapshot:
                     df_snapshot = DataFrameSnapshot()
                     df_snapshot.check_create_snapshot(df,
-                                                      directory_pth=self.get_output_folder(),
+                                                      directory_pth=self.folder_path,
                                                       sub_dir=f"{dataset_name}/_Extras")
 
 
@@ -320,10 +320,10 @@ class NullAnalysis(FileOutput):
                 if dataframe_snapshot:
                     df_snapshot = DataFrameSnapshot()
                     df_snapshot.check_create_snapshot(df,
-                                                      directory_pth=self.get_output_folder(),
+                                                      directory_pth=self.folder_path,
                                                       sub_dir=f"{dataset_name}/_Extras")
 
-            create_plt_png(self.get_output_folder(),
+            create_plt_png(self.folder_path,
                            f"{dataset_name}/Graphics",
                            convert_to_filename(filename))
 
@@ -441,10 +441,10 @@ class NullAnalysis(FileOutput):
                 if dataframe_snapshot:
                     df_snapshot = DataFrameSnapshot()
                     df_snapshot.check_create_snapshot(df,
-                                                      directory_pth=self.get_output_folder(),
+                                                      directory_pth=self.folder_path,
                                                       sub_dir=f"{dataset_name}/_Extras")
 
-            create_plt_png(self.get_output_folder(),
+            create_plt_png(self.folder_path,
                            f"{dataset_name}/Graphics",
                            convert_to_filename(filename))
 
@@ -543,10 +543,10 @@ class NullAnalysis(FileOutput):
                 if dataframe_snapshot:
                     df_snapshot = DataFrameSnapshot()
                     df_snapshot.check_create_snapshot(df,
-                                                      directory_pth=self.get_output_folder(),
+                                                      directory_pth=self.folder_path,
                                                       sub_dir=f"{dataset_name}/_Extras")
 
-            create_plt_png(self.get_output_folder(),
+            create_plt_png(self.folder_path,
                            f"{dataset_name}/Graphics",
                            convert_to_filename(filename))
 
@@ -650,10 +650,10 @@ class NullAnalysis(FileOutput):
                 if dataframe_snapshot:
                     df_snapshot = DataFrameSnapshot()
                     df_snapshot.check_create_snapshot(df,
-                                                      directory_pth=self.get_output_folder(),
+                                                      directory_pth=self.folder_path,
                                                       sub_dir=f"{dataset_name}/_Extras")
 
-            create_plt_png(self.get_output_folder(),
+            create_plt_png(self.folder_path,
                            f"{dataset_name}/Graphics",
                            convert_to_filename(filename))
 
@@ -733,12 +733,12 @@ class NullAnalysis(FileOutput):
                 if dataframe_snapshot:
                     df_snapshot = DataFrameSnapshot()
                     df_snapshot.check_create_snapshot(df,
-                                                      directory_pth=self.get_output_folder(),
+                                                      directory_pth=self.folder_path,
                                                       sub_dir=f"{dataset_name}/_Extras")
 
             plt.close()
             df_to_image(mis_val_table_ren_columns,
-                        self.get_output_folder(),
+                        self.folder_path,
                         f"{dataset_name}/Tables",
                         convert_to_filename(filename),
                         show_index=True,
@@ -806,11 +806,11 @@ class NullAnalysis(FileOutput):
                 if dataframe_snapshot:
                     df_snapshot = DataFrameSnapshot()
                     df_snapshot.check_create_snapshot(df,
-                                                      directory_pth=self.get_output_folder(),
+                                                      directory_pth=self.folder_path,
                                                       sub_dir=f"{dataset_name}/_Extras")
             plt.close()
             df_to_image(dtypes_df,
-                        self.get_output_folder(),
+                        self.folder_path,
                         f"{dataset_name}/Tables",
                         convert_to_filename(filename),
                         show_index=True)

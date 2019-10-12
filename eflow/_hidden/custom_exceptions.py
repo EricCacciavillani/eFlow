@@ -1,4 +1,4 @@
-from eflow._hidden.parents_objects import DefaultException
+from eflow._hidden.parent_objects import DefaultException
 
 class MismatchError(DefaultException):
     def __init__(self,
@@ -6,6 +6,16 @@ class MismatchError(DefaultException):
         super().__init__(error_message=error_message)
 
 class UnsatisfiedRequirments(DefaultException):
+    def __init__(self,
+                 error_message=None):
+        super().__init__(error_message=error_message)
+
+class PipelineError(DefaultException):
+    def __init__(self,
+                 error_message=None):
+        super().__init__(error_message=error_message)
+
+class PipelineSegmentError(DefaultException):
     def __init__(self,
                  error_message=None):
         super().__init__(error_message=error_message)

@@ -1,9 +1,9 @@
 import os
 import pandas as pd
 import math
-from eflow.toolbox_objects import DataFrameTypes
+from eflow.foundation import DataFrameTypes
 from eflow.utils.sys_utils import check_create_dir_structure, \
-    create_json_object_from_dict
+    create_json_file_from_dict
 
 from eflow.utils.string_utils import correct_directory_path
 from eflow._hidden.custom_exceptions import *
@@ -250,7 +250,7 @@ class DataFrameSnapshot:
 
         meta_dict = self.__generate_dataframe_snapshot_dict(df)
 
-        create_json_object_from_dict(meta_dict,
+        create_json_file_from_dict(meta_dict,
                                      output_folder_path,
                                      "Dataframe Identity")
 

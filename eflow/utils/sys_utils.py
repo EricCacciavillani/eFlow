@@ -74,8 +74,8 @@ def check_create_dir_structure(directory_pth,
 
     if not os.path.exists(directory_pth):
         raise SystemError("Main directory path doesn't exist.\n"
-                          "To help ensure unwanted directories are created you "
-                          "must have a pre-defined path.")
+                          "To help ensure unwanted directories are not created "
+                          "you must have a pre-defined path.")
 
     directory_pth = correct_directory_path(directory_pth)
 
@@ -134,7 +134,6 @@ def pickle_object_to_file(obj,
 
     Returns/Desc:
         Writes the object to a pickle file.
-
     """
     directory_pth = correct_directory_path(directory_pth)
     if not os.path.exists(directory_pth):
@@ -150,9 +149,9 @@ def pickle_object_to_file(obj,
                 list_pickle)
     list_pickle.close()
 
-def create_json_object_from_dict(dict_obj,
-                                 directory_pth,
-                                 filename):
+def create_json_file_from_dict(dict_obj,
+                               directory_pth,
+                               filename):
     """
     dict_obj:
         Dictionary object.
@@ -178,3 +177,28 @@ def create_json_object_from_dict(dict_obj,
                   ensure_ascii=False,
                   indent=2)
 
+def get_all_directories_from_path(directory_pth):
+
+    dirs_in_paths = []
+    for (dirpath, dirnames, filenames) in os.walk(directory_pth):
+        dirs_in_paths.extend(dirnames)
+        break
+
+    return set(dirs_in_paths)
+
+
+def get_all_files_from_path(directory_pth,
+                            file_extension=None):
+    files_in_paths = []
+    for (dirpath, dirnames, filenames) in os.walk(directory_pth):
+
+        if file_extension:
+            file_extension = file_extension.replace(".","")
+            for file in filenames:
+                if file.endswith(f'.{file_extension}'):
+                    files_in_paths.append(file)
+        else:
+            files_in_paths.extend(filenames)
+        break
+
+    return set(files_in_paths)

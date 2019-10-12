@@ -1,4 +1,4 @@
-from eflow._hidden.parents_objects import DataPipelineSegment
+from eflow._hidden.parent_objects import DataPipelineSegment
 import copy
 from collections import deque
 
@@ -20,7 +20,7 @@ class DataTransformer(DataPipelineSegment):
             If in a python notebook display visualizations in the notebook.
         """
         DataPipelineSegment.__init__(self,
-                                     project_name=f'_Extras/Data Pipelines/FeatureTransformer')
+                                     object_name=self.__class__.__name__)
 
     def remove_features(self,
                         df,
@@ -38,13 +38,12 @@ class DataTransformer(DataPipelineSegment):
         self._DataPipelineSegment__add_function_to_que("remove_features",
                                                        feature_names)
 
+
     def __check_if_feature_exists(self,
                                   df,
                                   feature_name):
-        try:
-            if feature_name:
-                df[feature_name]
-        except KeyError:
+        if feature_name not in df.columns:
             raise KeyError(
                 f"The feature \'{feature_name}\' was not found in the dataframe!"
                 + " Please select a valid feature from the dataframe")
+

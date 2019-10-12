@@ -13,7 +13,7 @@ from IPython.display import display
 import matplotlib.pyplot as plt
 
 from eflow.utils.sys_utils import *
-from eflow._hidden.parents_objects import FileOutput
+from eflow._hidden.parent_objects import FileOutput
 from eflow._hidden.custom_exceptions import *
 from eflow.data_analysis import FeatureAnalysis
 from eflow._hidden.constants import GRAPH_DEFAULTS
@@ -116,29 +116,29 @@ class ClassificationAnalysis(FileOutput):
         # Save machine learning model
         if save_model:
             pickle_object_to_file(self.__model,
-                                  self.get_output_folder(),
+                                  self.folder_path,
                                   f'{self.__model_name}')
 
         # ---
-        check_create_dir_structure(self.get_output_folder(),
+        check_create_dir_structure(self.folder_path,
                                    "Extras")
         # Save predicted classes
         write_object_text_to_file(self.__target_values,
-                                  self.get_output_folder() + "Extras",
+                                  self.folder_path + "Extras",
                                   "_Classes")
 
         # Save features and or df_features object
         if columns or df_features:
             if columns:
                 write_object_text_to_file(columns,
-                                          self.get_output_folder() + "Extras",
+                                          self.folder_path + "Extras",
                                           "_Features")
             else:
                 write_object_text_to_file(df_features.get_all_features(),
-                                          self.get_output_folder() + "Extras",
+                                          self.folder_path + "Extras",
                                           "_Features")
                 pickle_object_to_file(self.__model,
-                                      self.get_output_folder() + "Extras",
+                                      self.folder_path + "Extras",
                                       "_df_features")
 
         # Find the 'type' of each prediction. Probabilities or Predictions
@@ -285,7 +285,7 @@ class ClassificationAnalysis(FileOutput):
                 sub_dir = f'{sub_dir}/Thresholds'
                 tmp_sub_dir = copy.deepcopy(sub_dir)
                 while True:
-                    threshold_dir = self.get_output_folder()
+                    threshold_dir = self.folder_path
                     if i > 0:
                         tmp_sub_dir = (sub_dir + f' {i}')
                     threshold_dir += tmp_sub_dir
@@ -568,7 +568,7 @@ class ClassificationAnalysis(FileOutput):
                                              text_fontsize=text_fontsize)
 
         if save_file:
-            create_plt_png(self.get_output_folder(),
+            create_plt_png(self.folder_path,
                            sub_dir,
                            convert_to_filename(filename))
 
@@ -632,7 +632,7 @@ class ClassificationAnalysis(FileOutput):
                                text_fontsize=text_fontsize)
 
         if save_file:
-            create_plt_png(self.get_output_folder(),
+            create_plt_png(self.folder_path,
                            sub_dir,
                            convert_to_filename(filename))
 
@@ -695,7 +695,7 @@ class ClassificationAnalysis(FileOutput):
                                            text_fontsize=text_fontsize)
 
         if save_file:
-            create_plt_png(self.get_output_folder(),
+            create_plt_png(self.folder_path,
                            sub_dir,
                            convert_to_filename(filename))
 
@@ -762,7 +762,7 @@ class ClassificationAnalysis(FileOutput):
                                             text_fontsize=text_fontsize)
 
         if save_file:
-            create_plt_png(self.get_output_folder(),
+            create_plt_png(self.folder_path,
                            sub_dir,
                            convert_to_filename(filename))
 
@@ -823,7 +823,7 @@ class ClassificationAnalysis(FileOutput):
                                       title_fontsize=title_fontsize,
                                       text_fontsize=text_fontsize)
         if save_file:
-            create_plt_png(self.get_output_folder(),
+            create_plt_png(self.folder_path,
                            sub_dir,
                            convert_to_filename(filename))
 
@@ -897,7 +897,7 @@ class ClassificationAnalysis(FileOutput):
         warnings.filterwarnings('default')
 
         if save_file:
-            create_plt_png(self.get_output_folder(),
+            create_plt_png(self.folder_path,
                            sub_dir,
                            convert_to_filename(filename))
 
@@ -1039,7 +1039,7 @@ class ClassificationAnalysis(FileOutput):
         if save_file:
             # Create image file
             df_to_image(evaluation_report,
-                        self.get_output_folder(),
+                        self.folder_path,
                         sub_dir,
                         convert_to_filename(filename),
                         col_width=20,
@@ -1102,7 +1102,7 @@ class ClassificationAnalysis(FileOutput):
                 DataAnalysis(pd.DataFrame(X[model_predictions == y],
                                           columns=self.__df_features.get_all_features()),
                              self.__df_features,
-                             overwrite_full_path=self.get_output_folder() +
+                             overwrite_full_path=self.folder_path +
                                                  sub_dir + "/Correctly Predicted Data/",
                              missing_data_visuals=False,
                              notebook_mode=display_analysis_graphs)
@@ -1122,7 +1122,7 @@ class ClassificationAnalysis(FileOutput):
             DataAnalysis(pd.DataFrame(X[model_predictions != y],
                                       columns=self.__df_features.get_all_features()),
                          self.__df_features,
-                         overwrite_full_path=self.get_output_folder() +
+                         overwrite_full_path=self.folder_path +
                                              sub_dir + "/Incorrectly Predicted Data/",
                          missing_data_visuals=False,
                          notebook_mode=display_analysis_graphs)
@@ -1184,7 +1184,7 @@ class ClassificationAnalysis(FileOutput):
         if save_file:
             # Output dataframe as png
             df_to_image(report_df,
-                        self.get_output_folder(),
+                        self.folder_path,
                         sub_dir,
                         filename,
                         col_width=20,

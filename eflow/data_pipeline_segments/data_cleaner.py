@@ -1,6 +1,6 @@
 from eflow._hidden.widgets.DataCleaningWidget import *
-from eflow._hidden.parents_objects.data_pipeline_segment import *
-from eflow.toolbox_objects import DataFrameTypes
+from eflow._hidden.parent_objects.data_pipeline_segment import *
+from eflow.foundation import DataFrameTypes
 
 import pandas as pd
 import numpy as np
@@ -174,8 +174,6 @@ class DataCleaner(DataPipelineSegment):
         filename += ".json"
 
         self.__filename = filename
-
-
 
     def data_cleaning_widget(self,
                              df,
