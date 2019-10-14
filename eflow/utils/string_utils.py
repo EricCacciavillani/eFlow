@@ -7,6 +7,8 @@ def convert_to_filename(filename):
     Returns/Desc:
         Attempts to ensure the filename is valid for saving.
     """
+
+    filename = filename.split(".")[0]
     return "".join(x for x in str(
         filename) if x.isalnum() or x == "_" or x == "("
             or x == ")" or x == " " or x == "-")
@@ -35,5 +37,5 @@ def correct_directory_path(directory_pth):
 
     return new_string
 
-def create_hex_decimal_string(string_len=16):
+def create_hex_decimal_string(string_len=10):
     return f'%0{string_len}x' % random.randrange(16 ** string_len)

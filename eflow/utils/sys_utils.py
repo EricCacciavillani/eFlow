@@ -177,7 +177,28 @@ def create_json_file_from_dict(dict_obj,
                   ensure_ascii=False,
                   indent=2)
 
+def json_file_to_dict(filepath):
+    """
+    filepath:
+         Given path to the filename.
+
+    Returns/Desc:
+        Returns back the dictionary form of a json file.
+    """
+    json_file = open(filepath)
+    json_str = json_file.read()
+    json_data = json.loads(json_str)
+
+    return json_data
+
 def get_all_directories_from_path(directory_pth):
+    """
+    directory_pth:
+        Given path that already exists.
+
+    Returns/Desc:
+        Returns back a set a directories with the provided path.
+    """
 
     dirs_in_paths = []
     for (dirpath, dirnames, filenames) in os.walk(directory_pth):
@@ -189,6 +210,17 @@ def get_all_directories_from_path(directory_pth):
 
 def get_all_files_from_path(directory_pth,
                             file_extension=None):
+    """
+    directory_pth:
+        Given path that already exists.
+
+    file_extension:
+        Only return files that have a given extension.
+
+    Returns/Desc:
+        Returns back a set a filenames with the provided path.
+    """
+
     files_in_paths = []
     for (dirpath, dirnames, filenames) in os.walk(directory_pth):
 

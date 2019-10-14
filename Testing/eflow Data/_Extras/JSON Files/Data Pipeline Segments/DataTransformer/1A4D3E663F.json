@@ -1,7 +1,7 @@
 {
   "Pipeline": {
     "Pipeline Name": "Titanic pipeline",
-    "Pipeline Path": "_Extras/Data Pipelines/"
+    "Pipeline Path": "_Extras/JSON Files/Data Pipeline/Titanic pipeline/"
   },
   "Pipeline Segment": {
     "Object Type": "DataTransformer",

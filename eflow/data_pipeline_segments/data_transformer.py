@@ -4,7 +4,8 @@ from collections import deque
 
 
 class DataTransformer(DataPipelineSegment):
-    def __init__(self):
+    def __init__(self,
+                 segment_path_id=None):
         """
         project_sub_dir:
             Appends to the absolute directory of the output folder

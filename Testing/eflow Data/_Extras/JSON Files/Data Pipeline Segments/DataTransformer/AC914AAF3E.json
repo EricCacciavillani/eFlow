@@ -1,0 +1,20 @@
+{
+  "Pipeline": {
+    "Pipeline Name": "Titanic pipeline",
+    "Pipeline Path": "_Extras/JSON Files/Data Pipeline/Titanic pipeline/"
+  },
+  "Pipeline Segment": {
+    "Object Type": "DataTransformer",
+    "Functions Performed Order": {
+      "Function Order 1": {
+        "remove_features": {
+          "Params": {
+            "Param 0": "Name",
+            "Param 1": "Ticket",
+            "Param 2": "PassengerId"
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "Pipeline Name": "Titanic pipeline",
+  "Pipeline Segment Order": {
+    "1": {
+      "Pipeline Segment Path": "_Extras/JSON Files/Data Pipeline Segments/DataTransformer/0D4511146F.json",
+      "Pipeline Segment Type": "DataTransformer",
+      "Pipeline Segment Name": "Remove Unwanted Features"
+    }
+  },
+  "Pipeline Segment Count": 2
+}

@@ -22,7 +22,7 @@ class FileOutput(object):
             check_create_dir_structure(os.getcwd(),
                                        parent_structure)
             tmp_path = correct_directory_path(
-                                      os.getcwd() + parent_structure)
+                os.getcwd() + parent_structure)
 
         # Trusting the user that this path must already exist
         else:
