@@ -1,10 +1,12 @@
 from eflow._hidden.parent_objects import FileOutput
 from eflow._hidden.custom_exceptions import PipelineSegmentError, UnsatisfiedRequirments
-from eflow.utils.sys_utils import create_json_file_from_dict,json_file_to_dict,get_all_files_from_path
+from eflow.utils.sys_utils import create_json_file_from_dict,json_file_to_dict,get_all_files_from_path, check_create_dir_structure
 from eflow.utils.string_utils import create_hex_decimal_string
 from collections import deque
 import copy
 import os
+import inspect
+import re
 
 class DataPipelineSegment(FileOutput):
     def __init__(self,
@@ -88,8 +90,6 @@ class DataPipelineSegment(FileOutput):
             function_order += 1
         json_dict["Pipeline Segment"]["Function Count"] = function_order - 1
 
-        print("hiiititiititi")
-        print(json_dict)
         create_json_file_from_dict(json_dict,
                                    self.folder_path,
                                    self.__json_file_name)
@@ -128,6 +128,75 @@ class DataPipelineSegment(FileOutput):
             params_dict["df"] = df
             params_dict["_add_to_que"] = False
             method_to_call(**params_dict)
+            del params_dict["df"]
+            del params_dict["_add_to_que"]
 
         for function_name, params_dict in self.__function_pipe:
             print(params_dict)
+
+
+    def generate_code(self,
+                      generate_file=True,
+                      add_libs=True):
+
+        if len(self.__function_pipe) == 0:
+            raise PipelineSegmentError("Can't generate code when no methods of this segment have been used yet!")
+
+        generated_code = []
+
+        if add_libs:
+            generated_code.append("from eflow.utils.math_utils import *")
+            generated_code.append("from eflow.utils.image_utils import *")
+            generated_code.append("from eflow.utils.pandas_utils import *")
+            generated_code.append("from eflow.utils.modeling_utils import *")
+            generated_code.append("from eflow.utils.string_utils import *")
+            generated_code.append("from eflow.utils.misc_utils import *")
+            generated_code.append("from eflow.utils.sys_utils import *")
+            generated_code.append("")
+
+        for function_name, params_dict in self.__function_pipe:
+
+            pre_made_code = inspect.getsource(getattr(self, function_name))
+
+            first_lines_found = False
+            def_start = False
+
+            for parm,val in params_dict.items():
+                generated_code.append(f"{parm} = {val}")
+
+            for line in pre_made_code.split("\n"):
+
+                if "def " in line:
+                    def_start = True
+                    continue
+
+                if def_start:
+                    if "):" in line:
+                        def_start = False
+                    continue
+
+                if "params_dict" in line or "_add_to_que" in line:
+                    continue
+
+                if not re.search('[a-zA-Z]', line) and not first_lines_found:
+                    continue
+                else:
+                    first_lines_found = True
+
+                if "__add_function_to_que" in line:
+                    continue
+
+                generated_code.append(line.replace("        ", "", 1))
+
+        generated_code.append("#" + "------"*5)
+
+        if generate_file:
+            check_create_dir_structure(self.folder_path,
+                                       "Generated code")
+            with open(self.folder_path + f'Generated code/{self.__segment_id}.py', 'r+') as filehandle:
+                filehandle.truncate(0)
+                for listitem in generated_code:
+                    filehandle.write('%s\n' % listitem)
+            print(f"Generated a python file named/at: {self.folder_path}Generated code/{self.__segment_id}.py")
+        else:
+            return generated_code

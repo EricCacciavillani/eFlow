@@ -120,7 +120,7 @@ class DataPipeline(FileOutput):
 
             segment_order += 1
 
-        json_dict["Pipeline Segment Count"] = segment_order
+        json_dict["Pipeline Segment Count"] = segment_order -1
         if self.__pipeline_modify_id:
             check_create_dir_structure(self.folder_path,
                                        "/Modified Pipelines")
@@ -145,7 +145,7 @@ class DataPipeline(FileOutput):
         self.__pipeline_segment_path_id = set()
         json_dict = json_file_to_dict(self.folder_path + copy.deepcopy(self.__json_file_name))
 
-        for segment_order in range(1,json_dict["Pipeline Segment Count"]):
+        for segment_order in range(1,json_dict["Pipeline Segment Count"] + 1):
             segment_type = json_dict["Pipeline Segment Order"][str(segment_order)]["Pipeline Segment Type"]
             segment_name = \
             json_dict["Pipeline Segment Order"][str(segment_order)][
@@ -156,8 +156,8 @@ class DataPipeline(FileOutput):
             segment_id = json_dict["Pipeline Segment Order"][str(segment_order)]["Pipeline Segment ID"]
 
             pipeline_segment_obj = None
-            execute_str = f"pipeline_segment_obj = {segment_type}({segment_id})\n"
-            exec(execute_str)
+
+            pipeline_segment_obj = eval(f"{segment_type}(\"{segment_id}\")\n")
 
             if not pipeline_segment_obj:
                 raise PipelineError(f"An unknown error has occurred with finding the correct pipeline segment for '{segment_type}' segment!")
@@ -173,3 +173,49 @@ class DataPipeline(FileOutput):
                          df):
         for _, _, pipeline_segment in self.__pipeline_segment_deque:
             pipeline_segment.perform_segment(df)
+
+    def generate_code(self,
+                      generate_file=True,
+                      add_libs=True):
+        if len(self.__pipeline_segment_deque) == 0:
+            raise PipelineError("Pipeline needs a segment to generate code.")
+
+        generated_code = []
+
+        if add_libs:
+            libs_code = list()
+            libs_code.append("from eflow.utils.math_utils import *")
+            libs_code.append("from eflow.utils.image_utils import *")
+            libs_code.append("from eflow.utils.pandas_utils import *")
+            libs_code.append("from eflow.utils.modeling_utils import *")
+            libs_code.append("from eflow.utils.string_utils import *")
+            libs_code.append("from eflow.utils.misc_utils import *")
+            libs_code.append("from eflow.utils.sys_utils import *")
+            libs_code.append("")
+            generated_code.append(libs_code)
+
+
+        for segment_name, segment_path_id, pipeline_segment in self.__pipeline_segment_deque:
+            tmp_list = pipeline_segment.generate_code(generate_file=False,
+                                                      add_libs=False)
+            tmp_list.insert(0, f'# Segment Name:    {segment_name}')
+            tmp_list.insert(0, f'# Segment Path ID: {segment_path_id}')
+
+            generated_code.append(tmp_list)
+
+        check_create_dir_structure(self.folder_path,
+                                   "Generated code")
+
+        if generate_file:
+            python_file_name = self.__json_file_name.split(".")[0] + ".py"
+            with open(self.folder_path +
+                      f'Generated code/{python_file_name}',
+                      'w') as filehandle:
+                for segment_code in generated_code:
+                    for listitem in segment_code:
+                        filehandle.write('%s\n' % listitem)
+            print(
+                f"Generated a python file named/at: {self.folder_path}Generated code/{python_file_name}")
+        else:
+            return generated_code
+

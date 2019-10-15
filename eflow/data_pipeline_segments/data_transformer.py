@@ -1,4 +1,6 @@
 from eflow._hidden.parent_objects import DataPipelineSegment
+from eflow.utils.pandas_utils import check_if_feature_exists
+
 import copy
 from collections import deque
 
@@ -33,7 +35,7 @@ class DataTransformer(DataPipelineSegment):
 
                 params_dict = locals()
 
-                # Remove any unwanted arguments
+                # Remove any unwanted arguments in params_dict
                 if _add_to_que:
                     params_dict = locals()
                     for arg in ["self","df","_add_to_que", "params_dict"]:
@@ -52,21 +54,13 @@ class DataTransformer(DataPipelineSegment):
                                      object_type=self.__class__.__name__,
                                      segment_id=segment_id)
 
-    def __check_if_feature_exists(self,
-                                  df,
-                                  feature_name):
-        if feature_name not in df.columns:
-            raise KeyError(
-                f"The feature \'{feature_name}\' was not found in the dataframe!"
-                + " Please select a valid feature from the dataframe")
-
     def remove_features(self,
                         df,
                         feature_names,
                         _add_to_que=True):
         params_dict = locals()
 
-        # Remove any unwanted arguments
+        # Remove any unwanted arguments in params_dict
         if _add_to_que:
             params_dict = locals()
             for arg in ["self","df","_add_to_que", "params_dict"]:
@@ -77,8 +71,8 @@ class DataTransformer(DataPipelineSegment):
             feature_names = [feature_names]
 
         for feature_n in feature_names:
-            self.__check_if_feature_exists(df,
-                                           feature_n)
+            check_if_feature_exists(df,
+                                    feature_n)
             df.drop(columns=[feature_n],
                     inplace=True)
 

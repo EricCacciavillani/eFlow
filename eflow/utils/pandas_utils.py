@@ -4,6 +4,14 @@ from eflow.utils.sys_utils import write_object_text_to_file
 from eflow.utils.image_utils import df_to_image
 
 
+def check_if_feature_exists(df,
+                            feature_name):
+    if feature_name not in df.columns:
+        raise KeyError(
+            f"The feature \'{feature_name}\' was not found in the dataframe!"
+            + " Please select a valid feature from the dataframe")
+
+
 def data_types_table(df,
                      sort_by_type=True):
     """
