@@ -46,5 +46,5 @@ class FileOutput(object):
         return copy.deepcopy(self.__PROJECT.PATH_TO_OUTPUT_FOLDER)
 
     @property
-    def relative_folder_path(self,):
+    def relative_folder_path(self):
         return copy.deepcopy(self.__PROJECT.RELATIVE_PATH_TO_OUTPUT_FOLDER)

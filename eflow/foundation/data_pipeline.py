@@ -3,6 +3,8 @@ from eflow._hidden.parent_objects import DataPipelineSegment
 from eflow._hidden.custom_exceptions import UnsatisfiedRequirments, PipelineError
 from eflow.utils.string_utils import create_hex_decimal_string,correct_directory_path
 from eflow.utils.sys_utils import create_json_file_from_dict, get_all_files_from_path, check_create_dir_structure, json_file_to_dict
+# from eflow.data_pipeline_segments import DataCleaner
+from eflow.data_pipeline_segments import DataTransformer
 from eflow._hidden.constants import SYS_CONSTANTS
 import copy
 import os
@@ -76,7 +78,7 @@ class DataPipeline(FileOutput):
         if segment_name in self.__pipeline_segment_names:
             raise PipelineError(f"The '{segment_name}' pipeline segment is already in this pipeline. Please choose a different segment name.")
 
-        segment_path_id = (pipeline_segment_obj.relative_folder_path + pipeline_segment_obj.file_name)
+        segment_path_id = pipeline_segment_obj.relative_folder_path + pipeline_segment_obj.file_name
         if segment_path_id in self.__pipeline_segment_path_id:
             raise PipelineError("The segment has been already found "
                                 "in this pipeline Segment path id: " +
@@ -96,9 +98,8 @@ class DataPipeline(FileOutput):
         self.__pipeline_segment_names.add(segment_name)
         self.__pipeline_segment_path_id.add(segment_path_id)
         self.__pipeline_segment_deque.append((segment_name,
+                                              segment_path_id,
                                               pipeline_segment_obj))
-
-        # pipeline_segment_obj._DataPipelineSegment__create_json_pipeline_segment_file()
 
         self.__create_json_pipeline_file()
 
@@ -108,13 +109,14 @@ class DataPipeline(FileOutput):
         json_dict = dict()
         segment_order = 1
 
-        for segment_name, pipeline_segment_obj in self.__pipeline_segment_deque:
-            json_dict["Pipeline Name"] = self.__pipeline_name
-            json_dict["Pipeline Segment Order"] = dict()
+        json_dict["Pipeline Name"] = self.__pipeline_name
+        json_dict["Pipeline Segment Order"] = dict()
+        for segment_name, segment_path_id, pipeline_segment_obj in self.__pipeline_segment_deque:
             json_dict["Pipeline Segment Order"][segment_order] = dict()
-            json_dict["Pipeline Segment Order"][segment_order]["Pipeline Segment Path"] = pipeline_segment_obj.relative_folder_path + pipeline_segment_obj.file_name
+            json_dict["Pipeline Segment Order"][segment_order]["Pipeline Segment Path"] = segment_path_id
             json_dict["Pipeline Segment Order"][segment_order]["Pipeline Segment Type"] = pipeline_segment_obj.__class__.__name__
             json_dict["Pipeline Segment Order"][segment_order]["Pipeline Segment Name"] = segment_name
+            json_dict["Pipeline Segment Order"][segment_order]["Pipeline Segment ID"] = segment_path_id.split("/")[-1].split(".")[0]
 
             segment_order += 1
 
@@ -131,28 +133,43 @@ class DataPipeline(FileOutput):
                                        self.__json_file_name)
 
     def __configure_pipeline_with_existing_file(self):
+
+        if not os.path.exists(self.folder_path):
+            raise PipelineError("Couldn't find the pipeline's folder when trying to configure this object with the provided json file.")
+        if not os.path.exists(self.folder_path + copy.deepcopy(self.__json_file_name)):
+            raise PipelineError(f"Couldn't find the pipeline's file named '{self.file_name}' in the pipeline's directory when trying to configure this object with the provided json file.")
+
+
         self.__pipeline_segment_deque = deque()
         self.__pipeline_segment_names = set()
         self.__pipeline_segment_path_id = set()
         json_dict = json_file_to_dict(self.folder_path + copy.deepcopy(self.__json_file_name))
 
         for segment_order in range(1,json_dict["Pipeline Segment Count"]):
-            # self.__pipeline_segment_names.add(segment_name)
-            # self.__pipeline_segment_path_id.add(segment_path_id)
-            # self.__pipeline_segment_deque.append((segment_name,
-            #                                       pipeline_segment_obj))
-            pass
+            segment_type = json_dict["Pipeline Segment Order"][str(segment_order)]["Pipeline Segment Type"]
+            segment_name = \
+            json_dict["Pipeline Segment Order"][str(segment_order)][
+                "Pipeline Segment Name"]
+            segment_path_id = \
+            json_dict["Pipeline Segment Order"][str(segment_order)][
+                "Pipeline Segment Path"]
+            segment_id = json_dict["Pipeline Segment Order"][str(segment_order)]["Pipeline Segment ID"]
 
+            pipeline_segment_obj = None
+            execute_str = f"pipeline_segment_obj = {segment_type}({segment_id})\n"
+            exec(execute_str)
 
-    def perform_pipeline(self):
-        json_dict = json_file_to_dict(self.file_path)
+            if not pipeline_segment_obj:
+                raise PipelineError(f"An unknown error has occurred with finding the correct pipeline segment for '{segment_type}' segment!")
 
-        for segment_order in range(1, json_dict["Pipeline Segment Count"]):
-            pass
+            self.__pipeline_segment_names.add(segment_name)
+            self.__pipeline_segment_path_id.add(segment_path_id)
 
-            # execute_str = f'segment_obj = {json_dict["Pipeline Segment Order"][segment_order]["Pipeline Segment Type"]}"()''
-            # execute_str += "segment_obj."
+            self.__pipeline_segment_deque.append((segment_name,
+                                                  segment_path_id,
+                                                  pipeline_segment_obj))
 
-            # exec ("a=4\na+=1\nprint(a)")
-
-
+    def perform_pipeline(self,
+                         df):
+        for _, _, pipeline_segment in self.__pipeline_segment_deque:
+            pipeline_segment.perform_segment(df)

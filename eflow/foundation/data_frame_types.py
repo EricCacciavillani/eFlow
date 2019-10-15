@@ -95,7 +95,14 @@ class DataFrameTypes:
         """
         if exclude_target:
             tmp_set = copy.deepcopy(self.__numerical_features)
-            tmp_set.remove(self.__target_feature)
+
+            # Target feature never init
+            if self.__target_feature:
+                raise KeyError("Target feature was never initialized")
+
+            # Check if target exist in set
+            if self.__target_feature in tmp_set:
+                tmp_set.remove(self.__target_feature)
             return tmp_set
         else:
             return copy.deepcopy(self.__numerical_features)
@@ -110,6 +117,7 @@ class DataFrameTypes:
         Returns/Desc:
             Returns a set of all integer features.
         """
+        print(exclude_target)
         if exclude_target:
             tmp_set = copy.deepcopy(self.__integer_features)
 
@@ -117,7 +125,8 @@ class DataFrameTypes:
             if self.__target_feature:
                 raise KeyError("Target feature was never initialized")
 
-            if len(tmp_set) != 0:
+            # Check if target exist in set
+            if self.__target_feature in tmp_set:
                 tmp_set.remove(self.__target_feature)
 
             return tmp_set
@@ -141,7 +150,8 @@ class DataFrameTypes:
             if self.__target_feature:
                 raise KeyError("Target feature was never initialized")
 
-            if len(tmp_set) != 0:
+            # Check if target exist in set
+            if self.__target_feature in tmp_set:
                 tmp_set.remove(self.__target_feature)
 
             return tmp_set
@@ -165,7 +175,8 @@ class DataFrameTypes:
             if self.__target_feature:
                 raise KeyError("Target feature was never initialized")
 
-            if len(tmp_set) != 0:
+            # Check if target exist in set
+            if self.__target_feature in tmp_set:
                 tmp_set.remove(self.__target_feature)
 
             return tmp_set
@@ -189,7 +200,8 @@ class DataFrameTypes:
             if self.__target_feature:
                 raise KeyError("Target feature was never initialized")
 
-            if len(tmp_set) != 0:
+            # Check if target exist in set
+            if self.__target_feature in tmp_set:
                 tmp_set.remove(self.__target_feature)
 
             return tmp_set
@@ -214,7 +226,8 @@ class DataFrameTypes:
             if self.__target_feature:
                 raise KeyError("Target feature was never initialized")
 
-            if len(tmp_set) != 0:
+            # Check if target exist in set
+            if self.__target_feature in tmp_set:
                 tmp_set.remove(self.__target_feature)
 
             return tmp_set
@@ -233,11 +246,13 @@ class DataFrameTypes:
         """
         if exclude_target:
             tmp_set = copy.deepcopy(self.__datetime_features)
+
             # Target feature never init
             if self.__target_feature:
                 raise KeyError("Target feature was never initialized")
 
-            if len(tmp_set) != 0:
+            # Check if target exist in set
+            if self.__target_feature in tmp_set:
                 tmp_set.remove(self.__target_feature)
 
             return tmp_set

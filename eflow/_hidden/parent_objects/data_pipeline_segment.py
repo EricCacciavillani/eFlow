@@ -1,6 +1,6 @@
 from eflow._hidden.parent_objects import FileOutput
-from eflow._hidden.custom_exceptions import PipelineSegmentError
-from eflow.utils.sys_utils import create_json_file_from_dict,get_all_files_from_path
+from eflow._hidden.custom_exceptions import PipelineSegmentError, UnsatisfiedRequirments
+from eflow.utils.sys_utils import create_json_file_from_dict,json_file_to_dict,get_all_files_from_path
 from eflow.utils.string_utils import create_hex_decimal_string
 from collections import deque
 import copy
@@ -8,12 +8,23 @@ import os
 
 class DataPipelineSegment(FileOutput):
     def __init__(self,
-                 object_name):
+                 object_type,
+                 segment_id=None):
 
-        self.__object_name = object_name
-        self.__function_pipe = deque()
-        self.__pipeline_names = set()
         self.__json_file_name = None
+        self.__object_type = copy.deepcopy(object_type)
+        if not isinstance(segment_id, str) and segment_id:
+            raise UnsatisfiedRequirments(
+                "Segment id must be a string or set to 'None'!")
+
+        if isinstance(segment_id,str):
+            segment_id = segment_id.split(".")[0]
+
+        self.__segment_id = copy.deepcopy(segment_id)
+        self.__function_pipe = deque()
+        if self.__segment_id:
+            self.__configure_pipeline_segment_with_existing_file()
+
 
     @property
     def file_path(self):
@@ -31,23 +42,24 @@ class DataPipelineSegment(FileOutput):
         else:
             return copy.deepcopy(self.__json_file_name)
 
-
     def __add_function_to_que(self,
                               function_name,
-                              param_vals):
+                              params_dict):
 
         self.__function_pipe.append((function_name,
-                                     param_vals))
+                                     params_dict))
 
-        if len(self.__function_pipe) == 1:
+        if len(self.__function_pipe) == 1 and not self.__json_file_name:
             FileOutput.__init__(self,
-                                f'_Extras/JSON Files/Data Pipeline Segments/{self.__object_name}')
+                                f'_Extras/JSON Files/Data Pipeline Segments/{self.__object_type}')
             all_json_files = get_all_files_from_path(self.folder_path,
                                                      ".json")
             while True:
                 random_file_name = create_hex_decimal_string().upper()
                 if random_file_name not in all_json_files:
                     break
+
+            self.__segment_id = random_file_name
             self.__json_file_name = random_file_name + ".json"
 
         self.__create_json_pipeline_segment_file()
@@ -60,27 +72,62 @@ class DataPipelineSegment(FileOutput):
 
         # Pipeline Segment
         json_dict["Pipeline Segment"] = dict()
-
+        json_dict["Pipeline Segment"]["Object Type"] = self.__object_type
+        json_dict["Pipeline Segment"]["Functions Performed Order"] = dict()
         function_order = 1
-        for function_name, params in self.__function_pipe:
-            json_dict["Pipeline Segment"]["Object Type"] = self.__object_name
-            json_dict["Pipeline Segment"]["Functions Performed Order"] = dict()
+        for function_name, params_dict in self.__function_pipe:
             json_dict["Pipeline Segment"]["Functions Performed Order"][f"Function " \
                 f"Order {function_order}"] = dict()
             json_dict["Pipeline Segment"]["Functions Performed Order"][f"Function " \
                 f"Order {function_order}"][function_name] = dict()
+
             json_dict["Pipeline Segment"]["Functions Performed Order"][
                 f"Function Order {function_order}"][function_name][
-                "Params"] = dict()
-            for param_count,p in enumerate(params):
-                json_dict["Pipeline Segment"]["Functions Performed Order"][
-                    f"Function Order {function_order}"][function_name]["Params"][f"Param {param_count}"] = p
+                "Params Dict"] = params_dict
 
             function_order += 1
-        json_dict["Pipeline Segment"]["Function Count"] = function_order
+        json_dict["Pipeline Segment"]["Function Count"] = function_order - 1
 
+        print("hiiititiititi")
+        print(json_dict)
         create_json_file_from_dict(json_dict,
                                    self.folder_path,
                                    self.__json_file_name)
-    def perform_segment(self):
-        for
+
+    def __configure_pipeline_segment_with_existing_file(self):
+
+        FileOutput.__init__(self,
+                            f'_Extras/JSON Files/Data Pipeline Segments/{self.__object_type}')
+
+        self.__function_pipe = deque()
+        self.__json_file_name = copy.deepcopy(self.__segment_id) + ".json"
+
+        if not os.path.exists(self.folder_path):
+            raise PipelineSegmentError(
+                "Couldn't find the pipeline segment's folder when trying to configure this object with the provided json file.")
+        if not os.path.exists(self.folder_path + copy.deepcopy(self.__json_file_name)):
+            raise PipelineSegmentError(
+                f"Couldn't find the pipeline segment's file named '{self.__json_file_name}' in the pipeline's directory when trying to configure this object with the provided json file.")
+
+        json_dict = json_file_to_dict(
+            self.folder_path + copy.deepcopy(self.__json_file_name))
+
+        for function_order in range(1,2):
+            function_name = list(json_dict["Pipeline Segment"]["Functions Performed Order"][f"Function Order {function_order}"].keys())[0]
+            params_dict = json_dict["Pipeline Segment"]["Functions Performed Order"][f"Function Order {function_order}"][function_name]["Params Dict"]
+            self.__function_pipe.append((function_name,
+                                         params_dict))
+
+
+
+    def perform_segment(self,
+                        df):
+        for function_name,params_dict in self.__function_pipe:
+            method_to_call = getattr(self, function_name)
+
+            params_dict["df"] = df
+            params_dict["_add_to_que"] = False
+            method_to_call(**params_dict)
+
+        for function_name, params_dict in self.__function_pipe:
+            print(params_dict)
