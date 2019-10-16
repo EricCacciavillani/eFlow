@@ -263,7 +263,7 @@ class DataCleaner(DataPipelineSegment):
 
         for bool_feature in df_features.get_bool_features():
             if len(df[bool_feature].dropna().value_counts().values) != 2:
-                print("Testing")
+                print("testing")
 
     # --- Cleaning options
     def __zcore_remove_outliers(self,
