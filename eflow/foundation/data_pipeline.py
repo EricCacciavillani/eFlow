@@ -249,7 +249,7 @@ class DataPipeline(FileOutput):
                       add_libs=True):
         """
         generate_file (bool):
-            Determines whether or not to generate a python file 
+            Determines whether or not to generate a python file
         add_libs:
 
         Returns/Desc:
