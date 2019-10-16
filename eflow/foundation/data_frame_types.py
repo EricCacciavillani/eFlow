@@ -86,12 +86,12 @@ class DataFrameTypes:
     def get_numerical_features(self,
                                exclude_target=False):
         """
-            exclude_target:
-                If the target feature is an numerical (int/float); then it will be ignored
-                when passing back the set.
+        exclude_target:
+            If the target feature is an numerical (int/float); then it will be ignored
+            when passing back the set.
 
-            Returns/Desc:
-                Returns a set of all numerical features
+        Returns/Desc:
+            Returns a set of all numerical features
         """
         if exclude_target:
             tmp_set = copy.deepcopy(self.__numerical_features)
