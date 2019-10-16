@@ -11,3 +11,5 @@ tqdm
 python-dateutil
 scikit-plot
 scipy
+ipywidgets
+ipython_blocking
