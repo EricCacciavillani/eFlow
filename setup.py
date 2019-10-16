@@ -6,6 +6,7 @@ with open("README.md", "r") as fh:
 setuptools.setup(
      name='eflow',
      version='0.1',
+     scripts=['init_env'] ,
      author="Eric Cacciavillani",
      author_email="eric.cacciavillani@gmail.com",
      description="",
