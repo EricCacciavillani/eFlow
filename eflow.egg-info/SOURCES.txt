@@ -22,7 +22,6 @@ eflow/_hidden/general_objects/dataframe_snapshot.py
 eflow/_hidden/general_objects/enum.py
 eflow/_hidden/parent_objects/__init__.py
 eflow/_hidden/parent_objects/data_pipeline_segment.py
-eflow/_hidden/parent_objects/default_exception.py
 eflow/_hidden/parent_objects/file_output.py
 eflow/_hidden/utils/Multi_Threading_Functions.py
 eflow/_hidden/utils/__init__.py

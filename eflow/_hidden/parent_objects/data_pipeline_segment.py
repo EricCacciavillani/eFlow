@@ -9,141 +9,103 @@ import inspect
 import re
 
 class DataPipelineSegment(FileOutput):
+    """
+        Holds the function name's and arguments to be pushed to a json file.
+        This generated json file later allows a dataframe to be passed to it
+        and applies the functions and arguments in the sequence they were run.
+    """
     def __init__(self,
                  object_type,
                  segment_id=None):
+        """
+        Args:
+            object_type:
+                The child type of all object's that inherited DataPipelineSegment
+
+            segment_id:
+                 If init as a string instead of None; the object will attempt
+                 to find the json file in the provided directory.
+        Note:
+            Essentially we are serializing the object with json files.
+        """
 
         self.__json_file_name = None
         self.__object_type = copy.deepcopy(object_type)
+
         if not isinstance(segment_id, str) and segment_id:
             raise UnsatisfiedRequirments(
                 "Segment id must be a string or set to 'None'!")
 
+        # File extension removal
         if isinstance(segment_id,str):
             segment_id = segment_id.split(".")[0]
-
         self.__segment_id = copy.deepcopy(segment_id)
+
+        # Pushes the functions info based on order they are called
         self.__function_pipe = deque()
+
+        # Attempt to get json file into object's attributes.
         if self.__segment_id:
             self.__configure_pipeline_segment_with_existing_file()
 
 
-    @property
-    def file_path(self):
-        if len(self.__function_pipe) == 0:
-            raise PipelineSegmentError("The pipeline segment has not performed any actions yet."
-                                       " Please perform some methods with this object.")
-        else:
-            return self.folder_path + copy.deepcopy(self.__json_file_name)
-
-    @property
-    def file_name(self):
-        if len(self.__function_pipe) == 0:
-            raise PipelineSegmentError("The pipeline segment has not performed any actions yet."
-                                       " Please perform some methods with this object.")
-        else:
-            return copy.deepcopy(self.__json_file_name)
-
-    def __add_function_to_que(self,
-                              function_name,
-                              params_dict):
-
-        self.__function_pipe.append((function_name,
-                                     params_dict))
-
-        if len(self.__function_pipe) == 1 and not self.__json_file_name:
-            FileOutput.__init__(self,
-                                f'_Extras/JSON Files/Data Pipeline Segments/{self.__object_type}')
-            all_json_files = get_all_files_from_path(self.folder_path,
-                                                     ".json")
-            while True:
-                random_file_name = create_hex_decimal_string().upper()
-                if random_file_name not in all_json_files:
-                    break
-
-            self.__segment_id = random_file_name
-            self.__json_file_name = random_file_name + ".json"
-
-        self.__create_json_pipeline_segment_file()
-
-    def __create_json_pipeline_segment_file(self):
-        json_dict = dict()
-        # json_dict["Pipeline"] = dict()
-        # json_dict["Pipeline"]["Pipeline Name"] = pipeline_name
-        # json_dict["Pipeline"]["Pipeline Path"] = pipeline_name
-
-        # Pipeline Segment
-        json_dict["Pipeline Segment"] = dict()
-        json_dict["Pipeline Segment"]["Object Type"] = self.__object_type
-        json_dict["Pipeline Segment"]["Functions Performed Order"] = dict()
-        function_order = 1
-        for function_name, params_dict in self.__function_pipe:
-            json_dict["Pipeline Segment"]["Functions Performed Order"][f"Function " \
-                f"Order {function_order}"] = dict()
-            json_dict["Pipeline Segment"]["Functions Performed Order"][f"Function " \
-                f"Order {function_order}"][function_name] = dict()
-
-            json_dict["Pipeline Segment"]["Functions Performed Order"][
-                f"Function Order {function_order}"][function_name][
-                "Params Dict"] = params_dict
-
-            function_order += 1
-        json_dict["Pipeline Segment"]["Function Count"] = function_order - 1
-
-        create_json_file_from_dict(json_dict,
-                                   self.folder_path,
-                                   self.__json_file_name)
-
-    def __configure_pipeline_segment_with_existing_file(self):
-
-        FileOutput.__init__(self,
-                            f'_Extras/JSON Files/Data Pipeline Segments/{self.__object_type}')
-
-        self.__function_pipe = deque()
-        self.__json_file_name = copy.deepcopy(self.__segment_id) + ".json"
-
-        if not os.path.exists(self.folder_path):
-            raise PipelineSegmentError(
-                "Couldn't find the pipeline segment's folder when trying to configure this object with the provided json file.")
-        if not os.path.exists(self.folder_path + copy.deepcopy(self.__json_file_name)):
-            raise PipelineSegmentError(
-                f"Couldn't find the pipeline segment's file named '{self.__json_file_name}' in the pipeline's directory when trying to configure this object with the provided json file.")
-
-        json_dict = json_file_to_dict(
-            self.folder_path + copy.deepcopy(self.__json_file_name))
-
-        for function_order in range(1,2):
-            function_name = list(json_dict["Pipeline Segment"]["Functions Performed Order"][f"Function Order {function_order}"].keys())[0]
-            params_dict = json_dict["Pipeline Segment"]["Functions Performed Order"][f"Function Order {function_order}"][function_name]["Params Dict"]
-            self.__function_pipe.append((function_name,
-                                         params_dict))
-
-
-
     def perform_segment(self,
                         df):
-        for function_name,params_dict in self.__function_pipe:
+        """
+        Desc:
+            Performs all functions that the child of the pipeline segment has
+            performed on a given pandas dataframe.
+
+        Args:
+            df:
+                Pandas Dataframe
+        """
+        for function_name, params_dict in self.__function_pipe:
+
+            # Get function
             method_to_call = getattr(self, function_name)
 
+            # -----
             params_dict["df"] = df
             params_dict["_add_to_que"] = False
+
+            # Function call with arguments
             method_to_call(**params_dict)
+
+            # -----
             del params_dict["df"]
             del params_dict["_add_to_que"]
-
-        for function_name, params_dict in self.__function_pipe:
-            print(params_dict)
-
 
     def generate_code(self,
                       generate_file=True,
                       add_libs=True):
+        """
+        Desc:
+            Attempts to parse the file of the child object of the pipline
+            segment.
 
+        Args:
+            generate_file:
+                Depending on the boolean value of generate_file; True will
+                generate a python file and False will just return a list of
+                strings.
+
+            add_libs:
+                Adds utils libs to the top of list.
+
+        Returns:
+            If the arg 'generate_file' is set to False then it will just return
+            a list of strings.
+        """
+
+        # Raise error if no methods of the child have been called yet
         if len(self.__function_pipe) == 0:
-            raise PipelineSegmentError("Can't generate code when no methods of this segment have been used yet!")
+            raise PipelineSegmentError(
+                "Can't generate code when no methods of this segment have been used yet!")
 
         generated_code = []
 
+        # Add libs to the top of the file
         if add_libs:
             generated_code.append("from eflow.utils.math_utils import *")
             generated_code.append("from eflow.utils.image_utils import *")
@@ -154,16 +116,20 @@ class DataPipelineSegment(FileOutput):
             generated_code.append("from eflow.utils.sys_utils import *")
             generated_code.append("")
 
+        # -----
         for function_name, params_dict in self.__function_pipe:
 
+            # Get function's code
             pre_made_code = inspect.getsource(getattr(self, function_name))
 
             first_lines_found = False
             def_start = False
 
-            for parm,val in params_dict.items():
+            # Init variables
+            for parm, val in params_dict.items():
                 generated_code.append(f"{parm} = {val}")
 
+            # Iterate line by line of function's code
             for line in pre_made_code.split("\n"):
 
                 if "def " in line:
@@ -186,17 +152,155 @@ class DataPipelineSegment(FileOutput):
                 if "__add_function_to_que" in line:
                     continue
 
+                # -----
                 generated_code.append(line.replace("        ", "", 1))
 
-        generated_code.append("#" + "------"*5)
+            # Formatting
+            generated_code.append("# " + "------" * 5)
 
+        # Generate file or pass back list
         if generate_file:
             check_create_dir_structure(self.folder_path,
                                        "Generated code")
-            with open(self.folder_path + f'Generated code/{self.__segment_id}.py', 'r+') as filehandle:
+            with open(
+                    self.folder_path + f'Generated code/{self.__segment_id}.py',
+                    'r+') as filehandle:
                 filehandle.truncate(0)
                 for listitem in generated_code:
                     filehandle.write('%s\n' % listitem)
-            print(f"Generated a python file named/at: {self.folder_path}Generated code/{self.__segment_id}.py")
+            print(
+                f"Generated a python file named/at: {self.folder_path}Generated code/{self.__segment_id}.py")
         else:
             return generated_code
+
+    @property
+    def file_path(self):
+        """
+        Desc:
+            Gets the absolute path to the json file.
+        """
+        # -----
+        if len(self.__function_pipe) == 0:
+            raise PipelineSegmentError("The pipeline segment has not performed any actions yet."
+                                       " Please perform some methods with this object.")
+        else:
+            return self.folder_path + copy.deepcopy(self.__json_file_name)
+
+    @property
+    def file_name(self):
+        """
+        Desc:
+            Gets the file name of the json file.
+        """
+        # -----
+        if len(self.__function_pipe) == 0:
+            raise PipelineSegmentError("The pipeline segment has not performed any actions yet."
+                                       " Please perform some methods with this object.")
+        else:
+            return copy.deepcopy(self.__json_file_name)
+
+    def __add_function_to_que(self,
+                              function_name,
+                              params_dict):
+        """
+        Desc:
+            Adds the function info the function que. If the segment has no
+            json file name then generate one for it the given directory.
+
+        Args:
+            function_name:
+                Functions name
+
+            params_dict:
+                Parameter's name to their associated values.
+
+        Note:
+            This function should only ever be called by children of
+            this object.
+        """
+
+        self.__function_pipe.append((function_name,
+                                     params_dict))
+
+        # Generate new json file name with proper file/folder output attributes
+        if len(self.__function_pipe) == 1 and not self.__json_file_name:
+            FileOutput.__init__(self,
+                                f'_Extras/JSON Files/Data Pipeline Segments/{self.__object_type}')
+            all_json_files = get_all_files_from_path(self.folder_path,
+                                                     ".json")
+            while True:
+                random_file_name = create_hex_decimal_string().upper()
+                if random_file_name not in all_json_files:
+                    break
+
+            self.__segment_id = random_file_name
+            self.__json_file_name = random_file_name + ".json"
+
+        # Update json file
+        self.__create_json_pipeline_segment_file()
+
+    def __create_json_pipeline_segment_file(self):
+        """
+        Desc:
+            Creates a json file that the segment relates to; this file's
+            segment id can be used later used in the init to get all functions
+            that object already used.
+        """
+        json_dict = dict()
+
+        # Pipeline Segment
+        json_dict["Pipeline Segment"] = dict()
+        json_dict["Pipeline Segment"]["Object Type"] = self.__object_type
+        json_dict["Pipeline Segment"]["Functions Performed Order"] = dict()
+        function_order = 1
+        for function_name, params_dict in self.__function_pipe:
+            json_dict["Pipeline Segment"]["Functions Performed Order"][f"Function " \
+                f"Order {function_order}"] = dict()
+            json_dict["Pipeline Segment"]["Functions Performed Order"][f"Function " \
+                f"Order {function_order}"][function_name] = dict()
+
+            json_dict["Pipeline Segment"]["Functions Performed Order"][
+                f"Function Order {function_order}"][function_name][
+                "Params Dict"] = params_dict
+
+            function_order += 1
+        json_dict["Pipeline Segment"]["Function Count"] = function_order - 1
+
+        # Generate pipeline segment file
+        create_json_file_from_dict(json_dict,
+                                   self.folder_path,
+                                   self.__json_file_name)
+
+    def __configure_pipeline_segment_with_existing_file(self):
+        """
+        Desc:
+            Attempts to get a json file and then re_init the 'function_pipe'
+            and the 'json_file_name'.
+        """
+
+        FileOutput.__init__(self,
+                            f'_Extras/JSON Files/Data Pipeline Segments/{self.__object_type}')
+
+        self.__function_pipe = deque()
+        self.__json_file_name = copy.deepcopy(self.__segment_id) + ".json"
+
+        # File/Folder error checks
+        if not os.path.exists(self.folder_path):
+            raise PipelineSegmentError(
+                "Couldn't find the pipeline segment's folder when trying to configure this object with the provided json file.")
+        if not os.path.exists(self.folder_path + copy.deepcopy(self.__json_file_name)):
+            raise PipelineSegmentError(
+                f"Couldn't find the pipeline segment's file named '{self.__json_file_name}' in the pipeline's directory when trying to configure this object with the provided json file.")
+
+        json_dict = json_file_to_dict(
+            self.folder_path + copy.deepcopy(self.__json_file_name))
+
+        # Push functions into function pipe
+        for function_order in range(1,json_dict["Pipeline Segment"]["Function Count"] + 1):
+            function_name = list(json_dict["Pipeline Segment"]["Functions Performed Order"][f"Function Order {function_order}"].keys())[0]
+            params_dict = json_dict["Pipeline Segment"]["Functions Performed Order"][f"Function Order {function_order}"][function_name]["Params Dict"]
+            self.__function_pipe.append((function_name,
+                                         params_dict))
+
+
+

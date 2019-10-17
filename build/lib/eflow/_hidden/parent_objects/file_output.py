@@ -1,12 +1,12 @@
-from eflow._hidden.constants import SYS_CONSTANTS
 from eflow._hidden.custom_exceptions import UnsatisfiedRequirments
-from eflow._hidden.general_objects import enum
+from eflow._hidden.constants import SYS_CONSTANTS
 from eflow.utils.sys_utils import check_create_dir_structure
 from eflow.utils.string_utils import correct_directory_path
-
 import os
 import copy
 
+def enum(**enums):
+    return type('Enum', (), enums)
 
 class FileOutput(object):
 
@@ -37,7 +37,6 @@ class FileOutput(object):
                                   "structure than orginally intended.")
 
             tmp_path = overwrite_full_path
-
         self.__PROJECT = enum(PATH_TO_OUTPUT_FOLDER=tmp_path,
                               RELATIVE_PATH_TO_OUTPUT_FOLDER=tmp_path.split(f"/{SYS_CONSTANTS.PARENT_OUTPUT_FOLDER_NAME}/")[1])
 

@@ -27,18 +27,19 @@ class NullAnalysis(FileOutput):
                  overwrite_full_path=None,
                  notebook_mode=True):
         """
-        project_sub_dir:
-            Appends to the absolute directory of the output folder
+        Args:
+            project_sub_dir:
+                Appends to the absolute directory of the output folder
 
-        project_name:
-            Creates a parent or "project" folder in which all sub-directories
-            will be inner nested.
+            project_name:
+                Creates a parent or "project" folder in which all sub-directories
+                will be inner nested.
 
-        overwrite_full_path:
-            Overwrites the path to the parent folder.
+            overwrite_full_path:
+                Overwrites the path to the parent folder.
 
-        notebook_mode:
-            If in a python notebook display visualizations in the notebook.
+            notebook_mode:
+                If in a python notebook display visualizations in the notebook.
         """
 
         FileOutput.__init__(self,
