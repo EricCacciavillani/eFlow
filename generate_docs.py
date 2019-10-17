@@ -1,6 +1,8 @@
 # Import libs
 import os
 
+return getmarkdown(mod)
+
 # Taken from utils.sys_utils
 def get_all_directories_from_path(directory_pth):
     """
@@ -79,8 +81,10 @@ for dir_name in all_dirs:
             while line:
                 line = fp.readline()
 
-                if line == ""
+                if line == "":
 
+
+                # Create template
                 if "# def " in line or "#def ":
                     continue
 

@@ -16,20 +16,21 @@ class DataFrameTypes:
                  ignore_nulls=False,
                  display_init=True):
         """
-
-        df:
+        Parameters
+        ----------
+        :df:
             Pandas dataframe object.
 
-        target_feature:
+        :target_feature:
             If the project is using a supervised learning approach we can
             specify the target column. (Note: Not required)
 
-        ignore_nulls:
+        :ignore_nulls:
             If set to true than a temporary dataframe is created with each
             feature removes it's nan values to assert what data type the series
             object would be without nans existing inside it.
 
-        display_init:
+        :display_init:
             Display results when object init
         """
         self.__all_columns = df.columns.tolist()
@@ -86,11 +87,14 @@ class DataFrameTypes:
     def get_numerical_features(self,
                                exclude_target=False):
         """
-        exclude_target:
+        Parameters
+        ----------
+        exclude_target: bool
             If the target feature is an numerical (int/float); then it will be ignored
             when passing back the set.
 
-        Returns/Desc:
+        Returns/Desc
+        ----------
             Returns a set of all numerical features
         """
         if exclude_target:
