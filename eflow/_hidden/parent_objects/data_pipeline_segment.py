@@ -2,11 +2,19 @@ from eflow._hidden.parent_objects import FileOutput
 from eflow._hidden.custom_exceptions import PipelineSegmentError, UnsatisfiedRequirments
 from eflow.utils.sys_utils import create_json_file_from_dict,json_file_to_dict,get_all_files_from_path, check_create_dir_structure
 from eflow.utils.string_utils import create_hex_decimal_string
+
 from collections import deque
 import copy
 import os
 import inspect
 import re
+
+__author__ = "Eric Cacciavillani"
+__copyright__ = "Copyright 2019, eFlow"
+__credits__ = ["Eric Cacciavillani"]
+__license__ = "MIT"
+__maintainer__ = "EricCacciavillani"
+__email__ = "eric.cacciavillani@gmail.com"
 
 class DataPipelineSegment(FileOutput):
     """

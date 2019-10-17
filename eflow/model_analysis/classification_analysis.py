@@ -1,3 +1,9 @@
+from eflow.utils.sys_utils import *
+from eflow._hidden.parent_objects import FileOutput
+from eflow._hidden.custom_exceptions import *
+from eflow.data_analysis import FeatureAnalysis
+from eflow._hidden.constants import GRAPH_DEFAULTS
+
 from sklearn.metrics import accuracy_score
 from sklearn.metrics import f1_score
 from sklearn.metrics import matthews_corrcoef
@@ -12,11 +18,12 @@ import pandas as pd
 from IPython.display import display
 import matplotlib.pyplot as plt
 
-from eflow.utils.sys_utils import *
-from eflow._hidden.parent_objects import FileOutput
-from eflow._hidden.custom_exceptions import *
-from eflow.data_analysis import FeatureAnalysis
-from eflow._hidden.constants import GRAPH_DEFAULTS
+__author__ = "Eric Cacciavillani"
+__copyright__ = "Copyright 2019, eFlow"
+__credits__ = ["Eric Cacciavillani"]
+__license__ = "MIT"
+__maintainer__ = "EricCacciavillani"
+__email__ = "eric.cacciavillani@gmail.com"
 
 class ClassificationAnalysis(FileOutput):
 

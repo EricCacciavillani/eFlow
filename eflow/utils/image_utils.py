@@ -8,6 +8,14 @@ import six
 from eflow.utils.sys_utils import check_create_dir_structure
 from eflow.utils.string_utils import correct_directory_path
 
+__author__ = "Eric Cacciavillani"
+__copyright__ = "Copyright 2019, eFlow"
+__credits__ = ["Eric Cacciavillani"]
+__license__ = "MIT"
+__maintainer__ = "EricCacciavillani"
+__email__ = "eric.cacciavillani@gmail.com"
+
+
 def create_plt_png(directory_pth,
                    sub_dir,
                    filename,

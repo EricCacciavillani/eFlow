@@ -1,15 +1,22 @@
-import os
-import pandas as pd
-import math
+from eflow.utils.string_utils import correct_directory_path
+from eflow._hidden.custom_exceptions import UnsatisfiedRequirments, MismatchError
 from eflow.foundation import DataFrameTypes
 from eflow.utils.sys_utils import check_create_dir_structure, \
     create_json_file_from_dict
 
-from eflow.utils.string_utils import correct_directory_path
-from eflow._hidden.custom_exceptions import UnsatisfiedRequirments, MismatchError
+import os
+import pandas as pd
+import math
 import copy
 import json
 import numpy as np
+
+__author__ = "Eric Cacciavillani"
+__copyright__ = "Copyright 2019, eFlow"
+__credits__ = ["Eric Cacciavillani"]
+__license__ = "MIT"
+__maintainer__ = "EricCacciavillani"
+__email__ = "eric.cacciavillani@gmail.com"
 
 
 class DataFrameSnapshot:

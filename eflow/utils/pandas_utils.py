@@ -4,6 +4,14 @@ from eflow.utils.sys_utils import write_object_text_to_file
 from eflow.utils.image_utils import df_to_image
 
 
+__author__ = "Eric Cacciavillani"
+__copyright__ = "Copyright 2019, eFlow"
+__credits__ = ["Eric Cacciavillani"]
+__license__ = "MIT"
+__maintainer__ = "EricCacciavillani"
+__email__ = "eric.cacciavillani@gmail.com"
+
+
 def check_if_feature_exists(df,
                             feature_name):
     if feature_name not in df.columns:

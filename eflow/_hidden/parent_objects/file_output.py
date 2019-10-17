@@ -5,6 +5,13 @@ from eflow.utils.string_utils import correct_directory_path
 import os
 import copy
 
+__author__ = "Eric Cacciavillani"
+__copyright__ = "Copyright 2019, eFlow"
+__credits__ = ["Eric Cacciavillani"]
+__license__ = "MIT"
+__maintainer__ = "EricCacciavillani"
+__email__ = "eric.cacciavillani@gmail.com"
+
 class FileOutput(object):
     """
         Ensures a folder is part of eflow's main output stream and creates a

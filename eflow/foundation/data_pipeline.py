@@ -2,13 +2,20 @@ from eflow._hidden.parent_objects import FileOutput
 from eflow._hidden.parent_objects import DataPipelineSegment
 from eflow._hidden.custom_exceptions import UnsatisfiedRequirments, PipelineError
 from eflow.utils.string_utils import create_hex_decimal_string,correct_directory_path
-from eflow.utils.sys_utils import create_json_file_from_dict, get_all_files_from_path, check_create_dir_structure, json_file_to_dict
-# from eflow.data_pipeline_segments import DataCleaner
-from eflow.data_pipeline_segments import DataTransformer
+from eflow.utils.sys_utils import create_json_file_from_dict, check_create_dir_structure, json_file_to_dict
+
 from eflow._hidden.constants import SYS_CONSTANTS
 import copy
 import os
 from collections import deque
+
+__author__ = "Eric Cacciavillani"
+__copyright__ = "Copyright 2019, eFlow"
+__credits__ = ["Eric Cacciavillani"]
+__license__ = "MIT"
+__maintainer__ = "EricCacciavillani"
+__email__ = "eric.cacciavillani@gmail.com"
+
 
 class DataPipeline(FileOutput):
     """

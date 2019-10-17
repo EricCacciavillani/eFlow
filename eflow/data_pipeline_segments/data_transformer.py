@@ -2,7 +2,13 @@ from eflow._hidden.parent_objects import DataPipelineSegment
 from eflow.utils.pandas_utils import check_if_feature_exists
 
 import copy
-from collections import deque
+
+__author__ = "Eric Cacciavillani"
+__copyright__ = "Copyright 2019, eFlow"
+__credits__ = ["Eric Cacciavillani"]
+__license__ = "MIT"
+__maintainer__ = "EricCacciavillani"
+__email__ = "eric.cacciavillani@gmail.com"
 
 
 class DataTransformer(DataPipelineSegment):

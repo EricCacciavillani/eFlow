@@ -1,6 +1,13 @@
 # General/Misc somethings that don't quite fit it the other utils
 import itertools
 
+__author__ = "Eric Cacciavillani"
+__copyright__ = "Copyright 2019, eFlow"
+__credits__ = ["Eric Cacciavillani"]
+__license__ = "MIT"
+__maintainer__ = "EricCacciavillani"
+__email__ = "eric.cacciavillani@gmail.com"
+
 def string_condtional(given_val,
                       full_condtional):
     """

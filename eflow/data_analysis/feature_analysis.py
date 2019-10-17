@@ -1,3 +1,10 @@
+from eflow._hidden.parent_objects import FileOutput
+from eflow._hidden.general_objects import DataFrameSnapshot
+from eflow.utils.pandas_utils import descr_table,value_counts_table
+from eflow.utils.image_utils import create_plt_png, df_to_image
+from eflow.utils.string_utils import convert_to_filename
+from eflow._hidden.custom_exceptions import UnsatisfiedRequirments
+
 import random
 import numpy as np
 from matplotlib import pyplot as plt
@@ -5,16 +12,12 @@ import copy
 from IPython.display import display
 import seaborn as sns
 
-from eflow.utils.sys_utils import *
-from eflow._hidden.parent_objects import FileOutput
-from eflow._hidden.custom_exceptions import *
-
-from eflow._hidden.parent_objects import FileOutput
-from eflow._hidden.general_objects import DataFrameSnapshot
-from eflow.utils.pandas_utils import descr_table,value_counts_table
-from eflow.utils.image_utils import create_plt_png, df_to_image
-from eflow.utils.string_utils import convert_to_filename
-from eflow._hidden.custom_exceptions import UnsatisfiedRequirments
+__author__ = "Eric Cacciavillani"
+__copyright__ = "Copyright 2019, eFlow"
+__credits__ = ["Eric Cacciavillani"]
+__license__ = "MIT"
+__maintainer__ = "EricCacciavillani"
+__email__ = "eric.cacciavillani@gmail.com"
 
 
 class FeatureAnalysis(FileOutput):
@@ -30,18 +33,19 @@ class FeatureAnalysis(FileOutput):
                  overwrite_full_path=None,
                  notebook_mode=True):
         """
-        project_sub_dir:
-            Appends to the absolute directory of the output folder
+        Args:
+            project_sub_dir:
+                Appends to the absolute directory of the output folder
 
-        project_name:
-            Creates a parent or "project" folder in which all sub-directories
-            will be inner nested.
+            project_name:
+                Creates a parent or "project" folder in which all sub-directories
+                will be inner nested.
 
-        overwrite_full_path:
-            Overwrites the path to the parent folder.
+            overwrite_full_path:
+                Overwrites the path to the parent folder.
 
-        notebook_mode:
-            If in a python notebook display visualizations in the notebook.
+            notebook_mode:
+                If in a python notebook display visualizations in the notebook.
         """
 
         FileOutput.__init__(self,
@@ -50,91 +54,29 @@ class FeatureAnalysis(FileOutput):
 
         # Pre-defined colors for column's with set column names names.
         # Multiple names/values are allowed
-        self.__defined_column_colors = list()
-        self.__defined_column_colors.append([["gender", "sex"],
-                                             ["Male", "M", "#7EAED3"],
-                                             ["Female", "F", "#FFB6C1"]])
-        self.__defined_column_colors.append([[" "],
-                                             ["Male", "#7EAED3"],
-                                             ["Female", "#FFB6C1"]])
-        self.__defined_column_colors.append([[" "],
-                                             ["Y", "y" "yes", "Yes",
-                                              "#55a868"],
-                                             ["N", "n", "no", "No",
-                                              "#ff8585"]])
-        self.__defined_column_colors.append([[" "],
-                                             [True, "True", "#55a868"],
-                                             [False, "False", "#ff8585"]])
+        self.__defined_column_value_colors = list()
+        self.__defined_column_value_colors.append([["gender", "sex"],
+                                                  ["Male", "M", "#7EAED3"],
+                                                  ["Female", "F", "#FFB6C1"]])
+        self.__defined_column_value_colors.append([[" "],
+                                                  ["Male", "#7EAED3"],
+                                                  ["Female", "#FFB6C1"]])
+        self.__defined_column_value_colors.append([[" "],
+                                                  ["Y", "y" "yes", "Yes",
+                                                   "#55a868"],
+                                                  ["N", "n", "no", "No",
+                                                   "#ff8585"]])
+        self.__defined_column_value_colors.append([[" "],
+                                                  [True, "True", "true",
+                                                   "#55a868"],
+                                                  [False, "False", "false",
+                                                   "#ff8585"]])
 
         self.__notebook_mode = copy.deepcopy(notebook_mode)
+
+        # Determines if the perform was called to see if we need to re-check
+        # the dataframe.
         self.__called_from_perform = False
-
-    def __check_specfied_column_colors(self,
-                                       df,
-                                       feature_name,
-                                       init_default_color=None):
-        """
-        df:
-            Pandas DataFrame object.
-
-        col_feature_name:
-            Specified feature column name.
-
-        init_default_color:
-            A default color to assign unknown values when other values are
-            already assigned. Left to 'None' will init with random colors.
-
-        Returns/Descr:
-            Checks the column name and assigns it with the appropriate
-            color values if the values also match specified values.
-        """
-
-        specfied_column_values = [
-            str(x).upper() for x in
-            df[feature_name].value_counts().index.tolist()]
-
-        # Assign with default color value or assign random colors
-        if not init_default_color:
-            column_colors = ["#%06x" % random.randint(0, 0xFFFFFF)
-                             for _ in range(0,
-                                            len(specfied_column_values))]
-        else:
-            column_colors = [init_default_color
-                             for _ in range(0,
-                                            len(
-                                                specfied_column_values))]
-
-        found_color_value = False
-
-        # Check if the given column name matches any pre-defined names
-        for column_info in copy.deepcopy(self.__defined_column_colors):
-
-            specified_column_names = column_info.pop(0)
-            specified_column_names = [str(x).upper()
-                                      for x in specified_column_names]
-
-            # Compare both feature names; ignore char case; check for default
-            if feature_name.upper() in specified_column_names or \
-                    specified_column_names[0] == " ":
-
-                for column_value_info in column_info:
-                    column_value_color = column_value_info.pop(-1)
-
-                    for column_value in {x for x in column_value_info}:
-
-                        if str(column_value).upper() in specfied_column_values:
-                            column_colors[specfied_column_values.index(str(
-                                column_value).upper())] = column_value_color
-                            found_color_value = True
-
-                # No colors were found reloop operation
-                if not found_color_value:
-                    continue
-                else:
-                    return column_colors
-
-        # Return obj None for no matching colors
-        return None
 
     def perform_analysis(self,
                          df,
@@ -144,85 +86,119 @@ class FeatureAnalysis(FileOutput):
                          save_file=True,
                          dataframe_snapshot=True):
         """
-        df:
-            Pandas dataframe object
+        Desc:
+            Performs all public methods that generate visualizations/insights
+            about the data.
 
-        df_features:
-            DataFrameTypes object; organizes feature types into groups.
+        Note:
+            Pretty much my personal lazy button for running the entire object
+            without specifying any method in particular.
 
-        dataset_name:
-            The dataset's name; this will create a sub-directory in which your
-            generated graph will be inner-nested in.
+        Args:
+            df:
+                Pandas dataframe object
 
-        display_visuals:
-            Boolean value to whether or not to display visualizations.
+            df_features:
+                DataFrameTypes object; organizes feature types into groups.
 
-        save_file:
-            Boolean value to whether or not to save the file.
+            dataset_name:
+                The dataset's name; this will create a sub-directory in which your
+                generated graph will be inner-nested in.
 
-        dataframe_snapshot:
-            Boolean value to determine whether or not generate and compare a
-            snapshot of the dataframe in the dataset's directory structure.
-            Helps ensure that data generated in that directory is correctly
-            associated to a dataframe.
+            display_visuals:
+                Boolean value to whether or not to display visualizations.
+
+            save_file:
+                Boolean value to whether or not to save the file.
+
+            dataframe_snapshot:
+                Boolean value to determine whether or not generate and compare a
+                snapshot of the dataframe in the dataset's directory structure.
+                Helps ensure that data generated in that directory is correctly
+                associated to a dataframe.
+
+        Raises:
+            If an empty dataframe is passed to this function or if the same
+            dataframe is passed to it raise error.
         """
         try:
-           self.__called_from_perform = False
-           if df.shape[0] == 0 or np.sum(np.sum(df.isnull()).values) == df.shape[0]:
-               raise UnsatisfiedRequirments("Dataframe must contain valid data and not be empty or filled with nulls!")
-           # Iterate through DataFrame columns and graph based on data types
 
-           if dataframe_snapshot:
+            self.__called_from_perform = False
+
+            # Raise empty dataframe error
+            if df.shape[0] == 0 or np.sum(np.sum(df.isnull()).values) == df.shape[0]:
+               raise UnsatisfiedRequirments("Dataframe must contain valid data and not be empty or filled with nulls!")
+
+            # Compare dataframe json file's snapshot to the given dataframe's
+            # snapshot
+            if dataframe_snapshot:
                df_snapshot = DataFrameSnapshot()
                df_snapshot.check_create_snapshot(df,
                                                  directory_pth=self.folder_path,
                                                  sub_dir=f"{dataset_name}/_Extras")
 
-           for feature_name in df.columns:
+            # Set to true to represent the function call was made with perform
+            self.__called_from_perform = True
 
-               feature_values = df[feature_name].value_counts().keys()
-               if len(feature_values) <= 3 and \
-                       not feature_name in df_features.get_numerical_features():
-                   self.pie_graph(df,
-                                  feature_name,
-                                  dataset_name=dataset_name,
-                                  display_visuals=display_visuals,
-                                  save_file=save_file,
-                                  init_default_color="#C0C0C0")
+            missed_features = []
+            error_features = dict()
+            try:
+                # Iterate through features
+                for feature_name in df.columns:
 
-               elif feature_name in df_features.get_categorical_features():
-                   self.count_plot_graph(df,
-                                         feature_name,
-                                         dataset_name=dataset_name,
-                                         display_visuals=display_visuals,
-                                         save_file=save_file)
+                   feature_values = df[feature_name].value_counts().keys()
 
-               elif feature_name in df_features.get_integer_features():
-                   if len(feature_values) <= 13:
+                   # -----
+                   if len(feature_values) <= 3 and \
+                           not feature_name in df_features.get_numerical_features():
+                       self.pie_graph(df,
+                                      feature_name,
+                                      dataset_name=dataset_name,
+                                      display_visuals=display_visuals,
+                                      save_file=save_file,
+                                      init_default_color="#C0C0C0")
+                   # -----
+                   elif feature_name in df_features.get_categorical_features():
                        self.count_plot_graph(df,
                                              feature_name,
                                              dataset_name=dataset_name,
                                              display_visuals=display_visuals,
                                              save_file=save_file)
-                   else:
+                   # -----
+                   elif feature_name in df_features.get_integer_features():
                        self.distance_plot_graph(df,
                                                 feature_name,
                                                 dataset_name=dataset_name,
                                                 display_visuals=display_visuals,
                                                 save_file=save_file)
+                   # -----
+                   elif feature_name in df_features.get_float_features():
+                       self.distance_plot_graph(df,
+                                                feature_name,
+                                                dataset_name=dataset_name,
+                                                display_visuals=display_visuals,
+                                                save_file=save_file)
+                   else:
+                       missed_features.append(feature_name)
+            except Exception as e:
+                error_features[feature_name] = e
 
-               elif feature_name in df_features.get_float_features():
-                   self.distance_plot_graph(df,
-                                            feature_name,
-                                            dataset_name=dataset_name,
-                                            display_visuals=display_visuals,
-                                            save_file=save_file)
 
-           else:
-               print(
-                   "Object didn't receive a Pandas Dataframe object or a DataFrameTypes object")
+            # If any missed features are picked up
+            if len(missed_features) != 0:
+                print("Some features were not analyzed by perform analysis!")
+                for feature_name in missed_features:
+                    print(f"\t\tFeature:{feature_name}")
+
+            # If any functions invoked errors
+            if len(error_features.keys()) != 0:
+                print("Some features caused functions to create errors.")
+                for feature_name,error in error_features:
+                    print(f"\t\tFeature:{feature_name}\n{error}\n")
+
+        # Ensures that called from perform is turned off
         finally:
-           self.__called_from_perform = False
+            self.__called_from_perform = False
 
     def distance_plot_graph(self,
                             df,
@@ -233,39 +209,48 @@ class FeatureAnalysis(FileOutput):
                             save_file=True,
                             dataframe_snapshot=True):
         """
-        df:
-            Pandas dataframe object
+        Args:
+            df:
+                Pandas dataframe object
 
-        feature_name:
-            Specified feature column name.
+            feature_name:
+                Specified feature column name.
 
-        dataset_name:
-            The dataset's name; this will create a sub-directory in which your
-            generated graph will be inner-nested in.
+            dataset_name:
+                The dataset's name; this will create a sub-directory in which your
+                generated graph will be inner-nested in.
 
-        display_visuals:
-            Boolean value to whether or not to display visualizations.
+            display_visuals:
+                Boolean value to whether or not to display visualizations.
 
-        save_file:
-            Boolean value to whether or not to save the file.
+            filename:
+                Name to give the file.
 
-        dataframe_snapshot:
-            Boolean value to determine whether or not generate and compare a
-            snapshot of the dataframe in the dataset's directory structure.
-            Helps ensure that data generated in that directory is correctly
-            associated to a dataframe.
+            save_file:
+                Boolean value to whether or not to save the file.
 
-        Returns/Descr:
-            Display a distance plot and save the graph/table in the correct
-            directory.
+            dataframe_snapshot:
+                Boolean value to determine whether or not generate and compare a
+                snapshot of the dataframe in the dataset's directory structure.
+                Helps ensure that data generated in that directory is correctly
+                associated to a dataframe.
+
+        Desc:
+            Display a distance plot and save the graph in the correct directory.
+
+        Raises:
+            Raises error if the feature data is filled with only nulls or if
+            the json file's snapshot of the given dataframe doesn't match the
+            given dataframe.
         """
-
         if np.sum(df[feature_name].isnull()) == df.shape[0]:
             raise UnsatisfiedRequirments(
                 "Distance plot graph couldn't be generated because " +
                 f"there is only missing data to display in {feature_name}!")
 
         print(f"Generating graph for distance plot graph on {feature_name}")
+
+        # Closes up any past graph info
         plt.close()
 
         # Set foundation graph info
@@ -276,11 +261,13 @@ class FeatureAnalysis(FileOutput):
         # Create seaborn graph
         sns.distplot(df[feature_name].dropna())
 
+        # Pass a default name if needed
         if not filename:
             filename = f"Distance plot graph on {feature_name}"
 
+        # -----
         if save_file:
-
+            # Check if dataframe matches saved snapshot; Creates file if needed
             if not self.__called_from_perform:
                 if dataframe_snapshot:
                     df_snapshot = DataFrameSnapshot()
@@ -288,6 +275,7 @@ class FeatureAnalysis(FileOutput):
                                                       directory_pth=self.folder_path,
                                                       sub_dir=f"{dataset_name}/_Extras")
 
+            # Create the png
             create_plt_png(self.folder_path,
                            f"{dataset_name}/Graphics",
                            convert_to_filename(filename))
@@ -310,38 +298,43 @@ class FeatureAnalysis(FileOutput):
                          flip_axis=False,
                          palette="PuBu"):
         """
-        df:
-            Pandas dataframe object
+        Args:
+            df:
+                Pandas dataframe object
 
-        feature_name:
-            Specified feature column name.
+            feature_name:
+                Specified feature column name.
 
-        dataset_name:
-            The dataset's name; this will create a sub-directory in which your
-            generated graph will be inner-nested in.
+            dataset_name:
+                The dataset's name; this will create a sub-directory in which your
+                generated graph will be inner-nested in.
 
-        display_visuals:
-            Boolean value to whether or not to display visualizations.
+            display_visuals:
+                Boolean value to whether or not to display visualizations.
 
-        save_file:
-            Boolean value to whether or not to save the file.
+            save_file:
+                Boolean value to whether or not to save the file.
 
-        dataframe_snapshot:
-            Boolean value to determine whether or not generate and compare a
-            snapshot of the dataframe in the dataset's directory structure.
-            Helps ensure that data generated in that directory is correctly
-            associated to a dataframe.
+            dataframe_snapshot:
+                Boolean value to determine whether or not generate and compare a
+                snapshot of the dataframe in the dataset's directory structure.
+                Helps ensure that data generated in that directory is correctly
+                associated to a dataframe.
 
 
-        flip_axis:
-            Flip the x and y axis for visual representation.
+            flip_axis:
+                Flip the x and y axis for visual representation.
 
-        palette:
-            Seaborn color palette, specifies the colors the graph will use.
+            palette:
+                Seaborn color palette, specifies the colors the graph will use.
 
-        Returns/Descr:
-            Display a count plot and save the graph/table in the correct
-            directory.
+        Desc:
+            Display a count plot and save the graph in the correct directory.
+
+        Raises:
+            Raises error if the feature data is filled with only nulls or if
+            the json file's snapshot of the given dataframe doesn't match the
+            given dataframe.
         """
 
         if np.sum(df[feature_name].isnull()) == df.shape[0]:
@@ -349,6 +342,8 @@ class FeatureAnalysis(FileOutput):
                   f"there is only missing data to display in {feature_name}!")
         print(
             f"Count plot graph for distance plot graph on {feature_name}")
+
+        # Closes up any past graph info
         plt.close()
 
         # Set graph info
@@ -384,11 +379,14 @@ class FeatureAnalysis(FileOutput):
                     '{:1}'.format(height),
                     ha="center")
 
+        # Pass a default name if needed
         if not filename:
             filename = f"Count plot graph on {feature_name}"
 
+        # -----
         if save_file:
 
+            # Check if dataframe matches saved snapshot; Creates file if needed
             if not self.__called_from_perform:
                 if dataframe_snapshot:
                     df_snapshot = DataFrameSnapshot()
@@ -396,6 +394,7 @@ class FeatureAnalysis(FileOutput):
                                                       directory_pth=self.folder_path,
                                                       sub_dir=f"{dataset_name}/_Extras")
 
+            # Creates png of plot
             create_plt_png(self.folder_path,
                            f"{dataset_name}/Graphics",
                            convert_to_filename(filename))
@@ -418,42 +417,47 @@ class FeatureAnalysis(FileOutput):
                   colors=None,
                   init_default_color=None):
         """
-       df:
-           Pandas DataFrame object.
+        Args:
+           df:
+               Pandas DataFrame object.
 
-       feature_name:
-           Specified feature column name.
+           feature_name:
+               Specified feature column name.
 
-       dataset_name:
-           The dataset's name; this will create a sub-directory in which your
-           generated graph will be inner-nested in.
+           dataset_name:
+               The dataset's name; this will create a sub-directory in which your
+               generated graph will be inner-nested in.
 
-       display_visuals:
-           Boolean value to whether or not to display visualizations.
+           display_visuals:
+               Boolean value to whether or not to display visualizations.
 
-       save_file:
-           Boolean value to whether or not to save the file.
+           save_file:
+               Boolean value to whether or not to save the file.
 
-       dataframe_snapshot:
-            Boolean value to determine whether or not generate and compare a
-            snapshot of the dataframe in the dataset's directory structure.
-            Helps ensure that data generated in that directory is correctly
-            associated to a dataframe.
+           dataframe_snapshot:
+                Boolean value to determine whether or not generate and compare a
+                snapshot of the dataframe in the dataset's directory structure.
+                Helps ensure that data generated in that directory is correctly
+                associated to a dataframe.
 
-       colors:
-            Accepts an array of hex colors with the correct count of values
-            within the feature. If not init; then specified colors will be
-            assigned based on if the feature is Boolean or if the column name
-            is found in 'defined_column_colors'; else just init with
-            random colors.
+           colors:
+                Accepts an array of hex colors with the correct count of values
+                within the feature. If not init; then specified colors will be
+                assigned based on if the feature is Boolean or if the column name
+                is found in 'defined_column_colors'; else just init with
+                random colors.
 
-       init_default_color:
-           A default color to assign unknown values when other values are
-           already assigned. Left to 'None' will init with random colors.
+           init_default_color:
+               A default color to assign unknown values when other values are
+               already assigned. Left to 'None' will init with random colors.
 
-       Returns/Descr:
-           Display a pie graph and save the graph/table in the correct
-           directory.
+       Desc:
+           Display a pie graph and save the graph in the correct directory.
+
+        Raises:
+            Raises error if the feature data is filled with only nulls or if
+            the json file's snapshot of the given dataframe doesn't match the
+            given dataframe.
         """
 
         if np.sum(df[feature_name].isnull()) == df.shape[0]:
@@ -461,6 +465,8 @@ class FeatureAnalysis(FileOutput):
                   f"there is only missing data to display in {feature_name}!")
         print(
             f"Pie graph for distance plot graph on {feature_name}")
+
+        # Closes up any past graph info
         plt.close()
 
         # Find value counts
@@ -498,11 +504,13 @@ class FeatureAnalysis(FileOutput):
         plt.tight_layout()
         plt.figure(figsize=(20, 20))
 
+        # Pass a default name if needed
         if not filename:
             filename = f"Pie graph on {feature_name}"
 
+        # -----
         if save_file:
-
+            # Check if dataframe matches saved snapshot; Creates file if needed
             if not self.__called_from_perform:
                 if dataframe_snapshot:
                     df_snapshot = DataFrameSnapshot()
@@ -510,6 +518,7 @@ class FeatureAnalysis(FileOutput):
                                                       directory_pth=self.folder_path,
                                                       sub_dir=f"{dataset_name}/_Extras")
 
+            # Create a png of the plot
             create_plt_png(self.folder_path,
                            f"{dataset_name}/Graphics",
                            convert_to_filename(filename))
@@ -531,42 +540,53 @@ class FeatureAnalysis(FileOutput):
                            save_file=True,
                            dataframe_snapshot=True):
         """
-        df:
-            Pandas DataFrame object
+        Args:
+            df:
+                Pandas DataFrame object
 
-        feature_name:
-            Specified feature column name.
+            feature_name:
+                Specified feature column name.
 
-        dataset_name:
-            The dataset's name; this will create a sub-directory in which your
-            generated graph will be inner-nested in.
+            dataset_name:
+                The dataset's name; this will create a sub-directory in which your
+                generated graph will be inner-nested in.
 
-        display_visuals:
-            Boolean value to whether or not to display visualizations.
+            display_visuals:
+                Boolean value to whether or not to display visualizations.
 
-        filename:
-            If set to 'None' will default to a pre-defined string;
-            unless it is set to an actual filename.
+            filename:
+                If set to 'None' will default to a pre-defined string;
+                unless it is set to an actual filename.
 
-        save_file:
-            Saves file if set to True; doesn't if set to False.
+            save_file:
+                Saves file if set to True; doesn't if set to False.
 
-        dataframe_snapshot:
-            Boolean value to determine whether or not generate and compare a
-            snapshot of the dataframe in the dataset's directory structure.
-            Helps ensure that data generated in that directory is correctly
-            associated to a dataframe.
+            dataframe_snapshot:
+                Boolean value to determine whether or not generate and compare a
+                snapshot of the dataframe in the dataset's directory structure.
+                Helps ensure that data generated in that directory is correctly
+                associated to a dataframe.
 
-        Returns/Desc:
+        Desc:
             Creates/Saves a pandas dataframe of value counts of a dataframe.
+
+            Note:
+                Creates a png of the table.
+
+        Raises:
+            Raises error if the feature data is filled with only nulls or if
+            the json file's snapshot of the given dataframe doesn't match the
+            given dataframe.
         """
 
+        # Check if feature has only null data
         if np.sum(df[feature_name].isnull()) == df.shape[0]:
             raise UnsatisfiedRequirments("Values count table couldn't be generated because " +
                                          f"there is only missing data to display in {feature_name}!")
 
         print("Creating data description table...")
 
+        # -----
         val_counts_df = value_counts_table(df,
                                            feature_name)
 
@@ -577,6 +597,7 @@ class FeatureAnalysis(FileOutput):
             if display_visuals:
                 print(val_counts_df)
 
+        # Pass a default name if needed
         if not filename:
             filename = f"{feature_name} Value Counts Table"
 
@@ -587,7 +608,10 @@ class FeatureAnalysis(FileOutput):
                     df_snapshot.check_create_snapshot(df,
                                                       directory_pth=self.folder_path,
                                                       sub_dir=f"{dataset_name}/_Extras")
+            # Closes up any past graph info
             plt.close()
+
+            # Convert value counts dataframe to an image
             df_to_image(val_counts_df,
                         self.folder_path,
                         f"{dataset_name}/Tables",
@@ -604,42 +628,50 @@ class FeatureAnalysis(FileOutput):
                     save_file=True,
                     dataframe_snapshot=True):
         """
-        df:
-            Pandas DataFrame object
+        Args:
+            df:
+                Pandas DataFrame object
 
-        feature_name:
-            Specified feature column name.
+            feature_name:
+                Specified feature column name.
 
-        dataset_name:
-            The dataset's name; this will create a sub-directory in which your
-            generated graph will be inner-nested in.
+            dataset_name:
+                The dataset's name; this will create a sub-directory in which your
+                generated graph will be inner-nested in.
 
-        display_visuals:
-            Boolean value to whether or not to display visualizations.
+            display_visuals:
+                Boolean value to whether or not to display visualizations.
 
-        filename:
-            If set to 'None' will default to a pre-defined string;
-            unless it is set to an actual filename.
+            filename:
+                If set to 'None' will default to a pre-defined string;
+                unless it is set to an actual filename.
 
-        save_file:
-            Saves file if set to True; doesn't if set to False.
+            save_file:
+                Saves file if set to True; doesn't if set to False.
 
-        dataframe_snapshot:
-            Boolean value to determine whether or not generate and compare a
-            snapshot of the dataframe in the dataset's directory structure.
-            Helps ensure that data generated in that directory is correctly
-            associated to a dataframe.
+            dataframe_snapshot:
+                Boolean value to determine whether or not generate and compare a
+                snapshot of the dataframe in the dataset's directory structure.
+                Helps ensure that data generated in that directory is correctly
+                associated to a dataframe.
 
-        Returns/Desc:
+        Desc:
             Creates/Saves a pandas dataframe of features and their found types
             in the dataframe.
+
+            Note:
+                Creates a png of the table.
+
+        Raises:
+            Raises error if the feature data is filled with only nulls or if
+            the json file's snapshot of the given dataframe doesn't match the
+            given dataframe.
         """
+
+        # Check if dataframe has only null data
         if np.sum(df[feature_name].isnull()) == df.shape[0]:
-            print("This function requires a dataframe"
-                  "in both rows and columns.")
             raise UnsatisfiedRequirments("Count plot graph couldn't be generated because " +
                   f"there is only missing data to display in {feature_name}!")
-            return None
 
         print("Creating data description table...")
 
@@ -653,6 +685,7 @@ class FeatureAnalysis(FileOutput):
             if display_visuals:
                 print(col_desc_df)
 
+        # Pass a default name if needed
         if not filename:
             filename = f"{feature_name} Description Table"
 
@@ -663,10 +696,85 @@ class FeatureAnalysis(FileOutput):
                     df_snapshot.check_create_snapshot(df,
                                                       directory_pth=self.folder_path,
                                                       sub_dir=f"{dataset_name}/_Extras")
+            # Closes up any past graph info
             plt.close()
+
+            # Convert value counts dataframe to an image
             df_to_image(col_desc_df,
                         self.folder_path,
                         f"{dataset_name}/Tables",
                         convert_to_filename(filename),
                         show_index=True,
                         format_float_pos=2)
+
+
+    def __check_specfied_column_colors(self,
+                                       df,
+                                       feature_name,
+                                       init_default_color=None):
+        """
+        Desc:
+            Checks the column name and column values and
+            returns a list hex of colors.
+
+        Args:
+            df:
+                Pandas DataFrame object.
+
+            feature_name:
+                Specified feature column name.
+
+            init_default_color:
+                A default color to assign unknown values when other values are
+                already assigned. Left to 'None' will init with random colors.
+
+        Returns:
+            Returns a list hex of colors based on the feature name.
+        """
+
+        specfied_column_values = [
+            str(x).upper() for x in
+            df[feature_name].value_counts().index.tolist()]
+
+        # Assign with default color value or assign random colors
+        if not init_default_color:
+            column_colors = ["#%06x" % random.randint(0, 0xFFFFFF)
+                             for _ in range(0,
+                                            len(specfied_column_values))]
+        else:
+            column_colors = [init_default_color
+                             for _ in range(0,
+                                            len(
+                                                specfied_column_values))]
+
+        found_color_value = False
+
+        # Check if the given column name matches any pre-defined names
+        for column_info in copy.deepcopy(self.__defined_column_value_colors):
+
+            specified_column_names = column_info.pop(0)
+            specified_column_names = [str(x).upper()
+                                      for x in specified_column_names]
+
+            # Compare both feature names; ignore char case; check for default
+            if feature_name.upper() in specified_column_names or \
+                    specified_column_names[0] == " ":
+
+                for column_value_info in column_info:
+                    column_value_color = column_value_info.pop(-1)
+
+                    for column_value in {x for x in column_value_info}:
+
+                        if str(column_value).upper() in specfied_column_values:
+                            column_colors[specfied_column_values.index(str(
+                                column_value).upper())] = column_value_color
+                            found_color_value = True
+
+                # No colors were found reloop operation
+                if not found_color_value:
+                    continue
+                else:
+                    return column_colors
+
+        # Return obj None for no matching colors
+        return None
