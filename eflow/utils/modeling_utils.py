@@ -17,27 +17,41 @@ def optimize_model_grid(model,
                         verbose=0,
                         n_jobs=1):
     """
-    model:
-        Machine learning model to fit across a cross fold with a cross
+    Desc:
+        Finds the best parameters for a model; returns the model and parameters.
 
-    X_train:
-        Feature matrix.
+    Args:
+        model:
+            Machine learning model to fit across a cross fold with a cross
 
-    y_train:
-        Target vector.
+        X_train:
+            Feature matrix.
 
-    param_grid:
-        Dictionary with parameters names.
+        y_train:
+            Target vector.
 
-    scoring:
-        String value to determine the metric to evaluate the best model.
-        Link to all strings: http://tinyurl.com/y22f3m5k
+        param_grid:
+            Dictionary with parameters names.
 
-    cv:
-        Cross-validation strategy for 'training'.
+        scoring:
+            String value to determine the metric to evaluate the best model.
+            Link to all strings: http://tinyurl.com/y22f3m5k
 
-    Returns/Desc:
+        cv:
+            Cross-validation strategy for 'training'.
+
+        verbose:
+            Controls the verbosity: the higher, the more messages.
+
+        n_jobs:
+            Number of jobs to run in parallel.
+
+        Note:
+            From the sklearn library;
+
+    Returns:
         Finds the best parameters for a grid; returns the model and parameters.
+        Link: http://tinyurl.com/y296u6mq
     """
 
     # Instantiate the GridSearchCV object

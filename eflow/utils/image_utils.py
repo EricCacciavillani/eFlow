@@ -22,21 +22,22 @@ def create_plt_png(directory_pth,
                    sharpness=1.7):
 
     """
-    directory_pth:
-        Already existing directory path.
-
-    sub_dir:
-        Directory structure to create on top of the already generated path of
-        'directory_pth'.
-
-    filename:
-        Filename to save into the full path of 'directory_pth' + 'sub_dir'.
-
-    sharpness:
-        Changes the image's sharpness to look better.
-
-    Returns/Desc:
+    Desc:
         Saves the plt based image in the correct directory.
+
+    Args:
+        directory_pth:
+            Already existing directory path.
+
+        sub_dir:
+            Directory structure to create on top of the already generated path of
+            'directory_pth'.
+
+        filename:
+            Filename to save into the full path of 'directory_pth' + 'sub_dir'.
+
+        sharpness:
+            Changes the image's sharpness to look better.
     """
     directory_pth = correct_directory_path(directory_pth)
 
@@ -155,18 +156,19 @@ def adjust_brightness(input_image_path,
                       output_image_path,
                       factor=1.7):
     """
-    input_image_path:
-        Path to the image file to apply changes.
-
-    output_image:
-        Path to output the modified image file.
-
-    factor:
-        A float based value to determine the level of effect on the image.
-
-    Returns/Desc:
+    Desc:
         Adjust brightness of a saved image and save them to a give image path
         with filename.
+
+    Args:
+        input_image_path:
+            Path to the image file to apply changes.
+
+        output_image:
+            Path to output the modified image file.
+
+        factor:
+            A float based value to determine the level of effect on the image.
     """
 
     image = Image.open(input_image_path)
@@ -179,18 +181,19 @@ def adjust_contrast(input_image_path,
                     output_image_path,
                     factor=1.7):
     """
-    input_image_path:
-        Path to the image file to apply changes.
-
-    output_image:
-        Path to output the modified image file.
-
-    factor:
-        A float based value to determine the level of effect on the image.
-
-    Returns/Desc:
+    Desc:
         Adjust contrast of a saved image and save them to a give image path
         with filename.
+
+    Args:
+        input_image_path:
+            Path to the image file to apply changes.
+
+        output_image:
+            Path to output the modified image file.
+
+        factor:
+            A float based value to determine the level of effect on the image.
     """
     image = Image.open(input_image_path)
     enhancer_object = ImageEnhance.Contrast(image)
@@ -202,18 +205,19 @@ def adjust_sharpness(input_image_path,
                      output_image_path,
                      factor=1.7):
     """
-    input_image_path:
-        Path to the image file to apply changes.
-
-    output_image:
-        Path to output the modified image file.
-
-    factor:
-        A float based value to determine the level of effect on the image.
-
-    Returns/Desc:
+    Desc:
         Adjust sharpness of a saved image and save them to a give image path
         with filename.
+
+    Args:
+        input_image_path:
+            Path to the image file to apply changes.
+
+        output_image:
+            Path to output the modified image file.
+
+        factor:
+            A float based value to determine the level of effect on the image.
     """
     image = Image.open(input_image_path)
     enhancer_object = ImageEnhance.Sharpness(image)

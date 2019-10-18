@@ -53,7 +53,7 @@ class DataTransformer(DataPipelineSegment):
 
                 # Add to the given pipeline segment
                  if _add_to_que:
-                    self._DataPipelineSegment__add_function_to_que("remove_features",
+                    self._DataPipelineSegment__add_function_to_que(METHOD_NAME,
                                                                    params_dict)
         """
         DataPipelineSegment.__init__(self,

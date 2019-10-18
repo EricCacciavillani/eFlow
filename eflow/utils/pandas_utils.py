@@ -14,6 +14,20 @@ __email__ = "eric.cacciavillani@gmail.com"
 
 def check_if_feature_exists(df,
                             feature_name):
+    """
+    Desc:
+        Checks if feature exists in the dataframe.
+
+    Args:
+        df:
+            Pandas dataframe object.
+
+        feature_name:
+            Feature's name.
+
+    Raises:
+        Raises an error in the feature does not exist in the columns.
+    """
     if feature_name not in df.columns:
         raise KeyError(
             f"The feature \'{feature_name}\' was not found in the dataframe!"
@@ -23,17 +37,24 @@ def check_if_feature_exists(df,
 def data_types_table(df,
                      sort_by_type=True):
     """
-    df:
-        Pandas DataFrame object
+    Desc:
+        Creates a pandas dataframe based on the features and their types of the
+        given/passed dataframe.
 
-    Returns/Desc:
+    Args:
+        df:
+            Pandas DataFrame object
+
+        sort_by_type:
+            Orders the resulting dataframe by alphabetically by type.
+
+    Returns:
         Returns a pandas dataframe of features and their found types
         in the passed dataframe.
     """
 
     if not df.shape[0]:
-        print("Empty dataframe found! This function requires a dataframe"
-              "in both rows and columns.")
+        print("Empty dataframe found!")
         return None
 
     dtypes_df = pd.DataFrame({'Data Types': df.dtypes.values})
@@ -49,12 +70,17 @@ def data_types_table(df,
 
 def missing_values_table(df):
     """
-    df:
-        Pandas DataFrame object
+    Desc:
+        Creates a pandas dataframe based on the missing data inside the
+        given/passed dataframe
 
-    Returns/Descr:
-            Returns/Saves a Pandas DataFrame object giving the percentage of
-            the null data for the original DataFrame columns.
+    Args:
+        df:
+            Pandas DataFrame object
+
+    Returns:
+        Returns a Pandas DataFrame object giving the percentage of
+        the null data for the original DataFrame columns.
     """
 
     mis_val = df.isnull().sum()
@@ -72,17 +98,21 @@ def missing_values_table(df):
 def generate_meta_data(df,
                        output_folder_path):
     """
+    Desc:
+        Creates files representing the shape and feature types of the dataframe.
 
-    df:
-        Pandas DataFrame object
+    Args:
+        df:
+            Pandas DataFrame object
 
-    output_folder_path:
-        Pre defined path to already existing directory to output file(s).
+        output_folder_path:
+            Pre defined path to already existing directory to output file(s).
 
-    Returns/Desc:
-        Creates meta data on the passed directory ### FUTURE ERIC COME BACK AND FINALIZE THE REST ASSHAT*
+    Returns:
+        Creates meta data on the passed datafrane.
     """
 
+    # Create files relating to dataframe's shape
     shape_df = pd.DataFrame.from_dict({'Rows': [df.shape[0]],
                                        'Columns': [df.shape[1]]})
     df_to_image(shape_df,
@@ -91,6 +121,11 @@ def generate_meta_data(df,
                 "Dataframe Shape Table",
                 show_index=False)
 
+    write_object_text_to_file(shape_df.to_dict('records'),
+                              output_folder_path,
+                              "Dataframe Shape Text")
+
+    # Create files relating to dataframe's types
     dtypes_df = data_types_table(df)
 
     df_to_image(dtypes_df,
@@ -99,22 +134,25 @@ def generate_meta_data(df,
                 "Dataframe Types Table",
                 show_index=False)
 
-    write_object_text_to_file({'Rows': [df.shape[0]],
-                               'Columns': [df.shape[1]]},
+    write_object_text_to_file(shape_df.to_dict('index'),
                               output_folder_path,
-                              "Dataframe Shape Text")
+                              "Dataframe Feature Types Text")
 
 
 def value_counts_table(df,
                        feature_name):
     """
-    df:
-        Pandas DataFrame object.
+    Desc:
+        Creates a value counts dataframe.
 
-    feature_name:
-        Specified feature column name.
+    Args:
+        df:
+            Pandas DataFrame object.
 
-    Returns/Descr:
+        feature_name:
+            Specified feature column name.
+
+    Returns:
         Returns back a pandas Dataframe object of a feature's value counts
         with percentages.
     """
@@ -136,11 +174,15 @@ def value_counts_table(df,
 def descr_table(df,
                 feature_name):
     """
-    df:
-        Pandas DataFrame object.
+    Desc:
+        Creates numerical description of a feature of a dataframe.
 
-    feature_name:
-        Specified feature column name.
+    Args:
+        df:
+            Pandas DataFrame object.
+
+        feature_name:
+            Specified feature column name.
 
     Returns/Descr:
         Returns back a Dataframe object of a numerical feature's summary.
@@ -154,10 +196,11 @@ def descr_table(df,
 
 def suggest_removal_features(df):
     """
-    df:
-        Pandas DataFrame object.
+    Args:
+        df:
+            Pandas DataFrame object.
 
-    Returns/Desc:
+    Returns:
         Returns back a list of features to remove.
     """
     features_to_remove = set()
