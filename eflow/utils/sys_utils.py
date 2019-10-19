@@ -13,32 +13,42 @@ __email__ = "eric.cacciavillani@gmail.com"
 def create_unique_directory(directory_pth,
                             folder_name):
     """
-    directory_pth:
-        Given path that already exists.
-
-    folder_name:
-        Generated folder path.
-
-    Returns/Desc:
+    Desc:
         Creates a unique folder in the proper directory structure.
+
+    Args:
+        directory_pth:
+            Given path that already exists.
+
+        folder_name:
+            Folder name to generated.
     """
 
     os.makedirs(get_unique_directory_path(directory_pth,
-                                     folder_name))
+                                          folder_name))
 
 def get_unique_directory_path(directory_pth,
                               folder_name):
     """
-    directory_pth:
-        Given path that already exists.
+    Desc:
+        Iterate through directory structure until a unique folder name can be
+        found.
 
-    folder_name:
-        Generated folder path.
+        Note:
+            Keeps changing the folder name by appending 1 each iteration.
 
-    Returns/Desc:
+    Args:
+        directory_pth:
+            Given path that already exists.
+
+        folder_name:
+             Given path that already exists.
+
+    Returns:
         Returns back a directory path with a unique folder name.
     """
 
+    # -----
     directory_pth = correct_directory_path(directory_pth)
     if not os.path.exists(directory_pth):
         raise SystemError("Main directory path doesn't exist.\n"
@@ -67,15 +77,19 @@ def get_unique_directory_path(directory_pth,
 def check_create_dir_structure(directory_pth,
                                create_sub_dir):
     """
-    directory_pth:
-        Given path that already exists.
+    Desc:
+        Checks/Creates required directory structures inside the parent
+        directory figures.
 
-    folder_name:
-        Generated folder path.
+    Args:
+        directory_pth:
+            Given path that already exists.
 
-    Returns/Desc:
-        Checks/Creates required directory structures inside
-        the parent directory figures.
+        create_sub_dir:
+            Sub directory to create a given folder path.
+
+    Returns:
+        Returns back the created directory/
     """
 
     if not os.path.exists(directory_pth):
@@ -97,17 +111,18 @@ def write_object_text_to_file(obj,
                               directory_pth,
                               filename):
     """
-    obj:
-        Any object that has a string 'repr'.
+    Desc:
+        Writes the object's string representation to a text file.
 
-    directory_pth:
-        Given path that already exists.
+    Args:
+        obj:
+            Any object that has a string 'repr'.
 
-    filename:
-        Text file's name.
+        directory_pth:
+            Given path that already exists.
 
-    Returns/Desc:
-        Writes the object to a text file.
+        filename:
+            Text file's name.
     """
     directory_pth = correct_directory_path(directory_pth)
     if not os.path.exists(directory_pth):
@@ -129,17 +144,18 @@ def pickle_object_to_file(obj,
                           directory_pth,
                           filename):
     """
-    obj:
-        Any python object that can be pickled.
-
-    directory_pth:
-        Given path that already exists.
-
-    filename:
-         Pickle file's name.
-
-    Returns/Desc:
+    Desc:
         Writes the object to a pickle file.
+
+    Args:
+        obj:
+            Any python object that can be pickled.
+
+        directory_pth:
+            Given path that already exists.
+
+        filename:
+             Pickle file's name.
     """
     directory_pth = correct_directory_path(directory_pth)
     if not os.path.exists(directory_pth):
@@ -159,16 +175,18 @@ def create_json_file_from_dict(dict_obj,
                                directory_pth,
                                filename):
     """
-    dict_obj:
-        Dictionary object.
-
-    directory_pth:
-        Given path that already exists.
-    filename:
-        Json file's name.
-
-    Returns/Desc:
+    Desc:
         Writes a dict to a json file.
+
+    Args:
+        dict_obj:
+            Dictionary object.
+
+        directory_pth:
+            Given path that already exists.
+
+        filename:
+            Json file's name.
     """
     directory_pth = correct_directory_path(directory_pth)
     if not os.path.exists(directory_pth):
@@ -185,11 +203,15 @@ def create_json_file_from_dict(dict_obj,
 
 def json_file_to_dict(filepath):
     """
-    filepath:
-         Given path to the filename.
+    Desc:
+        Returns back the dictionary from of a json file.
+
+    Args:
+        filepath:
+             Given path to the filename.
 
     Returns/Desc:
-        Returns back the dictionary form of a json file.
+        Returns back the dictionary from of a json file.
     """
     json_file = open(filepath)
     json_str = json_file.read()
@@ -199,10 +221,14 @@ def json_file_to_dict(filepath):
 
 def get_all_directories_from_path(directory_pth):
     """
-    directory_pth:
-        Given path that already exists.
+    Desc:
+       Gets directories names with the provided path.
 
-    Returns/Desc:
+    Args:
+        directory_pth:
+            Given path that already exists.
+
+    Returns:
         Returns back a set a directories with the provided path.
     """
 
@@ -217,13 +243,17 @@ def get_all_directories_from_path(directory_pth):
 def get_all_files_from_path(directory_pth,
                             file_extension=None):
     """
-    directory_pth:
-        Given path that already exists.
+    Desc:
+        Gets all filenames with the provided path.
 
-    file_extension:
-        Only return files that have a given extension.
+    Args:
+        directory_pth:
+            Given path that already exists.
 
-    Returns/Desc:
+        file_extension:
+            Only return files that have a given extension.
+
+    Returns:
         Returns back a set a filenames with the provided path.
     """
 
