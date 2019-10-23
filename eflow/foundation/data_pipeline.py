@@ -2,7 +2,7 @@ from eflow._hidden.parent_objects import FileOutput
 from eflow._hidden.parent_objects import DataPipelineSegment
 from eflow._hidden.custom_exceptions import UnsatisfiedRequirments, PipelineError
 from eflow.utils.string_utils import create_hex_decimal_string,correct_directory_path
-from eflow.utils.sys_utils import create_json_file_from_dict, check_create_dir_structure, json_file_to_dict
+from eflow.utils.sys_utils import create_json_file_from_dict, create_dir_structure, json_file_to_dict, move_folder_to_eflow_garbage
 from eflow.data_pipeline_segments import *
 
 from eflow._hidden.constants import SYS_CONSTANTS
@@ -27,7 +27,8 @@ class DataPipeline(FileOutput):
     """
     def __init__(self,
                  pipeline_name,
-                 pipeline_modify_id=None):
+                 pipeline_modify_id=None,
+                 remove_past_contents=False):
         """
         pipeline_name (str):
             Points to/generates a folder based on the pipeline's name.
@@ -37,7 +38,7 @@ class DataPipeline(FileOutput):
             of the pipeline.
         """
         #
-        dir_path_to_pipeline = correct_directory_path(f"{os.getcwd()}/{SYS_CONSTANTS.PARENT_OUTPUT_FOLDER_NAME}/_Extras/JSON Files/Data Pipeline/{pipeline_name}")
+        dir_path_to_pipeline = correct_directory_path(f"{os.getcwd()}/{SYS_CONSTANTS.PARENT_OUTPUT_FOLDER_NAME}/_Extras/Pipeline Structure/JSON Files/Data Pipeline/{pipeline_name}")
         configure_existing_file = False
 
         # Get json proper file name
@@ -51,7 +52,7 @@ class DataPipeline(FileOutput):
             if os.path.exists(dir_path_to_pipeline + json_file):
                 print(f"The file '{json_file}' exist!")
                 FileOutput.__init__(self,
-                                    f'_Extras/JSON Files/Data Pipeline/{pipeline_name}')
+                                    f'_Extras/Pipeline Structure/JSON Files/Data Pipeline/{pipeline_name}')
                 configure_existing_file = True
             else:
                 raise PipelineError(f"The file '{json_file}' does not exist!")
@@ -68,8 +69,13 @@ class DataPipeline(FileOutput):
 
         # Json file does exist; init DataPipeline object correctly
         if configure_existing_file:
-            print("Now configuring object with proper pipeline segments...")
-            self.__configure_pipeline_with_existing_file()
+            if remove_past_contents:
+                print("Moving past contents to eFlow's garbage.")
+                move_folder_to_eflow_garbage(dir_path_to_pipeline,
+                                             "Data Pipelines")
+            else:
+                print("Now configuring object with proper pipeline segments...")
+                self.__configure_pipeline_with_existing_file()
 
     @property
     def file_path(self):
@@ -140,7 +146,7 @@ class DataPipeline(FileOutput):
             # Que has yet to have data pushed; set up output directory
             if len(self.__pipeline_segment_deque) == 0:
                 FileOutput.__init__(self,
-                                    f'_Extras/JSON Files/Data Pipeline/{self.__pipeline_name}')
+                                    f'_Extras/Pipeline Structure/JSON Files/Data Pipeline/{self.__pipeline_name}')
 
 
         # Update data types for error checking
@@ -184,7 +190,7 @@ class DataPipeline(FileOutput):
 
         # Create a folder for all non-root json files.
         if self.__pipeline_modify_id:
-            check_create_dir_structure(self.folder_path,
+            create_dir_structure(self.folder_path,
                                        "/Modified Pipelines")
             create_json_file_from_dict(json_dict,
                                        self.folder_path + "/Modified Pipelines",
@@ -242,7 +248,8 @@ class DataPipeline(FileOutput):
                                                   pipeline_segment_obj))
 
     def perform_pipeline(self,
-                         df):
+                         df,
+                         df_features):
         """
         df:
             Pandas Dataframe object to be transformed by the pipeline.
@@ -252,7 +259,8 @@ class DataPipeline(FileOutput):
             in the pipeline.
         """
         for _, _, pipeline_segment in self.__pipeline_segment_deque:
-            pipeline_segment.perform_segment(df)
+            pipeline_segment.perform_segment(df,
+                                             df_features)
 
     def generate_code(self,
                       generate_file=True,
@@ -291,7 +299,7 @@ class DataPipeline(FileOutput):
 
             generated_code.append(tmp_list)
 
-        check_create_dir_structure(self.folder_path,
+        create_dir_structure(self.folder_path,
                                    "Generated code")
 
         if generate_file:

@@ -165,7 +165,7 @@ class NullAnalysis(FileOutput):
                 if dataframe_snapshot:
                     df_snapshot = DataFrameSnapshot()
                     df_snapshot.check_create_snapshot(df,
-                                                      directory_pth=self.folder_path,
+                                                      directory_path=self.folder_path,
                                                       sub_dir=f"{dataset_name}/_Extras")
 
 
@@ -319,7 +319,7 @@ class NullAnalysis(FileOutput):
                 if dataframe_snapshot:
                     df_snapshot = DataFrameSnapshot()
                     df_snapshot.check_create_snapshot(df,
-                                                      directory_pth=self.folder_path,
+                                                      directory_path=self.folder_path,
                                                       sub_dir=f"{dataset_name}/_Extras")
 
             create_plt_png(self.folder_path,
@@ -445,7 +445,7 @@ class NullAnalysis(FileOutput):
                 if dataframe_snapshot:
                     df_snapshot = DataFrameSnapshot()
                     df_snapshot.check_create_snapshot(df,
-                                                      directory_pth=self.folder_path,
+                                                      directory_path=self.folder_path,
                                                       sub_dir=f"{dataset_name}/_Extras")
 
             # Convert plot to png
@@ -553,7 +553,7 @@ class NullAnalysis(FileOutput):
                 if dataframe_snapshot:
                     df_snapshot = DataFrameSnapshot()
                     df_snapshot.check_create_snapshot(df,
-                                                      directory_pth=self.folder_path,
+                                                      directory_path=self.folder_path,
                                                       sub_dir=f"{dataset_name}/_Extras")
 
             # Convert plot to png
@@ -660,7 +660,7 @@ class NullAnalysis(FileOutput):
                 if dataframe_snapshot:
                     df_snapshot = DataFrameSnapshot()
                     df_snapshot.check_create_snapshot(df,
-                                                      directory_pth=self.folder_path,
+                                                      directory_path=self.folder_path,
                                                       sub_dir=f"{dataset_name}/_Extras")
 
             # Convert plot to png
@@ -725,7 +725,7 @@ class NullAnalysis(FileOutput):
         mis_val_table_ren_columns = missing_values_table(df)
 
         print(f"Your selected dataframe has {str(df.shape[1])} columns.\n"
-              f"That are {str(mis_val_table_ren_columns.shape[0])} columns.\n")
+              f"That has {str(mis_val_table_ren_columns.shape[0])} columns missing data.\n")
 
         if self.__notebook_mode:
             if display_visuals:
@@ -746,7 +746,7 @@ class NullAnalysis(FileOutput):
                 if dataframe_snapshot:
                     df_snapshot = DataFrameSnapshot()
                     df_snapshot.check_create_snapshot(df,
-                                                      directory_pth=self.folder_path,
+                                                      directory_path=self.folder_path,
                                                       sub_dir=f"{dataset_name}/_Extras")
 
             plt.close()
@@ -822,7 +822,7 @@ class NullAnalysis(FileOutput):
                 if dataframe_snapshot:
                     df_snapshot = DataFrameSnapshot()
                     df_snapshot.check_create_snapshot(df,
-                                                      directory_pth=self.folder_path,
+                                                      directory_path=self.folder_path,
                                                       sub_dir=f"{dataset_name}/_Extras")
             plt.close()
             df_to_image(dtypes_df,

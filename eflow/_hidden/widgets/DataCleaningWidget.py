@@ -249,7 +249,7 @@ class DataCleaningWidget:
     #         json_path = self.__PROJECT.PATH_TO_OUTPUT_FOLDER[0:
     #                                                          self.__PROJECT.PATH_TO_OUTPUT_FOLDER.find(
     #                                                              SYS_CONSTANTS.PARENT_OUTPUT_FOLDER_NAME)] + SYS_CONSTANTS.PARENT_OUTPUT_FOLDER_NAME
-    #         check_create_dir_structure(json_path,
+    #         create_dir_structure(json_path,
     #                                    "JSON File Dump/Data Cleaning")
     #
     #         # Keep generating a filename until a unique one is found
@@ -417,7 +417,7 @@ class DataCleaningWidget:
     #
     #     json_dict[feature]["Extra"] = json_path
     #
-    #     check_create_dir_structure(json_path,
+    #     create_dir_structure(json_path,
     #                                "JSON File Dump/Data Cleaning")
     #
     #     abs_file_path = json_path + "/JSON File Dump/Data Cleaning/" + \

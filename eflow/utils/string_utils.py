@@ -26,14 +26,14 @@ def convert_to_filename(filename):
             or x == ")" or x == " " or x == "-")
 
 
-def correct_directory_path(directory_pth):
+def correct_directory_path(directory_path):
     """
     Desc:
         Attempts to convert the directory path to a proper one by removing
         any double slashes next to one another.
 
     Args:
-        directory_pth:
+        directory_path:
             String of a potential directory path.
 
     Returns:
@@ -41,7 +41,7 @@ def correct_directory_path(directory_pth):
     """
     last_char = None
     new_string = ""
-    for char in directory_pth:
+    for char in directory_path:
         if last_char and (last_char == "/" and char == "/"):
             pass
         else:

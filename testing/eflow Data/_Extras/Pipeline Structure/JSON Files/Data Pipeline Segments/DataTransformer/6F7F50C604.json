@@ -1,0 +1,19 @@
+{
+  "Pipeline Segment": {
+    "Object Type": "DataTransformer",
+    "Functions Performed Order": {
+      "Function Order 1": {
+        "remove_features": {
+          "Params Dict": {
+            "feature_names": [
+              "Name",
+              "Ticket",
+              "PassengerId"
+            ]
+          }
+        }
+      }
+    },
+    "Function Count": 1
+  }
+}

@@ -134,7 +134,7 @@ class FeatureAnalysis(FileOutput):
             if dataframe_snapshot:
                df_snapshot = DataFrameSnapshot()
                df_snapshot.check_create_snapshot(df,
-                                                 directory_pth=self.folder_path,
+                                                 directory_path=self.folder_path,
                                                  sub_dir=f"{dataset_name}/_Extras")
 
             # Set to true to represent the function call was made with perform
@@ -149,16 +149,16 @@ class FeatureAnalysis(FileOutput):
                    feature_values = df[feature_name].value_counts().keys()
 
                    # -----
-                   if len(feature_values) <= 3 and \
-                           not feature_name in df_features.get_numerical_features():
-                       self.pie_graph(df,
-                                      feature_name,
-                                      dataset_name=dataset_name,
-                                      display_visuals=display_visuals,
-                                      save_file=save_file,
-                                      init_default_color="#C0C0C0")
-                   # -----
-                   elif feature_name in df_features.get_categorical_features():
+                   if feature_name not in df_features.get_numerical_features() and feature_name not in df_features.get_datetime_features():
+
+                       if len(feature_values) <= 3:
+                           self.pie_graph(df,
+                                          feature_name,
+                                          dataset_name=dataset_name,
+                                          display_visuals=display_visuals,
+                                          save_file=save_file,
+                                          init_default_color="#C0C0C0")
+
                        self.count_plot_graph(df,
                                              feature_name,
                                              dataset_name=dataset_name,
@@ -272,7 +272,7 @@ class FeatureAnalysis(FileOutput):
                 if dataframe_snapshot:
                     df_snapshot = DataFrameSnapshot()
                     df_snapshot.check_create_snapshot(df,
-                                                      directory_pth=self.folder_path,
+                                                      directory_path=self.folder_path,
                                                       sub_dir=f"{dataset_name}/_Extras")
 
             # Create the png
@@ -391,7 +391,7 @@ class FeatureAnalysis(FileOutput):
                 if dataframe_snapshot:
                     df_snapshot = DataFrameSnapshot()
                     df_snapshot.check_create_snapshot(df,
-                                                      directory_pth=self.folder_path,
+                                                      directory_path=self.folder_path,
                                                       sub_dir=f"{dataset_name}/_Extras")
 
             # Creates png of plot
@@ -515,7 +515,7 @@ class FeatureAnalysis(FileOutput):
                 if dataframe_snapshot:
                     df_snapshot = DataFrameSnapshot()
                     df_snapshot.check_create_snapshot(df,
-                                                      directory_pth=self.folder_path,
+                                                      directory_path=self.folder_path,
                                                       sub_dir=f"{dataset_name}/_Extras")
 
             # Create a png of the plot
@@ -606,7 +606,7 @@ class FeatureAnalysis(FileOutput):
                 if dataframe_snapshot:
                     df_snapshot = DataFrameSnapshot()
                     df_snapshot.check_create_snapshot(df,
-                                                      directory_pth=self.folder_path,
+                                                      directory_path=self.folder_path,
                                                       sub_dir=f"{dataset_name}/_Extras")
             # Closes up any past graph info
             plt.close()
@@ -694,7 +694,7 @@ class FeatureAnalysis(FileOutput):
                 if dataframe_snapshot:
                     df_snapshot = DataFrameSnapshot()
                     df_snapshot.check_create_snapshot(df,
-                                                      directory_pth=self.folder_path,
+                                                      directory_path=self.folder_path,
                                                       sub_dir=f"{dataset_name}/_Extras")
             # Closes up any past graph info
             plt.close()

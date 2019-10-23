@@ -1,0 +1,18 @@
+{
+  "Pipeline Name": "Titanic pipeline",
+  "Pipeline Segment Order": {
+    "1": {
+      "Pipeline Segment Path": "_Extras/Pipeline Structure/JSON Files/Data Pipeline Segments/DataTransformer/A63CFE8F52.json",
+      "Pipeline Segment Type": "DataTransformer",
+      "Pipeline Segment Name": "Remove Unwanted Features",
+      "Pipeline Segment ID": "A63CFE8F52"
+    },
+    "2": {
+      "Pipeline Segment Path": "_Extras/Pipeline Structure/JSON Files/Data Pipeline Segments/DataTransformer/258F3488CC.json",
+      "Pipeline Segment Type": "DataTransformer",
+      "Pipeline Segment Name": "Remove unresolvable null features",
+      "Pipeline Segment ID": "258F3488CC"
+    }
+  },
+  "Pipeline Segment Count": 2
+}

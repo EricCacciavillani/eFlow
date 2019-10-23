@@ -722,14 +722,14 @@ class ClusterMaster:
             the parent directory figures.
         """
 
-        directory_pth = self.__PROJECT.PATH_TO_OUTPUT_FOLDER
+        directory_path = self.__PROJECT.PATH_TO_OUTPUT_FOLDER
 
         for dir in sub_dir.split("/"):
-            directory_pth += "/" + dir
-            if not os.path.exists(directory_pth):
-                os.makedirs(directory_pth)
+            directory_path += "/" + dir
+            if not os.path.exists(directory_path):
+                os.makedirs(directory_path)
 
-        return directory_pth
+        return directory_path
 
     def __create_plt_png(self,
                          sub_dir,

@@ -127,7 +127,7 @@ class ClassificationAnalysis(FileOutput):
                                   f'{self.__model_name}')
 
         # ---
-        check_create_dir_structure(self.folder_path,
+        create_dir_structure(self.folder_path,
                                    "Extras")
         # Save predicted classes
         write_object_text_to_file(self.__target_values,
@@ -320,10 +320,10 @@ class ClassificationAnalysis(FileOutput):
         return sub_dir
 
     def __compare_thresholds_to_saved_thresholds(self,
-                                                 directory_pth,
+                                                 directory_path,
                                                  thresholds):
         """
-        directory_pth:
+        directory_path:
             Path to the given folder where the "_Thresholds.txt"
 
         thresholds:
@@ -337,7 +337,7 @@ class ClassificationAnalysis(FileOutput):
             the file exists and the object's value matches up.
         """
 
-        file_directory = correct_directory_path(directory_pth)
+        file_directory = correct_directory_path(directory_path)
 
         if os.path.exists(file_directory):
 

@@ -1,6 +1,6 @@
 from eflow._hidden.custom_exceptions import UnsatisfiedRequirments
 from eflow._hidden.constants import SYS_CONSTANTS
-from eflow.utils.sys_utils import check_create_dir_structure
+from eflow.utils.sys_utils import create_dir_structure
 from eflow.utils.string_utils import correct_directory_path
 import os
 import copy
@@ -45,7 +45,7 @@ class FileOutput(object):
             parent_structure = "/" + SYS_CONSTANTS.PARENT_OUTPUT_FOLDER_NAME \
                                + "/" + project_name + "/"
 
-            check_create_dir_structure(os.getcwd(),
+            create_dir_structure(os.getcwd(),
                                        parent_structure)
             tmp_path = correct_directory_path(
                 os.getcwd() + parent_structure)

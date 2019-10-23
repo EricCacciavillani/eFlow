@@ -1,7 +1,7 @@
 from eflow.utils.string_utils import correct_directory_path
 from eflow._hidden.custom_exceptions import UnsatisfiedRequirments, MismatchError
 from eflow.foundation import DataFrameTypes
-from eflow.utils.sys_utils import check_create_dir_structure, \
+from eflow.utils.sys_utils import create_dir_structure, \
     create_json_file_from_dict
 
 import os
@@ -78,7 +78,7 @@ class DataFrameSnapshot:
 
     def check_create_snapshot(self,
                               df,
-                              directory_pth,
+                              directory_path,
                               sub_dir):
         """
         Desc:
@@ -89,7 +89,7 @@ class DataFrameSnapshot:
             df:
                 Pandas dataframe object.
 
-            directory_pth:
+            directory_path:
                 Output path of the dataset's.
 
             sub_dir:
@@ -100,10 +100,10 @@ class DataFrameSnapshot:
             passed dataframe snapshot; causing the program to stop in runtime.
         """
 
-        output_folder_path = check_create_dir_structure(directory_pth,
+        output_folder_path = create_dir_structure(directory_path,
                                                         sub_dir)
 
-        json_file = output_folder_path + "Dataframe Identity.json"
+        json_file = output_folder_path + "Dataframe Snapshot.json"
 
         # Meta Data has already been generated; compare data
         if os.path.isfile(json_file):
@@ -112,9 +112,10 @@ class DataFrameSnapshot:
                 data = json.load(file)
 
                 df_features = DataFrameTypes(df,
-                                             display_init=False,
                                              ignore_nulls=True)
                 mismatch_error = None
+
+                # Not using for looping; used for logic breaks
                 while True:
                     if self.__compare_shape:
                         list_shape = list(df.shape)
@@ -185,17 +186,27 @@ class DataFrameSnapshot:
                                     mismatch_error += f"\n\tFeature '{snapshot_feature}' is supposed " \
                                         f"to be in '{snapshot_feature_type}' was found to be in '{correct_feature_type}'"
 
-                        break
+                        if mismatch_error:
+                            break
 
 
                     if self.__compare_random_values:
                         compared_data = self.__create_random_values_dict(df,
                                                                          df_features)
-                        if data["random_values"] != compared_data:
+
+                        random_values_matchd_flag = True
+                        for k,v in data["random_values"].items():
+                            if k in compared_data:
+                                if data["random_values"][k] != compared_data[k]:
+                                    random_values_matchd_flag = False
+                                    break
+
+                        if not random_values_matchd_flag:
                             mismatch_error = "the 'random' values did not match at the proper places in the dataframe " \
                                              "(these 'random' values are based on the shape and name of the column)."
                             break
 
+                    # Break main loop
                     break
                 if mismatch_error is not None:
                     raise MismatchError(f"DataFrameSnapshot has raised an error because {mismatch_error}." +
@@ -203,7 +214,7 @@ class DataFrameSnapshot:
                                         "containing attributes of the dataframe or a 'snapshot'."
                                         "\nThe given error can be resolved by performing any of the following:"
                                         "\n\t* Pass in the same dataframe as expected."
-                                        "\n\t* Disable the identity check by changing 'dataframe_snapshot' to False."
+                                        "\n\t* Disable the snapshot check by changing 'dataframe_snapshot' to False."
                                         "\n\t* Disable save file option by changing the parameter 'save_file' to False."
                                         "\n\t* Or deleting the json object file in the dataset directory under _Extras")
 
@@ -260,7 +271,7 @@ class DataFrameSnapshot:
                 raise ValueError("Hash type must be between 1-10.")
 
         # Make sure the number is positive (Future proofing if someone adds in
-        # something that could cause thee result to be negative.)
+        # something that could cause the result to be negative.)
         result = np.absolute(result)
 
         return result
@@ -288,6 +299,8 @@ class DataFrameSnapshot:
             list(df_features.get_bool_features()))
         feature_types["string_features"] = sorted(
             list(df_features.get_string_features()))
+        feature_types["categorical_features"] = sorted(
+            list(df_features.get_categorical_features()))
         feature_types["datetime_features"] = sorted(
             list(df_features.get_datetime_features()))
 
@@ -382,7 +395,6 @@ class DataFrameSnapshot:
                 that component of the dataframe.
         """
         df_features = DataFrameTypes(df,
-                                     display_init=False,
                                      ignore_nulls=True)
 
         meta_dict = dict()
@@ -423,5 +435,5 @@ class DataFrameSnapshot:
 
         create_json_file_from_dict(meta_dict,
                                    output_folder_path,
-                                   "Dataframe Identity")
+                                   "Dataframe Snapshot")
 

@@ -48,14 +48,14 @@ PROJECT = enum(PATH_TO_OUTPUT_FOLDER=''.join(os.getcwd().partition('/eFlow')[0:1
 # --- Figures maintaining ---
 def check_create_figure_dir(sub_dir):
 
-    directory_pth = PROJECT.PATH_TO_OUTPUT_FOLDER
+    directory_path = PROJECT.PATH_TO_OUTPUT_FOLDER
 
     for dir in sub_dir.split("/"):
-        directory_pth += "/" + dir
-        if not os.path.exists(directory_pth):
-            os.makedirs(directory_pth)
+        directory_path += "/" + dir
+        if not os.path.exists(directory_path):
+            os.makedirs(directory_path)
 
-    return directory_pth
+    return directory_path
 
 
 def create_plt_png(sub_dir, filename):

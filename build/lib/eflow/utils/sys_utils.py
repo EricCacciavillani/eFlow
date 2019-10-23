@@ -4,10 +4,10 @@ import json
 from eflow.utils.string_utils import convert_to_filename, correct_directory_path
 
 
-def create_unique_directory(directory_pth,
+def create_unique_directory(directory_path,
                             folder_name):
     """
-    directory_pth:
+    directory_path:
         Given path that already exists.
 
     folder_name:
@@ -17,13 +17,13 @@ def create_unique_directory(directory_pth,
         Creates a unique folder in the proper directory structure.
     """
 
-    os.makedirs(get_unique_directory_path(directory_pth,
+    os.makedirs(get_unique_directory_path(directory_path,
                                      folder_name))
 
-def get_unique_directory_path(directory_pth,
+def get_unique_directory_path(directory_path,
                               folder_name):
     """
-    directory_pth:
+    directory_path:
         Given path that already exists.
 
     folder_name:
@@ -33,22 +33,22 @@ def get_unique_directory_path(directory_pth,
         Returns back a directory path with a unique folder name.
     """
 
-    directory_pth = correct_directory_path(directory_pth)
-    if not os.path.exists(directory_pth):
+    directory_path = correct_directory_path(directory_path)
+    if not os.path.exists(directory_path):
         raise SystemError("Main directory path doesn't exist.\n"
                           "To help ensure unwanted directories are created you "
                           "must have a pre-defined path.")
 
-    check_create_dir_structure(directory_pth=directory_pth,
+    create_dir_structure(directory_path=directory_path,
                                create_sub_dir="")
 
     # Ensures the folder is unique in the directory
     iterable = 0
     while True:
         if iterable != 0:
-            created_path = f'{directory_pth}{folder_name} {iterable}'
+            created_path = f'{directory_path}{folder_name} {iterable}'
         else:
-            created_path = f'{directory_pth}{folder_name}'
+            created_path = f'{directory_path}{folder_name}'
 
         if not os.path.exists(created_path):
             break
@@ -58,10 +58,10 @@ def get_unique_directory_path(directory_pth,
     return created_path
 
 
-def check_create_dir_structure(directory_pth,
+def create_dir_structure(directory_path,
                                create_sub_dir):
     """
-    directory_pth:
+    directory_path:
         Given path that already exists.
 
     folder_name:
@@ -72,29 +72,29 @@ def check_create_dir_structure(directory_pth,
         the parent directory figures.
     """
 
-    if not os.path.exists(directory_pth):
+    if not os.path.exists(directory_path):
         raise SystemError("Main directory path doesn't exist.\n"
                           "To help ensure unwanted directories are not created "
                           "you must have a pre-defined path.")
 
-    directory_pth = correct_directory_path(directory_pth)
+    directory_path = correct_directory_path(directory_path)
 
     for dir in create_sub_dir.split("/"):
-        directory_pth += "/" + dir
-        if not os.path.exists(directory_pth):
-            os.makedirs(directory_pth)
+        directory_path += "/" + dir
+        if not os.path.exists(directory_path):
+            os.makedirs(directory_path)
 
-    return correct_directory_path(directory_pth)
+    return correct_directory_path(directory_path)
 
 
 def write_object_text_to_file(obj,
-                              directory_pth,
+                              directory_path,
                               filename):
     """
     obj:
         Any object that has a string 'repr'.
 
-    directory_pth:
+    directory_path:
         Given path that already exists.
 
     filename:
@@ -103,8 +103,8 @@ def write_object_text_to_file(obj,
     Returns/Desc:
         Writes the object to a text file.
     """
-    directory_pth = correct_directory_path(directory_pth)
-    if not os.path.exists(directory_pth):
+    directory_path = correct_directory_path(directory_path)
+    if not os.path.exists(directory_path):
         raise SystemError("Main directory path doesn't exist.\n"
                           "To help ensure unwanted directories are created you "
                           "must have a pre-defined path.")
@@ -113,20 +113,20 @@ def write_object_text_to_file(obj,
     filename = filename.split(".")[0]
 
 
-    file_dir = f'{directory_pth}{convert_to_filename(filename)}.txt'
+    file_dir = f'{directory_path}{convert_to_filename(filename)}.txt'
 
     f = open(file_dir, 'w')
     f.write('obj = ' + repr(obj) + '\n')
     f.close()
 
 def pickle_object_to_file(obj,
-                          directory_pth,
+                          directory_path,
                           filename):
     """
     obj:
         Any python object that can be pickled.
 
-    directory_pth:
+    directory_path:
         Given path that already exists.
 
     filename:
@@ -135,8 +135,8 @@ def pickle_object_to_file(obj,
     Returns/Desc:
         Writes the object to a pickle file.
     """
-    directory_pth = correct_directory_path(directory_pth)
-    if not os.path.exists(directory_pth):
+    directory_path = correct_directory_path(directory_path)
+    if not os.path.exists(directory_path):
         raise SystemError("Main directory path doesn't exist.\n"
                           "To help ensure unwanted directories are created you "
                           "must have a pre-defined path.")

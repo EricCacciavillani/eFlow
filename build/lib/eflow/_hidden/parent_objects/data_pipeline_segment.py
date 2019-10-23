@@ -1,6 +1,6 @@
 from eflow._hidden.parent_objects import FileOutput
 from eflow._hidden.custom_exceptions import PipelineSegmentError, UnsatisfiedRequirments
-from eflow.utils.sys_utils import create_json_file_from_dict,json_file_to_dict,get_all_files_from_path, check_create_dir_structure
+from eflow.utils.sys_utils import create_json_file_from_dict,json_file_to_dict,get_all_files_from_path, create_dir_structure
 from eflow.utils.string_utils import create_hex_decimal_string
 from collections import deque
 import copy
@@ -191,7 +191,7 @@ class DataPipelineSegment(FileOutput):
         generated_code.append("#" + "------"*5)
 
         if generate_file:
-            check_create_dir_structure(self.folder_path,
+            create_dir_structure(self.folder_path,
                                        "Generated code")
             with open(self.folder_path + f'Generated code/{self.__segment_id}.py', 'r+') as filehandle:
                 filehandle.truncate(0)

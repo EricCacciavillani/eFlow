@@ -5,7 +5,7 @@ from PIL import ImageEnhance
 import copy
 import six
 
-from eflow.utils.sys_utils import check_create_dir_structure
+from eflow.utils.sys_utils import create_dir_structure
 from eflow.utils.string_utils import correct_directory_path
 
 def create_plt_png(directory_pth,
@@ -33,7 +33,7 @@ def create_plt_png(directory_pth,
     directory_pth = correct_directory_path(directory_pth)
 
     # Ensure directory structure is init correctly
-    abs_path = check_create_dir_structure(directory_pth,
+    abs_path = create_dir_structure(directory_pth,
                                           sub_dir)
 
     # Ensure file ext is on the file.

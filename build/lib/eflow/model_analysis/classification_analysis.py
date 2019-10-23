@@ -120,7 +120,7 @@ class ClassificationAnalysis(FileOutput):
                                   f'{self.__model_name}')
 
         # ---
-        check_create_dir_structure(self.folder_path,
+        create_dir_structure(self.folder_path,
                                    "Extras")
         # Save predicted classes
         write_object_text_to_file(self.__target_values,

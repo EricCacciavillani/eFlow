@@ -4,9 +4,9 @@ import os
 return getmarkdown(mod)
 
 # Taken from utils.sys_utils
-def get_all_directories_from_path(directory_pth):
+def get_all_directories_from_path(directory_path):
     """
-    directory_pth:
+    directory_path:
         Given path that already exists.
 
     Returns/Desc:
@@ -14,17 +14,17 @@ def get_all_directories_from_path(directory_pth):
     """
 
     dirs_in_paths = []
-    for (dirpath, dirnames, filenames) in os.walk(directory_pth):
+    for (dirpath, dirnames, filenames) in os.walk(directory_path):
         dirs_in_paths.extend(dirnames)
         break
 
     return set(dirs_in_paths)
 
 
-def get_all_files_from_path(directory_pth,
+def get_all_files_from_path(directory_path,
                             file_extension=None):
     """
-    directory_pth:
+    directory_path:
         Given path that already exists.
 
     file_extension:
@@ -35,7 +35,7 @@ def get_all_files_from_path(directory_pth,
     """
 
     files_in_paths = []
-    for (dirpath, dirnames, filenames) in os.walk(directory_pth):
+    for (dirpath, dirnames, filenames) in os.walk(directory_path):
 
         if file_extension:
             file_extension = file_extension.replace(".","")

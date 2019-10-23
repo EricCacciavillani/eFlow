@@ -5,7 +5,7 @@ from PIL import ImageEnhance
 import copy
 import six
 
-from eflow.utils.sys_utils import check_create_dir_structure
+from eflow.utils.sys_utils import create_dir_structure
 from eflow.utils.string_utils import correct_directory_path
 
 __author__ = "Eric Cacciavillani"
@@ -16,7 +16,7 @@ __maintainer__ = "EricCacciavillani"
 __email__ = "eric.cacciavillani@gmail.com"
 
 
-def create_plt_png(directory_pth,
+def create_plt_png(directory_path,
                    sub_dir,
                    filename,
                    sharpness=1.7):
@@ -26,23 +26,23 @@ def create_plt_png(directory_pth,
         Saves the plt based image in the correct directory.
 
     Args:
-        directory_pth:
+        directory_path:
             Already existing directory path.
 
         sub_dir:
             Directory structure to create on top of the already generated path of
-            'directory_pth'.
+            'directory_path'.
 
         filename:
-            Filename to save into the full path of 'directory_pth' + 'sub_dir'.
+            Filename to save into the full path of 'directory_path' + 'sub_dir'.
 
         sharpness:
             Changes the image's sharpness to look better.
     """
-    directory_pth = correct_directory_path(directory_pth)
+    directory_path = correct_directory_path(directory_path)
 
     # Ensure directory structure is init correctly
-    abs_path = check_create_dir_structure(directory_pth,
+    abs_path = create_dir_structure(directory_path,
                                           sub_dir)
 
     # Ensure file ext is on the file.
@@ -53,14 +53,14 @@ def create_plt_png(directory_pth,
     fig.savefig(abs_path + "/" + filename, bbox_inches='tight')
 
     if sharpness:
-        full_path = directory_pth + sub_dir + "/" + filename
+        full_path = directory_path + sub_dir + "/" + filename
         adjust_sharpness(full_path,
                          full_path,
                          sharpness)
 
 
 def df_to_image(df,
-                directory_pth,
+                directory_path,
                 sub_dir,
                 filename,
                 sharpness=1.7,
@@ -82,7 +82,7 @@ def df_to_image(df,
     df:
         Pandas Dataframe object.
 
-    directory_pth:
+    directory_path:
         Main output path
 
     sub_dir:
@@ -104,7 +104,7 @@ def df_to_image(df,
     Returns/Desc"
     """
 
-    directory_pth = correct_directory_path(directory_pth)
+    directory_path = correct_directory_path(directory_path)
     df = copy.deepcopy(df)
 
     if format_float_pos and format_float_pos > 1:
@@ -141,7 +141,7 @@ def df_to_image(df,
     if not sub_dir:
         sub_dir = ""
 
-    create_plt_png(directory_pth,
+    create_plt_png(directory_path,
                    sub_dir,
                    filename,
                    sharpness)

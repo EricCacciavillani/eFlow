@@ -1,6 +1,6 @@
 from eflow._hidden.parent_objects import FileOutput
 from eflow._hidden.custom_exceptions import PipelineSegmentError, UnsatisfiedRequirments
-from eflow.utils.sys_utils import create_json_file_from_dict,json_file_to_dict,get_all_files_from_path, check_create_dir_structure
+from eflow.utils.sys_utils import create_json_file_from_dict,json_file_to_dict,get_all_files_from_path, create_dir_structure
 from eflow.utils.string_utils import create_hex_decimal_string
 
 from collections import deque
@@ -58,7 +58,8 @@ class DataPipelineSegment(FileOutput):
 
 
     def perform_segment(self,
-                        df):
+                        df,
+                        df_features):
         """
         Desc:
             Performs all functions that the child of the pipeline segment has
@@ -75,6 +76,7 @@ class DataPipelineSegment(FileOutput):
 
             # -----
             params_dict["df"] = df
+            params_dict["df_features"] = df_features
             params_dict["_add_to_que"] = False
 
             # Function call with arguments
@@ -82,6 +84,7 @@ class DataPipelineSegment(FileOutput):
 
             # -----
             del params_dict["df"]
+            del params_dict["df_features"]
             del params_dict["_add_to_que"]
 
     def generate_code(self,
@@ -168,7 +171,7 @@ class DataPipelineSegment(FileOutput):
 
         # Generate file or pass back list
         if generate_file:
-            check_create_dir_structure(self.folder_path,
+            create_dir_structure(self.folder_path,
                                        "Generated code")
             with open(
                     self.folder_path + f'Generated code/{self.__segment_id}.py',
@@ -233,7 +236,7 @@ class DataPipelineSegment(FileOutput):
         # Generate new json file name with proper file/folder output attributes
         if len(self.__function_pipe) == 1 and not self.__json_file_name:
             FileOutput.__init__(self,
-                                f'_Extras/JSON Files/Data Pipeline Segments/{self.__object_type}')
+                                f'_Extras/Pipeline Structure/JSON Files/Data Pipeline Segments/{self.__object_type}')
             all_json_files = get_all_files_from_path(self.folder_path,
                                                      ".json")
             while True:
@@ -287,7 +290,7 @@ class DataPipelineSegment(FileOutput):
         """
 
         FileOutput.__init__(self,
-                            f'_Extras/JSON Files/Data Pipeline Segments/{self.__object_type}')
+                            f'_Extras/Pipeline Structure/JSON Files/Data Pipeline Segments/{self.__object_type}')
 
         self.__function_pipe = deque()
         self.__json_file_name = copy.deepcopy(self.__segment_id) + ".json"

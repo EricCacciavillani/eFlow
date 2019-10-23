@@ -2,7 +2,7 @@ from eflow._hidden.parent_objects import FileOutput
 from eflow._hidden.parent_objects import DataPipelineSegment
 from eflow._hidden.custom_exceptions import UnsatisfiedRequirments, PipelineError
 from eflow.utils.string_utils import create_hex_decimal_string,correct_directory_path
-from eflow.utils.sys_utils import create_json_file_from_dict, get_all_files_from_path, check_create_dir_structure, json_file_to_dict
+from eflow.utils.sys_utils import create_json_file_from_dict, get_all_files_from_path, create_dir_structure, json_file_to_dict
 # from eflow.data_pipeline_segments import DataCleaner
 from eflow.data_pipeline_segments import DataTransformer
 from eflow._hidden.constants import SYS_CONSTANTS
@@ -174,7 +174,7 @@ class DataPipeline(FileOutput):
 
         # Create a folder for all non-root json files.
         if self.__pipeline_modify_id:
-            check_create_dir_structure(self.folder_path,
+            create_dir_structure(self.folder_path,
                                        "/Modified Pipelines")
             create_json_file_from_dict(json_dict,
                                        self.folder_path + "/Modified Pipelines",
@@ -281,7 +281,7 @@ class DataPipeline(FileOutput):
 
             generated_code.append(tmp_list)
 
-        check_create_dir_structure(self.folder_path,
+        create_dir_structure(self.folder_path,
                                    "Generated code")
 
         if generate_file:

@@ -10,51 +10,49 @@ __license__ = "MIT"
 __maintainer__ = "EricCacciavillani"
 __email__ = "eric.cacciavillani@gmail.com"
 
+# Template
+# def METHOD_NAME(self,
+#                 df,
+#                 df_features,
+#                 '''ALL YOUR OTHER ARGS'''
+#                 _add_to_que=True):
+#     params_dict = locals()
+#
+#     # Remove any unwanted arguments in params_dict
+#     if _add_to_que:
+#         params_dict = locals()
+#         for arg in ["self", "df", "df_features", "_add_to_que",
+#                     "params_dict"]:
+#             del params_dict[arg]
+#
+#     '''
+#     YOUR CUSTOM CODE HERE
+#     '''
+#
+#     IMPORTANT UPDATE 'df_features' if changed type at all.
+#
+#     # Add to the given pipeline segment
+#     if _add_to_que:
+#         self._DataPipelineSegment__add_function_to_que(METHOD_NAME,
+#                                                        params_dict)
+
 
 class DataTransformer(DataPipelineSegment):
+    """
+        Combines, removes, scales, etc features of a pandas dataframe.
+    """
     def __init__(self,
                  segment_id=None):
         """
-        project_sub_dir:
-            Appends to the absolute directory of the output folder
-
-        project_name:
-            Creates a parent or "project" folder in which all sub-directories
-            will be inner nested.
-
-        overwrite_full_path:
-            Overwrites the path to the parent folder.
-
-        notebook_mode:
-            If in a python notebook display visualizations in the notebook.
+        Args:
+            segment_id:
+                Reference id to past segments of this object.
 
         Note/Caveats:
             When creating any public function that will be part of the pipeline's
-            structure it is important to follow this given template. Also please never
-            touch _add_to_que...ruins the entire purpose of this project.
-            I needed to put it there to make the project come together.
-
-            def your_code(self,
-                          df,
-                          '''ALL YOUR OTHER ARGS'''
-                          _add_to_que=True):
-
-                params_dict = locals()
-
-                # Remove any unwanted arguments in params_dict
-                if _add_to_que:
-                    params_dict = locals()
-                    for arg in ["self","df","_add_to_que", "params_dict"]:
-                        del params_dict[arg]
-
-                '''
-                YOUR CUSTOM CODE HERE
-                '''
-
-                # Add to the given pipeline segment
-                 if _add_to_que:
-                    self._DataPipelineSegment__add_function_to_que(METHOD_NAME,
-                                                                   params_dict)
+            structure it is important to follow this given template. Also,
+            try not to use _add_to_que. Can ruin the entire purpose of this
+            project.
         """
         DataPipelineSegment.__init__(self,
                                      object_type=self.__class__.__name__,
@@ -62,25 +60,50 @@ class DataTransformer(DataPipelineSegment):
 
     def remove_features(self,
                         df,
+                        df_features,
                         feature_names,
                         _add_to_que=True):
+        """
+        Desc:
+            Removes unwanted features from the dataframe and saves them to the
+            pipeline segment structure if _add_to_que is set to True.
+
+        Args:
+            df:
+                Pandas Dataframe to update.
+
+            df_features:
+                DataFrameTypes object to update.
+
+            feature_names:
+                Features to remove
+
+            _add_to_que:
+                Pushes the function to pipeline segment parent if set to 'True'.
+        """
         params_dict = locals()
 
         # Remove any unwanted arguments in params_dict
         if _add_to_que:
             params_dict = locals()
-            for arg in ["self","df","_add_to_que", "params_dict"]:
+            for arg in ["self", "df", "df_features", "_add_to_que",
+                        "params_dict"]:
                 del params_dict[arg]
-
 
         if isinstance(feature_names, str):
             feature_names = [feature_names]
 
         for feature_n in feature_names:
-            check_if_feature_exists(df,
-                                    feature_n)
-            df.drop(columns=[feature_n],
-                    inplace=True)
+
+            try:
+                check_if_feature_exists(df,
+                                        feature_n)
+                df.drop(columns=[feature_n],
+                        inplace=True)
+
+                df_features.remove_feature(feature_n)
+            except KeyError:
+                pass
 
         if _add_to_que:
             self._DataPipelineSegment__add_function_to_que("remove_features",

@@ -1,0 +1,35 @@
+{
+  "Pipeline Segment": {
+    "Object Type": "TypeFixer",
+    "Functions Performed Order": {
+      "Function Order 1": {
+        "numeric_feature_fix": {
+          "Params Dict": {}
+        }
+      },
+      "Function Order 2": {
+        "type_string_conflict_fix": {
+          "Params Dict": {
+            "type_conflict_dict": {
+              "Embarked": "string",
+              "Pclass": "integer",
+              "Sex": "string",
+              "Survived": "integer",
+              "Age": "float"
+            },
+            "numeric_conflict_options": {
+              "Pclass": "extract numeric values",
+              "Age": "convert to nans"
+            }
+          }
+        }
+      },
+      "Function Order 3": {
+        "numeric_feature_fix": {
+          "Params Dict": {}
+        }
+      }
+    },
+    "Function Count": 3
+  }
+}

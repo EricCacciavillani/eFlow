@@ -2,7 +2,7 @@ import os
 import pandas as pd
 import math
 from eflow.foundation import DataFrameTypes
-from eflow.utils.sys_utils import check_create_dir_structure, \
+from eflow.utils.sys_utils import create_dir_structure, \
     create_json_file_from_dict
 
 from eflow.utils.string_utils import correct_directory_path
@@ -214,7 +214,6 @@ class DataFrameSnapshot:
                 that component of the dataframe.
         """
         df_features = DataFrameTypes(df,
-                                     display_init=False,
                                      ignore_nulls=True)
 
         meta_dict = dict()
@@ -256,7 +255,7 @@ class DataFrameSnapshot:
 
     def check_create_snapshot(self,
                               df,
-                              directory_pth,
+                              directory_path,
                               sub_dir):
         """
         df:
@@ -276,7 +275,7 @@ class DataFrameSnapshot:
 
         """
 
-        output_folder_path = check_create_dir_structure(directory_pth,
+        output_folder_path = create_dir_structure(directory_path,
                                                         sub_dir)
 
         json_file = output_folder_path + "Dataframe Identity.json"
