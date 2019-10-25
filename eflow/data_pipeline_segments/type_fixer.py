@@ -127,8 +127,7 @@ class TypeFixer(DataPipelineSegment):
                     df_features.set_feature_to_integer(feature_name)
                     continue
 
-        display(pd.DataFrame.from_dict(features_flag_types, orient='index'
-                                       ))
+        display(pd.DataFrame.from_dict(features_flag_types, orient='index'))
         if _add_to_que:
             self._DataPipelineSegment__add_function_to_que("numeric_feature_fix",
                                                            params_dict)
@@ -140,6 +139,25 @@ class TypeFixer(DataPipelineSegment):
                                  type_conflict_dict,
                                  numeric_conflict_options,
                                  _add_to_que=True):
+        """
+        Dec:
+
+
+        Args:
+            df:
+                Pandas dataframe object to update.
+
+            df_features:
+                Dataframe types holder.
+
+            type_conflict_dict:
+
+
+            numeric_conflict_options:
+
+            _add_to_que:
+                Pushes the function to pipeline segment parent if set to 'True'.
+        """
         params_dict = locals()
 
         # Remove any unwanted arguments in params_dict
@@ -211,6 +229,13 @@ class TypeFixer(DataPipelineSegment):
                                      df,
                                      df_features,
                                      notebook_mode=False):
+        """
+
+        :param df:
+        :param df_features:
+        :param notebook_mode:
+        :return:
+        """
         type_conflict_dict = dict()
         numeric_conflict_options = dict()
 
@@ -343,14 +368,55 @@ class TypeFixer(DataPipelineSegment):
 
     def __bool_check(self,
                      feature_values):
+        """
+        Desc:
+            Determines if the feature type of this column is a boolean based on
+            the numeric values passed to it.
 
-        if len(feature_values) == 2:
-            return True
+        Args:
+            feature_values:
+                Collection object a numeric values.
+
+        Returns:
+            True or false if the values are boolean.
+        """
+
+        if len(feature_values) <= 2:
+
+            is_bool = False
+
+            for val in feature_values:
+
+                if not val:
+                    continue
+
+                str_val = str(val)
+                tokens = str_val.split(".")
+
+                # Float check
+                if len(tokens) > 1 and int(tokens[1]) > 0:
+                    is_bool = False
+                    break
+
+                # Possible bool value found
+                if val == 1.0 or val == 1 or val == 0.0 or val == 0:
+                    is_bool = True
+
+            return is_bool
         else:
             return False
 
     def __categorical_check(self,
                             feature_values):
+        """
+        Desc:
+
+        Args:
+            feature_values:
+
+        Returns:
+
+        """
         # Categorical check
         last_val = None
         categorical_flag = True
@@ -369,9 +435,7 @@ class TypeFixer(DataPipelineSegment):
             except:
                 return False
 
-
-            else:
-                last_val = val
+            last_val = val
         return categorical_flag
 
     def __numeric_check(self,
