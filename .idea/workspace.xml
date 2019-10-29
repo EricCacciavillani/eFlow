@@ -6,81 +6,7 @@
     <bookmark url="file://$PROJECT_DIR$/eflow/data_pipeline_segments/type_fixer.py" line="30" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="178261e3-0830-4d8e-91ef-8172f5216aca" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/eflow/data_pipeline_segments/string_cleaner.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/eflow/utils/eflow_utils.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/lib/eflow/_hidden/parent_objects/data_pipeline_segment.py" beforeDir="false" afterPath="$PROJECT_DIR$/build/lib/eflow/_hidden/parent_objects/data_pipeline_segment.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/lib/eflow/foundation/data_pipeline.py" beforeDir="false" afterPath="$PROJECT_DIR$/build/lib/eflow/foundation/data_pipeline.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/eflow/_hidden/Backlogged Code/string_cleaning_widget.py" beforeDir="false" afterPath="$PROJECT_DIR$/eflow/_hidden/widgets/string_cleaning_widget.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/eflow/_hidden/parent_objects/data_pipeline_segment.py" beforeDir="false" afterPath="$PROJECT_DIR$/eflow/_hidden/parent_objects/data_pipeline_segment.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/eflow/_hidden/parent_objects/jupyter_widget.py" beforeDir="false" afterPath="$PROJECT_DIR$/eflow/_hidden/parent_objects/jupyter_widget.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/eflow/data_pipeline_segments/type_fixer.py" beforeDir="false" afterPath="$PROJECT_DIR$/eflow/data_pipeline_segments/type_fixer.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/eflow/foundation/data_frame_types.py" beforeDir="false" afterPath="$PROJECT_DIR$/eflow/foundation/data_frame_types.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/eflow/foundation/data_pipeline.py" beforeDir="false" afterPath="$PROJECT_DIR$/eflow/foundation/data_pipeline.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/eflow/model_analysis/classification_analysis.py" beforeDir="false" afterPath="$PROJECT_DIR$/eflow/model_analysis/classification_analysis.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/eflow/utils/sys_utils.py" beforeDir="false" afterPath="$PROJECT_DIR$/eflow/utils/sys_utils.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/.ipynb_checkpoints/Pre Production-checkpoint.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/testing/.ipynb_checkpoints/Pre Production-checkpoint.ipynb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/Pre Production.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/testing/Pre Production.ipynb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Before Cleaning/Data Analysis/titanic_train/Graphics/Count plot graph on Embarked.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Before Cleaning/Data Analysis/titanic_train/Graphics/Count plot graph on Parch.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Before Cleaning/Data Analysis/titanic_train/Graphics/Count plot graph on Pclass.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Before Cleaning/Data Analysis/titanic_train/Graphics/Count plot graph on Sex.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Before Cleaning/Data Analysis/titanic_train/Graphics/Count plot graph on Survived.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Before Cleaning/Data Analysis/titanic_train/Graphics/Distance plot graph on Age.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Before Cleaning/Data Analysis/titanic_train/Graphics/Distance plot graph on Fare.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Before Cleaning/Data Analysis/titanic_train/Graphics/Distance plot graph on SibSp.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Before Cleaning/Data Analysis/titanic_train/Graphics/Pie graph on Embarked.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Before Cleaning/Data Analysis/titanic_train/Graphics/Pie graph on Pclass.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Before Cleaning/Data Analysis/titanic_train/Graphics/Pie graph on Sex.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Before Cleaning/Data Analysis/titanic_train/Graphics/Pie graph on Survived.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Before Cleaning/Data Analysis/titanic_train/_Extras/Dataframe Snapshot.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Before Cleaning/Missing Data/titanic_train/Graphics/Missing data bar graph.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Before Cleaning/Missing Data/titanic_train/Graphics/Missing data dendrogram graph average.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Before Cleaning/Missing Data/titanic_train/Graphics/Missing data heatmap graph.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Before Cleaning/Missing Data/titanic_train/Graphics/Missing data matrix graph.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Before Cleaning/Missing Data/titanic_train/Tables/Data Types Table.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Before Cleaning/Missing Data/titanic_train/Tables/Missing Data Table.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Before Cleaning/Missing Data/titanic_train/_Extras/Dataframe Snapshot.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Data Pipelines/Titanic pipeline 1/root_pipeline.json" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Data Pipelines/Titanic pipeline 1/root_pipeline.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Data Pipelines/Titanic pipeline 2/root_pipeline.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Data Pipelines/Titanic pipeline 3/root_pipeline.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Data Pipelines/Titanic pipeline 4/root_pipeline.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Data Pipelines/Titanic pipeline 5/root_pipeline.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Data Pipelines/Titanic pipeline 6/root_pipeline.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Data Pipelines/Titanic pipeline 7/root_pipeline.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Data Pipelines/Titanic pipeline 8/root_pipeline.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Data Pipelines/Titanic pipeline/root_pipeline.json" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Data Pipelines/Titanic pipeline/root_pipeline.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Pipeline Structure/JSON Files/Data Pipeline Segments/DataTransformer/01C9C6B679.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Pipeline Structure/JSON Files/Data Pipeline Segments/DataTransformer/0DCCFB2CAE.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Pipeline Structure/JSON Files/Data Pipeline Segments/DataTransformer/171F67044B.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Pipeline Structure/JSON Files/Data Pipeline Segments/DataTransformer/181E0A9E88.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Pipeline Structure/JSON Files/Data Pipeline Segments/DataTransformer/258F3488CC.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Pipeline Structure/JSON Files/Data Pipeline Segments/DataTransformer/2D62FF6D56.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Pipeline Structure/JSON Files/Data Pipeline Segments/DataTransformer/502068DA4E.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Pipeline Structure/JSON Files/Data Pipeline Segments/DataTransformer/5491D82949.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Pipeline Structure/JSON Files/Data Pipeline Segments/DataTransformer/6F7F50C604.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Pipeline Structure/JSON Files/Data Pipeline Segments/DataTransformer/72F48C1A49.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Pipeline Structure/JSON Files/Data Pipeline Segments/DataTransformer/7B5A364352.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Pipeline Structure/JSON Files/Data Pipeline Segments/DataTransformer/87EEB8E060.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Pipeline Structure/JSON Files/Data Pipeline Segments/DataTransformer/94F5325818.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Pipeline Structure/JSON Files/Data Pipeline Segments/DataTransformer/A63CFE8F52.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Pipeline Structure/JSON Files/Data Pipeline Segments/DataTransformer/B9FC9D12C5.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Pipeline Structure/JSON Files/Data Pipeline Segments/DataTransformer/BDA6986AAD.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Pipeline Structure/JSON Files/Data Pipeline Segments/DataTransformer/C2A9BB3F8C.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Pipeline Structure/JSON Files/Data Pipeline Segments/DataTransformer/E91CEB8612.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Pipeline Structure/JSON Files/Data Pipeline Segments/DataTransformer/FA48361D4A.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Pipeline Structure/JSON Files/Data Pipeline Segments/TypeFixer/2117B52984.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Pipeline Structure/JSON Files/Data Pipeline Segments/TypeFixer/2439FCCCC1.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Pipeline Structure/JSON Files/Data Pipeline Segments/TypeFixer/33278189B0.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Pipeline Structure/JSON Files/Data Pipeline Segments/TypeFixer/5E03AA5644.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Pipeline Structure/JSON Files/Data Pipeline Segments/TypeFixer/742C8E23D3.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Pipeline Structure/JSON Files/Data Pipeline Segments/TypeFixer/A66A2A8F6D.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Pipeline Structure/JSON Files/Data Pipeline Segments/TypeFixer/D9BF60E655.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Pipeline Structure/JSON Files/Data Pipeline Segments/TypeFixer/DA3B62CFF2.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Pipeline Structure/JSON Files/Data Pipeline Segments/TypeFixer/DA92752F86.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Pipeline Structure/JSON Files/Data Pipeline/Titanic pipeline/root_pipeline.json" beforeDir="false" />
-    </list>
+    <list default="true" id="178261e3-0830-4d8e-91ef-8172f5216aca" name="Default Changelist" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -105,10 +31,10 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/eflow/foundation/data_frame_types.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1066">
+            <state relative-caret-position="-1510">
               <caret line="1003" column="25" selection-start-line="1003" selection-start-column="8" selection-end-line="1003" selection-end-column="25" />
               <folding>
                 <element signature="e#0#4#0" expanded="true" />
@@ -192,11 +118,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/eflow/utils/eflow_utils.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="274">
-              <caret line="46" column="33" selection-start-line="46" selection-start-column="4" selection-end-line="46" selection-end-column="33" />
+            <state relative-caret-position="-295">
+              <caret line="61" column="52" selection-start-line="61" selection-start-column="52" selection-end-line="61" selection-end-column="52" />
               <folding>
                 <element signature="e#0#43#0" expanded="true" />
               </folding>
@@ -241,9 +167,9 @@
       <find>df_features =</find>
       <find>create_json_file_representation</find>
       <find>init_on_json_file</find>
-      <find>get_type_holder_from_pipeline</find>
       <find>df_features</find>
       <find>print</find>
+      <find>get_type_holder_from_pipeline</find>
       <find>move_folder_to_eflow_garbage</find>
     </findStrings>
     <replaceStrings>
@@ -325,8 +251,8 @@
         <option value="$PROJECT_DIR$/eflow/_hidden/parent_objects/data_pipeline_segment.py" />
         <option value="$PROJECT_DIR$/build/lib/eflow/_hidden/parent_objects/data_pipeline_segment.py" />
         <option value="$PROJECT_DIR$/build/lib/eflow/foundation/data_pipeline.py" />
-        <option value="$PROJECT_DIR$/eflow/utils/eflow_utils.py" />
         <option value="$PROJECT_DIR$/eflow/foundation/data_pipeline.py" />
+        <option value="$PROJECT_DIR$/eflow/utils/eflow_utils.py" />
       </list>
     </option>
   </component>
@@ -535,12 +461,12 @@
       <workItem from="1572010704662" duration="1944000" />
       <workItem from="1572020199833" duration="12024000" />
       <workItem from="1572146080302" duration="295000" />
-      <workItem from="1572269885903" duration="19629000" />
+      <workItem from="1572269885903" duration="20009000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="253377000" />
+    <option name="totallyTimeSpent" value="253757000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="53" y="23" width="1627" height="1027" extended-state="6" />
@@ -869,16 +795,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/eflow/utils/pandas_utils.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-987">
-          <caret line="91" column="52" selection-start-line="91" selection-start-column="52" selection-end-line="91" selection-end-column="52" />
-          <folding>
-            <element signature="e#0#19#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/eflow/utils/modeling_utils.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="484">
@@ -896,12 +812,22 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/eflow/foundation/data_frame_types.py">
+    <entry file="file://$PROJECT_DIR$/eflow/utils/eflow_utils.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1066">
-          <caret line="1003" column="25" selection-start-line="1003" selection-start-column="8" selection-end-line="1003" selection-end-column="25" />
+        <state relative-caret-position="-295">
+          <caret line="61" column="52" selection-start-line="61" selection-start-column="52" selection-end-line="61" selection-end-column="52" />
           <folding>
-            <element signature="e#0#4#0" expanded="true" />
+            <element signature="e#0#43#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/eflow/utils/pandas_utils.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-987">
+          <caret line="91" column="52" selection-start-line="91" selection-start-column="52" selection-end-line="91" selection-end-column="52" />
+          <folding>
+            <element signature="e#0#19#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -916,12 +842,12 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/eflow/utils/eflow_utils.py">
+    <entry file="file://$PROJECT_DIR$/eflow/foundation/data_frame_types.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="274">
-          <caret line="46" column="33" selection-start-line="46" selection-start-column="4" selection-end-line="46" selection-end-column="33" />
+        <state relative-caret-position="-1510">
+          <caret line="1003" column="25" selection-start-line="1003" selection-start-column="8" selection-end-line="1003" selection-end-column="25" />
           <folding>
-            <element signature="e#0#43#0" expanded="true" />
+            <element signature="e#0#4#0" expanded="true" />
           </folding>
         </state>
       </provider>

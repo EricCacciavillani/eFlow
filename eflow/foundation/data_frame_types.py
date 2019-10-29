@@ -1061,6 +1061,10 @@ class DataFrameTypes:
             else:
                 raise ValueError(f"Unknown type {type} was found!")
 
+        self.__all_columns = (self.__float_features | self.__integer_features) | \
+                              self.__string_features | self.__bool_features | \
+                              self.__datetime_features | self.__categorical_features
+
 
 
     def __bool_check(self,
