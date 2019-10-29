@@ -43,7 +43,7 @@ class DataPipeline(FileOutput):
             if os.path.exists(dir_path_to_pipeline + json_file):
                 print(f"The file '{json_file}' exist!")
                 FileOutput.__init__(self,
-                                    f'_Extras/JSON Files/Data Pipeline/{pipeline_name}')
+                                    f'_Extras/Data Pipeline/{pipeline_name}')
                 configure_existing_file = True
             else:
                 raise PipelineError(f"The file '{json_file}' does not exist!")
@@ -130,7 +130,7 @@ class DataPipeline(FileOutput):
             # Que has yet to have data pushed; set up output directory
             if len(self.__pipeline_segment_deque) == 0:
                 FileOutput.__init__(self,
-                                    f'_Extras/JSON Files/Data Pipeline/{self.__pipeline_name}')
+                                    f'_Extras/Data Pipeline/{self.__pipeline_name}')
 
 
         # Update data types for error checking

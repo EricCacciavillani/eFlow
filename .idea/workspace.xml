@@ -1,18 +1,85 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="BookmarkManager">
-    <bookmark url="file://$PROJECT_DIR$/eflow/foundation/data_frame_types.py" line="121" />
-    <bookmark url="file://$PROJECT_DIR$/eflow/utils/sys_utils.py" line="167" />
-    <bookmark url="file://$PROJECT_DIR$/eflow/data_pipeline_segments/type_fixer.py" line="98" />
+    <bookmark url="file://$PROJECT_DIR$/eflow/foundation/data_frame_types.py" line="148" />
+    <bookmark url="file://$PROJECT_DIR$/eflow/utils/sys_utils.py" line="165" />
+    <bookmark url="file://$PROJECT_DIR$/eflow/data_pipeline_segments/type_fixer.py" line="30" />
   </component>
   <component name="ChangeListManager">
     <list default="true" id="178261e3-0830-4d8e-91ef-8172f5216aca" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/eflow/data_pipeline_segments/string_cleaner.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/eflow/utils/eflow_utils.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/lib/eflow/_hidden/parent_objects/data_pipeline_segment.py" beforeDir="false" afterPath="$PROJECT_DIR$/build/lib/eflow/_hidden/parent_objects/data_pipeline_segment.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/lib/eflow/foundation/data_pipeline.py" beforeDir="false" afterPath="$PROJECT_DIR$/build/lib/eflow/foundation/data_pipeline.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/eflow/_hidden/Backlogged Code/string_cleaning_widget.py" beforeDir="false" afterPath="$PROJECT_DIR$/eflow/_hidden/widgets/string_cleaning_widget.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/eflow/_hidden/parent_objects/data_pipeline_segment.py" beforeDir="false" afterPath="$PROJECT_DIR$/eflow/_hidden/parent_objects/data_pipeline_segment.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/eflow/_hidden/parent_objects/jupyter_widget.py" beforeDir="false" afterPath="$PROJECT_DIR$/eflow/_hidden/parent_objects/jupyter_widget.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/eflow/data_pipeline_segments/type_fixer.py" beforeDir="false" afterPath="$PROJECT_DIR$/eflow/data_pipeline_segments/type_fixer.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/eflow/foundation/data_frame_types.py" beforeDir="false" afterPath="$PROJECT_DIR$/eflow/foundation/data_frame_types.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/eflow/foundation/data_pipeline.py" beforeDir="false" afterPath="$PROJECT_DIR$/eflow/foundation/data_pipeline.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/eflow/model_analysis/classification_analysis.py" beforeDir="false" afterPath="$PROJECT_DIR$/eflow/model_analysis/classification_analysis.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/eflow/utils/sys_utils.py" beforeDir="false" afterPath="$PROJECT_DIR$/eflow/utils/sys_utils.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/testing/.ipynb_checkpoints/Pre Production-checkpoint.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/testing/.ipynb_checkpoints/Pre Production-checkpoint.ipynb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/testing/Pre Production.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/testing/Pre Production.ipynb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Before Cleaning/Data Analysis/titanic_train/Graphics/Pie graph on Survived.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Before Cleaning/Data Analysis/titanic_train/Graphics/Pie graph on Survived.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Pipeline Structure/JSON Files/Data Pipeline/Titanic pipeline/root_pipeline.json" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/_Extras/Pipeline Structure/JSON Files/Data Pipeline/Titanic pipeline/root_pipeline.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Before Cleaning/Data Analysis/titanic_train/Graphics/Count plot graph on Embarked.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Before Cleaning/Data Analysis/titanic_train/Graphics/Count plot graph on Parch.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Before Cleaning/Data Analysis/titanic_train/Graphics/Count plot graph on Pclass.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Before Cleaning/Data Analysis/titanic_train/Graphics/Count plot graph on Sex.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Before Cleaning/Data Analysis/titanic_train/Graphics/Count plot graph on Survived.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Before Cleaning/Data Analysis/titanic_train/Graphics/Distance plot graph on Age.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Before Cleaning/Data Analysis/titanic_train/Graphics/Distance plot graph on Fare.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Before Cleaning/Data Analysis/titanic_train/Graphics/Distance plot graph on SibSp.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Before Cleaning/Data Analysis/titanic_train/Graphics/Pie graph on Embarked.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Before Cleaning/Data Analysis/titanic_train/Graphics/Pie graph on Pclass.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Before Cleaning/Data Analysis/titanic_train/Graphics/Pie graph on Sex.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Before Cleaning/Data Analysis/titanic_train/Graphics/Pie graph on Survived.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Before Cleaning/Data Analysis/titanic_train/_Extras/Dataframe Snapshot.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Before Cleaning/Missing Data/titanic_train/Graphics/Missing data bar graph.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Before Cleaning/Missing Data/titanic_train/Graphics/Missing data dendrogram graph average.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Before Cleaning/Missing Data/titanic_train/Graphics/Missing data heatmap graph.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Before Cleaning/Missing Data/titanic_train/Graphics/Missing data matrix graph.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Before Cleaning/Missing Data/titanic_train/Tables/Data Types Table.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Before Cleaning/Missing Data/titanic_train/Tables/Missing Data Table.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Before Cleaning/Missing Data/titanic_train/_Extras/Dataframe Snapshot.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Data Pipelines/Titanic pipeline 1/root_pipeline.json" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Data Pipelines/Titanic pipeline 1/root_pipeline.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Data Pipelines/Titanic pipeline 2/root_pipeline.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Data Pipelines/Titanic pipeline 3/root_pipeline.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Data Pipelines/Titanic pipeline 4/root_pipeline.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Data Pipelines/Titanic pipeline 5/root_pipeline.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Data Pipelines/Titanic pipeline 6/root_pipeline.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Data Pipelines/Titanic pipeline 7/root_pipeline.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Data Pipelines/Titanic pipeline 8/root_pipeline.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Data Pipelines/Titanic pipeline/root_pipeline.json" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Data Pipelines/Titanic pipeline/root_pipeline.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Pipeline Structure/JSON Files/Data Pipeline Segments/DataTransformer/01C9C6B679.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Pipeline Structure/JSON Files/Data Pipeline Segments/DataTransformer/0DCCFB2CAE.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Pipeline Structure/JSON Files/Data Pipeline Segments/DataTransformer/171F67044B.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Pipeline Structure/JSON Files/Data Pipeline Segments/DataTransformer/181E0A9E88.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Pipeline Structure/JSON Files/Data Pipeline Segments/DataTransformer/258F3488CC.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Pipeline Structure/JSON Files/Data Pipeline Segments/DataTransformer/2D62FF6D56.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Pipeline Structure/JSON Files/Data Pipeline Segments/DataTransformer/502068DA4E.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Pipeline Structure/JSON Files/Data Pipeline Segments/DataTransformer/5491D82949.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Pipeline Structure/JSON Files/Data Pipeline Segments/DataTransformer/6F7F50C604.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Pipeline Structure/JSON Files/Data Pipeline Segments/DataTransformer/72F48C1A49.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Pipeline Structure/JSON Files/Data Pipeline Segments/DataTransformer/7B5A364352.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Pipeline Structure/JSON Files/Data Pipeline Segments/DataTransformer/87EEB8E060.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Pipeline Structure/JSON Files/Data Pipeline Segments/DataTransformer/94F5325818.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Pipeline Structure/JSON Files/Data Pipeline Segments/DataTransformer/A63CFE8F52.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Pipeline Structure/JSON Files/Data Pipeline Segments/DataTransformer/B9FC9D12C5.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Pipeline Structure/JSON Files/Data Pipeline Segments/DataTransformer/BDA6986AAD.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Pipeline Structure/JSON Files/Data Pipeline Segments/DataTransformer/C2A9BB3F8C.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Pipeline Structure/JSON Files/Data Pipeline Segments/DataTransformer/E91CEB8612.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Pipeline Structure/JSON Files/Data Pipeline Segments/DataTransformer/FA48361D4A.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Pipeline Structure/JSON Files/Data Pipeline Segments/TypeFixer/2117B52984.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Pipeline Structure/JSON Files/Data Pipeline Segments/TypeFixer/2439FCCCC1.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Pipeline Structure/JSON Files/Data Pipeline Segments/TypeFixer/33278189B0.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Pipeline Structure/JSON Files/Data Pipeline Segments/TypeFixer/5E03AA5644.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Pipeline Structure/JSON Files/Data Pipeline Segments/TypeFixer/742C8E23D3.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Pipeline Structure/JSON Files/Data Pipeline Segments/TypeFixer/A66A2A8F6D.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Pipeline Structure/JSON Files/Data Pipeline Segments/TypeFixer/D9BF60E655.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Pipeline Structure/JSON Files/Data Pipeline Segments/TypeFixer/DA3B62CFF2.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Pipeline Structure/JSON Files/Data Pipeline Segments/TypeFixer/DA92752F86.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Pipeline Structure/JSON Files/Data Pipeline/Titanic pipeline/root_pipeline.json" beforeDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -27,19 +94,10 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/eflow/_hidden/custom_exceptions.py">
+        <entry file="file://$PROJECT_DIR$/eflow/foundation/data_pipeline.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="570">
-              <caret line="38" selection-start-line="38" selection-end-line="38" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/eflow/data_analysis/feature_analysis.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2520">
-              <caret line="180" column="24" selection-start-line="180" selection-start-column="24" selection-end-line="180" selection-end-column="24" />
+            <state relative-caret-position="-602">
+              <caret line="190" column="65" selection-start-line="190" selection-start-column="54" selection-end-line="190" selection-end-column="65" />
               <folding>
                 <element signature="e#0#51#0" expanded="true" />
               </folding>
@@ -47,26 +105,71 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/eflow/data_pipeline_segments/type_fixer.py">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/eflow/foundation/data_frame_types.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="933">
-              <caret line="180" column="43" lean-forward="true" selection-start-line="180" selection-start-column="43" selection-end-line="180" selection-end-column="43" />
+            <state relative-caret-position="1066">
+              <caret line="1003" column="25" selection-start-line="1003" selection-start-column="8" selection-end-line="1003" selection-end-column="25" />
               <folding>
-                <element signature="e#0#43#0" expanded="true" />
+                <element signature="e#0#4#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/eflow/data_pipeline_segments/data_transformer.py">
+        <entry file="file://$PROJECT_DIR$/eflow/_hidden/parent_objects/file_output.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="945">
-              <caret line="66" column="13" selection-start-line="66" selection-start-column="13" selection-end-line="66" selection-end-column="13" />
+            <state relative-caret-position="415">
+              <caret line="49" column="35" selection-start-line="49" selection-start-column="35" selection-end-line="49" selection-end-column="35" />
               <folding>
-                <element signature="e#0#60#0" expanded="true" />
+                <element signature="e#0#66#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/eflow/_hidden/parent_objects/data_pipeline_segment.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="293">
+              <caret line="222" selection-start-line="222" selection-end-line="222" />
+              <folding>
+                <element signature="e#0#51#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/eflow/utils/sys_utils.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="336">
+              <caret line="206" column="21" selection-start-line="206" selection-start-column="4" selection-end-line="206" selection-end-column="21" />
+              <folding>
+                <element signature="e#0#86#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/eflow/utils/pandas_utils.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-987">
+              <caret line="91" column="52" selection-start-line="91" selection-start-column="52" selection-end-line="91" selection-end-column="52" />
+              <folding>
+                <element signature="e#0#19#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/eflow/utils/modeling_utils.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="484">
+              <caret line="53" column="41" selection-start-line="53" selection-start-column="41" selection-end-line="53" selection-end-column="41" />
             </state>
           </provider>
         </entry>
@@ -81,50 +184,21 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/eflow/utils/__init__.py">
-          <provider selected="true" editor-type-id="text-editor" />
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/eflow/utils/misc_utils.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="375">
+            <state relative-caret-position="-230">
               <caret line="25" column="9" selection-start-line="25" selection-start-column="9" selection-end-line="25" selection-end-column="9" />
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/eflow/utils/pandas_utils.py">
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/eflow/utils/eflow_utils.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1320">
-              <caret line="91" column="52" selection-start-line="91" selection-start-column="52" selection-end-line="91" selection-end-column="52" />
+            <state relative-caret-position="274">
+              <caret line="46" column="33" selection-start-line="46" selection-start-column="4" selection-end-line="46" selection-end-column="33" />
               <folding>
-                <element signature="e#0#19#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/eflow/utils/sys_utils.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="4395">
-              <caret line="299" selection-start-line="299" selection-end-line="299" />
-              <folding>
-                <element signature="e#0#86#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/eflow/foundation/data_frame_types.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="543">
-              <caret line="592" column="47" selection-start-line="592" selection-start-column="47" selection-end-line="592" selection-end-column="47" />
-              <folding>
-                <element signature="e#0#11#0" expanded="true" />
+                <element signature="e#0#43#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -141,36 +215,36 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
+      <find>create_json_file_from_dict</find>
+      <find>json</find>
+      <find>__bool_features</find>
+      <find>perform</find>
+      <find>FileOutput</find>
+      <find>file_path</find>
       <find>del</find>
-      <find>check_create_dir_structure</find>
-      <find>df_features =</find>
-      <find>display_init</find>
-      <find>df_features.display_all</find>
-      <find>get_unique_directory_path</find>
-      <find>remove_feature</find>
-      <find>pd.</find>
-      <find>type_conflict_dict</find>
-      <find>df</find>
-      <find>df_features</find>
-      <find>display</find>
-      <find>.value_counts</find>
-      <find>eFlow's garbage</find>
+      <find>de</find>
+      <find>.get_all</find>
+      <find>get_target_feature</find>
+      <find>target_feature</find>
+      <find>self.__target_feature</find>
+      <find>tmp_df_features</find>
       <find>__categorical_check</find>
-      <find>numeric_</find>
-      <find>float_flag</find>
-      <find>display_features</find>
-      <find>data_types_table</find>
-      <find>__make_type_assertions_after_ignore_nan</find>
-      <find>loat_flag</find>
-      <find>parser</find>
-      <find>check_if_feature_exists</find>
-      <find>numeric_conflict_options</find>
-      <find>numeric</find>
-      <find>string_type_conflict</find>
-      <find>set_feature_to_boo</find>
-      <find>count_plot_graph</find>
+      <find>error</find>
+      <find>__df_features</find>
+      <find>When initializing a data pipeline str</find>
+      <find>filepath</find>
+      <find>DataFrameTypes</find>
+      <find>JSON Files</find>
+      <find>Data Pipeline</find>
+      <find>When initializing a data pipeline structure you must pass a DataFrameTypbject with the correctly defined types!</find>
+      <find>self.__df_features</find>
+      <find>df_features =</find>
+      <find>create_json_file_representation</find>
+      <find>init_on_json_file</find>
+      <find>get_type_holder_from_pipeline</find>
+      <find>df_features</find>
       <find>print</find>
-      <find>distance</find>
+      <find>move_folder_to_eflow_garbage</find>
     </findStrings>
     <replaceStrings>
       <replace>dataframe_snapshot</replace>
@@ -187,9 +261,10 @@
       <replace>folder_path</replace>
       <replace>Please read the offical documentation for more about the parameters:</replace>
       <replace>create_dir_structure</replace>
-      <replace />
       <replace>if not self.__target_feature:</replace>
       <replace>directory_path</replace>
+      <replace />
+      <replace>__tmp_df</replace>
     </replaceStrings>
     <dirStrings>
       <dir>$PROJECT_DIR$/eflow/_hidden/objects</dir>
@@ -201,11 +276,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/eflow/_hidden/Backlogged Code/__init__.py" />
-        <option value="$PROJECT_DIR$/eflow/core_objects/data_pipeline.py" />
-        <option value="$PROJECT_DIR$/eflow/core_objects/__init__.py" />
-        <option value="$PROJECT_DIR$/eflow/toolbox_objects/data_pipeline.py" />
-        <option value="$PROJECT_DIR$/eflow/data_pipeline.py" />
         <option value="$PROJECT_DIR$/eflow/toolbox_objects/__init__.py" />
         <option value="$PROJECT_DIR$/eflow/_hidden/parents_objects/__init__.py" />
         <option value="$PROJECT_DIR$/eflow/general_objects/data_pipeline.py" />
@@ -225,7 +295,6 @@
         <option value="$PROJECT_DIR$/eflow/_hidden/widgets/DataCleaningWidget.py" />
         <option value="$PROJECT_DIR$/documentation_generation/test.py" />
         <option value="$PROJECT_DIR$/eflow/_hidden/custom_warnings.py" />
-        <option value="$PROJECT_DIR$/eflow/model_analysis/classification_analysis.py" />
         <option value="$PROJECT_DIR$/eflow/data_pipeline_segments/data_cleaner.py" />
         <option value="$PROJECT_DIR$/eflow/auto_modeler/cluster_master.py" />
         <option value="$PROJECT_DIR$/eflow/_hidden/constants.py" />
@@ -235,29 +304,37 @@
         <option value="$PROJECT_DIR$/eflow/utils/misc_utils.py" />
         <option value="$PROJECT_DIR$/eflow/utils/string_utils.py" />
         <option value="$PROJECT_DIR$/eflow/data_analysis/null_analysis.py" />
-        <option value="$PROJECT_DIR$/eflow/_hidden/parent_objects/jupyter_widget.py" />
-        <option value="$PROJECT_DIR$/eflow/_hidden/parent_objects/data_pipeline_segment.py" />
         <option value="$PROJECT_DIR$/eflow/_hidden/Backlogged Code/string_cleaning_widget.py" />
         <option value="$PROJECT_DIR$/eflow/_hidden/parent_objects/__init__.py" />
-        <option value="$PROJECT_DIR$/eflow/foundation/data_pipeline.py" />
         <option value="$PROJECT_DIR$/eflow/_hidden/general_objects/dataframe_snapshot.py" />
         <option value="$PROJECT_DIR$/build/lib/eflow/_hidden/general_objects/dataframe_snapshot.py" />
         <option value="$PROJECT_DIR$/eflow/_hidden/parent_objects/file_output.py" />
         <option value="$PROJECT_DIR$/eflow/_hidden/custom_exceptions.py" />
         <option value="$PROJECT_DIR$/eflow/data_pipeline_segments/__init__.py" />
         <option value="$PROJECT_DIR$/eflow/utils/pandas_utils.py" />
-        <option value="$PROJECT_DIR$/eflow/utils/sys_utils.py" />
         <option value="$PROJECT_DIR$/eflow/utils/math_utils.py" />
         <option value="$PROJECT_DIR$/eflow/data_pipeline_segments/data_transformer.py" />
-        <option value="$PROJECT_DIR$/eflow/foundation/data_frame_types.py" />
         <option value="$PROJECT_DIR$/eflow/data_analysis/feature_analysis.py" />
         <option value="$PROJECT_DIR$/eflow/data_pipeline_segments/type_fixer.py" />
+        <option value="$PROJECT_DIR$/eflow/_hidden/widgets/string_cleaning_widget.py" />
+        <option value="$PROJECT_DIR$/eflow/data_pipeline_segments/string_cleaner.py" />
+        <option value="$PROJECT_DIR$/eflow/model_analysis/classification_analysis.py" />
+        <option value="$PROJECT_DIR$/eflow/foundation/data_frame_types.py" />
+        <option value="$PROJECT_DIR$/eflow/utils/sys_utils.py" />
+        <option value="$PROJECT_DIR$/eflow/_hidden/parent_objects/jupyter_widget.py" />
+        <option value="$PROJECT_DIR$/eflow/_hidden/parent_objects/data_pipeline_segment.py" />
+        <option value="$PROJECT_DIR$/build/lib/eflow/_hidden/parent_objects/data_pipeline_segment.py" />
+        <option value="$PROJECT_DIR$/build/lib/eflow/foundation/data_pipeline.py" />
+        <option value="$PROJECT_DIR$/eflow/utils/eflow_utils.py" />
+        <option value="$PROJECT_DIR$/eflow/foundation/data_pipeline.py" />
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" fullScreen="true">
-    <option name="width" value="1920" />
-    <option name="height" value="1080" />
+  <component name="ProjectFrameBounds" extendedState="6">
+    <option name="x" value="53" />
+    <option name="y" value="53" />
+    <option name="width" value="1627" />
+    <option name="height" value="1027" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
@@ -265,6 +342,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -306,6 +384,12 @@
               <item name="eFlow" type="b2602c69:ProjectViewProjectNode" />
               <item name="eFlow" type="462c0819:PsiDirectoryNode" />
               <item name="eflow" type="462c0819:PsiDirectoryNode" />
+              <item name="foundation" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="eFlow" type="b2602c69:ProjectViewProjectNode" />
+              <item name="eFlow" type="462c0819:PsiDirectoryNode" />
+              <item name="eflow" type="462c0819:PsiDirectoryNode" />
               <item name="model_analysis" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -318,7 +402,6 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -329,16 +412,16 @@
     <property name="settings.editor.selected.configurable" value="preferences.editor" />
   </component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/eflow" />
+      <recent name="$PROJECT_DIR$/eflow/fuckoff" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/eflow/_hidden/widgets" />
       <recent name="$PROJECT_DIR$" />
       <recent name="$PROJECT_DIR$/eflow/_hidden" />
       <recent name="$PROJECT_DIR$/eflow" />
       <recent name="$PROJECT_DIR$/eflow/toolbox_objects" />
-      <recent name="$PROJECT_DIR$/eflow/core_objects" />
-    </key>
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/eflow" />
-      <recent name="$PROJECT_DIR$/eflow/fuckoff" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -449,18 +532,21 @@
       <workItem from="1571340704433" duration="5434000" />
       <workItem from="1571436868722" duration="345000" />
       <workItem from="1571440255398" duration="39919000" />
-      <workItem from="1572010704662" duration="1742000" />
+      <workItem from="1572010704662" duration="1944000" />
+      <workItem from="1572020199833" duration="12024000" />
+      <workItem from="1572146080302" duration="295000" />
+      <workItem from="1572269885903" duration="19629000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="221227000" />
+    <option name="totallyTimeSpent" value="253377000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="0" width="1920" height="1080" extended-state="0" />
+    <frame x="53" y="23" width="1627" height="1027" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.23588924" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.2895899" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -486,44 +572,11 @@
       <window_info anchor="right" id="R Packages" order="5" />
       <window_info anchor="right" id="Database" order="6" />
     </layout>
-    <layout-to-restore>
-      <window_info id="Favorites" order="0" side_tool="true" />
-      <window_info active="true" content_ui="combo" id="Project" order="1" visible="true" weight="0.24968395" />
-      <window_info id="Structure" order="2" side_tool="true" weight="0.25" />
-      <window_info anchor="bottom" id="Docker" order="0" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Terminal" order="1" />
-      <window_info anchor="bottom" id="Database Changes" order="2" />
-      <window_info anchor="bottom" id="Version Control" order="3" />
-      <window_info anchor="bottom" id="Event Log" order="4" side_tool="true" />
-      <window_info anchor="bottom" id="Python Console" order="5" />
-      <window_info anchor="bottom" id="Message" order="6" />
-      <window_info anchor="bottom" id="Find" order="7" />
-      <window_info anchor="bottom" id="Run" order="8" />
-      <window_info anchor="bottom" id="Debug" order="9" weight="0.4" />
-      <window_info anchor="bottom" id="Cvs" order="10" weight="0.25" />
-      <window_info anchor="bottom" id="Inspection" order="11" weight="0.4" />
-      <window_info anchor="bottom" id="TODO" order="12" />
-      <window_info anchor="right" id="R Graphics" order="0" />
-      <window_info anchor="right" id="R Packages" order="1" />
-      <window_info anchor="right" id="Database" order="2" />
-      <window_info anchor="right" id="SciView" order="3" />
-      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="4" type="SLIDING" weight="0.4" />
-      <window_info anchor="right" id="Ant Build" order="5" weight="0.25" />
-      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="6" weight="0.25" />
-    </layout-to-restore>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/Global_Utils.py" />
-    <entry file="file://$PROJECT_DIR$/eflow/model_analysis/__init__.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret column="59" selection-start-column="59" selection-end-column="59" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/eflow/data_analysis/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
         <state>
@@ -640,13 +693,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/eflow/utils/modeling_utils.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="795">
-          <caret line="53" column="41" selection-start-line="53" selection-start-column="41" selection-end-line="53" selection-end-column="41" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/eflow/utils/image_utils.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="3030">
@@ -654,13 +700,6 @@
           <folding>
             <element signature="e#0#18#0" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/eflow/utils/string_utils.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="285">
-          <caret line="19" column="42" selection-start-line="19" selection-start-column="42" selection-end-line="19" selection-end-column="42" />
         </state>
       </provider>
     </entry>
@@ -688,16 +727,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/eflow/_hidden/Backlogged Code/string_cleaning_widget.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-822">
-          <caret line="38" column="55" selection-start-line="38" selection-start-column="55" selection-end-line="38" selection-end-column="55" />
-          <folding>
-            <element signature="e#0#51#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/eflow/_hidden/general_objects/enum.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="75">
@@ -715,32 +744,12 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/eflow/_hidden/parent_objects/data_pipeline_segment.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="611">
-          <caret line="78" column="52" selection-start-line="78" selection-start-column="52" selection-end-line="78" selection-end-column="52" />
-          <folding>
-            <element signature="e#0#51#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/eflow/data_pipeline_segments/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="30">
           <caret line="2" column="33" selection-start-line="2" selection-start-column="33" selection-end-line="2" selection-end-column="33" />
           <folding>
             <element signature="e#0#37#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/eflow/foundation/data_pipeline.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1703">
-          <caret line="74" column="51" selection-start-line="74" selection-start-column="51" selection-end-line="74" selection-end-column="51" />
-          <folding>
-            <element signature="e#0#51#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -762,16 +771,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/eflow/_hidden/parent_objects/file_output.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="90">
-          <caret line="6" selection-start-line="6" selection-end-line="6" />
-          <folding>
-            <element signature="e#0#66#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/eflow/data_analysis/feature_analysis.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="2520">
@@ -781,6 +780,9 @@
           </folding>
         </state>
       </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/eflow/utils/__init__.py">
+      <provider selected="true" editor-type-id="text-editor" />
     </entry>
     <entry file="file://$PROJECT_DIR$/eflow/data_pipeline_segments/data_transformer.py">
       <provider selected="true" editor-type-id="text-editor">
@@ -792,6 +794,47 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/eflow/_hidden/widgets/string_cleaning_widget.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="45">
+          <caret line="7" selection-start-line="7" selection-end-line="7" selection-end-column="20" />
+          <folding>
+            <element signature="e#0#54#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/eflow/data_pipeline_segments/string_cleaner.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="495">
+          <caret line="33" selection-start-line="33" selection-end-line="33" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/eflow/data_pipeline_segments/type_fixer.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="165">
+          <caret line="11" column="74" selection-start-line="11" selection-start-column="74" selection-end-line="11" selection-end-column="74" />
+          <folding>
+            <element signature="e#0#43#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/eflow/_hidden/custom_exceptions.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="345">
+          <caret line="23" column="28" selection-start-line="23" selection-start-column="6" selection-end-line="23" selection-end-column="28" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/eflow/utils/string_utils.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="63">
+          <caret line="19" column="42" selection-start-line="19" selection-start-column="42" selection-end-line="19" selection-end-column="42" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/eflow/utils/math_utils.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="225">
@@ -799,19 +842,36 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/eflow/utils/__init__.py">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
     <entry file="file://$PROJECT_DIR$/eflow/utils/misc_utils.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="375">
+        <state relative-caret-position="-230">
           <caret line="25" column="9" selection-start-line="25" selection-start-column="9" selection-end-line="25" selection-end-column="9" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/eflow/_hidden/parent_objects/file_output.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="415">
+          <caret line="49" column="35" selection-start-line="49" selection-start-column="35" selection-end-line="49" selection-end-column="35" />
+          <folding>
+            <element signature="e#0#66#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/eflow/utils/sys_utils.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="336">
+          <caret line="206" column="21" selection-start-line="206" selection-start-column="4" selection-end-line="206" selection-end-column="21" />
+          <folding>
+            <element signature="e#0#86#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/eflow/utils/pandas_utils.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1320">
+        <state relative-caret-position="-987">
           <caret line="91" column="52" selection-start-line="91" selection-start-column="52" selection-end-line="91" selection-end-column="52" />
           <folding>
             <element signature="e#0#19#0" expanded="true" />
@@ -819,37 +879,47 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/eflow/utils/sys_utils.py">
+    <entry file="file://$PROJECT_DIR$/eflow/utils/modeling_utils.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="4395">
-          <caret line="299" selection-start-line="299" selection-end-line="299" />
+        <state relative-caret-position="484">
+          <caret line="53" column="41" selection-start-line="53" selection-start-column="41" selection-end-line="53" selection-end-column="41" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/eflow/foundation/data_pipeline.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-602">
+          <caret line="190" column="65" selection-start-line="190" selection-start-column="54" selection-end-line="190" selection-end-column="65" />
           <folding>
-            <element signature="e#0#86#0" expanded="true" />
+            <element signature="e#0#51#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/eflow/foundation/data_frame_types.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="543">
-          <caret line="592" column="47" selection-start-line="592" selection-start-column="47" selection-end-line="592" selection-end-column="47" />
+        <state relative-caret-position="1066">
+          <caret line="1003" column="25" selection-start-line="1003" selection-start-column="8" selection-end-line="1003" selection-end-column="25" />
           <folding>
-            <element signature="e#0#11#0" expanded="true" />
+            <element signature="e#0#4#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/eflow/_hidden/custom_exceptions.py">
+    <entry file="file://$PROJECT_DIR$/eflow/_hidden/parent_objects/data_pipeline_segment.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="570">
-          <caret line="38" selection-start-line="38" selection-end-line="38" />
+        <state relative-caret-position="293">
+          <caret line="222" selection-start-line="222" selection-end-line="222" />
+          <folding>
+            <element signature="e#0#51#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/eflow/data_pipeline_segments/type_fixer.py">
+    <entry file="file://$PROJECT_DIR$/eflow/utils/eflow_utils.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="933">
-          <caret line="180" column="43" lean-forward="true" selection-start-line="180" selection-start-column="43" selection-end-line="180" selection-end-column="43" />
+        <state relative-caret-position="274">
+          <caret line="46" column="33" selection-start-line="46" selection-start-column="4" selection-end-line="46" selection-end-column="33" />
           <folding>
             <element signature="e#0#43#0" expanded="true" />
           </folding>

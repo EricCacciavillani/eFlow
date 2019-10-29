@@ -6,7 +6,9 @@
         "remove_features": {
           "Params Dict": {
             "feature_names": [
-              "Cabin"
+              "PassengerId",
+              "Ticket",
+              "Name"
             ]
           }
         }

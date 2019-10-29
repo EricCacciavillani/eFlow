@@ -141,7 +141,7 @@ class ClassificationAnalysis(FileOutput):
                                           self.folder_path + "Extras",
                                           "_Features")
             else:
-                write_object_text_to_file(df_features.get_all_features(),
+                write_object_text_to_file(df_features.all_features(),
                                           self.folder_path + "Extras",
                                           "_Features")
                 pickle_object_to_file(self.__model,

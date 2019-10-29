@@ -87,102 +87,102 @@ class DataPipelineSegment(FileOutput):
             del params_dict["df_features"]
             del params_dict["_add_to_que"]
 
-    def generate_code(self,
-                      generate_file=True,
-                      add_libs=True):
-        """
-        Desc:
-            Attempts to parse the file of the child object of the pipline
-            segment.
-
-        Args:
-            generate_file:
-                Depending on the boolean value of generate_file; True will
-                generate a python file and False will just return a list of
-                strings.
-
-            add_libs:
-                Adds utils libs to the top of list.
-
-        Returns:
-            If the arg 'generate_file' is set to False then it will just return
-            a list of strings.
-        """
-
-        # Raise error if no methods of the child have been called yet
-        if len(self.__function_pipe) == 0:
-            raise PipelineSegmentError(
-                "Can't generate code when no methods of this segment have been used yet!")
-
-        generated_code = []
-
-        # Add libs to the top of the file
-        if add_libs:
-            generated_code.append("from eflow.utils.math_utils import *")
-            generated_code.append("from eflow.utils.image_utils import *")
-            generated_code.append("from eflow.utils.pandas_utils import *")
-            generated_code.append("from eflow.utils.modeling_utils import *")
-            generated_code.append("from eflow.utils.string_utils import *")
-            generated_code.append("from eflow.utils.misc_utils import *")
-            generated_code.append("from eflow.utils.sys_utils import *")
-            generated_code.append("")
-
-        # -----
-        for function_name, params_dict in self.__function_pipe:
-
-            # Get function's code
-            pre_made_code = inspect.getsource(getattr(self, function_name))
-
-            first_lines_found = False
-            def_start = False
-
-            # Init variables
-            for parm, val in params_dict.items():
-                generated_code.append(f"{parm} = {val}")
-
-            # Iterate line by line of function's code
-            for line in pre_made_code.split("\n"):
-
-                if "def " in line:
-                    def_start = True
-                    continue
-
-                if def_start:
-                    if "):" in line:
-                        def_start = False
-                    continue
-
-                if "params_dict" in line or "_add_to_que" in line:
-                    continue
-
-                if not re.search('[a-zA-Z]', line) and not first_lines_found:
-                    continue
-                else:
-                    first_lines_found = True
-
-                if "__add_function_to_que" in line:
-                    continue
-
-                # -----
-                generated_code.append(line.replace("        ", "", 1))
-
-            # Formatting
-            generated_code.append("# " + "------" * 5)
-
-        # Generate file or pass back list
-        if generate_file:
-            create_dir_structure(self.folder_path,
-                                       "Generated code")
-            with open(
-                    self.folder_path + f'Generated code/{self.__segment_id}.py',
-                    'r+') as filehandle:
-                filehandle.truncate(0)
-                for listitem in generated_code:
-                    filehandle.write('%s\n' % listitem)
-            print(
-                f"Generated a python file named/at: {self.folder_path}Generated code/{self.__segment_id}.py")
-        else:
-            return generated_code
+    # def generate_code(self,
+    #                   generate_file=True,
+    #                   add_libs=True):
+    #     """
+    #     Desc:
+    #         Attempts to parse the file of the child object of the pipline
+    #         segment.
+    #
+    #     Args:
+    #         generate_file:
+    #             Depending on the boolean value of generate_file; True will
+    #             generate a python file and False will just return a list of
+    #             strings.
+    #
+    #         add_libs:
+    #             Adds utils libs to the top of list.
+    #
+    #     Returns:
+    #         If the arg 'generate_file' is set to False then it will just return
+    #         a list of strings.
+    #     """
+    #
+    #     # Raise error if no methods of the child have been called yet
+    #     if len(self.__function_pipe) == 0:
+    #         raise PipelineSegmentError(
+    #             "Can't generate code when no methods of this segment have been used yet!")
+    #
+    #     generated_code = []
+    #
+    #     # Add libs to the top of the file
+    #     if add_libs:
+    #         generated_code.append("from eflow.utils.math_utils import *")
+    #         generated_code.append("from eflow.utils.image_utils import *")
+    #         generated_code.append("from eflow.utils.pandas_utils import *")
+    #         generated_code.append("from eflow.utils.modeling_utils import *")
+    #         generated_code.append("from eflow.utils.string_utils import *")
+    #         generated_code.append("from eflow.utils.misc_utils import *")
+    #         generated_code.append("from eflow.utils.sys_utils import *")
+    #         generated_code.append("")
+    #
+    #     # -----
+    #     for function_name, params_dict in self.__function_pipe:
+    #
+    #         # Get function's code
+    #         pre_made_code = inspect.getsource(getattr(self, function_name))
+    #
+    #         first_lines_found = False
+    #         def_start = False
+    #
+    #         # Init variables
+    #         for parm, val in params_dict.items():
+    #             generated_code.append(f"{parm} = {val}")
+    #
+    #         # Iterate line by line of function's code
+    #         for line in pre_made_code.split("\n"):
+    #
+    #             if "def " in line:
+    #                 def_start = True
+    #                 continue
+    #
+    #             if def_start:
+    #                 if "):" in line:
+    #                     def_start = False
+    #                 continue
+    #
+    #             if "params_dict" in line or "_add_to_que" in line:
+    #                 continue
+    #
+    #             if not re.search('[a-zA-Z]', line) and not first_lines_found:
+    #                 continue
+    #             else:
+    #                 first_lines_found = True
+    #
+    #             if "__add_function_to_que" in line:
+    #                 continue
+    #
+    #             # -----
+    #             generated_code.append(line.replace("        ", "", 1))
+    #
+    #         # Formatting
+    #         generated_code.append("# " + "------" * 5)
+    #
+    #     # Generate file or pass back list
+    #     if generate_file:
+    #         create_dir_structure(self.folder_path,
+    #                                    "Generated code")
+    #         with open(
+    #                 self.folder_path + f'Generated code/{self.__segment_id}.py',
+    #                 'r+') as filehandle:
+    #             filehandle.truncate(0)
+    #             for listitem in generated_code:
+    #                 filehandle.write('%s\n' % listitem)
+    #         print(
+    #             f"Generated a python file named/at: {self.folder_path}Generated code/{self.__segment_id}.py")
+    #     else:
+    #         return generated_code
 
     @property
     def file_path(self):
@@ -210,6 +210,36 @@ class DataPipelineSegment(FileOutput):
         else:
             return copy.deepcopy(self.__json_file_name)
 
+
+    def __replace_function_in_que(self,
+                                  function_name,
+                                  params_dict,
+                                  param,
+                                  param_val):
+
+        for que_function_name, que_params_dict in self.__function_pipe.iteritems():
+            print(que_function_name)
+
+
+
+        # Generate new json file name with proper file/folder output attributes
+        if len(self.__function_pipe) == 1 and not self.__json_file_name:
+            FileOutput.__init__(self,
+                                f'_Extras/Pipeline Structure/Data Pipeline Segments/{self.__object_type}')
+            all_json_files = get_all_files_from_path(self.folder_path,
+                                                     ".json")
+            while True:
+                random_file_name = create_hex_decimal_string().upper()
+                if random_file_name not in all_json_files:
+                    break
+
+            self.__segment_id = random_file_name
+            self.__json_file_name = random_file_name + ".json"
+
+        # Update json file
+        self.__create_json_pipeline_segment_file()
+
+
     def __add_function_to_que(self,
                               function_name,
                               params_dict):
@@ -236,7 +266,7 @@ class DataPipelineSegment(FileOutput):
         # Generate new json file name with proper file/folder output attributes
         if len(self.__function_pipe) == 1 and not self.__json_file_name:
             FileOutput.__init__(self,
-                                f'_Extras/Pipeline Structure/JSON Files/Data Pipeline Segments/{self.__object_type}')
+                                f'_Extras/Pipeline Structure/Data Pipeline Segments/{self.__object_type}')
             all_json_files = get_all_files_from_path(self.folder_path,
                                                      ".json")
             while True:
@@ -290,7 +320,7 @@ class DataPipelineSegment(FileOutput):
         """
 
         FileOutput.__init__(self,
-                            f'_Extras/Pipeline Structure/JSON Files/Data Pipeline Segments/{self.__object_type}')
+                            f'_Extras/Pipeline Structure/Data Pipeline Segments/{self.__object_type}')
 
         self.__function_pipe = deque()
         self.__json_file_name = copy.deepcopy(self.__segment_id) + ".json"
@@ -312,6 +342,4 @@ class DataPipelineSegment(FileOutput):
             params_dict = json_dict["Pipeline Segment"]["Functions Performed Order"][f"Function Order {function_order}"][function_name]["Params Dict"]
             self.__function_pipe.append((function_name,
                                          params_dict))
-
-
 

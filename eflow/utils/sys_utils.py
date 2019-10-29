@@ -1,10 +1,8 @@
 from eflow.utils.string_utils import convert_to_filename, \
     correct_directory_path
-from eflow._hidden.constants import SYS_CONSTANTS
 import os
 import pickle
 import json
-import shutil
 
 __author__ = "Eric Cacciavillani"
 __copyright__ = "Copyright 2019, eFlow"
@@ -279,27 +277,3 @@ def get_all_files_from_path(directory_path,
         break
 
     return set(files_in_paths)
-
-
-def move_folder_to_eflow_garbage(directory_path,
-                                 create_sub_dir=None):
-    directory_path = correct_directory_path(directory_path)
-    check_if_directory_exists(directory_path)
-
-    if not create_sub_dir:
-        create_sub_dir = ""
-    else:
-        correct_directory_path(create_sub_dir)
-
-    garbage_folder_path = create_dir_structure(os.getcwd(),
-                                               f"{SYS_CONSTANTS.PARENT_OUTPUT_FOLDER_NAME}/_Extras/Garbage/{create_sub_dir}")
-
-    path_to_folder, folder_name = directory_path[:-1].rsplit('/', 1)
-
-    _, folder_name = get_unique_directory_path(garbage_folder_path,folder_name).rsplit('/', 1)
-
-    os.rename(directory_path,
-              f'{path_to_folder}/{folder_name}')
-
-    shutil.move(f'{path_to_folder}/{folder_name}', garbage_folder_path)
-

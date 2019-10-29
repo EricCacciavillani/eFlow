@@ -53,7 +53,7 @@ class DataPipelineSegment(FileOutput):
 
         if len(self.__function_pipe) == 1 and not self.__json_file_name:
             FileOutput.__init__(self,
-                                f'_Extras/JSON Files/Data Pipeline Segments/{self.__object_type}')
+                                f'_Extras/Data Pipeline Segments/{self.__object_type}')
             all_json_files = get_all_files_from_path(self.folder_path,
                                                      ".json")
             while True:
@@ -97,7 +97,7 @@ class DataPipelineSegment(FileOutput):
     def __configure_pipeline_segment_with_existing_file(self):
 
         FileOutput.__init__(self,
-                            f'_Extras/JSON Files/Data Pipeline Segments/{self.__object_type}')
+                            f'_Extras/Data Pipeline Segments/{self.__object_type}')
 
         self.__function_pipe = deque()
         self.__json_file_name = copy.deepcopy(self.__segment_id) + ".json"
