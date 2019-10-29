@@ -3,23 +3,23 @@
     "Survived"
   ],
   "string": [
-    "Name",
-    "Embarked",
     "Ticket",
     "Cabin",
-    "Sex"
+    "Sex",
+    "Name",
+    "Embarked"
   ],
   "integer": [
     "SibSp",
     "Parch"
   ],
   "float": [
-    "Fare",
-    "Age"
+    "Age",
+    "Fare"
   ],
   "categorical": [
-    "Pclass",
-    "PassengerId"
+    "PassengerId",
+    "Pclass"
   ],
   "target": "Survived"
 }

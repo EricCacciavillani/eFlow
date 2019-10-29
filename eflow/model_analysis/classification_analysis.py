@@ -1,7 +1,11 @@
 from eflow.utils.sys_utils import *
+from eflow.utils.pandas_utils import df_to_image
+from eflow.utils.image_utils import create_plt_png
 from eflow._hidden.parent_objects import FileOutput
-from eflow._hidden.custom_exceptions import *
+from eflow._hidden.custom_exceptions import RequiresPredictionMethods, ThresholdLength, \
+    ThresholdType, UnknownModelOutputType, ProbasNotPossible, UnsatisfiedRequirments
 from eflow.data_analysis import FeatureAnalysis
+
 from eflow._hidden.constants import GRAPH_DEFAULTS
 
 from sklearn.metrics import accuracy_score
@@ -29,77 +33,65 @@ class ClassificationAnalysis(FileOutput):
 
     """
         Analyzes a classification model's result's based on the prediction
-        function(s) passed to it.
+        function(s) passed to it. Creates graphs and tables to be saved in directory
+        structure.
     """
 
     def __init__(self,
                  model,
                  model_name,
                  pred_funcs_dict,
+                 df_features,
                  sample_data,
-                 project_name="Classification analysis_objects",
+                 project_sub_dir="Classification Analysis",
                  overwrite_full_path=None,
                  notebook_mode=True,
                  target_classes=None,
-                 df_features=None,
-                 columns=[],
                  save_model=True):
         """
-        model:
-            A fitted supervised machine learning model.
+        Args:
+            model:
+                A fitted supervised machine learning model.
 
-        model_name:
-            The name of the model in string form.
+            model_name:
+                The name of the model in string form.
 
-        pred_funcs_dict:
-            A dict of the name of the function and the function defintion for the
-            model prediction methods.
-            (Can handle either a return of probabilities or a singile value.)
-            Init Example:
-            pred_funcs = dict()
-            pred_funcs["Predictions"] = model.predict
-            pred_funcs["Probabilities"] = model.probas
+            pred_funcs_dict:
+                A dict of the name of the function and the function defintion for the
+                model prediction methods.
+                (Can handle either a return of probabilities or a singile value.)
+                Init Example:
+                pred_funcs = dict()
+                pred_funcs["Predictions"] = model.predict
+                pred_funcs["Probabilities"] = model.probas
 
-        sample_data:
-            Given data to then pass into our prediction functions to get a
-            resultant to get the classification prediction 'type'.
-            Can be a matrix or a vector.
+            sample_data:
+                Given data to then pass into our prediction functions to get a
+                resultant to get the classification prediction 'type'.
+                Can be a matrix or a vector.
 
-        project_name:
-            Creates a parent or "project" folder in which all sub-directories
-            will be inner nested.
+            project_sub_dir:
+                Creates a parent or "project" folder in which all sub-directories
+                will be inner nested.
 
-        overwrite_full_path:
-            Overwrites the path to the parent folder.
+            overwrite_full_path:
+                Overwrites the path to the parent folder.
 
-        notebook_mode:
-            If in a python notebook display in the notebook.
+            notebook_mode:
+                If in a python notebook display in the notebook.
 
-        target_classes:
-            Specfied list/np.array of targeted classes the model predicts. If set to
-            none then it will attempt to pull from the sklearn's default attribute
-            '.classes_'.
+            target_classes:
+                Specfied list/np.array of targeted classes the model predicts. If set to
+                none then it will attempt to pull from the sklearn's default attribute
+                '.classes_'.
 
-        df_features:
             df_features:
-            DataFrameTypes object; organizes feature types into groups.
-
-            If initalized we can run correct/error
-            data_analysis on the dataframe.Will save object in a pickle file
-            and provided columns if initalized and df_features is not initalized.
-
-        columns:
-            Will overwrite over df_features (DataFrameTypeHolder) regardless
-            of whether or not df_features is init.
-
-        Returns/Desc:
-            Evaluates the given model based on the prediction functions pased to it.
-            Saves the model and other various graphs/dataframes for evaluation.
+                DataFrameTypes object; organizes feature types into groups.
         """
 
-        # Init any parent objects
+        # Init parent object
         FileOutput.__init__(self,
-                            f'{project_name}/{model_name}',
+                            f'{project_sub_dir}/{model_name}',
                             overwrite_full_path)
 
         # Init objects without pass by refrence
@@ -128,233 +120,44 @@ class ClassificationAnalysis(FileOutput):
 
         # ---
         create_dir_structure(self.folder_path,
-                                   "Extras")
+                             "_Extras")
         # Save predicted classes
         write_object_text_to_file(self.__target_values,
-                                  self.folder_path + "Extras",
+                                  self.folder_path + "_Extras",
                                   "_Classes")
 
         # Save features and or df_features object
-        if columns or df_features:
-            if columns:
-                write_object_text_to_file(columns,
-                                          self.folder_path + "Extras",
-                                          "_Features")
-            else:
-                write_object_text_to_file(df_features.all_features(),
-                                          self.folder_path + "Extras",
-                                          "_Features")
-                pickle_object_to_file(self.__model,
-                                      self.folder_path + "Extras",
-                                      "_df_features")
+        df_features.create_json_file_representation(self.folder_path + "_Extras",
+                                                    "df_features.json")
+
+        self.__sample_data = None
+
+        if len(sample_data.shape) == 2:
+            self.__sample_data = np.reshape(sample_data[0],
+                                            (-1, sample_data.shape[1]))
+        elif len(sample_data.shape) == 1:
+            self.__sample_data = [sample_data]
+        else:
+            raise UnsatisfiedRequirments("This program can only handle 1D and 2D matrices.")
+
+        print(self.__sample_data)
 
         # Find the 'type' of each prediction. Probabilities or Predictions
         if self.__pred_funcs_dict:
             for pred_name, pred_func in self.__pred_funcs_dict.items():
-                model_output = pred_func(
-                    np.reshape(sample_data[0],
-                               (-1, sample_data.shape[1])))[0]
+                model_output = pred_func(self.__sample_data)[0]
 
                 # Confidence / Probability (Continuous output)
                 if isinstance(model_output, list) or isinstance(model_output,
                                                                 np.ndarray):
                     self.__pred_funcs_types[pred_name] = "Probabilities"
 
-                    # Classification (Discrete output)
+                # Classification (Discrete output)
                 else:
                     self.__pred_funcs_types[pred_name] = "Predictions"
         else:
             raise RequiresPredictionMethods
 
-    def __get_model_prediction(self,
-                               pred_name,
-                               X,
-                               thresholds=None):
-        """
-        X:
-            Feature matrix.
-
-        pred_name:
-            The name of the prediction function in questioned stored in 'self.__pred_funcs_dict'
-
-        thresholds:
-            If the model outputs a probability list/numpy array then we apply
-            thresholds to the ouput of the model.
-            For classification only; will not affect the direct output of
-            the probabilities.
-
-        Returns/Desc:
-            Returns back a predicted value based for a given matrix.
-            Handles prediction function 'types' Predictions and Probabilities.
-            Helps streamline the entire process of evaluating classes.
-        """
-        # DEBUG_MARKER
-
-        # Must be a prediction function
-        if self.__pred_funcs_types[pred_name] == "Predictions":
-            return self.__pred_funcs_dict[pred_name](X)
-
-        elif self.__pred_funcs_types[pred_name] == "Probabilities":
-
-            # Validate probabilities
-            if thresholds:
-                if isinstance(thresholds, list) or \
-                        isinstance(thresholds, np.ndarray):
-                    if len(thresholds) != len(self.__target_values):
-                        raise ThresholdLength
-                else:
-                    raise ThresholdType
-
-            model_output = self.__get_model_probas(pred_name,
-                                                   X)
-            if not thresholds:
-                return np.asarray([self.__target_values[np.argmax(proba)]
-                                   for proba in model_output])
-
-            bool_matrix_thresholds = model_output < thresholds
-
-            prob_passed_matrix = np.asarray([
-                np.asarray([model_output[i][0] if passed else float("-inf")
-                            for i, passed in enumerate(bool_vector)])
-                for bool_vector in bool_matrix_thresholds])
-
-            model_predictions = np.asarray(
-                [self.__target_values[np.argmax(proba_vector)]
-                 if sum(proba_vector != float("-inf")) > 0
-                 else self.__target_values[np.argmax(model_output)]
-                 for proba_vector in prob_passed_matrix])
-            return model_predictions
-        else:
-            raise UnknownModelOutputType
-
-    def __get_model_probas(self,
-                           pred_name,
-                           X):
-        """
-        X:
-            Feature matrix.
-
-        pred_name:
-            The name of the prediction function in questioned stored in 'self.__pred_funcs_dict'
-
-        Returns/Desc:
-            Returns back a series of values between 0-1 to represent it's confidence.
-            Invokes an error if the prediction function call is anything but a Probabilities
-            call.
-        """
-
-        if self.__pred_funcs_types[pred_name] == "Probabilities":
-            model_output = self.__pred_funcs_dict[pred_name](X)
-
-            # ---
-            if isinstance(model_output, list):
-                model_output = np.asarray(model_output)
-
-            return model_output
-        else:
-            raise ProbasNotPossible
-
-    def __create_sub_dir_with_thresholds(self,
-                                         pred_name,
-                                         dataset_name,
-                                         thresholds):
-        """
-        pred_name:
-            The name of the prediction function in questioned stored in 'self.__pred_funcs_dict'
-
-        dataset_name:
-            The dataset's name; this will create a sub-directory in which your
-            generated graph will be inner-nested in.
-
-        thresholds:
-            If the model outputs a probability list/numpy array then we apply
-            thresholds to the ouput of the model.
-            For classification only; will not affect the direct output of
-            the probabilities.
-
-        Returns/Desc:
-            Looking at the root of the starting directory and looking at each
-            '_Thresholds.txt' file to determine if the files can be outputed
-            to that directory. The content of the file must match the content
-            of the list/numpy array 'thresholds'.
-        """
-
-        sub_dir = f'{dataset_name}/{pred_name}'
-
-        # Only generate extra folder structure if function type is Probabilities
-        if self.__pred_funcs_types[pred_name] == "Probabilities":
-
-            # ------
-            if not thresholds:
-                sub_dir = f'{sub_dir}/No Thresholds'
-            else:
-                i = 0
-                sub_dir = f'{sub_dir}/Thresholds'
-                tmp_sub_dir = copy.deepcopy(sub_dir)
-                while True:
-                    threshold_dir = self.folder_path
-                    if i > 0:
-                        tmp_sub_dir = (sub_dir + f' {i}')
-                    threshold_dir += tmp_sub_dir
-
-                    # If file exists with the same thresholds; than use this directory
-                    if os.path.exists(threshold_dir):
-                        if self.__compare_thresholds_to_saved_thresholds(
-                                threshold_dir,
-                                thresholds):
-                            sub_dir = tmp_sub_dir
-                            break
-
-                    # Create new directory
-                    else:
-                        os.makedirs(threshold_dir)
-                        write_object_text_to_file(thresholds,
-                                                  threshold_dir,
-                                                  "_Thresholds")
-                        sub_dir = tmp_sub_dir
-                        break
-
-                    # Iterate for directory name change
-                    i += 1
-
-        return sub_dir
-
-    def __compare_thresholds_to_saved_thresholds(self,
-                                                 directory_path,
-                                                 thresholds):
-        """
-        directory_path:
-            Path to the given folder where the "_Thresholds.txt"
-
-        thresholds:
-            If the model outputs a probability list/numpy array then we apply
-            thresholds to the ouput of the model.
-            For classification only; will not affect the direct output of
-            the probabilities.
-
-        Returns/Desc:
-            Compare the thresholds object to the text file; returns true if
-            the file exists and the object's value matches up.
-        """
-
-        file_directory = correct_directory_path(directory_path)
-
-        if os.path.exists(file_directory):
-
-            # Extract file contents and convert to a list object
-            file = open(file_directory + "_Thresholds.txt", "r")
-            line = file.read()
-            converted_list = line.split("=")[-1].strip().strip('][').split(
-                ', ')
-            converted_list = [float(val) for val in converted_list]
-            file.close()
-
-            if thresholds == converted_list:
-                return True
-            else:
-                return False
-        else:
-            return False
 
     def perform_analysis(self,
                          X,
@@ -370,51 +173,55 @@ class ClassificationAnalysis(FileOutput):
                                           "weighted"],
                          display_visuals=False):
         """
-        X/y:
-            Feature matrix/Target data vector.
+        Desc:
+            Runs all
 
-        dataset_name:
-            The dataset's name; this will create a sub-directory in which your
-            generated graph will be inner-nested in.
+        Args:
+            X/y:
+                Feature matrix/Target data vector.
 
-        thresholds_matrix:
-            List of list/Matrix of thresholds
+            dataset_name:
+                The dataset's name; this will create a sub-directory in which your
+                generated graph will be inner-nested in.
 
-            each thresholds:
-                If the model outputs a probability list/numpy array then we apply
-                thresholds to the ouput of the model.
-                For classification only; will not affect the direct output of
-                the probabilities.
+            thresholds_matrix:
+                List of list/Matrix of thresholds
 
-        figsize:
-            Plot's dimension's.
+                each thresholds:
+                    If the model outputs a probability list/numpy array then we apply
+                    thresholds to the ouput of the model.
+                    For classification only; will not affect the direct output of
+                    the probabilities.
 
-        normalize_confusion_matrix:
-            Normalize the confusion matrix buckets.
+            figsize:
+                Plot's dimension's.
 
-        ignore_metrics:
-            Specify set metrics to ignore. (F1-Score, Accuracy etc).
+            normalize_confusion_matrix:
+                Normalize the confusion matrix buckets.
 
-        ignore_metrics:
-            Specify the default metrics to not apply to the classification
-            data_analysis.
-                * Precision
-                * MCC
-                * Recall
-                * F1-Score
-                * Accuracy
+            ignore_metrics:
+                Specify set metrics to ignore. (F1-Score, Accuracy etc).
 
-        custom_metrics:
-            Pass the name of metric(s) and the function definition(s) in a
-            dictionary.
+            ignore_metrics:
+                Specify the default metrics to not apply to the classification
+                data_analysis.
+                    * Precision
+                    * MCC
+                    * Recall
+                    * F1-Score
+                    * Accuracy
 
-        average_scoring:
-            Determines the type of averaging performed on the data.
+            custom_metrics:
+                Pass the name of metric(s) and the function definition(s) in a
+                dictionary.
 
-        display_analysis_graphs:
-            Controls visual display of error error data_analysis if it is able to run.
+            average_scoring:
+                Determines the type of averaging performed on the data.
 
-        Returns/Desc:
+            display_analysis_graphs:
+                Controls visual display of error error data_analysis if it is able to run.
+
+        Returns:
             Performs all classification functionality with the provided feature
             data and target data.
                 * plot_precision_recall_curve
@@ -437,16 +244,16 @@ class ClassificationAnalysis(FileOutput):
         print("\n\n" + "---" * 10 + f'{dataset_name}' + "---" * 10)
 
         for pred_name, pred_type in self.__pred_funcs_types.items():
-            print(f"Now running classification on {pred_name}", end = '')
-            print("hit")
             for thresholds in thresholds_matrix:
+                print(f"\n\n\n### Now running classification on {pred_name}", end='')
                 if pred_type == "Predictions":
+                    print("###")
                     thresholds = None
                 else:
                     if thresholds:
-                        print(f"on thresholds:\n{thresholds}")
+                        print(f" on thresholds:\n{thresholds}")
                     else:
-                        print("No thresholds")
+                        print(" on no thresholds")
 
                 self.classification_metrics(X,
                                             y,
@@ -480,24 +287,28 @@ class ClassificationAnalysis(FileOutput):
                                         thresholds=thresholds)
 
                     if self.__binary_classifcation:
+
                         self.plot_lift_curve(X,
                                              y,
                                              pred_name=pred_name,
                                              dataset_name=dataset_name,
                                              figsize=figsize,
                                              thresholds=thresholds)
+
                         self.plot_ks_statistic(X,
                                                y,
                                                pred_name=pred_name,
                                                dataset_name=dataset_name,
                                                figsize=figsize,
                                                thresholds=thresholds)
+
                         self.plot_calibration_curve(X,
                                                     y,
                                                     pred_name=pred_name,
                                                     dataset_name=dataset_name,
                                                     figsize=figsize,
                                                     thresholds=thresholds)
+
                         self.plot_cumulative_gain(X,
                                                   y,
                                                   pred_name=pred_name,
@@ -505,13 +316,13 @@ class ClassificationAnalysis(FileOutput):
                                                   figsize=figsize,
                                                   thresholds=thresholds)
 
-                if self.__df_features:
-                    self.classification_error_analysis(X,
-                                                       y,
-                                                       pred_name=pred_name,
-                                                       dataset_name=dataset_name,
-                                                       thresholds=thresholds,
-                                                       display_analysis_graphs=display_analysis_graphs)
+                # if self.__df_features:
+                #     self.classification_error_analysis(X,
+                #                                        y,
+                #                                        pred_name=pred_name,
+                #                                        dataset_name=dataset_name,
+                #                                        thresholds=thresholds,
+                #                                        display_analysis_graphs=display_analysis_graphs)
 
                     if pred_type == "Predictions":
                         break
@@ -573,7 +384,6 @@ class ClassificationAnalysis(FileOutput):
                                              figsize=figsize,
                                              title_fontsize=title_fontsize,
                                              text_fontsize=text_fontsize)
-
         if save_file:
             create_plt_png(self.folder_path,
                            sub_dir,
@@ -694,7 +504,7 @@ class ClassificationAnalysis(FileOutput):
 
         skplt.metrics.plot_cumulative_gain(y,
                                            self.__get_model_probas(pred_name,
-                                                                   X),
+                                                               X),
                                            title=title,
                                            ax=ax,
                                            figsize=figsize,
@@ -829,6 +639,7 @@ class ClassificationAnalysis(FileOutput):
                                       figsize=figsize,
                                       title_fontsize=title_fontsize,
                                       text_fontsize=text_fontsize)
+
         if save_file:
             create_plt_png(self.folder_path,
                            sub_dir,
@@ -886,21 +697,25 @@ class ClassificationAnalysis(FileOutput):
             title = filename
 
         warnings.filterwarnings('ignore')
-        skplt.metrics.plot_confusion_matrix(
-            self.__get_model_prediction(pred_name,
-                                        X,
-                                        thresholds),
-            y,
-            title=title,
-            normalize=normalize,
-            hide_zeros=hide_zeros,
-            hide_counts=hide_counts,
-            x_tick_rotation=x_tick_rotation,
-            ax=ax,
-            figsize=figsize,
-            cmap=cmap,
-            title_fontsize=title_fontsize,
-            text_fontsize=text_fontsize)
+        ax = skplt.metrics.plot_confusion_matrix(
+             self.__get_model_prediction(pred_name,
+                                         X,
+                                         thresholds),
+             y,
+             title=title,
+             normalize=normalize,
+             hide_zeros=hide_zeros,
+             hide_counts=hide_counts,
+             x_tick_rotation=x_tick_rotation,
+             ax=ax,
+             figsize=figsize,
+             cmap=cmap,
+             title_fontsize=title_fontsize,
+             text_fontsize=text_fontsize)
+
+        bottom, top = ax.get_ylim()
+        ax.set_ylim(bottom + 0.5, top - 0.5)
+
         warnings.filterwarnings('default')
 
         if save_file:
@@ -1106,7 +921,7 @@ class ClassificationAnalysis(FileOutput):
                 print("\n\n" + "*" * 10 +
                       "Generating graphs for model's correctly predicted..." +
                       "*" * 10 + "\n")
-                DataAnalysis(pd.DataFrame(X[model_predictions == y],
+                FeatureAnalysis(pd.DataFrame(X[model_predictions == y],
                                           columns=self.__df_features.get_all_features()),
                              self.__df_features,
                              overwrite_full_path=self.folder_path +
@@ -1197,3 +1012,222 @@ class ClassificationAnalysis(FileOutput):
                         col_width=20,
                         show_index=True,
                         format_float_pos=4)
+
+    def __get_model_prediction(self,
+                               pred_name,
+                               X,
+                               thresholds=None):
+        """
+        Desc:
+            Finds the model's predicted labels.
+
+        Args:
+            X:
+                Feature matrix.
+
+            pred_name:
+                The name of the prediction function in questioned stored in 'self.__pred_funcs_dict'
+
+            thresholds:
+                If the model outputs a probability list/numpy array then we apply
+                thresholds to the ouput of the model.
+                For classification only; will not affect the direct output of
+                the probabilities.
+
+        Returns:
+            Returns back a predicted value based for a given matrix.
+            Handles prediction function 'types' Predictions and Probabilities.
+            Helps streamline the entire process of evaluating classes.
+        """
+
+        # Must be a prediction function
+        if self.__pred_funcs_types[pred_name] == "Predictions":
+            return self.__pred_funcs_dict[pred_name](X)
+
+        # Output must be continuous; Probabilities
+        elif self.__pred_funcs_types[pred_name] == "Probabilities":
+
+            # Validate probabilities
+            if thresholds:
+                if isinstance(thresholds, list) or \
+                        isinstance(thresholds, np.ndarray):
+                    if len(thresholds) != len(self.__target_values):
+                        raise ThresholdLength("")
+                else:
+                    raise ThresholdType("")
+
+            model_output = self.__get_model_probas(pred_name,
+                                                   X)
+            if not thresholds:
+                return np.asarray([self.__target_values[np.argmax(proba)]
+                                   for proba in model_output])
+            else:
+
+                model_output = model_output - thresholds
+
+                return np.asarray([self.__target_values[np.argmax(proba)]
+                                   for proba in model_output])
+
+                # print(model_output[0])
+                # print(bool_matrix_thresholds[0])
+                #
+                # prob_passed_matrix = np.asarray([
+                #     np.asarray([model_output[i][0] if passed else float("-inf")
+                #                 for i, passed in enumerate(bool_vector)])
+                #     for bool_vector in bool_matrix_thresholds])
+                # print(prob_passed_matrix[0])
+                #
+                # model_predictions = np.asarray(
+                #     [self.__target_values[np.argmax(proba_vector)]
+                #      if sum(proba_vector != float("-inf")) > 0
+                #      else self.__target_values[np.argmax(model_output)]
+                #      for proba_vector in prob_passed_matrix])
+                # return model_predictions
+        else:
+            raise UnknownModelOutputType("")
+
+    def __get_model_probas(self,
+                           pred_name,
+                           X):
+        """
+        Desc:
+            Attempts to get the probabilities from the prediction function.
+
+        Args:
+            X:
+                Feature matrix.
+
+            pred_name:
+                The name of the prediction function in questioned stored in 'self.__pred_funcs_dict'
+
+        Raises:
+             If probabilities isn't possible with the given function that it will invoke an error.
+
+        Returns:
+            Returns back a series of values between 0-1 to represent it's confidence.
+        """
+
+        if self.__pred_funcs_types[pred_name] == "Probabilities":
+            model_output = self.__pred_funcs_dict[pred_name](X)
+
+            # ---
+            if isinstance(model_output, list):
+                model_output = np.asarray(model_output)
+
+            return model_output
+        else:
+            raise ProbasNotPossible
+
+    def __create_sub_dir_with_thresholds(self,
+                                         pred_name,
+                                         dataset_name,
+                                         thresholds):
+        """
+        Desc:
+            Iterates through directory structure looking at each text file
+            containing a string representation of the given threshold;
+            keeps comparing the passed value of 'thresholds' to the text file.
+
+        Args:
+            pred_name:
+                The name of the prediction function in questioned stored in 'self.__pred_funcs_dict'
+
+            dataset_name:
+                The dataset's name; this will create a sub-directory in which your
+                generated graph will be inner-nested in.
+
+            thresholds:
+                If the model outputs a probability list/numpy array then we apply
+                thresholds to the ouput of the model.
+                For classification only; will not affect the direct output of
+                the probabilities.
+
+        Returns:
+            Looking at the root of the starting directory and looking at each
+            '_Thresholds.txt' file to determine if the files can be outputed
+            to that directory. The content of the file must match the content
+            of the list/numpy array 'thresholds'.
+        """
+
+        sub_dir = f'{dataset_name}/{pred_name}'
+
+        # Only generate extra folder structure if function type is Probabilities
+        if self.__pred_funcs_types[pred_name] == "Probabilities":
+
+            # ------
+            if not thresholds:
+                sub_dir = f'{sub_dir}/No Thresholds'
+            else:
+                i = 0
+                sub_dir = f'{sub_dir}/Thresholds'
+                tmp_sub_dir = copy.deepcopy(sub_dir)
+                while True:
+                    threshold_dir = self.folder_path
+                    if i > 0:
+                        tmp_sub_dir = (sub_dir + f' {i}')
+                    threshold_dir += tmp_sub_dir
+
+                    # If file exists with the same thresholds; than use this directory
+                    if os.path.exists(threshold_dir):
+                        if self.__compare_thresholds_to_saved_thresholds(
+                                threshold_dir,
+                                thresholds):
+                            sub_dir = tmp_sub_dir
+                            break
+
+                    # Create new directory
+                    else:
+                        os.makedirs(threshold_dir)
+                        write_object_text_to_file(thresholds,
+                                                  threshold_dir,
+                                                  "_Thresholds")
+                        sub_dir = tmp_sub_dir
+                        break
+
+                    # Iterate for directory name change
+                    i += 1
+
+        return sub_dir
+
+    def __compare_thresholds_to_saved_thresholds(self,
+                                                 directory_path,
+                                                 thresholds):
+        """
+        Desc:
+            Compare the thresholds object to a threshold text file found in
+            the directory; returns true if the file exists and the object's
+            value matches up.
+
+        Args:
+            directory_path:
+                Path to the given folder where the "_Thresholds.txt"
+
+            thresholds:
+                If the model outputs a probability list/numpy array then we apply
+                thresholds to the ouput of the model.
+                For classification only; will not affect the direct output of
+                the probabilities.
+
+        Returns:
+            Compare the thresholds object to the text file; returns true if
+            the file exists and the object's value matches up.
+        """
+
+        file_directory = correct_directory_path(directory_path)
+
+        if os.path.exists(file_directory):
+
+            # Extract file contents and convert to a list object
+            file = open(file_directory + "_Thresholds.txt", "r")
+            line = file.read()
+            converted_list = line.split("=")[-1].strip().strip('][').split(
+                ', ')
+            converted_list = [float(val) for val in converted_list]
+            file.close()
+
+            if thresholds == converted_list:
+                return True
+            else:
+                return False
+        else:
+            return False

@@ -1,10 +1,9 @@
-from eflow.utils.image_utils import df_to_image
 from eflow._hidden.custom_warnings import DataFrameWarning
 from eflow._hidden.constants import GRAPH_DEFAULTS
 from eflow._hidden.custom_exceptions import UnsatisfiedRequirments
 from eflow.utils.image_utils import create_plt_png
 from eflow.utils.string_utils import convert_to_filename, correct_directory_path
-from eflow.utils.pandas_utils import data_types_table, missing_values_table
+from eflow.utils.pandas_utils import data_types_table, missing_values_table, df_to_image
 from eflow._hidden.general_objects import DataFrameSnapshot
 from eflow._hidden.parent_objects import FileOutput
 import copy

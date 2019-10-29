@@ -55,6 +55,8 @@ class DataFrameTypes:
             notebook_mode:
                 Determine if any notebook functions can be used here.
         """
+
+        # Init an empty dataframe
         if df is None:
             df = pd.DataFrame({})
 

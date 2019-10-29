@@ -11,8 +11,8 @@ from eflow._hidden.custom_exceptions import *
 
 from eflow._hidden.parent_objects import FileOutput
 from eflow._hidden.general_objects import DataFrameSnapshot
-from eflow.utils.pandas_utils import descr_table,value_counts_table
-from eflow.utils.image_utils import create_plt_png, df_to_image
+from eflow.utils.pandas_utils import descr_table,value_counts_table, df_to_image
+from eflow.utils.image_utils import create_plt_png
 from eflow.utils.string_utils import convert_to_filename
 from eflow._hidden.custom_exceptions import UnsatisfiedRequirments
 

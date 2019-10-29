@@ -6,7 +6,7 @@ import pandas as pd
 import missingno as msno
 from matplotlib import pyplot as plt
 import warnings
-from eflow.utils.image_utils import df_to_image
+from eflow.utils.pandas_utils import df_to_image
 from eflow._hidden.custom_warnings import DataFrameWarning
 from eflow._hidden.constants import GRAPH_DEFAULTS
 
