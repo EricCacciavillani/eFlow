@@ -1,0 +1,25 @@
+{
+  "bool": [
+    "Survived"
+  ],
+  "string": [
+    "Sex",
+    "Embarked",
+    "Ticket",
+    "Cabin",
+    "Name"
+  ],
+  "integer": [
+    "Parch",
+    "SibSp"
+  ],
+  "float": [
+    "Fare",
+    "Age"
+  ],
+  "categorical": [
+    "PassengerId",
+    "Pclass"
+  ],
+  "target": "Survived"
+}

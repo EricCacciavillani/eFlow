@@ -42,20 +42,6 @@ class RequiresPredictionMethods(DefaultException):
                  error_message=None):
         super().__init__(error_message=error_message)
 
-class ThresholdLength(DefaultException):
-    def __init__(self,
-                 error_message=None):
-        super().__init__(error_message=error_message)
-
-class ThresholdType(DefaultException):
-    def __init__(self,
-                 error_message=None):
-        super().__init__(error_message=error_message)
-
-class UnknownModelOutputType(DefaultException):
-    def __init__(self,
-                 error_message=None):
-        super().__init__(error_message=error_message)
 
 class ProbasNotPossible(DefaultException):
     def __init__(self,

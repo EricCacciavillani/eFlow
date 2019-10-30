@@ -7,26 +7,31 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="178261e3-0830-4d8e-91ef-8172f5216aca" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/build/lib/eflow/data_analysis/feature_analysis.py" beforeDir="false" afterPath="$PROJECT_DIR$/build/lib/eflow/data_analysis/feature_analysis.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/lib/eflow/data_analysis/null_analysis.py" beforeDir="false" afterPath="$PROJECT_DIR$/build/lib/eflow/data_analysis/null_analysis.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/eflow/_hidden/custom_exceptions.py" beforeDir="false" afterPath="$PROJECT_DIR$/eflow/_hidden/custom_exceptions.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/eflow/data_analysis/feature_analysis.py" beforeDir="false" afterPath="$PROJECT_DIR$/eflow/data_analysis/feature_analysis.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/eflow/data_analysis/null_analysis.py" beforeDir="false" afterPath="$PROJECT_DIR$/eflow/data_analysis/null_analysis.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/eflow/foundation/data_frame_types.py" beforeDir="false" afterPath="$PROJECT_DIR$/eflow/foundation/data_frame_types.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/eflow/model_analysis/classification_analysis.py" beforeDir="false" afterPath="$PROJECT_DIR$/eflow/model_analysis/classification_analysis.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/eflow/utils/image_utils.py" beforeDir="false" afterPath="$PROJECT_DIR$/eflow/utils/image_utils.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/eflow/utils/pandas_utils.py" beforeDir="false" afterPath="$PROJECT_DIR$/eflow/utils/pandas_utils.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/testing/.ipynb_checkpoints/Pre Production-checkpoint.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/testing/.ipynb_checkpoints/Pre Production-checkpoint.ipynb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/testing/Pre Production.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/testing/Pre Production.ipynb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Before Cleaning/Missing Data/Titanic Training Data/Graphics/Missing data bar graph.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Before Cleaning/Missing Data/Titanic Training Data/Graphics/Missing data dendrogram graph average.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Before Cleaning/Missing Data/Titanic Training Data/Graphics/Missing data heatmap graph.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Before Cleaning/Missing Data/Titanic Training Data/Graphics/Missing data matrix graph.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Before Cleaning/Missing Data/Titanic Training Data/Tables/Data Types Table.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Before Cleaning/Missing Data/Titanic Training Data/Tables/Missing Data Table.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Before Cleaning/Missing Data/Titanic Training Data/_Extras/Dataframe Snapshot.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Pipeline Structure/Data Pipeline Segments/DataTransformer/42CF0FBB72.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Pipeline Structure/Data Pipeline Segments/DataTransformer/8B707CB854.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Training Data/Cleaned data/Classification Analysis/DecisionTreeClassifier/DecisionTreeClassifier.pkl" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Training Data/Cleaned data/Classification Analysis/DecisionTreeClassifier/Training Data/Predict function/.ipynb_checkpoints/Confusion Matrix Training Data on DecisionTreeClassifier-checkpoint.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Training Data/Cleaned data/Classification Analysis/DecisionTreeClassifier/Training Data/Predict function/.ipynb_checkpoints/Metric Evaluation on Training Data on DecisionTreeClassifier-checkpoint.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Training Data/Cleaned data/Classification Analysis/DecisionTreeClassifier/Training Data/Predict function/Confusion Matrix Training Data on DecisionTreeClassifier.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Training Data/Cleaned data/Classification Analysis/DecisionTreeClassifier/Training Data/Predict function/Metric Evaluation on Training Data on DecisionTreeClassifier.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Training Data/Cleaned data/Classification Analysis/DecisionTreeClassifier/Training Data/Probabilities function/No Thresholds/Confusion Matrix Training Data on DecisionTreeClassifier.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Training Data/Cleaned data/Classification Analysis/DecisionTreeClassifier/Training Data/Probabilities function/No Thresholds/Metric Evaluation on Training Data on DecisionTreeClassifier.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Training Data/Cleaned data/Classification Analysis/DecisionTreeClassifier/Training Data/Probabilities function/No Thresholds/Precision Recall on Training Data on DecisionTreeClassifier.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Training Data/Cleaned data/Classification Analysis/DecisionTreeClassifier/Training Data/Probabilities function/No Thresholds/Roc Curve on Training Data on DecisionTreeClassifier.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Training Data/Cleaned data/Classification Analysis/DecisionTreeClassifier/Training Data/Probabilities function/Thresholds/.ipynb_checkpoints/_Thresholds-checkpoint.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Training Data/Cleaned data/Classification Analysis/DecisionTreeClassifier/Training Data/Probabilities function/Thresholds/Confusion Matrix Training Data on DecisionTreeClassifier.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Training Data/Cleaned data/Classification Analysis/DecisionTreeClassifier/Training Data/Probabilities function/Thresholds/Metric Evaluation on Training Data on DecisionTreeClassifier.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Training Data/Cleaned data/Classification Analysis/DecisionTreeClassifier/Training Data/Probabilities function/Thresholds/Precision Recall on Training Data on DecisionTreeClassifier.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Training Data/Cleaned data/Classification Analysis/DecisionTreeClassifier/Training Data/Probabilities function/Thresholds/Roc Curve on Training Data on DecisionTreeClassifier.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Training Data/Cleaned data/Classification Analysis/DecisionTreeClassifier/Training Data/Probabilities function/Thresholds/_Thresholds.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Training Data/Cleaned data/Classification Analysis/DecisionTreeClassifier/_Extras/.ipynb_checkpoints/_Classes-checkpoint.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Training Data/Cleaned data/Classification Analysis/DecisionTreeClassifier/_Extras/_Classes.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Training Data/Cleaned data/Classification Analysis/DecisionTreeClassifier/_Extras/df_features.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Pipeline Structure/Data Pipeline Segments/DataTransformer/0F1F2171B3.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Pipeline Structure/Data Pipeline Segments/DataTransformer/3FF0099465.json" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Pipeline Structure/Data Pipeline/Titanic Pipeline/df_features.json" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/_Extras/Pipeline Structure/Data Pipeline/Titanic Pipeline/df_features.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Pipeline Structure/Data Pipeline/Titanic Pipeline/root_pipeline.json" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/_Extras/Pipeline Structure/Data Pipeline/Titanic Pipeline/root_pipeline.json" afterDir="false" />
     </list>
@@ -45,8 +50,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/eflow/model_analysis/classification_analysis.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="3116">
-              <caret line="247" column="30" selection-start-line="247" selection-start-column="30" selection-end-line="247" selection-end-column="30" />
+            <state relative-caret-position="-2860">
+              <caret line="1066" column="65" selection-start-line="1066" selection-start-column="65" selection-end-line="1066" selection-end-column="65" />
               <folding>
                 <element signature="e#0#35#0" expanded="true" />
               </folding>
@@ -68,7 +73,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/eflow/utils/pandas_utils.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="450">
+            <state relative-caret-position="-203">
               <caret line="30" column="33" selection-start-line="30" selection-start-column="33" selection-end-line="30" selection-end-column="33" />
               <folding>
                 <element signature="e#0#50#0" expanded="true" />
@@ -80,7 +85,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/eflow/data_analysis/feature_analysis.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-1335">
+            <state relative-caret-position="-10202">
               <caret line="3" column="50" selection-start-line="3" selection-start-column="50" selection-end-line="3" selection-end-column="50" />
             </state>
           </provider>
@@ -110,8 +115,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/eflow/_hidden/custom_exceptions.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="210">
-              <caret line="14" column="72" selection-start-line="14" selection-start-column="72" selection-end-line="14" selection-end-column="72" />
+            <state relative-caret-position="2">
+              <caret line="5" column="3" selection-start-line="5" selection-start-column="3" selection-end-line="5" selection-end-column="3" />
             </state>
           </provider>
         </entry>
@@ -139,18 +144,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>__df_features</find>
-      <find>When initializing a data pipeline str</find>
-      <find>filepath</find>
-      <find>DataFrameTypes</find>
-      <find>JSON Files</find>
-      <find>Data Pipeline</find>
-      <find>self.__df_features</find>
-      <find>df_features =</find>
-      <find>create_json_file_representation</find>
-      <find>init_on_json_file</find>
-      <find>print</find>
-      <find>sample_data</find>
       <find>move_folder_to_eflow_garbage</find>
       <find>When initializing a data pipeline structure you must pass a DataFrameTypbject with the correctly defined types!</find>
       <find>raise</find>
@@ -164,11 +157,23 @@
       <find>df_to_image</find>
       <find>create_plt_png</find>
       <find>display_analysis_graphs</find>
-      <find>plot_calibration_curve</find>
       <find>function</find>
-      <find>classification_metrics</find>
       <find>np.argm</find>
+      <find>plot_confusion_matrix</find>
+      <find>classification_metrics</find>
+      <find>__get</find>
       <find>__get_model_prediction</find>
+      <find>thresholds =</find>
+      <find>thresholds</find>
+      <find>__get_model_probas</find>
+      <find>plot_lift_curve</find>
+      <find>plot_ks_statistic</find>
+      <find>plot_roc_curve</find>
+      <find>plot_calibration_curve</find>
+      <find>notebook_mode</find>
+      <find>display_visuals=False,</find>
+      <find>if self.</find>
+      <find>if self.__notebook_mode:</find>
     </findStrings>
     <replaceStrings>
       <replace>dataframe_snapshot</replace>
@@ -189,6 +194,8 @@
       <replace>directory_path</replace>
       <replace />
       <replace>__tmp_df</replace>
+      <replace>display_visuals=True,</replace>
+      <replace>if display_visuals:</replace>
     </replaceStrings>
     <dirStrings>
       <dir>$PROJECT_DIR$/eflow/_hidden/objects</dir>
@@ -243,18 +250,18 @@
         <option value="$PROJECT_DIR$/eflow/foundation/data_pipeline.py" />
         <option value="$PROJECT_DIR$/eflow/utils/eflow_utils.py" />
         <option value="$PROJECT_DIR$/eflow/foundation/data_frame_types.py" />
-        <option value="$PROJECT_DIR$/eflow/_hidden/custom_exceptions.py" />
         <option value="$PROJECT_DIR$/eflow/data_analysis/feature_analysis.py" />
         <option value="$PROJECT_DIR$/eflow/utils/image_utils.py" />
         <option value="$PROJECT_DIR$/eflow/utils/pandas_utils.py" />
         <option value="$PROJECT_DIR$/build/lib/eflow/data_analysis/null_analysis.py" />
         <option value="$PROJECT_DIR$/build/lib/eflow/data_analysis/feature_analysis.py" />
         <option value="$PROJECT_DIR$/eflow/data_analysis/null_analysis.py" />
+        <option value="$PROJECT_DIR$/eflow/_hidden/custom_exceptions.py" />
         <option value="$PROJECT_DIR$/eflow/model_analysis/classification_analysis.py" />
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds">
+  <component name="ProjectFrameBounds" extendedState="6">
     <option name="x" value="53" />
     <option name="y" value="53" />
     <option name="width" value="1627" />
@@ -459,15 +466,15 @@
       <workItem from="1572010704662" duration="1944000" />
       <workItem from="1572020199833" duration="12024000" />
       <workItem from="1572146080302" duration="295000" />
-      <workItem from="1572269885903" duration="28516000" />
+      <workItem from="1572269885903" duration="36263000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="262264000" />
+    <option name="totallyTimeSpent" value="270011000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="53" y="53" width="1627" height="1027" extended-state="0" />
+    <frame x="53" y="23" width="1627" height="1027" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.2895899" />
@@ -790,13 +797,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/eflow/_hidden/custom_exceptions.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="210">
-          <caret line="14" column="72" selection-start-line="14" selection-start-column="72" selection-end-line="14" selection-end-column="72" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/eflow/foundation/data_pipeline.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-646">
@@ -816,9 +816,16 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/eflow/_hidden/custom_exceptions.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2">
+          <caret line="5" column="3" selection-start-line="5" selection-start-column="3" selection-end-line="5" selection-end-column="3" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/eflow/utils/pandas_utils.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="450">
+        <state relative-caret-position="-203">
           <caret line="30" column="33" selection-start-line="30" selection-start-column="33" selection-end-line="30" selection-end-column="33" />
           <folding>
             <element signature="e#0#50#0" expanded="true" />
@@ -828,15 +835,15 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/eflow/data_analysis/feature_analysis.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1335">
+        <state relative-caret-position="-10202">
           <caret line="3" column="50" selection-start-line="3" selection-start-column="50" selection-end-line="3" selection-end-column="50" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/eflow/model_analysis/classification_analysis.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3116">
-          <caret line="247" column="30" selection-start-line="247" selection-start-column="30" selection-end-line="247" selection-end-column="30" />
+        <state relative-caret-position="-2860">
+          <caret line="1066" column="65" selection-start-line="1066" selection-start-column="65" selection-end-line="1066" selection-end-column="65" />
           <folding>
             <element signature="e#0#35#0" expanded="true" />
           </folding>

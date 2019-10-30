@@ -2,8 +2,8 @@ from eflow.utils.sys_utils import *
 from eflow.utils.pandas_utils import df_to_image
 from eflow.utils.image_utils import create_plt_png
 from eflow._hidden.parent_objects import FileOutput
-from eflow._hidden.custom_exceptions import RequiresPredictionMethods, ThresholdLength, \
-    ThresholdType, UnknownModelOutputType, ProbasNotPossible, UnsatisfiedRequirments
+from eflow._hidden.custom_exceptions import RequiresPredictionMethods, ProbasNotPossible, \
+    UnsatisfiedRequirments
 from eflow.data_analysis import FeatureAnalysis
 
 from eflow._hidden.constants import GRAPH_DEFAULTS
@@ -40,12 +40,12 @@ class ClassificationAnalysis(FileOutput):
     def __init__(self,
                  model,
                  model_name,
+                 target_feature,
                  pred_funcs_dict,
                  df_features,
                  sample_data,
                  project_sub_dir="Classification Analysis",
                  overwrite_full_path=None,
-                 notebook_mode=True,
                  target_classes=None,
                  save_model=True):
         """
@@ -77,9 +77,6 @@ class ClassificationAnalysis(FileOutput):
             overwrite_full_path:
                 Overwrites the path to the parent folder.
 
-            notebook_mode:
-                If in a python notebook display in the notebook.
-
             target_classes:
                 Specfied list/np.array of targeted classes the model predicts. If set to
                 none then it will attempt to pull from the sklearn's default attribute
@@ -91,13 +88,12 @@ class ClassificationAnalysis(FileOutput):
 
         # Init parent object
         FileOutput.__init__(self,
-                            f'{project_sub_dir}/{model_name}',
+                            f'{project_sub_dir}/Target Feature: {target_feature}/{model_name}',
                             overwrite_full_path)
 
         # Init objects without pass by refrence
         self.__model = copy.deepcopy(model)
         self.__model_name = copy.deepcopy(model_name)
-        self.__notebook_mode = copy.deepcopy(notebook_mode)
         self.__target_values = copy.deepcopy(target_classes)
         self.__df_features = copy.deepcopy(df_features)
         self.__pred_funcs_dict = copy.deepcopy(pred_funcs_dict)
@@ -165,42 +161,37 @@ class ClassificationAnalysis(FileOutput):
                          dataset_name,
                          thresholds_matrix=None,
                          figsize=GRAPH_DEFAULTS.FIGSIZE,
-                         normalize_confusion_matrix=True,
                          ignore_metrics=[],
-                         custom_metrics=dict(),
+                         custom_metrics_dict=dict(),
                          average_scoring=["micro",
                                           "macro",
                                           "weighted"],
                          display_visuals=False):
         """
         Desc:
-            Runs all
+            Runs all available analysis functions on the models predicted data.
 
         Args:
-            X/y:
-                Feature matrix/Target data vector.
+            X:
+                Feature matrix.
+
+            y:
+                Target data vector.
 
             dataset_name:
                 The dataset's name; this will create a sub-directory in which your
                 generated graph will be inner-nested in.
 
             thresholds_matrix:
-                List of list/Matrix of thresholds
+                List of list/matrix of thresholds.
 
-                each thresholds:
-                    If the model outputs a probability list/numpy array then we apply
-                    thresholds to the ouput of the model.
-                    For classification only; will not affect the direct output of
-                    the probabilities.
+                If the model outputs a probability list/numpy array then we apply
+                thresholds to the ouput of the model.
+                For classification only; will not affect the direct output of
+                the probabilities.
 
             figsize:
-                Plot's dimension's.
-
-            normalize_confusion_matrix:
-                Normalize the confusion matrix buckets.
-
-            ignore_metrics:
-                Specify set metrics to ignore. (F1-Score, Accuracy etc).
+                All plot's dimension's.
 
             ignore_metrics:
                 Specify the default metrics to not apply to the classification
@@ -211,14 +202,14 @@ class ClassificationAnalysis(FileOutput):
                     * F1-Score
                     * Accuracy
 
-            custom_metrics:
-                Pass the name of metric(s) and the function definition(s) in a
+            custom_metrics_dict:
+                Pass the name of metric(s) with the function definition(s) in a
                 dictionary.
 
             average_scoring:
                 Determines the type of averaging performed on the data.
 
-            display_analysis_graphs:
+            display_visuals:
                 Controls visual display of error error data_analysis if it is able to run.
 
         Returns:
@@ -228,6 +219,8 @@ class ClassificationAnalysis(FileOutput):
                 * classification_evaluation
                 * plot_confusion_matrix
         """
+
+        # Convert to
         if isinstance(thresholds_matrix, np.ndarray):
             thresholds_matrix = thresholds_matrix.tolist()
 
@@ -242,18 +235,27 @@ class ClassificationAnalysis(FileOutput):
             thresholds_matrix.append(None)
 
         print("\n\n" + "---" * 10 + f'{dataset_name}' + "---" * 10)
-
+        first_iteration = True
         for pred_name, pred_type in self.__pred_funcs_types.items():
+
+            # Nicer formating
+            if not first_iteration:
+                print("\n\n\n")
+            first_iteration = False
+
             for thresholds in thresholds_matrix:
-                print(f"\n\n\n### Now running classification on {pred_name}", end='')
+
+
+                print(f"Now running classification on {pred_name}", end='')
                 if pred_type == "Predictions":
-                    print("###")
+                    print()
                     thresholds = None
                 else:
                     if thresholds:
                         print(f" on thresholds:\n{thresholds}")
                     else:
-                        print(" on no thresholds")
+                        print(" on no thresholds.")
+                print("-" * (len(dataset_name) + 60))
 
                 self.classification_metrics(X,
                                             y,
@@ -261,8 +263,9 @@ class ClassificationAnalysis(FileOutput):
                                             dataset_name=dataset_name,
                                             thresholds=thresholds,
                                             ignore_metrics=ignore_metrics,
-                                            custom_metrics=custom_metrics,
-                                            average_scoring=average_scoring)
+                                            custom_metrics_dict=custom_metrics_dict,
+                                            average_scoring=average_scoring,
+                                            display_visuals=display_visuals)
 
                 self.plot_confusion_matrix(X,
                                            y,
@@ -270,7 +273,17 @@ class ClassificationAnalysis(FileOutput):
                                            dataset_name=dataset_name,
                                            thresholds=thresholds,
                                            figsize=figsize,
-                                           normalize=normalize_confusion_matrix)
+                                           normalize=True,
+                                           display_visuals=display_visuals)
+
+                self.plot_confusion_matrix(X,
+                                           y,
+                                           pred_name=pred_name,
+                                           dataset_name=dataset_name,
+                                           thresholds=thresholds,
+                                           figsize=figsize,
+                                           normalize=False,
+                                           display_visuals=display_visuals)
 
                 if pred_type == "Probabilities":
                     self.plot_precision_recall_curve(X,
@@ -278,13 +291,15 @@ class ClassificationAnalysis(FileOutput):
                                                      pred_name=pred_name,
                                                      dataset_name=dataset_name,
                                                      figsize=figsize,
-                                                     thresholds=thresholds)
+                                                     thresholds=thresholds,
+                                                     display_visuals=display_visuals)
                     self.plot_roc_curve(X,
                                         y,
                                         pred_name=pred_name,
                                         dataset_name=dataset_name,
                                         figsize=figsize,
-                                        thresholds=thresholds)
+                                        thresholds=thresholds,
+                                        display_visuals=display_visuals)
 
                     if self.__binary_classifcation:
 
@@ -293,28 +308,24 @@ class ClassificationAnalysis(FileOutput):
                                              pred_name=pred_name,
                                              dataset_name=dataset_name,
                                              figsize=figsize,
-                                             thresholds=thresholds)
+                                             thresholds=thresholds,
+                                             display_visuals=display_visuals)
 
                         self.plot_ks_statistic(X,
                                                y,
                                                pred_name=pred_name,
                                                dataset_name=dataset_name,
                                                figsize=figsize,
-                                               thresholds=thresholds)
-
-                        self.plot_calibration_curve(X,
-                                                    y,
-                                                    pred_name=pred_name,
-                                                    dataset_name=dataset_name,
-                                                    figsize=figsize,
-                                                    thresholds=thresholds)
+                                               thresholds=thresholds,
+                                               display_visuals=display_visuals)
 
                         self.plot_cumulative_gain(X,
                                                   y,
                                                   pred_name=pred_name,
                                                   dataset_name=dataset_name,
                                                   figsize=figsize,
-                                                  thresholds=thresholds)
+                                                  thresholds=thresholds,
+                                                  display_visuals=display_visuals)
 
                 # if self.__df_features:
                 #     self.classification_error_analysis(X,
@@ -324,48 +335,56 @@ class ClassificationAnalysis(FileOutput):
                 #                                        thresholds=thresholds,
                 #                                        display_analysis_graphs=display_analysis_graphs)
 
-                    if pred_type == "Predictions":
-                        break
+                print("-" * (len(dataset_name) + 60))
+                if pred_type == "Predictions":
+                    break
 
-    def plot_calibration_curve(self,
-                               X,
-                               y,
-                               pred_name,
-                               dataset_name,
-                               thresholds=None,
-                               save_file=True,
-                               title=None,
-                               ax=None,
-                               cmap='nipy_spectral',
-                               figsize=GRAPH_DEFAULTS.FIGSIZE,
-                               title_fontsize='large',
-                               text_fontsize='medium'):
+    def plot_ks_statistic(self,
+                          X,
+                          y,
+                          pred_name,
+                          dataset_name,
+                          thresholds=None,
+                          display_visuals=True,
+                          save_file=True,
+                          title=None,
+                          ax=None,
+                          figsize=None,
+                          title_fontsize='large',
+                          text_fontsize='medium'):
 
         """
-        X/y:
-            Feature matrix/Target data vector.
+        Desc:
+            From scikit-plot documentation
+            Link: http://tinyurl.com/y3ym5pyc
+            Generates the KS Statistic plot from labels and scores/probabilities.
 
-        pred_name:
-            The name of the prediction function in questioned
-            stored in 'self.__pred_funcs_dict'
+        Args:
+            X:
+                Feature matrix.
 
-        dataset_name:
-            The dataset's name; this will create a sub-directory in which your
-            generated graph will be inner-nested in.
+             y:
+                Target data vector.
 
-        thresholds:
-            If the model outputs a probability list/numpy array then we apply
-            thresholds to the ouput of the model.
-            For classification only; will not affect the direct output of
-            the probabilities.
+            pred_name:
+                The name of the prediction function in questioned
+                stored in 'self.__pred_funcs_dict'
 
-        save_file:
-            Boolean value to whether or not to save the file.
+            dataset_name:
+                The dataset's name; this will create a sub-directory in which your
+                generated graph will be inner-nested in.
 
-        From scikit-plot documentation (Note not all attributes are provided to you):
-        Link: http://tinyurl.com/y3ym5pyc
-        Returns/Descr:
-            Plots calibration curves for a set of classifier probability estimates.
+            thresholds:
+                If the model outputs a probability list/numpy array then we apply
+                thresholds to the ouput of the model.
+                For classification only; will not affect the direct output of
+                the probabilities.
+
+            display_visuals:
+                Visualize graph if needed.
+
+            save_file:
+                Boolean value to whether or not to save the file.
         """
 
         filename = f'KS Statistic on {dataset_name} on {self.__model_name}'
@@ -375,21 +394,20 @@ class ClassificationAnalysis(FileOutput):
         if not title:
             title = filename
 
-        skplt.metrics.plot_calibration_curve(y,
-                                             self.__get_model_probas(pred_name,
-                                                                     X),
-                                             title=title,
-                                             ax=ax,
-                                             cmap=cmap,
-                                             figsize=figsize,
-                                             title_fontsize=title_fontsize,
-                                             text_fontsize=text_fontsize)
+        skplt.metrics.plot_ks_statistic(y,
+                                        self.__get_model_probas(pred_name,
+                                                                X),
+                                        title=title,
+                                        ax=ax,
+                                        figsize=figsize,
+                                        title_fontsize=title_fontsize,
+                                        text_fontsize=text_fontsize)
         if save_file:
             create_plt_png(self.folder_path,
                            sub_dir,
                            convert_to_filename(filename))
 
-        if self.__notebook_mode:
+        if display_visuals:
             plt.show()
         plt.close()
 
@@ -399,6 +417,7 @@ class ClassificationAnalysis(FileOutput):
                        pred_name,
                        dataset_name,
                        thresholds=None,
+                       display_visuals=True,
                        save_file=True,
                        title=None,
                        ax=None,
@@ -407,30 +426,37 @@ class ClassificationAnalysis(FileOutput):
                        text_fontsize='medium'):
 
         """
-        X/y:
-            Feature matrix/Target data vector.
-
-        pred_name:
-            The name of the prediction function in questioned
-            stored in 'self.__pred_funcs_dict'
-
-        dataset_name:
-            The dataset's name; this will create a sub-directory in which your
-            generated graph will be inner-nested in.
-
-        thresholds:
-            If the model outputs a probability list/numpy array then we apply
-            thresholds to the ouput of the model.
-            For classification only; will not affect the direct output of
-            the probabilities.
-
-        save_file:
-            Boolean value to whether or not to save the file.
-
-        From scikit-plot documentation (Note not all attributes are provided to you):
-        Link: http://tinyurl.com/y3ym5pyc
-        Returns/Descr:
+        Desc:
+            From scikit-plot documentation
+            Link: http://tinyurl.com/y3ym5pyc
             Creates ROC curves from labels and predicted probabilities.
+
+        Args:
+             X:
+                Feature matrix.
+
+             y:
+                Target data vector.
+
+            pred_name:
+                The name of the prediction function in questioned
+                stored in 'self.__pred_funcs_dict'
+
+            dataset_name:
+                The dataset's name; this will create a sub-directory in which your
+                generated graph will be inner-nested in.
+
+            thresholds:
+                If the model outputs a probability list/numpy array then we apply
+                thresholds to the ouput of the model.
+                For classification only; will not affect the direct output of
+                the probabilities.
+
+            display_visuals:
+                Visualize graph if needed.
+
+            save_file:
+                Boolean value to whether or not to save the file.
         """
         filename = f'Roc Curve on {dataset_name} on {self.__model_name}'
         sub_dir = self.__create_sub_dir_with_thresholds(pred_name,
@@ -453,7 +479,7 @@ class ClassificationAnalysis(FileOutput):
                            sub_dir,
                            convert_to_filename(filename))
 
-        if self.__notebook_mode:
+        if display_visuals:
             plt.show()
         plt.close()
 
@@ -463,6 +489,7 @@ class ClassificationAnalysis(FileOutput):
                              pred_name,
                              dataset_name,
                              thresholds=None,
+                             display_visuals=True,
                              save_file=True,
                              title=None,
                              ax=None,
@@ -471,29 +498,37 @@ class ClassificationAnalysis(FileOutput):
                              text_fontsize='medium'):
 
         """
-        X/y:
-            Feature matrix/Target data vector.
+        Desc:
+            From scikit-plot documentation
+            Link: http://tinyurl.com/y3ym5pyc
+            Plots calibration curves for a set of classifier probability estimates.
 
-        pred_name:
-            The name of the prediction function in questioned
-            stored in 'self.__pred_funcs_dict'.
+        Args:
+            X:
+                Feature matrix.
 
-        dataset_name:
-            The dataset's name; this will create a sub-directory in which your
-            generated graph will be inner-nested in.
+             y:
+                Target data vector.
 
-        thresholds:
-            If the model outputs a probability list/numpy array then we apply
-            thresholds to the ouput of the model.
-            For classification only; will not affect the direct output of
-            the probabilities.
+            pred_name:
+                The name of the prediction function in questioned
+                stored in 'self.__pred_funcs_dict'
 
-        save_file:
-            Boolean value to whether or not to save the file.
+            dataset_name:
+                The dataset's name; this will create a sub-directory in which your
+                generated graph will be inner-nested in.
 
-        From scikit-plot documentation (Note not all attributes are provided to you):
-        Link: http://tinyurl.com/y3ym5pyc
-        Returns/Descr:
+            thresholds:
+                If the model outputs a probability list/numpy array then we apply
+                thresholds to the ouput of the model.
+                For classification only; will not affect the direct output of
+                the probabilities.
+
+            display_visuals:
+                Visualize graph if needed.
+
+            save_file:
+                Boolean value to whether or not to save the file.
         """
         filename = f'Cumulative Gain gain on {dataset_name} on {self.__model_name}'
         sub_dir = self.__create_sub_dir_with_thresholds(pred_name,
@@ -516,7 +551,7 @@ class ClassificationAnalysis(FileOutput):
                            sub_dir,
                            convert_to_filename(filename))
 
-        if self.__notebook_mode:
+        if display_visuals:
             plt.show()
         plt.close()
 
@@ -526,6 +561,7 @@ class ClassificationAnalysis(FileOutput):
                                     pred_name,
                                     dataset_name,
                                     thresholds=None,
+                                    display_visuals=True,
                                     save_file=True,
                                     title=None,
                                     plot_micro=True,
@@ -536,27 +572,37 @@ class ClassificationAnalysis(FileOutput):
                                     title_fontsize='large',
                                     text_fontsize='medium'):
         """
-        X/y:
-            Feature matrix/Target data vector.
+        Desc:
+            From scikit-plot documentation
+            Link: http://tinyurl.com/y3ym5pyc
+            Plots precision recall curve plot based on the models predictions.
 
-        pred_name:
-            The name of the prediction function in questioned
-            stored in 'self.__pred_funcs_dict'
+        Args:
+            X:
+                Feature matrix.
 
-        dataset_name:
-            The dataset's name; this will create a sub-directory in which your
-            generated graph will be inner-nested in.
+             y:
+                Target data vector.
 
-        thresholds:
-            If the model outputs a probability list/numpy array then we apply
-            thresholds to the ouput of the model.
-            For classification only; will not affect the direct output of
-            the probabilities.
+            pred_name:
+                The name of the prediction function in questioned
+                stored in 'self.__pred_funcs_dict'
 
-        From scikit-plot documentation (Note not all attributes are provided to you):
-        Link: http://tinyurl.com/y3ym5pyc
-        Returns/Descr:
-            Creates a plot precision recall curve plot based on the models predictions.
+            dataset_name:
+                The dataset's name; this will create a sub-directory in which your
+                generated graph will be inner-nested in.
+
+            thresholds:
+                If the model outputs a probability list/numpy array then we apply
+                thresholds to the ouput of the model.
+                For classification only; will not affect the direct output of
+                the probabilities.
+
+            display_visuals:
+                Visualize graph if needed.
+
+            save_file:
+                Boolean value to whether or not to save the file.
         """
 
         filename = f'Precision Recall on {dataset_name} on {self.__model_name}'
@@ -583,7 +629,7 @@ class ClassificationAnalysis(FileOutput):
                            sub_dir,
                            convert_to_filename(filename))
 
-        if self.__notebook_mode:
+        if display_visuals:
             plt.show()
         plt.close()
 
@@ -593,6 +639,7 @@ class ClassificationAnalysis(FileOutput):
                         pred_name,
                         dataset_name,
                         thresholds=None,
+                        display_visuals=True,
                         save_file=True,
                         title=None,
                         ax=None,
@@ -600,27 +647,39 @@ class ClassificationAnalysis(FileOutput):
                         title_fontsize='large',
                         text_fontsize='medium'):
         """
-        X/y:
-            Feature matrix/Target data vector.
+        Desc:
+            From scikit-plot documentation
+            Link: http://tinyurl.com/y3ym5pyc
+            The lift curve is used to determine the effectiveness of a binary classifier.
+            A detailed explanation can be found at http://tinyurl.com/csegj9.
+            The implementation here works only for binary classification.
 
-        pred_name:
-            The name of the prediction function in questioned
-            stored in 'self.__pred_funcs_dict'
+        Args:
+            X:
+                Feature matrix.
 
-        dataset_name:
-            The dataset's name; this will create a sub-directory in which your
-            generated graph will be inner-nested in.
+             y:
+                Target data vector.
 
-        thresholds:
-            If the model outputs a probability list/numpy array then we apply
-            thresholds to the ouput of the model.
-            For classification only; will not affect the direct output of
-            the probabilities.
+            pred_name:
+                The name of the prediction function in questioned
+                stored in 'self.__pred_funcs_dict'
 
-        From scikit-plot documentation (Note not all attributes are provided to you):
-        Link: http://tinyurl.com/y3ym5pyc
-        Returns/Descr:
-            Creates a plot precision recall curve plot based on the models predictions.
+            dataset_name:
+                The dataset's name; this will create a sub-directory in which your
+                generated graph will be inner-nested in.
+
+            thresholds:
+                If the model outputs a probability list/numpy array then we apply
+                thresholds to the ouput of the model.
+                For classification only; will not affect the direct output of
+                the probabilities.
+
+            display_visuals:
+                Visualize graph if needed.
+
+            save_file:
+                Boolean value to whether or not to save the file.
         """
 
         filename = f'Lift Curve on {dataset_name} on {self.__model_name}'
@@ -633,7 +692,6 @@ class ClassificationAnalysis(FileOutput):
         skplt.metrics.plot_lift_curve(y,
                                       self.__get_model_probas(pred_name,
                                                               X),
-                                      thresholds=thresholds,
                                       title=title,
                                       ax=ax,
                                       figsize=figsize,
@@ -645,7 +703,7 @@ class ClassificationAnalysis(FileOutput):
                            sub_dir,
                            convert_to_filename(filename))
 
-        if self.__notebook_mode:
+        if display_visuals:
             plt.show()
         plt.close()
 
@@ -655,6 +713,7 @@ class ClassificationAnalysis(FileOutput):
                               pred_name,
                               dataset_name,
                               thresholds=None,
+                              display_visuals=True,
                               save_file=True,
                               title=None,
                               normalize=False,
@@ -667,29 +726,39 @@ class ClassificationAnalysis(FileOutput):
                               title_fontsize='large',
                               text_fontsize='medium'):
         """
-        X/y:
-            Feature matrix/Target data vector.
-
-        pred_name:
-            The name of the prediction function in questioned
-            stored in 'self.__pred_funcs_dict'
-
-        dataset_name:
-            The dataset's name; this will create a sub-directory in which your
-            generated graph will be inner-nested in.
-
-        thresholds:
-            If the model outputs a probability list/numpy array then we apply
-            thresholds to the ouput of the model.
-            For classification only; will not affect the direct output of
-            the probabilities.
-
-        From scikit-plot documentation (Note not all attributes are provided to you):
-        Link: http://tinyurl.com/y3ym5pyc
-        Returns/Descr:
+        Desc:
+            From scikit-plot documentation
+            Link: http://tinyurl.com/y3ym5pyc
             Creates a confusion matrix plot based on the models predictions.
+
+        Args:
+            X:
+                Feature matrix.
+
+             y:
+                Target data vector.
+
+            pred_name:
+                The name of the prediction function in questioned
+                stored in 'self.__pred_funcs_dict'
+
+            dataset_name:
+                The dataset's name; this will create a sub-directory in which your
+                generated graph will be inner-nested in.
+
+            thresholds:
+                If the model outputs a probability list/numpy array then we apply
+                thresholds to the ouput of the model.
+                For classification only; will not affect the direct output of
+                the probabilities.
+
+            display_visuals:
+                Visualize graph if needed.
+
+            save_file:
+                Boolean value to whether or not to save the file.
         """
-        filename = f'Confusion Matrix: {dataset_name} on {self.__model_name}'
+        filename = f'Confusion Matrix: {dataset_name} on {self.__model_name} Normalized: {normalize}'
         sub_dir = self.__create_sub_dir_with_thresholds(pred_name,
                                                         dataset_name,
                                                         thresholds)
@@ -723,7 +792,7 @@ class ClassificationAnalysis(FileOutput):
                            sub_dir,
                            convert_to_filename(filename))
 
-        if self.__notebook_mode:
+        if display_visuals:
             plt.show()
         plt.close()
 
@@ -733,62 +802,70 @@ class ClassificationAnalysis(FileOutput):
                                pred_name,
                                dataset_name,
                                thresholds=None,
+                               display_visuals=True,
                                save_file=True,
                                title="",
-                               custom_metrics=dict(),
+                               custom_metrics_dict=dict(),
                                ignore_metrics=[],
                                average_scoring=["micro",
                                                 "macro",
                                                 "weighted"]):
         """
-        X/y:
-            Feature matrix/Target data vector.
+        Desc:
+            Creates a dataframe based on the prediction metrics
+            of the feature matrix and target vector.
 
-        pred_name:
-            The name of the prediction function in questioned stored
-            in 'self.__pred_funcs_dict'
+        Args:
+            X:
+                Feature matrix.
 
-        dataset_name:
-            The dataset's name; this will create a sub-directory in which your
-            generated graph will be inner-nested in.
+            y:
+                Target data vector.
 
-        thresholds:
-            If the model outputs a probability list/numpy array then we apply
-            thresholds to the ouput of the model.
-            For classification only; will not affect the direct output of
-            the probabilities.
+            pred_name:
+                The name of the prediction function in questioned stored
+                in 'self.__pred_funcs_dict'
 
-        save_file:
-            Determines whether or not to save the generated document.
+            dataset_name:
+                The dataset's name; this will create a sub-directory in which your
+                generated graph will be inner-nested in.
 
-        title:
-            Adds to the column 'Metric Score'.
+            thresholds:
+                If the model outputs a probability list/numpy array then we apply
+                thresholds to the ouput of the model.
+                For classification only; will not affect the direct output of
+                the probabilities.
 
-        sub_dir:
-            Specify a subdirectory to append to the output path of the file.
+            display_visuals:
+                Display tables.
 
-        custom_metrics:
-            Pass the name of metric(s) and the function definition(s) in a
-            dictionary.
+            save_file:
+                Determines whether or not to save the generated document.
 
-        ignore_metrics:
-            Specify the default metrics to not apply to the classification
-            data_analysis.
-                * Precision
-                * MCC
-                * Recall
-                * F1-Score
-                * Accuracy
+            title:
+                Adds to the column 'Metric Score'.
 
-        average_scoring:
-            Determines the type of averaging performed on the data.
-                * micro
-                * macro
-                * weighted
+            custom_metrics_dict:
+                Pass the name of metric(s) and the function definition(s) in a
+                dictionary.
 
-        Returns/Desc:
-            Creates/displays a dataframe object based on the model's
-            predictions on the feature matrix compared to target data.
+            ignore_metrics:
+                Specify the default metrics to not apply to the classification
+                data_analysis.
+                    * Precision
+                    * MCC
+                    * Recall
+                    * F1-Score
+                    * Accuracy
+
+            average_scoring:
+                Determines the type of averaging performed on the data.
+                    * micro
+                    * macro
+                    * weighted
+
+        Returns:
+            Return a dataframe object of the metrics value.
         """
         filename = f'Metric Evaluation on {dataset_name} on {self.__model_name}'
         sub_dir = self.__create_sub_dir_with_thresholds(pred_name,
@@ -814,8 +891,8 @@ class ClassificationAnalysis(FileOutput):
                 del metric_functions[remove_metric]
 
         # Add in custom metrics
-        if len(custom_metrics.keys()):
-            metric_functions.update(custom_metrics)
+        if len(custom_metrics_dict.keys()):
+            metric_functions.update(custom_metrics_dict)
 
         # Evaluate model on metrics
         evaluation_report = dict()
@@ -836,9 +913,6 @@ class ClassificationAnalysis(FileOutput):
                                      model_predictions)
                     break
 
-                except ValueError:
-                    pass
-
         warnings.filterwarnings('default')
 
         if title and len(title) > 0:
@@ -853,13 +927,12 @@ class ClassificationAnalysis(FileOutput):
                                                in evaluation_report.values()]},
                                          index=list(evaluation_report.keys()))
 
-        if self.__notebook_mode:
+        if display_visuals:
             display(evaluation_report)
         else:
             print(evaluation_report)
 
         if save_file:
-            # Create image file
             df_to_image(evaluation_report,
                         self.folder_path,
                         sub_dir,
@@ -874,83 +947,83 @@ class ClassificationAnalysis(FileOutput):
                                       pred_name,
                                       dataset_name,
                                       thresholds=None,
+                                      display_visuals=True,
                                       save_file=True,
                                       display_analysis_graphs=False):
         """
-        X/y:
-            Feature matrix/Target data vector.
+        Args:
+            X:
+                Feature matrix.
 
-        pred_name:
-            The name of the prediction function in questioned
-            stored in 'self.__pred_funcs_dict'
+            y:
+                Target data vector.
 
-        dataset_name:
-            The dataset's name; this will create a sub-directory in which your
-            generated graph will be inner-nested in.
+            pred_name:
+                The name of the prediction function in questioned
+                stored in 'self.__pred_funcs_dict'
 
-        thresholds:
-            If the model outputs a probability list/numpy array then we apply
-            thresholds to the ouput of the model.
-            For classification only; will not affect the direct output of
-            the probabilities.
+            dataset_name:
+                The dataset's name; this will create a sub-directory in which your
+                generated graph will be inner-nested in.
 
-        save_file:
-            Determines whether or not to save the generated document.
+            thresholds:
+                If the model outputs a probability list/numpy array then we apply
+                thresholds to the ouput of the model.
+                For classification only; will not affect the direct output of
+                the probabilities.
 
-        display_analysis_graphs:
-            Controls visual display of graph generation.
+            save_file:
+                Determines whether or not to save the generated document.
 
-        Returns/Descr:
-            Creates a directory structure of subsetted data produced by all correctly/predicted.
+            display_analysis_graphs:
+                Controls visual display of graph generation.
         """
-
-        sub_dir = self.__create_sub_dir_with_thresholds(pred_name,
-                                                        dataset_name,
-                                                        thresholds)
-
-        model_predictions = self.__get_model_prediction(pred_name,
-                                                        X,
-                                                        thresholds=thresholds)
-
-        if sum(model_predictions == y):
-            if display_analysis_graphs:
-                print("\n\n" + "*" * 10 +
-                      "Correctly predicted data_analysis"
-                      + "*" * 10 + "\n")
-            else:
-                print("\n\n" + "*" * 10 +
-                      "Generating graphs for model's correctly predicted..." +
-                      "*" * 10 + "\n")
-                FeatureAnalysis(pd.DataFrame(X[model_predictions == y],
-                                          columns=self.__df_features.get_all_features()),
-                             self.__df_features,
-                             overwrite_full_path=self.folder_path +
-                                                 sub_dir + "/Correctly Predicted Data/",
-                             missing_data_visuals=False,
-                             notebook_mode=display_analysis_graphs)
-        else:
-            print("Your model predicted nothing correctly...dam that sucks")
-
-        if sum(model_predictions != y):
-            if display_analysis_graphs:
-                print("\n\n" + "*" * 10 +
-                      "Incorrectly predicted data_analysis"
-                      + "*" * 10 + "\n")
-            else:
-                print("\n\n" + "*" * 10 +
-                      "Generating graphs for model's incorrectly predicted..." +
-                      "*" * 10 + "\n")
-
-            DataAnalysis(pd.DataFrame(X[model_predictions != y],
-                                      columns=self.__df_features.get_all_features()),
-                         self.__df_features,
-                         overwrite_full_path=self.folder_path +
-                                             sub_dir + "/Incorrectly Predicted Data/",
-                         missing_data_visuals=False,
-                         notebook_mode=display_analysis_graphs)
-        else:
-            print(
-                "\n\nYour model predicted everything correctly...there is something very wrong here...")
+        pass
+        # sub_dir = self.__create_sub_dir_with_thresholds(pred_name,
+        #                                                 dataset_name,
+        #                                                 thresholds)
+        #
+        # model_predictions = self.__get_model_prediction(pred_name,
+        #                                                 X,
+        #                                                 thresholds=thresholds)
+        #
+        # if sum(model_predictions == y):
+        #     if display_analysis_graphs:
+        #         print("\n\n" + "*" * 10 +
+        #               "Correctly predicted data_analysis"
+        #               + "*" * 10 + "\n")
+        #     else:
+        #         print("\n\n" + "*" * 10 +
+        #               "Generating graphs for model's correctly predicted..." +
+        #               "*" * 10 + "\n")
+        #         FeatureAnalysis(pd.DataFrame(X[model_predictions == y],
+        #                                   columns=self.__df_features.get_all_features()),
+        #                      self.__df_features,
+        #                      overwrite_full_path=self.folder_path +
+        #                                          sub_dir + "/Correctly Predicted Data/",
+        #                      notebook_mode=display_analysis_graphs)
+        # else:
+        #     print("Your model predicted nothing correctly...dam that sucks")
+        #
+        # if sum(model_predictions != y):
+        #     if display_analysis_graphs:
+        #         print("\n\n" + "*" * 10 +
+        #               "Incorrectly predicted data_analysis"
+        #               + "*" * 10 + "\n")
+        #     else:
+        #         print("\n\n" + "*" * 10 +
+        #               "Generating graphs for model's incorrectly predicted..." +
+        #               "*" * 10 + "\n")
+        #
+        #     DataAnalysis(pd.DataFrame(X[model_predictions != y],
+        #                               columns=self.__df_features.get_all_features()),
+        #                  self.__df_features,
+        #                  overwrite_full_path=self.folder_path +
+        #                                      sub_dir + "/Incorrectly Predicted Data/",
+        #                  notebook_mode=display_analysis_graphs)
+        # else:
+        #     print(
+        #         "\n\nYour model predicted everything correctly...there is something very wrong here...")
 
     def classification_report(self,
                               X,
@@ -958,31 +1031,40 @@ class ClassificationAnalysis(FileOutput):
                               pred_name,
                               dataset_name,
                               thresholds=None,
+                              display_visuals=True,
                               save_file=True):
         """
-        X/y:
-            Feature matrix/Target data vector.
-
-        pred_name:
-            The name of the prediction function in questioned
-            stored in 'self.__pred_funcs_dict'
-
-        dataset_name:
-            The dataset's name; this will create a sub-directory in which your
-            generated graph will be inner-nested in.
-
-        thresholds:
-            If the model outputs a probability list/numpy array then we apply
-            thresholds to the ouput of the model.
-            For classification only; will not affect the direct output of
-            the probabilities.
-
-        save_file:
-            Determines whether or not to save the generated document.
-
-        Returns/Descr:
+        Desc:
             Creates a report of all target's metric evaluations
-            based on the model's prediction output.
+            based on the model's prediction output from the classification report
+            from the sklearn.
+
+        Args:
+            X:
+                Feature matrix.
+
+             y:
+                Target data vector.
+
+            pred_name:
+                The name of the prediction function in questioned
+                stored in 'self.__pred_funcs_dict'
+
+            dataset_name:
+                The dataset's name; this will create a sub-directory in which your
+                generated graph will be inner-nested in.
+
+            thresholds:
+                If the model outputs a probability list/numpy array then we apply
+                thresholds to the ouput of the model.
+                For classification only; will not affect the direct output of
+                the probabilities.
+
+            display_visuals:
+                Visualize graph if needed.
+
+            save_file:
+                Boolean value to whether or not to save the file.
         """
         filename = f'Classification Report {dataset_name} on {self.__model_name}'
         sub_dir = self.__create_sub_dir_with_thresholds(pred_name,
@@ -998,7 +1080,7 @@ class ClassificationAnalysis(FileOutput):
                                                        output_dict=True))
 
         # ---
-        if self.__notebook_mode:
+        if display_visuals:
             display(report_df)
         else:
             print(report_df)
@@ -1040,6 +1122,10 @@ class ClassificationAnalysis(FileOutput):
             Helps streamline the entire process of evaluating classes.
         """
 
+        # Check if function name exists in the dictionary
+        if pred_name not in self.__pred_funcs_types:
+            raise KeyError("The function name has not be recorded!")
+
         # Must be a prediction function
         if self.__pred_funcs_types[pred_name] == "Predictions":
             return self.__pred_funcs_dict[pred_name](X)
@@ -1052,39 +1138,27 @@ class ClassificationAnalysis(FileOutput):
                 if isinstance(thresholds, list) or \
                         isinstance(thresholds, np.ndarray):
                     if len(thresholds) != len(self.__target_values):
-                        raise ThresholdLength("")
+                        raise UnsatisfiedRequirments("Length of thresholds must match the same length as the associated classes.")
                 else:
-                    raise ThresholdType("")
+                    raise UnsatisfiedRequirments("Threshold object is not a list or numpy array!")
 
+            # Get model probability output
             model_output = self.__get_model_probas(pred_name,
                                                    X)
+
+            # No thresholds found
             if not thresholds:
                 return np.asarray([self.__target_values[np.argmax(proba)]
                                    for proba in model_output])
-            else:
 
+            # Apply thresholds to model's probability output
+            else:
                 model_output = model_output - thresholds
 
                 return np.asarray([self.__target_values[np.argmax(proba)]
                                    for proba in model_output])
-
-                # print(model_output[0])
-                # print(bool_matrix_thresholds[0])
-                #
-                # prob_passed_matrix = np.asarray([
-                #     np.asarray([model_output[i][0] if passed else float("-inf")
-                #                 for i, passed in enumerate(bool_vector)])
-                #     for bool_vector in bool_matrix_thresholds])
-                # print(prob_passed_matrix[0])
-                #
-                # model_predictions = np.asarray(
-                #     [self.__target_values[np.argmax(proba_vector)]
-                #      if sum(proba_vector != float("-inf")) > 0
-                #      else self.__target_values[np.argmax(model_output)]
-                #      for proba_vector in prob_passed_matrix])
-                # return model_predictions
         else:
-            raise UnknownModelOutputType("")
+            raise ValueError(f"Unknown type '{self.__pred_funcs_types[pred_name]}' was found!")
 
     def __get_model_probas(self,
                            pred_name,

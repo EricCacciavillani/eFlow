@@ -3,11 +3,11 @@
     "Survived"
   ],
   "string": [
+    "Sex",
     "Ticket",
     "Cabin",
-    "Sex",
-    "Name",
-    "Embarked"
+    "Embarked",
+    "Name"
   ],
   "integer": [
     "SibSp",
@@ -18,8 +18,8 @@
     "Fare"
   ],
   "categorical": [
-    "PassengerId",
-    "Pclass"
+    "Pclass",
+    "PassengerId"
   ],
   "target": "Survived"
 }
