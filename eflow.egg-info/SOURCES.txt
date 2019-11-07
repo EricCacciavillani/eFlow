@@ -41,7 +41,7 @@ eflow/foundation/data_pipeline.py
 eflow/model_analysis/__init__.py
 eflow/model_analysis/classification_analysis.py
 eflow/utils/__init__.py
-eflow/utils/image_utils.py
+eflow/utils/image_processing_utils.py
 eflow/utils/math_utils.py
 eflow/utils/misc_utils.py
 eflow/utils/modeling_utils.py

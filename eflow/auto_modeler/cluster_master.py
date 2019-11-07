@@ -128,7 +128,7 @@ class ClusterMaster:
         plt.xlabel(x_title, fontsize=20, labelpad=20)
         plt.ylabel(y_title, fontsize=20, labelpad=20)
         plt.title(title, fontsize=15)
-        self.__create_plt_png(output_path,
+        self.__image_processing_utils(output_path,
                               model_name + "_Cluster_Count")
         plt.show()
         plt.close()
@@ -161,7 +161,7 @@ class ClusterMaster:
                        leaf_font_size=3)
 
             plt.title("hierarchical Clustering Method : " + method)
-            self.__create_plt_png("Hierarchical_Clustering",
+            self.__image_processing_utils("Hierarchical_Clustering",
                                   "Hierarchical_Clustering_Method_" + method)
 
             plt.show()
@@ -205,7 +205,7 @@ class ClusterMaster:
 
         pl.legend(cluster_array, cluster_names)
         pl.title(model_name + ' visualized with data', fontsize=15)
-        self.__create_plt_png(output_path,
+        self.__image_processing_utils(output_path,
                               model_name + "_Visualized_Cluster")
         plt.show()
         plt.close()
@@ -269,7 +269,7 @@ class ClusterMaster:
                 "Successfully generate Kmeans model on k_val={0}".format(k_val)
             )
 
-        self.__create_plt_png("Kmeans",
+        self.__image_processing_utils("Kmeans",
                               "Kmeans_Visualized_Cluster")
         plt.show()
         plt.close()
@@ -491,7 +491,7 @@ class ClusterMaster:
             else:
                 cell.set_facecolor(row_colors[k[0] % len(row_colors)])
 
-        self.__create_plt_png(sub_dir, filename)
+        self.__image_processing_utils(sub_dir, filename)
 
         plt.close()
 
@@ -697,7 +697,7 @@ class ClusterMaster:
         plt.ylabel('variance ratio')
         plt.xlabel('PCA feature')
         plt.tight_layout()
-        self.__create_plt_png("PCA", "PCA_Feature_Variance_Ratio")
+        self.__image_processing_utils("PCA", "PCA_Feature_Variance_Ratio")
         plt.show()
         plt.close()
 
@@ -708,7 +708,7 @@ class ClusterMaster:
         plt.ylabel('cumulative sum of variances')
         plt.xlabel('PCA feature')
         plt.tight_layout()
-        self.__create_plt_png("PCA", "PCA_Cumulative_Sum_of_Variances")
+        self.__image_processing_utils("PCA", "PCA_Cumulative_Sum_of_Variances")
         plt.show()
         plt.close()
 
@@ -731,7 +731,7 @@ class ClusterMaster:
 
         return directory_path
 
-    def __create_plt_png(self,
+    def __image_processing_utils(self,
                          sub_dir,
                          filename):
         """

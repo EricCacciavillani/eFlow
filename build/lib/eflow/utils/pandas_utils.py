@@ -1,7 +1,7 @@
 import pandas as pd
 
 from eflow.utils.sys_utils import write_object_text_to_file
-from eflow.utils.image_utils import df_to_image
+from eflow.utils.image_processing_utils import df_to_image
 
 
 def check_if_feature_exists(df,

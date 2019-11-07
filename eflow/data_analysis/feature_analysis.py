@@ -1,16 +1,21 @@
 from eflow._hidden.parent_objects import FileOutput
 from eflow._hidden.general_objects import DataFrameSnapshot
 from eflow.utils.pandas_utils import descr_table,value_counts_table, df_to_image
-from eflow.utils.image_utils import create_plt_png
+from eflow.utils.image_processing_utils import create_plt_png
 from eflow.utils.string_utils import convert_to_filename
 from eflow._hidden.custom_exceptions import UnsatisfiedRequirments
+from eflow._hidden.custom_warnings import EflowWarning
+from eflow._hidden.constants import GRAPH_DEFAULTS
 
+
+import warnings
 import random
 import numpy as np
 from matplotlib import pyplot as plt
 import copy
 from IPython.display import display
 import seaborn as sns
+import pandas as pd
 
 __author__ = "Eric Cacciavillani"
 __copyright__ = "Copyright 2019, eFlow"
@@ -34,17 +39,17 @@ class FeatureAnalysis(FileOutput):
                  notebook_mode=True):
         """
         Args:
-            project_sub_dir:
+            project_sub_dir: string
                 Appends to the absolute directory of the output folder
 
-            project_name:
+            project_name: string
                 Creates a parent or "project" folder in which all sub-directories
                 will be inner nested.
 
-            overwrite_full_path:
+            overwrite_full_path: string, None
                 Overwrites the path to the parent folder.
 
-            notebook_mode:
+            notebook_mode: bool
                 If in a python notebook display visualizations in the notebook.
         """
 
@@ -52,25 +57,6 @@ class FeatureAnalysis(FileOutput):
                             f'{project_sub_dir}/{project_name}',
                             overwrite_full_path)
 
-        # Pre-defined colors for column's with set column names names.
-        # Multiple names/values are allowed
-        self.__defined_column_value_colors = list()
-        self.__defined_column_value_colors.append([["gender", "sex"],
-                                                  ["Male", "M", "#7EAED3"],
-                                                  ["Female", "F", "#FFB6C1"]])
-        self.__defined_column_value_colors.append([[" "],
-                                                  ["Male", "#7EAED3"],
-                                                  ["Female", "#FFB6C1"]])
-        self.__defined_column_value_colors.append([[" "],
-                                                  ["Y", "y" "yes", "Yes",
-                                                   "#55a868"],
-                                                  ["N", "n", "no", "No",
-                                                   "#ff8585"]])
-        self.__defined_column_value_colors.append([[" "],
-                                                  [True, "True", "true",
-                                                   "#55a868"],
-                                                  [False, "False", "false",
-                                                   "#ff8585"]])
 
         self.__notebook_mode = copy.deepcopy(notebook_mode)
 
@@ -95,23 +81,23 @@ class FeatureAnalysis(FileOutput):
             without specifying any method in particular.
 
         Args:
-            df:
+            df: Pandas dataframe
                 Pandas dataframe object
 
-            df_features:
+            df_features: DataFrameTypes
                 DataFrameTypes object; organizes feature types into groups.
 
-            dataset_name:
+            dataset_name: string
                 The dataset's name; this will create a sub-directory in which your
                 generated graph will be inner-nested in.
 
-            display_visuals:
+            display_visuals: bool
                 Boolean value to whether or not to display visualizations.
 
-            save_file:
+            save_file: bool
                 Boolean value to whether or not to save the file.
 
-            dataframe_snapshot:
+            dataframe_snapshot: bool
                 Boolean value to determine whether or not generate and compare a
                 snapshot of the dataframe in the dataset's directory structure.
                 Helps ensure that data generated in that directory is correctly
@@ -127,7 +113,8 @@ class FeatureAnalysis(FileOutput):
 
             # Raise empty dataframe error
             if df.shape[0] == 0 or np.sum(np.sum(df.isnull()).values) == df.shape[0]:
-               raise UnsatisfiedRequirments("Dataframe must contain valid data and not be empty or filled with nulls!")
+               raise UnsatisfiedRequirments("Dataframe must contain valid data and "
+                                            "not be empty or filled with nulls!")
 
             # Compare dataframe json file's snapshot to the given dataframe's
             # snapshot
@@ -141,48 +128,112 @@ class FeatureAnalysis(FileOutput):
             self.__called_from_perform = True
 
             missed_features = []
-            error_features = dict()
-            try:
-                # Iterate through features
-                for feature_name in df.columns:
+            target_feature = df_features.get_target_feature()
+            target_feature_numerical = target_feature in df_features.get_numerical_features()
+            # Iterate through features
+            for feature_name in df.columns:
 
-                   feature_values = df[feature_name].value_counts().keys()
+               feature_values = df[feature_name].value_counts(sort=False).keys().to_list()
 
-                   # -----
-                   if feature_name not in df_features.get_numerical_features() and feature_name not in df_features.get_datetime_features():
+               colors = df_features.get_feature_colors(feature_name)
+               if colors:
+                   if isinstance(colors, dict):
 
-                       if len(feature_values) <= 3:
-                           self.pie_graph(df,
-                                          feature_name,
-                                          dataset_name=dataset_name,
-                                          display_visuals=display_visuals,
-                                          save_file=save_file,
-                                          init_default_color="#C0C0C0")
+                       i = 0
+                       for value in feature_values:
+                           if value not in colors.keys():
+                               colors[value] = GRAPH_DEFAULTS.DEFINED_LIST_OF_RANDOM_COLORS[i]
+                               i += 1
 
-                       self.count_plot_graph(df,
+                               if i == len(GRAPH_DEFAULTS.DEFINED_LIST_OF_RANDOM_COLORS):
+                                   print("ERROR: You have to many undefined feature value to color relationship's. Init color to 'None'.")
+                                   colors = None
+               if colors:
+                   print(f"Colors: {colors}")
+
+               # -----
+               if feature_name in df_features.get_non_numerical_features() or feature_name in df_features.get_bool_features():
+
+                   if len(feature_values) <= 3:
+                       self.pie_graph(df,
+                                      feature_name,
+                                      dataset_name=dataset_name,
+                                      display_visuals=display_visuals,
+                                      save_file=save_file,
+                                      pallete=colors)
+
+
+
+                   self.plot_count_graph(df,
+                                         feature_name,
+                                         dataset_name=dataset_name,
+                                         display_visuals=display_visuals,
+                                         save_file=save_file,
+                                         palette=colors)
+
+                   if colors:
+                       self.plot_count_graph(df,
                                              feature_name,
                                              dataset_name=dataset_name,
                                              display_visuals=display_visuals,
                                              save_file=save_file)
-                   # -----
-                   elif feature_name in df_features.get_integer_features():
-                       self.distance_plot_graph(df,
-                                                feature_name,
-                                                dataset_name=dataset_name,
-                                                display_visuals=display_visuals,
-                                                save_file=save_file)
-                   # -----
-                   elif feature_name in df_features.get_float_features():
-                       self.distance_plot_graph(df,
-                                                feature_name,
-                                                dataset_name=dataset_name,
-                                                display_visuals=display_visuals,
-                                                save_file=save_file)
-                   else:
-                       missed_features.append(feature_name)
-            except Exception as e:
-                error_features[feature_name] = e
 
+
+                   self.value_counts_table(df,
+                                           feature_name,
+                                           dataset_name=dataset_name,
+                                           display_visuals=display_visuals,
+                                           save_file=save_file)
+
+
+                   if target_feature and feature_name != target_feature:
+
+                       # Target is a continuous numerical feature
+                       if target_feature_numerical:
+                           self.plot_violin_graph(df,
+                                                  feature_name,
+                                                  dataset_name=dataset_name,
+                                                  y_feature_name=target_feature,
+                                                  display_visuals=display_visuals,
+                                                  save_file=save_file,
+                                                  palette=colors)
+                       else:
+                           pass
+
+
+               # -----
+               elif feature_name in df_features.get_continuous_numerical_features():
+                   self.plot_distance_graph(df,
+                                            feature_name,
+                                            dataset_name=dataset_name,
+                                            display_visuals=display_visuals,
+                                            save_file=save_file)
+
+                   self.descr_table(df,
+                                    feature_name,
+                                    dataset_name=dataset_name,
+                                    display_visuals=display_visuals,
+                                    save_file=save_file)
+
+
+                   if target_feature and feature_name != target_feature:
+
+                       # Target is a continuous numerical feature
+                       if target_feature_numerical:
+                           pass
+                       else:
+                           self.plot_violin_graph(df,
+                                                  target_feature,
+                                                  dataset_name=dataset_name,
+                                                  y_feature_name=feature_name,
+                                                  display_visuals=display_visuals,
+                                                  save_file=save_file,
+                                                  palette=colors)
+
+               else:
+                   missed_features.append(feature_name)
+
+               print("\n\n")
 
             # If any missed features are picked up
             if len(missed_features) != 0:
@@ -190,53 +241,87 @@ class FeatureAnalysis(FileOutput):
                 for feature_name in missed_features:
                     print(f"\t\tFeature:{feature_name}")
 
-            # If any functions invoked errors
-            if len(error_features.keys()) != 0:
-                print("Some features caused functions to create errors.")
-                for feature_name,error in error_features:
-                    print(f"\t\tFeature:{feature_name}\n{error}\n")
-
         # Ensures that called from perform is turned off
         finally:
             self.__called_from_perform = False
 
-    def distance_plot_graph(self,
+    def plot_distance_graph(self,
                             df,
                             feature_name,
                             dataset_name,
                             display_visuals=True,
                             filename=None,
                             save_file=True,
-                            dataframe_snapshot=True):
+                            dataframe_snapshot=True,
+                            figsize=GRAPH_DEFAULTS.FIGSIZE,
+                            bins=None,
+                            norm_hist=True,
+                            hist=True,
+                            kde=True,
+                            colors=None,
+                            fit=None,
+                            fit_kws=None):
         """
+        Desc:
+            Display a distance plot and save the graph in the correct directory.
+
         Args:
-            df:
+            df: Pandas dataframe
                 Pandas dataframe object
 
-            feature_name:
+            feature_name: string
                 Specified feature column name.
 
-            dataset_name:
+            dataset_name: string
                 The dataset's name; this will create a sub-directory in which your
                 generated graph will be inner-nested in.
 
-            display_visuals:
+            display_visuals: bool
                 Boolean value to whether or not to display visualizations.
 
-            filename:
+            filename: string
                 Name to give the file.
 
-            save_file:
+            save_file: bool
                 Boolean value to whether or not to save the file.
 
-            dataframe_snapshot:
+            dataframe_snapshot: bool
                 Boolean value to determine whether or not generate and compare a
                 snapshot of the dataframe in the dataset's directory structure.
                 Helps ensure that data generated in that directory is correctly
                 associated to a dataframe.
 
-        Desc:
-            Display a distance plot and save the graph in the correct directory.
+            figsize: tuple
+                The given size of the plot.
+
+            bins: int
+                Specification of hist bins, or None to use Freedman-Diaconis rule.
+
+            norm_hist: bool
+                If True, the histogram height shows a density rather than a count. This is implied if a KDE or fitted density is plotted.
+
+            hist: bool
+                Whether to plot a (normed) histogram.
+
+            kde: bool
+                Whether to plot a gaussian kernel density estimate.
+
+            color : matplotlib color
+                Color to plot everything but the fitted curve in.
+
+            fit: functional method
+                An object with fit method, returning a tuple that can be passed
+                to a pdf method a positional arguments following an grid of
+                values to evaluate the pdf on.
+
+            fit_kws : dictionaries, optional
+                Keyword arguments for underlying plotting functions.
+
+
+            Credit to seaborn's author:
+            Michael Waskom
+            Git username: mwaskom
+            Doc Link: http://tinyurl.com/ycco2hok
 
         Raises:
             Raises error if the feature data is filled with only nulls or if
@@ -248,18 +333,32 @@ class FeatureAnalysis(FileOutput):
                 "Distance plot graph couldn't be generated because " +
                 f"there is only missing data to display in {feature_name}!")
 
-        print(f"Generating graph for distance plot graph on {feature_name}")
+        print(f"Generating graph for distance plot on {feature_name}")
+
+        feature_values = pd.to_numeric(df[feature_name].dropna(),
+                                       errors='coerce').dropna()
+
+        if not len(feature_values):
+            raise ValueError(
+                f"The given feature {feature_name} doesn't seem to convert to a numeric vector.")
 
         # Closes up any past graph info
         plt.close()
 
         # Set foundation graph info
         sns.set(style="whitegrid")
-        plt.figure(figsize=(12, 8))
+        plt.figure(figsize=figsize)
         plt.title("Distance Plot: " + feature_name)
 
         # Create seaborn graph
-        sns.distplot(df[feature_name].dropna())
+        sns.distplot(feature_values,
+                     bins=bins,
+                     hist=hist,
+                     kde=kde,
+                     fit=fit,
+                     fit_kws=fit_kws,
+                     color=colors,
+                     norm_hist=norm_hist)
 
         # Pass a default name if needed
         if not filename:
@@ -287,49 +386,101 @@ class FeatureAnalysis(FileOutput):
         plt.close()
 
 
-    def count_plot_graph(self,
-                         df,
-                         feature_name,
-                         dataset_name,
-                         display_visuals=True,
-                         filename=None,
-                         save_file=True,
-                         dataframe_snapshot=True,
-                         flip_axis=False,
-                         palette="PuBu"):
+    def plot_violin_graph(self,
+                          df,
+                          feature_name,
+                          dataset_name,
+                          y_feature_name=None,
+                          display_visuals=True,
+                          filename=None,
+                          save_file=True,
+                          dataframe_snapshot=True,
+                          figsize=GRAPH_DEFAULTS.FIGSIZE,
+                          order=None,
+                          cut=2,
+                          scale='area',
+                          gridsize=100,
+                          width=0.8,
+                          palette=None,
+                          saturation=0.75):
         """
+        Desc:
+            Display a violin plot and save the graph in the correct directory.
+
         Args:
-            df:
+            df: Pandas dataframe
                 Pandas dataframe object
 
-            feature_name:
-                Specified feature column name.
+            feature_name: string
+                Specified feature column name to compare to y.
 
-            dataset_name:
+            dataset_name: string
                 The dataset's name; this will create a sub-directory in which your
                 generated graph will be inner-nested in.
 
-            display_visuals:
+            y_feature_name: bool
+                Specified feature column name to compare to x.
+
+            display_visuals: bool
                 Boolean value to whether or not to display visualizations.
 
-            save_file:
+            filename: string
+                Name to give the file.
+
+            save_file: bool
                 Boolean value to whether or not to save the file.
 
-            dataframe_snapshot:
+            dataframe_snapshot: bool
                 Boolean value to determine whether or not generate and compare a
                 snapshot of the dataframe in the dataset's directory structure.
                 Helps ensure that data generated in that directory is correctly
                 associated to a dataframe.
 
+            figsize: tuple
+                Size of the given plot.
 
-            flip_axis:
-                Flip the x and y axis for visual representation.
+            order: lists of strings
+                Order to plot the categorical levels in, otherwise the levels
+                are inferred from the data objects.
+
+            cut: float
+                Distance, in units of bandwidth size, to extend the density
+                past the extreme datapoints. Set to 0 to limit the violin range
+                within the range of the observed data.
+                (i.e., to have the same effect as trim=True in ggplot.)
+
+            scale: string
+                {area, count, width}
+                The method used to scale the width of each violin. If area,
+                each violin will have the same area. If count, the width of the
+                violins will be scaled by the number of observations in that
+                bin. If width, each violin will have the same width.
+
+            gridsize: int
+                Number of points in the discrete grid used to compute the kernel density estimate.
+
+            width: float
+                Width of a full element when not using hue nesting, or width of
+                all the elements for one level of the major grouping variable.
+
+            colors: matplotlib color, optional
+                Color for all of the elements, or seed for a gradient palette.
 
             palette:
-                Seaborn color palette, specifies the colors the graph will use.
+                Colors to use for the different levels of the hue variable.
+                Should be something that can be interpreted by color_palette(),
+                or a dictionary mapping hue levels to matplotlib colors.
 
-        Desc:
-            Display a count plot and save the graph in the correct directory.
+            saturation: float
+                Proportion of the original saturation to draw colors at. Large
+                patches often look better with slightly desaturated colors, but
+                set this to 1 if you want the plot colors to perfectly match
+                the input color spec.
+
+            Credit to seaborn's author:
+            Michael Waskom
+            Git username: mwaskom
+            Doc link: http://tinyurl.com/y3hxxzgv
 
         Raises:
             Raises error if the feature data is filled with only nulls or if
@@ -337,51 +488,56 @@ class FeatureAnalysis(FileOutput):
             given dataframe.
         """
 
-        if np.sum(df[feature_name].isnull()) == df.shape[0]:
-            raise UnsatisfiedRequirments("Count plot graph couldn't be generated because " +
-                  f"there is only missing data to display in {feature_name}!")
-        print(
-            f"Count plot graph for distance plot graph on {feature_name}")
+        # Error check and create title/part of default file name
+        found_features = []
+        feature_title = ""
+        for feature in (feature_name, y_feature_name):
+            if feature:
+                if np.sum(df[feature].isnull()) == df.shape[0]:
+                    raise UnsatisfiedRequirments("Count plot graph couldn't be generated because " +
+                          f"there is only missing data to display in {feature}!")
+
+                found_features.append(feature)
+                if len(found_features) == 1:
+                    feature_title = f"{feature}"
+                else:
+                    feature_title += f" by {feature}"
+
+
+        if not len(found_features):
+            raise UnsatisfiedRequirments("Both x and y feature's are type 'None'. Please pass at least one feature.")
+
+        del found_features
+
+        print("Generating graph violin graph on " + feature_title)
 
         # Closes up any past graph info
         plt.close()
 
-        # Set graph info
-        sns.set(style="whitegrid")
-        plt.figure(figsize=(12, 8))
-        plt.title("Category Count Plot: " + feature_name)
+        # Set plot structure
+        plt.figure(figsize=figsize)
+        plt.title("Violin Plot: " + feature_title)
 
-        # Find and rank values based on counts for color variation of the graph
-        groupedvalues = df.groupby(feature_name).sum().reset_index()
+        feature_values = pd.to_numeric(df[y_feature_name],
+                                       errors='coerce').dropna()
 
-        pal = sns.color_palette(palette, len(groupedvalues))
+        if not len(feature_values):
+            raise ValueError("The y feature must contain numerical features.")
 
-        rank_list = []
-        for target_value in df[feature_name].dropna().unique():
-            rank_list.append(sum(
-                df[feature_name] == target_value))
-
-        rank_list = np.argsort(-np.array(rank_list)).argsort()
-
-        # Flip the graph for visual flare
-        if flip_axis:
-            ax = sns.countplot(y=feature_name, data=df,
-                               palette=np.array(pal[::-1])[rank_list])
-        else:
-            ax = sns.countplot(x=feature_name, data=df,
-                               palette=np.array(pal[::-1])[rank_list])
-
-        # Labels for numerical count of each bar
-        for p in ax.patches:
-            height = p.get_height()
-            ax.text(p.get_x() + p.get_width() / 2.,
-                    height + 3,
-                    '{:1}'.format(height),
-                    ha="center")
+        sns.violinplot(x=df[feature_name],
+                       y=feature_values,
+                       order=order,
+                       cut=cut,
+                       scale=scale,
+                       gridsize=gridsize,
+                       width=width,
+                       palette=palette,
+                       saturation=saturation)
 
         # Pass a default name if needed
         if not filename:
-            filename = f"Count plot graph on {feature_name}"
+            filename = f"Violin plot graph on {feature_title}."
+
 
         # -----
         if save_file:
@@ -405,6 +561,147 @@ class FeatureAnalysis(FileOutput):
 
         plt.close()
 
+    def plot_count_graph(self,
+                         df,
+                         feature_name,
+                         dataset_name,
+                         display_visuals=True,
+                         filename=None,
+                         save_file=True,
+                         dataframe_snapshot=True,
+                         figsize=GRAPH_DEFAULTS.FIGSIZE,
+                         flip_axis=False,
+                         palette="PuBu"):
+        """
+        Desc:
+            Display a barplot with color ranking from a feature's value counts
+            from the seaborn libary and save the graph in the correct directory
+            structure.
+
+        Args:
+            df: Pandas dataframe
+                Pandas dataframe object.
+
+            feature_name: string
+                Specified feature column name.
+
+            dataset_name: string
+                The dataset's name; this will create a sub-directory in which your
+                generated graph will be inner-nested in.
+
+            display_visuals: bool
+                Boolean value to whether or not to display visualizations.
+
+            filename: string
+                Name to give the file.
+
+            save_file: bool
+                Boolean value to whether or not to save the file.
+
+            dataframe_snapshot: bool
+                Boolean value to determine whether or not generate and compare a
+                snapshot of the dataframe in the dataset's directory structure.
+                Helps ensure that data generated in that directory is correctly
+                associated to a dataframe.
+
+            figsize: tuple
+                Size for the given plot.
+
+            flip_axis: bool
+                Flip the axis the ploting axis from x to y if set to 'True'.
+
+            palette: string
+                String representation of color pallete for ranking from seaborn's pallete.
+
+            Credit to seaborn's author:
+            Michael Waskom
+            Git username: mwaskom
+            Link: http://tinyurl.com/y4pzrgcf
+
+        Raises:
+            Raises error if the feature data is filled with only nulls or if
+            the json file's snapshot of the given dataframe doesn't match the
+            given dataframe.
+        """
+
+        if np.sum(df[feature_name].isnull()) == df.shape[0]:
+            raise UnsatisfiedRequirments(
+                "Count plot graph couldn't be generated because " +
+                f"there is only missing data to display in {feature_name}!")
+        print(
+            f"Count plot graph on {feature_name}")
+
+        # Closes up any past graph info
+        plt.close()
+
+        # Set graph info
+        plt.figure(figsize=figsize)
+        sns.set(style="whitegrid")
+        plt.title("Category Count Plot: " + feature_name)
+
+        value_counts = df[feature_name].dropna().value_counts(sort=True)
+
+        feature_values = value_counts.index
+        counts = value_counts.values
+        del value_counts
+
+        # Find and rank values based on counts for color variation of the graph
+        if not palette:
+            palette = "PuBu"
+
+        if isinstance(palette,str):
+            rank_list = np.argsort(-np.array(counts)).argsort()
+            pal = sns.color_palette(palette, len(counts))
+            palette = np.array(pal[::-1])[rank_list]
+
+        plt.clf()
+
+        # Flip the graph for visual flare
+        if flip_axis:
+            ax = sns.barplot(x=counts,
+                             y=feature_values,
+                             palette=palette,
+                             order=feature_values)
+        else:
+            ax = sns.barplot(x=feature_values,
+                             y=counts,
+                             palette=palette,
+                             order=feature_values)
+
+        # Labels for numerical count of each bar
+        for p in ax.patches:
+            height = p.get_height()
+            ax.text(p.get_x() + p.get_width() / 2.,
+                    height + 3,
+                    '{:1}'.format(height),
+                    ha="center")
+
+        # Pass a default name if needed
+        if not filename:
+            filename = f"Count plot graph on {feature_name}"
+
+            if isinstance(palette,str):
+                filename += " with count ranking."
+        # -----
+        if save_file:
+
+            # Check if dataframe matches saved snapshot; Creates file if needed
+            if not self.__called_from_perform:
+                if dataframe_snapshot:
+                    df_snapshot = DataFrameSnapshot()
+                    df_snapshot.check_create_snapshot(df,
+                                                      directory_path=self.folder_path,
+                                                      sub_dir=f"{dataset_name}/_Extras")
+
+            # Creates png of plot
+            create_plt_png(self.folder_path,
+                           f"{dataset_name}/Graphics",
+                           convert_to_filename(filename))
+
+        if self.__notebook_mode and display_visuals:
+            plt.show()
+
+        plt.close()
 
     def pie_graph(self,
                   df,
@@ -414,9 +711,12 @@ class FeatureAnalysis(FileOutput):
                   filename=None,
                   save_file=True,
                   dataframe_snapshot=True,
-                  colors=None,
-                  init_default_color=None):
+                  figsize=GRAPH_DEFAULTS.FIGSIZE,
+                  pallete=None):
         """
+        Desc:
+            Display a pie graph and save the graph in the correct directory.
+
         Args:
            df:
                Pandas DataFrame object.
@@ -431,6 +731,10 @@ class FeatureAnalysis(FileOutput):
            display_visuals:
                Boolean value to whether or not to display visualizations.
 
+           filename:
+               If set to 'None' will default to a pre-defined string;
+               unless it is set to an actual filename.
+
            save_file:
                Boolean value to whether or not to save the file.
 
@@ -441,18 +745,7 @@ class FeatureAnalysis(FileOutput):
                 associated to a dataframe.
 
            colors:
-                Accepts an array of hex colors with the correct count of values
-                within the feature. If not init; then specified colors will be
-                assigned based on if the feature is Boolean or if the column name
-                is found in 'defined_column_colors'; else just init with
-                random colors.
-
-           init_default_color:
-               A default color to assign unknown values when other values are
-               already assigned. Left to 'None' will init with random colors.
-
-       Desc:
-           Display a pie graph and save the graph in the correct directory.
+                Dictionary of all feature values to hex color values.
 
         Raises:
             Raises error if the feature data is filled with only nulls or if
@@ -464,32 +757,39 @@ class FeatureAnalysis(FileOutput):
             raise UnsatisfiedRequirments("Pie graph couldn't be generated because " +
                   f"there is only missing data to display in {feature_name}!")
         print(
-            f"Pie graph for distance plot graph on {feature_name}")
+            f"Pie graph on {feature_name}")
 
         # Closes up any past graph info
         plt.close()
 
         # Find value counts
-        value_counts = df[feature_name].dropna().value_counts()
+        value_counts = df[feature_name].dropna().value_counts(sort=False)
         value_list = value_counts.index.tolist()
         value_count_list = value_counts.values.tolist()
-
-        # Init with proper color hex value based on conditionals. (Read Above)
-        if colors is None:
-            colors = self.__check_specfied_column_colors(df,
-                                                         feature_name,
-                                                         init_default_color)
 
         # Explode the part of the pie graph that is the maximum of the graph
         explode_array = [0] * len(value_list)
         explode_array[np.array(value_count_list).argmax()] = .03
+
+        color_list = None
+
+        if isinstance(pallete,dict):
+            color_list = []
+            for value in tuple(value_list):
+                try:
+                    color_list.append(pallete[value])
+                except KeyError:
+                    raise KeyError(f"The given value '{value}' in feature '{feature_name}'"
+                                   + " was not found in the passed color dict.")
+
+        plt.figure(figsize=figsize)
 
         # Plot pie graph
         plt.pie(
             tuple(value_count_list),
             labels=tuple(value_list),
             shadow=False,
-            colors=colors,
+            colors=color_list,
             explode=tuple(explode_array),
             startangle=90,
             autopct='%1.1f%%',
@@ -497,12 +797,10 @@ class FeatureAnalysis(FileOutput):
 
         # Set foundation graph info
         fig = plt.gcf()
-        fig.set_size_inches(12, 8)
         plt.title("Pie Chart: " + feature_name)
         plt.legend(fancybox=True)
         plt.axis('equal')
         plt.tight_layout()
-        plt.figure(figsize=(20, 20))
 
         # Pass a default name if needed
         if not filename:
@@ -528,7 +826,6 @@ class FeatureAnalysis(FileOutput):
             plt.show()
 
         plt.close()
-
 
 
     def value_counts_table(self,
@@ -584,7 +881,7 @@ class FeatureAnalysis(FileOutput):
             raise UnsatisfiedRequirments("Values count table couldn't be generated because " +
                                          f"there is only missing data to display in {feature_name}!")
 
-        print("Creating data description table...")
+        print(f"Creating value counts table for feature {feature_name}.")
 
         # -----
         val_counts_df = value_counts_table(df,
@@ -628,6 +925,13 @@ class FeatureAnalysis(FileOutput):
                     save_file=True,
                     dataframe_snapshot=True):
         """
+        Desc:
+            Creates/Saves a pandas dataframe of features and their found types
+            in the dataframe.
+
+            Note:
+                Creates a png of the table.
+
         Args:
             df:
                 Pandas DataFrame object
@@ -655,13 +959,6 @@ class FeatureAnalysis(FileOutput):
                 Helps ensure that data generated in that directory is correctly
                 associated to a dataframe.
 
-        Desc:
-            Creates/Saves a pandas dataframe of features and their found types
-            in the dataframe.
-
-            Note:
-                Creates a png of the table.
-
         Raises:
             Raises error if the feature data is filled with only nulls or if
             the json file's snapshot of the given dataframe doesn't match the
@@ -673,17 +970,18 @@ class FeatureAnalysis(FileOutput):
             raise UnsatisfiedRequirments("Count plot graph couldn't be generated because " +
                   f"there is only missing data to display in {feature_name}!")
 
-        print("Creating data description table...")
+        print(f"Creating data description table for {feature_name}")
 
-        col_desc_df = descr_table(df,
-                                  feature_name)
+        desc_df = descr_table(df,
+                              feature_name,
+                              to_numeric=True)
 
         if self.__notebook_mode:
             if display_visuals:
-                display(col_desc_df)
+                display(desc_df)
         else:
             if display_visuals:
-                print(col_desc_df)
+                print(desc_df)
 
         # Pass a default name if needed
         if not filename:
@@ -700,81 +998,10 @@ class FeatureAnalysis(FileOutput):
             plt.close()
 
             # Convert value counts dataframe to an image
-            df_to_image(col_desc_df,
+            df_to_image(desc_df,
                         self.folder_path,
                         f"{dataset_name}/Tables",
                         convert_to_filename(filename),
                         show_index=True,
                         format_float_pos=2)
 
-
-    def __check_specfied_column_colors(self,
-                                       df,
-                                       feature_name,
-                                       init_default_color=None):
-        """
-        Desc:
-            Checks the column name and column values and
-            returns a list hex of colors.
-
-        Args:
-            df:
-                Pandas DataFrame object.
-
-            feature_name:
-                Specified feature column name.
-
-            init_default_color:
-                A default color to assign unknown values when other values are
-                already assigned. Left to 'None' will init with random colors.
-
-        Returns:
-            Returns a list hex of colors based on the feature name.
-        """
-
-        specfied_column_values = [
-            str(x).upper() for x in
-            df[feature_name].value_counts().index.tolist()]
-
-        # Assign with default color value or assign random colors
-        if not init_default_color:
-            column_colors = ["#%06x" % random.randint(0, 0xFFFFFF)
-                             for _ in range(0,
-                                            len(specfied_column_values))]
-        else:
-            column_colors = [init_default_color
-                             for _ in range(0,
-                                            len(
-                                                specfied_column_values))]
-
-        found_color_value = False
-
-        # Check if the given column name matches any pre-defined names
-        for column_info in copy.deepcopy(self.__defined_column_value_colors):
-
-            specified_column_names = column_info.pop(0)
-            specified_column_names = [str(x).upper()
-                                      for x in specified_column_names]
-
-            # Compare both feature names; ignore char case; check for default
-            if feature_name.upper() in specified_column_names or \
-                    specified_column_names[0] == " ":
-
-                for column_value_info in column_info:
-                    column_value_color = column_value_info.pop(-1)
-
-                    for column_value in {x for x in column_value_info}:
-
-                        if str(column_value).upper() in specfied_column_values:
-                            column_colors[specfied_column_values.index(str(
-                                column_value).upper())] = column_value_color
-                            found_color_value = True
-
-                # No colors were found reloop operation
-                if not found_color_value:
-                    continue
-                else:
-                    return column_colors
-
-        # Return obj None for no matching colors
-        return None

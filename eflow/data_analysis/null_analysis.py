@@ -1,7 +1,6 @@
-from eflow._hidden.custom_warnings import DataFrameWarning
 from eflow._hidden.constants import GRAPH_DEFAULTS
 from eflow._hidden.custom_exceptions import UnsatisfiedRequirments
-from eflow.utils.image_utils import create_plt_png
+from eflow.utils.image_processing_utils import create_plt_png
 from eflow.utils.string_utils import convert_to_filename, correct_directory_path
 from eflow.utils.pandas_utils import data_types_table, missing_values_table, df_to_image
 from eflow._hidden.general_objects import DataFrameSnapshot
@@ -21,6 +20,7 @@ __credits__ = ["Eric Cacciavillani"]
 __license__ = "MIT"
 __maintainer__ = "EricCacciavillani"
 __email__ = "eric.cacciavillani@gmail.com"
+
 
 class NullAnalysis(FileOutput):
     """
@@ -55,66 +55,6 @@ class NullAnalysis(FileOutput):
         self.__notebook_mode = copy.deepcopy(notebook_mode)
         self.__called_from_perform = False
 
-    def __check_dataframe(self,
-                          df):
-        """
-        Args:
-            df:
-                Pandas Dataframe object.
-
-        Returns:
-            Returns backs a bool to determine whether or not to null analysis
-            method should work with it.
-
-        Note:
-            I only made this function in case I needed to do more error checks
-            in the future.
-        """
-
-        passed_check = True
-
-        if not df.isnull().values.any() or df.shape[0] == 0:
-            passed_check = False
-
-        return passed_check
-
-    def __sort_features_by_nulls(self,
-                                 df):
-        """
-        Desc:
-            Sorts a dataframe by data containing the most nulls to least nulls.
-
-        Args:
-            df:
-                Pandas Dataframe object.
-
-        Returns:
-            Returns back the sorted order of features and the features that
-            contain null.
-        """
-
-        # Perform sort of nulls
-        features = df.isnull().sum().index.tolist()
-        null_values = df.isnull().sum().values.tolist()
-        null_values, null_sorted_features = zip(*sorted(zip(null_values,
-                                                            features)))
-
-        # Get list and reverse sequence
-        null_values = list(null_values)
-        null_sorted_features = list(null_sorted_features)
-
-        null_sorted_features.reverse()
-        null_values.reverse()
-        # -------------------------------------
-
-        # Iterate until through feature values until no nulls feature is found
-        for feature_index, value in enumerate(null_values):
-            if value == 0:
-                break
-
-        null_features = null_sorted_features[0:feature_index]
-
-        return null_sorted_features, null_features
 
     def perform_analysis(self,
                          df,
@@ -224,15 +164,14 @@ class NullAnalysis(FileOutput):
                                n=0,
                                p=0,
                                sort=None,
-                               figsize=(25, 10),
+                               figsize=GRAPH_DEFAULTS.NULL_FIGSIZE,
                                width_ratios=(15, 1),
                                color=(.027, .184, .373),
                                fontsize=16,
                                labels=None,
                                sparkline=True,
                                inline=False,
-                               freq=None,
-                               ax=None):
+                               freq=None):
         """
         Desc (Taken from missingno):
             A matrix visualization of the nullity of the given DataFrame then
@@ -304,8 +243,7 @@ class NullAnalysis(FileOutput):
                     labels=labels,
                     sparkline=sparkline,
                     inline=inline,
-                    freq=freq,
-                    ax=ax)
+                    freq=freq)
 
         if not filename:
             filename = "Missing data matrix graph"
@@ -339,17 +277,16 @@ class NullAnalysis(FileOutput):
                             save_file=True,
                             dataframe_snapshot=True,
                             null_features_only=False,
-                            figsize=(24, 10),
+                            figsize=GRAPH_DEFAULTS.NULL_FIGSIZE,
                             fontsize=16,
                             labels=None,
                             log=False,
-                            color=GRAPH_DEFAULTS.DEFAULT_NULL_COLOR,
+                            color=GRAPH_DEFAULTS.NULL_COLOR,
                             inline=False,
                             filter=False,
                             n=0,
                             p=0,
-                            sort=None,
-                            ax=None):
+                            sort=None):
         """
         Desc (Taken from missingno):
             A bar graph visualization of the nullity of the given DataFrame then
@@ -418,8 +355,7 @@ class NullAnalysis(FileOutput):
                       filter=filter,
                       n=n,
                       p=p,
-                      sort=sort,
-                      ax=ax)
+                      sort=sort)
 
         # Annotation
         props = dict(boxstyle='round',
@@ -469,14 +405,13 @@ class NullAnalysis(FileOutput):
                                 n=0,
                                 p=0,
                                 sort=None,
-                                figsize=(20, 12),
+                                figsize=GRAPH_DEFAULTS.NULL_FIGSIZE,
                                 fontsize=16,
                                 labels=True,
                                 cmap='RdBu',
                                 vmin=-1,
                                 vmax=1,
-                                cbar=True,
-                                ax=None):
+                                cbar=True):
         """
         Desc (Taken from missingno):
             Presents a `seaborn` heatmap visualization of nullity correlation
@@ -539,8 +474,7 @@ class NullAnalysis(FileOutput):
                      cmap=cmap,
                      vmin=vmin,
                      vmax=vmax,
-                     cbar=cbar,
-                     ax=ax)
+                     cbar=cbar)
 
         # Sets filename with a default name
         if not filename:
@@ -578,10 +512,9 @@ class NullAnalysis(FileOutput):
                                    n=0,
                                    p=0,
                                    orientation=None,
-                                   figsize=None,
+                                   figsize=GRAPH_DEFAULTS.NULL_FIGSIZE,
                                    fontsize=16,
-                                   inline=False,
-                                   ax=None):
+                                   inline=False):
         # All credit to the following author for making the 'missingno' package
         # https://github.com/ResidentMario/missingno
         """
@@ -645,8 +578,7 @@ class NullAnalysis(FileOutput):
                         orientation=orientation,
                         figsize=figsize,
                         fontsize=fontsize,
-                        inline=inline,
-                        ax=ax)
+                        inline=inline)
 
         # Sets filename with a default name
         if not filename:
@@ -829,3 +761,64 @@ class NullAnalysis(FileOutput):
                         f"{dataset_name}/Tables",
                         convert_to_filename(filename),
                         show_index=True)
+
+    def __check_dataframe(self,
+                          df):
+        """
+        Args:
+            df:
+                Pandas Dataframe object.
+
+        Returns:
+            Returns backs a bool to determine whether or not to null analysis
+            method should work with it.
+
+        Note:
+            I only made this function in case I needed to do more error checks
+            in the future.
+        """
+
+        passed_check = True
+
+        if not df.isnull().values.any() or df.shape[0] == 0:
+            passed_check = False
+
+        return passed_check
+
+    def __sort_features_by_nulls(self,
+                                 df):
+        """
+        Desc:
+            Sorts a dataframe by data containing the most nulls to least nulls.
+
+        Args:
+            df:
+                Pandas Dataframe object.
+
+        Returns:
+            Returns back the sorted order of features and the features that
+            contain null.
+        """
+
+        # Perform sort of nulls
+        features = df.isnull().sum().index.tolist()
+        null_values = df.isnull().sum().values.tolist()
+        null_values, null_sorted_features = zip(*sorted(zip(null_values,
+                                                            features)))
+
+        # Get list and reverse sequence
+        null_values = list(null_values)
+        null_sorted_features = list(null_sorted_features)
+
+        null_sorted_features.reverse()
+        null_values.reverse()
+        # -------------------------------------
+
+        # Iterate until through feature values until no nulls feature is found
+        for feature_index, value in enumerate(null_values):
+            if value == 0:
+                break
+
+        null_features = null_sorted_features[0:feature_index]
+
+        return null_sorted_features, null_features

@@ -337,7 +337,7 @@ class DataPipeline(FileOutput):
     #     if add_libs:
     #         libs_code = list()
     #         libs_code.append("from eflow.utils.math_utils import *")
-    #         libs_code.append("from eflow.utils.image_utils import *")
+    #         libs_code.append("from eflow.utils.image_processing_utils import *")
     #         libs_code.append("from eflow.utils.pandas_utils import *")
     #         libs_code.append("from eflow.utils.modeling_utils import *")
     #         libs_code.append("from eflow.utils.string_utils import *")

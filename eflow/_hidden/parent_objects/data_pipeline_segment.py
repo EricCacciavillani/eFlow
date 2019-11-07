@@ -119,7 +119,7 @@ class DataPipelineSegment(FileOutput):
     #     # Add libs to the top of the file
     #     if add_libs:
     #         generated_code.append("from eflow.utils.math_utils import *")
-    #         generated_code.append("from eflow.utils.image_utils import *")
+    #         generated_code.append("from eflow.utils.image_processing_utils import *")
     #         generated_code.append("from eflow.utils.pandas_utils import *")
     #         generated_code.append("from eflow.utils.modeling_utils import *")
     #         generated_code.append("from eflow.utils.string_utils import *")

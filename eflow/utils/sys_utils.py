@@ -17,7 +17,7 @@ def check_if_directory_exists(directory_path):
         Checks if the given directory path exists. Raises an error if doesn't
 
     Args:
-        directory_path:
+        directory_path: string
             Given path that already exists.
 
     Raises:
@@ -35,10 +35,10 @@ def create_unique_directory(directory_path,
         Creates a unique folder in the proper directory structure.
 
     Args:
-        directory_path:
+        directory_path: string
             Given path that already exists.
 
-        folder_name:
+        folder_name: string
             Folder name to generated.
     """
 
@@ -56,10 +56,10 @@ def get_unique_directory_path(directory_path,
             Keeps changing the folder name by appending 1 each iteration.
 
     Args:
-        directory_path:
+        directory_path: string
             Given path that already exists.
 
-        folder_name:
+        folder_name: string
              Folder name to compare against other directories that exist in the
              directory_path.
 
@@ -98,10 +98,10 @@ def create_dir_structure(directory_path,
         directory figures.
 
     Args:
-        directory_path:
+        directory_path: string
             Given path that already exists.
 
-        create_sub_dir:
+        create_sub_dir: string
             Sub directory to create a given folder path.
 
     Returns:
@@ -126,13 +126,13 @@ def write_object_text_to_file(obj,
         Writes the object's string representation to a text file.
 
     Args:
-        obj:
+        obj: any
             Any object that has a string 'repr'.
 
-        directory_path:
+        directory_path: string
             Given path that already exists.
 
-        filename:
+        filename: string
             Text file's name.
     """
     directory_path = correct_directory_path(directory_path)
@@ -156,13 +156,13 @@ def pickle_object_to_file(obj,
         Writes the object to a pickle file.
 
     Args:
-        obj:
+        obj: any object
             Any python object that can be pickled.
 
-        directory_path:
+        directory_path: string
             Given path that already exists.
 
-        filename:
+        filename: string
              Pickle file's name.
     """
     directory_path = correct_directory_path(directory_path)
@@ -184,13 +184,13 @@ def create_json_file_from_dict(dict_obj,
         Writes a dict to a json file.
 
     Args:
-        dict_obj:
+        dict_obj: dict
             Dictionary object.
 
-        directory_path:
+        directory_path: string
             Given path that already exists.
 
-        filename:
+        filename: string
             Json file's name.
     """
     directory_path = correct_directory_path(directory_path)
@@ -210,7 +210,7 @@ def json_file_to_dict(filepath):
         Returns back the dictionary from of a json file.
 
     Args:
-        filepath:
+        filepath: string
              Given path to the filename.
 
     Returns/Desc:
@@ -228,7 +228,7 @@ def get_all_directories_from_path(directory_path):
        Gets directories names with the provided path.
 
     Args:
-        directory_path:
+        directory_path: string
             Given path that already exists.
 
     Returns:
@@ -252,10 +252,10 @@ def get_all_files_from_path(directory_path,
         Gets all filenames with the provided path.
 
     Args:
-        directory_path:
+        directory_path: string
             Given path that already exists.
 
-        file_extension:
+        file_extension: string
             Only return files that have a given extension.
 
     Returns:

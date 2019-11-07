@@ -1,6 +1,6 @@
 from eflow.utils.sys_utils import *
 from eflow.utils.pandas_utils import df_to_image
-from eflow.utils.image_utils import create_plt_png
+from eflow.utils.image_processing_utils import create_plt_png
 from eflow._hidden.parent_objects import FileOutput
 from eflow._hidden.custom_exceptions import RequiresPredictionMethods, ProbasNotPossible, \
     UnsatisfiedRequirments

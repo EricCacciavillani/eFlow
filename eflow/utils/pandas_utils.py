@@ -1,4 +1,4 @@
-from eflow.utils.image_utils import create_plt_png
+from eflow.utils.image_processing_utils import create_plt_png
 from eflow.utils.string_utils import correct_directory_path
 from eflow.utils.sys_utils import write_object_text_to_file
 
@@ -243,7 +243,8 @@ def value_counts_table(df,
 
 
 def descr_table(df,
-                feature_name):
+                feature_name,
+                to_numeric=False):
     """
     Desc:
         Creates numerical description of a feature of a dataframe.
@@ -255,14 +256,27 @@ def descr_table(df,
         feature_name:
             Specified feature column name.
 
+        to_numeric:
+            Converts the pandas series to all numeric.
+
     Returns/Descr:
         Returns back a Dataframe object of a numerical feature's summary.
     """
 
-    col_desc_df = df[feature_name].describe().to_frame()
-    col_desc_df.loc["var"] = df[feature_name].var()
+    # Convert to numeric without raising errors
+    if to_numeric:
+        errors = "coerce"
+    else:
+        errors = "ignore"
 
-    return col_desc_df
+    print(feature_name)
+    desc_df = pd.to_numeric(df[feature_name],
+                            errors=errors).dropna().describe().to_frame()
+    desc_df.loc["var"] = pd.to_numeric(df[feature_name],
+                                       errors=errors).dropna().var()
+
+    return desc_df
+
 
 
 def suggest_removal_features(df):
