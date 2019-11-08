@@ -149,7 +149,7 @@ def pickle_object_to_file(obj,
                 list_pickle)
     list_pickle.close()
 
-def create_json_file_from_dict(dict_obj,
+def dict_to_json_file(dict_obj,
                                directory_pth,
                                filename):
     """

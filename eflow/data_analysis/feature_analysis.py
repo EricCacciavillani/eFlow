@@ -33,6 +33,7 @@ class FeatureAnalysis(FileOutput):
     """
 
     def __init__(self,
+                 df_features,
                  project_sub_dir="",
                  project_name="Data Analysis",
                  overwrite_full_path=None,
@@ -58,6 +59,7 @@ class FeatureAnalysis(FileOutput):
                             overwrite_full_path)
 
 
+        self.__df_features = copy.deepcopy(df_features)
         self.__notebook_mode = copy.deepcopy(notebook_mode)
 
         # Determines if the perform was called to see if we need to re-check
@@ -66,7 +68,6 @@ class FeatureAnalysis(FileOutput):
 
     def perform_analysis(self,
                          df,
-                         df_features,
                          dataset_name,
                          display_visuals=True,
                          save_file=True,
@@ -121,6 +122,7 @@ class FeatureAnalysis(FileOutput):
             if dataframe_snapshot:
                df_snapshot = DataFrameSnapshot()
                df_snapshot.check_create_snapshot(df,
+                                                 self.__df_features,
                                                  directory_path=self.folder_path,
                                                  sub_dir=f"{dataset_name}/_Extras")
 
@@ -128,14 +130,14 @@ class FeatureAnalysis(FileOutput):
             self.__called_from_perform = True
 
             missed_features = []
-            target_feature = df_features.get_target_feature()
-            target_feature_numerical = target_feature in df_features.get_numerical_features()
+            target_feature = self.__df_features.get_target_feature()
+            target_feature_numerical = target_feature in self.__df_features.get_numerical_features()
             # Iterate through features
             for feature_name in df.columns:
 
                feature_values = df[feature_name].value_counts(sort=False).keys().to_list()
 
-               colors = df_features.get_feature_colors(feature_name)
+               colors = self.__df_features.get_feature_colors(feature_name)
                if colors:
                    if isinstance(colors, dict):
 
@@ -152,9 +154,9 @@ class FeatureAnalysis(FileOutput):
                    print(f"Colors: {colors}")
 
                # -----
-               if feature_name in df_features.get_non_numerical_features() or feature_name in df_features.get_bool_features():
+               if feature_name in self.__df_features.get_non_numerical_features() or feature_name in self.__df_features.get_bool_features():
 
-                   if len(feature_values) <= 3:
+                   if len(feature_values) <= 5:
                        self.pie_graph(df,
                                       feature_name,
                                       dataset_name=dataset_name,
@@ -200,9 +202,11 @@ class FeatureAnalysis(FileOutput):
                        else:
                            pass
 
+                   print("\n\n")
+
 
                # -----
-               elif feature_name in df_features.get_continuous_numerical_features():
+               elif feature_name in self.__df_features.get_continuous_numerical_features():
                    self.plot_distance_graph(df,
                                             feature_name,
                                             dataset_name=dataset_name,
@@ -229,6 +233,7 @@ class FeatureAnalysis(FileOutput):
                                                   display_visuals=display_visuals,
                                                   save_file=save_file,
                                                   palette=colors)
+                   print("\n\n")
 
                else:
                    missed_features.append(feature_name)
@@ -371,6 +376,7 @@ class FeatureAnalysis(FileOutput):
                 if dataframe_snapshot:
                     df_snapshot = DataFrameSnapshot()
                     df_snapshot.check_create_snapshot(df,
+                                                      self.__df_features,
                                                       directory_path=self.folder_path,
                                                       sub_dir=f"{dataset_name}/_Extras")
 
@@ -524,6 +530,10 @@ class FeatureAnalysis(FileOutput):
         if not len(feature_values):
             raise ValueError("The y feature must contain numerical features.")
 
+        if feature_name in self.__df_features.get_bool_features():
+            feature_values = [bool(val) if val == 0 or val == 1 else val
+                              for val in feature_values]
+
         sns.violinplot(x=df[feature_name],
                        y=feature_values,
                        order=order,
@@ -547,6 +557,7 @@ class FeatureAnalysis(FileOutput):
                 if dataframe_snapshot:
                     df_snapshot = DataFrameSnapshot()
                     df_snapshot.check_create_snapshot(df,
+                                                      self.__df_features,
                                                       directory_path=self.folder_path,
                                                       sub_dir=f"{dataset_name}/_Extras")
 
@@ -628,8 +639,7 @@ class FeatureAnalysis(FileOutput):
             raise UnsatisfiedRequirments(
                 "Count plot graph couldn't be generated because " +
                 f"there is only missing data to display in {feature_name}!")
-        print(
-            f"Count plot graph on {feature_name}")
+        print(f"Count plot graph on {feature_name}")
 
         # Closes up any past graph info
         plt.close()
@@ -641,8 +651,7 @@ class FeatureAnalysis(FileOutput):
 
         value_counts = df[feature_name].dropna().value_counts(sort=True)
 
-        feature_values = value_counts.index
-        counts = value_counts.values
+        feature_values,counts = value_counts.index, value_counts.values
         del value_counts
 
         # Find and rank values based on counts for color variation of the graph
@@ -655,6 +664,10 @@ class FeatureAnalysis(FileOutput):
             palette = np.array(pal[::-1])[rank_list]
 
         plt.clf()
+
+        if feature_name in self.__df_features.get_bool_features():
+            feature_values = [bool(val) if val == 0 or val == 1 else val
+                              for val in feature_values]
 
         # Flip the graph for visual flare
         if flip_axis:
@@ -680,8 +693,8 @@ class FeatureAnalysis(FileOutput):
         if not filename:
             filename = f"Count plot graph on {feature_name}"
 
-            if isinstance(palette,str):
-                filename += " with count ranking."
+            if isinstance(palette,np.ndarray):
+                filename += " with count color ranking."
         # -----
         if save_file:
 
@@ -690,6 +703,7 @@ class FeatureAnalysis(FileOutput):
                 if dataframe_snapshot:
                     df_snapshot = DataFrameSnapshot()
                     df_snapshot.check_create_snapshot(df,
+                                                      self.__df_features,
                                                       directory_path=self.folder_path,
                                                       sub_dir=f"{dataset_name}/_Extras")
 
@@ -784,6 +798,10 @@ class FeatureAnalysis(FileOutput):
 
         plt.figure(figsize=figsize)
 
+        if feature_name in self.__df_features.get_bool_features():
+            value_list = [bool(val) if val == 0 or val == 1 else val
+                          for val in value_list]
+
         # Plot pie graph
         plt.pie(
             tuple(value_count_list),
@@ -813,6 +831,7 @@ class FeatureAnalysis(FileOutput):
                 if dataframe_snapshot:
                     df_snapshot = DataFrameSnapshot()
                     df_snapshot.check_create_snapshot(df,
+                                                      self.__df_features,
                                                       directory_path=self.folder_path,
                                                       sub_dir=f"{dataset_name}/_Extras")
 
@@ -903,6 +922,7 @@ class FeatureAnalysis(FileOutput):
                 if dataframe_snapshot:
                     df_snapshot = DataFrameSnapshot()
                     df_snapshot.check_create_snapshot(df,
+                                                      self.__df_features,
                                                       directory_path=self.folder_path,
                                                       sub_dir=f"{dataset_name}/_Extras")
             # Closes up any past graph info
@@ -992,6 +1012,7 @@ class FeatureAnalysis(FileOutput):
                 if dataframe_snapshot:
                     df_snapshot = DataFrameSnapshot()
                     df_snapshot.check_create_snapshot(df,
+                                                      self.__df_features,
                                                       directory_path=self.folder_path,
                                                       sub_dir=f"{dataset_name}/_Extras")
             # Closes up any past graph info

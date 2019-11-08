@@ -176,9 +176,9 @@ def pickle_object_to_file(obj,
                 list_pickle)
     list_pickle.close()
 
-def create_json_file_from_dict(dict_obj,
-                               directory_path,
-                               filename):
+def dict_to_json_file(dict_obj,
+                      directory_path,
+                      filename):
     """
     Desc:
         Writes a dict to a json file.

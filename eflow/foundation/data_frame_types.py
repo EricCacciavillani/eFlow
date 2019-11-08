@@ -1,4 +1,4 @@
-from eflow.utils.sys_utils import create_json_file_from_dict,json_file_to_dict
+from eflow.utils.sys_utils import dict_to_json_file,json_file_to_dict
 from eflow._hidden.custom_exceptions import UnsatisfiedRequirments
 
 import copy
@@ -27,7 +27,7 @@ class DataFrameTypes:
     """
 
     def __init__(self,
-                 df,
+                 df=None,
                  target_feature=None,
                  ignore_nulls=False,
                  fix_numeric_features=False,
@@ -489,6 +489,44 @@ class DataFrameTypes:
             return copy.deepcopy(self.__all_columns)
 
 
+    def get_feature_type(self,
+                         feature_name):
+        """
+        Desc:
+            Return's a feature's type as a string
+
+        Args:
+            feature_name:
+                The given's feature's name.
+
+        Returns:
+            Return's a feature's type as a string
+        """
+
+        if feature_name in self.__float_features:
+            return "float"
+
+        elif feature_name in self.__bool_features:
+            return "bool"
+
+        elif feature_name in self.__integer_features:
+            return "integer"
+
+        elif feature_name in self.__categorical_features:
+            return "categorical"
+
+        elif feature_name in self.__string_features:
+            return "string"
+
+        elif feature_name in self.__datetime_features:
+            return "datetime"
+
+        else:
+            raise KeyError(f"Feature '{feature_name}' can't be found in the set!")
+
+
+
+
     def get_target_feature(self):
         """
         Desc:
@@ -554,9 +592,11 @@ class DataFrameTypes:
                 Feature name or a list of feature names to move to given set.
         """
         if isinstance(feature_name, str):
-            feature_name = [feature_name]
+            feature_names = [feature_name]
+        else:
+            feature_names = []
 
-        for name in feature_name:
+        for name in feature_names:
             self.remove_feature(name)
             self.__bool_features.add(name)
 
@@ -571,9 +611,11 @@ class DataFrameTypes:
                 Feature name or a list of feature names to move to given set.
         """
         if isinstance(feature_name, str):
-            feature_name = [feature_name]
+            feature_names = [feature_name]
+        else:
+            feature_names = []
 
-        for name in feature_name:
+        for name in feature_names:
             self.remove_feature(name)
             self.__integer_features.add(name)
 
@@ -588,9 +630,11 @@ class DataFrameTypes:
                 Feature name or a list of feature names to move to given set.
         """
         if isinstance(feature_name, str):
-            feature_name = [feature_name]
+            feature_names = [feature_name]
+        else:
+            feature_names = []
 
-        for name in feature_name:
+        for name in feature_names:
             self.remove_feature(name)
             self.__float_features.add(name)
 
@@ -605,9 +649,12 @@ class DataFrameTypes:
                 Feature name or a list of feature names to move to given set.
         """
         if isinstance(feature_name, str):
-            feature_name = [feature_name]
+            feature_names = [feature_name]
+        else:
+            feature_names = []
 
-        for name in feature_name:
+
+        for name in feature_names:
             self.remove_feature(name)
             self.__string_features.add(name)
 
@@ -622,9 +669,11 @@ class DataFrameTypes:
                 Feature name or a list of feature names to move to given set.
         """
         if isinstance(feature_name, str):
-            feature_name = [feature_name]
+            feature_names = [feature_name]
+        else:
+            feature_names = []
 
-        for name in feature_name:
+        for name in feature_names:
             self.remove_feature(name)
             self.__categorical_features.add(name)
 
@@ -640,10 +689,12 @@ class DataFrameTypes:
         """
 
         if isinstance(feature_name,str):
-            feature_name = [feature_name]
+            feature_names = [feature_name]
+        else:
+            feature_names = []
 
 
-        for name in feature_name:
+        for name in feature_names:
             self.remove_feature(name)
             self.__datetime_features.add(name)
 
@@ -721,7 +772,7 @@ class DataFrameTypes:
                 pass
 
             try:
-                self.__string_features.remove(feature_name)
+                self.__categorical_features.remove(feature_name)
                 break
             except KeyError:
                 pass
@@ -750,7 +801,7 @@ class DataFrameTypes:
             except KeyError:
                 pass
 
-            raise KeyError("This feature doesn't exist inside any of DataFrameType's feature sets!!!")
+            raise KeyError(f"The feature {feature_name} doesn't exist inside any of DataFrameType's feature sets!!!")
 
     def display_features(self,
                          display_dataframes=False,
@@ -850,7 +901,9 @@ class DataFrameTypes:
                 print(dtypes_df)
 
     def fix_numeric_features(self,
-                             df):
+                             df,
+                             notebook_mode=False,
+                             display_results=True):
         """
         Desc:
             Attempts to move numerical features to the correct types by
@@ -871,20 +924,26 @@ class DataFrameTypes:
 
         features_flag_types = dict()
         for feature_name in df.columns:
+            try:
+                pd.to_numeric(df[feature_name])
+            except ValueError:
+                # Ignore all string features
+                if feature_name in self.get_string_features():
+                    continue
 
-            # Ignore all string features
-            if feature_name in self.get_string_features():
-                continue
+                # Features that must be these set types
+                if feature_name in self.get_categorical_features():
+                    continue
 
-            # Features that must be these set types
-            if feature_name in self.get_categorical_features():
-                continue
-
-            if feature_name in self.get_bool_features():
-                continue
+                if feature_name in self.get_bool_features():
+                    continue
 
             feature_values = set(pd.to_numeric(df[feature_name],
-                                               errors="coerce").dropna())
+                                 errors="coerce").dropna())
+
+            if not len(feature_values):
+                continue
+
             flag_dict = dict()
 
             # Bool check
@@ -908,12 +967,12 @@ class DataFrameTypes:
                 continue
 
             # -----
-            if flag_dict["Categorical"]:
+            elif flag_dict["Categorical"]:
                 self.set_feature_to_categorical(feature_name)
                 continue
 
             # -----
-            if flag_dict["Numeric"]:
+            elif flag_dict["Numeric"]:
                 if flag_dict["Float"]:
                     self.set_feature_to_float(feature_name)
                     continue
@@ -922,7 +981,14 @@ class DataFrameTypes:
                     self.set_feature_to_integer(feature_name)
                     continue
 
-        display(pd.DataFrame.from_dict(features_flag_types, orient='index'))
+        if display_results:
+            flag_df = pd.DataFrame.from_dict(features_flag_types,
+                                             orient='index')
+            if notebook_mode:
+                display(flag_df)
+            else:
+                print(flag_df)
+
 
 
     def fix_string_features(self,
@@ -1101,29 +1167,49 @@ class DataFrameTypes:
         # Iterate on all features
         for feature_name, feature_type in type_conflict_dict.items():
 
-            print(f"\nMoving feature '{feature_name}' to type {feature_type}")
+            moved_feature = False
 
             if feature_type == "string":
-                self.set_feature_to_string(feature_name)
+
+                if feature_name not in self.__string_features:
+                    self.set_feature_to_string(feature_name)
+                    moved_feature = True
 
             elif feature_type == "datetime":
-                self.set_feature_to_datetime(feature_name)
+
+                if feature_name not in self.__datetime_features:
+                    self.set_feature_to_datetime(feature_name)
+                    moved_feature = True
 
             elif feature_type == "integer":
-                self.set_feature_to_integer(feature_name)
+
+                if feature_name not in self.__integer_features:
+                    self.set_feature_to_integer(feature_name)
+                    moved_feature = True
 
             elif feature_type == "category":
-                self.set_feature_to_categorical(feature_name)
+
+                if feature_name not in self.__categorical_features:
+                    self.set_feature_to_categorical(feature_name)
+                    moved_feature = True
 
             elif feature_type == "bool":
-                self.set_feature_to_bool(feature_name)
+
+                if feature_name not in self.__bool_features:
+                    self.set_feature_to_bool(feature_name)
+                    moved_feature = True
 
             elif feature_type == "float":
-                self.set_feature_to_float(feature_name)
+
+                if feature_name not in self.__float_features:
+                    self.set_feature_to_float(feature_name)
+                    moved_feature = True
 
             else:
                 raise TypeError("An unknown type was passed!")
 
+            if moved_feature:
+                print(f"\nMoving feature '{feature_name}' to type {feature_type}.")
 
     def fix_nan_features(self,
                          df):
@@ -1228,7 +1314,7 @@ class DataFrameTypes:
 
         type_features["feature_values_colors"] = self.__feature_value_color_dict
 
-        create_json_file_from_dict(type_features,
+        dict_to_json_file(type_features,
                                    directory_path,
                                    filename)
 

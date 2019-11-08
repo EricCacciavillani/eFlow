@@ -29,6 +29,7 @@ class NullAnalysis(FileOutput):
     """
 
     def __init__(self,
+                 df_features,
                  project_sub_dir="",
                  project_name="Missing Data",
                  overwrite_full_path=None,
@@ -52,7 +53,12 @@ class NullAnalysis(FileOutput):
         FileOutput.__init__(self,
                             f'{project_sub_dir}/{project_name}',
                             overwrite_full_path)
+
+        self.__df_features = copy.deepcopy(df_features)
         self.__notebook_mode = copy.deepcopy(notebook_mode)
+
+        # Determines if the perform was called to see if we need to re-check
+        # the dataframe.
         self.__called_from_perform = False
 
 
@@ -104,6 +110,7 @@ class NullAnalysis(FileOutput):
                 if dataframe_snapshot:
                     df_snapshot = DataFrameSnapshot()
                     df_snapshot.check_create_snapshot(df,
+                                                      self.__df_features,
                                                       directory_path=self.folder_path,
                                                       sub_dir=f"{dataset_name}/_Extras")
 
@@ -256,6 +263,7 @@ class NullAnalysis(FileOutput):
                 if dataframe_snapshot:
                     df_snapshot = DataFrameSnapshot()
                     df_snapshot.check_create_snapshot(df,
+                                                      self.__df_features,
                                                       directory_path=self.folder_path,
                                                       sub_dir=f"{dataset_name}/_Extras")
 
@@ -380,6 +388,7 @@ class NullAnalysis(FileOutput):
                 if dataframe_snapshot:
                     df_snapshot = DataFrameSnapshot()
                     df_snapshot.check_create_snapshot(df,
+                                                      self.__df_features,
                                                       directory_path=self.folder_path,
                                                       sub_dir=f"{dataset_name}/_Extras")
 
@@ -486,6 +495,7 @@ class NullAnalysis(FileOutput):
                 if dataframe_snapshot:
                     df_snapshot = DataFrameSnapshot()
                     df_snapshot.check_create_snapshot(df,
+                                                      self.__df_features,
                                                       directory_path=self.folder_path,
                                                       sub_dir=f"{dataset_name}/_Extras")
 
@@ -591,6 +601,7 @@ class NullAnalysis(FileOutput):
                 if dataframe_snapshot:
                     df_snapshot = DataFrameSnapshot()
                     df_snapshot.check_create_snapshot(df,
+                                                      self.__df_features,
                                                       directory_path=self.folder_path,
                                                       sub_dir=f"{dataset_name}/_Extras")
 

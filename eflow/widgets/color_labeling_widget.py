@@ -1,10 +1,8 @@
-from eflow._hidden.parent_objects import JupyterWidget
+from eflow.utils.string_utils import create_hex_decimal_string
 
 import ipywidgets as widgets
 from IPython.display import display
 from ipywidgets import Layout
-
-from eflow._hidden.parent_objects import JupyterWidget
 
 import ipywidgets as widgets
 from IPython.display import display
@@ -12,14 +10,10 @@ from ipywidgets import Layout
 
 import copy
 
-class ColorLabelingWidget(JupyterWidget):
+class ColorLabelingWidget():
 
     def __init__(self):
 
-        JupyterWidget.__init__(self,
-                               self.__class__.__name__)
-
-        # Define needed widgets
         self.__features_w = None
         self.__values_w = None
         self.__color_picker_w = None
@@ -104,6 +98,10 @@ class ColorLabelingWidget(JupyterWidget):
 
     def __select_value(self,
                        **func_kwargs):
+        """
+        Desc:
+            Save colors to dictionary and save json file.
+        """
 
         saved_color = self.__feature_value_color_dict[self.__features_w.value][
             self.__values_w.value]
@@ -116,16 +114,18 @@ class ColorLabelingWidget(JupyterWidget):
 
     def __select_color(self,
                        _):
+        """
+        Desc:
+            Select the color on color picker widget.
+        """
 
         if self.__color_picker_w.value != "#000000":
             self.__feature_value_color_dict[self.__features_w.value][self.__values_w.value] = self.__color_picker_w.value
 
-
-
     def __select_feature(self,
                          _):
             """
-            Returns/Descr:
+            Desc:
                 When a feature selection is chosen all the widgets are
                 re-initialized.
             """

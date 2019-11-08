@@ -1,6 +1,6 @@
 from eflow._hidden.parent_objects import FileOutput
 from eflow._hidden.custom_exceptions import PipelineSegmentError, UnsatisfiedRequirments
-from eflow.utils.sys_utils import create_json_file_from_dict,json_file_to_dict,get_all_files_from_path, create_dir_structure
+from eflow.utils.sys_utils import dict_to_json_file,json_file_to_dict,get_all_files_from_path, create_dir_structure
 from eflow.utils.string_utils import create_hex_decimal_string
 from collections import deque
 import copy
@@ -90,7 +90,7 @@ class DataPipelineSegment(FileOutput):
             function_order += 1
         json_dict["Pipeline Segment"]["Function Count"] = function_order - 1
 
-        create_json_file_from_dict(json_dict,
+        dict_to_json_file(json_dict,
                                    self.folder_path,
                                    self.__json_file_name)
 

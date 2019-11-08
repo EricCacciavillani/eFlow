@@ -232,12 +232,13 @@ def value_counts_table(df,
     value_count_df = df[feature_name].value_counts().rename_axis(
         'Unique Values').reset_index(name='Counts')
 
-    value_count_df["Percantage"] = ["{0:.4f}%".format(count/df.shape[0] * 100)
-                               for value, count in
-                               df[feature_name].value_counts().items()]
+    total_count = sum(df[feature_name].dropna().value_counts().values)
+    value_count_df["Percantage"] = ["{0:.4f}%".format(count/total_count * 100)
+                                    for value, count in
+                                    df[feature_name].value_counts().items()]
 
     value_count_df.set_index('Unique Values',
-                        inplace=True)
+                             inplace=True)
 
     return value_count_df
 

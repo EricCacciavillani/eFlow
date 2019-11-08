@@ -2,7 +2,7 @@ from eflow.utils.string_utils import correct_directory_path
 from eflow._hidden.custom_exceptions import UnsatisfiedRequirments, MismatchError
 from eflow.foundation import DataFrameTypes
 from eflow.utils.sys_utils import create_dir_structure, \
-    create_json_file_from_dict
+    dict_to_json_file
 
 import os
 import pandas as pd
@@ -42,7 +42,6 @@ class DataFrameSnapshot:
     def __init__(self,
                  compare_shape=True,
                  compare_feature_names=True,
-                 compare_feature_types=True,
                  compare_random_values=True):
         """
         Args:
@@ -52,8 +51,6 @@ class DataFrameSnapshot:
             compare_feature_names:
                 Determines whether or not to create/compare the dataframe's the feature names for the snapshot
 
-            compare_feature_types:
-                Determines whether or not to create/compare the dataframe's the feature types for the snapshot
 
             compare_random_values:
                 Determines whether or not to create/compare the dataframe's 10 'random'
@@ -65,19 +62,18 @@ class DataFrameSnapshot:
         # Copy values
         self.__compare_shape = copy.deepcopy(compare_shape)
         self.__compare_feature_names = copy.deepcopy(compare_feature_names)
-        self.__compare_feature_types = copy.deepcopy(compare_feature_types)
         self.__compare_random_values = copy.deepcopy(compare_random_values)
 
         # Error check; must have at least one boolean
         if not self.__compare_shape and \
                 not self.__compare_feature_names and \
-                not self.__compare_feature_types and \
                 not self.__compare_random_values:
             raise UnsatisfiedRequirments("At least one compare boolean must be "
                                          "set to True for snapshot check to properly work")
 
     def check_create_snapshot(self,
                               df,
+                              df_features,
                               directory_path,
                               sub_dir):
         """
@@ -101,7 +97,7 @@ class DataFrameSnapshot:
         """
 
         output_folder_path = create_dir_structure(directory_path,
-                                                        sub_dir)
+                                                  sub_dir)
 
         json_file = output_folder_path + "Dataframe Snapshot.json"
 
@@ -110,9 +106,6 @@ class DataFrameSnapshot:
             with open(json_file) as file:
 
                 data = json.load(file)
-
-                df_features = DataFrameTypes(df,
-                                             ignore_nulls=True)
                 mismatch_error = None
 
                 # Not using for looping; used for logic breaks
@@ -155,40 +148,6 @@ class DataFrameSnapshot:
                             if extra_features or missing_features:
                                 break
 
-                    if self.__compare_feature_types:
-                        passed_feature_types_dict = self.__create_feature_types_dict(df_features)
-
-                        # ----------
-                        for snapshot_feature_type,snapshot_feature_list in data["feature_types"].items():
-
-                            # --------
-                            for snapshot_feature in snapshot_feature_list:
-
-                                # Mismatch found between snapshot and passed dataframe
-                                if snapshot_feature not in passed_feature_types_dict[snapshot_feature_type]:
-
-                                    # Error labeling
-                                    correct_feature_type = "UNKNOWN TYPE"
-                                    if mismatch_error is None:
-                                        mismatch_error = ":"
-
-                                    # Find the correct type of the feature
-                                    for passed_feature_type, passed_feature_list in passed_feature_types_dict.items():
-
-                                        # We already confirmed that it isn't this data type
-                                        if passed_feature_type == snapshot_feature_type:
-                                            continue
-                                        if snapshot_feature in passed_feature_list:
-                                            correct_feature_type = passed_feature_type
-                                            break
-
-                                    # Add to error message
-                                    mismatch_error += f"\n\tFeature '{snapshot_feature}' is supposed " \
-                                        f"to be in '{snapshot_feature_type}' was found to be in '{correct_feature_type}'"
-
-                        if mismatch_error:
-                            break
-
 
                     if self.__compare_random_values:
                         compared_data = self.__create_random_values_dict(df,
@@ -200,10 +159,9 @@ class DataFrameSnapshot:
                                 if data["random_values"][k] != compared_data[k]:
                                     random_values_matchd_flag = False
                                     break
-
                         if not random_values_matchd_flag:
-                            mismatch_error = "the 'random' values did not match at the proper places in the dataframe " \
-                                             "(these 'random' values are based on the shape and name of the column)."
+                            mismatch_error = f"the 'random' values did not match at feature name '{k}' in the dataframe " \
+                                             + "(these 'random' values are based on the shape and name of the column)"
                             break
 
                     # Break main loop
@@ -275,36 +233,6 @@ class DataFrameSnapshot:
         result = np.absolute(result)
 
         return result
-
-
-    def __create_feature_types_dict(self,
-                                    df_features):
-        """
-        Desc:
-            Creates a dict of feature types to return back
-
-        Args:
-            df_features:
-                DataFrameTypes object; organizes feature types into groups.
-
-        Returns:
-            Returns a dict object of the feature types
-        """
-        feature_types = dict()
-        feature_types["integer_features"] = sorted(
-            list(df_features.get_integer_features()))
-        feature_types["float_features"] = sorted(
-            list(df_features.get_float_features()))
-        feature_types["bool_features"] = sorted(
-            list(df_features.get_bool_features()))
-        feature_types["string_features"] = sorted(
-            list(df_features.get_string_features()))
-        feature_types["categorical_features"] = sorted(
-            list(df_features.get_categorical_features()))
-        feature_types["datetime_features"] = sorted(
-            list(df_features.get_datetime_features()))
-
-        return feature_types
 
 
     def __create_random_values_dict(self,
@@ -404,10 +332,6 @@ class DataFrameSnapshot:
         if self.__compare_feature_names:
             meta_dict["feature_names"] = sorted(df_features.get_all_features())
 
-        if self.__compare_feature_types:
-            meta_dict["feature_types"] = self.__create_feature_types_dict(
-                df_features)
-
         if self.__compare_random_values:
             meta_dict["random_values"] = self.__create_random_values_dict(df,
                                                                           df_features)
@@ -433,7 +357,7 @@ class DataFrameSnapshot:
 
         meta_dict = self.__generate_dataframe_snapshot_dict(df)
 
-        create_json_file_from_dict(meta_dict,
+        dict_to_json_file(meta_dict,
                                    output_folder_path,
                                    "Dataframe Snapshot")
 

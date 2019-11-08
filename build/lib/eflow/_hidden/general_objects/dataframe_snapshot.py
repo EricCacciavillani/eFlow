@@ -3,7 +3,7 @@ import pandas as pd
 import math
 from eflow.foundation import DataFrameTypes
 from eflow.utils.sys_utils import create_dir_structure, \
-    create_json_file_from_dict
+    dict_to_json_file
 
 from eflow.utils.string_utils import correct_directory_path
 from eflow._hidden.custom_exceptions import UnsatisfiedRequirments, MismatchError
@@ -249,7 +249,7 @@ class DataFrameSnapshot:
 
         meta_dict = self.__generate_dataframe_snapshot_dict(df)
 
-        create_json_file_from_dict(meta_dict,
+        dict_to_json_file(meta_dict,
                                      output_folder_path,
                                      "Dataframe Identity")
 
