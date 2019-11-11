@@ -408,7 +408,7 @@ class FeatureAnalysis(FileOutput):
 
             # Create the png
             create_plt_png(self.folder_path,
-                           f"{dataset_name}/Graphics",
+                           f"{dataset_name}/Graphics/{feature_name}",
                            convert_to_filename(filename))
 
 
@@ -589,7 +589,7 @@ class FeatureAnalysis(FileOutput):
 
             # Creates png of plot
             create_plt_png(self.folder_path,
-                           f"{dataset_name}/Graphics",
+                           f"{dataset_name}/Graphics/{feature_name}",
                            convert_to_filename(filename))
 
 
@@ -735,7 +735,7 @@ class FeatureAnalysis(FileOutput):
 
             # Creates png of plot
             create_plt_png(self.folder_path,
-                           f"{dataset_name}/Graphics",
+                           f"{dataset_name}/Graphics/{feature_name}",
                            convert_to_filename(filename))
 
         if self.__notebook_mode and display_visuals:
@@ -863,7 +863,7 @@ class FeatureAnalysis(FileOutput):
 
             # Create a png of the plot
             create_plt_png(self.folder_path,
-                           f"{dataset_name}/Graphics",
+                           f"{dataset_name}/Graphics/{feature_name}",
                            convert_to_filename(filename))
 
 

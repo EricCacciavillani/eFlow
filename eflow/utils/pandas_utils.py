@@ -270,7 +270,6 @@ def descr_table(df,
     else:
         errors = "ignore"
 
-    print(feature_name)
     desc_df = pd.to_numeric(df[feature_name],
                             errors=errors).dropna().describe().to_frame()
     desc_df.loc["var"] = pd.to_numeric(df[feature_name],

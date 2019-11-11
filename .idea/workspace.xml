@@ -7,20 +7,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="178261e3-0830-4d8e-91ef-8172f5216aca" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/eflow/data_pipeline_segments/data_encoder.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/eflow/_hidden/custom_exceptions.py" beforeDir="false" afterPath="$PROJECT_DIR$/eflow/_hidden/custom_exceptions.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/eflow/data_analysis/feature_analysis.py" beforeDir="false" afterPath="$PROJECT_DIR$/eflow/data_analysis/feature_analysis.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/eflow/data_pipeline_segments/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/eflow/data_pipeline_segments/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/eflow/data_pipeline_segments/data_transformer.py" beforeDir="false" afterPath="$PROJECT_DIR$/eflow/data_pipeline_segments/feature_transformer.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/eflow/data_pipeline_segments/string_cleaner.py" beforeDir="false" afterPath="$PROJECT_DIR$/eflow/data_pipeline_segments/string_cleaner.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/eflow/data_pipeline_segments/type_fixer.py" beforeDir="false" afterPath="$PROJECT_DIR$/eflow/data_pipeline_segments/type_fixer.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/eflow/foundation/data_frame_types.py" beforeDir="false" afterPath="$PROJECT_DIR$/eflow/foundation/data_frame_types.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/eflow/utils/eflow_utils.py" beforeDir="false" afterPath="$PROJECT_DIR$/eflow/utils/eflow_utils.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/eflow/utils/pandas_utils.py" beforeDir="false" afterPath="$PROJECT_DIR$/eflow/utils/pandas_utils.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/testing/.ipynb_checkpoints/1.) Quick peek at data-checkpoint.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/testing/.ipynb_checkpoints/1.) Quick peek at data-checkpoint.ipynb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/.ipynb_checkpoints/2.) Pre Production-checkpoint.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/testing/.ipynb_checkpoints/2.) Pre Production-checkpoint.ipynb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/testing/1.) Quick peek at data.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/testing/1.) Quick peek at data.ipynb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/2.) Pre Production.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/testing/2.) Pre Production.ipynb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Data Analysis/Titanic Data/Graphics/Pie graph on Embarked.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Data Analysis/Titanic Data/Graphics/Pie graph on Embarked.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Data Analysis/Titanic Data/Graphics/Pie graph on Pclass.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Data Analysis/Titanic Data/Graphics/Pie graph on Pclass.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Data Analysis/Titanic Data/Graphics/Pie graph on Sex.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Data Analysis/Titanic Data/Graphics/Pie graph on Sex.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/df_features.json" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/df_features.json" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -62,11 +57,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/eflow/data_analysis/feature_analysis.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-926">
-              <caret line="420" column="25" selection-start-line="420" selection-start-column="8" selection-end-line="420" selection-end-column="25" />
+            <state relative-caret-position="770">
+              <caret line="1049" column="47" selection-start-line="1049" selection-start-column="47" selection-end-line="1049" selection-end-column="47" />
               <folding>
                 <element signature="e#0#51#0" expanded="true" />
               </folding>
@@ -74,13 +69,25 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/eflow/auto_modeler/cluster_master.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="395">
-              <caret line="62" column="37" lean-forward="true" selection-start-line="62" selection-start-column="12" selection-end-line="62" selection-end-column="37" />
+            <state relative-caret-position="410">
+              <caret line="63" column="42" selection-start-line="63" selection-start-column="21" selection-end-line="63" selection-end-column="42" />
               <folding>
                 <element signature="e#25#62#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/eflow/utils/pandas_utils.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="553">
+              <caret line="271" selection-start-line="271" selection-end-line="271" />
+              <folding>
+                <element signature="e#0#61#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -97,8 +104,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>value_count</find>
-      <find>fix_string_features</find>
       <find>get_synonyms</find>
       <find>UnsatisfiedRequirments</find>
       <find>self.__label_encoder = dict()</find>
@@ -127,6 +132,8 @@
       <find>pipeline_segments_dict</find>
       <find>get_feature_value</find>
       <find>plot_violin_graph</find>
+      <find>create_plt_png</find>
+      <find>descr</find>
     </findStrings>
     <replaceStrings>
       <replace>dataframe_snapshot</replace>
@@ -199,7 +206,6 @@
         <option value="$PROJECT_DIR$/eflow/_hidden/constants.py" />
         <option value="$PROJECT_DIR$/eflow/data_analysis/null_analysis.py" />
         <option value="$PROJECT_DIR$/eflow/_hidden/general_objects/dataframe_snapshot.py" />
-        <option value="$PROJECT_DIR$/eflow/utils/pandas_utils.py" />
         <option value="$PROJECT_DIR$/eflow/utils/sys_utils.py" />
         <option value="$PROJECT_DIR$/eflow/utils/string_utils.py" />
         <option value="$PROJECT_DIR$/eflow/_hidden/parent_objects/data_pipeline_segment.py" />
@@ -213,8 +219,9 @@
         <option value="$PROJECT_DIR$/eflow/_hidden/custom_exceptions.py" />
         <option value="$PROJECT_DIR$/eflow/foundation/data_frame_types.py" />
         <option value="$PROJECT_DIR$/eflow/data_pipeline_segments/data_encoder.py" />
-        <option value="$PROJECT_DIR$/eflow/data_analysis/feature_analysis.py" />
         <option value="$PROJECT_DIR$/eflow/utils/eflow_utils.py" />
+        <option value="$PROJECT_DIR$/eflow/utils/pandas_utils.py" />
+        <option value="$PROJECT_DIR$/eflow/data_analysis/feature_analysis.py" />
       </list>
     </option>
   </component>
@@ -427,12 +434,12 @@
       <workItem from="1573140991177" duration="22936000" />
       <workItem from="1573246269071" duration="720000" />
       <workItem from="1573248357114" duration="7413000" />
-      <workItem from="1573420874196" duration="10808000" />
+      <workItem from="1573420874196" duration="11606000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="369211000" />
+    <option name="totallyTimeSpent" value="370009000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1920" height="1080" extended-state="0" />
@@ -646,16 +653,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/eflow/utils/pandas_utils.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="315">
-          <caret line="237" column="36" selection-start-line="237" selection-start-column="36" selection-end-line="237" selection-end-column="36" />
-          <folding>
-            <element signature="e#0#61#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/eflow/_hidden/constants.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="323">
@@ -828,22 +825,32 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/eflow/data_analysis/feature_analysis.py">
+    <entry file="file://$PROJECT_DIR$/eflow/auto_modeler/cluster_master.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-926">
-          <caret line="420" column="25" selection-start-line="420" selection-start-column="8" selection-end-line="420" selection-end-column="25" />
+        <state relative-caret-position="410">
+          <caret line="63" column="42" selection-start-line="63" selection-start-column="21" selection-end-line="63" selection-end-column="42" />
           <folding>
-            <element signature="e#0#51#0" expanded="true" />
+            <element signature="e#25#62#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/eflow/auto_modeler/cluster_master.py">
+    <entry file="file://$PROJECT_DIR$/eflow/utils/pandas_utils.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="395">
-          <caret line="62" column="37" lean-forward="true" selection-start-line="62" selection-start-column="12" selection-end-line="62" selection-end-column="37" />
+        <state relative-caret-position="553">
+          <caret line="271" selection-start-line="271" selection-end-line="271" />
           <folding>
-            <element signature="e#25#62#0" expanded="true" />
+            <element signature="e#0#61#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/eflow/data_analysis/feature_analysis.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="770">
+          <caret line="1049" column="47" selection-start-line="1049" selection-start-column="47" selection-end-line="1049" selection-end-column="47" />
+          <folding>
+            <element signature="e#0#51#0" expanded="true" />
           </folding>
         </state>
       </provider>
