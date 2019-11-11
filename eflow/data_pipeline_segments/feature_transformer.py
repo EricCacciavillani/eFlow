@@ -37,7 +37,7 @@ __email__ = "eric.cacciavillani@gmail.com"
 #                                                        params_dict)
 
 
-class DataTransformer(DataPipelineSegment):
+class FeatureTransformer(DataPipelineSegment):
     """
         Combines, removes, scales, etc features of a pandas dataframe.
     """

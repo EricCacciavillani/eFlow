@@ -22,7 +22,7 @@ __email__ = "eric.cacciavillani@gmail.com"
 class DataFrameTypes:
 
     """
-        Seperates the features based off of dtypes to better keep track of
+        Separates the features based off of dtypes to better keep track of
         feature types and helps make type assertions.
     """
 
@@ -32,6 +32,7 @@ class DataFrameTypes:
                  ignore_nulls=False,
                  fix_numeric_features=False,
                  fix_string_features=False,
+                 categorical_value_dict=dict(),
                  notebook_mode=False):
         """
         Args:
@@ -54,8 +55,11 @@ class DataFrameTypes:
             fix_string_features:
                 Will attempt to convert all string features to ALL proper types.
 
+            categorical_value_dict:
+                Any pre-defined category to string value relationships.
+
             notebook_mode:
-                Determine if any notebook functions can be used here.
+                Boolean value to determine if any notebook functions can be used here.
         """
 
         # Init an empty dataframe
@@ -81,6 +85,14 @@ class DataFrameTypes:
 
         # Feature's colors
         self.__feature_value_color_dict = dict()
+
+        # Category/Label encoders
+        self.__label_encoder = dict()
+        self.__label_decoder = dict()
+
+        # Feature values representation
+        self.__feature_value_representation = dict()
+
 
         # Data type assertions without nulls
         if ignore_nulls and df.isnull().values.any():
@@ -113,7 +125,11 @@ class DataFrameTypes:
                                      notebook_mode)
 
         if fix_numeric_features:
-            self.fix_numeric_features(df)
+            self.fix_numeric_features(df,
+                                      notebook_mode)
+
+        self.set_encoder_for_features(df,
+                                      categorical_value_dict)
 
     # --- Getters ---
     def get_numerical_features(self,
@@ -524,9 +540,6 @@ class DataFrameTypes:
         else:
             raise KeyError(f"Feature '{feature_name}' can't be found in the set!")
 
-
-
-
     def get_target_feature(self):
         """
         Desc:
@@ -536,6 +549,27 @@ class DataFrameTypes:
             Returns the target feature.
         """
         return copy.deepcopy(self.__target_feature)
+
+
+    def get_label_decoder(self):
+        """
+        Desc:
+            Gets the dict encoder for category to string relationship.
+
+        Returns:
+            Returns the encoder dict object.
+        """
+        return copy.deepcopy(self.__label_decoder)
+
+    def get_label_encoder(self):
+        """
+        Desc:
+            Gets the dict encoder for string to category relationship.
+
+        Returns:
+            Returns the encoder dict object.
+        """
+        return copy.deepcopy(self.__label_encoder)
 
     def get_feature_colors(self,
                            feature_name):
@@ -566,6 +600,16 @@ class DataFrameTypes:
             Returns a copy of feature's value colors.
         """
         return copy.deepcopy(self.__feature_value_color_dict)
+
+    def get_feature_value_representation(self):
+        """
+        Desc:
+            Get's the entire dict of the feature's value colors.
+
+        Returns:
+            Returns a copy of feature's value colors.
+        """
+        return copy.deepcopy(self.__feature_value_representation)
 
     # --- Setters ---
     def set_target_feature(self,
@@ -752,6 +796,16 @@ class DataFrameTypes:
                                              + f"string instead was found to be {type(feature_name)}")
 
 
+    def set_feature_value_representation(self,
+                                         feature_value_representation):
+        for feature_name in feature_value_representation:
+            if feature_name not in self.__string_features:
+                raise UnsatisfiedRequirments(f"Feature value assertions must be of type string.")
+
+            if feature_name not in self.__all_columns:
+                raise UnsatisfiedRequirments(f"'{feature_name}' doesn't exist in any features.")
+
+        self.__feature_value_representation = copy.deepcopy(feature_value_representation)
 
     # --- Functions ---
     def remove_feature(self,
@@ -916,6 +970,13 @@ class DataFrameTypes:
         Args:
             df:
                 Pandas Dataframe object to update to correct types.
+
+            notebook_mode:
+                Boolean value to determine if any notebook functions can be used here.
+
+            display_results:
+                Display the table in priority order with flags.
+
 
         Note:
             This will not actually update the given dataframe. This object is
@@ -1409,6 +1470,102 @@ class DataFrameTypes:
                     except:
                         pass
                 self.__feature_value_color_dict[feature_name] = tmp_value_color_dict
+
+
+    def set_encoder_for_features(self,
+                                 df,
+                                 categorical_value_dict=dict()):
+        """
+        Desc:
+            Create's encoder dict for strings and categories.
+
+        Args:
+            df:
+                Pandas dataframe.
+
+            categorical_value_dict:
+                Relationship between category and string label.
+
+        Note:
+            Can handle a feature that have categories and strings in same series.
+        """
+        # Reset dict
+        self.__label_encoder = dict()
+
+        # Get all string and categorical features
+        categorical_string_features = self.get_categorical_features() | self.get_string_features()
+
+        for feature_name in categorical_string_features:
+
+            self.__label_encoder[feature_name] = dict()
+
+            # Order feature values
+            feature_values = [str(val) for val in
+                              df[feature_name].dropna().value_counts(
+                                  sort=False).index.to_list()]
+            feature_values.sort()
+
+            # Convert to category (int) if possible
+            for i in range(0, len(feature_values)):
+                try:
+                    feature_values[i] = int(feature_values[i])
+                except ValueError:
+                    pass
+
+            # Pre-defined category values
+            default_categories = [i for i in range(0,
+                                                   len(feature_values))]
+
+            # Check if user defined any category to string relationships
+            if feature_name in categorical_value_dict.keys():
+                for cat, label in categorical_value_dict[feature_name].items():
+
+                    # Error checks
+                    if label == "":
+                        raise UnsatisfiedRequirments(
+                            f"Can't replace category value with empty space! Found on feature {feature_name}")
+
+                    if isinstance(label, int):
+                        raise UnsatisfiedRequirments(
+                            f"Can't replace category value with a number based value! Found on feature {feature_name}")
+
+                    if not isinstance(cat, int):
+                        raise UnsatisfiedRequirments(
+                            f"Category value must be a number based value! Found on feature {feature_name}")
+
+                    if feature_name not in self.__categorical_features:
+                        raise UnsatisfiedRequirments(
+                            f"User defined a feature name that doesn't appear to be a '{feature_name}'")
+
+                    self.__label_encoder[feature_name][label] = int(cat)
+
+                    # Remove category and label from collection objects
+                    if cat in default_categories:
+                        default_categories.remove(cat)
+
+                    if cat in feature_values:
+                        feature_values.remove(cat)
+
+                    if label in feature_values:
+                        feature_values.remove(label)
+
+            # Encode strings and categories
+            cat_count = 0
+            for val in feature_values:
+
+                if isinstance(val, int):
+                    self.__label_encoder[feature_name][val] = val
+                else:
+                    self.__label_encoder[feature_name][val] = default_categories[
+                        cat_count]
+                    cat_count += 1
+
+        # Inverse dict
+        self.__label_decoder = dict()
+        for feature_name, label_val_dict in self.__label_encoder.items():
+            self.__label_decoder[feature_name] = dict()
+            for label, cat in label_val_dict.items():
+                self.__label_decoder[feature_name][cat] = label
 
     def __bool_check(self,
                      feature_values):

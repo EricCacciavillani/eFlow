@@ -49,6 +49,7 @@ class ProbasNotPossible(DefaultException):
         super().__init__(error_message=error_message)
 
 
+
 # class UnknownPredictionType(DefaultException):
 #     def __init__(self):
 #         super().__init__(error_message="Couldn't assert whether type was a"

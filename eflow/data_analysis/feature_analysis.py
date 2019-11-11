@@ -132,14 +132,41 @@ class FeatureAnalysis(FileOutput):
             missed_features = []
             target_feature = self.__df_features.get_target_feature()
             target_feature_numerical = target_feature in self.__df_features.get_numerical_features()
+
+            feature_value_representation = self.__df_features.get_feature_value_representation()
             # Iterate through features
             for feature_name in df.columns:
 
                feature_values = df[feature_name].value_counts(sort=False).keys().to_list()
 
                colors = self.__df_features.get_feature_colors(feature_name)
+
                if colors:
+
                    if isinstance(colors, dict):
+
+                       decoder = self.__df_features.get_label_decoder()
+
+                       # Add color feature value for decoders values
+                       if feature_name in decoder.keys():
+                           for cat,val in decoder[feature_name].items():
+
+                               if cat in colors.keys():
+                                   hex_code = colors[cat]
+                                   colors[decoder[feature_name][cat]] = hex_code
+
+                               elif val in colors.keys():
+                                   hex_code = colors[val]
+                                   colors[cat] = hex_code
+
+                       # Add color feature value for different value representation
+                       if feature_name in feature_value_representation.keys():
+                           for val in feature_value_representation[
+                               feature_name].keys():
+                               if val in colors.keys():
+                                   hex_code = colors[val]
+                                   colors[feature_value_representation[
+                                       feature_name][val]] = hex_code
 
                        i = 0
                        for value in feature_values:
@@ -148,7 +175,6 @@ class FeatureAnalysis(FileOutput):
                                i += 1
 
                                if i == len(GRAPH_DEFAULTS.DEFINED_LIST_OF_RANDOM_COLORS):
-                                   print("ERROR: You have to many undefined feature value to color relationship's. Init color to 'None'.")
                                    colors = None
                if colors:
                    print(f"Colors: {colors}")

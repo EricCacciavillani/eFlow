@@ -1,0 +1,37 @@
+{
+  "bool": [
+    "Survived"
+  ],
+  "string": [
+    "Cabin",
+    "Sex",
+    "Embarked"
+  ],
+  "integer": [
+    "Parch",
+    "SibSp"
+  ],
+  "float": [
+    "Age",
+    "Fare"
+  ],
+  "categorical": [
+    "Pclass"
+  ],
+  "target": "Survived",
+  "feature_values_colors": {
+    "Sex": {
+      "male": "#7eaed3",
+      "female": "#ffb6c1"
+    },
+    "Survived": {
+      "0": "#616369",
+      "1": "#4dad6c"
+    },
+    "Pclass": {
+      "1": "#d4af37",
+      "2": "#c0c0c0",
+      "3": "#cd7f32"
+    }
+  }
+}

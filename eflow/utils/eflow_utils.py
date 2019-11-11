@@ -225,34 +225,36 @@ def remove_unconnected_pipeline_segments():
     if not os.path.exists(pipeline_struct_dir):
         print("Project structure has yet to be initalized. Can't clean/remove any files...")
     else:
-        # Get all segment files by their types.
-        all_segment_dirs = get_all_directories_from_path(
-            pipeline_struct_dir + "/Data Pipeline Segments")
         segment_dict = dict()
+        pipeline_segments_dict = dict()
+        # Get all segment files by their types.
+        if os.path.exists(pipeline_struct_dir + "/Data Pipeline Segments/"):
+            all_segment_dirs = get_all_directories_from_path(
+                pipeline_struct_dir + "/Data Pipeline Segments")
 
-        for segment_type in all_segment_dirs:
-            segment_dict[segment_type] = get_all_files_from_path(
-                pipeline_struct_dir + f"/Data Pipeline Segments/{segment_type}")
+            for segment_type in all_segment_dirs:
+                segment_dict[segment_type] = get_all_files_from_path(
+                    pipeline_struct_dir + f"/Data Pipeline Segments/{segment_type}")
 
         # Get all segments related to each pipeline.
-        all_pipeline_dirs = get_all_directories_from_path(
-            pipeline_struct_dir + "/Data Pipeline/")
-        pipeline_segments_dict = dict()
+        if os.path.exists(pipeline_struct_dir + "/Data Pipeline/"):
+            all_pipeline_dirs = get_all_directories_from_path(
+                pipeline_struct_dir + "/Data Pipeline/")
 
-        for pipeline_name in all_pipeline_dirs:
-            json_file = json_file_to_dict(
-                f"{pipeline_struct_dir}/Data Pipeline/{pipeline_name}/root_pipeline.json")
+            for pipeline_name in all_pipeline_dirs:
+                json_file = json_file_to_dict(
+                    f"{pipeline_struct_dir}/Data Pipeline/{pipeline_name}/root_pipeline.json")
 
-            for i in range(1, json_file["Pipeline Segment Count"] + 1):
-                segment_id = json_file["Pipeline Segment Order"][str(i)][
-                    'Pipeline Segment ID']
-                segment_type = json_file["Pipeline Segment Order"][str(i)][
-                    'Pipeline Segment Type']
+                for i in range(1, json_file["Pipeline Segment Count"] + 1):
+                    segment_id = json_file["Pipeline Segment Order"][str(i)][
+                        'Pipeline Segment ID']
+                    segment_type = json_file["Pipeline Segment Order"][str(i)][
+                        'Pipeline Segment Type']
 
-                if segment_type not in pipeline_segments_dict.keys():
-                    pipeline_segments_dict[segment_type] = {segment_id + ".json"}
-                else:
-                    pipeline_segments_dict[segment_type].add(segment_id + ".json")
+                    if segment_type not in pipeline_segments_dict.keys():
+                        pipeline_segments_dict[segment_type] = {segment_id + ".json"}
+                    else:
+                        pipeline_segments_dict[segment_type].add(segment_id + ".json")
 
         # Remove given segments
         for segment_type, segment_ids in pipeline_segments_dict.items():

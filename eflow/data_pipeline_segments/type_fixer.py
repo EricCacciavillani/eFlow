@@ -1,11 +1,14 @@
-from eflow.foundation import DataFrameTypes
 from eflow._hidden.parent_objects import DataPipelineSegment
-import numpy as np
-import pandas as pd
-from dateutil import parser
-from IPython.display import display
-from IPython.display import clear_output
-import re
+
+import copy
+
+__author__ = "Eric Cacciavillani"
+__copyright__ = "Copyright 2019, eFlow"
+__credits__ = ["Eric Cacciavillani"]
+__license__ = "MIT"
+__maintainer__ = "EricCacciavillani"
+__email__ = "eric.cacciavillani@gmail.com"
+
 
 class TypeFixer(DataPipelineSegment):
     """
