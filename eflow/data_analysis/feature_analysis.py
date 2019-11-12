@@ -129,144 +129,66 @@ class FeatureAnalysis(FileOutput):
             # Set to true to represent the function call was made with perform
             self.__called_from_perform = True
 
-            missed_features = []
             target_feature = self.__df_features.get_target_feature()
-            target_feature_numerical = target_feature in self.__df_features.get_numerical_features()
-
-            feature_value_representation = self.__df_features.get_feature_value_representation()
             # Iterate through features
             for feature_name in df.columns:
 
-               feature_values = df[feature_name].value_counts(sort=False).keys().to_list()
+               try:
+                   self.generate_graphics_for_feature(df,
+                                                      feature_name,
+                                                      dataset_name,
+                                                      display_visuals=display_visuals,
+                                                      save_file=save_file,
+                                                      dataframe_snapshot=dataframe_snapshot)
+               except ValueError as e:
+                   print(f"Error found on feature {feature_name}: {e}")
 
-               colors = self.__df_features.get_feature_colors(feature_name)
+               if feature_name == target_feature:
 
-               if colors:
+                   if target_feature in self.__df_features.get_non_numerical_features() or \
+                           target_feature in self.__df_features.get_bool_features():
 
-                   if isinstance(colors, dict):
+                       target_feature_values = df[target_feature].value_counts(sort=False).index.to_list()
 
-                       decoder = self.__df_features.get_label_decoder()
+                       for target_feature_val in target_feature_values:
 
-                       # Add color feature value for decoders values
-                       if feature_name in decoder.keys():
-                           for cat,val in decoder[feature_name].items():
+                           repr_target_feature_val = target_feature_val
 
-                               if cat in colors.keys():
-                                   hex_code = colors[cat]
-                                   colors[decoder[feature_name][cat]] = hex_code
+                           if target_feature in self.__df_features.get_bool_features():
 
-                               elif val in colors.keys():
-                                   hex_code = colors[val]
-                                   colors[cat] = hex_code
+                               try:
+                                   repr_target_feature_val = int(repr_target_feature_val)
 
-                       # Add color feature value for different value representation
-                       if feature_name in feature_value_representation.keys():
-                           for val in feature_value_representation[
-                               feature_name].keys():
-                               if val in colors.keys():
-                                   hex_code = colors[val]
-                                   colors[feature_value_representation[
-                                       feature_name][val]] = hex_code
+                               except ValueError:
+                                   continue
 
-                       i = 0
-                       for value in feature_values:
-                           if value not in colors.keys():
-                               colors[value] = GRAPH_DEFAULTS.DEFINED_LIST_OF_RANDOM_COLORS[i]
-                               i += 1
+                               except TypeError:
+                                   continue
 
-                               if i == len(GRAPH_DEFAULTS.DEFINED_LIST_OF_RANDOM_COLORS):
-                                   colors = None
-               if colors:
-                   print(f"Colors: {colors}")
+                               repr_target_feature_val = str(bool(repr_target_feature_val))
 
-               # -----
-               if feature_name in self.__df_features.get_non_numerical_features() or feature_name in self.__df_features.get_bool_features():
+                           for f_name in df.columns:
 
-                   if len(feature_values) <= 5:
-                       self.pie_graph(df,
-                                      feature_name,
-                                      dataset_name=dataset_name,
-                                      display_visuals=display_visuals,
-                                      save_file=save_file,
-                                      pallete=colors)
+                               if f_name == target_feature:
+                                   continue
 
+                               if repr_target_feature_val:
+                                    print(f"Target feature {target_feature} set to {target_feature_val}; also known as {repr_target_feature_val}.")
+                               else:
+                                   print(f"Target feature {target_feature} set to {target_feature_val}.")
+                               try:
+                                   self.generate_graphics_for_feature(df[df[target_feature] == target_feature_val],
+                                                                      f_name,
+                                                                      dataset_name,
+                                                                      display_visuals=display_visuals,
+                                                                      save_file=save_file,
+                                                                      dataframe_snapshot=dataframe_snapshot,
+                                                                      sub_dir=f"{dataset_name}/{target_feature}/{repr_target_feature_val}/{f_name}")
+                               except Exception as e:
+                                   print(f"Error found on feature {f_name}: {e}")
 
-
-                   self.plot_count_graph(df,
-                                         feature_name,
-                                         dataset_name=dataset_name,
-                                         display_visuals=display_visuals,
-                                         save_file=save_file,
-                                         palette=colors)
-
-                   if colors:
-                       self.plot_count_graph(df,
-                                             feature_name,
-                                             dataset_name=dataset_name,
-                                             display_visuals=display_visuals,
-                                             save_file=save_file)
-
-
-                   self.value_counts_table(df,
-                                           feature_name,
-                                           dataset_name=dataset_name,
-                                           display_visuals=display_visuals,
-                                           save_file=save_file)
-
-
-                   if target_feature and feature_name != target_feature:
-
-                       # Target is a continuous numerical feature
-                       if target_feature_numerical:
-                           self.plot_violin_graph(df,
-                                                  feature_name,
-                                                  dataset_name=dataset_name,
-                                                  y_feature_name=target_feature,
-                                                  display_visuals=display_visuals,
-                                                  save_file=save_file,
-                                                  palette=colors)
-                       else:
-                           pass
-
-                   print("\n\n")
-
-
-               # -----
-               elif feature_name in self.__df_features.get_continuous_numerical_features():
-                   self.plot_distance_graph(df,
-                                            feature_name,
-                                            dataset_name=dataset_name,
-                                            display_visuals=display_visuals,
-                                            save_file=save_file)
-
-                   self.descr_table(df,
-                                    feature_name,
-                                    dataset_name=dataset_name,
-                                    display_visuals=display_visuals,
-                                    save_file=save_file)
-
-
-                   if target_feature and feature_name != target_feature:
-
-                       # Target is a continuous numerical feature
-                       if target_feature_numerical:
-                           pass
-                       else:
-                           self.plot_violin_graph(df,
-                                                  target_feature,
-                                                  dataset_name=dataset_name,
-                                                  y_feature_name=feature_name,
-                                                  display_visuals=display_visuals,
-                                                  save_file=save_file,
-                                                  palette=colors)
-                   print("\n\n")
-
-               else:
-                   missed_features.append(feature_name)
-
-               print("\n\n")
-
-            # If any missed features are picked up
+            missed_features = set(df.columns) ^ self.__df_features.get_all_features()
+            # If any missed features are picked up...
             if len(missed_features) != 0:
                 print("Some features were not analyzed by perform analysis!")
                 for feature_name in missed_features:
@@ -282,6 +204,7 @@ class FeatureAnalysis(FileOutput):
                             dataset_name,
                             display_visuals=True,
                             filename=None,
+                            sub_dir=None,
                             save_file=True,
                             dataframe_snapshot=True,
                             figsize=GRAPH_DEFAULTS.FIGSIZE,
@@ -312,6 +235,9 @@ class FeatureAnalysis(FileOutput):
 
             filename: string
                 Name to give the file.
+
+            sub_dir:
+                Specify the sub directory to append to the pre-defined folder path.
 
             save_file: bool
                 Boolean value to whether or not to save the file.
@@ -397,18 +323,25 @@ class FeatureAnalysis(FileOutput):
 
         # -----
         if save_file:
+
+            if not sub_dir:
+                sub_dir = f"{dataset_name}/{feature_name}"
+            if not isinstance(sub_dir, str):
+                raise TypeError(f"Expected param 'sub_dir' to be type string! Was found to be {type(sub_dir)}")
+
             # Check if dataframe matches saved snapshot; Creates file if needed
             if not self.__called_from_perform:
+
                 if dataframe_snapshot:
                     df_snapshot = DataFrameSnapshot()
                     df_snapshot.check_create_snapshot(df,
                                                       self.__df_features,
                                                       directory_path=self.folder_path,
-                                                      sub_dir=f"{dataset_name}/_Extras")
+                                                      sub_dir=f"{sub_dir}/_Extras")
 
             # Create the png
             create_plt_png(self.folder_path,
-                           f"{dataset_name}/Graphics/{feature_name}",
+                           sub_dir,
                            convert_to_filename(filename))
 
 
@@ -425,6 +358,7 @@ class FeatureAnalysis(FileOutput):
                           y_feature_name=None,
                           display_visuals=True,
                           filename=None,
+                          sub_dir=None,
                           save_file=True,
                           dataframe_snapshot=True,
                           figsize=GRAPH_DEFAULTS.FIGSIZE,
@@ -450,7 +384,7 @@ class FeatureAnalysis(FileOutput):
                 The dataset's name; this will create a sub-directory in which your
                 generated graph will be inner-nested in.
 
-            y_feature_name: bool
+            y_feature_name: string
                 Specified feature column name to compare to x.
 
             display_visuals: bool
@@ -458,6 +392,9 @@ class FeatureAnalysis(FileOutput):
 
             filename: string
                 Name to give the file.
+
+            sub_dir:
+                Specify the sub directory to append to the pre-defined folder path.
 
             save_file: bool
                 Boolean value to whether or not to save the file.
@@ -556,11 +493,8 @@ class FeatureAnalysis(FileOutput):
         if not len(feature_values):
             raise ValueError("The y feature must contain numerical features.")
 
-        if feature_name in self.__df_features.get_bool_features():
-            feature_values = [bool(val) if val == 0 or val == 1 else val
-                              for val in feature_values]
-
-        sns.violinplot(x=df[feature_name],
+        x_values = df[feature_name]
+        sns.violinplot(x=x_values,
                        y=feature_values,
                        order=order,
                        cut=cut,
@@ -578,6 +512,11 @@ class FeatureAnalysis(FileOutput):
         # -----
         if save_file:
 
+            if not sub_dir:
+                sub_dir = f"{dataset_name}/{feature_name}"
+            if not isinstance(sub_dir, str):
+                raise TypeError(f"Expected param 'sub_dir' to be type string! Was found to be {type(sub_dir)}")
+
             # Check if dataframe matches saved snapshot; Creates file if needed
             if not self.__called_from_perform:
                 if dataframe_snapshot:
@@ -585,11 +524,16 @@ class FeatureAnalysis(FileOutput):
                     df_snapshot.check_create_snapshot(df,
                                                       self.__df_features,
                                                       directory_path=self.folder_path,
-                                                      sub_dir=f"{dataset_name}/_Extras")
+                                                      sub_dir=f"{sub_dir}/_Extras")
 
-            # Creates png of plot
+            if not sub_dir:
+                sub_dir = f"{dataset_name}/{feature_name}"
+            if not isinstance(sub_dir, str):
+                raise TypeError(f"Expected param 'sub_dir' to be type string! Was found to be {type(sub_dir)}")
+
+            # Create the png
             create_plt_png(self.folder_path,
-                           f"{dataset_name}/Graphics/{feature_name}",
+                           sub_dir,
                            convert_to_filename(filename))
 
 
@@ -604,6 +548,7 @@ class FeatureAnalysis(FileOutput):
                          dataset_name,
                          display_visuals=True,
                          filename=None,
+                         sub_dir=None,
                          save_file=True,
                          dataframe_snapshot=True,
                          figsize=GRAPH_DEFAULTS.FIGSIZE,
@@ -631,6 +576,9 @@ class FeatureAnalysis(FileOutput):
 
             filename: string
                 Name to give the file.
+
+            sub_dir:
+                Specify the sub directory to append to the pre-defined folder path.
 
             save_file: bool
                 Boolean value to whether or not to save the file.
@@ -724,6 +672,11 @@ class FeatureAnalysis(FileOutput):
         # -----
         if save_file:
 
+            if not sub_dir:
+                sub_dir = f"{dataset_name}/{feature_name}"
+            if not isinstance(sub_dir, str):
+                raise TypeError(f"Expected param 'sub_dir' to be type string! Was found to be {type(sub_dir)}")
+
             # Check if dataframe matches saved snapshot; Creates file if needed
             if not self.__called_from_perform:
                 if dataframe_snapshot:
@@ -731,11 +684,11 @@ class FeatureAnalysis(FileOutput):
                     df_snapshot.check_create_snapshot(df,
                                                       self.__df_features,
                                                       directory_path=self.folder_path,
-                                                      sub_dir=f"{dataset_name}/_Extras")
+                                                      sub_dir=f"{sub_dir}/_Extras")
 
-            # Creates png of plot
+            # Create the png
             create_plt_png(self.folder_path,
-                           f"{dataset_name}/Graphics/{feature_name}",
+                           sub_dir,
                            convert_to_filename(filename))
 
         if self.__notebook_mode and display_visuals:
@@ -749,6 +702,7 @@ class FeatureAnalysis(FileOutput):
                   dataset_name,
                   display_visuals=True,
                   filename=None,
+                  sub_dir=None,
                   save_file=True,
                   dataframe_snapshot=True,
                   figsize=GRAPH_DEFAULTS.FIGSIZE,
@@ -775,6 +729,9 @@ class FeatureAnalysis(FileOutput):
                If set to 'None' will default to a pre-defined string;
                unless it is set to an actual filename.
 
+           sub_dir:
+               Specify the sub directory to append to the pre-defined folder path.
+
            save_file:
                Boolean value to whether or not to save the file.
 
@@ -796,8 +753,7 @@ class FeatureAnalysis(FileOutput):
         if np.sum(df[feature_name].isnull()) == df.shape[0]:
             raise UnsatisfiedRequirments("Pie graph couldn't be generated because " +
                   f"there is only missing data to display in {feature_name}!")
-        print(
-            f"Pie graph on {feature_name}")
+        print(f"Pie graph on {feature_name}")
 
         # Closes up any past graph info
         plt.close()
@@ -852,6 +808,12 @@ class FeatureAnalysis(FileOutput):
 
         # -----
         if save_file:
+
+            if not sub_dir:
+                sub_dir = f"{dataset_name}/{feature_name}"
+            if not isinstance(sub_dir, str):
+                raise TypeError(f"Expected param 'sub_dir' to be type string! Was found to be {type(sub_dir)}")
+
             # Check if dataframe matches saved snapshot; Creates file if needed
             if not self.__called_from_perform:
                 if dataframe_snapshot:
@@ -859,11 +821,11 @@ class FeatureAnalysis(FileOutput):
                     df_snapshot.check_create_snapshot(df,
                                                       self.__df_features,
                                                       directory_path=self.folder_path,
-                                                      sub_dir=f"{dataset_name}/_Extras")
+                                                      sub_dir=f"{sub_dir}/_Extras")
 
-            # Create a png of the plot
+            # Create the png
             create_plt_png(self.folder_path,
-                           f"{dataset_name}/Graphics/{feature_name}",
+                           sub_dir,
                            convert_to_filename(filename))
 
 
@@ -879,6 +841,7 @@ class FeatureAnalysis(FileOutput):
                            dataset_name,
                            display_visuals=True,
                            filename=None,
+                           sub_dir=None,
                            save_file=True,
                            dataframe_snapshot=True):
         """
@@ -899,6 +862,9 @@ class FeatureAnalysis(FileOutput):
             filename:
                 If set to 'None' will default to a pre-defined string;
                 unless it is set to an actual filename.
+
+            sub_dir:
+                Specify the sub directory to append to the pre-defined folder path.
 
             save_file:
                 Saves file if set to True; doesn't if set to False.
@@ -944,20 +910,26 @@ class FeatureAnalysis(FileOutput):
             filename = f"{feature_name} Value Counts Table"
 
         if save_file:
+
+            if not sub_dir:
+                sub_dir = f"{dataset_name}/{feature_name}"
+            if not isinstance(sub_dir,str):
+                raise TypeError(f"Expected param 'sub_dir' to be type string! Was found to be {type(sub_dir)}")
+
             if not self.__called_from_perform:
                 if dataframe_snapshot:
                     df_snapshot = DataFrameSnapshot()
                     df_snapshot.check_create_snapshot(df,
                                                       self.__df_features,
                                                       directory_path=self.folder_path,
-                                                      sub_dir=f"{dataset_name}/_Extras")
+                                                      sub_dir=f"{sub_dir}/_Extras")
             # Closes up any past graph info
             plt.close()
 
             # Convert value counts dataframe to an image
             df_to_image(val_counts_df,
                         self.folder_path,
-                        f"{dataset_name}/Tables",
+                        sub_dir,
                         convert_to_filename(filename),
                         show_index=True,
                         format_float_pos=2)
@@ -968,6 +940,7 @@ class FeatureAnalysis(FileOutput):
                     dataset_name,
                     display_visuals=True,
                     filename=None,
+                    sub_dir=None,
                     save_file=True,
                     dataframe_snapshot=True):
         """
@@ -995,6 +968,9 @@ class FeatureAnalysis(FileOutput):
             filename:
                 If set to 'None' will default to a pre-defined string;
                 unless it is set to an actual filename.
+
+            sub_dir:
+                Specify the sub directory to append to the pre-defined folder path.
 
             save_file:
                 Saves file if set to True; doesn't if set to False.
@@ -1034,21 +1010,181 @@ class FeatureAnalysis(FileOutput):
             filename = f"{feature_name} Description Table"
 
         if save_file:
+
+            if not sub_dir:
+                sub_dir = f"{dataset_name}/{feature_name}"
+            if not isinstance(sub_dir,str):
+                raise TypeError(f"Expected param 'sub_dir' to be type string! Was found to be {type(sub_dir)}")
+
             if not self.__called_from_perform:
                 if dataframe_snapshot:
                     df_snapshot = DataFrameSnapshot()
                     df_snapshot.check_create_snapshot(df,
                                                       self.__df_features,
                                                       directory_path=self.folder_path,
-                                                      sub_dir=f"{dataset_name}/_Extras")
+                                                      sub_dir=f"{sub_dir}/_Extras")
             # Closes up any past graph info
             plt.close()
 
             # Convert value counts dataframe to an image
             df_to_image(desc_df,
                         self.folder_path,
-                        f"{dataset_name}/Tables",
+                        sub_dir,
                         convert_to_filename(filename),
                         show_index=True,
                         format_float_pos=2)
 
+
+
+    def generate_graphics_for_feature(self,
+                                      df,
+                                      feature_name,
+                                      dataset_name,
+                                      display_visuals=True,
+                                      sub_dir=None,
+                                      save_file=True,
+                                      dataframe_snapshot=True):
+
+        colors = self.__get_feature_colors(df,
+                                           feature_name)
+
+        # Display colors
+        if colors:
+            print(f"Colors:\n{colors}\n")
+
+        target_feature = self.__df_features.get_target_feature()
+        target_feature_cont_numerical = target_feature in self.__df_features.get_continuous_numerical_features()
+
+        # -----
+        if feature_name in self.__df_features.get_non_numerical_features() or feature_name in self.__df_features.get_bool_features():
+
+            if len(df[feature_name].value_counts().index) <= 5:
+                self.pie_graph(df,
+                               feature_name,
+                               dataset_name=dataset_name,
+                               display_visuals=display_visuals,
+                               sub_dir=sub_dir,
+                               save_file=save_file,
+                               pallete=colors,
+                               dataframe_snapshot=dataframe_snapshot)
+
+            self.plot_count_graph(df,
+                                  feature_name,
+                                  dataset_name=dataset_name,
+                                  display_visuals=display_visuals,
+                                  sub_dir=sub_dir,
+                                  save_file=save_file,
+                                  palette=colors,
+                                  dataframe_snapshot=dataframe_snapshot)
+
+            if colors:
+                self.plot_count_graph(df,
+                                      feature_name,
+                                      dataset_name=dataset_name,
+                                      display_visuals=display_visuals,
+                                      sub_dir=sub_dir,
+                                      save_file=save_file,
+                                      dataframe_snapshot=dataframe_snapshot)
+
+            self.value_counts_table(df,
+                                    feature_name,
+                                    dataset_name=dataset_name,
+                                    display_visuals=display_visuals,
+                                    sub_dir=sub_dir,
+                                    save_file=save_file,
+                                    dataframe_snapshot=dataframe_snapshot)
+
+            if target_feature and feature_name != target_feature:
+
+                if target_feature_cont_numerical:
+                    self.plot_violin_graph(df,
+                                           feature_name,
+                                           dataset_name=dataset_name,
+                                           y_feature_name=target_feature,
+                                           display_visuals=display_visuals,
+                                           sub_dir=sub_dir,
+                                           save_file=save_file,
+                                           dataframe_snapshot=dataframe_snapshot)
+                else:
+                    pass
+
+            print("\n\n")
+
+        # -----
+        elif feature_name in self.__df_features.get_continuous_numerical_features():
+            self.plot_distance_graph(df,
+                                     feature_name,
+                                     dataset_name=dataset_name,
+                                     display_visuals=display_visuals,
+                                     sub_dir=sub_dir,
+                                     save_file=save_file,
+                                     dataframe_snapshot=dataframe_snapshot)
+
+            self.descr_table(df,
+                             feature_name,
+                             dataset_name=dataset_name,
+                             display_visuals=display_visuals,
+                             sub_dir=sub_dir,
+                             save_file=save_file,
+                             dataframe_snapshot=dataframe_snapshot)
+
+            if target_feature and feature_name != target_feature:
+
+                if target_feature_cont_numerical:
+                    pass
+                else:
+                    self.plot_violin_graph(df,
+                                           target_feature,
+                                           dataset_name=dataset_name,
+                                           y_feature_name=feature_name,
+                                           display_visuals=display_visuals,
+                                           sub_dir=sub_dir,
+                                           save_file=save_file,
+                                           dataframe_snapshot=dataframe_snapshot)
+
+    def __get_feature_colors(self,
+                             df,
+                             feature_name):
+        colors = self.__df_features.get_feature_colors(feature_name)
+        feature_value_representation = self.__df_features.get_feature_value_representation()
+
+        if colors:
+            if isinstance(colors, dict):
+                feature_values = df[feature_name].value_counts(
+                    sort=False).keys().to_list()
+                decoder = self.__df_features.get_label_decoder()
+
+                # Add color feature value for decoders values
+                if feature_name in decoder.keys():
+                    for cat, val in decoder[feature_name].items():
+
+                        if cat in colors.keys():
+                            hex_code = colors[cat]
+                            colors[decoder[feature_name][cat]] = hex_code
+
+                        elif val in colors.keys():
+                            hex_code = colors[val]
+                            colors[cat] = hex_code
+
+                # Add color feature value for different value representation
+                if feature_name in feature_value_representation.keys():
+                    for val in feature_value_representation[
+                        feature_name].keys():
+                        if val in colors.keys():
+                            hex_code = colors[val]
+                            colors[feature_value_representation[
+                                feature_name][val]] = hex_code
+
+                i = 0
+                for value in feature_values:
+                    if value not in colors.keys():
+                        colors[value] = \
+                        GRAPH_DEFAULTS.DEFINED_LIST_OF_RANDOM_COLORS[i]
+                        i += 1
+
+                        if i == len(
+                                GRAPH_DEFAULTS.DEFINED_LIST_OF_RANDOM_COLORS):
+                            colors = None
+
+
+        return colors

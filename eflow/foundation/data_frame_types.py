@@ -1375,6 +1375,11 @@ class DataFrameTypes:
 
         type_features["feature_values_colors"] = self.__feature_value_color_dict
 
+        type_features["feature_value_representation"] = self.__feature_value_representation
+
+        type_features["label_encoder"] = self.__label_encoder
+        type_features["label_decoder"] = self.__label_decoder
+
         dict_to_json_file(type_features,
                                    directory_path,
                                    filename)
@@ -1409,41 +1414,57 @@ class DataFrameTypes:
 
         # -----
         self.__feature_value_color_dict = dict()
+
+        # -----
+        self.__feature_value_representation = dict()
+        self.__label_encoder = dict()
+        self.__label_decoder = dict()
+
         tmp_feature_value_color_dict = dict()
 
         # Iterate through dict given types to feature lists
-        for type, feature_names  in type_features.items():
+        for type, obj  in type_features.items():
 
             if type == "bool":
-                self.__bool_features = set(feature_names)
+                self.__bool_features = set(obj)
 
             # -----
             elif type == "integer":
-                self.__integer_features = set(feature_names)
+                self.__integer_features = set(obj)
 
             # -----
             elif type == "float":
-                self.__float_features = set(feature_names)
+                self.__float_features = set(obj)
 
             # -----
             elif type == "string":
-                self.__string_features = set(feature_names)
+                self.__string_features = set(obj)
 
             # -----
             elif type == "categorical":
-                self.__categorical_features = set(feature_names)
+                self.__categorical_features = set(obj)
 
             # -----
             elif type == "datetime":
-                self.__datetime_features = set(feature_names)
+                self.__datetime_features = set(obj)
 
             # Extract target
             elif type == "target":
-                self.__target_feature = feature_names
+                self.__target_feature = obj
 
             # Extract color dict.(Naming convention get's a little screwed up here.)
             elif type == "feature_values_colors":
-                tmp_feature_value_color_dict = feature_names
+                tmp_feature_value_color_dict = obj
+
+            # Extract out the feature value representation
+            elif type == "feature_value_representation":
+                self.__feature_value_representation = obj
+
+            elif type == "label_decoder":
+                self.__label_decoder = obj
+
+            elif type == "label_encoder":
+                self.__label_encoder = obj
 
             else:
                 raise ValueError(f"Unknown type {type} was found!")
@@ -1454,6 +1475,7 @@ class DataFrameTypes:
                               self.__datetime_features | \
                               self.__categorical_features
 
+        # Convert any values that are supposed to numeric back to numeric in colors
         for feature_name,value_color_dict in tmp_feature_value_color_dict.items():
             if feature_name not in self.__all_columns:
                 raise ValueError(f"Unknown feature '{feature_name}' found in color dict for features!")
@@ -1461,16 +1483,23 @@ class DataFrameTypes:
                 tmp_value_color_dict = copy.deepcopy(value_color_dict)
                 for feature_val,color in value_color_dict.items():
                     try:
-                        int(feature_val)
-
-                        del tmp_value_color_dict[feature_val]
-
                         tmp_value_color_dict[int(feature_val)] = color
-
-                    except:
+                        del tmp_value_color_dict[feature_val]
+                    except ValueError:
                         pass
                 self.__feature_value_color_dict[feature_name] = tmp_value_color_dict
 
+        # Converting to numeric on decoder's categories
+        tmp_decoder = self.__label_decoder
+        for feature_name,cat_val_dict in tmp_decoder.items():
+
+            cat_val_dict = copy.deepcopy(cat_val_dict)
+            for cat, val in cat_val_dict.items():
+                try:
+                    self.__label_decoder[feature_name][int(cat)] = self.__label_decoder[feature_name][cat]
+                    del self.__label_decoder[feature_name][cat]
+                except ValueError:
+                    pass
 
     def set_encoder_for_features(self,
                                  df,
