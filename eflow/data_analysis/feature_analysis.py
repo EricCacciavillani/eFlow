@@ -1053,7 +1053,7 @@ class FeatureAnalysis(FileOutput):
             print(f"Colors:\n{colors}\n")
 
         target_feature = self.__df_features.get_target_feature()
-        target_feature_cont_numerical = target_feature in self.__df_features.get_continuous_numerical_features()
+        target_feature_numerical = target_feature in self.__df_features.get_numerical_features()
 
         # -----
         if feature_name in self.__df_features.get_non_numerical_features() or feature_name in self.__df_features.get_bool_features():
@@ -1096,7 +1096,7 @@ class FeatureAnalysis(FileOutput):
 
             if target_feature and feature_name != target_feature:
 
-                if target_feature_cont_numerical:
+                if target_feature_numerical:
                     self.plot_violin_graph(df,
                                            feature_name,
                                            dataset_name=dataset_name,
@@ -1130,7 +1130,7 @@ class FeatureAnalysis(FileOutput):
 
             if target_feature and feature_name != target_feature:
 
-                if target_feature_cont_numerical:
+                if target_feature_numerical:
                     pass
                 else:
                     self.plot_violin_graph(df,
