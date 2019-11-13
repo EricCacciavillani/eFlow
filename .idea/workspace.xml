@@ -7,64 +7,61 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="178261e3-0830-4d8e-91ef-8172f5216aca" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Data Analysis/Full Titanic Data/Age/Age Description Table 2.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Data Analysis/Full Titanic Data/Age/Age Description Table.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Data Analysis/Full Titanic Data/Age/Distance plot graph on Age 2.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Data Analysis/Full Titanic Data/Cabin/Cabin Value Counts Table.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Data Analysis/Full Titanic Data/Cabin/Count plot graph on Cabin with count color ranking.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Data Analysis/Full Titanic Data/Embarked/Count plot graph on Embarked with count color ranking.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Data Analysis/Full Titanic Data/Embarked/Embarked Value Counts Table.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Data Analysis/Full Titanic Data/Embarked/Pie graph on Embarked.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Data Analysis/Full Titanic Data/Fare/Distance plot graph on Fare.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Data Analysis/Full Titanic Data/Fare/Fare Description Table.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Data Analysis/Full Titanic Data/Parch/Distance plot graph on Parch.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Data Analysis/Full Titanic Data/Parch/Parch Description Table.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Data Analysis/Full Titanic Data/Pclass/Count plot graph on Pclass with count color ranking 2.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Data Analysis/Full Titanic Data/Pclass/Pclass Value Counts Table 2.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Data Analysis/Full Titanic Data/Pclass/Pie graph on Pclass.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Data Analysis/Full Titanic Data/Pclass/Pie graph on Pclass.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Data Analysis/Full Titanic Data/Sex/Count plot graph on Sex 2.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Data Analysis/Full Titanic Data/Sex/Count plot graph on Sex with count color ranking 2.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Data Analysis/Full Titanic Data/Sex/Pie graph on Sex 2.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Data Analysis/Full Titanic Data/Sex/Sex Value Counts Table 2.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Data Analysis/Full Titanic Data/SibSp/Distance plot graph on SibSp.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Data Analysis/Full Titanic Data/SibSp/SibSp Description Table.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/eflow/data_analysis/feature_analysis.py" beforeDir="false" afterPath="$PROJECT_DIR$/eflow/data_analysis/feature_analysis.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/.ipynb_checkpoints/1.) Quick peek at data-checkpoint.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/testing/.ipynb_checkpoints/1.) Quick peek at data-checkpoint.ipynb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/1.) Quick peek at data.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/testing/1.) Quick peek at data.ipynb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Data Analysis/Full Titanic Data/Embarked/Pie graph on Embarked.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Data Analysis/Full Titanic Data/Embarked/Pie graph on Embarked.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Data Analysis/Full Titanic Data/Pclass/Violin plot graph on Pclass by Survived.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Data Analysis/Full Titanic Data/Pclass/Violin plot graph on Pclass by Survived.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Data Analysis/Full Titanic Data/Sex/Pie graph on Sex.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Data Analysis/Full Titanic Data/Sex/Pie graph on Sex.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Data Analysis/Full Titanic Data/Sex/Violin plot graph on Sex by Survived.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Data Analysis/Full Titanic Data/Sex/Violin plot graph on Sex by Survived.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Data Analysis/Full Titanic Data/Survived/.ipynb_checkpoints/Violin plot graph on Survived by Fare-checkpoint.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Data Analysis/Full Titanic Data/Survived/.ipynb_checkpoints/Violin plot graph on Survived by Parch-checkpoint.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Data Analysis/Full Titanic Data/Survived/.ipynb_checkpoints/Violin plot graph on Survived by SibSp-checkpoint.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Data Analysis/Full Titanic Data/Survived/False/Age/Violin plot graph on Survived by Age.png" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Data Analysis/Full Titanic Data/Survived/False/Cabin/Cabin Value Counts Table.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Data Analysis/Full Titanic Data/Survived/False/Cabin/Cabin Value Counts Table.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Data Analysis/Full Titanic Data/Survived/False/Cabin/Count plot graph on Cabin with count color ranking.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Data Analysis/Full Titanic Data/Survived/False/Cabin/Count plot graph on Cabin with count color ranking.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Data Analysis/Full Titanic Data/Survived/False/Cabin/Violin plot graph on Cabin by Survived.png" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Data Analysis/Full Titanic Data/Survived/False/Embarked/Pie graph on Embarked.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Data Analysis/Full Titanic Data/Survived/False/Embarked/Pie graph on Embarked.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Data Analysis/Full Titanic Data/Survived/False/Embarked/Violin plot graph on Embarked by Survived.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Data Analysis/Full Titanic Data/Survived/False/Fare/Violin plot graph on Survived by Fare.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Data Analysis/Full Titanic Data/Survived/False/Parch/Violin plot graph on Survived by Parch.png" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Data Analysis/Full Titanic Data/Survived/False/Pclass/Pie graph on Pclass.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Data Analysis/Full Titanic Data/Survived/False/Pclass/Pie graph on Pclass.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Data Analysis/Full Titanic Data/Survived/True/Age/.ipynb_checkpoints/Age Description Table-checkpoint.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Data Analysis/Full Titanic Data/Survived/True/Age/Distance plot graph on Age 3.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Data Analysis/Full Titanic Data/Survived/True/Cabin/Cabin Value Counts Table 3.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Data Analysis/Full Titanic Data/Survived/False/Pclass/Violin plot graph on Pclass by Survived.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Data Analysis/Full Titanic Data/Survived/False/Sex/Violin plot graph on Sex by Survived.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Data Analysis/Full Titanic Data/Survived/False/SibSp/Violin plot graph on Survived by SibSp.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Data Analysis/Full Titanic Data/Survived/True/Age/Distance plot graph on Age 2.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Data Analysis/Full Titanic Data/Survived/True/Age/Violin plot graph on Survived by Age.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Data Analysis/Full Titanic Data/Survived/True/Cabin/Cabin Value Counts Table 2.png" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Data Analysis/Full Titanic Data/Survived/True/Cabin/Cabin Value Counts Table.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Data Analysis/Full Titanic Data/Survived/True/Cabin/Cabin Value Counts Table.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Data Analysis/Full Titanic Data/Survived/True/Cabin/Count plot graph on Cabin with count color ranking 3.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Data Analysis/Full Titanic Data/Survived/True/Embarked/Count plot graph on Embarked with count color ranking 3.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Data Analysis/Full Titanic Data/Survived/True/Embarked/Embarked Value Counts Table 3.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Data Analysis/Full Titanic Data/Survived/True/Embarked/Pie graph on Embarked 3.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Data Analysis/Full Titanic Data/Survived/True/Cabin/Count plot graph on Cabin with count color ranking 2.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Data Analysis/Full Titanic Data/Survived/True/Cabin/Violin plot graph on Cabin by Survived.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Data Analysis/Full Titanic Data/Survived/True/Embarked/Count plot graph on Embarked with count color ranking 2.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Data Analysis/Full Titanic Data/Survived/True/Embarked/Embarked Value Counts Table 2.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Data Analysis/Full Titanic Data/Survived/True/Embarked/Pie graph on Embarked 2.png" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Data Analysis/Full Titanic Data/Survived/True/Embarked/Pie graph on Embarked.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Data Analysis/Full Titanic Data/Survived/True/Embarked/Pie graph on Embarked.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Data Analysis/Full Titanic Data/Survived/True/Fare/Distance plot graph on Fare 3.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Data Analysis/Full Titanic Data/Survived/True/Fare/Fare Description Table 3.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Data Analysis/Full Titanic Data/Survived/True/Fare/Violin plot graph on Survived by Fare 3.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Data Analysis/Full Titanic Data/Survived/True/Parch/Distance plot graph on Parch 2.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Data Analysis/Full Titanic Data/Survived/True/Parch/Parch Description Table 3.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Data Analysis/Full Titanic Data/Survived/True/Parch/Violin plot graph on Survived by Parch 3.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Data Analysis/Full Titanic Data/Survived/True/Pclass/Count plot graph on Pclass 3.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Data Analysis/Full Titanic Data/Survived/True/Pclass/Pie graph on Pclass 3.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Data Analysis/Full Titanic Data/Survived/True/Embarked/Violin plot graph on Embarked by Survived.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Data Analysis/Full Titanic Data/Survived/True/Fare/Distance plot graph on Fare 2.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Data Analysis/Full Titanic Data/Survived/True/Fare/Fare Description Table 2.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Data Analysis/Full Titanic Data/Survived/True/Fare/Violin plot graph on Survived by Fare 2.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Data Analysis/Full Titanic Data/Survived/True/Fare/Violin plot graph on Survived by Fare.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Data Analysis/Full Titanic Data/Survived/True/Parch/Distance plot graph on Parch 3.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Data Analysis/Full Titanic Data/Survived/True/Parch/Violin plot graph on Survived by Parch.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Data Analysis/Full Titanic Data/Survived/True/Pclass/Count plot graph on Pclass 2.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Data Analysis/Full Titanic Data/Survived/True/Pclass/Pie graph on Pclass 2.png" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Data Analysis/Full Titanic Data/Survived/True/Pclass/Pie graph on Pclass.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Data Analysis/Full Titanic Data/Survived/True/Pclass/Pie graph on Pclass.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Data Analysis/Full Titanic Data/Survived/True/Sex/Pie graph on Sex 2.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Data Analysis/Full Titanic Data/Survived/True/SibSp/Distance plot graph on SibSp 2.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Data Analysis/Full Titanic Data/Survived/True/Pclass/Violin plot graph on Pclass by Survived.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Data Analysis/Full Titanic Data/Survived/True/Sex/Pie graph on Sex 3.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Data Analysis/Full Titanic Data/Survived/True/Sex/Violin plot graph on Sex by Survived.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Data Analysis/Full Titanic Data/Survived/True/SibSp/Distance plot graph on SibSp 3.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Data Analysis/Full Titanic Data/Survived/True/SibSp/Violin plot graph on Survived by SibSp.png" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Data Analysis/Full Titanic Data/Survived/Violin plot graph on Survived by Age.png" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Data Analysis/Full Titanic Data/Survived/Violin plot graph on Survived by Fare.png" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Data Analysis/Full Titanic Data/Survived/Violin plot graph on Survived by Parch.png" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Data Analysis/Full Titanic Data/Survived/Violin plot graph on Survived by SibSp.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Missing Data/Full Titanic Data/Graphics/Missing data bar graph.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Missing Data/Full Titanic Data/Graphics/Missing data dendrogram graph average.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Missing Data/Full Titanic Data/Graphics/Missing data heatmap graph.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Missing Data/Full Titanic Data/Graphics/Missing data matrix graph.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Missing Data/Full Titanic Data/Tables/Data Types Table.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Missing Data/Full Titanic Data/Tables/Missing Data Table.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Missing Data/Full Titanic Data/_Extras/Dataframe Snapshot.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/df_features.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Data Pipeline Segments/DataTransformer/25453C7DB6.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/df_features.json" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/df_features.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Data Pipeline Segments/DataTransformer/6960C157CF.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Data Pipeline Segments/DataTransformer/76FBFD91E2.json" beforeDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -82,8 +79,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/eflow/foundation/data_frame_types.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="391">
-              <caret line="274" column="35" selection-start-line="274" selection-start-column="8" selection-end-line="274" selection-end-column="35" />
+            <state relative-caret-position="180">
+              <caret line="573" column="26" selection-start-line="573" selection-start-column="8" selection-end-line="573" selection-end-column="26" />
             </state>
           </provider>
         </entry>
@@ -91,8 +88,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/eflow/data_analysis/feature_analysis.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="311">
-              <caret line="1061" column="30" selection-start-line="1061" selection-start-column="21" selection-end-line="1061" selection-end-column="30" />
+            <state relative-caret-position="200">
+              <caret line="1361" column="43" lean-forward="true" selection-start-line="1361" selection-start-column="43" selection-end-line="1361" selection-end-column="43" />
               <folding>
                 <element signature="e#0#51#0" expanded="true" />
               </folding>
@@ -103,7 +100,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/eflow/data_analysis/null_analysis.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="8790">
+            <state relative-caret-position="-2056">
               <caret line="586" column="28" selection-start-line="586" selection-start-column="28" selection-end-line="586" selection-end-column="28" />
               <folding>
                 <element signature="e#0#50#0" expanded="true" />
@@ -123,13 +120,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>representation</find>
-      <find>feature_value_representation</find>
-      <find>set_feature_value_representation</find>
-      <find>set_encoder_for_features</find>
-      <find>feature_value_represention</find>
-      <find>remove_unconnected_pipeline_segments</find>
-      <find>/Data Pipeline/</find>
       <find>pipeline_segments_dict</find>
       <find>get_feature_value</find>
       <find>descr</find>
@@ -147,12 +137,19 @@
       <find>except</find>
       <find>get_all</find>
       <find>end</find>
-      <find>get_non_</find>
       <find>get_</find>
-      <find>plot_violin_graph</find>
       <find>generate_graphics_for_feature</find>
       <find>plot_violin</find>
       <find>pie_graph</find>
+      <find>if target_featur</find>
+      <find>get_non_</find>
+      <find>pd.to_numeri</find>
+      <find>plot_violin_graph</find>
+      <find>figsize</find>
+      <find>plot_distance_graph</find>
+      <find>pie_</find>
+      <find>plot_ridge_graph</find>
+      <find>colors</find>
     </findStrings>
     <replaceStrings>
       <replace>dataframe_snapshot</replace>
@@ -514,12 +511,12 @@
       <workItem from="1573420874196" duration="14325000" />
       <workItem from="1573571264125" duration="121000" />
       <workItem from="1573571585497" duration="194000" />
-      <workItem from="1573572147026" duration="12203000" />
+      <workItem from="1573572147026" duration="18682000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="385246000" />
+    <option name="totallyTimeSpent" value="391725000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1920" height="1080" extended-state="0" />
@@ -896,16 +893,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/eflow/data_analysis/null_analysis.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="8790">
-          <caret line="586" column="28" selection-start-line="586" selection-start-column="28" selection-end-line="586" selection-end-column="28" />
-          <folding>
-            <element signature="e#0#50#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/eflow/utils/eflow_utils.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-41">
@@ -918,15 +905,25 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/eflow/foundation/data_frame_types.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="391">
-          <caret line="274" column="35" selection-start-line="274" selection-start-column="8" selection-end-line="274" selection-end-column="35" />
+        <state relative-caret-position="180">
+          <caret line="573" column="26" selection-start-line="573" selection-start-column="8" selection-end-line="573" selection-end-column="26" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/eflow/data_analysis/null_analysis.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-2056">
+          <caret line="586" column="28" selection-start-line="586" selection-start-column="28" selection-end-line="586" selection-end-column="28" />
+          <folding>
+            <element signature="e#0#50#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/eflow/data_analysis/feature_analysis.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="311">
-          <caret line="1061" column="30" selection-start-line="1061" selection-start-column="21" selection-end-line="1061" selection-end-column="30" />
+        <state relative-caret-position="200">
+          <caret line="1361" column="43" lean-forward="true" selection-start-line="1361" selection-start-column="43" selection-end-line="1361" selection-end-column="43" />
           <folding>
             <element signature="e#0#51#0" expanded="true" />
           </folding>
