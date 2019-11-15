@@ -32,3 +32,8 @@ class TypeFixer(DataPipelineSegment):
                                      object_type=self.__class__.__name__,
                                      segment_id=segment_id)
 
+    def convert_types(self,
+                      df,
+                      df_features,
+                      user_logic=True):
+        pass

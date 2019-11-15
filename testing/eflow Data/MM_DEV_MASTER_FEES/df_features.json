@@ -1,0 +1,117 @@
+{
+  "bool": [
+    "allow_freeform_provider_yn",
+    "allow_fee_total_allocation_yn",
+    "seller_responsible_yn",
+    "selectable_provider_yn",
+    "borrower_responsible_yn",
+    "fee_provider_type_change_yn",
+    "cascade_fee_provider_info_yn",
+    "amount_editable_yn",
+    "net_fundable_yn",
+    "net_fund_edit_yn",
+    "include_on_provider_list_yn",
+    "default_payee_to_provider_yn",
+    "allow_zero_value_yn",
+    "can_finance_yn",
+    "description_editable_yn",
+    "finance_charge_yn"
+  ],
+  "string": [
+    "default_tolerance_type_id",
+    "fee_provider_type_id",
+    "summary_fee_item_type_id",
+    "fee_paid_to_type_id",
+    "sort_value"
+  ],
+  "integer": [
+    "hud_section_type_id"
+  ],
+  "target": null,
+  "feature_values_colors": {},
+  "feature_value_representation": {},
+  "label_encoder": {
+    "summary_fee_item_type_id": {
+      "CANNOT_SHOP": 0,
+      "CAN_SHOP": 1,
+      "ORIGINATION": 2,
+      "OTHER": 3,
+      "PREPAIDS": 4,
+      "TAXES_GOV_FEES": 5
+    },
+    "default_tolerance_type_id": {
+      "99": 99,
+      "TENPCT": 0,
+      "ZEROPCT": 1
+    },
+    "fee_provider_type_id": {
+      "APPRAISE": 0,
+      "CREDIT": 1,
+      "DOCPREP": 2,
+      "FLOODCERT": 3,
+      "FLOODINS": 4,
+      "FREEFORM": 5,
+      "HAZARDINS": 6,
+      "MTGINS": 7,
+      "PEST": 8,
+      "SURVEY": 9,
+      "TAXSERV": 10,
+      "TITLE": 11
+    },
+    "fee_paid_to_type_id": {
+      "LENDER": 0,
+      "THIRDPARTY": 1
+    },
+    "sort_value": {
+      "A": 0,
+      "B": 1,
+      "C": 2,
+      "E": 3,
+      "F": 4,
+      "H": 5,
+      "h": 6
+    }
+  },
+  "label_decoder": {
+    "summary_fee_item_type_id": {
+      "0": "CANNOT_SHOP",
+      "1": "CAN_SHOP",
+      "2": "ORIGINATION",
+      "3": "OTHER",
+      "4": "PREPAIDS",
+      "5": "TAXES_GOV_FEES"
+    },
+    "default_tolerance_type_id": {
+      "99": 99,
+      "0": "TENPCT",
+      "1": "ZEROPCT"
+    },
+    "fee_provider_type_id": {
+      "0": "APPRAISE",
+      "1": "CREDIT",
+      "2": "DOCPREP",
+      "3": "FLOODCERT",
+      "4": "FLOODINS",
+      "5": "FREEFORM",
+      "6": "HAZARDINS",
+      "7": "MTGINS",
+      "8": "PEST",
+      "9": "SURVEY",
+      "10": "TAXSERV",
+      "11": "TITLE"
+    },
+    "fee_paid_to_type_id": {
+      "0": "LENDER",
+      "1": "THIRDPARTY"
+    },
+    "sort_value": {
+      "0": "A",
+      "1": "B",
+      "2": "C",
+      "3": "E",
+      "4": "F",
+      "5": "H",
+      "6": "h"
+    }
+  }
+}

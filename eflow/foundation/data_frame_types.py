@@ -1495,11 +1495,8 @@ class DataFrameTypes:
 
             cat_val_dict = copy.deepcopy(cat_val_dict)
             for cat, val in cat_val_dict.items():
-                try:
-                    self.__label_decoder[feature_name][int(cat)] = self.__label_decoder[feature_name][cat]
-                    del self.__label_decoder[feature_name][cat]
-                except ValueError:
-                    pass
+                self.__label_decoder[feature_name][int(cat)] = self.__label_decoder[feature_name][cat]
+                del self.__label_decoder[feature_name][cat]
 
     def set_encoder_for_features(self,
                                  df,
@@ -1537,7 +1534,7 @@ class DataFrameTypes:
             # Convert to category (int) if possible
             for i in range(0, len(feature_values)):
                 try:
-                    feature_values[i] = int(feature_values[i])
+                    feature_values[i] = int(float(feature_values[i]))
                 except ValueError:
                     pass
 
