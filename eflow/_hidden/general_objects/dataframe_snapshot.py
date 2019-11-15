@@ -96,6 +96,13 @@ class DataFrameSnapshot:
             passed dataframe snapshot; causing the program to stop in runtime.
         """
 
+        if not isinstance(df, pd.DataFrame):
+            raise TypeError(f"'df' must be a pandas datafram object not a {type(df)}")
+
+        if not isinstance(df_features,DataFrameTypes):
+            raise TypeError(f"'df_features' must be a DataFrameTypes object not a {type(df_features)}")
+
+
         output_folder_path = create_dir_structure(directory_path,
                                                   sub_dir)
 

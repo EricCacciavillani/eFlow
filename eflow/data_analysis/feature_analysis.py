@@ -29,13 +29,14 @@ class FeatureAnalysis(FileOutput):
 
     """
         Analyzes the feature data of a pandas Dataframe object.
-        (Only works on single features and ignores null data for displaying data.)
+        (Ignores null data for displaying data and creates 2d graphics with 2 features.
+        In the future I might add 3d graphics with 3 features.)
     """
 
     def __init__(self,
                  df_features,
                  project_sub_dir="",
-                 project_name="Data Analysis",
+                 project_name="Feature Analysis",
                  overwrite_full_path=None,
                  notebook_mode=True):
         """
@@ -73,7 +74,8 @@ class FeatureAnalysis(FileOutput):
                          display_visuals=True,
                          save_file=True,
                          dataframe_snapshot=True,
-                         aggerate_target_feature=True):
+                         suppress_runtime_errors=True,
+                         aggregate_target_feature=True):
         """
         Desc:
             Performs all public methods that generate visualizations/insights
@@ -87,12 +89,17 @@ class FeatureAnalysis(FileOutput):
             df: Pandas dataframe
                 Pandas dataframe object
 
-            df_features: DataFrameTypes
-                DataFrameTypes object; organizes feature types into groups.
-
             dataset_name: string
                 The dataset's name; this will create a sub-directory in which your
                 generated graph will be inner-nested in.
+
+            target_feature: string or None
+                A feature name that both exists in the init df_features
+                and the passed dataframe.
+
+                Note;
+                    If init to 'None' then df_features will try to extract out
+                    the target feature.
 
             display_visuals: bool
                 Boolean value to whether or not to display visualizations.
@@ -105,6 +112,17 @@ class FeatureAnalysis(FileOutput):
                 snapshot of the dataframe in the dataset's directory structure.
                 Helps ensure that data generated in that directory is correctly
                 associated to a dataframe.
+
+            suppress_runtime_errors: bool
+                If set to true; when generating any graphs will suppress any runtime
+                errors so the program can keep running.
+
+            aggregate_target_feature:
+                Aggregate the data of the target feature if the data is
+                non-continuous data.
+
+                Note:
+                    In the future I will have this also work with continuous data.
 
         Raises:
             If an empty dataframe is passed to this function or if the same
@@ -137,19 +155,19 @@ class FeatureAnalysis(FileOutput):
             # Iterate through features
             for feature_name in df.columns:
 
-               try:
-                   self.generate_graphics_for_feature(df,
-                                                      feature_name,
-                                                      dataset_name,
-                                                      target_feature=target_feature,
-                                                      display_visuals=display_visuals,
-                                                      save_file=save_file,
-                                                      dataframe_snapshot=dataframe_snapshot)
-               except ValueError as e:
-                   print(f"Error found on feature {feature_name}: {e}")
+               self.generate_graphics_for_feature(df,
+                                                  feature_name,
+                                                  dataset_name,
+                                                  target_feature=target_feature,
+                                                  display_visuals=display_visuals,
+                                                  save_file=save_file,
+                                                  dataframe_snapshot=dataframe_snapshot,
+                                                  suppress_runtime_errors=suppress_runtime_errors)
 
-               if target_feature and feature_name == target_feature and aggerate_target_feature:
+               # Aggregate data if target feature exists
+               if target_feature and feature_name == target_feature and aggregate_target_feature:
 
+                   # -----
                    if target_feature in self.__df_features.get_non_numerical_features() or \
                            target_feature in self.__df_features.get_bool_features():
 
@@ -172,6 +190,7 @@ class FeatureAnalysis(FileOutput):
 
                                repr_target_feature_val = str(bool(repr_target_feature_val))
 
+                           # Iterate through all features to generate new graphs for aggregation
                            for f_name in df.columns:
 
                                if f_name == target_feature:
@@ -189,6 +208,7 @@ class FeatureAnalysis(FileOutput):
                                                                       display_visuals=display_visuals,
                                                                       save_file=save_file,
                                                                       dataframe_snapshot=dataframe_snapshot,
+                                                                      suppress_runtime_errors=suppress_runtime_errors,
                                                                       sub_dir=f"{dataset_name}/{target_feature}/{repr_target_feature_val}/{f_name}")
                                except Exception as e:
                                    print(f"Error found on feature {f_name}: {e}")
@@ -204,6 +224,222 @@ class FeatureAnalysis(FileOutput):
         finally:
             self.__called_from_perform = False
 
+
+    def generate_graphics_for_feature(self,
+                                      df,
+                                      feature_name,
+                                      dataset_name,
+                                      target_feature=None,
+                                      display_visuals=True,
+                                      sub_dir=None,
+                                      save_file=True,
+                                      dataframe_snapshot=True,
+                                      suppress_runtime_errors=True):
+        """
+        Desc:
+            Generate's all graphic's for that given feature and the relationship target feature
+
+        Args:
+            df:
+                Pandas DataFrame object
+
+            feature_name:
+                Specified feature column name.
+
+            dataset_name:
+                The dataset's name; this will create a sub-directory in which your
+                generated graph will be inner-nested in.
+
+            display_visuals:
+                Boolean value to whether or not to display visualizations.
+
+            filename:
+                If set to 'None' will default to a pre-defined string;
+                unless it is set to an actual filename.
+
+            sub_dir:
+                Specify the sub directory to append to the pre-defined folder path.
+
+            save_file:
+                Saves file if set to True; doesn't if set to False.
+
+            dataframe_snapshot:
+                Boolean value to determine whether or not generate and compare a
+                snapshot of the dataframe in the dataset's directory structure.
+                Helps ensure that data generated in that directory is correctly
+                associated to a dataframe.
+
+            suppress_runtime_errors: bool
+                If set to true; when generating any graphs will suppress any runtime
+                errors so the program can keep running.
+
+        Raises:
+            Raises error if the json file's snapshot of the given dataframe doesn't
+            match the given dataframe.
+        """
+
+        colors = self.__get_feature_colors(df,
+                                           feature_name)
+
+        # Display colors
+        if colors:
+            print(f"Colors:\n{colors}\n")
+
+        if target_feature:
+            target_feature_numerical = target_feature in self.__df_features.get_numerical_features()
+        else:
+            target_feature_numerical = False
+
+        # -----
+        if feature_name in self.__df_features.get_non_numerical_features() or feature_name in self.__df_features.get_bool_features():
+
+            if len(df[feature_name].value_counts().index) <= 5:
+                self.pie_graph(df,
+                               feature_name,
+                               dataset_name=dataset_name,
+                               display_visuals=display_visuals,
+                               sub_dir=sub_dir,
+                               save_file=save_file,
+                               pallete=colors,
+                               dataframe_snapshot=dataframe_snapshot,
+                               suppress_runtime_errors=suppress_runtime_errors)
+
+
+            self.plot_count_graph(df,
+                                  feature_name,
+                                  dataset_name=dataset_name,
+                                  display_visuals=display_visuals,
+                                  sub_dir=sub_dir,
+                                  save_file=save_file,
+                                  palette=colors,
+                                  dataframe_snapshot=dataframe_snapshot,
+                                  suppress_runtime_errors=suppress_runtime_errors)
+
+            if colors:
+                self.plot_count_graph(df,
+                                      feature_name,
+                                      dataset_name=dataset_name,
+                                      display_visuals=display_visuals,
+                                      sub_dir=sub_dir,
+                                      save_file=save_file,
+                                      dataframe_snapshot=dataframe_snapshot,
+                                      suppress_runtime_errors=suppress_runtime_errors)
+
+            self.value_counts_table(df,
+                                    feature_name,
+                                    dataset_name=dataset_name,
+                                    display_visuals=display_visuals,
+                                    sub_dir=sub_dir,
+                                    save_file=save_file,
+                                    dataframe_snapshot=dataframe_snapshot,
+                                    suppress_runtime_errors=suppress_runtime_errors)
+
+            if target_feature and feature_name != target_feature:
+
+                if target_feature_numerical:
+
+                    if len(set(pd.to_numeric(df[target_feature],
+                                         errors='coerce').dropna())) > 1:
+                        self.plot_violin_graph(df,
+                                               feature_name,
+                                               dataset_name=dataset_name,
+                                               y_feature_name=target_feature,
+                                               display_visuals=display_visuals,
+                                               sub_dir=sub_dir,
+                                               save_file=save_file,
+                                               palette=colors,
+                                               dataframe_snapshot=dataframe_snapshot,
+                                               suppress_runtime_errors=suppress_runtime_errors)
+                else:
+
+                    ridge_plot_colors = self.__df_features.get_feature_colors(
+                        target_feature)
+
+                    self.plot_ridge_graph(df,
+                                          target_feature,
+                                          dataset_name=dataset_name,
+                                          y_feature_name=feature_name,
+                                          display_visuals=display_visuals,
+                                          sub_dir=sub_dir,
+                                          save_file=save_file,
+                                          dataframe_snapshot=dataframe_snapshot,
+                                          suppress_runtime_errors=suppress_runtime_errors)
+
+                    if not ridge_plot_colors:
+                        self.plot_ridge_graph(df,
+                                              target_feature,
+                                              dataset_name=dataset_name,
+                                              y_feature_name=feature_name,
+                                              display_visuals=display_visuals,
+                                              sub_dir=sub_dir,
+                                              save_file=save_file,
+                                              palette=self.__df_features.get_feature_colors(feature_name),
+                                              dataframe_snapshot=dataframe_snapshot,
+                                              suppress_runtime_errors=suppress_runtime_errors)
+
+            print("\n\n")
+
+        # -----
+        elif feature_name in self.__df_features.get_continuous_numerical_features():
+            self.plot_distance_graph(df,
+                                     feature_name,
+                                     dataset_name=dataset_name,
+                                     display_visuals=display_visuals,
+                                     sub_dir=sub_dir,
+                                     save_file=save_file,
+                                     dataframe_snapshot=dataframe_snapshot,
+                                     suppress_runtime_errors=suppress_runtime_errors)
+
+            self.descr_table(df,
+                             feature_name,
+                             dataset_name=dataset_name,
+                             display_visuals=display_visuals,
+                             sub_dir=sub_dir,
+                             save_file=save_file,
+                             dataframe_snapshot=dataframe_snapshot,
+                             suppress_runtime_errors=suppress_runtime_errors)
+
+            if target_feature and feature_name != target_feature:
+
+                if target_feature_numerical:
+
+                    ridge_plot_colors = self.__df_features.get_feature_colors(target_feature)
+                    self.plot_ridge_graph(df,
+                                          feature_name,
+                                          dataset_name=dataset_name,
+                                          y_feature_name=target_feature,
+                                          display_visuals=display_visuals,
+                                          sub_dir=sub_dir,
+                                          save_file=save_file,
+                                          palette=ridge_plot_colors,
+                                          dataframe_snapshot=dataframe_snapshot,
+                                          suppress_runtime_errors=suppress_runtime_errors)
+
+                    if not ridge_plot_colors:
+                        self.plot_ridge_graph(df,
+                                              feature_name,
+                                              dataset_name=dataset_name,
+                                              y_feature_name=target_feature,
+                                              display_visuals=display_visuals,
+                                              sub_dir=sub_dir,
+                                              save_file=save_file,
+                                              dataframe_snapshot=dataframe_snapshot,
+                                              suppress_runtime_errors=suppress_runtime_errors)
+
+                else:
+                    if len(set(pd.to_numeric(df[feature_name],
+                                             errors='coerce').dropna())) > 1:
+                        self.plot_violin_graph(df,
+                                               target_feature,
+                                               dataset_name=dataset_name,
+                                               y_feature_name=feature_name,
+                                               display_visuals=display_visuals,
+                                               sub_dir=sub_dir,
+                                               save_file=save_file,
+                                               palette=colors,
+                                               dataframe_snapshot=dataframe_snapshot,
+                                               suppress_runtime_errors=suppress_runtime_errors)
+
     def plot_distance_graph(self,
                             df,
                             feature_name,
@@ -213,6 +449,7 @@ class FeatureAnalysis(FileOutput):
                             sub_dir=None,
                             save_file=True,
                             dataframe_snapshot=True,
+                            suppress_runtime_errors=True,
                             figsize=GRAPH_DEFAULTS.FIGSIZE,
                             bins=None,
                             norm_hist=True,
@@ -254,6 +491,10 @@ class FeatureAnalysis(FileOutput):
                 Helps ensure that data generated in that directory is correctly
                 associated to a dataframe.
 
+            suppress_runtime_errors: bool
+                If set to true; when generating any graphs will suppress any runtime
+                errors so the program can keep running.
+
             figsize: tuple
                 The given size of the plot.
 
@@ -291,70 +532,67 @@ class FeatureAnalysis(FileOutput):
             the json file's snapshot of the given dataframe doesn't match the
             given dataframe.
         """
-        if np.sum(df[feature_name].isnull()) == df.shape[0]:
-            raise UnsatisfiedRequirments(
-                "Distance plot graph couldn't be generated because " +
-                f"there is only missing data to display in {feature_name}!")
+        try:
+            if np.sum(df[feature_name].isnull()) == df.shape[0]:
+                raise UnsatisfiedRequirments(
+                    "Distance plot graph couldn't be generated because " +
+                    f"there is only missing data to display in {feature_name}!")
 
-        print(f"Generating graph for distance plot on {feature_name}")
+            print(f"Generating graph for distance plot on {feature_name}")
 
-        feature_values = pd.to_numeric(df[feature_name].dropna(),
-                                       errors='coerce').dropna()
+            feature_values = pd.to_numeric(df[feature_name].dropna(),
+                                           errors='coerce').dropna()
 
-        if not len(feature_values):
-            raise ValueError(
-                f"The given feature {feature_name} doesn't seem to convert to a numeric vector.")
+            if not len(feature_values):
+                raise ValueError(
+                    f"The given feature {feature_name} doesn't seem to convert to a numeric vector.")
 
-        # Closes up any past graph info
-        plt.close()
+            # Closes up any past graph info
+            plt.close()
 
-        # Set foundation graph info
-        sns.set(style="whitegrid")
-        plt.figure(figsize=figsize)
-        plt.title("Distance Plot: " + feature_name)
+            # Set foundation graph info
+            sns.set(style="whitegrid")
+            plt.figure(figsize=figsize)
+            plt.title("Distance Plot: " + feature_name)
 
-        # Create seaborn graph
-        sns.distplot(feature_values,
-                     bins=bins,
-                     hist=hist,
-                     kde=kde,
-                     fit=fit,
-                     fit_kws=fit_kws,
-                     color=colors,
-                     norm_hist=norm_hist)
+            # Create seaborn graph
+            sns.distplot(feature_values,
+                         bins=bins,
+                         hist=hist,
+                         kde=kde,
+                         fit=fit,
+                         fit_kws=fit_kws,
+                         color=colors,
+                         norm_hist=norm_hist)
 
-        # Pass a default name if needed
-        if not filename:
-            filename = f"Distance plot graph on {feature_name}"
+            # Pass a default name if needed
+            if not filename:
+                filename = f"Distance plot graph on {feature_name}"
 
-        # -----
-        if save_file:
-
-            if not sub_dir:
-                sub_dir = f"{dataset_name}/{feature_name}"
-            if not isinstance(sub_dir, str):
-                raise TypeError(f"Expected param 'sub_dir' to be type string! Was found to be {type(sub_dir)}")
-
-            # Check if dataframe matches saved snapshot; Creates file if needed
-            if not self.__called_from_perform:
-
-                if dataframe_snapshot:
-                    df_snapshot = DataFrameSnapshot()
-                    df_snapshot.check_create_snapshot(df,
-                                                      self.__df_features,
-                                                      directory_path=self.folder_path,
-                                                      sub_dir=f"{sub_dir}/_Extras")
-
-            # Create the png
-            create_plt_png(self.folder_path,
-                           sub_dir,
-                           convert_to_filename(filename))
+            # -----
+            if save_file:
+                self.__attempt_to_save_plot(df=df,
+                                            feature_name=feature_name,
+                                            dataset_name=dataset_name,
+                                            filename=filename,
+                                            sub_dir=sub_dir,
+                                            dataframe_snapshot=dataframe_snapshot,
+                                            suppress_runtime_errors=suppress_runtime_errors)
 
 
-        if self.__notebook_mode and display_visuals:
-            plt.show()
+            if self.__notebook_mode and display_visuals:
+                plt.show()
 
-        plt.close()
+            plt.close()
+
+        except Exception as e:
+            plt.close()
+            if suppress_runtime_errors:
+                warnings.warn(
+                    f"Distance plot graph throw an error on feature '{feature_name}':\n{str(e)}",
+                    RuntimeWarning)
+            else:
+                raise e
 
 
     def plot_violin_graph(self,
@@ -367,6 +605,7 @@ class FeatureAnalysis(FileOutput):
                           sub_dir=None,
                           save_file=True,
                           dataframe_snapshot=True,
+                          suppress_runtime_errors=True,
                           figsize=GRAPH_DEFAULTS.FIGSIZE,
                           order=None,
                           cut=2,
@@ -410,6 +649,10 @@ class FeatureAnalysis(FileOutput):
                 snapshot of the dataframe in the dataset's directory structure.
                 Helps ensure that data generated in that directory is correctly
                 associated to a dataframe.
+
+            suppress_runtime_errors: bool
+                If set to true; when generating any graphs will suppress any runtime
+                errors so the program can keep running.
 
             figsize: tuple
                 Size of the given plot.
@@ -462,91 +705,83 @@ class FeatureAnalysis(FileOutput):
             the json file's snapshot of the given dataframe doesn't match the
             given dataframe.
         """
+        try:
+            # Error check and create title/part of default file name
+            found_features = []
+            feature_title = ""
+            for feature in (feature_name, y_feature_name):
+                if feature:
+                    if np.sum(df[feature].isnull()) == df.shape[0]:
+                        raise UnsatisfiedRequirments("Count plot graph couldn't be generated because " +
+                              f"there is only missing data to display in {feature}!")
 
-        # Error check and create title/part of default file name
-        found_features = []
-        feature_title = ""
-        for feature in (feature_name, y_feature_name):
-            if feature:
-                if np.sum(df[feature].isnull()) == df.shape[0]:
-                    raise UnsatisfiedRequirments("Count plot graph couldn't be generated because " +
-                          f"there is only missing data to display in {feature}!")
-
-                found_features.append(feature)
-                if len(found_features) == 1:
-                    feature_title = f"{feature}"
-                else:
-                    feature_title += f" by {feature}"
-
-
-        if not len(found_features):
-            raise UnsatisfiedRequirments("Both x and y feature's are type 'None'. Please pass at least one feature.")
-
-        del found_features
-
-        print("Generating graph violin graph on " + feature_title)
-
-        # Closes up any past graph info
-        plt.close()
-
-        # Set plot structure
-        plt.figure(figsize=figsize)
-        plt.title("Violin Plot: " + feature_title)
-
-        feature_values = pd.to_numeric(df[y_feature_name],
-                                       errors='coerce').dropna()
-
-        if not len(feature_values):
-            raise ValueError("The y feature must contain numerical features.")
-
-        x_values = df[feature_name]
-        sns.violinplot(x=x_values,
-                       y=feature_values,
-                       order=order,
-                       cut=cut,
-                       scale=scale,
-                       gridsize=gridsize,
-                       width=width,
-                       palette=palette,
-                       saturation=saturation)
-
-        # Pass a default name if needed
-        if not filename:
-            filename = f"Violin plot graph on {feature_title}."
+                    found_features.append(feature)
+                    if len(found_features) == 1:
+                        feature_title = f"{feature}"
+                    else:
+                        feature_title += f" by {feature}"
 
 
-        # -----
-        if save_file:
+            if not len(found_features):
+                raise UnsatisfiedRequirments("Both x and y feature's are type 'None'. Please pass at least one feature.")
 
-            if not sub_dir:
-                sub_dir = f"{dataset_name}/{feature_name}"
-            if not isinstance(sub_dir, str):
-                raise TypeError(f"Expected param 'sub_dir' to be type string! Was found to be {type(sub_dir)}")
+            del found_features
 
-            # Check if dataframe matches saved snapshot; Creates file if needed
-            if not self.__called_from_perform:
-                if dataframe_snapshot:
-                    df_snapshot = DataFrameSnapshot()
-                    df_snapshot.check_create_snapshot(df,
-                                                      self.__df_features,
-                                                      directory_path=self.folder_path,
-                                                      sub_dir=f"{sub_dir}/_Extras")
+            print("Generating graph violin graph on " + feature_title)
 
-            if not sub_dir:
-                sub_dir = f"{dataset_name}/{feature_name}"
-            if not isinstance(sub_dir, str):
-                raise TypeError(f"Expected param 'sub_dir' to be type string! Was found to be {type(sub_dir)}")
+            # Closes up any past graph info
+            plt.close()
 
-            # Create the png
-            create_plt_png(self.folder_path,
-                           sub_dir,
-                           convert_to_filename(filename))
+            # Set plot structure
+            plt.figure(figsize=figsize)
+            plt.title("Violin Plot: " + feature_title)
+
+            feature_values = pd.to_numeric(df[y_feature_name],
+                                           errors='coerce').dropna()
+
+            if not len(feature_values):
+                raise ValueError("The y feature must contain numerical features.")
+
+            x_values = df[feature_name]
+            sns.violinplot(x=x_values,
+                           y=feature_values,
+                           order=order,
+                           cut=cut,
+                           scale=scale,
+                           gridsize=gridsize,
+                           width=width,
+                           palette=palette,
+                           saturation=saturation)
+
+            # Pass a default name if needed
+            if not filename:
+                filename = f"Violin plot graph on {feature_title}."
 
 
-        if self.__notebook_mode and display_visuals:
-            plt.show()
+            # -----
+            if save_file:
+                self.__attempt_to_save_plot(df=df,
+                                            feature_name=feature_name,
+                                            dataset_name=dataset_name,
+                                            filename=filename,
+                                            sub_dir=sub_dir,
+                                            dataframe_snapshot=dataframe_snapshot,
+                                            suppress_runtime_errors=suppress_runtime_errors)
 
-        plt.close()
+
+            if self.__notebook_mode and display_visuals:
+                plt.show()
+
+            plt.close()
+
+        except Exception as e:
+            plt.close()
+            if suppress_runtime_errors:
+                warnings.warn(
+                    f"Plot violin graph an error on feature '{feature_name}':\n{str(e)}",
+                    RuntimeWarning)
+            else:
+                raise e
 
     def plot_count_graph(self,
                          df,
@@ -557,6 +792,7 @@ class FeatureAnalysis(FileOutput):
                          sub_dir=None,
                          save_file=True,
                          dataframe_snapshot=True,
+                         suppress_runtime_errors=True,
                          figsize=GRAPH_DEFAULTS.FIGSIZE,
                          flip_axis=False,
                          palette="PuBu"):
@@ -595,6 +831,10 @@ class FeatureAnalysis(FileOutput):
                 Helps ensure that data generated in that directory is correctly
                 associated to a dataframe.
 
+            suppress_runtime_errors: bool
+                If set to true; when generating any graphs will suppress any runtime
+                errors so the program can keep running.
+
             figsize: tuple
                 Size for the given plot.
 
@@ -614,93 +854,90 @@ class FeatureAnalysis(FileOutput):
             the json file's snapshot of the given dataframe doesn't match the
             given dataframe.
         """
+        try:
+            if np.sum(df[feature_name].isnull()) == df.shape[0]:
+                raise UnsatisfiedRequirments(
+                    "Count plot graph couldn't be generated because " +
+                    f"there is only missing data to display in {feature_name}!")
+            print(f"Count plot graph on {feature_name}")
 
-        if np.sum(df[feature_name].isnull()) == df.shape[0]:
-            raise UnsatisfiedRequirments(
-                "Count plot graph couldn't be generated because " +
-                f"there is only missing data to display in {feature_name}!")
-        print(f"Count plot graph on {feature_name}")
+            # Closes up any past graph info
+            plt.close()
 
-        # Closes up any past graph info
-        plt.close()
+            # Set graph info
+            plt.figure(figsize=figsize)
+            sns.set(style="whitegrid")
+            plt.title("Category Count Plot: " + feature_name)
 
-        # Set graph info
-        plt.figure(figsize=figsize)
-        sns.set(style="whitegrid")
-        plt.title("Category Count Plot: " + feature_name)
+            value_counts = df[feature_name].dropna().value_counts(sort=True)
 
-        value_counts = df[feature_name].dropna().value_counts(sort=True)
+            feature_values,counts = value_counts.index, value_counts.values
+            del value_counts
 
-        feature_values,counts = value_counts.index, value_counts.values
-        del value_counts
+            # Find and rank values based on counts for color variation of the graph
+            if not palette:
+                palette = "PuBu"
 
-        # Find and rank values based on counts for color variation of the graph
-        if not palette:
-            palette = "PuBu"
+            if isinstance(palette,str):
+                rank_list = np.argsort(-np.array(counts)).argsort()
+                pal = sns.color_palette(palette, len(counts))
+                palette = np.array(pal[::-1])[rank_list]
 
-        if isinstance(palette,str):
-            rank_list = np.argsort(-np.array(counts)).argsort()
-            pal = sns.color_palette(palette, len(counts))
-            palette = np.array(pal[::-1])[rank_list]
+            plt.clf()
 
-        plt.clf()
+            if feature_name in self.__df_features.get_bool_features():
+                feature_values = [bool(val) if val == 0 or val == 1 else val
+                                  for val in feature_values]
 
-        if feature_name in self.__df_features.get_bool_features():
-            feature_values = [bool(val) if val == 0 or val == 1 else val
-                              for val in feature_values]
+            # Flip the graph for visual flare
+            if flip_axis:
+                ax = sns.barplot(x=counts,
+                                 y=feature_values,
+                                 palette=palette,
+                                 order=feature_values)
+            else:
+                ax = sns.barplot(x=feature_values,
+                                 y=counts,
+                                 palette=palette,
+                                 order=feature_values)
 
-        # Flip the graph for visual flare
-        if flip_axis:
-            ax = sns.barplot(x=counts,
-                             y=feature_values,
-                             palette=palette,
-                             order=feature_values)
-        else:
-            ax = sns.barplot(x=feature_values,
-                             y=counts,
-                             palette=palette,
-                             order=feature_values)
+            # Labels for numerical count of each bar
+            for p in ax.patches:
+                height = p.get_height()
+                ax.text(p.get_x() + p.get_width() / 2.,
+                        height + 3,
+                        '{:1}'.format(height),
+                        ha="center")
 
-        # Labels for numerical count of each bar
-        for p in ax.patches:
-            height = p.get_height()
-            ax.text(p.get_x() + p.get_width() / 2.,
-                    height + 3,
-                    '{:1}'.format(height),
-                    ha="center")
+            # Pass a default name if needed
+            if not filename:
+                filename = f"Count plot graph on {feature_name}"
 
-        # Pass a default name if needed
-        if not filename:
-            filename = f"Count plot graph on {feature_name}"
+                if isinstance(palette,np.ndarray):
+                    filename += " with count color ranking."
+            # -----
+            if save_file:
+                self.__attempt_to_save_plot(df=df,
+                                            feature_name=feature_name,
+                                            dataset_name=dataset_name,
+                                            filename=filename,
+                                            sub_dir=sub_dir,
+                                            dataframe_snapshot=dataframe_snapshot,
+                                            suppress_runtime_errors=suppress_runtime_errors)
 
-            if isinstance(palette,np.ndarray):
-                filename += " with count color ranking."
-        # -----
-        if save_file:
+            if self.__notebook_mode and display_visuals:
+                plt.show()
 
-            if not sub_dir:
-                sub_dir = f"{dataset_name}/{feature_name}"
-            if not isinstance(sub_dir, str):
-                raise TypeError(f"Expected param 'sub_dir' to be type string! Was found to be {type(sub_dir)}")
+            plt.close()
 
-            # Check if dataframe matches saved snapshot; Creates file if needed
-            if not self.__called_from_perform:
-                if dataframe_snapshot:
-                    df_snapshot = DataFrameSnapshot()
-                    df_snapshot.check_create_snapshot(df,
-                                                      self.__df_features,
-                                                      directory_path=self.folder_path,
-                                                      sub_dir=f"{sub_dir}/_Extras")
-
-            # Create the png
-            create_plt_png(self.folder_path,
-                           sub_dir,
-                           convert_to_filename(filename))
-
-        if self.__notebook_mode and display_visuals:
-            plt.show()
-
-        plt.close()
+        except Exception as e:
+            plt.close()
+            if suppress_runtime_errors:
+                warnings.warn(
+                    f"Plot count graph raised an error on feature '{feature_name}':\n{str(e)}",
+                    RuntimeWarning)
+            else:
+                raise e
 
     def pie_graph(self,
                   df,
@@ -711,6 +948,7 @@ class FeatureAnalysis(FileOutput):
                   sub_dir=None,
                   save_file=True,
                   dataframe_snapshot=True,
+                  suppress_runtime_errors=True,
                   figsize=GRAPH_DEFAULTS.FIGSIZE,
                   pallete=None):
         """
@@ -747,6 +985,10 @@ class FeatureAnalysis(FileOutput):
                 Helps ensure that data generated in that directory is correctly
                 associated to a dataframe.
 
+           suppress_runtime_errors: bool
+                If set to true; when generating any graphs will suppress any runtime
+                errors so the program can keep running.
+
            palette:
                 Dictionary of all feature values to hex color values.
 
@@ -755,90 +997,86 @@ class FeatureAnalysis(FileOutput):
             the json file's snapshot of the given dataframe doesn't match the
             given dataframe.
         """
+        try:
+            if np.sum(df[feature_name].isnull()) == df.shape[0]:
+                raise UnsatisfiedRequirments("Pie graph couldn't be generated because " +
+                      f"there is only missing data to display in {feature_name}!")
+            print(f"Pie graph on {feature_name}")
 
-        if np.sum(df[feature_name].isnull()) == df.shape[0]:
-            raise UnsatisfiedRequirments("Pie graph couldn't be generated because " +
-                  f"there is only missing data to display in {feature_name}!")
-        print(f"Pie graph on {feature_name}")
+            # Closes up any past graph info
+            plt.close()
 
-        # Closes up any past graph info
-        plt.close()
+            # Find value counts
+            value_counts = df[feature_name].dropna().value_counts(sort=False)
+            value_list = value_counts.index.tolist()
+            value_count_list = value_counts.values.tolist()
 
-        # Find value counts
-        value_counts = df[feature_name].dropna().value_counts(sort=False)
-        value_list = value_counts.index.tolist()
-        value_count_list = value_counts.values.tolist()
+            # Explode the part of the pie graph that is the maximum of the graph
+            explode_array = [0] * len(value_list)
+            explode_array[np.array(value_count_list).argmax()] = .03
 
-        # Explode the part of the pie graph that is the maximum of the graph
-        explode_array = [0] * len(value_list)
-        explode_array[np.array(value_count_list).argmax()] = .03
+            color_list = None
 
-        color_list = None
+            if isinstance(pallete,dict):
+                color_list = []
+                for value in tuple(value_list):
+                    try:
+                        color_list.append(pallete[value])
+                    except KeyError:
+                        raise KeyError(f"The given value '{value}' in feature '{feature_name}'"
+                                       + " was not found in the passed color dict.")
 
-        if isinstance(pallete,dict):
-            color_list = []
-            for value in tuple(value_list):
-                try:
-                    color_list.append(pallete[value])
-                except KeyError:
-                    raise KeyError(f"The given value '{value}' in feature '{feature_name}'"
-                                   + " was not found in the passed color dict.")
+            plt.figure(figsize=figsize)
 
-        plt.figure(figsize=figsize)
+            if feature_name in self.__df_features.get_bool_features():
+                value_list = [bool(val) if val == 0 or val == 1 else val
+                              for val in value_list]
 
-        if feature_name in self.__df_features.get_bool_features():
-            value_list = [bool(val) if val == 0 or val == 1 else val
-                          for val in value_list]
+            # Plot pie graph
+            plt.pie(
+                tuple(value_count_list),
+                labels=tuple(value_list),
+                shadow=False,
+                colors=color_list,
+                explode=tuple(explode_array),
+                startangle=90,
+                autopct='%1.1f%%',
+            )
 
-        # Plot pie graph
-        plt.pie(
-            tuple(value_count_list),
-            labels=tuple(value_list),
-            shadow=False,
-            colors=color_list,
-            explode=tuple(explode_array),
-            startangle=90,
-            autopct='%1.1f%%',
-        )
+            # Set foundation graph info
+            fig = plt.gcf()
+            plt.title("Pie Chart: " + feature_name)
+            plt.legend(fancybox=True)
+            plt.axis('equal')
+            plt.tight_layout()
 
-        # Set foundation graph info
-        fig = plt.gcf()
-        plt.title("Pie Chart: " + feature_name)
-        plt.legend(fancybox=True)
-        plt.axis('equal')
-        plt.tight_layout()
+            # Pass a default name if needed
+            if not filename:
+                filename = f"Pie graph on {feature_name}"
 
-        # Pass a default name if needed
-        if not filename:
-            filename = f"Pie graph on {feature_name}"
-
-        # -----
-        if save_file:
-
-            if not sub_dir:
-                sub_dir = f"{dataset_name}/{feature_name}"
-            if not isinstance(sub_dir, str):
-                raise TypeError(f"Expected param 'sub_dir' to be type string! Was found to be {type(sub_dir)}")
-
-            # Check if dataframe matches saved snapshot; Creates file if needed
-            if not self.__called_from_perform:
-                if dataframe_snapshot:
-                    df_snapshot = DataFrameSnapshot()
-                    df_snapshot.check_create_snapshot(df,
-                                                      self.__df_features,
-                                                      directory_path=self.folder_path,
-                                                      sub_dir=f"{sub_dir}/_Extras")
-
-            # Create the png
-            create_plt_png(self.folder_path,
-                           sub_dir,
-                           convert_to_filename(filename))
+            # -----
+            if save_file:
+                self.__attempt_to_save_plot(df=df,
+                                            feature_name=feature_name,
+                                            dataset_name=dataset_name,
+                                            filename=filename,
+                                            sub_dir=sub_dir,
+                                            dataframe_snapshot=dataframe_snapshot,
+                                            suppress_runtime_errors=suppress_runtime_errors)
 
 
-        if self.__notebook_mode and display_visuals:
-            plt.show()
+            if self.__notebook_mode and display_visuals:
+                plt.show()
 
-        plt.close()
+            plt.close()
+
+        except Exception as e:
+            if suppress_runtime_errors:
+                warnings.warn(
+                    f"Pie graph raised an error on feature '{feature_name}':\n{str(e)}",
+                    RuntimeWarning)
+            else:
+                raise e
 
     def plot_ridge_graph(self,
                          df,
@@ -850,6 +1088,7 @@ class FeatureAnalysis(FileOutput):
                          sub_dir=None,
                          save_file=True,
                          dataframe_snapshot=True,
+                         suppress_runtime_errors=True,
                          figsize=GRAPH_DEFAULTS.FIGSIZE,
                          palette=None):
         """
@@ -857,7 +1096,7 @@ class FeatureAnalysis(FileOutput):
             Display a ridge plot and save the graph in the correct directory.
 
         Args:
-            df:
+          df:
                 Pandas DataFrame object.
 
           feature_name:
@@ -886,6 +1125,165 @@ class FeatureAnalysis(FileOutput):
                 Helps ensure that data generated in that directory is correctly
                 associated to a dataframe.
 
+          suppress_runtime_errors: bool
+                If set to true; when generating any graphs will suppress any runtime
+                errors so the program can keep running.
+
+          palette:
+                Dictionary of all feature values to hex color values.
+
+          Note:
+              A large part of this was taken from: http://tinyurl.com/tuou2cn
+
+        Raises:
+           Raises error if the feature data is filled with only nulls or if
+           the json file's snapshot of the given dataframe doesn't match the
+           given dataframe.
+        """
+        try:
+            print(f"Ridge plot graph on {feature_name} by {y_feature_name}.")
+
+            sns.set(style="white",
+                    rc={"axes.facecolor": (0, 0, 0, 0)})
+
+            filename_add_on = ""
+            if not palette:
+                palette = sns.cubehelix_palette(10, rot=-.20, light=.7)
+            else:
+                filename_add_on = " with pre defined colors"
+
+            # Initialize the FacetGrid object
+            g = sns.FacetGrid(df,
+                              row=y_feature_name,
+                              hue=y_feature_name,
+                              aspect=15,
+                              height=.4,
+                              palette=palette)
+
+            # Draw the densities in a few steps
+            g.map(sns.kdeplot,
+                  feature_name,
+                  clip_on=False,
+                  shade=True,
+                  alpha=1,
+                  lw=1.5,
+                  bw=.2)
+            g.map(sns.kdeplot,
+                  feature_name,
+                  clip_on=False,
+                  color="w",
+                  lw=2,
+                  bw=.2)
+
+            g.map(plt.axhline,
+                  y=0,
+                  lw=2,
+                  clip_on=False)
+
+            # Define and use a simple function to label the plot in axes coordinates
+            def label(x, color, label):
+                ax = plt.gca()
+                ax.text(0,
+                        .2,
+                        label,
+                        fontweight="bold",
+                        color=color,
+                        ha="left",
+                        va="center",
+                        transform=ax.transAxes)
+
+            g.map(label, feature_name)
+
+            # Set the subplots to overlap
+            g.fig.subplots_adjust(hspace=-.25)
+
+            # Remove axes details that don't play well with overlap
+            g.set_titles("")
+            g.set(yticks=[])
+            g.despine(bottom=True, left=True)
+            g.fig.set_size_inches(10, 10, forward=True)
+            g.fig.suptitle(f'{y_feature_name} by {feature_name}')
+            plt.figure(figsize=figsize)
+
+            # Pass a default name if needed
+            if not filename:
+                filename = f"Ridge plot graph on {feature_name} by {y_feature_name}" + filename_add_on
+
+            # -----
+            if save_file:
+                self.__attempt_to_save_plot(df=df,
+                                            feature_name=feature_name,
+                                            dataset_name=dataset_name,
+                                            filename=filename,
+                                            sub_dir=sub_dir,
+                                            dataframe_snapshot=dataframe_snapshot,
+                                            suppress_runtime_errors=suppress_runtime_errors)
+
+            if self.__notebook_mode and display_visuals:
+                plt.show()
+
+            plt.close()
+        except Exception as e:
+            plt.close()
+            if suppress_runtime_errors:
+                warnings.warn(
+                    f"Plot ridge graph raised an error on feature '{feature_name}':\n{str(e)}",
+                    RuntimeWarning)
+            else:
+                raise e
+
+
+    def plot_jointplot_graph(self,
+                             df,
+                             feature_name,
+                             dataset_name,
+                             y_feature_name,
+                             display_visuals=True,
+                             filename=None,
+                             sub_dir=None,
+                             save_file=True,
+                             dataframe_snapshot=True,
+                             suppress_runtime_errors=True,
+                             figsize=GRAPH_DEFAULTS.FIGSIZE,
+                             palette=None):
+        """
+        Desc:
+            Display a ridge plot and save the graph in the correct directory.
+
+        Args:
+          df:
+                Pandas DataFrame object.
+
+          feature_name:
+                Specified feature column name.
+
+          dataset_name:
+                The dataset's name; this will create a sub-directory in which your
+                generated graph will be inner-nested in.
+
+          display_visuals:
+                Boolean value to whether or not to display visualizations.
+
+          filename:
+                If set to 'None' will default to a pre-defined string;
+                unless it is set to an actual filename.
+
+          sub_dir:
+                Specify the sub directory to append to the pre-defined folder path.
+
+          save_file:
+                Boolean value to whether or not to save the file.
+
+          dataframe_snapshot:
+                Boolean value to determine whether or not generate and compare a
+                snapshot of the dataframe in the dataset's directory structure.
+                Helps ensure that data generated in that directory is correctly
+                associated to a dataframe.
+
+          suppress_runtime_errors: bool
+                If set to true; when generating any graphs will suppress any runtime
+                errors so the program can keep running.
+
           palette:
                 Dictionary of all feature values to hex color values.
 
@@ -898,103 +1296,37 @@ class FeatureAnalysis(FileOutput):
            given dataframe.
         """
 
-        print(f"Ridge plot graph on {feature_name} by {y_feature_name}.")
+        raise ValueError("NOT READY FOR USE YET!!!!!!")
 
-        sns.set(style="white",
-                rc={"axes.facecolor": (0, 0, 0, 0)})
+        try:
+            print(f"Joint plot graph on {feature_name} by {y_feature_name}.")
 
-        filename_add_on = ""
-        if not palette:
-            palette = sns.cubehelix_palette(10, rot=-.20, light=.7)
-        else:
-            filename_add_on = " with pre defined colors"
+            # Pass a default name if needed
+            if not filename:
+                filename = f"Ridge plot graph on {feature_name} by {y_feature_name}"
 
-        print(palette)
+            # -----
+            if save_file:
+                self.__attempt_to_save_plot(df=df,
+                                            feature_name=feature_name,
+                                            dataset_name=dataset_name,
+                                            filename=filename,
+                                            sub_dir=sub_dir,
+                                            dataframe_snapshot=dataframe_snapshot,
+                                            suppress_runtime_errors=suppress_runtime_errors)
 
-        # Initialize the FacetGrid object
-        g = sns.FacetGrid(df,
-                          row=y_feature_name,
-                          hue=y_feature_name,
-                          aspect=15,
-                          height=.4,
-                          palette=palette)
+            if self.__notebook_mode and display_visuals:
+                plt.show()
 
-        # Draw the densities in a few steps
-        g.map(sns.kdeplot,
-              feature_name,
-              clip_on=False,
-              shade=True,
-              alpha=1,
-              lw=1.5,
-              bw=.2)
-        g.map(sns.kdeplot,
-              feature_name,
-              clip_on=False,
-              color="w",
-              lw=2,
-              bw=.2)
-
-        g.map(plt.axhline,
-              y=0,
-              lw=2,
-              clip_on=False)
-
-        # Define and use a simple function to label the plot in axes coordinates
-        def label(x, color, label):
-            ax = plt.gca()
-            ax.text(0,
-                    .2,
-                    label,
-                    fontweight="bold",
-                    color=color,
-                    ha="left",
-                    va="center",
-                    transform=ax.transAxes)
-
-        g.map(label, feature_name)
-
-        # Set the subplots to overlap
-        g.fig.subplots_adjust(hspace=-.25)
-
-        # Remove axes details that don't play well with overlap
-        g.set_titles("")
-        g.set(yticks=[])
-        g.despine(bottom=True, left=True)
-        g.fig.set_size_inches(10, 10, forward=True)
-        g.fig.suptitle(f'{y_feature_name} by {feature_name}')
-        plt.figure(figsize=figsize)
-
-        # Pass a default name if needed
-        if not filename:
-            filename = f"Ridge plot graph on {feature_name} by {y_feature_name}" + filename_add_on
-
-        # -----
-        if save_file:
-
-            if not sub_dir:
-                sub_dir = f"{dataset_name}/{feature_name}"
-            if not isinstance(sub_dir, str):
-                raise TypeError(
-                    f"Expected param 'sub_dir' to be type string! Was found to be {type(sub_dir)}")
-
-            # Check if dataframe matches saved snapshot; Creates file if needed
-            if not self.__called_from_perform:
-                if dataframe_snapshot:
-                    df_snapshot = DataFrameSnapshot()
-                    df_snapshot.check_create_snapshot(df,
-                                                      self.__df_features,
-                                                      directory_path=self.folder_path,
-                                                      sub_dir=f"{sub_dir}/_Extras")
-
-            # Create the png
-            create_plt_png(self.folder_path,
-                           sub_dir,
-                           convert_to_filename(filename))
-
-        if self.__notebook_mode and display_visuals:
-            plt.show()
-
-        plt.close()
+            plt.close()
+        except Exception as e:
+            plt.close()
+            if suppress_runtime_errors:
+                warnings.warn(
+                    f"Plot ridge graph raised an error on feature '{feature_name}':\n{str(e)}",
+                    RuntimeWarning)
+            else:
+                raise e
 
 
     def value_counts_table(self,
@@ -1005,7 +1337,8 @@ class FeatureAnalysis(FileOutput):
                            filename=None,
                            sub_dir=None,
                            save_file=True,
-                           dataframe_snapshot=True):
+                           dataframe_snapshot=True,
+                           suppress_runtime_errors=True):
         """
         Args:
             df:
@@ -1037,6 +1370,10 @@ class FeatureAnalysis(FileOutput):
                 Helps ensure that data generated in that directory is correctly
                 associated to a dataframe.
 
+            suppress_runtime_errors: bool
+                If set to true; when generating any graphs will suppress any runtime
+                errors so the program can keep running.
+
         Desc:
             Creates/Saves a pandas dataframe of value counts of a dataframe.
 
@@ -1048,53 +1385,47 @@ class FeatureAnalysis(FileOutput):
             the json file's snapshot of the given dataframe doesn't match the
             given dataframe.
         """
+        try:
+            # Check if feature has only null data
+            if np.sum(df[feature_name].isnull()) == df.shape[0]:
+                raise UnsatisfiedRequirments("Values count table couldn't be generated because " +
+                                             f"there is only missing data to display in {feature_name}!")
 
-        # Check if feature has only null data
-        if np.sum(df[feature_name].isnull()) == df.shape[0]:
-            raise UnsatisfiedRequirments("Values count table couldn't be generated because " +
-                                         f"there is only missing data to display in {feature_name}!")
+            print(f"Creating value counts table for feature {feature_name}.")
 
-        print(f"Creating value counts table for feature {feature_name}.")
+            # -----
+            val_counts_df = value_counts_table(df,
+                                               feature_name)
 
-        # -----
-        val_counts_df = value_counts_table(df,
-                                           feature_name)
+            if self.__notebook_mode:
+                if display_visuals:
+                    display(val_counts_df)
+            else:
+                if display_visuals:
+                    print(val_counts_df)
 
-        if self.__notebook_mode:
-            if display_visuals:
-                display(val_counts_df)
-        else:
-            if display_visuals:
-                print(val_counts_df)
+            # Pass a default name if needed
+            if not filename:
+                filename = f"{feature_name} Value Counts Table"
 
-        # Pass a default name if needed
-        if not filename:
-            filename = f"{feature_name} Value Counts Table"
+            if save_file:
+                self.__attempt_to_save_table_as_plot(df=df,
+                                                     feature_name=feature_name,
+                                                     dataset_name=dataset_name,
+                                                     filename=filename,
+                                                     sub_dir=sub_dir,
+                                                     dataframe_snapshot=dataframe_snapshot,
+                                                     suppress_runtime_errors=suppress_runtime_errors,
+                                                     table=val_counts_df)
 
-        if save_file:
-
-            if not sub_dir:
-                sub_dir = f"{dataset_name}/{feature_name}"
-            if not isinstance(sub_dir,str):
-                raise TypeError(f"Expected param 'sub_dir' to be type string! Was found to be {type(sub_dir)}")
-
-            if not self.__called_from_perform:
-                if dataframe_snapshot:
-                    df_snapshot = DataFrameSnapshot()
-                    df_snapshot.check_create_snapshot(df,
-                                                      self.__df_features,
-                                                      directory_path=self.folder_path,
-                                                      sub_dir=f"{sub_dir}/_Extras")
-            # Closes up any past graph info
+        except Exception as e:
             plt.close()
-
-            # Convert value counts dataframe to an image
-            df_to_image(val_counts_df,
-                        self.folder_path,
-                        sub_dir,
-                        convert_to_filename(filename),
-                        show_index=True,
-                        format_float_pos=2)
+            if suppress_runtime_errors:
+                warnings.warn(
+                    f"Value count table raised an error on feature '{feature_name}':\n{str(e)}",
+                    RuntimeWarning)
+            else:
+                raise e
 
     def descr_table(self,
                     df,
@@ -1104,7 +1435,8 @@ class FeatureAnalysis(FileOutput):
                     filename=None,
                     sub_dir=None,
                     save_file=True,
-                    dataframe_snapshot=True):
+                    dataframe_snapshot=True,
+                    suppress_runtime_errors=True):
         """
         Desc:
             Creates/Saves a pandas dataframe of features and their found types
@@ -1143,223 +1475,85 @@ class FeatureAnalysis(FileOutput):
                 Helps ensure that data generated in that directory is correctly
                 associated to a dataframe.
 
+            suppress_runtime_errors: bool
+                If set to true; when generating any graphs will suppress any runtime
+                errors so the program can keep running.
+
         Raises:
             Raises error if the feature data is filled with only nulls or if
             the json file's snapshot of the given dataframe doesn't match the
             given dataframe.
         """
+        try:
+            # Check if dataframe has only null data
+            if np.sum(df[feature_name].isnull()) == df.shape[0]:
+                raise UnsatisfiedRequirments("Count plot graph couldn't be generated because " +
+                      f"there is only missing data to display in {feature_name}!")
 
-        # Check if dataframe has only null data
-        if np.sum(df[feature_name].isnull()) == df.shape[0]:
-            raise UnsatisfiedRequirments("Count plot graph couldn't be generated because " +
-                  f"there is only missing data to display in {feature_name}!")
+            print(f"Creating data description table for {feature_name}")
 
-        print(f"Creating data description table for {feature_name}")
-
-        desc_df = descr_table(df,
-                              feature_name,
-                              to_numeric=True)
-
-        if self.__notebook_mode:
-            if display_visuals:
-                display(desc_df)
-        else:
-            if display_visuals:
-                print(desc_df)
-
-        # Pass a default name if needed
-        if not filename:
-            filename = f"{feature_name} Description Table"
-
-        if save_file:
-
-            if not sub_dir:
-                sub_dir = f"{dataset_name}/{feature_name}"
-            if not isinstance(sub_dir,str):
-                raise TypeError(f"Expected param 'sub_dir' to be type string! Was found to be {type(sub_dir)}")
-
-            if not self.__called_from_perform:
-                if dataframe_snapshot:
-                    df_snapshot = DataFrameSnapshot()
-                    df_snapshot.check_create_snapshot(df,
-                                                      self.__df_features,
-                                                      directory_path=self.folder_path,
-                                                      sub_dir=f"{sub_dir}/_Extras")
-            # Closes up any past graph info
-            plt.close()
-
-            # Convert value counts dataframe to an image
-            df_to_image(desc_df,
-                        self.folder_path,
-                        sub_dir,
-                        convert_to_filename(filename),
-                        show_index=True,
-                        format_float_pos=2)
-
-
-    def generate_graphics_for_feature(self,
-                                      df,
-                                      feature_name,
-                                      dataset_name,
-                                      target_feature=None,
-                                      display_visuals=True,
-                                      sub_dir=None,
-                                      save_file=True,
-                                      dataframe_snapshot=True):
-
-        colors = self.__get_feature_colors(df,
-                                           feature_name)
-
-        # Display colors
-        if colors:
-            print(f"Colors:\n{colors}\n")
-
-        target_feature = target_feature
-
-        if target_feature:
-            target_feature_numerical = target_feature in self.__df_features.get_numerical_features()
-        else:
-            target_feature_numerical = False
-
-        # -----
-        if feature_name in self.__df_features.get_non_numerical_features() or feature_name in self.__df_features.get_bool_features():
-
-            if len(df[feature_name].value_counts().index) <= 5:
-                self.pie_graph(df,
-                               feature_name,
-                               dataset_name=dataset_name,
-                               display_visuals=display_visuals,
-                               sub_dir=sub_dir,
-                               save_file=save_file,
-                               pallete=colors,
-                               dataframe_snapshot=dataframe_snapshot)
-
-            self.plot_count_graph(df,
+            desc_df = descr_table(df,
                                   feature_name,
-                                  dataset_name=dataset_name,
-                                  display_visuals=display_visuals,
-                                  sub_dir=sub_dir,
-                                  save_file=save_file,
-                                  palette=colors,
-                                  dataframe_snapshot=dataframe_snapshot)
+                                  to_numeric=True)
 
-            if colors:
-                self.plot_count_graph(df,
-                                      feature_name,
-                                      dataset_name=dataset_name,
-                                      display_visuals=display_visuals,
-                                      sub_dir=sub_dir,
-                                      save_file=save_file,
-                                      dataframe_snapshot=dataframe_snapshot)
+            if self.__notebook_mode:
+                if display_visuals:
+                    display(desc_df)
+            else:
+                if display_visuals:
+                    print(desc_df)
 
-            self.value_counts_table(df,
-                                    feature_name,
-                                    dataset_name=dataset_name,
-                                    display_visuals=display_visuals,
-                                    sub_dir=sub_dir,
-                                    save_file=save_file,
-                                    dataframe_snapshot=dataframe_snapshot)
-            if target_feature and feature_name != target_feature:
+            # Pass a default name if needed
+            if not filename:
+                filename = f"{feature_name} Description Table"
 
-                if target_feature_numerical:
+            if save_file:
 
-                    if len(set(pd.to_numeric(df[target_feature],
-                                         errors='coerce').dropna())) > 1:
-                        self.plot_violin_graph(df,
-                                               feature_name,
-                                               dataset_name=dataset_name,
-                                               y_feature_name=target_feature,
-                                               display_visuals=display_visuals,
-                                               sub_dir=sub_dir,
-                                               save_file=save_file,
-                                               palette=colors,
-                                               dataframe_snapshot=dataframe_snapshot)
-                else:
+                self.__attempt_to_save_table_as_plot(df=df,
+                                                     feature_name=feature_name,
+                                                     dataset_name=dataset_name,
+                                                     filename=filename,
+                                                     sub_dir=sub_dir,
+                                                     dataframe_snapshot=dataframe_snapshot,
+                                                     suppress_runtime_errors=suppress_runtime_errors,
+                                                     table=desc_df)
 
-                    ridge_plot_colors = self.__df_features.get_feature_colors(
-                        target_feature)
-
-                    self.plot_ridge_graph(df,
-                                          target_feature,
-                                          dataset_name=dataset_name,
-                                          y_feature_name=feature_name,
-                                          display_visuals=display_visuals,
-                                          sub_dir=sub_dir,
-                                          save_file=save_file,
-                                          dataframe_snapshot=dataframe_snapshot)
-
-                    if not ridge_plot_colors:
-                        self.plot_ridge_graph(df,
-                                              target_feature,
-                                              dataset_name=dataset_name,
-                                              y_feature_name=feature_name,
-                                              display_visuals=display_visuals,
-                                              sub_dir=sub_dir,
-                                              save_file=save_file,
-                                              palette=self.__df_features.get_feature_colors(feature_name),
-                                              dataframe_snapshot=dataframe_snapshot)
-
-            print("\n\n")
-
-        # -----
-        elif feature_name in self.__df_features.get_continuous_numerical_features():
-            self.plot_distance_graph(df,
-                                     feature_name,
-                                     dataset_name=dataset_name,
-                                     display_visuals=display_visuals,
-                                     sub_dir=sub_dir,
-                                     save_file=save_file,
-                                     dataframe_snapshot=dataframe_snapshot)
-
-            self.descr_table(df,
-                             feature_name,
-                             dataset_name=dataset_name,
-                             display_visuals=display_visuals,
-                             sub_dir=sub_dir,
-                             save_file=save_file,
-                             dataframe_snapshot=dataframe_snapshot)
-
-            if target_feature and feature_name != target_feature:
-
-                if target_feature_numerical:
-
-                    ridge_plot_colors = self.__df_features.get_feature_colors(target_feature)
-                    self.plot_ridge_graph(df,
-                                          feature_name,
-                                          dataset_name=dataset_name,
-                                          y_feature_name=target_feature,
-                                          display_visuals=display_visuals,
-                                          sub_dir=sub_dir,
-                                          save_file=save_file,
-                                          palette=ridge_plot_colors,
-                                          dataframe_snapshot=dataframe_snapshot)
-
-                    if not ridge_plot_colors:
-                        self.plot_ridge_graph(df,
-                                              feature_name,
-                                              dataset_name=dataset_name,
-                                              y_feature_name=target_feature,
-                                              display_visuals=display_visuals,
-                                              sub_dir=sub_dir,
-                                              save_file=save_file,
-                                              dataframe_snapshot=dataframe_snapshot)
-
-                else:
-                    if len(set(pd.to_numeric(df[feature_name],
-                                             errors='coerce').dropna())) > 1:
-                        self.plot_violin_graph(df,
-                                               target_feature,
-                                               dataset_name=dataset_name,
-                                               y_feature_name=feature_name,
-                                               display_visuals=display_visuals,
-                                               sub_dir=sub_dir,
-                                               save_file=save_file,
-                                               palette=colors,
-                                               dataframe_snapshot=dataframe_snapshot)
+        except Exception as e:
+            plt.close()
+            if suppress_runtime_errors:
+                warnings.warn(
+                    f"Descr table raised an error on feature '{feature_name}':\n{str(e)}",
+                    RuntimeWarning)
+            else:
+                raise e
 
     def __get_feature_colors(self,
                              df,
                              feature_name):
+        """
+        Desc:
+            Creates a dict object of all possible feature values with their
+            associated colors.
+
+            Note
+                Any unknown feature values that aren't declared
+                by df_features are given a default color from the constants
+                section of the project. Goes up to 20 different colors unitl
+                colors is init to None.
+
+        Args:
+            df:
+                Pandas DataFrame object
+
+            feature_name:
+                Specified feature column name.
+
+        Returns:
+            Gives back a dictionary object of all possible feature values
+            with their associated colors.
+        """
+
+
         colors = self.__df_features.get_feature_colors(feature_name)
         feature_value_representation = self.__df_features.get_feature_value_representation()
 
@@ -1400,6 +1594,162 @@ class FeatureAnalysis(FileOutput):
                         if i == len(
                                 GRAPH_DEFAULTS.DEFINED_LIST_OF_RANDOM_COLORS):
                             colors = None
-
-
         return colors
+
+    def __attempt_to_save_plot(self,
+                               df=None,
+                               feature_name=None,
+                               dataset_name=None,
+                               filename="Unknown filename",
+                               sub_dir=None,
+                               dataframe_snapshot=True,
+                               suppress_runtime_errors=True):
+        """
+        Desc:
+            Checks the passed data to see if a plot can be saved; raises
+            an error if it can't.
+
+        Args:
+            df:
+                Pandas DataFrame object
+
+            feature_name: string or list of strings
+                Specified feature column name.
+
+            dataset_name:
+                The dataset's name; this will create a sub-directory in which your
+                generated graph will be inner-nested in.
+
+
+            filename:
+                If set to 'None' will default to a pre-defined string;
+                unless it is set to an actual filename.
+
+            sub_dir:
+                Specify the sub directory to append to the pre-defined folder path.
+
+            dataframe_snapshot:
+                Boolean value to determine whether or not generate and compare a
+                snapshot of the dataframe in the dataset's directory structure.
+                Helps ensure that data generated in that directory is correctly
+                associated to a dataframe.
+
+            suppress_runtime_errors: bool
+                If set to true; when generating any graphs will suppress any runtime
+                errors so the program can keep running.
+        """
+        try:
+            if not sub_dir and feature_name:
+                sub_dir = f"{dataset_name}/{feature_name}"
+
+            elif not sub_dir and not feature_name:
+                sub_dir = f"{dataset_name}"
+
+            if not isinstance(sub_dir, str):
+                raise TypeError(
+                    f"Expected param 'sub_dir' to be type string! Was found to be {type(sub_dir)}")
+
+            # Check if dataframe matches saved snapshot; Creates file if needed
+            if not self.__called_from_perform:
+
+                if dataframe_snapshot:
+                    df_snapshot = DataFrameSnapshot()
+                    df_snapshot.check_create_snapshot(df,
+                                                      self.__df_features,
+                                                      directory_path=self.folder_path,
+                                                      sub_dir=f"{sub_dir}/_Extras")
+            plt.show()
+            # Create the png to save
+            create_plt_png(self.folder_path,
+                           sub_dir,
+                           convert_to_filename(filename))
+
+        except Exception as e:
+            plt.close()
+            if suppress_runtime_errors:
+                warnings.warn(
+                    f"An error occured when trying to save the plot for feature '{feature_name}':\n{str(e)}",
+                    RuntimeWarning)
+            else:
+                raise e
+
+    def __attempt_to_save_table_as_plot(self,
+                                        df=None,
+                                        feature_name=None,
+                                        dataset_name=None,
+                                        filename="Unknown filename",
+                                        sub_dir=None,
+                                        dataframe_snapshot=True,
+                                        suppress_runtime_errors=True,
+                                        table=None):
+        """
+        Desc:
+            Checks the passed data to see if a table can be saved as a plot;
+            raises an error if it can't.
+
+        Args:
+            df:
+                Pandas DataFrame object
+
+            feature_name:
+                Specified feature column name.
+
+            dataset_name:
+                The dataset's name; this will create a sub-directory in which your
+                generated graph will be inner-nested in.
+
+            filename:
+                If set to 'None' will default to a pre-defined string;
+                unless it is set to an actual filename.
+
+            sub_dir:
+                Specify the sub directory to append to the pre-defined folder path.
+
+            dataframe_snapshot:
+                Boolean value to determine whether or not generate and compare a
+                snapshot of the dataframe in the dataset's directory structure.
+                Helps ensure that data generated in that directory is correctly
+                associated to a dataframe.
+
+            suppress_runtime_errors: bool
+                If set to true; when generating any graphs will suppress any runtime
+                errors so the program can keep running.
+        """
+
+        try:
+            if not sub_dir and feature_name:
+                sub_dir = f"{dataset_name}/{feature_name}"
+
+            elif not sub_dir and not feature_name:
+                sub_dir = f"{dataset_name}"
+
+            if not isinstance(sub_dir, str):
+                raise TypeError(
+                    f"Expected param 'sub_dir' to be type string! Was found to be {type(sub_dir)}")
+
+            if not self.__called_from_perform:
+                if dataframe_snapshot:
+                    df_snapshot = DataFrameSnapshot()
+                    df_snapshot.check_create_snapshot(df,
+                                                      self.__df_features,
+                                                      directory_path=self.folder_path,
+                                                      sub_dir=f"{sub_dir}/_Extras")
+            # Closes up any past graph info
+            plt.close()
+
+            # Convert value counts dataframe to an image
+            df_to_image(table,
+                        self.folder_path,
+                        sub_dir,
+                        convert_to_filename(filename),
+                        show_index=True,
+                        format_float_pos=2)
+
+        except Exception as e:
+            plt.close()
+            if suppress_runtime_errors:
+                warnings.warn(
+                    f"An error occured when trying to save the table as a plot for feature '{feature_name}':\n{str(e)}",
+                    RuntimeWarning)
+            else:
+                raise e

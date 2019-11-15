@@ -481,8 +481,7 @@ class DataCleaner(DataPipelineSegment):
             pd.Series(np.random.choice(list(series_obj.value_counts().keys()),
                                        size=len(df.index))))
 
-
-    ### Getters ###
+    # Getters
     def json_file_path(self):
 
         # self.__json_filename =

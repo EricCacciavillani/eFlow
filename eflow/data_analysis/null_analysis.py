@@ -2,7 +2,7 @@ from eflow._hidden.constants import GRAPH_DEFAULTS
 from eflow._hidden.custom_exceptions import UnsatisfiedRequirments
 from eflow.utils.image_processing_utils import create_plt_png
 from eflow.utils.string_utils import convert_to_filename, correct_directory_path
-from eflow.utils.pandas_utils import data_types_table, missing_values_table, df_to_image
+from eflow.utils.pandas_utils import missing_values_table, df_to_image
 from eflow._hidden.general_objects import DataFrameSnapshot
 from eflow._hidden.parent_objects import FileOutput
 import copy
@@ -68,6 +68,7 @@ class NullAnalysis(FileOutput):
                          display_visuals=True,
                          save_file=True,
                          dataframe_snapshot=True,
+                         suppress_runtime_errors=True,
                          null_features_only=False):
         """
         Desc:
@@ -118,10 +119,6 @@ class NullAnalysis(FileOutput):
                 # Set to true to represent the function call was made with perform
                 self.__called_from_perform = True
 
-                self.data_types_table(df,
-                                      dataset_name,
-                                      display_visuals=display_visuals,
-                                      save_file=save_file)
                 print("\n\n")
                 # --------------------------------------
                 self.missing_values_table(df,
@@ -166,6 +163,7 @@ class NullAnalysis(FileOutput):
                                filename=None,
                                save_file=True,
                                dataframe_snapshot=True,
+                               suppress_runtime_errors=True,
                                null_features_only=False,
                                filter=None,
                                n=0,
@@ -208,6 +206,10 @@ class NullAnalysis(FileOutput):
                 Helps ensure that data generated in that directory is correctly
                 associated to a dataframe.
 
+            suppress_runtime_errors: bool
+                If set to true; when generating any graphs will suppress any runtime
+                errors so the program can keep running.
+
             null_features_only:
                 Dataframe will pass on null features for the visualizations
 
@@ -220,61 +222,71 @@ class NullAnalysis(FileOutput):
         """
         # All credit to the following author for making the 'missingno' package
         # https://github.com/ResidentMario/missingno
-
-        if not self.__called_from_perform:
-            if not self.__check_dataframe(df):
-                print("Null matrix couldn't be generated because there is "
-                      "no missing data to display!")
-                return None
-
-        null_sorted_features, null_features = self.__sort_features_by_nulls(df)
-
-        if null_features_only:
-            selected_features = null_features
-        else:
-            selected_features = null_sorted_features
-
-        if display_visuals:
-            print("Generating graph for null matrix graph...")
-
-        plt.close()
-        msno.matrix(df[selected_features],
-                    filter=filter,
-                    n=n,
-                    p=p,
-                    sort=sort,
-                    figsize=figsize,
-                    width_ratios=width_ratios,
-                    color=color,
-                    fontsize=fontsize,
-                    labels=labels,
-                    sparkline=sparkline,
-                    inline=inline,
-                    freq=freq)
-
-        if not filename:
-            filename = "Missing data matrix graph"
-
-
-        if save_file:
-
-            # Compares the json file snapshot to passed dataframe's snapshot
+        try:
             if not self.__called_from_perform:
-                if dataframe_snapshot:
-                    df_snapshot = DataFrameSnapshot()
-                    df_snapshot.check_create_snapshot(df,
-                                                      self.__df_features,
-                                                      directory_path=self.folder_path,
-                                                      sub_dir=f"{dataset_name}/_Extras")
+                if not self.__check_dataframe(df):
+                    print("Null matrix couldn't be generated because there is "
+                          "no missing data to display!")
+                    return None
 
-            create_plt_png(self.folder_path,
-                           f"{dataset_name}/Graphics",
-                           convert_to_filename(filename))
+            null_sorted_features, null_features = self.__sort_features_by_nulls(df)
 
-        if self.__notebook_mode and display_visuals:
-            plt.show()
+            if null_features_only:
+                selected_features = null_features
+            else:
+                selected_features = null_sorted_features
 
-        plt.close()
+            if display_visuals:
+                print("Generating graph for null matrix graph...")
+
+            plt.close()
+            msno.matrix(df[selected_features],
+                        filter=filter,
+                        n=n,
+                        p=p,
+                        sort=sort,
+                        figsize=figsize,
+                        width_ratios=width_ratios,
+                        color=color,
+                        fontsize=fontsize,
+                        labels=labels,
+                        sparkline=sparkline,
+                        inline=inline,
+                        freq=freq)
+
+            if not filename:
+                filename = "Missing data matrix graph"
+
+
+            if save_file:
+
+                # Compares the json file snapshot to passed dataframe's snapshot
+                if not self.__called_from_perform:
+                    if dataframe_snapshot:
+                        df_snapshot = DataFrameSnapshot()
+                        df_snapshot.check_create_snapshot(df,
+                                                          self.__df_features,
+                                                          directory_path=self.folder_path,
+                                                          sub_dir=f"{dataset_name}/_Extras")
+
+                create_plt_png(self.folder_path,
+                               f"{dataset_name}/Graphics",
+                               convert_to_filename(filename))
+
+            if self.__notebook_mode and display_visuals:
+                plt.show()
+
+            plt.close()
+
+        except Exception as e:
+            plt.close()
+            if suppress_runtime_errors:
+                warnings.warn(
+                    f"Plot null matrix raised an error:\n{str(e)}",
+                    RuntimeWarning)
+            else:
+                raise e
+
 
 
     def plot_null_bar_graph(self,
@@ -284,6 +296,7 @@ class NullAnalysis(FileOutput):
                             filename=None,
                             save_file=True,
                             dataframe_snapshot=True,
+                            suppress_runtime_errors=True,
                             null_features_only=False,
                             figsize=GRAPH_DEFAULTS.NULL_FIGSIZE,
                             fontsize=16,
@@ -327,6 +340,10 @@ class NullAnalysis(FileOutput):
                 Helps ensure that data generated in that directory is correctly
                 associated to a dataframe.
 
+            suppress_runtime_errors: bool
+                If set to true; when generating any graphs will suppress any runtime
+                errors so the program can keep running.
+
             Please read the offical documentation for more about the parameters:
             Link: https://github.com/ResidentMario/missingno
 
@@ -336,71 +353,80 @@ class NullAnalysis(FileOutput):
         """
         # Credit to the following author for making the 'missingno' package
         # https://github.com/ResidentMario/missingno
-
-        if not self.__called_from_perform:
-            if not self.__check_dataframe(df):
-                print("Null bar graph couldn't be generated because there is "
-                      "no missing data to display!")
-                return None
-
-        null_sorted_features, null_features = self.__sort_features_by_nulls(df)
-
-        if null_features_only:
-            selected_features = null_features
-        else:
-            selected_features = null_sorted_features
-
-        print("Generating graph for null bar graph...")
-
-        plt.close()
-        ax = msno.bar(df[selected_features],
-                      figsize=figsize,
-                      log=log,
-                      fontsize=fontsize,
-                      labels=labels,
-                      color=color,
-                      inline=inline,
-                      filter=filter,
-                      n=n,
-                      p=p,
-                      sort=sort)
-
-        # Annotation
-        props = dict(boxstyle='round',
-                     facecolor="#FFFFFF",
-                     alpha=0)
-        ax.text(0.05,
-                1.13,
-                f"Clean data is {df.shape[0]} entries",
-                transform=ax.transAxes,
-                fontsize=10,
-                size=17,
-                verticalalignment='top',
-                bbox=props)
-
-        # Sets filename with a default name
-        if not filename:
-            filename = "Missing data bar graph"
-
-        if save_file:
-            # Compares the json file snapshot to passed dataframe's snapshot
+        try:
             if not self.__called_from_perform:
-                if dataframe_snapshot:
-                    df_snapshot = DataFrameSnapshot()
-                    df_snapshot.check_create_snapshot(df,
-                                                      self.__df_features,
-                                                      directory_path=self.folder_path,
-                                                      sub_dir=f"{dataset_name}/_Extras")
+                if not self.__check_dataframe(df):
+                    print("Null bar graph couldn't be generated because there is "
+                          "no missing data to display!")
+                    return None
 
-            # Convert plot to png
-            create_plt_png(self.folder_path,
-                           f"{dataset_name}/Graphics",
-                           convert_to_filename(filename))
+            null_sorted_features, null_features = self.__sort_features_by_nulls(df)
 
-        if self.__notebook_mode and display_visuals:
-            plt.show()
+            if null_features_only:
+                selected_features = null_features
+            else:
+                selected_features = null_sorted_features
 
-        plt.close()
+            print("Generating graph for null bar graph...")
+
+            plt.close()
+            ax = msno.bar(df[selected_features],
+                          figsize=figsize,
+                          log=log,
+                          fontsize=fontsize,
+                          labels=labels,
+                          color=color,
+                          inline=inline,
+                          filter=filter,
+                          n=n,
+                          p=p,
+                          sort=sort)
+
+            # Annotation
+            props = dict(boxstyle='round',
+                         facecolor="#FFFFFF",
+                         alpha=0)
+            ax.text(0.05,
+                    1.13,
+                    f"Clean data is {df.shape[0]} entries",
+                    transform=ax.transAxes,
+                    fontsize=10,
+                    size=17,
+                    verticalalignment='top',
+                    bbox=props)
+
+            # Sets filename with a default name
+            if not filename:
+                filename = "Missing data bar graph"
+
+            if save_file:
+                # Compares the json file snapshot to passed dataframe's snapshot
+                if not self.__called_from_perform:
+                    if dataframe_snapshot:
+                        df_snapshot = DataFrameSnapshot()
+                        df_snapshot.check_create_snapshot(df,
+                                                          self.__df_features,
+                                                          directory_path=self.folder_path,
+                                                          sub_dir=f"{dataset_name}/_Extras")
+
+                # Convert plot to png
+                create_plt_png(self.folder_path,
+                               f"{dataset_name}/Graphics",
+                               convert_to_filename(filename))
+
+            if self.__notebook_mode and display_visuals:
+                plt.show()
+
+            plt.close()
+
+        except Exception as e:
+            plt.close()
+            if suppress_runtime_errors:
+                warnings.warn(
+                    f"Plot null bar graph raised an error:\n{str(e)}",
+                    RuntimeWarning)
+            else:
+                raise e
 
     def plot_null_heatmap_graph(self,
                                 df,
@@ -409,6 +435,7 @@ class NullAnalysis(FileOutput):
                                 filename=None,
                                 save_file=True,
                                 dataframe_snapshot=True,
+                                suppress_runtime_errors=True,
                                 inline=False,
                                 filter=None,
                                 n=0,
@@ -450,6 +477,10 @@ class NullAnalysis(FileOutput):
                 Helps ensure that data generated in that directory is correctly
                 associated to a dataframe.
 
+            suppress_runtime_errors: bool
+                If set to true; when generating any graphs will suppress any runtime
+                errors so the program can keep running.
+
             Please read the offical documentation for more about the parameters:
             Link: https://github.com/ResidentMario/missingno
 
@@ -459,54 +490,66 @@ class NullAnalysis(FileOutput):
         """
         # All credit to the following author for making the 'missingno' package
         # https://github.com/ResidentMario/missingno
-
-        if not self.__called_from_perform:
-            # Compares the json file snapshot to passed dataframe's snapshot
-            if not self.__check_dataframe(df):
-                print("Null heatmap graph couldn't be generated because there"
-                      "is no missing data to display!")
-                return None
-
-        print("Generating graph for null heatmap...")
-
-        # -----
-        plt.close()
-        msno.heatmap(df,
-                     inline=inline,
-                     filter=filter,
-                     n=n,
-                     p=p,
-                     sort=sort,
-                     figsize=figsize,
-                     fontsize=fontsize,
-                     labels=labels,
-                     cmap=cmap,
-                     vmin=vmin,
-                     vmax=vmax,
-                     cbar=cbar)
-
-        # Sets filename with a default name
-        if not filename:
-            filename = "Missing data heatmap graph"
-
-        if save_file:
-            # Compares the json file snapshot to passed dataframe's snapshot
+        try:
             if not self.__called_from_perform:
-                if dataframe_snapshot:
-                    df_snapshot = DataFrameSnapshot()
-                    df_snapshot.check_create_snapshot(df,
-                                                      self.__df_features,
-                                                      directory_path=self.folder_path,
-                                                      sub_dir=f"{dataset_name}/_Extras")
+                # Compares the json file snapshot to passed dataframe's snapshot
+                if not self.__check_dataframe(df):
+                    print("Null heatmap graph couldn't be generated because there"
+                          "is no missing data to display!")
+                    return None
 
-            # Convert plot to png
-            create_plt_png(self.folder_path,
-                           f"{dataset_name}/Graphics",
-                           convert_to_filename(filename))
+            print("Generating graph for null heatmap...")
 
-        if self.__notebook_mode and display_visuals:
-            plt.show()
-        plt.close()
+            # -----
+            plt.close()
+            ax = msno.heatmap(df,
+                              inline=inline,
+                              filter=filter,
+                              n=n,
+                              p=p,
+                              sort=sort,
+                              figsize=figsize,
+                              fontsize=fontsize,
+                              labels=labels,
+                              cmap=cmap,
+                              vmin=vmin,
+                              vmax=vmax,
+                              cbar=cbar)
+
+            bottom, top = ax.get_ylim()
+            ax.set_ylim(bottom + 0.5, top - 0.5)
+
+            # Sets filename with a default name
+            if not filename:
+                filename = "Missing data heatmap graph"
+
+            if save_file:
+                # Compares the json file snapshot to passed dataframe's snapshot
+                if not self.__called_from_perform:
+                    if dataframe_snapshot:
+                        df_snapshot = DataFrameSnapshot()
+                        df_snapshot.check_create_snapshot(df,
+                                                          self.__df_features,
+                                                          directory_path=self.folder_path,
+                                                          sub_dir=f"{dataset_name}/_Extras")
+
+                # Convert plot to png
+                create_plt_png(self.folder_path,
+                               f"{dataset_name}/Graphics",
+                               convert_to_filename(filename))
+
+            if self.__notebook_mode and display_visuals:
+                plt.show()
+            plt.close()
+
+        except Exception as e:
+            plt.close()
+            if suppress_runtime_errors:
+                warnings.warn(
+                    f"Plot null heatmap raised an error:\n{str(e)}",
+                    RuntimeWarning)
+            else:
+                raise e
 
 
     def plot_null_dendrogram_graph(self,
@@ -516,6 +559,7 @@ class NullAnalysis(FileOutput):
                                    filename=None,
                                    save_file=True,
                                    dataframe_snapshot=True,
+                                   suppress_runtime_errors=True,
                                    null_features_only=False,
                                    method='average',
                                    filter=None,
@@ -557,64 +601,77 @@ class NullAnalysis(FileOutput):
                 Helps ensure that data generated in that directory is correctly
                 associated to a dataframe.
 
+            suppress_runtime_errors: bool
+                If set to true; when generating any graphs will suppress any runtime
+                errors so the program can keep running.
+
             null_features_only:
                 Dataframe will pass on null features for the visualizations
 
             Please read the offical documentation for more about the parameters:
             Link: https://github.com/ResidentMario/missingno
         """
-
-        if not self.__called_from_perform:
-            if not self.__check_dataframe(df):
-                print("Null dendrogram graph couldn't be generated because"
-                      " there is no missing data to display!")
-                return None
-
-        null_sorted_features, null_features = self.__sort_features_by_nulls(df)
-
-        if null_features_only:
-            selected_features = null_features
-        else:
-            selected_features = null_sorted_features
-
-        print("Generating graph for null dendrogram graph...")
-
-        plt.close()
-        msno.dendrogram(df[selected_features],
-                        method=method,
-                        filter=filter,
-                        n=n,
-                        p=p,
-                        orientation=orientation,
-                        figsize=figsize,
-                        fontsize=fontsize,
-                        inline=inline)
-
-        # Sets filename with a default name
-        if not filename:
-            filename = f"Missing data dendrogram graph {method}"
-
-        if save_file:
-
-            # Compares the json file snapshot to passed dataframe's snapshot
+        try:
             if not self.__called_from_perform:
-                if dataframe_snapshot:
-                    df_snapshot = DataFrameSnapshot()
-                    df_snapshot.check_create_snapshot(df,
-                                                      self.__df_features,
-                                                      directory_path=self.folder_path,
-                                                      sub_dir=f"{dataset_name}/_Extras")
+                if not self.__check_dataframe(df):
+                    print("Null dendrogram graph couldn't be generated because"
+                          " there is no missing data to display!")
+                    return None
 
-            # Convert plot to png
-            create_plt_png(self.folder_path,
-                           f"{dataset_name}/Graphics",
-                           convert_to_filename(filename))
+            null_sorted_features, null_features = self.__sort_features_by_nulls(df)
+
+            if null_features_only:
+                selected_features = null_features
+            else:
+                selected_features = null_sorted_features
+
+            print("Generating graph for null dendrogram graph...")
+
+            plt.close()
+            msno.dendrogram(df[selected_features],
+                            method=method,
+                            filter=filter,
+                            n=n,
+                            p=p,
+                            orientation=orientation,
+                            figsize=figsize,
+                            fontsize=fontsize,
+                            inline=inline)
+
+            # Sets filename with a default name
+            if not filename:
+                filename = f"Missing data dendrogram graph {method}"
+
+            if save_file:
+
+                # Compares the json file snapshot to passed dataframe's snapshot
+                if not self.__called_from_perform:
+                    if dataframe_snapshot:
+                        df_snapshot = DataFrameSnapshot()
+                        df_snapshot.check_create_snapshot(df,
+                                                          self.__df_features,
+                                                          directory_path=self.folder_path,
+                                                          sub_dir=f"{dataset_name}/_Extras")
+
+                # Convert plot to png
+                create_plt_png(self.folder_path,
+                               f"{dataset_name}/Graphics",
+                               convert_to_filename(filename))
 
 
-        if self.__notebook_mode and display_visuals:
-            plt.show()
+            if self.__notebook_mode and display_visuals:
+                plt.show()
 
-        plt.close()
+            plt.close()
+
+        except Exception as e:
+            plt.close()
+            if suppress_runtime_errors:
+                warnings.warn(
+                    f"Plot null dendrogram raised an error:\n{str(e)}",
+                    RuntimeWarning)
+            else:
+                raise e
 
     def missing_values_table(self,
                              df,
@@ -622,7 +679,8 @@ class NullAnalysis(FileOutput):
                              display_visuals=True,
                              filename=None,
                              save_file=True,
-                             dataframe_snapshot=True):
+                             dataframe_snapshot=True,
+                             suppress_runtime_errors=True):
         """
         Desc:
             Creates/Saves a Pandas DataFrame object giving the percentage of
@@ -651,127 +709,68 @@ class NullAnalysis(FileOutput):
                 snapshot of the dataframe in the dataset's directory structure.
                 Helps ensure that data generated in that directory is correctly
                 associated to a dataframe.
+
+            suppress_runtime_errors: bool
+                If set to true; when generating any graphs will suppress any runtime
+                errors so the program can keep running.
         """
 
-        if not self.__called_from_perform:
-            if not self.__check_dataframe(df):
-                print("Couldn't create missing values table because"
-                      " there is no missing data to display!")
-                return None
-
-        print("Creating missing values table...")
-
-        if not self.__called_from_perform:
-            self.__check_dataframe(df)
-
-        mis_val_table_ren_columns = missing_values_table(df)
-
-        print(f"Your selected dataframe has {str(df.shape[1])} columns.\n"
-              f"That has {str(mis_val_table_ren_columns.shape[0])} columns missing data.\n")
-
-        if self.__notebook_mode:
-            if display_visuals:
-                display(mis_val_table_ren_columns)
-        else:
-            if display_visuals:
-                print(mis_val_table_ren_columns)
-
-        # Sets filename with a default name
-        if not filename:
-            filename = "Missing Data Table"
-
-        # ---
-        if save_file:
-
-            # Compares the json file snapshot to passed dataframe's snapshot
+        try:
             if not self.__called_from_perform:
-                if dataframe_snapshot:
-                    df_snapshot = DataFrameSnapshot()
-                    df_snapshot.check_create_snapshot(df,
-                                                      directory_path=self.folder_path,
-                                                      sub_dir=f"{dataset_name}/_Extras")
+                if not self.__check_dataframe(df):
+                    print("Couldn't create missing values table because"
+                          " there is no missing data to display!")
+                    return None
 
-            plt.close()
-            df_to_image(mis_val_table_ren_columns,
-                        self.folder_path,
-                        f"{dataset_name}/Tables",
-                        convert_to_filename(filename),
-                        show_index=True,
-                        format_float_pos=2)
+            print("Creating missing values table...")
 
-    def data_types_table(self,
-                         df,
-                         dataset_name,
-                         display_visuals=True,
-                         filename=None,
-                         save_file=True,
-                         dataframe_snapshot=True):
-        """
-        Desc:
-            Creates/Saves a pandas dataframe of features and their found types
-            in the dataframe.
-
-        Args:
-            df:
-                Pandas DataFrame object
-
-            dataset_name:
-                The dataset's name; this will create a sub-directory in which your
-                generated graph will be inner-nested in.
-
-            display_visuals:
-                Boolean value to whether or not to display visualizations.
-
-            filename:
-                If set to 'None' will default to a pre-defined string;
-                unless it is set to an actual filename.
-
-            save_file:
-                Saves file if set to True; doesn't if set to False.
-
-            dataframe_snapshot:
-                Boolean value to determine whether or not generate and compare a
-                snapshot of the dataframe in the dataset's directory structure.
-                Helps ensure that data generated in that directory is correctly
-                associated to a dataframe.
-        """
-        if not self.__called_from_perform:
-            if not df.shape[0]:
-                print("Empty dataframe found! This function requires a dataframe"
-                      "in both rows and columns.")
-                return None
-
-        print("Creating data types table...")
-
-        dtypes_df = data_types_table(df)
-
-        print(f"Your selected dataframe has {df.shape[1]} features.")
-
-        if self.__notebook_mode:
-            if display_visuals:
-                display(dtypes_df)
-        else:
-            if display_visuals:
-                print(dtypes_df)
-
-        # Sets filename with a default name
-        if not filename:
-            filename = "Data Types Table"
-
-        if save_file:
-            # Compares the json file snapshot to passed dataframe's snapshot
             if not self.__called_from_perform:
-                if dataframe_snapshot:
-                    df_snapshot = DataFrameSnapshot()
-                    df_snapshot.check_create_snapshot(df,
-                                                      directory_path=self.folder_path,
-                                                      sub_dir=f"{dataset_name}/_Extras")
+                self.__check_dataframe(df)
+
+            mis_val_table_ren_columns = missing_values_table(df)
+
+            print(f"Your selected dataframe has {str(df.shape[1])} columns.\n"
+                  f"That has {str(mis_val_table_ren_columns.shape[0])} columns missing data.\n")
+
+            if self.__notebook_mode:
+                if display_visuals:
+                    display(mis_val_table_ren_columns)
+            else:
+                if display_visuals:
+                    print(mis_val_table_ren_columns)
+
+            # Sets filename with a default name
+            if not filename:
+                filename = "Missing Data Table"
+
+            # ---
+            if save_file:
+
+                # Compares the json file snapshot to passed dataframe's snapshot
+                if not self.__called_from_perform:
+                    if dataframe_snapshot:
+                        df_snapshot = DataFrameSnapshot()
+                        df_snapshot.check_create_snapshot(df,
+                                                          directory_path=self.folder_path,
+                                                          sub_dir=f"{dataset_name}/_Extras")
+
+                plt.close()
+                df_to_image(mis_val_table_ren_columns,
+                            self.folder_path,
+                            f"{dataset_name}/Tables",
+                            convert_to_filename(filename),
+                            show_index=True,
+                            format_float_pos=2)
+        except Exception as e:
             plt.close()
-            df_to_image(dtypes_df,
-                        self.folder_path,
-                        f"{dataset_name}/Tables",
-                        convert_to_filename(filename),
-                        show_index=True)
+            if suppress_runtime_errors:
+                warnings.warn(
+                    f"Missing data table raised an error:\n{str(e)}",
+                    RuntimeWarning)
+            else:
+                raise e
+
+
 
     def __check_dataframe(self,
                           df):
