@@ -4,7 +4,7 @@ from eflow.utils.image_processing_utils import create_plt_png
 from eflow.utils.string_utils import convert_to_filename, correct_directory_path
 from eflow.utils.pandas_utils import missing_values_table, df_to_image
 from eflow._hidden.general_objects import DataFrameSnapshot
-from eflow._hidden.parent_objects import FileOutput
+from eflow._hidden.parent_objects import DataAnalysis
 import copy
 from IPython.display import display
 
@@ -22,7 +22,7 @@ __maintainer__ = "EricCacciavillani"
 __email__ = "eric.cacciavillani@gmail.com"
 
 
-class NullAnalysis(FileOutput):
+class NullAnalysis(DataAnalysis):
     """
         Analyzes a pandas dataframe's object for null data; creates visuals
         like graphs and tables.
@@ -50,9 +50,10 @@ class NullAnalysis(FileOutput):
                 If in a python notebook display visualizations in the notebook.
         """
 
-        FileOutput.__init__(self,
-                            f'{project_sub_dir}/{project_name}',
-                            overwrite_full_path)
+        DataAnalysis.__init__(self,
+                              df_features,
+                              f'{project_sub_dir}/{project_name}',
+                              overwrite_full_path)
 
         self.__df_features = copy.deepcopy(df_features)
         self.__notebook_mode = copy.deepcopy(notebook_mode)
@@ -129,27 +130,31 @@ class NullAnalysis(FileOutput):
                                          dataset_name,
                                          null_features_only=null_features_only,
                                          display_visuals=display_visuals,
-                                         save_file=save_file)
+                                         save_file=save_file,
+                                         suppress_runtime_errors=suppress_runtime_errors)
                 print("\n\n")
                 # --------------------------------------
                 self.plot_null_matrix_graph(df,
                                             dataset_name,
                                             null_features_only=null_features_only,
                                             display_visuals=display_visuals,
-                                            save_file=save_file)
+                                            save_file=save_file,
+                                            suppress_runtime_errors=suppress_runtime_errors)
                 print("\n\n")
                 # --------------------------------------
                 self.plot_null_heatmap_graph(df,
                                              dataset_name,
                                              display_visuals=display_visuals,
-                                             save_file=save_file)
+                                             save_file=save_file,
+                                             suppress_runtime_errors=suppress_runtime_errors)
                 print("\n\n")
                 # --------------------------------------
                 self.plot_null_dendrogram_graph(df,
                                                 dataset_name,
                                                 null_features_only=null_features_only,
                                                 display_visuals=display_visuals,
-                                                save_file=save_file)
+                                                save_file=save_file,
+                                                suppress_runtime_errors=suppress_runtime_errors)
                 print("\n\n")
 
         finally:
@@ -161,6 +166,7 @@ class NullAnalysis(FileOutput):
                                dataset_name,
                                display_visuals=True,
                                filename=None,
+                               sub_dir=None,
                                save_file=True,
                                dataframe_snapshot=True,
                                suppress_runtime_errors=True,
@@ -257,21 +263,19 @@ class NullAnalysis(FileOutput):
             if not filename:
                 filename = "Missing data matrix graph"
 
-
             if save_file:
 
-                # Compares the json file snapshot to passed dataframe's snapshot
-                if not self.__called_from_perform:
-                    if dataframe_snapshot:
-                        df_snapshot = DataFrameSnapshot()
-                        df_snapshot.check_create_snapshot(df,
-                                                          self.__df_features,
-                                                          directory_path=self.folder_path,
-                                                          sub_dir=f"{dataset_name}/_Extras")
+                if not sub_dir:
+                    sub_dir = f"{dataset_name}/Graphics"
 
-                create_plt_png(self.folder_path,
-                               f"{dataset_name}/Graphics",
-                               convert_to_filename(filename))
+                if self.__called_from_perform:
+                    dataframe_snapshot = False
+
+                self.save_plot(df=df,
+                               filename=filename,
+                               sub_dir=sub_dir,
+                               dataframe_snapshot=dataframe_snapshot,
+                               suppress_runtime_errors=suppress_runtime_errors)
 
             if self.__notebook_mode and display_visuals:
                 plt.show()
@@ -294,6 +298,7 @@ class NullAnalysis(FileOutput):
                             dataset_name,
                             display_visuals=True,
                             filename=None,
+                            sub_dir=None,
                             save_file=True,
                             dataframe_snapshot=True,
                             suppress_runtime_errors=True,
@@ -400,19 +405,18 @@ class NullAnalysis(FileOutput):
                 filename = "Missing data bar graph"
 
             if save_file:
-                # Compares the json file snapshot to passed dataframe's snapshot
-                if not self.__called_from_perform:
-                    if dataframe_snapshot:
-                        df_snapshot = DataFrameSnapshot()
-                        df_snapshot.check_create_snapshot(df,
-                                                          self.__df_features,
-                                                          directory_path=self.folder_path,
-                                                          sub_dir=f"{dataset_name}/_Extras")
 
-                # Convert plot to png
-                create_plt_png(self.folder_path,
-                               f"{dataset_name}/Graphics",
-                               convert_to_filename(filename))
+                if not sub_dir:
+                    sub_dir = f"{dataset_name}/Graphics"
+
+                if self.__called_from_perform:
+                    dataframe_snapshot = False
+
+                self.save_plot(df=df,
+                               filename=filename,
+                               sub_dir=sub_dir,
+                               dataframe_snapshot=dataframe_snapshot,
+                               suppress_runtime_errors=suppress_runtime_errors)
 
             if self.__notebook_mode and display_visuals:
                 plt.show()
@@ -433,6 +437,7 @@ class NullAnalysis(FileOutput):
                                 dataset_name,
                                 display_visuals=True,
                                 filename=None,
+                                sub_dir=None,
                                 save_file=True,
                                 dataframe_snapshot=True,
                                 suppress_runtime_errors=True,
@@ -524,19 +529,18 @@ class NullAnalysis(FileOutput):
                 filename = "Missing data heatmap graph"
 
             if save_file:
-                # Compares the json file snapshot to passed dataframe's snapshot
-                if not self.__called_from_perform:
-                    if dataframe_snapshot:
-                        df_snapshot = DataFrameSnapshot()
-                        df_snapshot.check_create_snapshot(df,
-                                                          self.__df_features,
-                                                          directory_path=self.folder_path,
-                                                          sub_dir=f"{dataset_name}/_Extras")
 
-                # Convert plot to png
-                create_plt_png(self.folder_path,
-                               f"{dataset_name}/Graphics",
-                               convert_to_filename(filename))
+                if not sub_dir:
+                    sub_dir = f"{dataset_name}/Graphics"
+
+                if self.__called_from_perform:
+                    dataframe_snapshot = False
+
+                self.save_plot(df=df,
+                               filename=filename,
+                               sub_dir=sub_dir,
+                               dataframe_snapshot=dataframe_snapshot,
+                               suppress_runtime_errors=suppress_runtime_errors)
 
             if self.__notebook_mode and display_visuals:
                 plt.show()
@@ -557,6 +561,7 @@ class NullAnalysis(FileOutput):
                                    dataset_name,
                                    display_visuals=True,
                                    filename=None,
+                                   sub_dir=None,
                                    save_file=True,
                                    dataframe_snapshot=True,
                                    suppress_runtime_errors=True,
@@ -644,19 +649,17 @@ class NullAnalysis(FileOutput):
 
             if save_file:
 
-                # Compares the json file snapshot to passed dataframe's snapshot
-                if not self.__called_from_perform:
-                    if dataframe_snapshot:
-                        df_snapshot = DataFrameSnapshot()
-                        df_snapshot.check_create_snapshot(df,
-                                                          self.__df_features,
-                                                          directory_path=self.folder_path,
-                                                          sub_dir=f"{dataset_name}/_Extras")
+                if not sub_dir:
+                    sub_dir = f"{dataset_name}/Graphics"
 
-                # Convert plot to png
-                create_plt_png(self.folder_path,
-                               f"{dataset_name}/Graphics",
-                               convert_to_filename(filename))
+                if self.__called_from_perform:
+                    dataframe_snapshot = False
+
+                self.save_plot(df=df,
+                               filename=filename,
+                               sub_dir=sub_dir,
+                               dataframe_snapshot=dataframe_snapshot,
+                               suppress_runtime_errors=suppress_runtime_errors)
 
 
             if self.__notebook_mode and display_visuals:
@@ -678,6 +681,7 @@ class NullAnalysis(FileOutput):
                              dataset_name,
                              display_visuals=True,
                              filename=None,
+                             sub_dir=None,
                              save_file=True,
                              dataframe_snapshot=True,
                              suppress_runtime_errors=True):
@@ -746,21 +750,18 @@ class NullAnalysis(FileOutput):
             # ---
             if save_file:
 
-                # Compares the json file snapshot to passed dataframe's snapshot
-                if not self.__called_from_perform:
-                    if dataframe_snapshot:
-                        df_snapshot = DataFrameSnapshot()
-                        df_snapshot.check_create_snapshot(df,
-                                                          directory_path=self.folder_path,
-                                                          sub_dir=f"{dataset_name}/_Extras")
+                if not sub_dir:
+                    sub_dir = f"{dataset_name}/Tables"
 
-                plt.close()
-                df_to_image(mis_val_table_ren_columns,
-                            self.folder_path,
-                            f"{dataset_name}/Tables",
-                            convert_to_filename(filename),
-                            show_index=True,
-                            format_float_pos=2)
+                if self.__called_from_perform:
+                    dataframe_snapshot = False
+
+                self.save_table_as_plot(df=df,
+                                        filename=filename,
+                                        sub_dir=sub_dir,
+                                        dataframe_snapshot=dataframe_snapshot,
+                                        suppress_runtime_errors=suppress_runtime_errors,
+                                        table=mis_val_table_ren_columns)
         except Exception as e:
             plt.close()
             if suppress_runtime_errors:

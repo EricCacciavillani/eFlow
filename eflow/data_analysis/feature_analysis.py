@@ -1,11 +1,9 @@
 from eflow._hidden.parent_objects import FileOutput
 from eflow._hidden.general_objects import DataFrameSnapshot
-from eflow.utils.pandas_utils import descr_table,value_counts_table, df_to_image
-from eflow.utils.image_processing_utils import create_plt_png
-from eflow.utils.string_utils import convert_to_filename
+from eflow.utils.pandas_utils import descr_table,value_counts_table
 from eflow._hidden.custom_exceptions import UnsatisfiedRequirments
-from eflow._hidden.custom_warnings import EflowWarning
 from eflow._hidden.constants import GRAPH_DEFAULTS
+from eflow._hidden.parent_objects import DataAnalysis
 
 
 import warnings
@@ -25,7 +23,7 @@ __maintainer__ = "EricCacciavillani"
 __email__ = "eric.cacciavillani@gmail.com"
 
 
-class FeatureAnalysis(FileOutput):
+class FeatureAnalysis(DataAnalysis):
 
     """
         Analyzes the feature data of a pandas Dataframe object.
@@ -55,9 +53,10 @@ class FeatureAnalysis(FileOutput):
                 If in a python notebook display visualizations in the notebook.
         """
 
-        FileOutput.__init__(self,
-                            f'{project_sub_dir}/{project_name}',
-                            overwrite_full_path)
+        DataAnalysis.__init__(self,
+                              df_features,
+                              f'{project_sub_dir}/{project_name}',
+                              overwrite_full_path)
 
 
         self.__df_features = copy.deepcopy(df_features)
@@ -75,7 +74,8 @@ class FeatureAnalysis(FileOutput):
                          save_file=True,
                          dataframe_snapshot=True,
                          suppress_runtime_errors=True,
-                         aggregate_target_feature=True):
+                         aggregate_target_feature=True,
+                         selected_features=None):
         """
         Desc:
             Performs all public methods that generate visualizations/insights
@@ -117,12 +117,16 @@ class FeatureAnalysis(FileOutput):
                 If set to true; when generating any graphs will suppress any runtime
                 errors so the program can keep running.
 
-            aggregate_target_feature:
+            aggregate_target_feature: bool
                 Aggregate the data of the target feature if the data is
                 non-continuous data.
 
                 Note:
                     In the future I will have this also work with continuous data.
+
+            selected_features: collection object of features
+                Will only focus on these selected feature's and will ignore
+                the other given features.
 
         Raises:
             If an empty dataframe is passed to this function or if the same
@@ -154,6 +158,9 @@ class FeatureAnalysis(FileOutput):
 
             # Iterate through features
             for feature_name in df.columns:
+
+               if selected_features and feature_name not in selected_features and feature_name != target_feature:
+                   continue
 
                self.generate_graphics_for_feature(df,
                                                   feature_name,
@@ -192,6 +199,9 @@ class FeatureAnalysis(FileOutput):
 
                            # Iterate through all features to generate new graphs for aggregation
                            for f_name in df.columns:
+
+                               if selected_features and f_name not in selected_features and f_name != target_feature:
+                                   continue
 
                                if f_name == target_feature:
                                    continue
@@ -569,15 +579,24 @@ class FeatureAnalysis(FileOutput):
             if not filename:
                 filename = f"Distance plot graph on {feature_name}"
 
+            # Create string sub directory path
+            if not sub_dir:
+                if dataset_name and feature_name:
+                    sub_dir = f"{dataset_name}/{feature_name}"
+                elif dataset_name:
+                    sub_dir = f"{dataset_name}"
+
             # -----
             if save_file:
-                self.__attempt_to_save_plot(df=df,
-                                            feature_name=feature_name,
-                                            dataset_name=dataset_name,
-                                            filename=filename,
-                                            sub_dir=sub_dir,
-                                            dataframe_snapshot=dataframe_snapshot,
-                                            suppress_runtime_errors=suppress_runtime_errors)
+
+                if self.__called_from_perform:
+                    dataframe_snapshot = False
+
+                self.save_plot(df=df,
+                               filename=filename,
+                               sub_dir=sub_dir,
+                               dataframe_snapshot=dataframe_snapshot,
+                               suppress_runtime_errors=suppress_runtime_errors)
 
 
             if self.__notebook_mode and display_visuals:
@@ -757,16 +776,24 @@ class FeatureAnalysis(FileOutput):
             if not filename:
                 filename = f"Violin plot graph on {feature_title}."
 
+            # Create string sub directory path
+            if not sub_dir:
+                if dataset_name and feature_name:
+                    sub_dir = f"{dataset_name}/{feature_name}"
+                elif dataset_name:
+                    sub_dir = f"{dataset_name}"
 
             # -----
             if save_file:
-                self.__attempt_to_save_plot(df=df,
-                                            feature_name=feature_name,
-                                            dataset_name=dataset_name,
-                                            filename=filename,
-                                            sub_dir=sub_dir,
-                                            dataframe_snapshot=dataframe_snapshot,
-                                            suppress_runtime_errors=suppress_runtime_errors)
+
+                if self.__called_from_perform:
+                    dataframe_snapshot = False
+
+                self.save_plot(df=df,
+                               filename=filename,
+                               sub_dir=sub_dir,
+                               dataframe_snapshot=dataframe_snapshot,
+                               suppress_runtime_errors=suppress_runtime_errors)
 
 
             if self.__notebook_mode and display_visuals:
@@ -915,15 +942,25 @@ class FeatureAnalysis(FileOutput):
 
                 if isinstance(palette,np.ndarray):
                     filename += " with count color ranking."
+
+            # Create string sub directory path
+            if not sub_dir:
+                if dataset_name and feature_name:
+                    sub_dir = f"{dataset_name}/{feature_name}"
+                elif dataset_name:
+                    sub_dir = f"{dataset_name}"
+
             # -----
             if save_file:
-                self.__attempt_to_save_plot(df=df,
-                                            feature_name=feature_name,
-                                            dataset_name=dataset_name,
-                                            filename=filename,
-                                            sub_dir=sub_dir,
-                                            dataframe_snapshot=dataframe_snapshot,
-                                            suppress_runtime_errors=suppress_runtime_errors)
+
+                if self.__called_from_perform:
+                    dataframe_snapshot = False
+
+                self.save_plot(df=df,
+                               filename=filename,
+                               sub_dir=sub_dir,
+                               dataframe_snapshot=dataframe_snapshot,
+                               suppress_runtime_errors=suppress_runtime_errors)
 
             if self.__notebook_mode and display_visuals:
                 plt.show()
@@ -1054,15 +1091,24 @@ class FeatureAnalysis(FileOutput):
             if not filename:
                 filename = f"Pie graph on {feature_name}"
 
+            # Create string sub directory path
+            if not sub_dir:
+                if dataset_name and feature_name:
+                    sub_dir = f"{dataset_name}/{feature_name}"
+                elif dataset_name:
+                    sub_dir = f"{dataset_name}"
+
             # -----
             if save_file:
-                self.__attempt_to_save_plot(df=df,
-                                            feature_name=feature_name,
-                                            dataset_name=dataset_name,
-                                            filename=filename,
-                                            sub_dir=sub_dir,
-                                            dataframe_snapshot=dataframe_snapshot,
-                                            suppress_runtime_errors=suppress_runtime_errors)
+
+                if self.__called_from_perform:
+                    dataframe_snapshot = False
+
+                self.save_plot(df=df,
+                               filename=filename,
+                               sub_dir=sub_dir,
+                               dataframe_snapshot=dataframe_snapshot,
+                               suppress_runtime_errors=suppress_runtime_errors)
 
 
             if self.__notebook_mode and display_visuals:
@@ -1209,15 +1255,24 @@ class FeatureAnalysis(FileOutput):
             if not filename:
                 filename = f"Ridge plot graph on {feature_name} by {y_feature_name}" + filename_add_on
 
+            # Create string sub directory path
+            if not sub_dir:
+                if dataset_name and feature_name:
+                    sub_dir = f"{dataset_name}/{feature_name}"
+                elif dataset_name:
+                    sub_dir = f"{dataset_name}"
+
             # -----
             if save_file:
-                self.__attempt_to_save_plot(df=df,
-                                            feature_name=feature_name,
-                                            dataset_name=dataset_name,
-                                            filename=filename,
-                                            sub_dir=sub_dir,
-                                            dataframe_snapshot=dataframe_snapshot,
-                                            suppress_runtime_errors=suppress_runtime_errors)
+
+                if self.__called_from_perform:
+                    dataframe_snapshot = False
+
+                self.save_plot(df=df,
+                               filename=filename,
+                               sub_dir=sub_dir,
+                               dataframe_snapshot=dataframe_snapshot,
+                               suppress_runtime_errors=suppress_runtime_errors)
 
             if self.__notebook_mode and display_visuals:
                 plt.show()
@@ -1297,36 +1352,6 @@ class FeatureAnalysis(FileOutput):
         """
 
         raise ValueError("NOT READY FOR USE YET!!!!!!")
-
-        try:
-            print(f"Joint plot graph on {feature_name} by {y_feature_name}.")
-
-            # Pass a default name if needed
-            if not filename:
-                filename = f"Ridge plot graph on {feature_name} by {y_feature_name}"
-
-            # -----
-            if save_file:
-                self.__attempt_to_save_plot(df=df,
-                                            feature_name=feature_name,
-                                            dataset_name=dataset_name,
-                                            filename=filename,
-                                            sub_dir=sub_dir,
-                                            dataframe_snapshot=dataframe_snapshot,
-                                            suppress_runtime_errors=suppress_runtime_errors)
-
-            if self.__notebook_mode and display_visuals:
-                plt.show()
-
-            plt.close()
-        except Exception as e:
-            plt.close()
-            if suppress_runtime_errors:
-                warnings.warn(
-                    f"Plot ridge graph raised an error on feature '{feature_name}':\n{str(e)}",
-                    RuntimeWarning)
-            else:
-                raise e
 
 
     def value_counts_table(self,
@@ -1408,15 +1433,25 @@ class FeatureAnalysis(FileOutput):
             if not filename:
                 filename = f"{feature_name} Value Counts Table"
 
+            # Create string sub directory path
+            if not sub_dir:
+                if dataset_name and feature_name:
+                    sub_dir = f"{dataset_name}/{feature_name}"
+                elif dataset_name:
+                    sub_dir = f"{dataset_name}"
+
+
             if save_file:
-                self.__attempt_to_save_table_as_plot(df=df,
-                                                     feature_name=feature_name,
-                                                     dataset_name=dataset_name,
-                                                     filename=filename,
-                                                     sub_dir=sub_dir,
-                                                     dataframe_snapshot=dataframe_snapshot,
-                                                     suppress_runtime_errors=suppress_runtime_errors,
-                                                     table=val_counts_df)
+
+                if self.__called_from_perform:
+                    dataframe_snapshot = False
+
+                self.save_table_as_plot(df=df,
+                                        filename=filename,
+                                        sub_dir=sub_dir,
+                                        dataframe_snapshot=dataframe_snapshot,
+                                        suppress_runtime_errors=suppress_runtime_errors,
+                                        table=val_counts_df)
 
         except Exception as e:
             plt.close()
@@ -1507,16 +1542,24 @@ class FeatureAnalysis(FileOutput):
             if not filename:
                 filename = f"{feature_name} Description Table"
 
+            # Create string sub directory path
+            if not sub_dir:
+                if dataset_name and feature_name:
+                    sub_dir = f"{dataset_name}/{feature_name}"
+                elif dataset_name:
+                    sub_dir = f"{dataset_name}"
+
             if save_file:
 
-                self.__attempt_to_save_table_as_plot(df=df,
-                                                     feature_name=feature_name,
-                                                     dataset_name=dataset_name,
-                                                     filename=filename,
-                                                     sub_dir=sub_dir,
-                                                     dataframe_snapshot=dataframe_snapshot,
-                                                     suppress_runtime_errors=suppress_runtime_errors,
-                                                     table=desc_df)
+                if self.__called_from_perform:
+                    dataframe_snapshot = False
+
+                self.save_table_as_plot(df=df,
+                                        filename=filename,
+                                        sub_dir=sub_dir,
+                                        dataframe_snapshot=dataframe_snapshot,
+                                        suppress_runtime_errors=suppress_runtime_errors,
+                                        table=desc_df)
 
         except Exception as e:
             plt.close()
@@ -1595,161 +1638,3 @@ class FeatureAnalysis(FileOutput):
                                 GRAPH_DEFAULTS.DEFINED_LIST_OF_RANDOM_COLORS):
                             colors = None
         return colors
-
-    def __attempt_to_save_plot(self,
-                               df=None,
-                               feature_name=None,
-                               dataset_name=None,
-                               filename="Unknown filename",
-                               sub_dir=None,
-                               dataframe_snapshot=True,
-                               suppress_runtime_errors=True):
-        """
-        Desc:
-            Checks the passed data to see if a plot can be saved; raises
-            an error if it can't.
-
-        Args:
-            df:
-                Pandas DataFrame object
-
-            feature_name: string or list of strings
-                Specified feature column name.
-
-            dataset_name:
-                The dataset's name; this will create a sub-directory in which your
-                generated graph will be inner-nested in.
-
-
-            filename:
-                If set to 'None' will default to a pre-defined string;
-                unless it is set to an actual filename.
-
-            sub_dir:
-                Specify the sub directory to append to the pre-defined folder path.
-
-            dataframe_snapshot:
-                Boolean value to determine whether or not generate and compare a
-                snapshot of the dataframe in the dataset's directory structure.
-                Helps ensure that data generated in that directory is correctly
-                associated to a dataframe.
-
-            suppress_runtime_errors: bool
-                If set to true; when generating any graphs will suppress any runtime
-                errors so the program can keep running.
-        """
-        try:
-            if not sub_dir and feature_name:
-                sub_dir = f"{dataset_name}/{feature_name}"
-
-            elif not sub_dir and not feature_name:
-                sub_dir = f"{dataset_name}"
-
-            if not isinstance(sub_dir, str):
-                raise TypeError(
-                    f"Expected param 'sub_dir' to be type string! Was found to be {type(sub_dir)}")
-
-            # Check if dataframe matches saved snapshot; Creates file if needed
-            if not self.__called_from_perform:
-
-                if dataframe_snapshot:
-                    df_snapshot = DataFrameSnapshot()
-                    df_snapshot.check_create_snapshot(df,
-                                                      self.__df_features,
-                                                      directory_path=self.folder_path,
-                                                      sub_dir=f"{sub_dir}/_Extras")
-            plt.show()
-            # Create the png to save
-            create_plt_png(self.folder_path,
-                           sub_dir,
-                           convert_to_filename(filename))
-
-        except Exception as e:
-            plt.close()
-            if suppress_runtime_errors:
-                warnings.warn(
-                    f"An error occured when trying to save the plot for feature '{feature_name}':\n{str(e)}",
-                    RuntimeWarning)
-            else:
-                raise e
-
-    def __attempt_to_save_table_as_plot(self,
-                                        df=None,
-                                        feature_name=None,
-                                        dataset_name=None,
-                                        filename="Unknown filename",
-                                        sub_dir=None,
-                                        dataframe_snapshot=True,
-                                        suppress_runtime_errors=True,
-                                        table=None):
-        """
-        Desc:
-            Checks the passed data to see if a table can be saved as a plot;
-            raises an error if it can't.
-
-        Args:
-            df:
-                Pandas DataFrame object
-
-            feature_name:
-                Specified feature column name.
-
-            dataset_name:
-                The dataset's name; this will create a sub-directory in which your
-                generated graph will be inner-nested in.
-
-            filename:
-                If set to 'None' will default to a pre-defined string;
-                unless it is set to an actual filename.
-
-            sub_dir:
-                Specify the sub directory to append to the pre-defined folder path.
-
-            dataframe_snapshot:
-                Boolean value to determine whether or not generate and compare a
-                snapshot of the dataframe in the dataset's directory structure.
-                Helps ensure that data generated in that directory is correctly
-                associated to a dataframe.
-
-            suppress_runtime_errors: bool
-                If set to true; when generating any graphs will suppress any runtime
-                errors so the program can keep running.
-        """
-
-        try:
-            if not sub_dir and feature_name:
-                sub_dir = f"{dataset_name}/{feature_name}"
-
-            elif not sub_dir and not feature_name:
-                sub_dir = f"{dataset_name}"
-
-            if not isinstance(sub_dir, str):
-                raise TypeError(
-                    f"Expected param 'sub_dir' to be type string! Was found to be {type(sub_dir)}")
-
-            if not self.__called_from_perform:
-                if dataframe_snapshot:
-                    df_snapshot = DataFrameSnapshot()
-                    df_snapshot.check_create_snapshot(df,
-                                                      self.__df_features,
-                                                      directory_path=self.folder_path,
-                                                      sub_dir=f"{sub_dir}/_Extras")
-            # Closes up any past graph info
-            plt.close()
-
-            # Convert value counts dataframe to an image
-            df_to_image(table,
-                        self.folder_path,
-                        sub_dir,
-                        convert_to_filename(filename),
-                        show_index=True,
-                        format_float_pos=2)
-
-        except Exception as e:
-            plt.close()
-            if suppress_runtime_errors:
-                warnings.warn(
-                    f"An error occured when trying to save the table as a plot for feature '{feature_name}':\n{str(e)}",
-                    RuntimeWarning)
-            else:
-                raise e
