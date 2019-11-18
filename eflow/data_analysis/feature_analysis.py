@@ -296,7 +296,7 @@ class FeatureAnalysis(DataAnalysis):
             print(f"Colors:\n{colors}\n")
 
         if target_feature:
-            target_feature_numerical = target_feature in self.__df_features.get_numerical_features()
+            target_feature_numerical = target_feature in self.__df_features.get_continuous_numerical_features()
         else:
             target_feature_numerical = False
 
@@ -314,14 +314,12 @@ class FeatureAnalysis(DataAnalysis):
                                dataframe_snapshot=dataframe_snapshot,
                                suppress_runtime_errors=suppress_runtime_errors)
 
-
             self.plot_count_graph(df,
                                   feature_name,
                                   dataset_name=dataset_name,
                                   display_visuals=display_visuals,
                                   sub_dir=sub_dir,
                                   save_file=save_file,
-                                  palette=colors,
                                   dataframe_snapshot=dataframe_snapshot,
                                   suppress_runtime_errors=suppress_runtime_errors)
 
@@ -332,6 +330,7 @@ class FeatureAnalysis(DataAnalysis):
                                       display_visuals=display_visuals,
                                       sub_dir=sub_dir,
                                       save_file=save_file,
+                                      palette=colors,
                                       dataframe_snapshot=dataframe_snapshot,
                                       suppress_runtime_errors=suppress_runtime_errors)
 
@@ -353,40 +352,24 @@ class FeatureAnalysis(DataAnalysis):
                         self.plot_violin_graph(df,
                                                feature_name,
                                                dataset_name=dataset_name,
-                                               y_feature_name=target_feature,
+                                               other_feature_name=target_feature,
                                                display_visuals=display_visuals,
                                                sub_dir=sub_dir,
                                                save_file=save_file,
                                                palette=colors,
                                                dataframe_snapshot=dataframe_snapshot,
                                                suppress_runtime_errors=suppress_runtime_errors)
-                else:
-
-                    ridge_plot_colors = self.__df_features.get_feature_colors(
-                        target_feature)
 
                     self.plot_ridge_graph(df,
-                                          target_feature,
+                                          feature_name,
                                           dataset_name=dataset_name,
-                                          y_feature_name=feature_name,
+                                          other_feature_name=target_feature,
                                           display_visuals=display_visuals,
                                           sub_dir=sub_dir,
                                           save_file=save_file,
                                           dataframe_snapshot=dataframe_snapshot,
-                                          suppress_runtime_errors=suppress_runtime_errors)
-
-                    if not ridge_plot_colors:
-                        self.plot_ridge_graph(df,
-                                              target_feature,
-                                              dataset_name=dataset_name,
-                                              y_feature_name=feature_name,
-                                              display_visuals=display_visuals,
-                                              sub_dir=sub_dir,
-                                              save_file=save_file,
-                                              palette=self.__df_features.get_feature_colors(feature_name),
-                                              dataframe_snapshot=dataframe_snapshot,
-                                              suppress_runtime_errors=suppress_runtime_errors)
-
+                                          suppress_runtime_errors=suppress_runtime_errors,
+                                          palette=colors)
             print("\n\n")
 
         # -----
@@ -412,29 +395,8 @@ class FeatureAnalysis(DataAnalysis):
             if target_feature and feature_name != target_feature:
 
                 if target_feature_numerical:
-
-                    ridge_plot_colors = self.__df_features.get_feature_colors(target_feature)
-                    self.plot_ridge_graph(df,
-                                          feature_name,
-                                          dataset_name=dataset_name,
-                                          y_feature_name=target_feature,
-                                          display_visuals=display_visuals,
-                                          sub_dir=sub_dir,
-                                          save_file=save_file,
-                                          palette=ridge_plot_colors,
-                                          dataframe_snapshot=dataframe_snapshot,
-                                          suppress_runtime_errors=suppress_runtime_errors)
-
-                    if not ridge_plot_colors:
-                        self.plot_ridge_graph(df,
-                                              feature_name,
-                                              dataset_name=dataset_name,
-                                              y_feature_name=target_feature,
-                                              display_visuals=display_visuals,
-                                              sub_dir=sub_dir,
-                                              save_file=save_file,
-                                              dataframe_snapshot=dataframe_snapshot,
-                                              suppress_runtime_errors=suppress_runtime_errors)
+                    # Jointplot
+                    pass
 
                 else:
                     if len(set(pd.to_numeric(df[feature_name],
@@ -442,13 +404,24 @@ class FeatureAnalysis(DataAnalysis):
                         self.plot_violin_graph(df,
                                                target_feature,
                                                dataset_name=dataset_name,
-                                               y_feature_name=feature_name,
+                                               other_feature_name=feature_name,
                                                display_visuals=display_visuals,
                                                sub_dir=sub_dir,
                                                save_file=save_file,
                                                palette=colors,
                                                dataframe_snapshot=dataframe_snapshot,
                                                suppress_runtime_errors=suppress_runtime_errors)
+
+                    self.plot_ridge_graph(df,
+                                          target_feature,
+                                          dataset_name=dataset_name,
+                                          other_feature_name=feature_name,
+                                          display_visuals=display_visuals,
+                                          sub_dir=sub_dir,
+                                          save_file=save_file,
+                                          dataframe_snapshot=dataframe_snapshot,
+                                          suppress_runtime_errors=suppress_runtime_errors,
+                                          palette=colors)
 
     def plot_distance_graph(self,
                             df,
@@ -618,7 +591,7 @@ class FeatureAnalysis(DataAnalysis):
                           df,
                           feature_name,
                           dataset_name,
-                          y_feature_name=None,
+                          other_feature_name=None,
                           display_visuals=True,
                           filename=None,
                           sub_dir=None,
@@ -648,7 +621,7 @@ class FeatureAnalysis(DataAnalysis):
                 The dataset's name; this will create a sub-directory in which your
                 generated graph will be inner-nested in.
 
-            y_feature_name: string
+            other_feature_name: string
                 Specified feature column name to compare to x.
 
             display_visuals: bool
@@ -728,7 +701,7 @@ class FeatureAnalysis(DataAnalysis):
             # Error check and create title/part of default file name
             found_features = []
             feature_title = ""
-            for feature in (feature_name, y_feature_name):
+            for feature in (feature_name, other_feature_name):
                 if feature:
                     if np.sum(df[feature].isnull()) == df.shape[0]:
                         raise UnsatisfiedRequirments("Count plot graph couldn't be generated because " +
@@ -755,7 +728,7 @@ class FeatureAnalysis(DataAnalysis):
             plt.figure(figsize=figsize)
             plt.title("Violin Plot: " + feature_title)
 
-            feature_values = pd.to_numeric(df[y_feature_name],
+            feature_values = pd.to_numeric(df[other_feature_name],
                                            errors='coerce').dropna()
 
             if not len(feature_values):
@@ -868,7 +841,7 @@ class FeatureAnalysis(DataAnalysis):
             flip_axis: bool
                 Flip the axis the ploting axis from x to y if set to 'True'.
 
-            palette: string
+            palette: dict or string
                 String representation of color pallete for ranking from seaborn's pallete.
 
             Credit to seaborn's author:
@@ -1128,7 +1101,7 @@ class FeatureAnalysis(DataAnalysis):
                          df,
                          feature_name,
                          dataset_name,
-                         y_feature_name,
+                         other_feature_name,
                          display_visuals=True,
                          filename=None,
                          sub_dir=None,
@@ -1187,35 +1160,47 @@ class FeatureAnalysis(DataAnalysis):
            given dataframe.
         """
         try:
-            print(f"Ridge plot graph on {feature_name} by {y_feature_name}.")
+            print(f"Ridge plot graph on {feature_name} by {other_feature_name}.")
 
             sns.set(style="white",
                     rc={"axes.facecolor": (0, 0, 0, 0)})
 
-            filename_add_on = ""
             if not palette:
                 palette = sns.cubehelix_palette(10, rot=-.20, light=.7)
-            else:
-                filename_add_on = " with pre defined colors"
+
+
+            tmp_df = copy.deepcopy(df[[feature_name,other_feature_name]])
+            tmp_df.is_copy = False
+
+            tmp_df = df[[feature_name,other_feature_name]]
+            tmp_df[other_feature_name] = pd.to_numeric(tmp_df[other_feature_name],
+                                                       errors='coerce')
+
+            palette = None
+            sns.set(style="white",
+                    rc={"axes.facecolor": (0, 0, 0, 0)})
+
+            if not palette:
+                palette = sns.cubehelix_palette(10, rot=-.20, light=.7)
 
             # Initialize the FacetGrid object
-            g = sns.FacetGrid(df,
-                              row=y_feature_name,
-                              hue=y_feature_name,
+            g = sns.FacetGrid(tmp_df,
+                              row=feature_name,
+                              hue=feature_name,
                               aspect=15,
                               height=.4,
                               palette=palette)
 
             # Draw the densities in a few steps
             g.map(sns.kdeplot,
-                  feature_name,
+                  other_feature_name,
                   clip_on=False,
                   shade=True,
                   alpha=1,
                   lw=1.5,
                   bw=.2)
             g.map(sns.kdeplot,
-                  feature_name,
+                  other_feature_name,
                   clip_on=False,
                   color="w",
                   lw=2,
@@ -1229,7 +1214,7 @@ class FeatureAnalysis(DataAnalysis):
             # Define and use a simple function to label the plot in axes coordinates
             def label(x, color, label):
                 ax = plt.gca()
-                ax.text(0,
+                ax.text(-.1,
                         .2,
                         label,
                         fontweight="bold",
@@ -1238,7 +1223,7 @@ class FeatureAnalysis(DataAnalysis):
                         va="center",
                         transform=ax.transAxes)
 
-            g.map(label, feature_name)
+            g.map(label, other_feature_name)
 
             # Set the subplots to overlap
             g.fig.subplots_adjust(hspace=-.25)
@@ -1248,12 +1233,12 @@ class FeatureAnalysis(DataAnalysis):
             g.set(yticks=[])
             g.despine(bottom=True, left=True)
             g.fig.set_size_inches(10, 10, forward=True)
-            g.fig.suptitle(f'{y_feature_name} by {feature_name}')
+            g.fig.suptitle(f'{feature_name} by {other_feature_name}')
             plt.figure(figsize=figsize)
 
             # Pass a default name if needed
             if not filename:
-                filename = f"Ridge plot graph on {feature_name} by {y_feature_name}" + filename_add_on
+                filename = f"Ridge plot graph on {feature_name} by {other_feature_name}"
 
             # Create string sub directory path
             if not sub_dir:
@@ -1292,7 +1277,7 @@ class FeatureAnalysis(DataAnalysis):
                              df,
                              feature_name,
                              dataset_name,
-                             y_feature_name,
+                             other_feature_name,
                              display_visuals=True,
                              filename=None,
                              sub_dir=None,

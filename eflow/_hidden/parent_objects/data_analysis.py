@@ -82,7 +82,6 @@ class DataAnalysis(FileOutput):
                                                   self.__df_features,
                                                   directory_path=self.folder_path,
                                                   sub_dir=f"{sub_dir}/_Extras")
-            plt.show()
             # Create the png to save
             create_plt_png(self.folder_path,
                            sub_dir,
@@ -154,8 +153,6 @@ class DataAnalysis(FileOutput):
                                                   self.__df_features,
                                                   directory_path=self.folder_path,
                                                   sub_dir=f"{sub_dir}/_Extras")
-            # Closes up any past graph info
-            plt.close()
 
             # Convert value counts dataframe to an image
             df_to_image(table,

@@ -1,0 +1,2 @@
+0
+"=QUERY(Conditions!A:C, ""SELECT * WHERE B = ""&Conditions!D2&)"

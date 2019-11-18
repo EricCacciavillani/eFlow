@@ -8,12 +8,125 @@
   <component name="ChangeListManager">
     <list default="true" id="178261e3-0830-4d8e-91ef-8172f5216aca" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/eflow/data_pipeline_segments/type_fixer.py" beforeDir="false" afterPath="$PROJECT_DIR$/eflow/data_pipeline_segments/type_fixer.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/eflow/foundation/data_frame_types.py" beforeDir="false" afterPath="$PROJECT_DIR$/eflow/foundation/data_frame_types.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/eflow/_hidden/parent_objects/data_analysis.py" beforeDir="false" afterPath="$PROJECT_DIR$/eflow/_hidden/parent_objects/data_analysis.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/eflow/data_analysis/feature_analysis.py" beforeDir="false" afterPath="$PROJECT_DIR$/eflow/data_analysis/feature_analysis.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/testing/.ipynb_checkpoints/1.) Quick peek at data-checkpoint.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/testing/.ipynb_checkpoints/1.) Quick peek at data-checkpoint.ipynb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/testing/.ipynb_checkpoints/BlueSage Master CSV-checkpoint.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/testing/.ipynb_checkpoints/BlueSage Master CSV-checkpoint.ipynb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/testing/1.) Quick peek at data.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/testing/1.) Quick peek at data.ipynb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/testing/BlueSage Master CSV.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/testing/BlueSage Master CSV.ipynb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/MM_DEV_MASTER_FEES/Before Cleaning/Feature Analysis/MM_DEV_MASTER_FEES/_Extras/Dataframe Snapshot.json" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/MM_DEV_MASTER_FEES/Before Cleaning/Feature Analysis/MM_DEV_MASTER_FEES/_Extras/Dataframe Snapshot.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/MM_DEV_MASTER_FEES/Before Cleaning/Feature Analysis/MM_DEV_MASTER_FEES/allow_fee_total_allocation_yn/Count plot graph on allow_fee_total_allocation_yn with count color ranking.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/MM_DEV_MASTER_FEES/Before Cleaning/Feature Analysis/MM_DEV_MASTER_FEES/allow_fee_total_allocation_yn/Count plot graph on allow_fee_total_allocation_yn with count color ranking.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/MM_DEV_MASTER_FEES/Before Cleaning/Feature Analysis/MM_DEV_MASTER_FEES/allow_fee_total_allocation_yn/Pie graph on allow_fee_total_allocation_yn.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/MM_DEV_MASTER_FEES/Before Cleaning/Feature Analysis/MM_DEV_MASTER_FEES/allow_fee_total_allocation_yn/Pie graph on allow_fee_total_allocation_yn.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/MM_DEV_MASTER_FEES/Before Cleaning/Feature Analysis/MM_DEV_MASTER_FEES/allow_freeform_provider_yn/Count plot graph on allow_freeform_provider_yn with count color ranking.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/MM_DEV_MASTER_FEES/Before Cleaning/Feature Analysis/MM_DEV_MASTER_FEES/allow_freeform_provider_yn/Count plot graph on allow_freeform_provider_yn with count color ranking.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/MM_DEV_MASTER_FEES/Before Cleaning/Feature Analysis/MM_DEV_MASTER_FEES/allow_freeform_provider_yn/Pie graph on allow_freeform_provider_yn.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/MM_DEV_MASTER_FEES/Before Cleaning/Feature Analysis/MM_DEV_MASTER_FEES/allow_freeform_provider_yn/Pie graph on allow_freeform_provider_yn.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/MM_DEV_MASTER_FEES/Before Cleaning/Feature Analysis/MM_DEV_MASTER_FEES/allow_zero_value_yn/Count plot graph on allow_zero_value_yn with count color ranking.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/MM_DEV_MASTER_FEES/Before Cleaning/Feature Analysis/MM_DEV_MASTER_FEES/allow_zero_value_yn/Count plot graph on allow_zero_value_yn with count color ranking.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/MM_DEV_MASTER_FEES/Before Cleaning/Feature Analysis/MM_DEV_MASTER_FEES/allow_zero_value_yn/Pie graph on allow_zero_value_yn.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/MM_DEV_MASTER_FEES/Before Cleaning/Feature Analysis/MM_DEV_MASTER_FEES/allow_zero_value_yn/Pie graph on allow_zero_value_yn.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/MM_DEV_MASTER_FEES/Before Cleaning/Feature Analysis/MM_DEV_MASTER_FEES/amount_editable_yn/Count plot graph on amount_editable_yn with count color ranking.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/MM_DEV_MASTER_FEES/Before Cleaning/Feature Analysis/MM_DEV_MASTER_FEES/amount_editable_yn/Count plot graph on amount_editable_yn with count color ranking.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/MM_DEV_MASTER_FEES/Before Cleaning/Feature Analysis/MM_DEV_MASTER_FEES/amount_editable_yn/Pie graph on amount_editable_yn.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/MM_DEV_MASTER_FEES/Before Cleaning/Feature Analysis/MM_DEV_MASTER_FEES/amount_editable_yn/Pie graph on amount_editable_yn.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/MM_DEV_MASTER_FEES/Before Cleaning/Feature Analysis/MM_DEV_MASTER_FEES/borrower_responsible_yn/Count plot graph on borrower_responsible_yn with count color ranking.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/MM_DEV_MASTER_FEES/Before Cleaning/Feature Analysis/MM_DEV_MASTER_FEES/borrower_responsible_yn/Count plot graph on borrower_responsible_yn with count color ranking.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/MM_DEV_MASTER_FEES/Before Cleaning/Feature Analysis/MM_DEV_MASTER_FEES/borrower_responsible_yn/Pie graph on borrower_responsible_yn.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/MM_DEV_MASTER_FEES/Before Cleaning/Feature Analysis/MM_DEV_MASTER_FEES/borrower_responsible_yn/Pie graph on borrower_responsible_yn.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/MM_DEV_MASTER_FEES/Before Cleaning/Feature Analysis/MM_DEV_MASTER_FEES/can_finance_yn/Count plot graph on can_finance_yn with count color ranking.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/MM_DEV_MASTER_FEES/Before Cleaning/Feature Analysis/MM_DEV_MASTER_FEES/can_finance_yn/Count plot graph on can_finance_yn with count color ranking.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/MM_DEV_MASTER_FEES/Before Cleaning/Feature Analysis/MM_DEV_MASTER_FEES/can_finance_yn/Pie graph on can_finance_yn.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/MM_DEV_MASTER_FEES/Before Cleaning/Feature Analysis/MM_DEV_MASTER_FEES/can_finance_yn/Pie graph on can_finance_yn.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/MM_DEV_MASTER_FEES/Before Cleaning/Feature Analysis/MM_DEV_MASTER_FEES/cascade_fee_provider_info_yn/Count plot graph on cascade_fee_provider_info_yn with count color ranking.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/MM_DEV_MASTER_FEES/Before Cleaning/Feature Analysis/MM_DEV_MASTER_FEES/cascade_fee_provider_info_yn/Count plot graph on cascade_fee_provider_info_yn with count color ranking.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/MM_DEV_MASTER_FEES/Before Cleaning/Feature Analysis/MM_DEV_MASTER_FEES/cascade_fee_provider_info_yn/Pie graph on cascade_fee_provider_info_yn.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/MM_DEV_MASTER_FEES/Before Cleaning/Feature Analysis/MM_DEV_MASTER_FEES/cascade_fee_provider_info_yn/Pie graph on cascade_fee_provider_info_yn.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/MM_DEV_MASTER_FEES/Before Cleaning/Feature Analysis/MM_DEV_MASTER_FEES/default_payee_to_provider_yn/Count plot graph on default_payee_to_provider_yn with count color ranking.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/MM_DEV_MASTER_FEES/Before Cleaning/Feature Analysis/MM_DEV_MASTER_FEES/default_payee_to_provider_yn/Count plot graph on default_payee_to_provider_yn with count color ranking.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/MM_DEV_MASTER_FEES/Before Cleaning/Feature Analysis/MM_DEV_MASTER_FEES/default_payee_to_provider_yn/Pie graph on default_payee_to_provider_yn.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/MM_DEV_MASTER_FEES/Before Cleaning/Feature Analysis/MM_DEV_MASTER_FEES/default_payee_to_provider_yn/Pie graph on default_payee_to_provider_yn.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/MM_DEV_MASTER_FEES/Before Cleaning/Feature Analysis/MM_DEV_MASTER_FEES/default_tolerance_type_id/Count plot graph on default_tolerance_type_id with count color ranking.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/MM_DEV_MASTER_FEES/Before Cleaning/Feature Analysis/MM_DEV_MASTER_FEES/default_tolerance_type_id/Count plot graph on default_tolerance_type_id with count color ranking.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/MM_DEV_MASTER_FEES/Before Cleaning/Feature Analysis/MM_DEV_MASTER_FEES/default_tolerance_type_id/Pie graph on default_tolerance_type_id.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/MM_DEV_MASTER_FEES/Before Cleaning/Feature Analysis/MM_DEV_MASTER_FEES/default_tolerance_type_id/Pie graph on default_tolerance_type_id.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/MM_DEV_MASTER_FEES/Before Cleaning/Feature Analysis/MM_DEV_MASTER_FEES/default_tolerance_type_id/default_tolerance_type_id Value Counts Table.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/MM_DEV_MASTER_FEES/Before Cleaning/Feature Analysis/MM_DEV_MASTER_FEES/default_tolerance_type_id/default_tolerance_type_id Value Counts Table.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/MM_DEV_MASTER_FEES/Before Cleaning/Feature Analysis/MM_DEV_MASTER_FEES/description_editable_yn/Count plot graph on description_editable_yn with count color ranking.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/MM_DEV_MASTER_FEES/Before Cleaning/Feature Analysis/MM_DEV_MASTER_FEES/description_editable_yn/Count plot graph on description_editable_yn with count color ranking.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/MM_DEV_MASTER_FEES/Before Cleaning/Feature Analysis/MM_DEV_MASTER_FEES/description_editable_yn/Pie graph on description_editable_yn.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/MM_DEV_MASTER_FEES/Before Cleaning/Feature Analysis/MM_DEV_MASTER_FEES/description_editable_yn/Pie graph on description_editable_yn.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/MM_DEV_MASTER_FEES/Before Cleaning/Feature Analysis/MM_DEV_MASTER_FEES/fee_paid_to_type_id/Count plot graph on fee_paid_to_type_id with count color ranking.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/MM_DEV_MASTER_FEES/Before Cleaning/Feature Analysis/MM_DEV_MASTER_FEES/fee_paid_to_type_id/Count plot graph on fee_paid_to_type_id with count color ranking.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/MM_DEV_MASTER_FEES/Before Cleaning/Feature Analysis/MM_DEV_MASTER_FEES/fee_paid_to_type_id/Pie graph on fee_paid_to_type_id.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/MM_DEV_MASTER_FEES/Before Cleaning/Feature Analysis/MM_DEV_MASTER_FEES/fee_paid_to_type_id/Pie graph on fee_paid_to_type_id.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/MM_DEV_MASTER_FEES/Before Cleaning/Feature Analysis/MM_DEV_MASTER_FEES/fee_provider_type_change_yn/Count plot graph on fee_provider_type_change_yn with count color ranking.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/MM_DEV_MASTER_FEES/Before Cleaning/Feature Analysis/MM_DEV_MASTER_FEES/fee_provider_type_change_yn/Count plot graph on fee_provider_type_change_yn with count color ranking.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/MM_DEV_MASTER_FEES/Before Cleaning/Feature Analysis/MM_DEV_MASTER_FEES/fee_provider_type_change_yn/Pie graph on fee_provider_type_change_yn.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/MM_DEV_MASTER_FEES/Before Cleaning/Feature Analysis/MM_DEV_MASTER_FEES/fee_provider_type_change_yn/Pie graph on fee_provider_type_change_yn.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/MM_DEV_MASTER_FEES/Before Cleaning/Feature Analysis/MM_DEV_MASTER_FEES/fee_provider_type_id/Count plot graph on fee_provider_type_id with count color ranking.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/MM_DEV_MASTER_FEES/Before Cleaning/Feature Analysis/MM_DEV_MASTER_FEES/fee_provider_type_id/Count plot graph on fee_provider_type_id with count color ranking.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/MM_DEV_MASTER_FEES/Before Cleaning/Feature Analysis/MM_DEV_MASTER_FEES/fee_provider_type_id/fee_provider_type_id Value Counts Table.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/MM_DEV_MASTER_FEES/Before Cleaning/Feature Analysis/MM_DEV_MASTER_FEES/fee_provider_type_id/fee_provider_type_id Value Counts Table.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/MM_DEV_MASTER_FEES/Before Cleaning/Feature Analysis/MM_DEV_MASTER_FEES/finance_charge_yn/Count plot graph on finance_charge_yn with count color ranking.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/MM_DEV_MASTER_FEES/Before Cleaning/Feature Analysis/MM_DEV_MASTER_FEES/finance_charge_yn/Count plot graph on finance_charge_yn with count color ranking.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/MM_DEV_MASTER_FEES/Before Cleaning/Feature Analysis/MM_DEV_MASTER_FEES/finance_charge_yn/Pie graph on finance_charge_yn.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/MM_DEV_MASTER_FEES/Before Cleaning/Feature Analysis/MM_DEV_MASTER_FEES/finance_charge_yn/Pie graph on finance_charge_yn.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/MM_DEV_MASTER_FEES/Before Cleaning/Feature Analysis/MM_DEV_MASTER_FEES/hud_section_type_id/Distance plot graph on hud_section_type_id.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/MM_DEV_MASTER_FEES/Before Cleaning/Feature Analysis/MM_DEV_MASTER_FEES/hud_section_type_id/Distance plot graph on hud_section_type_id.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/MM_DEV_MASTER_FEES/Before Cleaning/Feature Analysis/MM_DEV_MASTER_FEES/include_on_provider_list_yn/Count plot graph on include_on_provider_list_yn with count color ranking.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/MM_DEV_MASTER_FEES/Before Cleaning/Feature Analysis/MM_DEV_MASTER_FEES/include_on_provider_list_yn/Count plot graph on include_on_provider_list_yn with count color ranking.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/MM_DEV_MASTER_FEES/Before Cleaning/Feature Analysis/MM_DEV_MASTER_FEES/include_on_provider_list_yn/Pie graph on include_on_provider_list_yn.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/MM_DEV_MASTER_FEES/Before Cleaning/Feature Analysis/MM_DEV_MASTER_FEES/include_on_provider_list_yn/Pie graph on include_on_provider_list_yn.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/MM_DEV_MASTER_FEES/Before Cleaning/Feature Analysis/MM_DEV_MASTER_FEES/net_fund_edit_yn/Count plot graph on net_fund_edit_yn with count color ranking.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/MM_DEV_MASTER_FEES/Before Cleaning/Feature Analysis/MM_DEV_MASTER_FEES/net_fund_edit_yn/Count plot graph on net_fund_edit_yn with count color ranking.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/MM_DEV_MASTER_FEES/Before Cleaning/Feature Analysis/MM_DEV_MASTER_FEES/net_fund_edit_yn/Pie graph on net_fund_edit_yn.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/MM_DEV_MASTER_FEES/Before Cleaning/Feature Analysis/MM_DEV_MASTER_FEES/net_fund_edit_yn/Pie graph on net_fund_edit_yn.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/MM_DEV_MASTER_FEES/Before Cleaning/Feature Analysis/MM_DEV_MASTER_FEES/net_fundable_yn/Count plot graph on net_fundable_yn with count color ranking.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/MM_DEV_MASTER_FEES/Before Cleaning/Feature Analysis/MM_DEV_MASTER_FEES/net_fundable_yn/Count plot graph on net_fundable_yn with count color ranking.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/MM_DEV_MASTER_FEES/Before Cleaning/Feature Analysis/MM_DEV_MASTER_FEES/net_fundable_yn/Pie graph on net_fundable_yn.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/MM_DEV_MASTER_FEES/Before Cleaning/Feature Analysis/MM_DEV_MASTER_FEES/net_fundable_yn/Pie graph on net_fundable_yn.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/MM_DEV_MASTER_FEES/Before Cleaning/Feature Analysis/MM_DEV_MASTER_FEES/selectable_provider_yn/Count plot graph on selectable_provider_yn with count color ranking.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/MM_DEV_MASTER_FEES/Before Cleaning/Feature Analysis/MM_DEV_MASTER_FEES/selectable_provider_yn/Count plot graph on selectable_provider_yn with count color ranking.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/MM_DEV_MASTER_FEES/Before Cleaning/Feature Analysis/MM_DEV_MASTER_FEES/selectable_provider_yn/Pie graph on selectable_provider_yn.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/MM_DEV_MASTER_FEES/Before Cleaning/Feature Analysis/MM_DEV_MASTER_FEES/selectable_provider_yn/Pie graph on selectable_provider_yn.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/MM_DEV_MASTER_FEES/Before Cleaning/Feature Analysis/MM_DEV_MASTER_FEES/seller_responsible_yn/Count plot graph on seller_responsible_yn with count color ranking.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/MM_DEV_MASTER_FEES/Before Cleaning/Feature Analysis/MM_DEV_MASTER_FEES/seller_responsible_yn/Count plot graph on seller_responsible_yn with count color ranking.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/MM_DEV_MASTER_FEES/Before Cleaning/Feature Analysis/MM_DEV_MASTER_FEES/seller_responsible_yn/Pie graph on seller_responsible_yn.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/MM_DEV_MASTER_FEES/Before Cleaning/Feature Analysis/MM_DEV_MASTER_FEES/seller_responsible_yn/Pie graph on seller_responsible_yn.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/MM_DEV_MASTER_FEES/Before Cleaning/Feature Analysis/MM_DEV_MASTER_FEES/sort_value/Count plot graph on sort_value with count color ranking.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/MM_DEV_MASTER_FEES/Before Cleaning/Feature Analysis/MM_DEV_MASTER_FEES/sort_value/Count plot graph on sort_value with count color ranking.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/MM_DEV_MASTER_FEES/Before Cleaning/Feature Analysis/MM_DEV_MASTER_FEES/summary_fee_item_type_id/Count plot graph on summary_fee_item_type_id with count color ranking.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/MM_DEV_MASTER_FEES/Before Cleaning/Feature Analysis/MM_DEV_MASTER_FEES/summary_fee_item_type_id/Count plot graph on summary_fee_item_type_id with count color ranking.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/MM_DEV_MASTER_FEES/Before Cleaning/Missing Data/MM_DEV_MASTER_FEES/Graphics/Missing data bar graph.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/MM_DEV_MASTER_FEES/Before Cleaning/Missing Data/MM_DEV_MASTER_FEES/Graphics/Missing data bar graph.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/MM_DEV_MASTER_FEES/Before Cleaning/Missing Data/MM_DEV_MASTER_FEES/Graphics/Missing data dendrogram graph average.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/MM_DEV_MASTER_FEES/Before Cleaning/Missing Data/MM_DEV_MASTER_FEES/Graphics/Missing data dendrogram graph average.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/MM_DEV_MASTER_FEES/Before Cleaning/Missing Data/MM_DEV_MASTER_FEES/Graphics/Missing data heatmap graph.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/MM_DEV_MASTER_FEES/Before Cleaning/Missing Data/MM_DEV_MASTER_FEES/Graphics/Missing data heatmap graph.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/MM_DEV_MASTER_FEES/Before Cleaning/Missing Data/MM_DEV_MASTER_FEES/Graphics/Missing data matrix graph.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/MM_DEV_MASTER_FEES/Before Cleaning/Missing Data/MM_DEV_MASTER_FEES/Graphics/Missing data matrix graph.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/MM_DEV_MASTER_FEES/Before Cleaning/Missing Data/MM_DEV_MASTER_FEES/_Extras/Dataframe Snapshot.json" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/MM_DEV_MASTER_FEES/Before Cleaning/Missing Data/MM_DEV_MASTER_FEES/_Extras/Dataframe Snapshot.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/MM_DEV_MASTER_FEES/df_features.json" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/MM_DEV_MASTER_FEES/df_features.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Feature Analysis/Full Titanic Data/Age/Distance plot graph on Age.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Feature Analysis/Full Titanic Data/Age/Distance plot graph on Age.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Feature Analysis/Full Titanic Data/Age/Ridge plot graph on Age by Survived with pre defined colors.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Feature Analysis/Full Titanic Data/Age/Ridge plot graph on Age by Survived with pre defined colors.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Feature Analysis/Full Titanic Data/Cabin/Count plot graph on Cabin with count color ranking.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Feature Analysis/Full Titanic Data/Cabin/Count plot graph on Cabin with count color ranking.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Feature Analysis/Full Titanic Data/Cabin/Violin plot graph on Cabin by Survived.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Feature Analysis/Full Titanic Data/Cabin/Violin plot graph on Cabin by Survived.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Feature Analysis/Full Titanic Data/Embarked/Count plot graph on Embarked with count color ranking.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Feature Analysis/Full Titanic Data/Embarked/Count plot graph on Embarked with count color ranking.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Feature Analysis/Full Titanic Data/Embarked/Pie graph on Embarked.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Feature Analysis/Full Titanic Data/Embarked/Pie graph on Embarked.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Feature Analysis/Full Titanic Data/Embarked/Violin plot graph on Embarked by Survived.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Feature Analysis/Full Titanic Data/Embarked/Violin plot graph on Embarked by Survived.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Feature Analysis/Full Titanic Data/Fare/Distance plot graph on Fare.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Feature Analysis/Full Titanic Data/Fare/Distance plot graph on Fare.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Feature Analysis/Full Titanic Data/Fare/Ridge plot graph on Fare by Survived with pre defined colors.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Feature Analysis/Full Titanic Data/Fare/Ridge plot graph on Fare by Survived with pre defined colors.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Feature Analysis/Full Titanic Data/Parch/Distance plot graph on Parch.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Feature Analysis/Full Titanic Data/Parch/Distance plot graph on Parch.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Feature Analysis/Full Titanic Data/Parch/Ridge plot graph on Parch by Survived with pre defined colors.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Feature Analysis/Full Titanic Data/Parch/Ridge plot graph on Parch by Survived with pre defined colors.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Feature Analysis/Full Titanic Data/Pclass/Count plot graph on Pclass with count color ranking.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Feature Analysis/Full Titanic Data/Pclass/Count plot graph on Pclass with count color ranking.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Feature Analysis/Full Titanic Data/Pclass/Count plot graph on Pclass.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Feature Analysis/Full Titanic Data/Pclass/Count plot graph on Pclass.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Feature Analysis/Full Titanic Data/Pclass/Pie graph on Pclass.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Feature Analysis/Full Titanic Data/Pclass/Pie graph on Pclass.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Feature Analysis/Full Titanic Data/Pclass/Violin plot graph on Pclass by Survived.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Feature Analysis/Full Titanic Data/Pclass/Violin plot graph on Pclass by Survived.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Feature Analysis/Full Titanic Data/Sex/Count plot graph on Sex with count color ranking.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Feature Analysis/Full Titanic Data/Sex/Count plot graph on Sex with count color ranking.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Feature Analysis/Full Titanic Data/Sex/Count plot graph on Sex.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Feature Analysis/Full Titanic Data/Sex/Count plot graph on Sex.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Feature Analysis/Full Titanic Data/Sex/Pie graph on Sex.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Feature Analysis/Full Titanic Data/Sex/Pie graph on Sex.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Feature Analysis/Full Titanic Data/Sex/Violin plot graph on Sex by Survived.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Feature Analysis/Full Titanic Data/Sex/Violin plot graph on Sex by Survived.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Feature Analysis/Full Titanic Data/SibSp/Distance plot graph on SibSp.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Feature Analysis/Full Titanic Data/SibSp/Distance plot graph on SibSp.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Feature Analysis/Full Titanic Data/SibSp/Ridge plot graph on SibSp by Survived with pre defined colors.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Feature Analysis/Full Titanic Data/SibSp/Ridge plot graph on SibSp by Survived with pre defined colors.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Feature Analysis/Full Titanic Data/Survived/Count plot graph on Survived with count color ranking.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Feature Analysis/Full Titanic Data/Survived/Count plot graph on Survived with count color ranking.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Feature Analysis/Full Titanic Data/Survived/Count plot graph on Survived.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Feature Analysis/Full Titanic Data/Survived/Count plot graph on Survived.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Feature Analysis/Full Titanic Data/Survived/False/Age/Distance plot graph on Age.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Feature Analysis/Full Titanic Data/Survived/False/Age/Distance plot graph on Age.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Feature Analysis/Full Titanic Data/Survived/False/Age/Ridge plot graph on Age by Survived with pre defined colors.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Feature Analysis/Full Titanic Data/Survived/False/Age/Ridge plot graph on Age by Survived with pre defined colors.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Feature Analysis/Full Titanic Data/Survived/False/Cabin/Cabin Value Counts Table.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Feature Analysis/Full Titanic Data/Survived/False/Cabin/Cabin Value Counts Table.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Feature Analysis/Full Titanic Data/Survived/False/Cabin/Count plot graph on Cabin with count color ranking.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Feature Analysis/Full Titanic Data/Survived/False/Cabin/Count plot graph on Cabin with count color ranking.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Feature Analysis/Full Titanic Data/Survived/False/Embarked/Count plot graph on Embarked with count color ranking.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Feature Analysis/Full Titanic Data/Survived/False/Embarked/Count plot graph on Embarked with count color ranking.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Feature Analysis/Full Titanic Data/Survived/False/Embarked/Pie graph on Embarked.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Feature Analysis/Full Titanic Data/Survived/False/Embarked/Pie graph on Embarked.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Feature Analysis/Full Titanic Data/Survived/False/Fare/Distance plot graph on Fare.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Feature Analysis/Full Titanic Data/Survived/False/Fare/Distance plot graph on Fare.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Feature Analysis/Full Titanic Data/Survived/False/Fare/Ridge plot graph on Fare by Survived with pre defined colors.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Feature Analysis/Full Titanic Data/Survived/False/Fare/Ridge plot graph on Fare by Survived with pre defined colors.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Feature Analysis/Full Titanic Data/Survived/False/Parch/Distance plot graph on Parch.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Feature Analysis/Full Titanic Data/Survived/False/Parch/Distance plot graph on Parch.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Feature Analysis/Full Titanic Data/Survived/False/Parch/Ridge plot graph on Parch by Survived with pre defined colors.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Feature Analysis/Full Titanic Data/Survived/False/Parch/Ridge plot graph on Parch by Survived with pre defined colors.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Feature Analysis/Full Titanic Data/Survived/False/Pclass/Count plot graph on Pclass with count color ranking.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Feature Analysis/Full Titanic Data/Survived/False/Pclass/Count plot graph on Pclass with count color ranking.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Feature Analysis/Full Titanic Data/Survived/False/Pclass/Count plot graph on Pclass.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Feature Analysis/Full Titanic Data/Survived/False/Pclass/Count plot graph on Pclass.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Feature Analysis/Full Titanic Data/Survived/False/Pclass/Pie graph on Pclass.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Feature Analysis/Full Titanic Data/Survived/False/Pclass/Pie graph on Pclass.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Feature Analysis/Full Titanic Data/Survived/False/Sex/Count plot graph on Sex with count color ranking.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Feature Analysis/Full Titanic Data/Survived/False/Sex/Count plot graph on Sex with count color ranking.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Feature Analysis/Full Titanic Data/Survived/False/Sex/Count plot graph on Sex.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Feature Analysis/Full Titanic Data/Survived/False/Sex/Count plot graph on Sex.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Feature Analysis/Full Titanic Data/Survived/False/Sex/Pie graph on Sex.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Feature Analysis/Full Titanic Data/Survived/False/Sex/Pie graph on Sex.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Feature Analysis/Full Titanic Data/Survived/False/SibSp/Distance plot graph on SibSp.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Feature Analysis/Full Titanic Data/Survived/False/SibSp/Distance plot graph on SibSp.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Feature Analysis/Full Titanic Data/Survived/False/SibSp/Ridge plot graph on SibSp by Survived with pre defined colors.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Feature Analysis/Full Titanic Data/Survived/False/SibSp/Ridge plot graph on SibSp by Survived with pre defined colors.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Feature Analysis/Full Titanic Data/Survived/Pie graph on Survived.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Feature Analysis/Full Titanic Data/Survived/Pie graph on Survived.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Feature Analysis/Full Titanic Data/Survived/True/Age/Distance plot graph on Age.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Feature Analysis/Full Titanic Data/Survived/True/Age/Distance plot graph on Age.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Feature Analysis/Full Titanic Data/Survived/True/Age/Ridge plot graph on Age by Survived with pre defined colors.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Feature Analysis/Full Titanic Data/Survived/True/Age/Ridge plot graph on Age by Survived with pre defined colors.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Feature Analysis/Full Titanic Data/Survived/True/Cabin/Count plot graph on Cabin with count color ranking.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Feature Analysis/Full Titanic Data/Survived/True/Cabin/Count plot graph on Cabin with count color ranking.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Feature Analysis/Full Titanic Data/Survived/True/Embarked/Count plot graph on Embarked with count color ranking.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Feature Analysis/Full Titanic Data/Survived/True/Embarked/Count plot graph on Embarked with count color ranking.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Feature Analysis/Full Titanic Data/Survived/True/Embarked/Pie graph on Embarked.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Feature Analysis/Full Titanic Data/Survived/True/Embarked/Pie graph on Embarked.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Feature Analysis/Full Titanic Data/Survived/True/Fare/Distance plot graph on Fare.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Feature Analysis/Full Titanic Data/Survived/True/Fare/Distance plot graph on Fare.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Feature Analysis/Full Titanic Data/Survived/True/Fare/Ridge plot graph on Fare by Survived with pre defined colors.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Feature Analysis/Full Titanic Data/Survived/True/Fare/Ridge plot graph on Fare by Survived with pre defined colors.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Feature Analysis/Full Titanic Data/Survived/True/Parch/Distance plot graph on Parch.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Feature Analysis/Full Titanic Data/Survived/True/Parch/Distance plot graph on Parch.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Feature Analysis/Full Titanic Data/Survived/True/Parch/Ridge plot graph on Parch by Survived with pre defined colors.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Feature Analysis/Full Titanic Data/Survived/True/Parch/Ridge plot graph on Parch by Survived with pre defined colors.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Feature Analysis/Full Titanic Data/Survived/True/Pclass/Count plot graph on Pclass with count color ranking.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Feature Analysis/Full Titanic Data/Survived/True/Pclass/Count plot graph on Pclass with count color ranking.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Feature Analysis/Full Titanic Data/Survived/True/Pclass/Count plot graph on Pclass.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Feature Analysis/Full Titanic Data/Survived/True/Pclass/Count plot graph on Pclass.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Feature Analysis/Full Titanic Data/Survived/True/Pclass/Pie graph on Pclass.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Feature Analysis/Full Titanic Data/Survived/True/Pclass/Pie graph on Pclass.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Feature Analysis/Full Titanic Data/Survived/True/Sex/Count plot graph on Sex with count color ranking.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Feature Analysis/Full Titanic Data/Survived/True/Sex/Count plot graph on Sex with count color ranking.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Feature Analysis/Full Titanic Data/Survived/True/Sex/Count plot graph on Sex.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Feature Analysis/Full Titanic Data/Survived/True/Sex/Count plot graph on Sex.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Feature Analysis/Full Titanic Data/Survived/True/Sex/Pie graph on Sex.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Feature Analysis/Full Titanic Data/Survived/True/Sex/Pie graph on Sex.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Feature Analysis/Full Titanic Data/Survived/True/SibSp/Distance plot graph on SibSp.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Feature Analysis/Full Titanic Data/Survived/True/SibSp/Distance plot graph on SibSp.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Feature Analysis/Full Titanic Data/Survived/True/SibSp/Ridge plot graph on SibSp by Survived with pre defined colors.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Feature Analysis/Full Titanic Data/Survived/True/SibSp/Ridge plot graph on SibSp by Survived with pre defined colors.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Missing Data/Full Titanic Data/Graphics/Missing data bar graph.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Missing Data/Full Titanic Data/Graphics/Missing data bar graph.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Missing Data/Full Titanic Data/Graphics/Missing data dendrogram graph average.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Missing Data/Full Titanic Data/Graphics/Missing data dendrogram graph average.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Missing Data/Full Titanic Data/Graphics/Missing data heatmap graph.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Missing Data/Full Titanic Data/Graphics/Missing data heatmap graph.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Missing Data/Full Titanic Data/Graphics/Missing data matrix graph.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Missing Data/Full Titanic Data/Graphics/Missing data matrix graph.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/df_features.json" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/df_features.json" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -31,8 +144,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/eflow/_hidden/parent_objects/data_analysis.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="165">
-              <caret line="11" column="10" selection-start-line="11" selection-start-column="10" selection-end-line="11" selection-end-column="10" />
+            <state relative-caret-position="-1254">
+              <caret line="20" column="33" selection-start-line="20" selection-start-column="33" selection-end-line="20" selection-end-column="33" />
               <folding>
                 <element signature="e#0#51#0" expanded="true" />
               </folding>
@@ -40,23 +153,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/eflow/_hidden/parent_objects/__init__.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="45">
-              <caret line="3" column="39" selection-start-line="3" selection-start-column="27" selection-end-line="3" selection-end-column="39" />
-              <folding>
-                <element signature="e#0#35#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/eflow/data_analysis/feature_analysis.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="102">
-              <caret line="497" column="36" selection-start-line="497" selection-start-column="36" selection-end-line="497" selection-end-column="36" />
+            <state relative-caret-position="487">
+              <caret line="1173" lean-forward="true" selection-start-line="1173" selection-end-line="1173" />
               <folding>
                 <element signature="e#0#51#0" expanded="true" />
               </folding>
@@ -67,17 +168,17 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/eflow/foundation/data_frame_types.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-1960">
-              <caret line="1498" column="57" selection-start-line="1498" selection-start-column="57" selection-end-line="1498" selection-end-column="57" />
+            <state relative-caret-position="311">
+              <caret line="190" column="41" selection-start-line="190" selection-start-column="8" selection-end-line="190" selection-end-column="41" />
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/eflow/data_pipeline_segments/type_fixer.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="540">
-              <caret line="38" column="12" lean-forward="true" selection-start-line="38" selection-start-column="12" selection-end-line="38" selection-end-column="12" />
+              <caret line="38" column="12" selection-start-line="38" selection-start-column="12" selection-end-line="38" selection-end-column="12" />
             </state>
           </provider>
         </entry>
@@ -85,7 +186,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/eflow/model_analysis/classification_analysis.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="10947">
+            <state relative-caret-position="11370">
               <caret line="780" column="23" selection-start-line="780" selection-start-column="23" selection-end-line="780" selection-end-column="23" />
               <folding>
                 <element signature="e#0#35#0" expanded="true" />
@@ -97,7 +198,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/eflow/data_analysis/null_analysis.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="525">
+            <state relative-caret-position="630">
               <caret line="55" column="30" selection-start-line="55" selection-start-column="30" selection-end-line="55" selection-end-column="30" />
               <folding>
                 <element signature="e#0#50#0" expanded="true" />
@@ -117,22 +218,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>perform_analysis</find>
-      <find>aggerate_target_feature</find>
-      <find>dataframe_snapshot:</find>
-      <find>raise e</find>
-      <find>except Exception as e:</find>
-      <find>self.__df_features</find>
-      <find>plot_null_heatmap_graph</find>
-      <find>ax =</find>
-      <find>def p</find>
-      <find>data_types_table</find>
-      <find>throw</find>
-      <find>Graph x raised</find>
-      <find>threw</find>
-      <find>convert_to_filename</find>
-      <find>__attempt_to_save_plot</find>
-      <find>trying to save the table a</find>
       <find>print</find>
       <find>attempt</find>
       <find>save_plot</find>
@@ -141,12 +226,28 @@
       <find>distance_</find>
       <find>if</find>
       <find>if save_file</find>
-      <find>suppress_runtime_errors</find>
       <find>if save_file:</find>
       <find>int(</find>
       <find>ridgge_</find>
       <find>.split</find>
       <find>int</find>
+      <find>ridge_plot</find>
+      <find>plot</find>
+      <find>y_feature_name</find>
+      <find>if not palette:</find>
+      <find>pd.to</find>
+      <find>plot_count_graph</find>
+      <find>plot_violin</find>
+      <find>plot_ridge</find>
+      <find>color ranking</find>
+      <find>plot_distance_graph</find>
+      <find>plot_violin_graph</find>
+      <find>feature_name</find>
+      <find>suppress_runtime_errors</find>
+      <find>plot_ridge_</find>
+      <find>plot_ridge_graph</find>
+      <find>target_feature_numerical</find>
+      <find>get_continuous_numerical_features</find>
     </findStrings>
     <replaceStrings>
       <replace>dataframe_snapshot</replace>
@@ -174,6 +275,7 @@
       <replace />
       <replace>self.__label_encoder</replace>
       <replace>raised</replace>
+      <replace>other_feature_name</replace>
     </replaceStrings>
     <dirStrings>
       <dir>$PROJECT_DIR$/eflow/_hidden/objects</dir>
@@ -185,7 +287,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/installation/main_packages.txt" />
         <option value="$PROJECT_DIR$/eflow/_hidden/general_objects.py" />
         <option value="$PROJECT_DIR$/eflow/_hidden/parent_objects.py" />
         <option value="$PROJECT_DIR$/eflow/_hidden/__init__.py" />
@@ -233,9 +334,10 @@
         <option value="$PROJECT_DIR$/eflow/_hidden/parent_objects/analysis_object.py" />
         <option value="$PROJECT_DIR$/eflow/_hidden/parent_objects/__init__.py" />
         <option value="$PROJECT_DIR$/eflow/data_analysis/null_analysis.py" />
-        <option value="$PROJECT_DIR$/eflow/data_analysis/feature_analysis.py" />
         <option value="$PROJECT_DIR$/eflow/foundation/data_frame_types.py" />
         <option value="$PROJECT_DIR$/eflow/data_pipeline_segments/type_fixer.py" />
+        <option value="$PROJECT_DIR$/eflow/_hidden/parent_objects/data_analysis.py" />
+        <option value="$PROJECT_DIR$/eflow/data_analysis/feature_analysis.py" />
       </list>
     </option>
   </component>
@@ -477,18 +579,18 @@
       <workItem from="1573571264125" duration="121000" />
       <workItem from="1573571585497" duration="194000" />
       <workItem from="1573572147026" duration="21064000" />
-      <workItem from="1573830156390" duration="17486000" />
+      <workItem from="1573830156390" duration="17732000" />
+      <workItem from="1574094489573" duration="3732000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="411593000" />
+    <option name="totallyTimeSpent" value="415571000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1920" height="1080" extended-state="0" />
-    <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.3775293" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.38125667" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -853,29 +955,9 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/eflow/_hidden/parent_objects/data_analysis.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="165">
-          <caret line="11" column="10" selection-start-line="11" selection-start-column="10" selection-end-line="11" selection-end-column="10" />
-          <folding>
-            <element signature="e#0#51#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/eflow/data_analysis/null_analysis.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="525">
-          <caret line="55" column="30" selection-start-line="55" selection-start-column="30" selection-end-line="55" selection-end-column="30" />
-          <folding>
-            <element signature="e#0#50#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/eflow/model_analysis/classification_analysis.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="10947">
+        <state relative-caret-position="11370">
           <caret line="780" column="23" selection-start-line="780" selection-start-column="23" selection-end-line="780" selection-end-column="23" />
           <folding>
             <element signature="e#0#35#0" expanded="true" />
@@ -883,37 +965,54 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/eflow/data_analysis/feature_analysis.py">
+    <entry file="file://$PROJECT_DIR$/eflow/data_analysis/null_analysis.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="497" column="36" selection-start-line="497" selection-start-column="36" selection-end-line="497" selection-end-column="36" />
+        <state relative-caret-position="630">
+          <caret line="55" column="30" selection-start-line="55" selection-start-column="30" selection-end-line="55" selection-end-column="30" />
           <folding>
-            <element signature="e#0#51#0" expanded="true" />
+            <element signature="e#0#50#0" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/eflow/_hidden/parent_objects/__init__.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="45">
-          <caret line="3" column="39" selection-start-line="3" selection-start-column="27" selection-end-line="3" selection-end-column="39" />
-          <folding>
-            <element signature="e#0#35#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/eflow/foundation/data_frame_types.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1960">
-          <caret line="1498" column="57" selection-start-line="1498" selection-start-column="57" selection-end-line="1498" selection-end-column="57" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/eflow/data_pipeline_segments/type_fixer.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="540">
-          <caret line="38" column="12" lean-forward="true" selection-start-line="38" selection-start-column="12" selection-end-line="38" selection-end-column="12" />
+          <caret line="38" column="12" selection-start-line="38" selection-start-column="12" selection-end-line="38" selection-end-column="12" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/eflow/_hidden/parent_objects/__init__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="45">
+          <caret line="3" column="33" selection-start-line="3" selection-start-column="33" selection-end-line="3" selection-end-column="33" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/eflow/_hidden/parent_objects/data_analysis.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1254">
+          <caret line="20" column="33" selection-start-line="20" selection-start-column="33" selection-end-line="20" selection-end-column="33" />
+          <folding>
+            <element signature="e#0#51#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/eflow/foundation/data_frame_types.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="311">
+          <caret line="190" column="41" selection-start-line="190" selection-start-column="8" selection-end-line="190" selection-end-column="41" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/eflow/data_analysis/feature_analysis.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="487">
+          <caret line="1173" lean-forward="true" selection-start-line="1173" selection-end-line="1173" />
+          <folding>
+            <element signature="e#0#51#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

@@ -1,7 +1,7 @@
 {
   "shape": [
     197,
-    22
+    24
   ],
   "feature_names": [
     "allow_fee_total_allocation_yn",
@@ -14,10 +14,12 @@
     "default_payee_to_provider_yn",
     "default_tolerance_type_id",
     "description_editable_yn",
+    "fee_item_desc",
     "fee_paid_to_type_id",
     "fee_provider_type_change_yn",
     "fee_provider_type_id",
     "finance_charge_yn",
+    "hud_line_number",
     "hud_section_type_id",
     "include_on_provider_list_yn",
     "net_fund_edit_yn",
@@ -125,16 +127,16 @@
       "Random Value 10": "1"
     },
     "default_tolerance_type_id": {
-      "Random Value 1": "NaN",
-      "Random Value 2": "1",
-      "Random Value 3": "NaN",
-      "Random Value 4": "NaN",
-      "Random Value 5": "1",
-      "Random Value 6": "1",
-      "Random Value 7": "1",
-      "Random Value 8": "NaN",
-      "Random Value 9": "1",
-      "Random Value 10": "1"
+      "Random Value 1": "TENPCT",
+      "Random Value 2": "ZEROPCT",
+      "Random Value 3": "TENPCT",
+      "Random Value 4": "TENPCT",
+      "Random Value 5": "ZEROPCT",
+      "Random Value 6": "ZEROPCT",
+      "Random Value 7": "ZEROPCT",
+      "Random Value 8": "TENPCT",
+      "Random Value 9": "ZEROPCT",
+      "Random Value 10": "ZEROPCT"
     },
     "description_editable_yn": {
       "Random Value 1": "1",
@@ -147,6 +149,18 @@
       "Random Value 8": "NaN",
       "Random Value 9": "NaN",
       "Random Value 10": "NaN"
+    },
+    "fee_item_desc": {
+      "Random Value 1": "Settlement/Closing Fee",
+      "Random Value 2": "Home Inspection Fee (Optional)",
+      "Random Value 3": "NY State Mortgage Recording Tax - Lender",
+      "Random Value 4": "Hazard Insurance Premium",
+      "Random Value 5": "Freeform/Borrower Can Shop/Prepaid",
+      "Random Value 6": "HOA Tax Due at Close",
+      "Random Value 7": "Misc. Insurance 2 Premium",
+      "Random Value 8": "Sanitation Tax Due at Close",
+      "Random Value 9": "Misc. Insurance 2 Premium",
+      "Random Value 10": "Escrow Holdback Admin Fee"
     },
     "fee_paid_to_type_id": {
       "Random Value 1": "THIRDPARTY",
@@ -195,6 +209,18 @@
       "Random Value 8": "1",
       "Random Value 9": "NaN",
       "Random Value 10": "NaN"
+    },
+    "hud_line_number": {
+      "Random Value 1": "0808",
+      "Random Value 2": "1218",
+      "Random Value 3": "1124",
+      "Random Value 4": "1335",
+      "Random Value 5": "1215",
+      "Random Value 6": "1138",
+      "Random Value 7": "1140",
+      "Random Value 8": "1119",
+      "Random Value 9": "1326",
+      "Random Value 10": "1132"
     },
     "hud_section_type_id": {
       "Random Value 1": "800",
