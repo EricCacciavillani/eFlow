@@ -1,32 +1,32 @@
 {
   "bool": [
-    "seller_responsible_yn",
-    "fee_provider_type_change_yn",
+    "allow_fee_total_allocation_yn",
+    "borrower_responsible_yn",
+    "cascade_fee_provider_info_yn",
+    "selectable_provider_yn",
     "allow_zero_value_yn",
     "net_fund_edit_yn",
-    "include_on_provider_list_yn",
-    "net_fundable_yn",
-    "selectable_provider_yn",
-    "can_finance_yn",
-    "allow_fee_total_allocation_yn",
-    "amount_editable_yn",
-    "cascade_fee_provider_info_yn",
-    "allow_freeform_provider_yn",
+    "seller_responsible_yn",
     "description_editable_yn",
-    "borrower_responsible_yn",
+    "fee_provider_type_change_yn",
     "default_payee_to_provider_yn",
-    "finance_charge_yn"
+    "include_on_provider_list_yn",
+    "finance_charge_yn",
+    "amount_editable_yn",
+    "allow_freeform_provider_yn",
+    "can_finance_yn",
+    "net_fundable_yn"
   ],
   "string": [
-    "fee_paid_to_type_id",
-    "summary_fee_item_type_id",
-    "fee_item_desc",
-    "fee_provider_type_id",
+    "hud_line_number",
     "sort_value",
     "default_tolerance_type_id",
-    "hud_line_number"
+    "fee_item_desc",
+    "summary_fee_item_type_id",
+    "fee_paid_to_type_id",
+    "fee_provider_type_id"
   ],
-  "integer": [
+  "categorical": [
     "hud_section_type_id"
   ],
   "target": "sort_value",
@@ -74,32 +74,6 @@
   },
   "feature_value_representation": {},
   "label_encoder": {
-    "fee_paid_to_type_id": {
-      "LENDER": 0,
-      "THIRDPARTY": 1
-    },
-    "summary_fee_item_type_id": {
-      "CANNOT_SHOP": 0,
-      "CAN_SHOP": 1,
-      "ORIGINATION": 2,
-      "OTHER": 3,
-      "PREPAIDS": 4,
-      "TAXES_GOV_FEES": 5
-    },
-    "sort_value": {
-      "A": 0,
-      "B": 1,
-      "C": 2,
-      "E": 3,
-      "F": 4,
-      "H": 5,
-      "h": 6
-    },
-    "default_tolerance_type_id": {
-      "99": 99,
-      "TENPCT": 0,
-      "ZEROPCT": 1
-    },
     "hud_line_number": {
       "801": 801,
       "802": 802,
@@ -470,6 +444,32 @@
       "Wire Transfer Fee": 168,
       "eDoc Fee": 169
     },
+    "sort_value": {
+      "A": 0,
+      "B": 1,
+      "C": 2,
+      "E": 3,
+      "F": 4,
+      "H": 5,
+      "h": 6
+    },
+    "summary_fee_item_type_id": {
+      "CANNOT_SHOP": 0,
+      "CAN_SHOP": 1,
+      "ORIGINATION": 2,
+      "OTHER": 3,
+      "PREPAIDS": 4,
+      "TAXES_GOV_FEES": 5
+    },
+    "fee_paid_to_type_id": {
+      "LENDER": 0,
+      "THIRDPARTY": 1
+    },
+    "default_tolerance_type_id": {
+      "99": 99,
+      "TENPCT": 0,
+      "ZEROPCT": 1
+    },
     "fee_provider_type_id": {
       "APPRAISE": 0,
       "CREDIT": 1,
@@ -486,32 +486,6 @@
     }
   },
   "label_decoder": {
-    "fee_paid_to_type_id": {
-      "0": "LENDER",
-      "1": "THIRDPARTY"
-    },
-    "summary_fee_item_type_id": {
-      "0": "CANNOT_SHOP",
-      "1": "CAN_SHOP",
-      "2": "ORIGINATION",
-      "3": "OTHER",
-      "4": "PREPAIDS",
-      "5": "TAXES_GOV_FEES"
-    },
-    "sort_value": {
-      "0": "A",
-      "1": "B",
-      "2": "C",
-      "3": "E",
-      "4": "F",
-      "5": "H",
-      "6": "h"
-    },
-    "default_tolerance_type_id": {
-      "99": 99,
-      "0": "TENPCT",
-      "1": "ZEROPCT"
-    },
     "hud_line_number": {
       "801": 801,
       "802": 802,
@@ -881,6 +855,32 @@
       "167": "Wire Fee",
       "168": "Wire Transfer Fee",
       "169": "eDoc Fee"
+    },
+    "sort_value": {
+      "0": "A",
+      "1": "B",
+      "2": "C",
+      "3": "E",
+      "4": "F",
+      "5": "H",
+      "6": "h"
+    },
+    "summary_fee_item_type_id": {
+      "0": "CANNOT_SHOP",
+      "1": "CAN_SHOP",
+      "2": "ORIGINATION",
+      "3": "OTHER",
+      "4": "PREPAIDS",
+      "5": "TAXES_GOV_FEES"
+    },
+    "fee_paid_to_type_id": {
+      "0": "LENDER",
+      "1": "THIRDPARTY"
+    },
+    "default_tolerance_type_id": {
+      "99": 99,
+      "0": "TENPCT",
+      "1": "ZEROPCT"
     },
     "fee_provider_type_id": {
       "0": "APPRAISE",

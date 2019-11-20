@@ -1,24 +1,25 @@
 {
   "bool": [
+    "Test",
     "Survived"
   ],
   "string": [
-    "Embarked",
     "Cabin",
-    "Sex"
+    "Sex",
+    "Embarked"
   ],
   "integer": [
-    "Parch",
-    "SibSp"
+    "SibSp",
+    "Parch"
   ],
   "float": [
-    "Age",
-    "Fare"
+    "Fare",
+    "Age"
   ],
   "categorical": [
     "Pclass"
   ],
-  "target": "Survived",
+  "target": "Age",
   "feature_values_colors": {
     "Sex": {
       "male": "#7eaed3",
@@ -42,14 +43,10 @@
     }
   },
   "label_encoder": {
-    "Embarked": {
-      "C": 0,
-      "Q": 1,
-      "S": 2
-    },
-    "Sex": {
-      "female": 0,
-      "male": 1
+    "Pclass": {
+      "1st Class": 1,
+      "2nd Class": 2,
+      "3rd Class": 3
     },
     "Cabin": {
       "A": 0,
@@ -61,21 +58,21 @@
       "G": 6,
       "T": 7
     },
-    "Pclass": {
-      "1st Class": 1,
-      "2nd Class": 2,
-      "3rd Class": 3
+    "Sex": {
+      "female": 0,
+      "male": 1
+    },
+    "Embarked": {
+      "C": 0,
+      "Q": 1,
+      "S": 2
     }
   },
   "label_decoder": {
-    "Embarked": {
-      "0": "C",
-      "1": "Q",
-      "2": "S"
-    },
-    "Sex": {
-      "0": "female",
-      "1": "male"
+    "Pclass": {
+      "1": "1st Class",
+      "2": "2nd Class",
+      "3": "3rd Class"
     },
     "Cabin": {
       "0": "A",
@@ -87,10 +84,14 @@
       "6": "G",
       "7": "T"
     },
-    "Pclass": {
-      "1": "1st Class",
-      "2": "2nd Class",
-      "3": "3rd Class"
+    "Sex": {
+      "0": "female",
+      "1": "male"
+    },
+    "Embarked": {
+      "0": "C",
+      "1": "Q",
+      "2": "S"
     }
   }
 }

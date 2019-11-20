@@ -16,7 +16,7 @@ class DefaultException(Exception):
         else:
             return self.__error_message
 
-class MismatchError(DefaultException):
+class SnapshotMismatchError(DefaultException):
     def __init__(self,
                  error_message=None):
         super().__init__(error_message=error_message)

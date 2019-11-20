@@ -1,15 +1,15 @@
 from eflow.utils.sys_utils import dict_to_json_file,json_file_to_dict
+from eflow.utils.language_processing_utils import get_synonyms
 from eflow._hidden.custom_exceptions import UnsatisfiedRequirments
 
+
 import copy
-from IPython.display import display, HTML
 
 import numpy as np
 import pandas as pd
 from dateutil import parser
 from IPython.display import display
 from IPython.display import clear_output
-import seaborn as sns
 
 __author__ = "Eric Cacciavillani"
 __copyright__ = "Copyright 2019, eFlow"
@@ -32,7 +32,6 @@ class DataFrameTypes:
                  ignore_nulls=False,
                  fix_numeric_features=False,
                  fix_string_features=False,
-                 categorical_value_dict=dict(),
                  notebook_mode=False):
         """
         Args:
@@ -127,9 +126,6 @@ class DataFrameTypes:
         if fix_numeric_features:
             self.fix_numeric_features(df,
                                       notebook_mode)
-
-        self.set_encoder_for_features(df,
-                                      categorical_value_dict)
 
     # --- Getters ---
     def get_numerical_features(self,
@@ -635,12 +631,11 @@ class DataFrameTypes:
             feature_name:
                 Feature name or a list of feature names to move to given set.
         """
-        if isinstance(feature_name, str):
-            feature_names = [feature_name]
-        else:
-            feature_names = []
 
-        for name in feature_names:
+        if isinstance(feature_name, str):
+            feature_name = [feature_name]
+
+        for name in feature_name:
             self.remove_feature(name)
             self.__bool_features.add(name)
 
@@ -655,11 +650,9 @@ class DataFrameTypes:
                 Feature name or a list of feature names to move to given set.
         """
         if isinstance(feature_name, str):
-            feature_names = [feature_name]
-        else:
-            feature_names = []
+            feature_name = [feature_name]
 
-        for name in feature_names:
+        for name in feature_name:
             self.remove_feature(name)
             self.__integer_features.add(name)
 
@@ -674,11 +667,9 @@ class DataFrameTypes:
                 Feature name or a list of feature names to move to given set.
         """
         if isinstance(feature_name, str):
-            feature_names = [feature_name]
-        else:
-            feature_names = []
+            feature_name = [feature_name]
 
-        for name in feature_names:
+        for name in feature_name:
             self.remove_feature(name)
             self.__float_features.add(name)
 
@@ -692,13 +683,11 @@ class DataFrameTypes:
             feature_name:
                 Feature name or a list of feature names to move to given set.
         """
+
         if isinstance(feature_name, str):
-            feature_names = [feature_name]
-        else:
-            feature_names = []
+            feature_name = [feature_name]
 
-
-        for name in feature_names:
+        for name in feature_name:
             self.remove_feature(name)
             self.__string_features.add(name)
 
@@ -712,12 +701,11 @@ class DataFrameTypes:
             feature_name:
                 Feature name or a list of feature names to move to given set.
         """
-        if isinstance(feature_name, str):
-            feature_names = [feature_name]
-        else:
-            feature_names = []
 
-        for name in feature_names:
+        if isinstance(feature_name, str):
+            feature_name = [feature_name]
+
+        for name in feature_name:
             self.remove_feature(name)
             self.__categorical_features.add(name)
 
@@ -733,12 +721,9 @@ class DataFrameTypes:
         """
 
         if isinstance(feature_name,str):
-            feature_names = [feature_name]
-        else:
-            feature_names = []
+            feature_name = [feature_name]
 
-
-        for name in feature_names:
+        for name in feature_name:
             self.remove_feature(name)
             self.__datetime_features.add(name)
 
@@ -968,17 +953,17 @@ class DataFrameTypes:
                 4. Int
                 5. Do nothing
         Args:
-            df:
+            df: pd.Dataframe
                 Pandas Dataframe object to update to correct types.
 
-            notebook_mode:
+            notebook_mode: bool
                 Boolean value to determine if any notebook functions can be used here.
 
-            display_results:
+            display_results: bool
                 Display the table in priority order with flags.
 
 
-        Note:
+        Note -
             This will not actually update the given dataframe. This object is
             a abstract representation of the dataframe.
         """
@@ -1005,9 +990,8 @@ class DataFrameTypes:
             if not len(feature_values):
                 continue
 
+            # Get flag's to push to priority que
             flag_dict = dict()
-
-            # Bool check
             flag_dict["Bool"] = self.__bool_check(feature_values)
             numeric_flag, float_flag, int_flag, category_flag = \
                 self.__numeric_check(feature_values)
@@ -1050,8 +1034,6 @@ class DataFrameTypes:
             else:
                 print(flag_df)
 
-
-
     def fix_string_features(self,
                             df,
                             notebook_mode=False):
@@ -1062,10 +1044,10 @@ class DataFrameTypes:
             types.
 
         Args:
-            df:
+            df: pd.Dataframe
                 Pandas dataframe object.
 
-            notebook_mode:
+            notebook_mode: bool
                 Will use the 'clear_output' notebook function if in notebook
                 mode.
         """
@@ -1092,8 +1074,7 @@ class DataFrameTypes:
             datetime_values = []
 
             # Iterate through value counts
-            for val, count in df[
-                feature_name].dropna().value_counts().iteritems():
+            for val, count in df[feature_name].dropna().value_counts().iteritems():
 
                 numeric_check = False
 
@@ -1149,7 +1130,11 @@ class DataFrameTypes:
 
             # Must be a string type
             elif numeric_count == 0 and string_count != 0 and datetime_count == 0:
-                type_conflict_dict[feature_name] = "string"
+
+                if self.__bool_string_values_check(string_values):
+                    type_conflict_dict[feature_name] = "bool"
+                else:
+                    type_conflict_dict[feature_name] = "string"
 
             # Must be a datetime
             elif numeric_count == 0 and string_count == 0 and datetime_count != 0:
@@ -1515,6 +1500,11 @@ class DataFrameTypes:
         Note:
             Can handle a feature that have categories and strings in same series.
         """
+
+        if len(set(df.columns) ^ set(self.get_all_features())) > 0:
+            raise UnsatisfiedRequirments("The given Dataframe's features should "
+                                         "be the same as the features saved in "
+                                         "the DataFrameTypes.")
         # Reset dict
         self.__label_encoder = dict()
 
@@ -1618,6 +1608,56 @@ class DataFrameTypes:
             return True
         else:
             return False
+
+    def __bool_string_values_check(self,
+                                   feature_values):
+
+        defined_true_strings = {"y",
+                                "yes",
+                                "okay",
+                                "approve",
+                                "approved",
+                                "accepted",
+                                "alright"}
+
+        defined_false_strings = {"n",
+                                 "no",
+                                 "denined",
+                                 "deny",
+                                 "refuse",
+                                 "abnegate"}
+
+        if len(feature_values) > 2:
+            return False
+
+        found_true_value = False
+        found_false_value = False
+
+        for val in feature_values:
+
+            if not found_true_value:
+                if val in defined_true_strings:
+                    found_true_value = True
+                    continue
+                else:
+                    for true_string in defined_true_strings:
+                        for syn in get_synonyms(true_string):
+                            if syn == val:
+                                found_true_value = True
+                                continue
+
+            if not found_false_value:
+                if val in defined_false_strings:
+                    found_false_value = True
+                    continue
+                else:
+                    for false_string in defined_false_strings:
+                        for syn in get_synonyms(false_string):
+                            if syn == val:
+                                found_false_value = True
+                                continue
+
+        return found_true_value and found_false_value
 
     def __categorical_check(self,
                             feature_values):

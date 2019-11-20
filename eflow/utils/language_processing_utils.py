@@ -13,7 +13,8 @@ def get_synonyms_antonyms(word):
             if l.antonyms():
                 antonyms.append(l.antonyms()[0].name())
 
-    return set(synonyms), set(antonyms)
+    return {word.replace("_", " ") for word in synonyms}, \
+           {word.replace("_", " ") for word in antonyms}
 
 
 def get_synonyms(word):
@@ -23,10 +24,7 @@ def get_synonyms(word):
         for l in syn.lemmas():
             synonyms.append(l.name())
 
-    return set(synonyms)
-
-
-
+    return {word.replace("_", " ") for word in synonyms}
 
 def get_antonyms(word):
     antonyms = []
@@ -36,4 +34,4 @@ def get_antonyms(word):
             if l.antonyms():
                 antonyms.append(l.antonyms()[0].name())
 
-    return set(antonyms)
+    return {word.replace("_", " ") for word in antonyms}

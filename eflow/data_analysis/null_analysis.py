@@ -1,8 +1,6 @@
 from eflow._hidden.constants import GRAPH_DEFAULTS
-from eflow._hidden.custom_exceptions import UnsatisfiedRequirments
-from eflow.utils.image_processing_utils import create_plt_png
-from eflow.utils.string_utils import convert_to_filename, correct_directory_path
-from eflow.utils.pandas_utils import missing_values_table, df_to_image
+from eflow._hidden.custom_exceptions import SnapshotMismatchError
+from eflow.utils.pandas_utils import missing_values_table
 from eflow._hidden.general_objects import DataFrameSnapshot
 from eflow._hidden.parent_objects import DataAnalysis
 import copy
@@ -36,17 +34,20 @@ class NullAnalysis(DataAnalysis):
                  notebook_mode=True):
         """
         Args:
-            project_sub_dir:
+            df_features:
+                Data
+
+            project_sub_dir: string
                 Appends to the absolute directory of the output folder
 
-            project_name:
+            project_name: string
                 Creates a parent or "project" folder in which all sub-directories
                 will be inner nested.
 
-            overwrite_full_path:
+            overwrite_full_path: string
                 Overwrites the path to the parent folder.
 
-            notebook_mode:
+            notebook_mode: bool
                 If in a python notebook display visualizations in the notebook.
         """
 
@@ -70,32 +71,41 @@ class NullAnalysis(DataAnalysis):
                          save_file=True,
                          dataframe_snapshot=True,
                          suppress_runtime_errors=True,
+                         display_print=True,
                          null_features_only=False):
         """
         Desc:
             Perform all public methods of the NullAnalysis object.
 
         Args:
-            df:
+            df: pd.Dataframe
                 Pandas Dataframe object.
 
-            dataset_name:
+            dataset_name: string
                 The dataset's name; this will create a sub-directory in which your
                 generated graph will be inner-nested in.
 
-            display_visuals:
+            display_visuals: bool
                 Boolean value to whether or not to display visualizations.
 
-            save_file:
+            display_print: bool
+                Determines whether or not to print function's embedded print
+                statements.
+
+            save_file: bool
                 Boolean value to whether or not to save the file.
 
-            dataframe_snapshot:
+            dataframe_snapshot: bool
                 Boolean value to determine whether or not generate and compare a
                 snapshot of the dataframe in the dataset's directory structure.
                 Helps ensure that data generated in that directory is correctly
                 associated to a dataframe.
 
-            null_features_only:
+            suppress_runtime_errors: bool
+                If set to true; when generating any graphs will suppress any runtime
+                errors so the program can keep running.
+
+            null_features_only: bool
                 Dataframe will pass on null features for the visualizations
         """
         try:
@@ -120,42 +130,56 @@ class NullAnalysis(DataAnalysis):
                 # Set to true to represent the function call was made with perform
                 self.__called_from_perform = True
 
-                print("\n\n")
+                if display_visuals:
+                    print("\n\n")
                 # --------------------------------------
                 self.missing_values_table(df,
-                                          dataset_name)
-                print("\n\n")
+                                          dataset_name,
+                                          display_visuals=display_visuals,
+                                          save_file=save_file,
+                                          dataframe_snapshot=dataframe_snapshot,
+                                          suppress_runtime_errors=suppress_runtime_errors,
+                                          display_print=display_print)
+
+                if display_visuals:
+                    print("\n\n")
                 # --------------------------------------
                 self.plot_null_bar_graph(df,
                                          dataset_name,
                                          null_features_only=null_features_only,
                                          display_visuals=display_visuals,
                                          save_file=save_file,
-                                         suppress_runtime_errors=suppress_runtime_errors)
-                print("\n\n")
+                                         suppress_runtime_errors=suppress_runtime_errors,
+                                         display_print=display_print)
+                if display_visuals:
+                    print("\n\n")
                 # --------------------------------------
                 self.plot_null_matrix_graph(df,
                                             dataset_name,
                                             null_features_only=null_features_only,
                                             display_visuals=display_visuals,
                                             save_file=save_file,
-                                            suppress_runtime_errors=suppress_runtime_errors)
-                print("\n\n")
+                                            suppress_runtime_errors=suppress_runtime_errors,
+                                            display_print=display_print)
+                if display_visuals:
+                    print("\n\n")
                 # --------------------------------------
                 self.plot_null_heatmap_graph(df,
                                              dataset_name,
                                              display_visuals=display_visuals,
                                              save_file=save_file,
-                                             suppress_runtime_errors=suppress_runtime_errors)
-                print("\n\n")
+                                             suppress_runtime_errors=suppress_runtime_errors,
+                                             display_print=display_print)
+                if display_visuals:
+                    print("\n\n")
                 # --------------------------------------
                 self.plot_null_dendrogram_graph(df,
                                                 dataset_name,
                                                 null_features_only=null_features_only,
                                                 display_visuals=display_visuals,
                                                 save_file=save_file,
-                                                suppress_runtime_errors=suppress_runtime_errors)
-                print("\n\n")
+                                                suppress_runtime_errors=suppress_runtime_errors,
+                                                display_print=display_print)
 
         finally:
             self.__called_from_perform = False
@@ -165,6 +189,7 @@ class NullAnalysis(DataAnalysis):
                                df,
                                dataset_name,
                                display_visuals=True,
+                               display_print=True,
                                filename=None,
                                sub_dir=None,
                                save_file=True,
@@ -189,24 +214,31 @@ class NullAnalysis(DataAnalysis):
             pushes the image to output folder.
 
         Args:
-            df:
+            df: pd.Dataframe
                 Pandas dataframe object
 
-            dataset_name:
+            dataset_name: string
                 The dataset's name; this will create a sub-directory in which your
                 generated graph will be inner-nested in.
 
-            display_visuals:
+            display_visuals: bool
                 Boolean value to whether or not to display visualizations.
 
-            save_file:
+            display_print: bool
+                Determines whether or not to print function's embedded print
+                statements.
+
+            save_file: bool
                 Boolean value to whether or not to save the file.
 
-            filename:
+            filename: string
                 If set to 'None' will default to a pre-defined string;
                 unless it is set to an actual filename.
 
-            dataframe_snapshot:
+            sub_dir: string
+                Specify the sub directory to append to the pre-defined folder path.
+
+            dataframe_snapshot: bool
                 Boolean value to determine whether or not generate and compare a
                 snapshot of the dataframe in the dataset's directory structure.
                 Helps ensure that data generated in that directory is correctly
@@ -216,7 +248,7 @@ class NullAnalysis(DataAnalysis):
                 If set to true; when generating any graphs will suppress any runtime
                 errors so the program can keep running.
 
-            null_features_only:
+            null_features_only: bool
                 Dataframe will pass on null features for the visualizations
 
             Please read the offical documentation at for more about the parameters:
@@ -231,8 +263,10 @@ class NullAnalysis(DataAnalysis):
         try:
             if not self.__called_from_perform:
                 if not self.__check_dataframe(df):
-                    print("Null matrix couldn't be generated because there is "
-                          "no missing data to display!")
+
+                    if display_print:
+                        print("Couldn't create missing values table because"
+                              " there is no missing data to display!")
                     return None
 
             null_sorted_features, null_features = self.__sort_features_by_nulls(df)
@@ -242,10 +276,10 @@ class NullAnalysis(DataAnalysis):
             else:
                 selected_features = null_sorted_features
 
-            if display_visuals:
+            if display_print:
                 print("Generating graph for null matrix graph...")
 
-            plt.close()
+            plt.close("all")
             msno.matrix(df[selected_features],
                         filter=filter,
                         n=n,
@@ -280,10 +314,13 @@ class NullAnalysis(DataAnalysis):
             if self.__notebook_mode and display_visuals:
                 plt.show()
 
-            plt.close()
+            plt.close("all")
+
+        except SnapshotMismatchError as e:
+            raise e
 
         except Exception as e:
-            plt.close()
+            plt.close("all")
             if suppress_runtime_errors:
                 warnings.warn(
                     f"Plot null matrix raised an error:\n{str(e)}",
@@ -302,6 +339,7 @@ class NullAnalysis(DataAnalysis):
                             save_file=True,
                             dataframe_snapshot=True,
                             suppress_runtime_errors=True,
+                            display_print=True,
                             null_features_only=False,
                             figsize=GRAPH_DEFAULTS.NULL_FIGSIZE,
                             fontsize=16,
@@ -319,27 +357,28 @@ class NullAnalysis(DataAnalysis):
             pushes the image to output folder.
 
         Args:
-            df:
+            df: pd.Dataframe
                 Pandas dataframe object
 
-            dataset_name:
+            dataset_name: string
                 The dataset's name; this will create a sub-directory in which your
                 generated graph will be inner-nested in.
 
-            null_features_only:
-                Dataframe will pass on null features for the visualizations
-
-            display_visuals:
+            display_visuals: bool
                 Boolean value to whether or not to display visualizations.
 
-            filename:
+            display_print: bool
+                Determines whether or not to print function's embedded print
+                statements.
+
+            filename: string
                 If set to 'None' will default to a pre-defined string;
                 unless it is set to an actual filename.
 
-            save_file:
+            save_file: bool
                 Boolean value to whether or not to save the file.
 
-            dataframe_snapshot:
+            dataframe_snapshot: bool
                 Boolean value to determine whether or not generate and compare a
                 snapshot of the dataframe in the dataset's directory structure.
                 Helps ensure that data generated in that directory is correctly
@@ -349,10 +388,13 @@ class NullAnalysis(DataAnalysis):
                 If set to true; when generating any graphs will suppress any runtime
                 errors so the program can keep running.
 
-            Please read the offical documentation for more about the parameters:
-            Link: https://github.com/ResidentMario/missingno
+            null_features_only: bool
+                Dataframe will pass on null features for the visualizations
 
-            Note:
+            Please read the offical documentation for more about the parameters:
+            Link - https://github.com/ResidentMario/missingno
+
+            Note -
                 Changed the default color of the bar graph because I thought it
                 was ugly.
         """
@@ -361,8 +403,9 @@ class NullAnalysis(DataAnalysis):
         try:
             if not self.__called_from_perform:
                 if not self.__check_dataframe(df):
-                    print("Null bar graph couldn't be generated because there is "
-                          "no missing data to display!")
+                    if display_print:
+                        print("Couldn't create missing values table because"
+                              " there is no missing data to display!")
                     return None
 
             null_sorted_features, null_features = self.__sort_features_by_nulls(df)
@@ -372,9 +415,10 @@ class NullAnalysis(DataAnalysis):
             else:
                 selected_features = null_sorted_features
 
-            print("Generating graph for null bar graph...")
+            if display_print:
+                print("Generating graph for null bar graph...")
 
-            plt.close()
+            plt.close("all")
             ax = msno.bar(df[selected_features],
                           figsize=figsize,
                           log=log,
@@ -421,10 +465,13 @@ class NullAnalysis(DataAnalysis):
             if self.__notebook_mode and display_visuals:
                 plt.show()
 
-            plt.close()
+            plt.close("all")
+
+        except SnapshotMismatchError as e:
+            raise e
 
         except Exception as e:
-            plt.close()
+            plt.close("all")
             if suppress_runtime_errors:
                 warnings.warn(
                     f"Plot null bar graph raised an error:\n{str(e)}",
@@ -441,6 +488,7 @@ class NullAnalysis(DataAnalysis):
                                 save_file=True,
                                 dataframe_snapshot=True,
                                 suppress_runtime_errors=True,
+                                display_print=True,
                                 inline=False,
                                 filter=None,
                                 n=0,
@@ -459,24 +507,28 @@ class NullAnalysis(DataAnalysis):
             in the given DataFrame.
 
         Args:
-            df:
+            df: pd.Dataframe
                 Pandas dataframe object
 
-            dataset_name:
+            dataset_name: string
                 The dataset's name; this will create a sub-directory in which your
                 generated graph will be inner-nested in.
 
-            display_visuals:
+            display_visuals: bool
                 Boolean value to whether or not to display visualizations.
 
-            filename:
+            display_print: bool
+                Determines whether or not to print function's embedded print
+                statements.
+
+            filename: string
                 If set to 'None' will default to a pre-defined string;
                 unless it is set to an actual filename.
 
-            save_file:
+            save_file: bool
                 Boolean value to whether or not to save the file.
 
-            dataframe_snapshot:
+            dataframe_snapshot: bool
                 Boolean value to determine whether or not generate and compare a
                 snapshot of the dataframe in the dataset's directory structure.
                 Helps ensure that data generated in that directory is correctly
@@ -499,14 +551,16 @@ class NullAnalysis(DataAnalysis):
             if not self.__called_from_perform:
                 # Compares the json file snapshot to passed dataframe's snapshot
                 if not self.__check_dataframe(df):
-                    print("Null heatmap graph couldn't be generated because there"
-                          "is no missing data to display!")
+                    if display_print:
+                        print("Couldn't create missing values table because"
+                              " there is no missing data to display!")
                     return None
 
-            print("Generating graph for null heatmap...")
+            if display_print:
+                print("Generating graph for null heatmap...")
 
             # -----
-            plt.close()
+            plt.close("all")
             ax = msno.heatmap(df,
                               inline=inline,
                               filter=filter,
@@ -544,10 +598,13 @@ class NullAnalysis(DataAnalysis):
 
             if self.__notebook_mode and display_visuals:
                 plt.show()
-            plt.close()
+            plt.close("all")
+
+        except SnapshotMismatchError as e:
+            raise e
 
         except Exception as e:
-            plt.close()
+            plt.close("all")
             if suppress_runtime_errors:
                 warnings.warn(
                     f"Plot null heatmap raised an error:\n{str(e)}",
@@ -565,6 +622,7 @@ class NullAnalysis(DataAnalysis):
                                    save_file=True,
                                    dataframe_snapshot=True,
                                    suppress_runtime_errors=True,
+                                   display_print=True,
                                    null_features_only=False,
                                    method='average',
                                    filter=None,
@@ -586,21 +644,25 @@ class NullAnalysis(DataAnalysis):
             df:
                 Pandas dataframe object
 
-            dataset_name:
+            dataset_name: string
                 The dataset's name; this will create a sub-directory in which your
                 generated graph will be inner-nested in.
 
-            display_visuals:
+            display_visuals: bool
                 Boolean value to whether or not to display visualizations.
 
-            filename:
+            display_print: bool
+                Determines whether or not to print function's embedded print
+                statements.
+
+            filename: string
                 If set to 'None' will default to a pre-defined string;
                 unless it is set to an actual filename.
 
-            save_file:
+            save_file: bool
                 Boolean value to whether or not to save the file.
 
-            dataframe_snapshot:
+            dataframe_snapshot: bool
                 Boolean value to determine whether or not generate and compare a
                 snapshot of the dataframe in the dataset's directory structure.
                 Helps ensure that data generated in that directory is correctly
@@ -610,8 +672,8 @@ class NullAnalysis(DataAnalysis):
                 If set to true; when generating any graphs will suppress any runtime
                 errors so the program can keep running.
 
-            null_features_only:
-                Dataframe will pass on null features for the visualizations
+            null_features_only: bool
+                Dataframe will pass on only null features for the visualizations
 
             Please read the offical documentation for more about the parameters:
             Link: https://github.com/ResidentMario/missingno
@@ -619,8 +681,9 @@ class NullAnalysis(DataAnalysis):
         try:
             if not self.__called_from_perform:
                 if not self.__check_dataframe(df):
-                    print("Null dendrogram graph couldn't be generated because"
-                          " there is no missing data to display!")
+                    if display_print:
+                        print("Couldn't create missing values table because"
+                              " there is no missing data to display!")
                     return None
 
             null_sorted_features, null_features = self.__sort_features_by_nulls(df)
@@ -630,9 +693,10 @@ class NullAnalysis(DataAnalysis):
             else:
                 selected_features = null_sorted_features
 
-            print("Generating graph for null dendrogram graph...")
+            if display_print:
+                print("Generating graph for null dendrogram graph...")
 
-            plt.close()
+            plt.close("all")
             msno.dendrogram(df[selected_features],
                             method=method,
                             filter=filter,
@@ -665,10 +729,13 @@ class NullAnalysis(DataAnalysis):
             if self.__notebook_mode and display_visuals:
                 plt.show()
 
-            plt.close()
+            plt.close("all")
+
+        except SnapshotMismatchError as e:
+            raise e
 
         except Exception as e:
-            plt.close()
+            plt.close("all")
             if suppress_runtime_errors:
                 warnings.warn(
                     f"Plot null dendrogram raised an error:\n{str(e)}",
@@ -684,31 +751,36 @@ class NullAnalysis(DataAnalysis):
                              sub_dir=None,
                              save_file=True,
                              dataframe_snapshot=True,
-                             suppress_runtime_errors=True):
+                             suppress_runtime_errors=True,
+                             display_print=True):
         """
         Desc:
             Creates/Saves a Pandas DataFrame object giving the percentage of
             the null data for the original DataFrame columns.
 
         Args:
-            df:
+            df: pd.Dataframe
                 Pandas DataFrame object
 
-            dataset_name:
+            dataset_name: string
                 The dataset's name; this will create a sub-directory in which your
                 generated graph will be inner-nested in.
 
-            display_visuals:
-                        Boolean value to whether or not to display visualizations.
+            display_visuals: bool
+                Boolean value to whether or not to display visualizations.
 
-            filename:
+            display_print: bool
+                Determines whether or not to print function's embedded print
+                statements.
+
+            filename: string
                 If set to 'None' will default to a pre-defined string;
                 unless it is set to an actual filename.
 
-            save_file:
+            save_file: bool
                 Boolean value to whether or not to save the file.
 
-            dataframe_snapshot:
+            dataframe_snapshot: bool
                 Boolean value to determine whether or not generate and compare a
                 snapshot of the dataframe in the dataset's directory structure.
                 Helps ensure that data generated in that directory is correctly
@@ -722,19 +794,24 @@ class NullAnalysis(DataAnalysis):
         try:
             if not self.__called_from_perform:
                 if not self.__check_dataframe(df):
-                    print("Couldn't create missing values table because"
-                          " there is no missing data to display!")
+
+                    if display_print:
+                        print("Couldn't create missing values table because"
+                              " there is no missing data to display!")
                     return None
 
-            print("Creating missing values table...")
+            if display_print:
+                print("Creating missing values table...")
 
             if not self.__called_from_perform:
                 self.__check_dataframe(df)
 
             mis_val_table_ren_columns = missing_values_table(df)
 
-            print(f"Your selected dataframe has {str(df.shape[1])} columns.\n"
-                  f"That has {str(mis_val_table_ren_columns.shape[0])} columns missing data.\n")
+
+            if display_print:
+                print(f"Your selected dataframe has {str(df.shape[1])} columns.\n"
+                      f"It has {str(mis_val_table_ren_columns.shape[0])} columns missing data.\n")
 
             if self.__notebook_mode:
                 if display_visuals:
@@ -762,8 +839,12 @@ class NullAnalysis(DataAnalysis):
                                         dataframe_snapshot=dataframe_snapshot,
                                         suppress_runtime_errors=suppress_runtime_errors,
                                         table=mis_val_table_ren_columns)
+
+        except SnapshotMismatchError as e:
+            raise e
+
         except Exception as e:
-            plt.close()
+            plt.close("all")
             if suppress_runtime_errors:
                 warnings.warn(
                     f"Missing data table raised an error:\n{str(e)}",
@@ -777,7 +858,7 @@ class NullAnalysis(DataAnalysis):
                           df):
         """
         Args:
-            df:
+            df: pd.Dataframe
                 Pandas Dataframe object.
 
         Returns:
@@ -803,7 +884,7 @@ class NullAnalysis(DataAnalysis):
             Sorts a dataframe by data containing the most nulls to least nulls.
 
         Args:
-            df:
+            df: pd.Dataframe
                 Pandas Dataframe object.
 
         Returns:

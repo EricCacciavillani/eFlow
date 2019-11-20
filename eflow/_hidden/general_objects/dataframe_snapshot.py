@@ -1,5 +1,5 @@
 from eflow.utils.string_utils import correct_directory_path
-from eflow._hidden.custom_exceptions import UnsatisfiedRequirments, MismatchError
+from eflow._hidden.custom_exceptions import UnsatisfiedRequirments, SnapshotMismatchError
 from eflow.foundation import DataFrameTypes
 from eflow.utils.sys_utils import create_dir_structure, \
     dict_to_json_file
@@ -174,14 +174,14 @@ class DataFrameSnapshot:
                     # Break main loop
                     break
                 if mismatch_error is not None:
-                    raise MismatchError(f"DataFrameSnapshot has raised an error because {mismatch_error}." +
-                                        "\nThis error invoked because the directory structure saved a json file "
-                                        "containing attributes of the dataframe or a 'snapshot'."
-                                        "\nThe given error can be resolved by performing any of the following:"
-                                        "\n\t* Pass in the same dataframe as expected."
-                                        "\n\t* Disable the snapshot check by changing 'dataframe_snapshot' to False."
-                                        "\n\t* Disable save file option by changing the parameter 'save_file' to False."
-                                        "\n\t* Or deleting the json object file in the dataset directory under _Extras")
+                    raise SnapshotMismatchError(f"DataFrameSnapshot has raised an error because {mismatch_error}." +
+                                                "\nThis error invoked because the directory structure saved a json file "
+                                                "containing attributes of the dataframe or a 'snapshot'."
+                                                "\nThe given error can be resolved by performing any of the following:"
+                                                "\n\t* Pass in the same dataframe as expected."
+                                                "\n\t* Disable the snapshot check by changing 'dataframe_snapshot' to False."
+                                                "\n\t* Disable save file option by changing the parameter 'save_file' to False."
+                                                "\n\t* Or deleting the json object file in the dataset directory under _Extras")
 
         # JSON file doesn't exist; create file
         else:
@@ -266,6 +266,10 @@ class DataFrameSnapshot:
         random_indexes = set()
         float_features = set(df_features.get_float_features())
 
+        # Empty dataframe check
+        if not df.shape[0]:
+            return feature_values
+
         for feature in sorted(df_features.get_all_features()):
 
             # Ignore if feature is a float
@@ -296,7 +300,7 @@ class DataFrameSnapshot:
 
                 # --------
                 feature_values[feature][f'Random Value {hash_type}'] = dict()
-                random_value = df[feature][random_index]
+                random_value = df[feature].iloc[random_index]
 
                 # Random value is nan
                 if not random_value or pd.isnull(random_value):

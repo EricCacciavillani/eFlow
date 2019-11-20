@@ -1,5 +1,6 @@
 from eflow._hidden.parent_objects import FileOutput
 from eflow._hidden.general_objects import DataFrameSnapshot
+from eflow._hidden.custom_exceptions import SnapshotMismatchError
 from eflow.utils.pandas_utils import df_to_image
 from eflow.utils.image_processing_utils import create_plt_png
 from eflow.utils.string_utils import convert_to_filename
@@ -42,14 +43,6 @@ class DataAnalysis(FileOutput):
             df:
                 Pandas DataFrame object
 
-            feature_name: string or list of strings
-                Specified feature column name.
-
-            dataset_name:
-                The dataset's name; this will create a sub-directory in which your
-                generated graph will be inner-nested in.
-
-
             filename:
                 If set to 'None' will default to a pre-defined string;
                 unless it is set to an actual filename.
@@ -87,11 +80,14 @@ class DataAnalysis(FileOutput):
                            sub_dir,
                            convert_to_filename(filename))
 
+        except SnapshotMismatchError as e:
+            raise e
+
         except Exception as e:
             plt.close()
             if suppress_runtime_errors:
                 warnings.warn(
-                    f"An error occured when trying to save the plot for feature '{feature_name}':\n{str(e)}",
+                    f"An error occured when trying to save the plot:\n{str(e)}",
                     RuntimeWarning)
             else:
                 raise e
@@ -162,11 +158,14 @@ class DataAnalysis(FileOutput):
                         show_index=True,
                         format_float_pos=2)
 
+        except SnapshotMismatchError as e:
+            raise e
+
         except Exception as e:
             plt.close()
             if suppress_runtime_errors:
                 warnings.warn(
-                    f"An error occured when trying to save the table as a plot for feature '{feature_name}':\n{str(e)}",
+                    f"An error occured when trying to save the table as a plot:\n{str(e)}",
                     RuntimeWarning)
             else:
                 raise e

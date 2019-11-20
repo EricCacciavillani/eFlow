@@ -1,7 +1,7 @@
 from eflow._hidden.parent_objects import FileOutput
 from eflow._hidden.general_objects import DataFrameSnapshot
 from eflow.utils.pandas_utils import descr_table,value_counts_table
-from eflow._hidden.custom_exceptions import UnsatisfiedRequirments
+from eflow._hidden.custom_exceptions import UnsatisfiedRequirments, SnapshotMismatchError
 from eflow._hidden.constants import GRAPH_DEFAULTS
 from eflow._hidden.parent_objects import DataAnalysis
 
@@ -39,6 +39,10 @@ class FeatureAnalysis(DataAnalysis):
                  notebook_mode=True):
         """
         Args:
+
+            df_features: DataFrameTypes object from eflow.
+                DataFrameTypes object.
+
             project_sub_dir: string
                 Appends to the absolute directory of the output folder
 
@@ -71,6 +75,7 @@ class FeatureAnalysis(DataAnalysis):
                          dataset_name,
                          target_feature=None,
                          display_visuals=True,
+                         display_print=True,
                          save_file=True,
                          dataframe_snapshot=True,
                          suppress_runtime_errors=True,
@@ -97,12 +102,16 @@ class FeatureAnalysis(DataAnalysis):
                 A feature name that both exists in the init df_features
                 and the passed dataframe.
 
-                Note;
+                Note
                     If init to 'None' then df_features will try to extract out
                     the target feature.
 
             display_visuals: bool
                 Boolean value to whether or not to display visualizations.
+
+            display_print: bool
+                Determines whether or not to print function's embedded print
+                statements.
 
             save_file: bool
                 Boolean value to whether or not to save the file.
@@ -121,8 +130,9 @@ class FeatureAnalysis(DataAnalysis):
                 Aggregate the data of the target feature if the data is
                 non-continuous data.
 
-                Note:
-                    In the future I will have this also work with continuous data.
+                Note
+                    In the future I will have this also working with continuous
+                    data.
 
             selected_features: collection object of features
                 Will only focus on these selected feature's and will ignore
@@ -162,14 +172,15 @@ class FeatureAnalysis(DataAnalysis):
                if selected_features and feature_name not in selected_features and feature_name != target_feature:
                    continue
 
-               self.generate_graphics_for_feature(df,
-                                                  feature_name,
-                                                  dataset_name,
-                                                  target_feature=target_feature,
-                                                  display_visuals=display_visuals,
-                                                  save_file=save_file,
-                                                  dataframe_snapshot=dataframe_snapshot,
-                                                  suppress_runtime_errors=suppress_runtime_errors)
+               self.analyze_feature(df,
+                                    feature_name,
+                                    dataset_name,
+                                    target_feature=target_feature,
+                                    display_visuals=display_visuals,
+                                    save_file=save_file,
+                                    dataframe_snapshot=dataframe_snapshot,
+                                    suppress_runtime_errors=suppress_runtime_errors,
+                                    display_print=display_print)
 
                # Aggregate data if target feature exists
                if target_feature and feature_name == target_feature and aggregate_target_feature:
@@ -206,26 +217,28 @@ class FeatureAnalysis(DataAnalysis):
                                if f_name == target_feature:
                                    continue
 
-                               if repr_target_feature_val:
-                                    print(f"Target feature {target_feature} set to {target_feature_val}; also known as {repr_target_feature_val}.")
-                               else:
-                                   print(f"Target feature {target_feature} set to {target_feature_val}.")
+                               if display_print:
+                                   if repr_target_feature_val:
+                                        print(f"Target feature {target_feature} set to {target_feature_val}; also known as {repr_target_feature_val}.")
+                                   else:
+                                       print(f"Target feature {target_feature} set to {target_feature_val}.")
                                try:
-                                   self.generate_graphics_for_feature(df[df[target_feature] == target_feature_val],
-                                                                      f_name,
-                                                                      dataset_name,
-                                                                      target_feature=target_feature,
-                                                                      display_visuals=display_visuals,
-                                                                      save_file=save_file,
-                                                                      dataframe_snapshot=dataframe_snapshot,
-                                                                      suppress_runtime_errors=suppress_runtime_errors,
-                                                                      sub_dir=f"{dataset_name}/{target_feature}/{repr_target_feature_val}/{f_name}")
+                                   self.analyze_feature(df[df[target_feature] == target_feature_val],
+                                                        f_name,
+                                                        dataset_name,
+                                                        target_feature=target_feature,
+                                                        display_visuals=display_visuals,
+                                                        save_file=save_file,
+                                                        dataframe_snapshot=dataframe_snapshot,
+                                                        suppress_runtime_errors=suppress_runtime_errors,
+                                                        display_print=display_print,
+                                                        sub_dir=f"{dataset_name}/{target_feature}/{repr_target_feature_val}/{f_name}")
                                except Exception as e:
                                    print(f"Error found on feature {f_name}: {e}")
 
             # If any missed features are picked up...
             missed_features = set(df.columns) ^ self.__df_features.get_all_features()
-            if len(missed_features) != 0:
+            if len(missed_features) != 0 and display_print:
                 print("Some features were not analyzed by perform analysis!")
                 for feature_name in missed_features:
                     print(f"\t\tFeature:{feature_name}")
@@ -235,19 +248,21 @@ class FeatureAnalysis(DataAnalysis):
             self.__called_from_perform = False
 
 
-    def generate_graphics_for_feature(self,
-                                      df,
-                                      feature_name,
-                                      dataset_name,
-                                      target_feature=None,
-                                      display_visuals=True,
-                                      sub_dir=None,
-                                      save_file=True,
-                                      dataframe_snapshot=True,
-                                      suppress_runtime_errors=True):
+    def analyze_feature(self,
+                        df,
+                        feature_name,
+                        dataset_name,
+                        target_feature=None,
+                        display_visuals=True,
+                        display_print=True,
+                        sub_dir=None,
+                        save_file=True,
+                        dataframe_snapshot=True,
+                        suppress_runtime_errors=True):
         """
         Desc:
-            Generate's all graphic's for that given feature and the relationship target feature
+            Generate's all graphic's for that given feature and the relationship
+            to the target feature.
 
         Args:
             df:
@@ -260,12 +275,16 @@ class FeatureAnalysis(DataAnalysis):
                 The dataset's name; this will create a sub-directory in which your
                 generated graph will be inner-nested in.
 
+            target_feature:
+                Will create graphics involving this feature with the main
+                feature 'feature_name'.
+
             display_visuals:
                 Boolean value to whether or not to display visualizations.
 
-            filename:
-                If set to 'None' will default to a pre-defined string;
-                unless it is set to an actual filename.
+            display_print: bool
+                Determines whether or not to print function's embedded print
+                statements.
 
             sub_dir:
                 Specify the sub directory to append to the pre-defined folder path.
@@ -292,13 +311,25 @@ class FeatureAnalysis(DataAnalysis):
                                            feature_name)
 
         # Display colors
-        if colors:
+        if colors and display_print:
             print(f"Colors:\n{colors}\n")
 
         if target_feature:
+
+            if target_feature not in self.__df_features.get_all_features():
+                raise UnsatisfiedRequirments("Target feature does not exist in pre-defined "
+                                             "df_features!")
+
             target_feature_numerical = target_feature in self.__df_features.get_continuous_numerical_features()
         else:
             target_feature_numerical = False
+
+        two_dim_sub_dir = None
+        if sub_dir:
+            two_dim_sub_dir = sub_dir
+        else:
+            if target_feature:
+                two_dim_sub_dir = f"{dataset_name}/{target_feature}"
 
         # -----
         if feature_name in self.__df_features.get_non_numerical_features() or feature_name in self.__df_features.get_bool_features():
@@ -312,7 +343,8 @@ class FeatureAnalysis(DataAnalysis):
                                save_file=save_file,
                                pallete=colors,
                                dataframe_snapshot=dataframe_snapshot,
-                               suppress_runtime_errors=suppress_runtime_errors)
+                               suppress_runtime_errors=suppress_runtime_errors,
+                               display_print=display_print)
 
             self.plot_count_graph(df,
                                   feature_name,
@@ -321,7 +353,8 @@ class FeatureAnalysis(DataAnalysis):
                                   sub_dir=sub_dir,
                                   save_file=save_file,
                                   dataframe_snapshot=dataframe_snapshot,
-                                  suppress_runtime_errors=suppress_runtime_errors)
+                                  suppress_runtime_errors=suppress_runtime_errors,
+                                  display_print=display_print)
 
             if colors:
                 self.plot_count_graph(df,
@@ -332,7 +365,8 @@ class FeatureAnalysis(DataAnalysis):
                                       save_file=save_file,
                                       palette=colors,
                                       dataframe_snapshot=dataframe_snapshot,
-                                      suppress_runtime_errors=suppress_runtime_errors)
+                                      suppress_runtime_errors=suppress_runtime_errors,
+                                      display_print=display_print)
 
             self.value_counts_table(df,
                                     feature_name,
@@ -341,7 +375,8 @@ class FeatureAnalysis(DataAnalysis):
                                     sub_dir=sub_dir,
                                     save_file=save_file,
                                     dataframe_snapshot=dataframe_snapshot,
-                                    suppress_runtime_errors=suppress_runtime_errors)
+                                    suppress_runtime_errors=suppress_runtime_errors,
+                                    display_print=display_print)
 
             if target_feature and feature_name != target_feature:
 
@@ -354,23 +389,23 @@ class FeatureAnalysis(DataAnalysis):
                                                dataset_name=dataset_name,
                                                other_feature_name=target_feature,
                                                display_visuals=display_visuals,
-                                               sub_dir=sub_dir,
+                                               sub_dir=two_dim_sub_dir,
                                                save_file=save_file,
                                                palette=colors,
                                                dataframe_snapshot=dataframe_snapshot,
-                                               suppress_runtime_errors=suppress_runtime_errors)
-
+                                               suppress_runtime_errors=suppress_runtime_errors,
+                                               display_print=display_print)
                     self.plot_ridge_graph(df,
                                           feature_name,
                                           dataset_name=dataset_name,
                                           other_feature_name=target_feature,
                                           display_visuals=display_visuals,
-                                          sub_dir=sub_dir,
+                                          sub_dir=two_dim_sub_dir,
                                           save_file=save_file,
                                           dataframe_snapshot=dataframe_snapshot,
+                                          palette=colors,
                                           suppress_runtime_errors=suppress_runtime_errors,
-                                          palette=colors)
-            print("\n\n")
+                                          display_print=display_print)
 
         # -----
         elif feature_name in self.__df_features.get_continuous_numerical_features():
@@ -381,7 +416,8 @@ class FeatureAnalysis(DataAnalysis):
                                      sub_dir=sub_dir,
                                      save_file=save_file,
                                      dataframe_snapshot=dataframe_snapshot,
-                                     suppress_runtime_errors=suppress_runtime_errors)
+                                     suppress_runtime_errors=suppress_runtime_errors,
+                                     display_print=display_print)
 
             self.descr_table(df,
                              feature_name,
@@ -390,7 +426,8 @@ class FeatureAnalysis(DataAnalysis):
                              sub_dir=sub_dir,
                              save_file=save_file,
                              dataframe_snapshot=dataframe_snapshot,
-                             suppress_runtime_errors=suppress_runtime_errors)
+                             suppress_runtime_errors=suppress_runtime_errors,
+                             display_print=display_print)
 
             if target_feature and feature_name != target_feature:
 
@@ -406,28 +443,33 @@ class FeatureAnalysis(DataAnalysis):
                                                dataset_name=dataset_name,
                                                other_feature_name=feature_name,
                                                display_visuals=display_visuals,
-                                               sub_dir=sub_dir,
+                                               sub_dir=two_dim_sub_dir,
                                                save_file=save_file,
                                                palette=colors,
                                                dataframe_snapshot=dataframe_snapshot,
-                                               suppress_runtime_errors=suppress_runtime_errors)
+                                               suppress_runtime_errors=suppress_runtime_errors,
+                                               display_print=display_print)
 
                     self.plot_ridge_graph(df,
                                           target_feature,
                                           dataset_name=dataset_name,
                                           other_feature_name=feature_name,
                                           display_visuals=display_visuals,
-                                          sub_dir=sub_dir,
+                                          sub_dir=two_dim_sub_dir,
                                           save_file=save_file,
                                           dataframe_snapshot=dataframe_snapshot,
                                           suppress_runtime_errors=suppress_runtime_errors,
-                                          palette=colors)
+                                          palette=colors,
+                                          display_print=display_print)
+        if display_print:
+            print("\n\n")
 
     def plot_distance_graph(self,
                             df,
                             feature_name,
                             dataset_name,
                             display_visuals=True,
+                            display_print=True,
                             filename=None,
                             sub_dir=None,
                             save_file=True,
@@ -458,6 +500,10 @@ class FeatureAnalysis(DataAnalysis):
 
             display_visuals: bool
                 Boolean value to whether or not to display visualizations.
+
+            display_print: bool
+                Determines whether or not to print function's embedded print
+                statements.
 
             filename: string
                 Name to give the file.
@@ -493,7 +539,7 @@ class FeatureAnalysis(DataAnalysis):
             kde: bool
                 Whether to plot a gaussian kernel density estimate.
 
-            palette : matplotlib color
+            colors : matplotlib color
                 Color to plot everything but the fitted curve in.
 
             fit: functional method
@@ -521,7 +567,8 @@ class FeatureAnalysis(DataAnalysis):
                     "Distance plot graph couldn't be generated because " +
                     f"there is only missing data to display in {feature_name}!")
 
-            print(f"Generating graph for distance plot on {feature_name}")
+            if display_print:
+                print(f"Generating graph for distance plot on {feature_name}")
 
             feature_values = pd.to_numeric(df[feature_name].dropna(),
                                            errors='coerce').dropna()
@@ -531,7 +578,7 @@ class FeatureAnalysis(DataAnalysis):
                     f"The given feature {feature_name} doesn't seem to convert to a numeric vector.")
 
             # Closes up any past graph info
-            plt.close()
+            plt.close('all')
 
             # Set foundation graph info
             sns.set(style="whitegrid")
@@ -554,16 +601,16 @@ class FeatureAnalysis(DataAnalysis):
 
             # Create string sub directory path
             if not sub_dir:
-                if dataset_name and feature_name:
-                    sub_dir = f"{dataset_name}/{feature_name}"
-                elif dataset_name:
-                    sub_dir = f"{dataset_name}"
+                sub_dir = f"{dataset_name}/{feature_name}"
 
             # -----
             if save_file:
 
+                print(self.__called_from_perform)
                 if self.__called_from_perform:
                     dataframe_snapshot = False
+
+                print(dataframe_snapshot)
 
                 self.save_plot(df=df,
                                filename=filename,
@@ -575,10 +622,13 @@ class FeatureAnalysis(DataAnalysis):
             if self.__notebook_mode and display_visuals:
                 plt.show()
 
-            plt.close()
+            plt.close('all')
+
+        except SnapshotMismatchError as e:
+            raise e
 
         except Exception as e:
-            plt.close()
+            plt.close('all')
             if suppress_runtime_errors:
                 warnings.warn(
                     f"Distance plot graph throw an error on feature '{feature_name}':\n{str(e)}",
@@ -593,6 +643,7 @@ class FeatureAnalysis(DataAnalysis):
                           dataset_name,
                           other_feature_name=None,
                           display_visuals=True,
+                          display_print=True,
                           filename=None,
                           sub_dir=None,
                           save_file=True,
@@ -645,6 +696,10 @@ class FeatureAnalysis(DataAnalysis):
             suppress_runtime_errors: bool
                 If set to true; when generating any graphs will suppress any runtime
                 errors so the program can keep running.
+
+            display_print: bool
+                Determines whether or not to print function's embedded print
+                statements.
 
             figsize: tuple
                 Size of the given plot.
@@ -719,10 +774,11 @@ class FeatureAnalysis(DataAnalysis):
 
             del found_features
 
-            print("Generating graph violin graph on " + feature_title)
+            if display_print:
+                print("Generating graph violin graph on " + feature_title)
 
             # Closes up any past graph info
-            plt.close()
+            plt.close('all')
 
             # Set plot structure
             plt.figure(figsize=figsize)
@@ -751,10 +807,7 @@ class FeatureAnalysis(DataAnalysis):
 
             # Create string sub directory path
             if not sub_dir:
-                if dataset_name and feature_name:
-                    sub_dir = f"{dataset_name}/{feature_name}"
-                elif dataset_name:
-                    sub_dir = f"{dataset_name}"
+                sub_dir = f"{dataset_name}/{feature_name}"
 
             # -----
             if save_file:
@@ -772,10 +825,13 @@ class FeatureAnalysis(DataAnalysis):
             if self.__notebook_mode and display_visuals:
                 plt.show()
 
-            plt.close()
+            plt.close('all')
+
+        except SnapshotMismatchError as e:
+            raise e
 
         except Exception as e:
-            plt.close()
+            plt.close('all')
             if suppress_runtime_errors:
                 warnings.warn(
                     f"Plot violin graph an error on feature '{feature_name}':\n{str(e)}",
@@ -788,6 +844,7 @@ class FeatureAnalysis(DataAnalysis):
                          feature_name,
                          dataset_name,
                          display_visuals=True,
+                         display_print=True,
                          filename=None,
                          sub_dir=None,
                          save_file=True,
@@ -816,6 +873,10 @@ class FeatureAnalysis(DataAnalysis):
             display_visuals: bool
                 Boolean value to whether or not to display visualizations.
 
+            display_print: bool
+                Determines whether or not to print function's embedded print
+                statements.
+
             filename: string
                 Name to give the file.
 
@@ -834,6 +895,10 @@ class FeatureAnalysis(DataAnalysis):
             suppress_runtime_errors: bool
                 If set to true; when generating any graphs will suppress any runtime
                 errors so the program can keep running.
+
+            display_print: bool
+                Determines whether or not to print function's embedded print
+                statements.
 
             figsize: tuple
                 Size for the given plot.
@@ -859,10 +924,12 @@ class FeatureAnalysis(DataAnalysis):
                 raise UnsatisfiedRequirments(
                     "Count plot graph couldn't be generated because " +
                     f"there is only missing data to display in {feature_name}!")
-            print(f"Count plot graph on {feature_name}")
+
+            if display_print:
+                print(f"Count plot graph on {feature_name}")
 
             # Closes up any past graph info
-            plt.close()
+            plt.close('all')
 
             # Set graph info
             plt.figure(figsize=figsize)
@@ -886,6 +953,14 @@ class FeatureAnalysis(DataAnalysis):
             plt.clf()
 
             if feature_name in self.__df_features.get_bool_features():
+
+                i = 0
+                for val in feature_values:
+                    try:
+                        feature_values[i] = float(val)
+                    except:
+                        pass
+
                 feature_values = [bool(val) if val == 0 or val == 1 else val
                                   for val in feature_values]
 
@@ -918,10 +993,7 @@ class FeatureAnalysis(DataAnalysis):
 
             # Create string sub directory path
             if not sub_dir:
-                if dataset_name and feature_name:
-                    sub_dir = f"{dataset_name}/{feature_name}"
-                elif dataset_name:
-                    sub_dir = f"{dataset_name}"
+                sub_dir = f"{dataset_name}/{feature_name}"
 
             # -----
             if save_file:
@@ -938,10 +1010,13 @@ class FeatureAnalysis(DataAnalysis):
             if self.__notebook_mode and display_visuals:
                 plt.show()
 
-            plt.close()
+            plt.close('all')
+
+        except SnapshotMismatchError as e:
+            raise e
 
         except Exception as e:
-            plt.close()
+            plt.close('all')
             if suppress_runtime_errors:
                 warnings.warn(
                     f"Plot count graph raised an error on feature '{feature_name}':\n{str(e)}",
@@ -954,6 +1029,7 @@ class FeatureAnalysis(DataAnalysis):
                   feature_name,
                   dataset_name,
                   display_visuals=True,
+                  display_print=True,
                   filename=None,
                   sub_dir=None,
                   save_file=True,
@@ -979,6 +1055,10 @@ class FeatureAnalysis(DataAnalysis):
            display_visuals:
                Boolean value to whether or not to display visualizations.
 
+           display_print: bool
+                Determines whether or not to print function's embedded print
+                statements.
+
            filename:
                If set to 'None' will default to a pre-defined string;
                unless it is set to an actual filename.
@@ -999,6 +1079,10 @@ class FeatureAnalysis(DataAnalysis):
                 If set to true; when generating any graphs will suppress any runtime
                 errors so the program can keep running.
 
+           display_print: bool
+                Determines whether or not to print function's embedded print
+                statements.
+
            palette:
                 Dictionary of all feature values to hex color values.
 
@@ -1011,25 +1095,27 @@ class FeatureAnalysis(DataAnalysis):
             if np.sum(df[feature_name].isnull()) == df.shape[0]:
                 raise UnsatisfiedRequirments("Pie graph couldn't be generated because " +
                       f"there is only missing data to display in {feature_name}!")
-            print(f"Pie graph on {feature_name}")
+
+            if display_print:
+                print(f"Pie graph on {feature_name}")
 
             # Closes up any past graph info
-            plt.close()
+            plt.close('all')
 
             # Find value counts
             value_counts = df[feature_name].dropna().value_counts(sort=False)
-            value_list = value_counts.index.tolist()
+            feature_values = value_counts.index.tolist()
             value_count_list = value_counts.values.tolist()
 
             # Explode the part of the pie graph that is the maximum of the graph
-            explode_array = [0] * len(value_list)
+            explode_array = [0] * len(feature_values)
             explode_array[np.array(value_count_list).argmax()] = .03
 
             color_list = None
 
             if isinstance(pallete,dict):
                 color_list = []
-                for value in tuple(value_list):
+                for value in tuple(feature_values):
                     try:
                         color_list.append(pallete[value])
                     except KeyError:
@@ -1039,13 +1125,20 @@ class FeatureAnalysis(DataAnalysis):
             plt.figure(figsize=figsize)
 
             if feature_name in self.__df_features.get_bool_features():
-                value_list = [bool(val) if val == 0 or val == 1 else val
-                              for val in value_list]
+
+                i = 0
+                for val in feature_values:
+                    try:
+                        feature_values[i] = float(val)
+                    except:
+                        pass
+                feature_values = [bool(val) if val == 0 or val == 1 else val
+                                  for val in feature_values]
 
             # Plot pie graph
             plt.pie(
                 tuple(value_count_list),
-                labels=tuple(value_list),
+                labels=tuple(feature_values),
                 shadow=False,
                 colors=color_list,
                 explode=tuple(explode_array),
@@ -1066,10 +1159,7 @@ class FeatureAnalysis(DataAnalysis):
 
             # Create string sub directory path
             if not sub_dir:
-                if dataset_name and feature_name:
-                    sub_dir = f"{dataset_name}/{feature_name}"
-                elif dataset_name:
-                    sub_dir = f"{dataset_name}"
+                sub_dir = f"{dataset_name}/{feature_name}"
 
             # -----
             if save_file:
@@ -1087,7 +1177,10 @@ class FeatureAnalysis(DataAnalysis):
             if self.__notebook_mode and display_visuals:
                 plt.show()
 
-            plt.close()
+            plt.close('all')
+
+        except SnapshotMismatchError as e:
+            raise e
 
         except Exception as e:
             if suppress_runtime_errors:
@@ -1103,6 +1196,7 @@ class FeatureAnalysis(DataAnalysis):
                          dataset_name,
                          other_feature_name,
                          display_visuals=True,
+                         display_print=True,
                          filename=None,
                          sub_dir=None,
                          save_file=True,
@@ -1115,44 +1209,58 @@ class FeatureAnalysis(DataAnalysis):
             Display a ridge plot and save the graph in the correct directory.
 
         Args:
-          df:
+            df:
                 Pandas DataFrame object.
 
-          feature_name:
+            feature_name:
                 Specified feature column name.
 
-          dataset_name:
+            dataset_name:
                 The dataset's name; this will create a sub-directory in which your
                 generated graph will be inner-nested in.
 
-          display_visuals:
+            other_feature_name:
+                Feature to compare to.
+
+            display_visuals:
                 Boolean value to whether or not to display visualizations.
 
-          filename:
+            display_print: bool
+                Determines whether or not to print function's embedded print
+                statements.
+
+            filename:
                 If set to 'None' will default to a pre-defined string;
                 unless it is set to an actual filename.
 
-          sub_dir:
+            sub_dir:
                 Specify the sub directory to append to the pre-defined folder path.
 
-          save_file:
+            save_file:
                 Boolean value to whether or not to save the file.
 
-          dataframe_snapshot:
+            dataframe_snapshot:
                 Boolean value to determine whether or not generate and compare a
                 snapshot of the dataframe in the dataset's directory structure.
                 Helps ensure that data generated in that directory is correctly
                 associated to a dataframe.
 
-          suppress_runtime_errors: bool
+            suppress_runtime_errors: bool
                 If set to true; when generating any graphs will suppress any runtime
                 errors so the program can keep running.
 
-          palette:
+            display_print: bool
+                Determines whether or not to print function's embedded print
+                statements.
+
+            figsize:
+                Tuple object to represent the plot/image's size.
+
+            palette:
                 Dictionary of all feature values to hex color values.
 
-          Note:
-              A large part of this was taken from: http://tinyurl.com/tuou2cn
+        Note:
+            A large part of this was taken from: http://tinyurl.com/tuou2cn
 
         Raises:
            Raises error if the feature data is filled with only nulls or if
@@ -1160,23 +1268,32 @@ class FeatureAnalysis(DataAnalysis):
            given dataframe.
         """
         try:
-            print(f"Ridge plot graph on {feature_name} by {other_feature_name}.")
+            if display_print:
+                print(f"Ridge plot graph on {feature_name} by {other_feature_name}.")
 
             sns.set(style="white",
                     rc={"axes.facecolor": (0, 0, 0, 0)})
 
-            if not palette:
-                palette = sns.cubehelix_palette(10, rot=-.20, light=.7)
-
-
-            tmp_df = copy.deepcopy(df[[feature_name,other_feature_name]])
-            tmp_df.is_copy = False
+            # Temporarily turn off chained assignments
+            chained_assignment = pd.options.mode.chained_assignment
+            pd.options.mode.chained_assignment = None
 
             tmp_df = df[[feature_name,other_feature_name]]
             tmp_df[other_feature_name] = pd.to_numeric(tmp_df[other_feature_name],
                                                        errors='coerce')
 
-            palette = None
+            tmp_df.dropna(inplace=True)
+
+            display(tmp_df)
+
+            # Remove any values that only return a single value back
+            for val in set(tmp_df[feature_name]):
+                if len(tmp_df[other_feature_name][tmp_df[feature_name] == val]) <= 1:
+                    tmp_df = tmp_df[tmp_df[feature_name] != val]
+
+            pd.options.mode.chained_assignment = chained_assignment
+            del chained_assignment
+
             sns.set(style="white",
                     rc={"axes.facecolor": (0, 0, 0, 0)})
 
@@ -1199,6 +1316,7 @@ class FeatureAnalysis(DataAnalysis):
                   alpha=1,
                   lw=1.5,
                   bw=.2)
+
             g.map(sns.kdeplot,
                   other_feature_name,
                   clip_on=False,
@@ -1242,13 +1360,11 @@ class FeatureAnalysis(DataAnalysis):
 
             # Create string sub directory path
             if not sub_dir:
-                if dataset_name and feature_name:
-                    sub_dir = f"{dataset_name}/{feature_name}"
-                elif dataset_name:
-                    sub_dir = f"{dataset_name}"
+                sub_dir = f"{dataset_name}/{feature_name}"
 
             # -----
             if save_file:
+
 
                 if self.__called_from_perform:
                     dataframe_snapshot = False
@@ -1262,9 +1378,13 @@ class FeatureAnalysis(DataAnalysis):
             if self.__notebook_mode and display_visuals:
                 plt.show()
 
-            plt.close()
+            plt.close('all')
+
+        except SnapshotMismatchError as e:
+            raise e
+
         except Exception as e:
-            plt.close()
+            plt.close('all')
             if suppress_runtime_errors:
                 warnings.warn(
                     f"Plot ridge graph raised an error on feature '{feature_name}':\n{str(e)}",
@@ -1277,65 +1397,7 @@ class FeatureAnalysis(DataAnalysis):
                              df,
                              feature_name,
                              dataset_name,
-                             other_feature_name,
-                             display_visuals=True,
-                             filename=None,
-                             sub_dir=None,
-                             save_file=True,
-                             dataframe_snapshot=True,
-                             suppress_runtime_errors=True,
-                             figsize=GRAPH_DEFAULTS.FIGSIZE,
-                             palette=None):
-        """
-        Desc:
-            Display a ridge plot and save the graph in the correct directory.
-
-        Args:
-          df:
-                Pandas DataFrame object.
-
-          feature_name:
-                Specified feature column name.
-
-          dataset_name:
-                The dataset's name; this will create a sub-directory in which your
-                generated graph will be inner-nested in.
-
-          display_visuals:
-                Boolean value to whether or not to display visualizations.
-
-          filename:
-                If set to 'None' will default to a pre-defined string;
-                unless it is set to an actual filename.
-
-          sub_dir:
-                Specify the sub directory to append to the pre-defined folder path.
-
-          save_file:
-                Boolean value to whether or not to save the file.
-
-          dataframe_snapshot:
-                Boolean value to determine whether or not generate and compare a
-                snapshot of the dataframe in the dataset's directory structure.
-                Helps ensure that data generated in that directory is correctly
-                associated to a dataframe.
-
-          suppress_runtime_errors: bool
-                If set to true; when generating any graphs will suppress any runtime
-                errors so the program can keep running.
-
-          palette:
-                Dictionary of all feature values to hex color values.
-
-          Note:
-              A large part of this was taken from: http://tinyurl.com/tuou2cn
-
-        Raises:
-           Raises error if the feature data is filled with only nulls or if
-           the json file's snapshot of the given dataframe doesn't match the
-           given dataframe.
-        """
-
+                             other_feature_name):
         raise ValueError("NOT READY FOR USE YET!!!!!!")
 
 
@@ -1344,6 +1406,7 @@ class FeatureAnalysis(DataAnalysis):
                            feature_name,
                            dataset_name,
                            display_visuals=True,
+                           display_print=True,
                            filename=None,
                            sub_dir=None,
                            save_file=True,
@@ -1363,6 +1426,10 @@ class FeatureAnalysis(DataAnalysis):
 
             display_visuals:
                 Boolean value to whether or not to display visualizations.
+
+            display_print: bool
+                Determines whether or not to print function's embedded print
+                statements.
 
             filename:
                 If set to 'None' will default to a pre-defined string;
@@ -1401,7 +1468,8 @@ class FeatureAnalysis(DataAnalysis):
                 raise UnsatisfiedRequirments("Values count table couldn't be generated because " +
                                              f"there is only missing data to display in {feature_name}!")
 
-            print(f"Creating value counts table for feature {feature_name}.")
+            if display_print:
+                print(f"Creating value counts table for feature {feature_name}.")
 
             # -----
             val_counts_df = value_counts_table(df,
@@ -1420,11 +1488,7 @@ class FeatureAnalysis(DataAnalysis):
 
             # Create string sub directory path
             if not sub_dir:
-                if dataset_name and feature_name:
-                    sub_dir = f"{dataset_name}/{feature_name}"
-                elif dataset_name:
-                    sub_dir = f"{dataset_name}"
-
+                sub_dir = f"{dataset_name}/{feature_name}"
 
             if save_file:
 
@@ -1438,8 +1502,11 @@ class FeatureAnalysis(DataAnalysis):
                                         suppress_runtime_errors=suppress_runtime_errors,
                                         table=val_counts_df)
 
+        except SnapshotMismatchError as e:
+            raise e
+
         except Exception as e:
-            plt.close()
+            plt.close('all')
             if suppress_runtime_errors:
                 warnings.warn(
                     f"Value count table raised an error on feature '{feature_name}':\n{str(e)}",
@@ -1452,6 +1519,7 @@ class FeatureAnalysis(DataAnalysis):
                     feature_name,
                     dataset_name,
                     display_visuals=True,
+                    display_print=True,
                     filename=None,
                     sub_dir=None,
                     save_file=True,
@@ -1462,7 +1530,7 @@ class FeatureAnalysis(DataAnalysis):
             Creates/Saves a pandas dataframe of features and their found types
             in the dataframe.
 
-            Note:
+            Note
                 Creates a png of the table.
 
         Args:
@@ -1478,6 +1546,10 @@ class FeatureAnalysis(DataAnalysis):
 
             display_visuals:
                 Boolean value to whether or not to display visualizations.
+
+            display_print: bool
+                Determines whether or not to print function's embedded print
+                statements.
 
             filename:
                 If set to 'None' will default to a pre-defined string;
@@ -1510,7 +1582,8 @@ class FeatureAnalysis(DataAnalysis):
                 raise UnsatisfiedRequirments("Count plot graph couldn't be generated because " +
                       f"there is only missing data to display in {feature_name}!")
 
-            print(f"Creating data description table for {feature_name}")
+            if display_print:
+                print(f"Creating data description table for {feature_name}")
 
             desc_df = descr_table(df,
                                   feature_name,
@@ -1529,10 +1602,7 @@ class FeatureAnalysis(DataAnalysis):
 
             # Create string sub directory path
             if not sub_dir:
-                if dataset_name and feature_name:
-                    sub_dir = f"{dataset_name}/{feature_name}"
-                elif dataset_name:
-                    sub_dir = f"{dataset_name}"
+                sub_dir = f"{dataset_name}/{feature_name}"
 
             if save_file:
 
@@ -1546,8 +1616,11 @@ class FeatureAnalysis(DataAnalysis):
                                         suppress_runtime_errors=suppress_runtime_errors,
                                         table=desc_df)
 
+        except SnapshotMismatchError as e:
+            raise e
+
         except Exception as e:
-            plt.close()
+            plt.close('all')
             if suppress_runtime_errors:
                 warnings.warn(
                     f"Descr table raised an error on feature '{feature_name}':\n{str(e)}",
