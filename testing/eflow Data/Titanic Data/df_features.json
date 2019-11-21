@@ -5,8 +5,8 @@
   ],
   "string": [
     "Cabin",
-    "Sex",
-    "Embarked"
+    "Embarked",
+    "Sex"
   ],
   "integer": [
     "SibSp",
@@ -19,7 +19,7 @@
   "categorical": [
     "Pclass"
   ],
-  "target": "Age",
+  "target": "Survived",
   "feature_values_colors": {
     "Sex": {
       "male": "#7eaed3",
@@ -48,6 +48,11 @@
       "2nd Class": 2,
       "3rd Class": 3
     },
+    "Embarked": {
+      "C": 0,
+      "Q": 1,
+      "S": 2
+    },
     "Cabin": {
       "A": 0,
       "B": 1,
@@ -61,11 +66,6 @@
     "Sex": {
       "female": 0,
       "male": 1
-    },
-    "Embarked": {
-      "C": 0,
-      "Q": 1,
-      "S": 2
     }
   },
   "label_decoder": {
@@ -73,6 +73,11 @@
       "1": "1st Class",
       "2": "2nd Class",
       "3": "3rd Class"
+    },
+    "Embarked": {
+      "0": "C",
+      "1": "Q",
+      "2": "S"
     },
     "Cabin": {
       "0": "A",
@@ -87,11 +92,6 @@
     "Sex": {
       "0": "female",
       "1": "male"
-    },
-    "Embarked": {
-      "0": "C",
-      "1": "Q",
-      "2": "S"
     }
   }
 }

@@ -232,7 +232,7 @@ class FeatureAnalysis(DataAnalysis):
                                                         dataframe_snapshot=dataframe_snapshot,
                                                         suppress_runtime_errors=suppress_runtime_errors,
                                                         display_print=display_print,
-                                                        sub_dir=f"{dataset_name}/{target_feature}/{repr_target_feature_val}/{f_name}")
+                                                        sub_dir=f"{dataset_name}/{target_feature}/Where {target_feature} = {repr_target_feature_val}/{f_name}")
                                except Exception as e:
                                    print(f"Error found on feature {f_name}: {e}")
 
@@ -329,7 +329,7 @@ class FeatureAnalysis(DataAnalysis):
             two_dim_sub_dir = sub_dir
         else:
             if target_feature:
-                two_dim_sub_dir = f"{dataset_name}/{target_feature}"
+                two_dim_sub_dir = f"{dataset_name}/{target_feature}/Two feature analysis/{target_feature} by {feature_name}"
 
         # -----
         if feature_name in self.__df_features.get_non_numerical_features() or feature_name in self.__df_features.get_bool_features():
@@ -606,11 +606,8 @@ class FeatureAnalysis(DataAnalysis):
             # -----
             if save_file:
 
-                print(self.__called_from_perform)
                 if self.__called_from_perform:
                     dataframe_snapshot = False
-
-                print(dataframe_snapshot)
 
                 self.save_plot(df=df,
                                filename=filename,
@@ -790,7 +787,17 @@ class FeatureAnalysis(DataAnalysis):
             if not len(feature_values):
                 raise ValueError("The y feature must contain numerical features.")
 
-            x_values = df[feature_name]
+            x_values = copy.deepcopy(df[feature_name])
+
+            # if feature_name in self.__df_features.get_bool_features():
+            #     x_values = pd.to_numeric(x_values,
+            #                              errors='ignore')
+            #
+            #     x_values = ['True' if val == 1 else 'False'
+            #                 if val == 0 else val
+            #                 for val in x_values]
+
+
             sns.violinplot(x=x_values,
                            y=feature_values,
                            order=order,
@@ -820,7 +827,6 @@ class FeatureAnalysis(DataAnalysis):
                                sub_dir=sub_dir,
                                dataframe_snapshot=dataframe_snapshot,
                                suppress_runtime_errors=suppress_runtime_errors)
-
 
             if self.__notebook_mode and display_visuals:
                 plt.show()
@@ -1278,13 +1284,19 @@ class FeatureAnalysis(DataAnalysis):
             chained_assignment = pd.options.mode.chained_assignment
             pd.options.mode.chained_assignment = None
 
-            tmp_df = df[[feature_name,other_feature_name]]
+            tmp_df = copy.deepcopy(df[[feature_name,other_feature_name]])
             tmp_df[other_feature_name] = pd.to_numeric(tmp_df[other_feature_name],
                                                        errors='coerce')
 
-            tmp_df.dropna(inplace=True)
+            # if feature_name in self.__df_features.get_bool_features():
+            #
+            #     tmp_df[feature_name] = pd.to_numeric(tmp_df[feature_name],
+            #                                          errors='ignore')
+            #     tmp_df[feature_name] = ['True' if val == 1 else 'False'
+            #                               if val == 0 else val
+            #                             for val in tmp_df[feature_name]]
 
-            display(tmp_df)
+            tmp_df.dropna(inplace=True)
 
             # Remove any values that only return a single value back
             for val in set(tmp_df[feature_name]):
