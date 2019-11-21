@@ -91,7 +91,7 @@ class FeatureAnalysis(DataAnalysis):
             without specifying any method in particular.
 
         Args:
-            df: Pandas dataframe
+            df: pd.Dataframe
                 Pandas dataframe object
 
             dataset_name: string
@@ -265,34 +265,34 @@ class FeatureAnalysis(DataAnalysis):
             to the target feature.
 
         Args:
-            df:
+            df: pd.Dataframe
                 Pandas DataFrame object
 
-            feature_name:
+            feature_name: string
                 Specified feature column name.
 
-            dataset_name:
+            dataset_name: string
                 The dataset's name; this will create a sub-directory in which your
                 generated graph will be inner-nested in.
 
-            target_feature:
+            target_feature: string
                 Will create graphics involving this feature with the main
                 feature 'feature_name'.
 
-            display_visuals:
+            display_visuals: string
                 Boolean value to whether or not to display visualizations.
 
             display_print: bool
                 Determines whether or not to print function's embedded print
                 statements.
 
-            sub_dir:
+            sub_dir: string
                 Specify the sub directory to append to the pre-defined folder path.
 
-            save_file:
+            save_file: bool
                 Saves file if set to True; doesn't if set to False.
 
-            dataframe_snapshot:
+            dataframe_snapshot: bool
                 Boolean value to determine whether or not generate and compare a
                 snapshot of the dataframe in the dataset's directory structure.
                 Helps ensure that data generated in that directory is correctly
@@ -488,7 +488,7 @@ class FeatureAnalysis(DataAnalysis):
             Display a distance plot and save the graph in the correct directory.
 
         Args:
-            df: Pandas dataframe
+            df: pd.Dataframe
                 Pandas dataframe object
 
             feature_name: string
@@ -508,7 +508,7 @@ class FeatureAnalysis(DataAnalysis):
             filename: string
                 Name to give the file.
 
-            sub_dir:
+            sub_dir: string
                 Specify the sub directory to append to the pre-defined folder path.
 
             save_file: bool
@@ -549,7 +549,6 @@ class FeatureAnalysis(DataAnalysis):
 
             fit_kws : dictionaries, optional
                 Keyword arguments for underlying plotting functions.
-
 
             Credit to seaborn's author:
             Michael Waskom
@@ -659,7 +658,7 @@ class FeatureAnalysis(DataAnalysis):
             Display a violin plot and save the graph in the correct directory.
 
         Args:
-            df: Pandas dataframe
+            df: pd.Dataframe
                 Pandas dataframe object
 
             feature_name: string
@@ -678,7 +677,7 @@ class FeatureAnalysis(DataAnalysis):
             filename: string
                 Name to give the file.
 
-            sub_dir:
+            sub_dir: string
                 Specify the sub directory to append to the pre-defined folder path.
 
             save_file: bool
@@ -725,10 +724,7 @@ class FeatureAnalysis(DataAnalysis):
                 Width of a full element when not using hue nesting, or width of
                 all the elements for one level of the major grouping variable.
 
-            palette: matplotlib color, optional
-                Color for all of the elements, or seed for a gradient palette.
-
-            palette:
+            palette: dict or string
                 Colors to use for the different levels of the hue variable.
                 Should be something that can be interpreted by color_palette(),
                 or a dictionary mapping hue levels to matplotlib colors.
@@ -866,7 +862,7 @@ class FeatureAnalysis(DataAnalysis):
             structure.
 
         Args:
-            df: Pandas dataframe
+            df: pd.Dataframe
                 Pandas dataframe object.
 
             feature_name: string
@@ -886,7 +882,7 @@ class FeatureAnalysis(DataAnalysis):
             filename: string
                 Name to give the file.
 
-            sub_dir:
+            sub_dir: string
                 Specify the sub directory to append to the pre-defined folder path.
 
             save_file: bool
@@ -1085,11 +1081,10 @@ class FeatureAnalysis(DataAnalysis):
                 If set to true; when generating any graphs will suppress any runtime
                 errors so the program can keep running.
 
-           display_print: bool
-                Determines whether or not to print function's embedded print
-                statements.
+           figsize: tuple
+                Size of the plot.
 
-           palette:
+           pallete: dict or string
                 Dictionary of all feature values to hex color values.
 
         Raises:
@@ -1215,37 +1210,37 @@ class FeatureAnalysis(DataAnalysis):
             Display a ridge plot and save the graph in the correct directory.
 
         Args:
-            df:
+            df: pd.Dataframe
                 Pandas DataFrame object.
 
-            feature_name:
+            feature_name: string
                 Specified feature column name.
 
-            dataset_name:
+            dataset_name: string
                 The dataset's name; this will create a sub-directory in which your
                 generated graph will be inner-nested in.
 
-            other_feature_name:
+            other_feature_name: string
                 Feature to compare to.
 
-            display_visuals:
+            display_visuals: bool
                 Boolean value to whether or not to display visualizations.
 
             display_print: bool
                 Determines whether or not to print function's embedded print
                 statements.
 
-            filename:
+            filename: string
                 If set to 'None' will default to a pre-defined string;
                 unless it is set to an actual filename.
 
-            sub_dir:
+            sub_dir: string
                 Specify the sub directory to append to the pre-defined folder path.
 
-            save_file:
+            save_file: bool
                 Boolean value to whether or not to save the file.
 
-            dataframe_snapshot:
+            dataframe_snapshot: bool
                 Boolean value to determine whether or not generate and compare a
                 snapshot of the dataframe in the dataset's directory structure.
                 Helps ensure that data generated in that directory is correctly
@@ -1259,10 +1254,10 @@ class FeatureAnalysis(DataAnalysis):
                 Determines whether or not to print function's embedded print
                 statements.
 
-            figsize:
+            figsize: tuple
                 Tuple object to represent the plot/image's size.
 
-            palette:
+            palette: dict or string
                 Dictionary of all feature values to hex color values.
 
         Note:
@@ -1426,34 +1421,34 @@ class FeatureAnalysis(DataAnalysis):
                            suppress_runtime_errors=True):
         """
         Args:
-            df:
+            df: pd.Dataframe
                 Pandas DataFrame object
 
-            feature_name:
+            feature_name: string
                 Specified feature column name.
 
-            dataset_name:
+            dataset_name: string
                 The dataset's name; this will create a sub-directory in which your
                 generated graph will be inner-nested in.
 
-            display_visuals:
+            display_visuals: bool
                 Boolean value to whether or not to display visualizations.
 
             display_print: bool
                 Determines whether or not to print function's embedded print
                 statements.
 
-            filename:
+            filename: string
                 If set to 'None' will default to a pre-defined string;
                 unless it is set to an actual filename.
 
-            sub_dir:
+            sub_dir: string
                 Specify the sub directory to append to the pre-defined folder path.
 
-            save_file:
+            save_file: bool
                 Saves file if set to True; doesn't if set to False.
 
-            dataframe_snapshot:
+            dataframe_snapshot: bool
                 Boolean value to determine whether or not generate and compare a
                 snapshot of the dataframe in the dataset's directory structure.
                 Helps ensure that data generated in that directory is correctly
@@ -1466,7 +1461,7 @@ class FeatureAnalysis(DataAnalysis):
         Desc:
             Creates/Saves a pandas dataframe of value counts of a dataframe.
 
-            Note:
+            Note -
                 Creates a png of the table.
 
         Raises:
@@ -1546,34 +1541,34 @@ class FeatureAnalysis(DataAnalysis):
                 Creates a png of the table.
 
         Args:
-            df:
+            df: pd.Dataframe
                 Pandas DataFrame object
 
-            feature_name:
+            feature_name: string
                 Specified feature column name.
 
-            dataset_name:
+            dataset_name: string
                 The dataset's name; this will create a sub-directory in which your
                 generated graph will be inner-nested in.
 
-            display_visuals:
+            display_visuals: bool
                 Boolean value to whether or not to display visualizations.
 
             display_print: bool
                 Determines whether or not to print function's embedded print
                 statements.
 
-            filename:
+            filename: string
                 If set to 'None' will default to a pre-defined string;
                 unless it is set to an actual filename.
 
-            sub_dir:
+            sub_dir: string
                 Specify the sub directory to append to the pre-defined folder path.
 
-            save_file:
+            save_file: bool
                 Saves file if set to True; doesn't if set to False.
 
-            dataframe_snapshot:
+            dataframe_snapshot: bool
                 Boolean value to determine whether or not generate and compare a
                 snapshot of the dataframe in the dataset's directory structure.
                 Helps ensure that data generated in that directory is correctly
@@ -1655,10 +1650,10 @@ class FeatureAnalysis(DataAnalysis):
                 colors is init to None.
 
         Args:
-            df:
+            df: pd.Dataframe
                 Pandas DataFrame object
 
-            feature_name:
+            feature_name: string
                 Specified feature column name.
 
         Returns:
