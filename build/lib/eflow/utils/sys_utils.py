@@ -1,46 +1,78 @@
+from eflow.utils.string_utils import convert_to_filename, \
+    correct_directory_path
 import os
 import pickle
 import json
-from eflow.utils.string_utils import convert_to_filename, correct_directory_path
 
+__author__ = "Eric Cacciavillani"
+__copyright__ = "Copyright 2019, eFlow"
+__credits__ = ["Eric Cacciavillani"]
+__license__ = "MIT"
+__maintainer__ = "EricCacciavillani"
+__email__ = "eric.cacciavillani@gmail.com"
 
-def create_unique_directory(directory_path,
-                            folder_name):
+def check_if_directory_exists(directory_path):
     """
-    directory_path:
-        Given path that already exists.
+    Desc:
+        Checks if the given directory path exists. Raises an error if doesn't
 
-    folder_name:
-        Generated folder path.
+    Args:
+        directory_path: string
+            Given path that already exists.
 
-    Returns/Desc:
-        Creates a unique folder in the proper directory structure.
+    Raises:
+        Raise an error if the given directory does not exist on the users system.
     """
-
-    os.makedirs(get_unique_directory_path(directory_path,
-                                     folder_name))
-
-def get_unique_directory_path(directory_path,
-                              folder_name):
-    """
-    directory_path:
-        Given path that already exists.
-
-    folder_name:
-        Generated folder path.
-
-    Returns/Desc:
-        Returns back a directory path with a unique folder name.
-    """
-
-    directory_path = correct_directory_path(directory_path)
     if not os.path.exists(directory_path):
         raise SystemError("Main directory path doesn't exist.\n"
                           "To help ensure unwanted directories are created you "
                           "must have a pre-defined path.")
 
+def create_unique_directory(directory_path,
+                            folder_name):
+    """
+    Desc:
+        Creates a unique folder in the proper directory structure.
+
+    Args:
+        directory_path: string
+            Given path that already exists.
+
+        folder_name: string
+            Folder name to generated.
+    """
+
+    os.makedirs(get_unique_directory_path(directory_path,
+                                          folder_name))
+
+def get_unique_directory_path(directory_path,
+                              folder_name):
+    """
+    Desc:
+        Iterate through directory structure until a unique folder name can be
+        found.
+
+        Note:
+            Keeps changing the folder name by appending 1 each iteration.
+
+    Args:
+        directory_path: string
+            Given path that already exists.
+
+        folder_name: string
+             Folder name to compare against other directories that exist in the
+             directory_path.
+
+    Returns:
+        Returns back a directory path with a unique folder name.
+    """
+
+    # -----
+    directory_path = correct_directory_path(directory_path)
+    check_if_directory_exists(directory_path)
+
     create_dir_structure(directory_path=directory_path,
-                               create_sub_dir="")
+                         create_sub_dir="")
 
     # Ensures the folder is unique in the directory
     iterable = 0
@@ -59,25 +91,24 @@ def get_unique_directory_path(directory_path,
 
 
 def create_dir_structure(directory_path,
-                               create_sub_dir):
+                         create_sub_dir):
     """
-    directory_path:
-        Given path that already exists.
+    Desc:
+        Creates required directory structures inside the parent
+        directory figures.
 
-    folder_name:
-        Generated folder path.
+    Args:
+        directory_path: string
+            Given path that already exists.
 
-    Returns/Desc:
-        Checks/Creates required directory structures inside
-        the parent directory figures.
+        create_sub_dir: string
+            Sub directory to create a given folder path.
+
+    Returns:
+        Returns back the created directory.
     """
-
-    if not os.path.exists(directory_path):
-        raise SystemError("Main directory path doesn't exist.\n"
-                          "To help ensure unwanted directories are not created "
-                          "you must have a pre-defined path.")
-
     directory_path = correct_directory_path(directory_path)
+    check_if_directory_exists(directory_path)
 
     for dir in create_sub_dir.split("/"):
         directory_path += "/" + dir
@@ -91,23 +122,21 @@ def write_object_text_to_file(obj,
                               directory_path,
                               filename):
     """
-    obj:
-        Any object that has a string 'repr'.
+    Desc:
+        Writes the object's string representation to a text file.
 
-    directory_path:
-        Given path that already exists.
+    Args:
+        obj: any
+            Any object that has a string 'repr'.
 
-    filename:
-        Text file's name.
+        directory_path: string
+            Given path that already exists.
 
-    Returns/Desc:
-        Writes the object to a text file.
+        filename: string
+            Text file's name.
     """
     directory_path = correct_directory_path(directory_path)
-    if not os.path.exists(directory_path):
-        raise SystemError("Main directory path doesn't exist.\n"
-                          "To help ensure unwanted directories are created you "
-                          "must have a pre-defined path.")
+    check_if_directory_exists(directory_path)
 
     # Ensures no file extensions in filename
     filename = filename.split(".")[0]
@@ -123,53 +152,51 @@ def pickle_object_to_file(obj,
                           directory_path,
                           filename):
     """
-    obj:
-        Any python object that can be pickled.
-
-    directory_path:
-        Given path that already exists.
-
-    filename:
-         Pickle file's name.
-
-    Returns/Desc:
+    Desc:
         Writes the object to a pickle file.
+
+    Args:
+        obj: any object
+            Any python object that can be pickled.
+
+        directory_path: string
+            Given path that already exists.
+
+        filename: string
+             Pickle file's name.
     """
     directory_path = correct_directory_path(directory_path)
-    if not os.path.exists(directory_path):
-        raise SystemError("Main directory path doesn't exist.\n"
-                          "To help ensure unwanted directories are created you "
-                          "must have a pre-defined path.")
+    check_if_directory_exists(directory_path)
 
     # Ensures no file extensions in filename
     filename = filename.split(".")[0]
-    file_dir = f'{directory_pth}{convert_to_filename(filename)}.pkl'
+    file_dir = f'{directory_path}{convert_to_filename(filename)}.pkl'
     list_pickle = open(file_dir, 'wb')
     pickle.dump(obj,
                 list_pickle)
     list_pickle.close()
 
 def dict_to_json_file(dict_obj,
-                               directory_pth,
-                               filename):
+                      directory_path,
+                      filename):
     """
-    dict_obj:
-        Dictionary object.
-
-    directory_pth:
-        Given path that already exists.
-    filename:
-        Json file's name.
-
-    Returns/Desc:
+    Desc:
         Writes a dict to a json file.
+
+    Args:
+        dict_obj: dict
+            Dictionary object.
+
+        directory_path: string
+            Given path that already exists.
+
+        filename: string
+            Json file's name.
     """
-    directory_pth = correct_directory_path(directory_pth)
-    if not os.path.exists(directory_pth):
-        raise SystemError("Main directory path doesn't exist.\n"
-                          "To help ensure unwanted directories are created you "
-                          "must have a pre-defined path.")
-    with open(f'{directory_pth}{convert_to_filename(filename)}.json',
+    directory_path = correct_directory_path(directory_path)
+    check_if_directory_exists(directory_path)
+
+    with open(f'{directory_path}{convert_to_filename(filename)}.json',
               'w',
               encoding='utf-8') as outfile:
         json.dump(dict_obj,
@@ -179,11 +206,15 @@ def dict_to_json_file(dict_obj,
 
 def json_file_to_dict(filepath):
     """
-    filepath:
-         Given path to the filename.
+    Desc:
+        Returns back the dictionary from of a json file.
+
+    Args:
+        filepath: string
+             Given path to the filename.
 
     Returns/Desc:
-        Returns back the dictionary form of a json file.
+        Returns back the dictionary from of a json file.
     """
     json_file = open(filepath)
     json_str = json_file.read()
@@ -191,38 +222,50 @@ def json_file_to_dict(filepath):
 
     return json_data
 
-def get_all_directories_from_path(directory_pth):
+def get_all_directories_from_path(directory_path):
     """
-    directory_pth:
-        Given path that already exists.
+    Desc:
+       Gets directories names with the provided path.
 
-    Returns/Desc:
+    Args:
+        directory_path: string
+            Given path that already exists.
+
+    Returns:
         Returns back a set a directories with the provided path.
     """
+    directory_path = correct_directory_path(directory_path)
+    check_if_directory_exists(directory_path)
 
     dirs_in_paths = []
-    for (dirpath, dirnames, filenames) in os.walk(directory_pth):
+    for (dirpath, dirnames, filenames) in os.walk(directory_path):
         dirs_in_paths.extend(dirnames)
         break
 
     return set(dirs_in_paths)
 
 
-def get_all_files_from_path(directory_pth,
+def get_all_files_from_path(directory_path,
                             file_extension=None):
     """
-    directory_pth:
-        Given path that already exists.
+    Desc:
+        Gets all filenames with the provided path.
 
-    file_extension:
-        Only return files that have a given extension.
+    Args:
+        directory_path: string
+            Given path that already exists.
 
-    Returns/Desc:
+        file_extension: string
+            Only return files that have a given extension.
+
+    Returns:
         Returns back a set a filenames with the provided path.
     """
+    directory_path = correct_directory_path(directory_path)
+    check_if_directory_exists(directory_path)
 
     files_in_paths = []
-    for (dirpath, dirnames, filenames) in os.walk(directory_pth):
+    for (dirpath, dirnames, filenames) in os.walk(directory_path):
 
         if file_extension:
             file_extension = file_extension.replace(".","")

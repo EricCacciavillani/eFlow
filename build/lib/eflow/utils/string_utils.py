@@ -1,11 +1,23 @@
 import random
+
+__author__ = "Eric Cacciavillani"
+__copyright__ = "Copyright 2019, eFlow"
+__credits__ = ["Eric Cacciavillani"]
+__license__ = "MIT"
+__maintainer__ = "EricCacciavillani"
+__email__ = "eric.cacciavillani@gmail.com"
+
 def convert_to_filename(filename):
     """
-    filename:
-       String of a potential filename.
+    Desc:
+        Attempts to make the filename string valid.
 
-    Returns/Desc:
-        Attempts to ensure the filename is valid for saving.
+    Args:
+        filename:
+           String of a potential filename.
+
+    Returns:
+        A string that is valid for saving.
     """
 
     filename = filename.split(".")[0]
@@ -14,17 +26,22 @@ def convert_to_filename(filename):
             or x == ")" or x == " " or x == "-")
 
 
-def correct_directory_path(directory_pth):
+def correct_directory_path(directory_path):
     """
-    directory_pth:
-        String of a potential directory path.
+    Desc:
+        Attempts to convert the directory path to a proper one by removing
+        any double slashes next to one another.
 
-    Returns/Desc:
-        Attempts to convert the directory path to a proper one.
+    Args:
+        directory_path:
+            String of a potential directory path.
+
+    Returns:
+        Returns the fixed path.
     """
     last_char = None
     new_string = ""
-    for char in directory_pth:
+    for char in directory_path:
         if last_char and (last_char == "/" and char == "/"):
             pass
         else:
@@ -38,4 +55,15 @@ def correct_directory_path(directory_pth):
     return new_string
 
 def create_hex_decimal_string(string_len=10):
+    """
+    Desc:
+        Creates a string of a random Hexadecimal value.
+
+    Args:
+        string_len:
+            Length of the Hexadecimal string.
+
+    Returns:
+        Returns the Hexadecimal string
+    """
     return f'%0{string_len}x' % random.randrange(16 ** string_len)

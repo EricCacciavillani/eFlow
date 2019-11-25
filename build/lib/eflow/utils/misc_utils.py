@@ -1,20 +1,27 @@
 # General/Misc somethings that don't quite fit it the other utils
 import itertools
 
+__author__ = "Eric Cacciavillani"
+__copyright__ = "Copyright 2019, eFlow"
+__credits__ = ["Eric Cacciavillani"]
+__license__ = "MIT"
+__maintainer__ = "EricCacciavillani"
+__email__ = "eric.cacciavillani@gmail.com"
+
 def string_condtional(given_val,
                       full_condtional):
     """
-    Simple string
-    given_val:
-        Numerical value to replace 'x'.
-
-    full_condtional:
-        Specified string conditional.
-        Ex: x >= 0 and x <=100
-
-    Returns/Descr:
+    Desc:
         Returns back a boolean value of whether or not the conditional the
         given value passes the condition.
+
+    Args:
+        given_val:
+            Numerical value to replace 'x'.
+
+        full_condtional:
+            Specified string conditional.
+            Ex: x >= 0 and x <=100
 
     Note:
         Currently only handles and conditionals (no 'or' statements yet)

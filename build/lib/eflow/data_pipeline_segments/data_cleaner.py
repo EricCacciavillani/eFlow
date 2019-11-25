@@ -2,6 +2,13 @@ from eflow._hidden.widgets.DataCleaningWidget import *
 from eflow._hidden.parent_objects.data_pipeline_segment import *
 from eflow.foundation import DataFrameTypes
 
+__author__ = "Eric Cacciavillani"
+__copyright__ = "Copyright 2019, eFlow"
+__credits__ = ["Eric Cacciavillani"]
+__license__ = "MIT"
+__maintainer__ = "EricCacciavillani"
+__email__ = "eric.cacciavillani@gmail.com"
+
 import pandas as pd
 import numpy as np
 
@@ -474,8 +481,7 @@ class DataCleaner(DataPipelineSegment):
             pd.Series(np.random.choice(list(series_obj.value_counts().keys()),
                                        size=len(df.index))))
 
-
-    ### Getters ###
+    # Getters
     def json_file_path(self):
 
         # self.__json_filename =

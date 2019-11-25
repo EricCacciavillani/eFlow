@@ -1,11 +1,104 @@
-import pandas as pd
-
+from eflow.utils.image_processing_utils import create_plt_png
+from eflow.utils.string_utils import correct_directory_path
 from eflow.utils.sys_utils import write_object_text_to_file
-from eflow.utils.image_processing_utils import df_to_image
+
+import pandas as pd
+from matplotlib import pyplot as plt
+import copy
+import six
+import numpy as np
+
+__author__ = "Eric Cacciavillani"
+__copyright__ = "Copyright 2019, eFlow"
+__credits__ = ["Eric Cacciavillani"]
+__license__ = "MIT"
+__maintainer__ = "EricCacciavillani"
+__email__ = "eric.cacciavillani@gmail.com"
+
+
+def df_to_image(df,
+                directory_path,
+                sub_dir,
+                filename,
+                sharpness=1.7,
+                col_width=5.0,
+                row_height=0.625,
+                font_size=14,
+                header_color='#40466e',
+                row_colors=['#f1f1f2', 'w'],
+                edge_color='w',
+                bbox=[0, 0, 1, 1],
+                header_columns=0,
+                ax=None,
+                show_index=False,
+                index_color="#add8e6",
+                format_float_pos=None,
+                show_plot=False,
+                **kwargs):
+
+    directory_path = correct_directory_path(directory_path)
+    df = copy.deepcopy(df)
+
+    if format_float_pos and format_float_pos > 1:
+        float_format = '{:,.' + str(2) + 'f}'
+        for col_feature in set(df.select_dtypes(include=["float"]).columns):
+            df[col_feature] = df[col_feature].map(float_format.format)
+
+    if ax is None:
+        size = (np.array(df.shape[::-1]) + np.array([0, 1])) * np.array(
+            [col_width, row_height])
+        fig, ax = plt.subplots(figsize=size)
+        ax.axis('off')
+
+    if show_index:
+        df.reset_index(inplace=True)
+
+    mpl_table = ax.table(cellText=df.values, bbox=bbox,
+                         colLabels=df.columns, **kwargs)
+
+    mpl_table.auto_set_font_size(False)
+    mpl_table.set_fontsize(font_size)
+
+    for k, cell in six.iteritems(mpl_table._cells):
+        cell.set_edgecolor(edge_color)
+        if k[0] == 0 or k[1] < header_columns:
+            cell.set_text_props(weight='bold', color='w')
+            cell.set_facecolor(header_color)
+        else:
+            if index_color and show_index and k[1] == 0:
+                cell.set_facecolor(index_color)
+            else:
+                cell.set_facecolor(row_colors[k[0] % len(row_colors)])
+
+    if not sub_dir:
+        sub_dir = ""
+
+    create_plt_png(directory_path,
+                   sub_dir,
+                   filename,
+                   sharpness)
+    if show_plot:
+        plt.show()
+
+    plt.close()
 
 
 def check_if_feature_exists(df,
                             feature_name):
+    """
+    Desc:
+        Checks if feature exists in the dataframe.
+
+    Args:
+        df:
+            Pandas dataframe object.
+
+        feature_name:
+            Feature's name.
+
+    Raises:
+        Raises an error in the feature does not exist in the columns.
+    """
     if feature_name not in df.columns:
         raise KeyError(
             f"The feature \'{feature_name}\' was not found in the dataframe!"
@@ -15,17 +108,24 @@ def check_if_feature_exists(df,
 def data_types_table(df,
                      sort_by_type=True):
     """
-    df:
-        Pandas DataFrame object
+    Desc:
+        Creates a pandas dataframe based on the features and their types of the
+        given/passed dataframe.
 
-    Returns/Desc:
+    Args:
+        df:
+            Pandas DataFrame object
+
+        sort_by_type:
+            Orders the resulting dataframe by alphabetically by type.
+
+    Returns:
         Returns a pandas dataframe of features and their found types
         in the passed dataframe.
     """
 
     if not df.shape[0]:
-        print("Empty dataframe found! This function requires a dataframe"
-              "in both rows and columns.")
+        print("Empty dataframe found!")
         return None
 
     dtypes_df = pd.DataFrame({'Data Types': df.dtypes.values})
@@ -41,12 +141,17 @@ def data_types_table(df,
 
 def missing_values_table(df):
     """
-    df:
-        Pandas DataFrame object
+    Desc:
+        Creates a pandas dataframe based on the missing data inside the
+        given/passed dataframe
 
-    Returns/Descr:
-            Returns/Saves a Pandas DataFrame object giving the percentage of
-            the null data for the original DataFrame columns.
+    Args:
+        df:
+            Pandas DataFrame object
+
+    Returns:
+        Returns a Pandas DataFrame object giving the percentage of
+        the null data for the original DataFrame columns.
     """
 
     mis_val = df.isnull().sum()
@@ -64,17 +169,21 @@ def missing_values_table(df):
 def generate_meta_data(df,
                        output_folder_path):
     """
+    Desc:
+        Creates files representing the shape and feature types of the dataframe.
 
-    df:
-        Pandas DataFrame object
+    Args:
+        df:
+            Pandas DataFrame object
 
-    output_folder_path:
-        Pre defined path to already existing directory to output file(s).
+        output_folder_path:
+            Pre defined path to already existing directory to output file(s).
 
-    Returns/Desc:
-        Creates meta data on the passed directory ### FUTURE ERIC COME BACK AND FINALIZE THE REST ASSHAT*
+    Returns:
+        Creates meta data on the passed datafrane.
     """
 
+    # Create files relating to dataframe's shape
     shape_df = pd.DataFrame.from_dict({'Rows': [df.shape[0]],
                                        'Columns': [df.shape[1]]})
     df_to_image(shape_df,
@@ -83,6 +192,11 @@ def generate_meta_data(df,
                 "Dataframe Shape Table",
                 show_index=False)
 
+    write_object_text_to_file(shape_df.to_dict('records'),
+                              output_folder_path,
+                              "Dataframe Shape Text")
+
+    # Create files relating to dataframe's types
     dtypes_df = data_types_table(df)
 
     df_to_image(dtypes_df,
@@ -91,65 +205,87 @@ def generate_meta_data(df,
                 "Dataframe Types Table",
                 show_index=False)
 
-    write_object_text_to_file({'Rows': [df.shape[0]],
-                               'Columns': [df.shape[1]]},
+    write_object_text_to_file(shape_df.to_dict('index'),
                               output_folder_path,
-                              "Dataframe Shape Text")
+                              "Dataframe Feature Types Text")
 
 
 def value_counts_table(df,
                        feature_name):
     """
-    df:
-        Pandas DataFrame object.
+    Desc:
+        Creates a value counts dataframe.
 
-    feature_name:
-        Specified feature column name.
+    Args:
+        df:
+            Pandas DataFrame object.
 
-    Returns/Descr:
+        feature_name:
+            Specified feature column name.
+
+    Returns:
         Returns back a pandas Dataframe object of a feature's value counts
         with percentages.
     """
 
     # Value counts DataFrame
-    col_vc_df = df[feature_name].value_counts().rename_axis(
+    value_count_df = df[feature_name].value_counts().rename_axis(
         'Unique Values').reset_index(name='Counts')
 
-    col_vc_df["Percantage"] = ["{0:.4f}%".format(count/df.shape[0] * 100)
-                               for value, count in
-                               df[feature_name].value_counts().items()]
+    total_count = sum(df[feature_name].dropna().value_counts().values)
+    value_count_df["Percantage"] = ["{0:.4f}%".format(count/total_count * 100)
+                                    for value, count in
+                                    df[feature_name].value_counts().items()]
 
-    col_vc_df.set_index('Unique Values',
-                        inplace=True)
+    value_count_df.set_index('Unique Values',
+                             inplace=True)
 
-    return col_vc_df
+    return value_count_df
 
 
 def descr_table(df,
-                feature_name):
+                feature_name,
+                to_numeric=False):
     """
-    df:
-        Pandas DataFrame object.
+    Desc:
+        Creates numerical description of a feature of a dataframe.
 
-    feature_name:
-        Specified feature column name.
+    Args:
+        df:
+            Pandas DataFrame object.
+
+        feature_name:
+            Specified feature column name.
+
+        to_numeric:
+            Converts the pandas series to all numeric.
 
     Returns/Descr:
         Returns back a Dataframe object of a numerical feature's summary.
     """
 
-    col_desc_df = df[feature_name].describe().to_frame()
-    col_desc_df.loc["var"] = df[feature_name].var()
+    # Convert to numeric without raising errors
+    if to_numeric:
+        errors = "coerce"
+    else:
+        errors = "ignore"
 
-    return col_desc_df
+    desc_df = pd.to_numeric(df[feature_name],
+                            errors=errors).dropna().describe().to_frame()
+    desc_df.loc["var"] = pd.to_numeric(df[feature_name],
+                                       errors=errors).dropna().var()
+
+    return desc_df
+
 
 
 def suggest_removal_features(df):
     """
-    df:
-        Pandas DataFrame object.
+    Args:
+        df:
+            Pandas DataFrame object.
 
-    Returns/Desc:
+    Returns:
         Returns back a list of features to remove.
     """
     features_to_remove = set()

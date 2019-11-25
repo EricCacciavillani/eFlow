@@ -1,3 +1,10 @@
+__author__ = "Eric Cacciavillani"
+__copyright__ = "Copyright 2019, eFlow"
+__credits__ = ["Eric Cacciavillani"]
+__license__ = "MIT"
+__maintainer__ = "EricCacciavillani"
+__email__ = "eric.cacciavillani@gmail.com"
+
 class DefaultException(Exception):
     def __init__(self,
                  error_message=None):
@@ -5,11 +12,11 @@ class DefaultException(Exception):
 
     def __str__(self):
         if not self.__error_message:
-            return "eflow has raised an undeclared exception"
+            return "eflow has raised an exception without describing it!"
         else:
             return self.__error_message
 
-class MismatchError(DefaultException):
+class SnapshotMismatchError(DefaultException):
     def __init__(self,
                  error_message=None):
         super().__init__(error_message=error_message)
@@ -28,6 +35,20 @@ class PipelineSegmentError(DefaultException):
     def __init__(self,
                  error_message=None):
         super().__init__(error_message=error_message)
+
+
+class RequiresPredictionMethods(DefaultException):
+    def __init__(self,
+                 error_message=None):
+        super().__init__(error_message=error_message)
+
+
+class ProbasNotPossible(DefaultException):
+    def __init__(self,
+                 error_message=None):
+        super().__init__(error_message=error_message)
+
+
 
 # class UnknownPredictionType(DefaultException):
 #     def __init__(self):

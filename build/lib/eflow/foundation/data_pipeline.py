@@ -1,14 +1,25 @@
 from eflow._hidden.parent_objects import FileOutput
 from eflow._hidden.parent_objects import DataPipelineSegment
 from eflow._hidden.custom_exceptions import UnsatisfiedRequirments, PipelineError
-from eflow.utils.string_utils import create_hex_decimal_string,correct_directory_path
-from eflow.utils.sys_utils import dict_to_json_file, get_all_files_from_path, create_dir_structure, json_file_to_dict
-# from eflow.data_pipeline_segments import DataCleaner
-from eflow.data_pipeline_segments import DataTransformer
 from eflow._hidden.constants import SYS_CONSTANTS
+from eflow.utils.string_utils import create_hex_decimal_string,correct_directory_path
+from eflow.utils.sys_utils import dict_to_json_file, create_dir_structure, json_file_to_dict
+from eflow.utils.eflow_utils import move_folder_to_eflow_garbage
+from eflow.data_pipeline_segments import *
+
+from eflow.foundation import DataFrameTypes
+
 import copy
 import os
 from collections import deque
+
+__author__ = "Eric Cacciavillani"
+__copyright__ = "Copyright 2019, eFlow"
+__credits__ = ["Eric Cacciavillani"]
+__license__ = "MIT"
+__maintainer__ = "EricCacciavillani"
+__email__ = "eric.cacciavillani@gmail.com"
+
 
 class DataPipeline(FileOutput):
     """
@@ -19,17 +30,24 @@ class DataPipeline(FileOutput):
     """
     def __init__(self,
                  pipeline_name,
-                 pipeline_modify_id=None):
+                 df_features=None,
+                 pipeline_modify_id=None,
+                 remove_past_contents=False):
         """
-        pipeline_name (str):
-            Points to/generates a folder based on the pipeline's name.
+        Args:
+            pipeline_name (str):
+                Points to/generates a folder based on the pipeline's name.
 
-        pipeline_modify_id (str,NoneType):
-            If set to 'None' then will point the 'root' or the main template
-            of the pipeline.
+            pipeline_modify_id (str,NoneType):
+                If set to 'None' then will point the 'root' or the main template
+                of the pipeline.
+
+            remove_past_contents:
+                If an already existing folder exists for this then move to
+                eflow's personal garbage.
         """
-        #
-        dir_path_to_pipeline = correct_directory_path(f"{os.getcwd()}/{SYS_CONSTANTS.PARENT_OUTPUT_FOLDER_NAME}/_Extras/JSON Files/Data Pipeline/{pipeline_name}")
+        # Set up directory structure
+        dir_path_to_pipeline = correct_directory_path(f"{os.getcwd()}/{SYS_CONSTANTS.PARENT_OUTPUT_FOLDER_NAME}/_Extras/Pipeline Structure/Data Pipeline/{pipeline_name}")
         configure_existing_file = False
 
         # Get json proper file name
@@ -38,16 +56,39 @@ class DataPipeline(FileOutput):
         else:
             json_file = "root_pipeline.json"
 
+        self.__df_features = None
+
         # Check if folder/file exist for the pipeline
         if os.path.exists(dir_path_to_pipeline):
             if os.path.exists(dir_path_to_pipeline + json_file):
                 print(f"The file '{json_file}' exist!")
                 FileOutput.__init__(self,
-                                    f'_Extras/Data Pipeline/{pipeline_name}')
+                                    f'_Extras/Pipeline Structure/Data Pipeline/{pipeline_name}')
                 configure_existing_file = True
             else:
                 raise PipelineError(f"The file '{json_file}' does not exist!")
 
+            # Create/Load in df_features to given object.
+            if os.path.exists(dir_path_to_pipeline + "df_features.json"):
+                df_features = DataFrameTypes(None)
+                df_features.init_on_json_file(dir_path_to_pipeline + "df_features.json")
+            else:
+                if df_features is None:
+                    raise PipelineError("When initializing a data pipeline structure "
+                                        "you must pass a DataFrameTypes object with "
+                                        "the correctly defined types!")
+
+                # Create file representation
+                else:
+                    df_features.create_json_file_representation(dir_path_to_pipeline,
+                                                                "df_features")
+
+        # -----
+        if df_features is None:
+            raise PipelineError("When initializing a data pipeline structure "
+                                "you must pass a DataFrameTypes object with "
+                                "the correctly defined types!")
+        self.__df_features = copy.deepcopy(df_features)
 
         # Check if root file exist or if pipeline modify id
         self.__pipeline_name = copy.deepcopy(pipeline_name)
@@ -60,8 +101,13 @@ class DataPipeline(FileOutput):
 
         # Json file does exist; init DataPipeline object correctly
         if configure_existing_file:
-            print("Now configuring object with proper pipeline segments...")
-            self.__configure_pipeline_with_existing_file()
+            if remove_past_contents:
+                print("Moving past contents to eFlow's garbage.")
+                move_folder_to_eflow_garbage(dir_path_to_pipeline,
+                                             "Data Pipelines")
+            else:
+                print("Now configuring object with proper pipeline segments...")
+                self.__configure_pipeline_with_existing_file()
 
     @property
     def file_path(self):
@@ -89,6 +135,14 @@ class DataPipeline(FileOutput):
         else:
             return copy.deepcopy(self.__json_file_name)
 
+    def get_df_features(self):
+        if len(self.__pipeline_segment_deque) == 0:
+            raise PipelineError(
+                "The pipeline has not added any segments yet."
+                " Please add segments to this object.")
+        else:
+            return copy.deepcopy(self.__df_features)
+
 
     def add(self,
             segment_name,
@@ -104,6 +158,8 @@ class DataPipeline(FileOutput):
             Attempts to add a pipeline segment object to the objects que and
             update it's related json object.
         """
+
+        pipeline_segment_obj = copy.deepcopy(pipeline_segment_obj)
 
         # Type check
         if not isinstance(pipeline_segment_obj,
@@ -127,10 +183,17 @@ class DataPipeline(FileOutput):
                                 " method."
                                 "\n\t*Refer to a different segment path id")
         else:
-            # Que has yet to have data pushed; set up output directory
+            # Que has yet to have data pushed; set up output directory for new data
             if len(self.__pipeline_segment_deque) == 0:
                 FileOutput.__init__(self,
-                                    f'_Extras/Data Pipeline/{self.__pipeline_name}')
+                                    f'_Extras/Pipeline Structure/Data Pipeline/{self.__pipeline_name}')
+
+                if os.path.exists(self.folder_path + "df_features.json"):
+                    self.__df_features.init_on_json_file(self.folder_path + "df_features.json")
+                else:
+                    self.__df_features.create_json_file_representation(self.folder_path,
+                                                                       "df_features.json")
+
 
 
         # Update data types for error checking
@@ -232,68 +295,79 @@ class DataPipeline(FileOutput):
                                                   pipeline_segment_obj))
 
     def perform_pipeline(self,
-                         df):
+                         df,
+                         df_features=None):
         """
-        df:
-            Pandas Dataframe object to be transformed by the pipeline.
+        Args:
+            df:
+                Pandas Dataframe object to be transformed by the pipeline.
 
         Returns/Desc:
             Applies a Pandas Dataframe object to all functions on all segments
             in the pipeline.
         """
+
+        if df_features is None:
+            df_features = self.__df_features
+
+        if self.__df_features is None:
+            raise PipelineError("Default type holder somehow is equal to none for "
+                                "this pipeline structure.")
+
         for _, _, pipeline_segment in self.__pipeline_segment_deque:
-            pipeline_segment.perform_segment(df)
+            pipeline_segment.perform_segment(df,
+                                             df_features)
 
-    def generate_code(self,
-                      generate_file=True,
-                      add_libs=True):
-        """
-        generate_file (bool):
-            Determines whether or not to generate a python file
-        add_libs:
-
-        Returns/Desc:
-            Applies
-        """
-        if len(self.__pipeline_segment_deque) == 0:
-            raise PipelineError("Pipeline needs a segment to generate code.")
-
-        generated_code = []
-
-        if add_libs:
-            libs_code = list()
-            libs_code.append("from eflow.utils.math_utils import *")
-            libs_code.append("from eflow.utils.image_processing_utils import *")
-            libs_code.append("from eflow.utils.pandas_utils import *")
-            libs_code.append("from eflow.utils.modeling_utils import *")
-            libs_code.append("from eflow.utils.string_utils import *")
-            libs_code.append("from eflow.utils.misc_utils import *")
-            libs_code.append("from eflow.utils.sys_utils import *")
-            libs_code.append("")
-            generated_code.append(libs_code)
-
-
-        for segment_name, segment_path_id, pipeline_segment in self.__pipeline_segment_deque:
-            tmp_list = pipeline_segment.generate_code(generate_file=False,
-                                                      add_libs=False)
-            tmp_list.insert(0, f'# Segment Name:    {segment_name}')
-            tmp_list.insert(0, f'# Segment Path ID: {segment_path_id}')
-
-            generated_code.append(tmp_list)
-
-        create_dir_structure(self.folder_path,
-                                   "Generated code")
-
-        if generate_file:
-            python_file_name = self.__json_file_name.split(".")[0] + ".py"
-            with open(self.folder_path +
-                      f'Generated code/{python_file_name}',
-                      'w') as filehandle:
-                for segment_code in generated_code:
-                    for listitem in segment_code:
-                        filehandle.write('%s\n' % listitem)
-            print(
-                f"Generated a python file named/at: {self.folder_path}Generated code/{python_file_name}")
-        else:
-            return generated_code
-
+    # def generate_code(self,
+    #                   generate_file=True,
+    #                   add_libs=True):
+    #     """
+    #     generate_file (bool):
+    #         Determines whether or not to generate a python file
+    #     add_libs:
+    #
+    #     Returns/Desc:
+    #         Applies
+    #     """
+    #     if len(self.__pipeline_segment_deque) == 0:
+    #         raise PipelineError("Pipeline needs a segment to generate code.")
+    #
+    #     generated_code = []
+    #
+    #     if add_libs:
+    #         libs_code = list()
+    #         libs_code.append("from eflow.utils.math_utils import *")
+    #         libs_code.append("from eflow.utils.image_processing_utils import *")
+    #         libs_code.append("from eflow.utils.pandas_utils import *")
+    #         libs_code.append("from eflow.utils.modeling_utils import *")
+    #         libs_code.append("from eflow.utils.string_utils import *")
+    #         libs_code.append("from eflow.utils.misc_utils import *")
+    #         libs_code.append("from eflow.utils.sys_utils import *")
+    #         libs_code.append("")
+    #         generated_code.append(libs_code)
+    #
+    #
+    #     for segment_name, segment_path_id, pipeline_segment in self.__pipeline_segment_deque:
+    #         tmp_list = pipeline_segment.generate_code(generate_file=False,
+    #                                                   add_libs=False)
+    #         tmp_list.insert(0, f'# Segment Name:    {segment_name}')
+    #         tmp_list.insert(0, f'# Segment Path ID: {segment_path_id}')
+    #
+    #         generated_code.append(tmp_list)
+    #
+    #     create_dir_structure(self.folder_path,
+    #                                "Generated code")
+    #
+    #     if generate_file:
+    #         python_file_name = self.__json_file_name.split(".")[0] + ".py"
+    #         with open(self.folder_path +
+    #                   f'Generated code/{python_file_name}',
+    #                   'w') as filehandle:
+    #             for segment_code in generated_code:
+    #                 for listitem in segment_code:
+    #                     filehandle.write('%s\n' % listitem)
+    #         print(
+    #             f"Generated a python file named/at: {self.folder_path}Generated code/{python_file_name}")
+    #     else:
+    #         return generated_code
+    #
