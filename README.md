@@ -20,9 +20,9 @@ Getting natural language datasets setup. Start by opening up a Python Repl.
 
 ```bash
 $ python
-$ nltk.download('wordnet')
-$ nltk.download('words')
-$ nltk.download('punkt')
+>>> nltk.download('wordnet')
+>>> nltk.download('words')
+>>> nltk.download('punkt')
 ```
 
 # Project Requirements
