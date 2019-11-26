@@ -80,7 +80,8 @@ class FeatureAnalysis(DataAnalysis):
                          dataframe_snapshot=True,
                          suppress_runtime_errors=True,
                          aggregate_target_feature=True,
-                         selected_features=None):
+                         selected_features=None,
+                         extra_tables=True):
         """
         Desc:
             Performs all public methods that generate visualizations/insights
@@ -125,6 +126,13 @@ class FeatureAnalysis(DataAnalysis):
             suppress_runtime_errors: bool
                 If set to true; when generating any graphs will suppress any runtime
                 errors so the program can keep running.
+
+            extra_tables: bool
+                When handling two types of features if set to true this will
+                    generate any extra tables that might be helpful.
+                    Note -
+                        These graphics may create duplicates if you already applied
+                        an aggregation in 'perform_analysis'
 
             aggregate_target_feature: bool
                 Aggregate the data of the target feature if the data is
@@ -180,7 +188,8 @@ class FeatureAnalysis(DataAnalysis):
                                     save_file=save_file,
                                     dataframe_snapshot=dataframe_snapshot,
                                     suppress_runtime_errors=suppress_runtime_errors,
-                                    display_print=display_print)
+                                    display_print=display_print,
+                                    extra_tables=extra_tables)
 
                # Aggregate data if target feature exists
                if target_feature and feature_name == target_feature and aggregate_target_feature:
@@ -232,7 +241,8 @@ class FeatureAnalysis(DataAnalysis):
                                                         dataframe_snapshot=dataframe_snapshot,
                                                         suppress_runtime_errors=suppress_runtime_errors,
                                                         display_print=display_print,
-                                                        sub_dir=f"{dataset_name}/{target_feature}/Where {target_feature} = {repr_target_feature_val}/{f_name}")
+                                                        sub_dir=f"{dataset_name}/{target_feature}/Where {target_feature} = {repr_target_feature_val}/{f_name}",
+                                                        extra_tables=False)
                                except Exception as e:
                                    print(f"Error found on feature {f_name}: {e}")
 
@@ -258,7 +268,8 @@ class FeatureAnalysis(DataAnalysis):
                         sub_dir=None,
                         save_file=True,
                         dataframe_snapshot=True,
-                        suppress_runtime_errors=True):
+                        suppress_runtime_errors=True,
+                        extra_tables=True):
         """
         Desc:
             Generate's all graphic's for that given feature and the relationship
@@ -302,6 +313,13 @@ class FeatureAnalysis(DataAnalysis):
                 If set to true; when generating any graphs will suppress any runtime
                 errors so the program can keep running.
 
+            extra_tables: bool
+                When handling two types of features if set to true this will
+                generate any extra tables that might be helpful.
+                Note -
+                    These graphics may create duplicates if you already applied
+                    an aggregation in 'perform_analysis'
+
         Raises:
             Raises error if the json file's snapshot of the given dataframe doesn't
             match the given dataframe.
@@ -314,16 +332,25 @@ class FeatureAnalysis(DataAnalysis):
         if colors and display_print:
             print(f"Colors:\n{colors}\n")
 
-        if target_feature:
 
+        # Check if feature exist in df_features and by extension the dataframe
+        if target_feature:
             if target_feature not in self.__df_features.get_all_features():
                 raise UnsatisfiedRequirments("Target feature does not exist in pre-defined "
                                              "df_features!")
+            if target_feature not in df.columns:
+                raise UnsatisfiedRequirments("Target feature does not exist in "
+                                             "the dataframe!")
 
-            target_feature_numerical = target_feature in self.__df_features.get_continuous_numerical_features()
-        else:
-            target_feature_numerical = False
+        if feature_name not in self.__df_features.get_all_features():
+            raise UnsatisfiedRequirments(
+                "Feature name does not exist in pre-defined "
+                "df_features!")
+        if feature_name not in df.columns:
+            raise UnsatisfiedRequirments("Feature name does not exist in "
+                                         "the dataframe!")
 
+        # Generate sub directory structure for plots involving two features
         two_dim_sub_dir = None
         if sub_dir:
             two_dim_sub_dir = sub_dir
@@ -334,18 +361,21 @@ class FeatureAnalysis(DataAnalysis):
         # -----
         if feature_name in self.__df_features.get_non_numerical_features() or feature_name in self.__df_features.get_bool_features():
 
+            # Pie graph's should only have less than or equal to six.
+            # (The function can handle ample more than this; just stylistically)
             if len(df[feature_name].value_counts().index) <= 5:
-                self.pie_graph(df,
-                               feature_name,
-                               dataset_name=dataset_name,
-                               display_visuals=display_visuals,
-                               sub_dir=sub_dir,
-                               save_file=save_file,
-                               pallete=colors,
-                               dataframe_snapshot=dataframe_snapshot,
-                               suppress_runtime_errors=suppress_runtime_errors,
-                               display_print=display_print)
+                self.plot_pie_graph(df,
+                                    feature_name,
+                                    dataset_name=dataset_name,
+                                    display_visuals=display_visuals,
+                                    sub_dir=sub_dir,
+                                    save_file=save_file,
+                                    pallete=colors,
+                                    dataframe_snapshot=dataframe_snapshot,
+                                    suppress_runtime_errors=suppress_runtime_errors,
+                                    display_print=display_print)
 
+            # Count plot without colors
             self.plot_count_graph(df,
                                   feature_name,
                                   dataset_name=dataset_name,
@@ -356,6 +386,7 @@ class FeatureAnalysis(DataAnalysis):
                                   suppress_runtime_errors=suppress_runtime_errors,
                                   display_print=display_print)
 
+            # Count plot with colors
             if colors:
                 self.plot_count_graph(df,
                                       feature_name,
@@ -368,6 +399,7 @@ class FeatureAnalysis(DataAnalysis):
                                       suppress_runtime_errors=suppress_runtime_errors,
                                       display_print=display_print)
 
+            # Generate value counts table
             self.value_counts_table(df,
                                     feature_name,
                                     dataset_name=dataset_name,
@@ -378,37 +410,10 @@ class FeatureAnalysis(DataAnalysis):
                                     suppress_runtime_errors=suppress_runtime_errors,
                                     display_print=display_print)
 
-            if target_feature and feature_name != target_feature:
-
-                if target_feature_numerical:
-
-                    if len(set(pd.to_numeric(df[target_feature],
-                                         errors='coerce').dropna())) > 1:
-                        self.plot_violin_graph(df,
-                                               feature_name,
-                                               dataset_name=dataset_name,
-                                               other_feature_name=target_feature,
-                                               display_visuals=display_visuals,
-                                               sub_dir=two_dim_sub_dir,
-                                               save_file=save_file,
-                                               palette=colors,
-                                               dataframe_snapshot=dataframe_snapshot,
-                                               suppress_runtime_errors=suppress_runtime_errors,
-                                               display_print=display_print)
-                    self.plot_ridge_graph(df,
-                                          feature_name,
-                                          dataset_name=dataset_name,
-                                          other_feature_name=target_feature,
-                                          display_visuals=display_visuals,
-                                          sub_dir=two_dim_sub_dir,
-                                          save_file=save_file,
-                                          dataframe_snapshot=dataframe_snapshot,
-                                          palette=colors,
-                                          suppress_runtime_errors=suppress_runtime_errors,
-                                          display_print=display_print)
-
         # -----
         elif feature_name in self.__df_features.get_continuous_numerical_features():
+
+            # Plot distance plot graph
             self.plot_distance_graph(df,
                                      feature_name,
                                      dataset_name=dataset_name,
@@ -419,6 +424,7 @@ class FeatureAnalysis(DataAnalysis):
                                      suppress_runtime_errors=suppress_runtime_errors,
                                      display_print=display_print)
 
+            # Create description table
             self.descr_table(df,
                              feature_name,
                              dataset_name=dataset_name,
@@ -429,40 +435,149 @@ class FeatureAnalysis(DataAnalysis):
                              suppress_runtime_errors=suppress_runtime_errors,
                              display_print=display_print)
 
-            if target_feature and feature_name != target_feature:
 
-                if target_feature_numerical:
-                    # Jointplot
-                    pass
+        if target_feature and feature_name != target_feature:
 
-                else:
-                    if len(set(pd.to_numeric(df[feature_name],
-                                             errors='coerce').dropna())) > 1:
-                        self.plot_violin_graph(df,
-                                               target_feature,
-                                               dataset_name=dataset_name,
-                                               other_feature_name=feature_name,
-                                               display_visuals=display_visuals,
-                                               sub_dir=two_dim_sub_dir,
-                                               save_file=save_file,
-                                               palette=colors,
-                                               dataframe_snapshot=dataframe_snapshot,
-                                               suppress_runtime_errors=suppress_runtime_errors,
-                                               display_print=display_print)
+            # Simplified conditional check for finding type relationship between the two features
+            num_features = []
+            non_num_features = []
 
-                    self.plot_ridge_graph(df,
-                                          target_feature,
+            if target_feature in self.__df_features.get_continuous_numerical_features():
+                num_features.append(target_feature)
+            else:
+                non_num_features.append(target_feature)
+
+            if feature_name in self.__df_features.get_continuous_numerical_features():
+                num_features.append(feature_name)
+            else:
+                non_num_features.append(feature_name)
+
+            # Two different types of features (numerical and non-numerical)
+            if len(num_features) == 1 and len(non_num_features) == 1:
+
+                # Extract out feature name's to better named variables for sanity
+                numerical_feature = num_features.pop()
+                non_numerical_feature = non_num_features.pop()
+
+                # Generate violin
+                self.plot_violin_graph(df,
+                                       non_numerical_feature,
+                                       dataset_name=dataset_name,
+                                       other_feature_name=numerical_feature,
+                                       display_visuals=display_visuals,
+                                       sub_dir=two_dim_sub_dir,
+                                       save_file=save_file,
+                                       palette=colors,
+                                       dataframe_snapshot=dataframe_snapshot,
+                                       suppress_runtime_errors=suppress_runtime_errors,
+                                       display_print=display_print)
+
+                # Generate ridge graph
+                self.plot_ridge_graph(df,
+                                      non_numerical_feature,
+                                      dataset_name=dataset_name,
+                                      other_feature_name=numerical_feature,
+                                      display_visuals=display_visuals,
+                                      sub_dir=two_dim_sub_dir,
+                                      save_file=save_file,
+                                      dataframe_snapshot=dataframe_snapshot,
+                                      palette=colors,
+                                      suppress_runtime_errors=suppress_runtime_errors,
+                                      display_print=display_print)
+
+                # Generate tables based on the aggregation of the non-numerical feature
+                if extra_tables:
+                    for val in df[non_numerical_feature].unique():
+
+                        if display_print:
+                            print(f"Where {non_numerical_feature} = {val}")
+
+                        # Create new sub dir based on the aggregation
+                        two_dim_desc_sub_dir = copy.deepcopy(
+                            two_dim_sub_dir)
+                        if not two_dim_desc_sub_dir:
+                            two_dim_desc_sub_dir = ""
+                        two_dim_desc_sub_dir += "/" + str(val)
+
+                        # Create new dataframe on aggregated value and check for nans
+                        tmp_df = df[df[non_numerical_feature] == val]
+                        if np.sum(tmp_df[numerical_feature].isnull()) != \
+                                tmp_df.shape[0]:
+
+                            self.descr_table(df=tmp_df,
+                                             feature_name=target_feature,
+                                             dataset_name=dataset_name,
+                                             display_visuals=display_visuals,
+                                             display_print=display_print,
+                                             sub_dir=two_dim_desc_sub_dir,
+                                             dataframe_snapshot=False)
+                            if display_print:
+                                print("\n")
+
+                        del tmp_df
+
+            elif len(non_num_features) == 2:
+
+                # Generate tables based on the aggregation of the non-numerical feature
+                if extra_tables:
+                    for val in df[feature_name].unique():
+
+                        if display_print:
+                            print(f"Where {feature_name} = {val}")
+
+                        # Create new sub dir based on the aggregation
+                        two_dim_desc_sub_dir = copy.deepcopy(
+                            two_dim_sub_dir)
+                        if not two_dim_desc_sub_dir:
+                            two_dim_desc_sub_dir = ""
+                        two_dim_desc_sub_dir += "/" + str(val)
+
+                        # Create new dataframe on aggregated value and check for nans
+                        tmp_df = df[df[feature_name] == val]
+                        if np.sum(tmp_df[target_feature].isnull()) != \
+                                tmp_df.shape[0]:
+                            self.value_counts_table(df=df[df[feature_name] == val],
+                                                    feature_name=target_feature,
+                                                    dataset_name=dataset_name,
+                                                    display_visuals=display_visuals,
+                                                    display_print=display_print,
+                                                    sub_dir=two_dim_desc_sub_dir,
+                                                    dataframe_snapshot=False)
+                            if display_print:
+                                print("\n")
+
+
+            elif len(num_features) == 2:
+
+                # Generate jointplot graph with scatter and kde
+                self.plot_jointplot_graph(df,
+                                          feature_name,
                                           dataset_name=dataset_name,
-                                          other_feature_name=feature_name,
+                                          other_feature_name=target_feature,
                                           display_visuals=display_visuals,
                                           sub_dir=two_dim_sub_dir,
                                           save_file=save_file,
                                           dataframe_snapshot=dataframe_snapshot,
+                                          color=colors,
                                           suppress_runtime_errors=suppress_runtime_errors,
-                                          palette=colors,
                                           display_print=display_print)
+
+                # Generate jointplot graph with kde
+                self.plot_jointplot_graph(df,
+                                          feature_name,
+                                          dataset_name=dataset_name,
+                                          other_feature_name=target_feature,
+                                          display_visuals=display_visuals,
+                                          sub_dir=two_dim_sub_dir,
+                                          save_file=save_file,
+                                          dataframe_snapshot=dataframe_snapshot,
+                                          color=colors,
+                                          suppress_runtime_errors=suppress_runtime_errors,
+                                          display_print=display_print,
+                                          kind="kde")
         if display_print:
             print("\n\n")
+
 
     def plot_distance_graph(self,
                             df,
@@ -625,6 +740,7 @@ class FeatureAnalysis(DataAnalysis):
 
         except Exception as e:
             plt.close('all')
+
             if suppress_runtime_errors:
                 warnings.warn(
                     f"Distance plot graph throw an error on feature '{feature_name}':\n{str(e)}",
@@ -765,6 +881,11 @@ class FeatureAnalysis(DataAnalysis):
             if not len(found_features):
                 raise UnsatisfiedRequirments("Both x and y feature's are type 'None'. Please pass at least one feature.")
 
+            if np.sum(df[feature_name].isnull()) == df.shape[0]:
+                raise UnsatisfiedRequirments(
+                    "Violin plot graph couldn't be generated because " +
+                    f"there is only missing data to display in {feature_name}!")
+
             del found_features
 
             if display_print:
@@ -774,7 +895,9 @@ class FeatureAnalysis(DataAnalysis):
             plt.close('all')
 
             # Set plot structure
-            plt.figure(figsize=figsize)
+            fig = plt.figure(figsize=figsize)
+            fig.set_tight_layout(True)
+
             plt.title("Violin Plot: " + feature_title)
 
             feature_values = pd.to_numeric(df[other_feature_name],
@@ -783,7 +906,7 @@ class FeatureAnalysis(DataAnalysis):
             if not len(feature_values):
                 raise ValueError("The y feature must contain numerical features.")
 
-            x_values = copy.deepcopy(df[feature_name])
+            x_values = copy.deepcopy(df[feature_name].dropna())
 
             # if feature_name in self.__df_features.get_bool_features():
             #     x_values = pd.to_numeric(x_values,
@@ -793,6 +916,10 @@ class FeatureAnalysis(DataAnalysis):
             #                 if val == 0 else val
             #                 for val in x_values]
 
+            # Sort list by x_values
+            x_values, feature_values = self.__sort_two_lists(x_values,feature_values)
+
+            warnings.filterwarnings("ignore")
 
             sns.violinplot(x=x_values,
                            y=feature_values,
@@ -803,6 +930,8 @@ class FeatureAnalysis(DataAnalysis):
                            width=width,
                            palette=palette,
                            saturation=saturation)
+
+            warnings.filterwarnings("default")
 
             # Pass a default name if needed
             if not filename:
@@ -834,12 +963,17 @@ class FeatureAnalysis(DataAnalysis):
 
         except Exception as e:
             plt.close('all')
+            warnings.filterwarnings("default")
+
             if suppress_runtime_errors:
                 warnings.warn(
                     f"Plot violin graph an error on feature '{feature_name}':\n{str(e)}",
                     RuntimeWarning)
             else:
                 raise e
+
+        finally:
+            warnings.filterwarnings("default")
 
     def plot_count_graph(self,
                          df,
@@ -1019,6 +1153,7 @@ class FeatureAnalysis(DataAnalysis):
 
         except Exception as e:
             plt.close('all')
+
             if suppress_runtime_errors:
                 warnings.warn(
                     f"Plot count graph raised an error on feature '{feature_name}':\n{str(e)}",
@@ -1026,19 +1161,19 @@ class FeatureAnalysis(DataAnalysis):
             else:
                 raise e
 
-    def pie_graph(self,
-                  df,
-                  feature_name,
-                  dataset_name,
-                  display_visuals=True,
-                  display_print=True,
-                  filename=None,
-                  sub_dir=None,
-                  save_file=True,
-                  dataframe_snapshot=True,
-                  suppress_runtime_errors=True,
-                  figsize=GRAPH_DEFAULTS.FIGSIZE,
-                  pallete=None):
+    def plot_pie_graph(self,
+                       df,
+                       feature_name,
+                       dataset_name,
+                       display_visuals=True,
+                       display_print=True,
+                       filename=None,
+                       sub_dir=None,
+                       save_file=True,
+                       dataframe_snapshot=True,
+                       suppress_runtime_errors=True,
+                       figsize=GRAPH_DEFAULTS.FIGSIZE,
+                       pallete=None):
         """
         Desc:
             Display a pie graph and save the graph in the correct directory.
@@ -1108,11 +1243,24 @@ class FeatureAnalysis(DataAnalysis):
             feature_values = value_counts.index.tolist()
             value_count_list = value_counts.values.tolist()
 
-            # Explode the part of the pie graph that is the maximum of the graph
-            explode_array = [0] * len(feature_values)
-            explode_array[np.array(value_count_list).argmax()] = .03
-
             color_list = None
+
+            plt.figure(figsize=figsize)
+
+            # if feature_name in self.__df_features.get_bool_features():
+            #
+            #     i = 0
+            #     for val in feature_values:
+            #         try:
+            #             feature_values[i] = float(val)
+            #         except:
+            #             pass
+            #     feature_values = [bool(val) if val == 0 or val == 1 else val
+            #                       for val in feature_values]
+
+            # Sort by feature_values
+            feature_values,value_count_list = self.__sort_two_lists(feature_values,
+                                                                    value_count_list)
 
             if isinstance(pallete,dict):
                 color_list = []
@@ -1123,18 +1271,9 @@ class FeatureAnalysis(DataAnalysis):
                         raise KeyError(f"The given value '{value}' in feature '{feature_name}'"
                                        + " was not found in the passed color dict.")
 
-            plt.figure(figsize=figsize)
-
-            if feature_name in self.__df_features.get_bool_features():
-
-                i = 0
-                for val in feature_values:
-                    try:
-                        feature_values[i] = float(val)
-                    except:
-                        pass
-                feature_values = [bool(val) if val == 0 or val == 1 else val
-                                  for val in feature_values]
+            # Explode the part of the pie graph that is the maximum of the graph
+            explode_array = [0] * len(feature_values)
+            explode_array[np.array(value_count_list).argmax()] = .03
 
             # Plot pie graph
             plt.pie(
@@ -1150,7 +1289,10 @@ class FeatureAnalysis(DataAnalysis):
             # Set foundation graph info
             fig = plt.gcf()
             plt.title("Pie Chart: " + feature_name)
-            plt.legend(fancybox=True)
+            plt.legend(fancybox=True,
+                       facecolor='w')
+
+            # Set foundation
             plt.axis('equal')
             plt.tight_layout()
 
@@ -1184,6 +1326,8 @@ class FeatureAnalysis(DataAnalysis):
             raise e
 
         except Exception as e:
+            plt.close('all')
+
             if suppress_runtime_errors:
                 warnings.warn(
                     f"Pie graph raised an error on feature '{feature_name}':\n{str(e)}",
@@ -1260,7 +1404,7 @@ class FeatureAnalysis(DataAnalysis):
             palette: dict or string
                 Dictionary of all feature values to hex color values.
 
-        Note:
+        Note -
             A large part of this was taken from: http://tinyurl.com/tuou2cn
 
         Raises:
@@ -1301,6 +1445,12 @@ class FeatureAnalysis(DataAnalysis):
             pd.options.mode.chained_assignment = chained_assignment
             del chained_assignment
 
+            # Sort by dataframe's series of 'feature_name'
+            tmp_df[feature_name], tmp_df[other_feature_name] = self.__sort_two_lists(tmp_df[feature_name],
+                                                                                     tmp_df[other_feature_name])
+
+            # Suppress any warnings that the seaborn's backend raises
+            warnings.filterwarnings("ignore")
             sns.set(style="white",
                     rc={"axes.facecolor": (0, 0, 0, 0)})
 
@@ -1349,6 +1499,7 @@ class FeatureAnalysis(DataAnalysis):
                         transform=ax.transAxes)
 
             g.map(label, other_feature_name)
+            g.fig.set_tight_layout(True)
 
             # Set the subplots to overlap
             g.fig.subplots_adjust(hspace=-.25)
@@ -1359,7 +1510,10 @@ class FeatureAnalysis(DataAnalysis):
             g.despine(bottom=True, left=True)
             g.fig.set_size_inches(10, 10, forward=True)
             g.fig.suptitle(f'{feature_name} by {other_feature_name}')
-            plt.figure(figsize=figsize)
+            fig = plt.figure(figsize=figsize)
+            fig.set_tight_layout(True)
+
+            warnings.filterwarnings("default")
 
             # Pass a default name if needed
             if not filename:
@@ -1387,25 +1541,203 @@ class FeatureAnalysis(DataAnalysis):
 
             plt.close('all')
 
+
         except SnapshotMismatchError as e:
             raise e
 
         except Exception as e:
             plt.close('all')
+            warnings.filterwarnings("default")
+
             if suppress_runtime_errors:
                 warnings.warn(
                     f"Plot ridge graph raised an error on feature '{feature_name}':\n{str(e)}",
                     RuntimeWarning)
             else:
                 raise e
+        finally:
+            warnings.filterwarnings("default")
 
 
     def plot_jointplot_graph(self,
                              df,
                              feature_name,
                              dataset_name,
-                             other_feature_name):
-        raise ValueError("NOT READY FOR USE YET!!!!!!")
+                             other_feature_name,
+                             display_visuals=True,
+                             display_print=True,
+                             filename=None,
+                             sub_dir=None,
+                             save_file=True,
+                             dataframe_snapshot=True,
+                             suppress_runtime_errors=True,
+                             figsize=GRAPH_DEFAULTS.FIGSIZE,
+                             color=None,
+                             kind="scatter and kde",
+                             ratio=5):
+
+        """
+        Desc:
+            Display a ridge plot and save the graph in the correct directory.
+
+        Args:
+            df: pd.Dataframe
+                Pandas DataFrame object.
+
+            feature_name: string
+                Specified feature column name.
+
+            dataset_name: string
+                The dataset's name; this will create a sub-directory in which your
+                generated graph will be inner-nested in.
+
+            other_feature_name: string
+                Feature to compare to.
+
+            display_visuals: bool
+                Boolean value to whether or not to display visualizations.
+
+            display_print: bool
+                Determines whether or not to print function's embedded print
+                statements.
+
+            filename: string
+                If set to 'None' will default to a pre-defined string;
+                unless it is set to an actual filename.
+
+            sub_dir: string
+                Specify the sub directory to append to the pre-defined folder path.
+
+            save_file: bool
+                Boolean value to whether or not to save the file.
+
+            dataframe_snapshot: bool
+                Boolean value to determine whether or not generate and compare a
+                snapshot of the dataframe in the dataset's directory structure.
+                Helps ensure that data generated in that directory is correctly
+                associated to a dataframe.
+
+            suppress_runtime_errors: bool
+                If set to true; when generating any graphs will suppress any runtime
+                errors so the program can keep running.
+
+            display_print: bool
+                Determines whether or not to print function's embedded print
+                statements.
+
+            figsize: tuple
+                Tuple object to represent the plot/image's size. Because joinplot
+                only accepts a single value for the figure; we just pull the
+                greatest of the two values.
+
+            color: string
+                Seaborn/maplotlib color/hex color for representing the graph
+
+            kind: string (scatter,reg,resid,kde,hex,scatter and kde)
+                Kind of plot to draw.
+
+            ratio:
+                Ratio of joint axes height to marginal axes height.
+                (Determines distplot like plots dimensions.)
+
+            Credit to seaborn's author:
+            Michael Waskom
+            Git username: mwaskom
+            Link: http://tinyurl.com/v9pxsoy
+
+        Raises:
+           Raises error if the feature data is filled with only nulls or if
+           the json file's snapshot of the given dataframe doesn't match the
+           given dataframe.
+        """
+
+
+        try:
+            # Error check and create title/part of default file name
+            if np.sum(df[feature_name].isnull()) == df.shape[0]:
+                raise UnsatisfiedRequirments(
+                    "Jointplot plot graph couldn't be generated because " +
+                    f"there is only missing data to display in {feature_name}!")
+
+            if display_print:
+                print(f"Generating jointplot graph on {feature_name} by {other_feature_name}")
+
+            # Closes up any past graph info
+            plt.close('all')
+
+            if figsize[0] < figsize[1]:
+                height = figsize[0]
+            else:
+                height = figsize[1]
+
+            tmp_df = copy.deepcopy(df[[feature_name,other_feature_name]])
+            tmp_df.dropna()
+
+            if not kind:
+                kind = "scatter"
+
+            if kind == "scatter and kde":
+                g = sns.jointplot(feature_name,
+                                  other_feature_name,
+                                  data=tmp_df,
+                                  kind="scatter",
+                                  color=color,
+                                  ratio=ratio,
+                                  height=height).plot_joint(sns.kdeplot, zorder=0,
+                                                            n_levels=6)
+            else:
+                g = sns.jointplot(feature_name,
+                                  other_feature_name,
+                                  data=tmp_df,
+                                  kind=kind,
+                                  color=color,
+                                  ratio=ratio,
+                                  height=height)
+
+            plt.subplots_adjust(top=0.93)
+            g.fig.suptitle("Jointplot: " + f"{feature_name} by {other_feature_name}")
+
+            # Pass a default name if needed
+            if not filename:
+                filename = f"Jointplot plot graph for {feature_name} by {other_feature_name} using {kind}"
+
+            # Create string sub directory path
+            if not sub_dir:
+                sub_dir = f"{dataset_name}/{feature_name}"
+
+            # -----
+            if save_file:
+
+                if self.__called_from_perform:
+                    dataframe_snapshot = False
+
+                self.save_plot(df=df,
+                               filename=filename,
+                               sub_dir=sub_dir,
+                               dataframe_snapshot=dataframe_snapshot,
+                               suppress_runtime_errors=suppress_runtime_errors)
+
+            if self.__notebook_mode and display_visuals:
+                plt.show()
+
+            plt.close('all')
+
+        except SnapshotMismatchError as e:
+            raise e
+
+        except Exception as e:
+            plt.close('all')
+            warnings.filterwarnings("default")
+
+            if suppress_runtime_errors:
+                warnings.warn(
+                    f"Joinplot plot graph an error on feature '{feature_name}':\n{str(e)}",
+                    RuntimeWarning)
+            else:
+                raise e
+
+        finally:
+            warnings.filterwarnings("default")
 
 
     def value_counts_table(self,
@@ -1475,6 +1807,7 @@ class FeatureAnalysis(DataAnalysis):
                 raise UnsatisfiedRequirments("Values count table couldn't be generated because " +
                                              f"there is only missing data to display in {feature_name}!")
 
+
             if display_print:
                 print(f"Creating value counts table for feature {feature_name}.")
 
@@ -1514,6 +1847,7 @@ class FeatureAnalysis(DataAnalysis):
 
         except Exception as e:
             plt.close('all')
+
             if suppress_runtime_errors:
                 warnings.warn(
                     f"Value count table raised an error on feature '{feature_name}':\n{str(e)}",
@@ -1628,6 +1962,7 @@ class FeatureAnalysis(DataAnalysis):
 
         except Exception as e:
             plt.close('all')
+
             if suppress_runtime_errors:
                 warnings.warn(
                     f"Descr table raised an error on feature '{feature_name}':\n{str(e)}",
@@ -1660,7 +1995,6 @@ class FeatureAnalysis(DataAnalysis):
             Gives back a dictionary object of all possible feature values
             with their associated colors.
         """
-
 
         colors = self.__df_features.get_feature_colors(feature_name)
         feature_value_representation = self.__df_features.get_feature_value_representation()
@@ -1703,3 +2037,23 @@ class FeatureAnalysis(DataAnalysis):
                                 GRAPH_DEFAULTS.DEFINED_LIST_OF_RANDOM_COLORS):
                             colors = None
         return colors
+
+    def __sort_two_lists(self,
+                         sort_values,
+                         other_list):
+        """
+        Desc:
+            Sort's two collections by the first collection passed in.
+
+        Args:
+            sort_values: collection
+                Values to be sorted by.
+            other_list: collection
+                Values that get sorted based on 'sort_values'.
+        Returns:
+            Returns back those two lists sorted.
+        """
+        tmp = list(zip(*sorted(list(zip(other_list, sort_values)),
+                               key=lambda x: x[1])))
+
+        return list(tmp[1]), list(tmp[0])

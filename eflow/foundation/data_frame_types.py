@@ -1183,6 +1183,7 @@ class DataFrameTypes:
                 if not len(user_input):
                     print(f"Ignoring feature '{feature_name}")
 
+                # -----
                 elif user_input[0] == "s":
                     type_conflict_dict[feature_name] = "string"
 
@@ -1191,8 +1192,8 @@ class DataFrameTypes:
                     if float_flag:
                         type_conflict_dict[feature_name] = "float"
                     else:
-                        numeric_values = pd.to_numeric(numeric_values,
-                                                       errors="coerce")
+                        numeric_values = set(pd.to_numeric(numeric_values,
+                                                       errors="coerce").dropna())
                         if self.__bool_check(numeric_values):
                             type_conflict_dict[feature_name] = "bool"
 
@@ -1611,10 +1612,22 @@ class DataFrameTypes:
 
     def __bool_string_values_check(self,
                                    feature_values):
+        """
+        Desc:
+            Checks if a collection of strings can be considered a bool feature
+            based on the amount of strings and the values of those strings.
+        Args:
+            feature_values:
+                Collection object of strings.
 
+        Returns:
+            Returns true or false if the values can be considered a bool.
+        """
         defined_true_strings = {"y",
                                 "yes",
                                 "okay",
+                                "t",
+                                "true",
                                 "approve",
                                 "approved",
                                 "accepted",
@@ -1622,10 +1635,13 @@ class DataFrameTypes:
 
         defined_false_strings = {"n",
                                  "no",
+                                 "f",
+                                 "false",
                                  "denined",
                                  "deny",
                                  "refuse",
-                                 "abnegate"}
+                                 "abnegate",
+                                 "never"}
 
         if len(feature_values) > 2:
             return False
@@ -1635,29 +1651,49 @@ class DataFrameTypes:
 
         for val in feature_values:
 
+            # Determine if val is true
             if not found_true_value:
+
+                # Check if the string already exist in the defined set
                 if val in defined_true_strings:
                     found_true_value = True
                     continue
                 else:
+                    # Attempt to find synonyms of the defined words to compare to
+                    # the iterable string
                     for true_string in defined_true_strings:
+
+                        if len(true_string) < 2:
+                            continue
+
                         for syn in get_synonyms(true_string):
                             if syn == val:
                                 found_true_value = True
                                 continue
 
+            # -----
             if not found_false_value:
+
+                # -----
                 if val in defined_false_strings:
                     found_false_value = True
                     continue
                 else:
+                    # -----
                     for false_string in defined_false_strings:
+
+                        if len(false_string) < 2:
+                            continue
+
                         for syn in get_synonyms(false_string):
                             if syn == val:
                                 found_false_value = True
                                 continue
 
-        return found_true_value and found_false_value
+        if len(feature_values) == 2:
+            return found_true_value and found_false_value
+        else:
+            return found_true_value or found_false_value
 
     def __categorical_check(self,
                             feature_values):
@@ -1672,11 +1708,17 @@ class DataFrameTypes:
         Returns:
             Returns true or false if the values can be categorical.
         """
-        # Categorical check
-        if sum(feature_values) == sum(range(1, len(feature_values) + 1)):
-            return True
-        else:
+
+        feature_values = copy.deepcopy(set(feature_values))
+
+        min_val = min(feature_values)
+        max_val = max(feature_values)
+
+        if sum(feature_values) != ((min_val + max_val) / 2) * len(
+                set(feature_values)):
             return False
+        else:
+            return True
 
     def __numeric_check(self,
                         feature_values):
@@ -1698,6 +1740,8 @@ class DataFrameTypes:
         categorical_total_sum = 0
         categorical_check = True
 
+        feature_values = copy.deepcopy(set(feature_values))
+
         # Iterate through all values
         for val in feature_values:
 
@@ -1709,18 +1753,24 @@ class DataFrameTypes:
             except ValueError:
                 return False, False, False, False
 
-            # Check if float
-            str_val = str(val)
-            tokens = str_val.split(".")
-            if len(tokens) > 1 and int(tokens[1]) > 0:
-                float_check = True
-                categorical_check = False
-            else:
-                categorical_total_sum += val
-                continue
+            if categorical_check:
+                # Check if float
+                str_val = str(val)
+                tokens = str_val.split(".")
+                if len(tokens) > 1 and int(tokens[1]) > 0:
+                    float_check = True
+                    categorical_check = False
+                else:
+                    categorical_total_sum += val
+                    continue
 
         # Check if categorical
-        if categorical_total_sum != sum(range(1, len(feature_values) + 1)):
-            categorical_check = False
+        if categorical_check:
+
+            min_val = min(feature_values)
+            max_val = max(feature_values)
+
+            if categorical_total_sum != ((min_val + max_val)/2) * len(feature_values):
+                categorical_check = False
 
         return True, float_check, not float_check, categorical_check

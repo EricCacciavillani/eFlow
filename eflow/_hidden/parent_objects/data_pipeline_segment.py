@@ -217,6 +217,8 @@ class DataPipelineSegment(FileOutput):
                                   param,
                                   param_val):
 
+        raise ValueError("This function hasn't been completed yet!")
+
         for que_function_name, que_params_dict in self.__function_pipe.iteritems():
             print(que_function_name)
 

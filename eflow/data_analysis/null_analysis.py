@@ -269,6 +269,7 @@ class NullAnalysis(DataAnalysis):
                               " there is no missing data to display!")
                     return None
 
+
             null_sorted_features, null_features = self.__sort_features_by_nulls(df)
 
             if null_features_only:
@@ -320,7 +321,9 @@ class NullAnalysis(DataAnalysis):
             raise e
 
         except Exception as e:
-            plt.close("all")
+
+            plt.close('all')
+
             if suppress_runtime_errors:
                 warnings.warn(
                     f"Plot null matrix raised an error:\n{str(e)}",
@@ -471,7 +474,9 @@ class NullAnalysis(DataAnalysis):
             raise e
 
         except Exception as e:
-            plt.close("all")
+
+            plt.close('all')
+
             if suppress_runtime_errors:
                 warnings.warn(
                     f"Plot null bar graph raised an error:\n{str(e)}",
@@ -604,7 +609,9 @@ class NullAnalysis(DataAnalysis):
             raise e
 
         except Exception as e:
-            plt.close("all")
+
+            plt.close('all')
+
             if suppress_runtime_errors:
                 warnings.warn(
                     f"Plot null heatmap raised an error:\n{str(e)}",
@@ -735,7 +742,9 @@ class NullAnalysis(DataAnalysis):
             raise e
 
         except Exception as e:
-            plt.close("all")
+
+            plt.close('all')
+
             if suppress_runtime_errors:
                 warnings.warn(
                     f"Plot null dendrogram raised an error:\n{str(e)}",
@@ -844,7 +853,9 @@ class NullAnalysis(DataAnalysis):
             raise e
 
         except Exception as e:
-            plt.close("all")
+
+            plt.close('all')
+
             if suppress_runtime_errors:
                 warnings.warn(
                     f"Missing data table raised an error:\n{str(e)}",
