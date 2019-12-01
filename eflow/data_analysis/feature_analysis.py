@@ -73,7 +73,7 @@ class FeatureAnalysis(DataAnalysis):
     def perform_analysis(self,
                          df,
                          dataset_name,
-                         target_feature=None,
+                         target_features=None,
                          display_visuals=True,
                          display_print=True,
                          save_file=True,
@@ -171,87 +171,96 @@ class FeatureAnalysis(DataAnalysis):
             # Set to true to represent the function call was made with perform
             self.__called_from_perform = True
 
-            if not target_feature:
-                target_feature = self.__df_features.get_target_feature()
+            if isinstance(target_features,str):
+                target_features = {target_features}
 
-            # Iterate through features
-            for feature_name in df.columns:
+            if not target_features:
+                target_features = {None}
 
-               if selected_features and feature_name not in selected_features and feature_name != target_feature:
-                   continue
+            if isinstance(target_features,list):
+                target_features = set(target_features)
 
-               self.analyze_feature(df,
-                                    feature_name,
-                                    dataset_name,
-                                    target_feature=target_feature,
-                                    display_visuals=display_visuals,
-                                    save_file=save_file,
-                                    dataframe_snapshot=dataframe_snapshot,
-                                    suppress_runtime_errors=suppress_runtime_errors,
-                                    display_print=display_print,
-                                    extra_tables=extra_tables)
+            # Iterate through all target features
+            for target_feature in target_features:
 
-               # Aggregate data if target feature exists
-               if target_feature and feature_name == target_feature and aggregate_target_feature:
+                # Iterate through all dataframe features
+                for feature_name in df.columns:
 
-                   # -----
-                   if target_feature in self.__df_features.get_non_numerical_features() or \
-                           target_feature in self.__df_features.get_bool_features():
+                   if selected_features and feature_name not in selected_features and feature_name != target_feature:
+                       continue
 
-                       target_feature_values = df[target_feature].value_counts(sort=False).index.to_list()
+                   self.analyze_feature(df,
+                                        feature_name,
+                                        dataset_name,
+                                        target_feature=target_feature,
+                                        display_visuals=display_visuals,
+                                        save_file=save_file,
+                                        dataframe_snapshot=dataframe_snapshot,
+                                        suppress_runtime_errors=suppress_runtime_errors,
+                                        display_print=display_print,
+                                        extra_tables=extra_tables)
 
-                       for target_feature_val in target_feature_values:
+                   # Aggregate data if target feature exists
+                   if target_feature and feature_name == target_feature and aggregate_target_feature:
 
-                           repr_target_feature_val = target_feature_val
+                       # -----
+                       if target_feature in self.__df_features.get_non_numerical_features() or \
+                               target_feature in self.__df_features.get_bool_features():
 
-                           if target_feature in self.__df_features.get_bool_features():
+                           target_feature_values = df[target_feature].value_counts(sort=False).index.to_list()
 
-                               try:
-                                   repr_target_feature_val = int(repr_target_feature_val)
+                           for target_feature_val in target_feature_values:
 
-                               except ValueError:
-                                   continue
+                               repr_target_feature_val = target_feature_val
 
-                               except TypeError:
-                                   continue
+                               if target_feature in self.__df_features.get_bool_features():
 
-                               repr_target_feature_val = str(bool(repr_target_feature_val))
+                                   try:
+                                       repr_target_feature_val = int(repr_target_feature_val)
 
-                           # Iterate through all features to generate new graphs for aggregation
-                           for f_name in df.columns:
+                                   except ValueError:
+                                       continue
 
-                               if selected_features and f_name not in selected_features and f_name != target_feature:
-                                   continue
+                                   except TypeError:
+                                       continue
 
-                               if f_name == target_feature:
-                                   continue
+                                   repr_target_feature_val = str(bool(repr_target_feature_val))
 
-                               if display_print:
-                                   if repr_target_feature_val:
-                                        print(f"Target feature {target_feature} set to {target_feature_val}; also known as {repr_target_feature_val}.")
-                                   else:
-                                       print(f"Target feature {target_feature} set to {target_feature_val}.")
-                               try:
-                                   self.analyze_feature(df[df[target_feature] == target_feature_val],
-                                                        f_name,
-                                                        dataset_name,
-                                                        target_feature=target_feature,
-                                                        display_visuals=display_visuals,
-                                                        save_file=save_file,
-                                                        dataframe_snapshot=dataframe_snapshot,
-                                                        suppress_runtime_errors=suppress_runtime_errors,
-                                                        display_print=display_print,
-                                                        sub_dir=f"{dataset_name}/{target_feature}/Where {target_feature} = {repr_target_feature_val}/{f_name}",
-                                                        extra_tables=False)
-                               except Exception as e:
-                                   print(f"Error found on feature {f_name}: {e}")
+                               # Iterate through all features to generate new graphs for aggregation
+                               for f_name in df.columns:
 
-            # If any missed features are picked up...
-            missed_features = set(df.columns) ^ self.__df_features.get_all_features()
-            if len(missed_features) != 0 and display_print:
-                print("Some features were not analyzed by perform analysis!")
-                for feature_name in missed_features:
-                    print(f"\t\tFeature:{feature_name}")
+                                   if selected_features and f_name not in selected_features and f_name != target_feature:
+                                       continue
+
+                                   if f_name == target_feature:
+                                       continue
+
+                                   if display_print:
+                                       if repr_target_feature_val:
+                                            print(f"Target feature {target_feature} set to {target_feature_val}; also known as {repr_target_feature_val}.")
+                                       else:
+                                           print(f"Target feature {target_feature} set to {target_feature_val}.")
+                                   try:
+                                       self.analyze_feature(df[df[target_feature] == target_feature_val],
+                                                            f_name,
+                                                            dataset_name,
+                                                            target_feature=target_feature,
+                                                            display_visuals=display_visuals,
+                                                            save_file=save_file,
+                                                            dataframe_snapshot=dataframe_snapshot,
+                                                            suppress_runtime_errors=suppress_runtime_errors,
+                                                            display_print=display_print,
+                                                            sub_dir=f"{dataset_name}/{target_feature}/Where {target_feature} = {repr_target_feature_val}/{f_name}",
+                                                            extra_tables=False)
+                                   except Exception as e:
+                                       print(f"Error found on feature {f_name}: {e}")
+
+                # If any missed features are picked up...
+                missed_features = set(df.columns) ^ self.__df_features.get_all_features()
+                if len(missed_features) != 0 and display_print:
+                    print("Some features were not analyzed by perform analysis!")
+                    for feature_name in missed_features:
+                        print(f"\t\tFeature:{feature_name}")
 
         # Ensures that called from perform is turned off
         finally:
@@ -444,12 +453,16 @@ class FeatureAnalysis(DataAnalysis):
 
             if target_feature in self.__df_features.get_continuous_numerical_features():
                 num_features.append(target_feature)
-            else:
+            elif target_feature in self.__df_features.get_datetime_features():
+                pass
+            elif target_feature not in self.__df_features.get_continuous_numerical_features():
                 non_num_features.append(target_feature)
 
             if feature_name in self.__df_features.get_continuous_numerical_features():
                 num_features.append(feature_name)
-            else:
+            elif feature_name in self.__df_features.get_datetime_features():
+                pass
+            elif feature_name not in self.__df_features.get_continuous_numerical_features():
                 non_num_features.append(feature_name)
 
             # Two different types of features (numerical and non-numerical)
@@ -505,7 +518,7 @@ class FeatureAnalysis(DataAnalysis):
                                 tmp_df.shape[0]:
 
                             self.descr_table(df=tmp_df,
-                                             feature_name=target_feature,
+                                             feature_name=numerical_feature,
                                              dataset_name=dataset_name,
                                              display_visuals=display_visuals,
                                              display_print=display_print,
@@ -520,7 +533,7 @@ class FeatureAnalysis(DataAnalysis):
 
                 # Generate tables based on the aggregation of the non-numerical feature
                 if extra_tables:
-                    for val in df[feature_name].unique():
+                    for val in df[feature_name].dropna().unique():
 
                         if display_print:
                             print(f"Where {feature_name} = {val}")
@@ -545,6 +558,40 @@ class FeatureAnalysis(DataAnalysis):
                                                     dataframe_snapshot=False)
                             if display_print:
                                 print("\n")
+
+                self.group_by_feature_value_count_table(df,
+                                                        feature_name,
+                                                        dataset_name=dataset_name,
+                                                        other_feature_name=target_feature,
+                                                        display_visuals=display_visuals,
+                                                        sub_dir=two_dim_sub_dir,
+                                                        save_file=save_file,
+                                                        dataframe_snapshot=dataframe_snapshot,
+                                                        suppress_runtime_errors=suppress_runtime_errors,
+                                                        display_print=display_print)
+                self.plot_multi_bar_graph(df,
+                                          feature_name,
+                                          dataset_name=dataset_name,
+                                          other_feature_name=target_feature,
+                                          display_visuals=display_visuals,
+                                          sub_dir=two_dim_sub_dir,
+                                          save_file=save_file,
+                                          dataframe_snapshot=dataframe_snapshot,
+                                          suppress_runtime_errors=suppress_runtime_errors,
+                                          display_print=display_print,
+                                          stacked=False)
+
+                self.plot_multi_bar_graph(df,
+                                          feature_name,
+                                          dataset_name=dataset_name,
+                                          other_feature_name=target_feature,
+                                          display_visuals=display_visuals,
+                                          sub_dir=two_dim_sub_dir,
+                                          save_file=save_file,
+                                          dataframe_snapshot=dataframe_snapshot,
+                                          suppress_runtime_errors=suppress_runtime_errors,
+                                          display_print=display_print,
+                                          stacked=True)
 
 
             elif len(num_features) == 2:
@@ -676,6 +723,7 @@ class FeatureAnalysis(DataAnalysis):
             given dataframe.
         """
         try:
+            # Error check
             if np.sum(df[feature_name].isnull()) == df.shape[0]:
                 raise UnsatisfiedRequirments(
                     "Distance plot graph couldn't be generated because " +
@@ -1056,6 +1104,7 @@ class FeatureAnalysis(DataAnalysis):
             given dataframe.
         """
         try:
+            # Error check
             if np.sum(df[feature_name].isnull()) == df.shape[0]:
                 raise UnsatisfiedRequirments(
                     "Count plot graph couldn't be generated because " +
@@ -1413,6 +1462,18 @@ class FeatureAnalysis(DataAnalysis):
            given dataframe.
         """
         try:
+
+            # Error check on null data
+            if np.sum(df[feature_name].isnull()) == df.shape[0]:
+                raise UnsatisfiedRequirments(
+                    "Ridge plot graph couldn't be generated because " +
+                    f"there is only missing data to display in {feature_name}!")
+
+            if np.sum(df[other_feature_name].isnull()) == df.shape[0]:
+                raise UnsatisfiedRequirments(
+                    "Ridge plot graph couldn't be generated because " +
+                    f"there is only missing data to display in {other_feature_name}!")
+
             if display_print:
                 print(f"Ridge plot graph on {feature_name} by {other_feature_name}.")
 
@@ -1526,7 +1587,6 @@ class FeatureAnalysis(DataAnalysis):
             # -----
             if save_file:
 
-
                 if self.__called_from_perform:
                     dataframe_snapshot = False
 
@@ -1557,6 +1617,161 @@ class FeatureAnalysis(DataAnalysis):
                 raise e
         finally:
             warnings.filterwarnings("default")
+
+    def plot_multi_bar_graph(self,
+                             df,
+                             feature_name,
+                             dataset_name,
+                             other_feature_name,
+                             display_visuals=True,
+                             display_print=True,
+                             filename=None,
+                             sub_dir=None,
+                             save_file=True,
+                             dataframe_snapshot=True,
+                             suppress_runtime_errors=True,
+                             figsize=GRAPH_DEFAULTS.FIGSIZE,
+                             colors=None,
+                             stacked=False):
+        """
+        Desc:
+            Display a pie graph and save the graph in the correct directory.
+
+        Args:
+           df:
+               Pandas DataFrame object.
+
+           feature_name:
+               Specified feature column name.
+
+           dataset_name:
+               The dataset's name; this will create a sub-directory in which your
+               generated graph will be inner-nested in.
+
+           display_visuals:
+               Boolean value to whether or not to display visualizations.
+
+           display_print: bool
+                Determines whether or not to print function's embedded print
+                statements.
+
+           filename:
+               If set to 'None' will default to a pre-defined string;
+               unless it is set to an actual filename.
+
+           sub_dir:
+               Specify the sub directory to append to the pre-defined folder path.
+
+           save_file:
+               Boolean value to whether or not to save the file.
+
+           dataframe_snapshot:
+                Boolean value to determine whether or not generate and compare a
+                snapshot of the dataframe in the dataset's directory structure.
+                Helps ensure that data generated in that directory is correctly
+                associated to a dataframe.
+
+           suppress_runtime_errors: bool
+                If set to true; when generating any graphs will suppress any runtime
+                errors so the program can keep running.
+
+           figsize: tuple
+                Size of the plot.
+
+           colors: dict or string
+                Dictionary of all feature values to hex color values.
+
+           stacked: bool
+                Determines if the multi bar graph should be stacked or not.
+
+        Raises:
+            Raises error if the feature data is filled with only nulls or if
+            the json file's snapshot of the given dataframe doesn't match the
+            given dataframe.
+        """
+        try:
+            # Error check on nan data
+            if np.sum(df[feature_name].isnull()) == df.shape[0]:
+                raise UnsatisfiedRequirments("Multi bar graph on " +
+                      f"there is only missing data to display in {feature_name}!")
+
+            if np.sum(df[other_feature_name].isnull()) == df.shape[0]:
+                raise UnsatisfiedRequirments("Multi bar graph on " +
+                                             f"there is only missing data to display in {other_feature_name}!")
+
+            if display_print:
+                print(f"Multi bar graph on {feature_name} by {other_feature_name}")
+
+            # Closes up any past graph info
+            plt.close('all')
+
+
+            if not colors:
+                try:
+                    colors = [self.__df_features.get_feature_colors(feature_name)[val]
+                              for val in list(df.groupby(
+                            [other_feature_name, feature_name]).size().unstack().columns)]
+                except TypeError:
+                    pass
+                except KeyError:
+                    pass
+
+            g = df.groupby([other_feature_name, feature_name]).size().unstack().plot(
+                kind='bar',
+                stacked=stacked,
+                color=colors,
+                figsize=figsize)
+            g.legend(loc='upper center',
+                     bbox_to_anchor=(1.07, 1),
+                     shadow=True,
+                     ncol=1)
+            sns.set(style="whitegrid")
+
+            plt.title(f"Multi bar graph on {feature_name} by {other_feature_name}")
+
+
+            # Pass a default name if needed
+            if not filename:
+                if stacked:
+                    filename = f"Multi bar graph on {feature_name} by {other_feature_name}"
+                else:
+                    filename = f"Multi bar graph stacked on {feature_name} by {other_feature_name}"
+
+
+            # Create string sub directory path
+            if not sub_dir:
+                sub_dir = f"{dataset_name}/{feature_name}"
+
+            # -----
+            if save_file:
+
+                if self.__called_from_perform:
+                    dataframe_snapshot = False
+
+                self.save_plot(df=df,
+                               filename=filename,
+                               sub_dir=sub_dir,
+                               dataframe_snapshot=dataframe_snapshot,
+                               suppress_runtime_errors=suppress_runtime_errors)
+
+
+            if self.__notebook_mode and display_visuals:
+                plt.show()
+
+            plt.close('all')
+
+        except SnapshotMismatchError as e:
+            raise e
+
+        except Exception as e:
+            plt.close('all')
+
+            if suppress_runtime_errors:
+                warnings.warn(
+                    f"Multi bar raised an error on feature '{feature_name}':\n{str(e)}",
+                    RuntimeWarning)
+            else:
+                raise e
 
 
     def plot_jointplot_graph(self,
@@ -1653,11 +1868,16 @@ class FeatureAnalysis(DataAnalysis):
 
 
         try:
-            # Error check and create title/part of default file name
+            # Error check on null data
             if np.sum(df[feature_name].isnull()) == df.shape[0]:
                 raise UnsatisfiedRequirments(
                     "Jointplot plot graph couldn't be generated because " +
                     f"there is only missing data to display in {feature_name}!")
+
+            if np.sum(df[other_feature_name].isnull()) == df.shape[0]:
+                raise UnsatisfiedRequirments(
+                    "Jointplot plot graph couldn't be generated because " +
+                    f"there is only missing data to display in {other_feature_name}!")
 
             if display_print:
                 print(f"Generating jointplot graph on {feature_name} by {other_feature_name}")
@@ -1752,6 +1972,12 @@ class FeatureAnalysis(DataAnalysis):
                            dataframe_snapshot=True,
                            suppress_runtime_errors=True):
         """
+        Desc:
+            Creates a value counts table of the features given data.
+
+            Note
+                Creates a png of the table.
+
         Args:
             df: pd.Dataframe
                 Pandas DataFrame object
@@ -1840,7 +2066,8 @@ class FeatureAnalysis(DataAnalysis):
                                         sub_dir=sub_dir,
                                         dataframe_snapshot=dataframe_snapshot,
                                         suppress_runtime_errors=suppress_runtime_errors,
-                                        table=val_counts_df)
+                                        table=val_counts_df,
+                                        show_index=True)
 
         except SnapshotMismatchError as e:
             raise e
@@ -1868,8 +2095,8 @@ class FeatureAnalysis(DataAnalysis):
                     suppress_runtime_errors=True):
         """
         Desc:
-            Creates/Saves a pandas dataframe of features and their found types
-            in the dataframe.
+            Creates/Saves a pandas dataframe of a feature's numerical data.
+            Standard deviation, mean, Q1-Q5, median, variance, etc.
 
             Note
                 Creates a png of the table.
@@ -1920,7 +2147,7 @@ class FeatureAnalysis(DataAnalysis):
         try:
             # Check if dataframe has only null data
             if np.sum(df[feature_name].isnull()) == df.shape[0]:
-                raise UnsatisfiedRequirments("Count plot graph couldn't be generated because " +
+                raise UnsatisfiedRequirments("Descr table couldn't be generated because " +
                       f"there is only missing data to display in {feature_name}!")
 
             if display_print:
@@ -1969,6 +2196,132 @@ class FeatureAnalysis(DataAnalysis):
                     RuntimeWarning)
             else:
                 raise e
+
+    def group_by_feature_value_count_table(self,
+                                           df,
+                                           feature_name,
+                                           dataset_name,
+                                           other_feature_name,
+                                           display_visuals=True,
+                                           display_print=True,
+                                           filename=None,
+                                           sub_dir=None,
+                                           save_file=True,
+                                           dataframe_snapshot=True,
+                                           suppress_runtime_errors=True):
+        """
+        Desc:
+            Creates/Saves a pandas dataframe of features and their found types
+            in the dataframe.
+
+            Note
+                Creates a png of the table.
+
+        Args:
+            df: pd.Dataframe
+                Pandas DataFrame object
+
+            feature_name: string
+                Specified feature column name.
+
+            dataset_name: string
+                The dataset's name; this will create a sub-directory in which your
+                generated graph will be inner-nested in.
+
+            other_feature_name: string
+                Feature to compare to.
+
+            display_visuals: bool
+                Boolean value to whether or not to display visualizations.
+
+            display_print: bool
+                Determines whether or not to print function's embedded print
+                statements.
+
+            filename: string
+                If set to 'None' will default to a pre-defined string;
+                unless it is set to an actual filename.
+
+            sub_dir: string
+                Specify the sub directory to append to the pre-defined folder path.
+
+            save_file: bool
+                Saves file if set to True; doesn't if set to False.
+
+            dataframe_snapshot: bool
+                Boolean value to determine whether or not generate and compare a
+                snapshot of the dataframe in the dataset's directory structure.
+                Helps ensure that data generated in that directory is correctly
+                associated to a dataframe.
+
+            suppress_runtime_errors: bool
+                If set to true; when generating any graphs will suppress any runtime
+                errors so the program can keep running.
+
+        Raises:
+            Raises error if the feature data is filled with only nulls or if
+            the json file's snapshot of the given dataframe doesn't match the
+            given dataframe.
+        """
+        try:
+            # Check if dataframe has only null data
+            if np.sum(df[feature_name].isnull()) == df.shape[0]:
+                raise UnsatisfiedRequirments("Count plot graph couldn't be generated because " +
+                      f"there is only missing data to display in {feature_name}!")
+
+            if np.sum(df[other_feature_name].isnull()) == df.shape[0]:
+                raise UnsatisfiedRequirments("Count plot graph couldn't be generated because " +
+                      f"there is only missing data to display in {other_feature_name}!")
+
+            if display_print:
+                print(f"Creating group by {feature_name} and {other_feature_name} Table")
+
+            tmp_df = copy.deepcopy(df[[feature_name, other_feature_name]])
+            tmp_df = tmp_df.groupby([feature_name, other_feature_name]).size().to_frame()
+            tmp_df.columns = ["Counts"]
+
+
+            if self.__notebook_mode:
+                if display_visuals:
+                    display(tmp_df)
+            else:
+                if display_visuals:
+                    print(tmp_df)
+
+            # Pass a default name if needed
+            if not filename:
+                filename = f"Group by {feature_name} and {other_feature_name} Table"
+
+            # Create string sub directory path
+            if not sub_dir:
+                sub_dir = f"{dataset_name}/{feature_name}"
+
+            if save_file:
+
+                if self.__called_from_perform:
+                    dataframe_snapshot = False
+
+                self.save_table_as_plot(df=df,
+                                        filename=filename,
+                                        sub_dir=sub_dir,
+                                        dataframe_snapshot=dataframe_snapshot,
+                                        suppress_runtime_errors=suppress_runtime_errors,
+                                        table=tmp_df,
+                                        show_index=True)
+
+        except SnapshotMismatchError as e:
+            raise e
+
+        except Exception as e:
+            plt.close('all')
+
+            if suppress_runtime_errors:
+                warnings.warn(
+                    f"Group by table raised an error on feature '{feature_name}' by '{other_feature_name}':\n{str(e)}",
+                    RuntimeWarning)
+            else:
+                raise e
+
 
     def __get_feature_colors(self,
                              df,

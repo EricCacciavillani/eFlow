@@ -219,6 +219,7 @@ def json_file_to_dict(filepath):
     json_file = open(filepath)
     json_str = json_file.read()
     json_data = json.loads(json_str)
+    json_file.close()
 
     return json_data
 

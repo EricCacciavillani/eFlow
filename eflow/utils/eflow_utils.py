@@ -223,7 +223,7 @@ def remove_unconnected_pipeline_segments():
     pipeline_struct_dir = os.getcwd() + f"/{SYS_CONSTANTS.PARENT_OUTPUT_FOLDER_NAME}/_Extras/Pipeline Structure/"
 
     if not os.path.exists(pipeline_struct_dir):
-        print("Project structure has yet to be initalized. Can't clean/remove any files...")
+        print("Project structure for pipelines has yet to be initalized. Can't clean/remove any files related to pipeline...")
     else:
         segment_dict = dict()
         pipeline_segments_dict = dict()

@@ -94,6 +94,7 @@ class DataAnalysis(FileOutput):
 
     def save_table_as_plot(self,
                            df,
+                           table,
                            filename="Unknown filename",
                            sub_dir=None,
                            dataframe_snapshot=True,
@@ -101,7 +102,7 @@ class DataAnalysis(FileOutput):
                            compare_shape=True,
                            compare_feature_names=True,
                            compare_random_values=True,
-                           table=None):
+                           show_index=False):
         """
         Desc:
             Checks the passed data to see if a table can be saved as a plot;
@@ -109,14 +110,10 @@ class DataAnalysis(FileOutput):
 
         Args:
             df:
-                Pandas DataFrame object
+                Pandas DataFrame object of all data.
 
-            feature_name:
-                Specified feature column name.
-
-            dataset_name:
-                The dataset's name; this will create a sub-directory in which your
-                generated graph will be inner-nested in.
+            table:
+                Dataframe object to convert to plot.
 
             filename:
                 If set to 'None' will default to a pre-defined string;
@@ -134,6 +131,21 @@ class DataAnalysis(FileOutput):
             suppress_runtime_errors: bool
                 If set to true; when generating any graphs will suppress any runtime
                 errors so the program can keep running.
+
+            compare_shape:
+                When comparing and creating the dataframe snapshot of the data's
+                shape.
+
+            compare_feature_names:
+                When comparing and creating the dataframe snapshot of the data's
+                column names.
+
+            compare_random_values:
+                When comparing and creating the dataframe snapshot of the data
+                sudo random values.
+
+            show_index:
+                Show index of the saved dataframe.
         """
 
         try:
@@ -150,12 +162,12 @@ class DataAnalysis(FileOutput):
                                                   directory_path=self.folder_path,
                                                   sub_dir=f"{sub_dir}/_Extras")
 
-            # Convert value counts dataframe to an image
+            # Convert dataframe to plot
             df_to_image(table,
                         self.folder_path,
                         sub_dir,
                         convert_to_filename(filename),
-                        show_index=True,
+                        show_index=show_index,
                         format_float_pos=2)
 
         except SnapshotMismatchError as e:
