@@ -1,6 +1,8 @@
 from eflow._hidden.parent_objects import DataPipelineSegment
 from eflow._hidden.constants import BOOL_STRINGS
+from eflow._hidden.custom_exceptions import UnsatisfiedRequirments
 from eflow.utils.language_processing_utils import get_synonyms
+
 
 import copy
 import pandas as pd
@@ -222,7 +224,7 @@ class DataEncoder(DataPipelineSegment):
                                     _add_to_que=True):
         """
         Desc:
-            Translate features into most understandable/best representation
+            Translate features back into worst representation
 
         Args:
             df: pd.Dataframe
@@ -268,6 +270,20 @@ class DataEncoder(DataPipelineSegment):
                          df,
                          df_features,
                          _add_to_que=True):
+        """
+        Desc:
+            Convert all string bools to numeric bool value
+        Args:
+            df: pd.Dataframe
+                Pandas dataframe.
+
+            df_features: DataFrameTypes from eflow
+                DataFrameTypes object.
+
+            _add_to_que: bool
+                Hidden variable to determine if the function should be pushed
+                to the pipeline segment.
+        """
 
         params_dict = locals()
 
@@ -301,12 +317,22 @@ class DataEncoder(DataPipelineSegment):
                      _add_to_que=True):
         """
         Desc:
+            Create dummies features of based on qualtative feature data and removes
+            the original feature.
 
         Args:
             df: pd.Dataframe
-            df_features: Dataframe type holder
-            categoical_features:
+                Pandas dataframe.
+
+            df_features: DataFrameTypes from eflow
+                DataFrameTypes object.
+
+            qualtative_features: collection of strings
+                Feature names to convert the feature data into dummy features.
+
             _add_to_que: bool
+                Hidden variable to determine if the function should be pushed
+                to the pipeline segment.
         """
         params_dict = locals()
 
@@ -322,6 +348,11 @@ class DataEncoder(DataPipelineSegment):
             qualtative_features = [qualtative_features]
 
         for cat_feature in qualtative_features:
+
+            if cat_feature not in df_features.get_string_features() | df_features.get_categorical_features():
+                raise UnsatisfiedRequirments(f"No feature named '{cat_feature}' in categorical or string features.")
+
+            # Make dummies and remove original feature
             dummies_df = pd.get_dummies(df[cat_feature],
                                         prefix=cat_feature)
             df.drop(columns=[cat_feature],
@@ -343,6 +374,25 @@ class DataEncoder(DataPipelineSegment):
                        df_features,
                        qualtative_features=[],
                        _add_to_que=True):
+        """
+        Desc:
+            Convert dummies features back to the original feature.
+
+        Args:
+            df: pd.Dataframe
+                Pandas dataframe.
+
+            df_features: DataFrameTypes from eflow
+                DataFrameTypes object.
+
+            qualtative_features: collection of strings
+                Feature names to convert the dummy features into original feature
+                data.
+
+            _add_to_que: bool
+                Hidden variable to determine if the function should be pushed
+                to the pipeline segment.
+        """
 
         params_dict = locals()
 
@@ -359,6 +409,7 @@ class DataEncoder(DataPipelineSegment):
         for feature_name in qualtative_features:
             dummies_df = df[df_features.get_dummy_encoded_features()[feature_name]]
 
+            # Create new series from dummy data
             tmp = dummies_df[dummies_df == 1].stack().reset_index()
             new_series = []
             index_count = 0
@@ -369,14 +420,18 @@ class DataEncoder(DataPipelineSegment):
                     new_series.append(tmp["level_1"][index_count])
                     index_count += 1
 
+            # -----
             new_series = pd.Series(new_series).str.replace(feature_name + "_", "")
             df[feature_name] = new_series
 
+            # Remove dummy features
             df.drop(columns=dummies_df.columns.to_list(),
                     inplace=True)
 
+            # Remove dummy encoded relationship
             df_features.remove_feature_from_dummy_encoded(feature_name)
 
+            # Add feature back to original set in df_features
             try:
                 pd.to_numeric(new_series.dropna())
                 df_features._DataFrameTypes__categorical_features.add(feature_name)
@@ -384,9 +439,9 @@ class DataEncoder(DataPipelineSegment):
             except ValueError:
                 df_features._DataFrameTypes__string_features.add(feature_name)
 
-            if _add_to_que:
-                self._DataPipelineSegment__add_function_to_que("revert_dummies",
-                                                               params_dict)
+        if _add_to_que:
+            self._DataPipelineSegment__add_function_to_que("revert_dummies",
+                                                           params_dict)
 
 
     def __bool_string_values_check(self,
@@ -403,7 +458,8 @@ class DataEncoder(DataPipelineSegment):
                 Collection object of strings.
 
         Returns:
-            Returns true or false if the values can be considered a bool.
+            Returns true or false if the values can be considered a bool and
+            the true and false values found.
         """
 
         if len(feature_values) > 2:
