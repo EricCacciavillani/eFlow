@@ -105,6 +105,9 @@ class FeatureTransformer(DataPipelineSegment):
             except KeyError:
                 pass
 
+        if isinstance(feature_names,set):
+            feature_names = list(feature_names)
+
         if _add_to_que:
             self._DataPipelineSegment__add_function_to_que("remove_features",
                                                            params_dict)

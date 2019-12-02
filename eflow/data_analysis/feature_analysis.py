@@ -99,7 +99,7 @@ class FeatureAnalysis(DataAnalysis):
                 The dataset's name; this will create a sub-directory in which your
                 generated graph will be inner-nested in.
 
-            target_feature: string or None
+            target_features: collection of strings or None
                 A feature name that both exists in the init df_features
                 and the passed dataframe.
 

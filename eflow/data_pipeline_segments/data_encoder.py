@@ -1,6 +1,10 @@
 from eflow._hidden.parent_objects import DataPipelineSegment
+from eflow._hidden.constants import BOOL_STRINGS
+from eflow.utils.language_processing_utils import get_synonyms
 
 import copy
+import pandas as pd
+import numpy as np
 
 __author__ = "Eric Cacciavillani"
 __copyright__ = "Copyright 2019, eFlow"
@@ -36,6 +40,24 @@ class DataEncoder(DataPipelineSegment):
                     df_features,
                     apply_value_representation=True,
                     _add_to_que=True):
+        """
+        Desc:
+            Encode the data into numerical values for machine learning processes.
+
+        Args:
+            df: pd.Dataframe
+                Pandas dataframe.
+
+            df_features: DataFrameTypes from eflow
+                DataFrameTypes object.
+
+            apply_value_representation: bool
+                Translate features into most understandable/best representation/
+
+            _add_to_que: bool
+                Hidden variable to determine if the function should be pushed
+                to the pipeline segment.
+        """
         params_dict = locals()
 
         # Remove any unwanted arguments in params_dict
@@ -80,6 +102,8 @@ class DataEncoder(DataPipelineSegment):
                 df[feature_name].replace(encoder_dict[feature_name],
                                          inplace=True)
 
+                df_features.set_feature_to_categorical(feature_name)
+
         if _add_to_que:
             self._DataPipelineSegment__add_function_to_que("encode_data",
                                                            params_dict)
@@ -89,6 +113,24 @@ class DataEncoder(DataPipelineSegment):
                     df_features,
                     apply_value_representation=True,
                     _add_to_que=True):
+        """
+        Desc:
+            Decode the data into non-numerical values for more descriptive analysis.
+
+        Args:
+            df: pd.Dataframe
+                Pandas dataframe.
+
+            df_features: DataFrameTypes from eflow
+                DataFrameTypes object.
+
+            apply_value_representation: bool
+                Translate features into most understandable/best representation/
+
+            _add_to_que: bool
+                Hidden variable to determine if the function should be pushed
+                to the pipeline segment.
+        """
         params_dict = locals()
 
         # Remove any unwanted arguments in params_dict
@@ -113,6 +155,7 @@ class DataEncoder(DataPipelineSegment):
         # Apply value representation to feature values
         if apply_value_representation:
             feature_value_represention = df_features.get_feature_value_representation()
+            # Replace values by each corresponding feature value related dict
             for feature_name in feature_value_represention.keys():
                 if feature_name not in df.columns:
                     raise KeyError(
@@ -122,8 +165,301 @@ class DataEncoder(DataPipelineSegment):
                     df[feature_name].replace(feature_value_represention[feature_name],
                                              inplace=True)
 
+                df_features.set_feature_to_string(feature_name)
+
         if _add_to_que:
             self._DataPipelineSegment__add_function_to_que("decode_data",
                                                            params_dict)
 
+    def apply_value_representation(self,
+                                   df,
+                                   df_features,
+                                   _add_to_que=True):
+        """
+        Desc:
+            Translate features into most understandable/best representation
 
+        Args:
+            df: pd.Dataframe
+                Pandas dataframe.
+
+            df_features: DataFrameTypes from eflow
+                DataFrameTypes object.
+
+            _add_to_que: bool
+                Hidden variable to determine if the function should be pushed
+                to the pipeline segment.
+        """
+
+        params_dict = locals()
+
+        # Remove any unwanted arguments in params_dict
+        if _add_to_que:
+            params_dict = locals()
+            for arg in ["self", "df", "df_features", "_add_to_que",
+                        "params_dict"]:
+                del params_dict[arg]
+
+        feature_value_represention = df_features.get_feature_value_representation()
+
+        # Replace values by each corresponding feature value related dict
+        for feature_name in feature_value_represention:
+
+            if feature_name not in df.columns:
+                raise KeyError(
+                    f"Dataframe doesn't have feature name '{feature_name}'.")
+
+            df[feature_name].replace(feature_value_represention[feature_name],
+                                     inplace=True)
+
+        if _add_to_que:
+            self._DataPipelineSegment__add_function_to_que("apply_value_representation",
+                                                           params_dict)
+
+    def revert_value_representation(self,
+                                    df,
+                                    df_features,
+                                    _add_to_que=True):
+        """
+        Desc:
+            Translate features into most understandable/best representation
+
+        Args:
+            df: pd.Dataframe
+                Pandas dataframe.
+
+            df_features: DataFrameTypes from eflow
+                DataFrameTypes object.
+
+            _add_to_que: bool
+                Hidden variable to determine if the function should be pushed
+                to the pipeline segment.
+        """
+
+        params_dict = locals()
+
+        # Remove any unwanted arguments in params_dict
+        if _add_to_que:
+            params_dict = locals()
+            for arg in ["self", "df", "df_features", "_add_to_que",
+                        "params_dict"]:
+                del params_dict[arg]
+
+        feature_value_represention = df_features.get_feature_value_representation()
+
+        # Replace values by each corresponding feature value related dict
+        for feature_name in feature_value_represention:
+
+            if feature_name not in df.columns:
+                raise KeyError(
+                    f"Dataframe doesn't have feature name '{feature_name}'.")
+
+
+            df[feature_name].replace({v: k
+                                      for k, v in feature_value_represention[
+                                          feature_name].items()},
+                                     inplace=True)
+
+        if _add_to_que:
+            self._DataPipelineSegment__add_function_to_que("revert_value_representation",
+                                                           params_dict)
+
+    def make_values_bool(self,
+                         df,
+                         df_features,
+                         _add_to_que=True):
+
+        params_dict = locals()
+
+        # Remove any unwanted arguments in params_dict
+        if _add_to_que:
+            params_dict = locals()
+            for arg in ["self", "df", "df_features", "_add_to_que",
+                        "params_dict"]:
+                del params_dict[arg]
+
+        for bool_feature in df_features.get_bool_features():
+            if df[bool_feature].dtype == "O":
+                bool_check,true_val,false_val = self.__bool_string_values_check(
+                    df[bool_feature].dropna().unique())
+
+                # Replace bool string values with bools
+                if bool_check:
+                    df[bool_feature].replace({true_val:1,
+                                              false_val:0},
+                                             inplace=True)
+
+        if _add_to_que:
+            self._DataPipelineSegment__add_function_to_que("make_values_bool",
+                                                           params_dict)
+
+
+    def make_dummies(self,
+                     df,
+                     df_features,
+                     qualtative_features=[],
+                     _add_to_que=True):
+        """
+        Desc:
+
+        Args:
+            df: pd.Dataframe
+            df_features: Dataframe type holder
+            categoical_features:
+            _add_to_que: bool
+        """
+        params_dict = locals()
+
+        # Remove any unwanted arguments in params_dict
+        if _add_to_que:
+            params_dict = locals()
+            for arg in ["self", "df", "df_features", "_add_to_que",
+                        "params_dict"]:
+                del params_dict[arg]
+
+
+        if isinstance(qualtative_features,str):
+            qualtative_features = [qualtative_features]
+
+        for cat_feature in qualtative_features:
+            dummies_df = pd.get_dummies(df[cat_feature],
+                                        prefix=cat_feature)
+            df.drop(columns=[cat_feature],
+                    inplace=True)
+            df_features.remove_feature(cat_feature)
+
+            df_features.set_feature_to_dummy_encoded(cat_feature,
+                                                     dummies_df.columns.to_list())
+
+            for feature_name in dummies_df.columns:
+                df[feature_name] = dummies_df[feature_name]
+
+        if _add_to_que:
+            self._DataPipelineSegment__add_function_to_que("make_dummies",
+                                                           params_dict)
+
+    def revert_dummies(self,
+                       df,
+                       df_features,
+                       qualtative_features=[],
+                       _add_to_que=True):
+
+        params_dict = locals()
+
+        # Remove any unwanted arguments in params_dict
+        if _add_to_que:
+            params_dict = locals()
+            for arg in ["self", "df", "df_features", "_add_to_que",
+                        "params_dict"]:
+                del params_dict[arg]
+
+        if isinstance(qualtative_features,str):
+            feature_name = [qualtative_features]
+
+        for feature_name in qualtative_features:
+            dummies_df = df[df_features.get_dummy_encoded_features()[feature_name]]
+
+            tmp = dummies_df[dummies_df == 1].stack().reset_index()
+            new_series = []
+            index_count = 0
+            for val in range(0, df.shape[0]):
+                if val not in set(tmp["level_0"]):
+                    new_series.append(np.nan)
+                else:
+                    new_series.append(tmp["level_1"][index_count])
+                    index_count += 1
+
+            new_series = pd.Series(new_series).str.replace(feature_name + "_", "")
+            df[feature_name] = new_series
+
+            df.drop(columns=dummies_df.columns.to_list(),
+                    inplace=True)
+
+            df_features.remove_feature_from_dummy_encoded(feature_name)
+
+            try:
+                pd.to_numeric(new_series.dropna())
+                df_features._DataFrameTypes__categorical_features.add(feature_name)
+
+            except ValueError:
+                df_features._DataFrameTypes__string_features.add(feature_name)
+
+            if _add_to_que:
+                self._DataPipelineSegment__add_function_to_que("revert_dummies",
+                                                               params_dict)
+
+
+    def __bool_string_values_check(self,
+                                   feature_values):
+        """
+        Desc:
+            Checks if a collection of strings can be considered a bool feature
+            based on the amount of strings and the values of those strings.
+
+            Note -
+                Modified from data frame types
+        Args:
+            feature_values:
+                Collection object of strings.
+
+        Returns:
+            Returns true or false if the values can be considered a bool.
+        """
+
+        if len(feature_values) > 2:
+            return False, None, None
+
+        found_true_value = None
+        found_false_value = None
+
+        for val in feature_values:
+
+            if not isinstance(val,str):
+                continue
+
+            org_val = copy.deepcopy(val)
+            val = val.lower()
+
+            # Determine if val is true
+            if not found_true_value:
+
+                # Check if the string already exist in the defined set
+                if val in BOOL_STRINGS.TRUE_STRINGS:
+                    found_true_value = org_val
+                    continue
+                else:
+                    # Attempt to find synonyms of the defined words to compare to
+                    # the iterable string
+                    for true_string in BOOL_STRINGS.TRUE_STRINGS:
+
+                        if len(true_string) < 2:
+                            continue
+
+                        for syn in get_synonyms(true_string):
+                            if syn == val:
+                                found_true_value = org_val
+                                continue
+
+            # -----
+            if not found_false_value:
+
+                # -----
+                if val in BOOL_STRINGS.FALSE_STRINGS:
+                    found_false_value = org_val
+                    continue
+                else:
+                    # -----
+                    for false_string in BOOL_STRINGS.FALSE_STRINGS:
+
+                        if len(false_string) < 2:
+                            continue
+
+                        for syn in get_synonyms(false_string):
+                            if syn == val:
+                                found_false_value = org_val
+                                continue
+
+        if len(feature_values) == 2:
+            return isinstance(found_true_value,str) and isinstance(found_false_value,str), found_true_value, found_false_value
+        else:
+            return isinstance(found_true_value,str) or isinstance(found_false_value,str), found_true_value, found_false_value

@@ -1,7 +1,7 @@
 from eflow.utils.sys_utils import dict_to_json_file,json_file_to_dict
 from eflow.utils.language_processing_utils import get_synonyms
 from eflow._hidden.custom_exceptions import UnsatisfiedRequirments
-
+from eflow._hidden.constants import BOOL_STRINGS
 
 import copy
 
@@ -91,6 +91,9 @@ class DataFrameTypes:
 
         # Feature values representation
         self.__feature_value_representation = dict()
+
+        # Dummy encoded feature dictionaries
+        self.__dummy_encoded_features = dict()
 
 
         # Data type assertions without nulls
@@ -607,6 +610,13 @@ class DataFrameTypes:
         """
         return copy.deepcopy(self.__feature_value_representation)
 
+    def get_dummy_encoded_features(self):
+        """
+        Desc:
+            Get's all dummy encoded relationships.
+        """
+        return copy.deepcopy(self.__dummy_encoded_features)
+
     # --- Setters ---
     def set_target_feature(self,
                            feature_name):
@@ -792,7 +802,25 @@ class DataFrameTypes:
 
         self.__feature_value_representation = copy.deepcopy(feature_value_representation)
 
+    def set_feature_to_dummy_encoded(self,
+                                     feature_name,
+                                     dummy_encoded_list):
+        self.__dummy_encoded_features[feature_name] = dummy_encoded_list
+
+        for bool_feature in dummy_encoded_list:
+            self.__bool_features.add(bool_feature)
+
     # --- Functions ---
+
+    def remove_feature_from_dummy_encoded(self,
+                                          feature_name):
+
+        for bool_feature in self.__dummy_encoded_features[feature_name]:
+            self.remove_feature(bool_feature)
+
+        del self.__dummy_encoded_features[feature_name]
+
+
     def remove_feature(self,
                        feature_name):
         """
@@ -1623,25 +1651,6 @@ class DataFrameTypes:
         Returns:
             Returns true or false if the values can be considered a bool.
         """
-        defined_true_strings = {"y",
-                                "yes",
-                                "okay",
-                                "t",
-                                "true",
-                                "approve",
-                                "approved",
-                                "accepted",
-                                "alright"}
-
-        defined_false_strings = {"n",
-                                 "no",
-                                 "f",
-                                 "false",
-                                 "denined",
-                                 "deny",
-                                 "refuse",
-                                 "abnegate",
-                                 "never"}
 
         if len(feature_values) > 2:
             return False
@@ -1651,17 +1660,22 @@ class DataFrameTypes:
 
         for val in feature_values:
 
+            if not isinstance(val,str):
+                continue
+
+            val = val.lower()
+
             # Determine if val is true
             if not found_true_value:
 
                 # Check if the string already exist in the defined set
-                if val in defined_true_strings:
+                if val in BOOL_STRINGS.TRUE_STRINGS:
                     found_true_value = True
                     continue
                 else:
                     # Attempt to find synonyms of the defined words to compare to
                     # the iterable string
-                    for true_string in defined_true_strings:
+                    for true_string in BOOL_STRINGS.TRUE_STRINGS:
 
                         if len(true_string) < 2:
                             continue
@@ -1675,12 +1689,12 @@ class DataFrameTypes:
             if not found_false_value:
 
                 # -----
-                if val in defined_false_strings:
+                if val in BOOL_STRINGS.FALSE_STRINGS:
                     found_false_value = True
                     continue
                 else:
                     # -----
-                    for false_string in defined_false_strings:
+                    for false_string in BOOL_STRINGS.FALSE_STRINGS:
 
                         if len(false_string) < 2:
                             continue

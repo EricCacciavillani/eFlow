@@ -115,8 +115,8 @@ def create_color_dict_for_features(df,
                                          ["0", "false",
                                           "#ff8585"]])
 
-    all_true_vals = {"1","y","yes","true"}
-    all_false_vals = {"0","n","no","false"}
+    all_true_vals = {"1","y","yes","true","t","y"}
+    all_false_vals = {"0","n","no","false","f","n"}
 
     feature_value_color_dict = dict()
 

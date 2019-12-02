@@ -261,7 +261,11 @@ class DataPipelineSegment(FileOutput):
             This function should only ever be called by children of
             this object.
         """
-
+        tmp_params_dict = copy.deepcopy(params_dict)
+        for k,v in params_dict.items():
+            if isinstance(v,set):
+                tmp_params_dict[k] = list(v)
+        params_dict = tmp_params_dict
         self.__function_pipe.append((function_name,
                                      params_dict))
 

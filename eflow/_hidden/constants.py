@@ -25,5 +25,25 @@ GRAPH_DEFAULTS = enum(FIGSIZE=(13, 10),
                       DEFINED_LIST_OF_RANDOM_COLORS=DEFINED_LIST_OF_RANDOM_COLORS)
 
 
+BOOL_STRINGS = enum(TRUE_STRINGS={"y",
+                                  "yes",
+                                  "okay",
+                                  "t",
+                                  "true",
+                                  "approve",
+                                  "approved",
+                                  "accepted",
+                                  "alright"},
+                    FALSE_STRINGS={"n",
+                                   "no",
+                                   "f",
+                                   "false",
+                                   "denined",
+                                   "deny",
+                                   "refuse",
+                                   "abnegate",
+                                   "never"})
+
+
 # FORMATED_STRINGS = enum()
 # STRING_CONSTANTS = enum()

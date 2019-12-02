@@ -1,24 +1,24 @@
 {
   "bool": [
+    "Test",
     "Survived"
   ],
   "string": [
     "Sex",
-    "Embarked",
     "Cabin",
-    "Test"
+    "Embarked"
   ],
   "integer": [
-    "SibSp",
-    "Parch"
+    "Parch",
+    "SibSp"
   ],
   "float": [
     "Fare",
     "Age"
   ],
   "categorical": [
-    "Pclass",
-    "Cat test"
+    "Cat test",
+    "Pclass"
   ],
   "target": "Survived",
   "feature_values_colors": {
@@ -44,24 +44,20 @@
     }
   },
   "label_encoder": {
-    "Sex": {
-      "female": 0,
-      "male": 1
-    },
     "Embarked": {
       "C": 0,
       "Q": 1,
       "S": 2
+    },
+    "Sex": {
+      "female": 0,
+      "male": 1
     },
     "Cat test": {
       "100": 100,
       "200": 200,
       "300": 300,
       "400": 400
-    },
-    "Test": {
-      "Y": 0,
-      "n": 1
     },
     "Cabin": {
       "A": 0,
@@ -80,24 +76,20 @@
     }
   },
   "label_decoder": {
-    "Sex": {
-      "0": "female",
-      "1": "male"
-    },
     "Embarked": {
       "0": "C",
       "1": "Q",
       "2": "S"
+    },
+    "Sex": {
+      "0": "female",
+      "1": "male"
     },
     "Cat test": {
       "100": 100,
       "200": 200,
       "300": 300,
       "400": 400
-    },
-    "Test": {
-      "0": "Y",
-      "1": "n"
     },
     "Cabin": {
       "0": "A",

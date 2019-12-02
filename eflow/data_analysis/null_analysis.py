@@ -3,6 +3,7 @@ from eflow._hidden.custom_exceptions import SnapshotMismatchError
 from eflow.utils.pandas_utils import missing_values_table
 from eflow._hidden.general_objects import DataFrameSnapshot
 from eflow._hidden.parent_objects import DataAnalysis
+from eflow.data_analysis.feature_analysis import FeatureAnalysis
 import copy
 from IPython.display import display
 
@@ -63,6 +64,11 @@ class NullAnalysis(DataAnalysis):
         # the dataframe.
         self.__called_from_perform = False
 
+        self.__feature_analysis = FeatureAnalysis(df_features,
+                                                  project_name=project_name,
+                                                  project_sub_dir=project_sub_dir,
+                                                  notebook_mode=notebook_mode)
+
 
     def perform_analysis(self,
                          df,
@@ -76,6 +82,7 @@ class NullAnalysis(DataAnalysis):
         """
         Desc:
             Perform all public methods of the NullAnalysis object.
+            Except for feature_analysis_of_null_data.
 
         Args:
             df: pd.Dataframe
@@ -183,6 +190,109 @@ class NullAnalysis(DataAnalysis):
 
         finally:
             self.__called_from_perform = False
+
+    def feature_analysis_of_null_data(self,
+                                      df,
+                                      dataset_name,
+                                      target_features=None,
+                                      display_visuals=True,
+                                      display_print=True,
+                                      save_file=True,
+                                      suppress_runtime_errors=True,
+                                      aggregate_target_feature=True,
+                                      selected_features=None,
+                                      extra_tables=True,
+                                      nan_features=[]):
+        """
+        Desc:
+            Performs all public methods that generate visualizations/insights
+            that feature analysis uses on an aggregation of null data in a
+            feature.
+
+        Note:
+            Pretty much my personal lazy button for running the entire object
+            without specifying any method in particular.
+
+        Args:
+            df: pd.Dataframe
+                Pandas dataframe object
+
+            dataset_name: string
+                The dataset's name; this will create a sub-directory in which your
+                generated graph will be inner-nested in.
+
+            target_features: collection of string or None
+                A feature name that both exists in the init df_features
+                and the passed dataframe.
+
+                Note
+                    If init to 'None' then df_features will try to extract out
+                    the target feature.
+
+            display_visuals: bool
+                Boolean value to whether or not to display visualizations.
+
+            display_print: bool
+                Determines whether or not to print function's embedded print
+                statements.
+
+            save_file: bool
+                Boolean value to whether or not to save the file.
+
+            suppress_runtime_errors: bool
+                If set to true; when generating any graphs will suppress any runtime
+                errors so the program can keep running.
+
+            extra_tables: bool
+                When handling two types of features if set to true this will
+                    generate any extra tables that might be helpful.
+                    Note -
+                        These graphics may create duplicates if you already applied
+                        an aggregation in 'perform_analysis'
+
+            aggregate_target_feature: bool
+                Aggregate the data of the target feature if the data is
+                non-continuous data.
+
+                Note
+                    In the future I will have this also working with continuous
+                    data.
+
+            selected_features: collection object of features
+                Will only focus on these selected feature's and will ignore
+                the other given features.
+
+            nan_features: collection of strings
+                Features names that must contain nan data to aggregate on.
+
+        Raises:
+            If an empty dataframe is passed to this function or if the same
+            dataframe is passed to it raise error.
+        """
+
+        target_features = set(target_features)
+
+        for nan_feature_name in nan_features:
+
+            # No null data ignore feature
+            if df[df[nan_feature_name].isna()].shape[0] == 0:
+                print(f"No nan data found for {nan_feature_name}")
+                continue
+
+            print(f"All nan data for {nan_feature_name}")
+
+            self.__feature_analysis.perform_analysis(
+                df[df[nan_feature_name].isna()].drop(columns=[nan_feature_name]),
+                dataset_name=dataset_name + "/Feature Analysis of Null Data/" + nan_feature_name + " = NaN",
+                target_features=target_features.discard(nan_feature_name),
+                display_visuals=display_visuals,
+                display_print=display_print,
+                save_file=save_file,
+                dataframe_snapshot=False,
+                suppress_runtime_errors=suppress_runtime_errors,
+                aggregate_target_feature=aggregate_target_feature,
+                selected_features=selected_features,
+                extra_tables=extra_tables)
 
 
     def plot_null_matrix_graph(self,
