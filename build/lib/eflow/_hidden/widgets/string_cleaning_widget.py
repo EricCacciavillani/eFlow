@@ -39,11 +39,11 @@ class StringCleaningWidget(JupyterWidget):
 
         self.__selected_options = {feature_name: "None"
                                    for feature_name in
-                                   df_features.get_string_features()}
+                                   df_features.string_features()}
 
         feature_cleaning_options = {feature_name: ["None"]
                                     for feature_name in
-                                    df_features.get_string_features()}
+                                    df_features.string_features()}
 
         self.__feature_options_w = {key: widgets.Select(
             options=feature_cleaning_options[key],

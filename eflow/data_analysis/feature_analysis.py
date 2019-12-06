@@ -204,8 +204,8 @@ class FeatureAnalysis(DataAnalysis):
                    if target_feature and feature_name == target_feature and aggregate_target_feature:
 
                        # -----
-                       if target_feature in self.__df_features.get_non_numerical_features() or \
-                               target_feature in self.__df_features.get_bool_features():
+                       if target_feature in self.__df_features.non_numerical_features() or \
+                               target_feature in self.__df_features.bool_features():
 
                            target_feature_values = df[target_feature].value_counts(sort=False).index.to_list()
 
@@ -213,7 +213,7 @@ class FeatureAnalysis(DataAnalysis):
 
                                repr_target_feature_val = target_feature_val
 
-                               if target_feature in self.__df_features.get_bool_features():
+                               if target_feature in self.__df_features.bool_features():
 
                                    try:
                                        repr_target_feature_val = int(repr_target_feature_val)
@@ -256,7 +256,7 @@ class FeatureAnalysis(DataAnalysis):
                                        print(f"Error found on feature {f_name}: {e}")
 
                 # If any missed features are picked up...
-                missed_features = set(df.columns) ^ self.__df_features.get_all_features()
+                missed_features = set(df.columns) ^ self.__df_features.all_features()
                 if len(missed_features) != 0 and display_print:
                     print("Some features were not analyzed by perform analysis!")
                     for feature_name in missed_features:
@@ -344,14 +344,14 @@ class FeatureAnalysis(DataAnalysis):
 
         # Check if feature exist in df_features and by extension the dataframe
         if target_feature:
-            if target_feature not in self.__df_features.get_all_features():
+            if target_feature not in self.__df_features.all_features():
                 raise UnsatisfiedRequirments("Target feature does not exist in pre-defined "
                                              "df_features!")
             if target_feature not in df.columns:
                 raise UnsatisfiedRequirments("Target feature does not exist in "
                                              "the dataframe!")
 
-        if feature_name not in self.__df_features.get_all_features():
+        if feature_name not in self.__df_features.all_features():
             raise UnsatisfiedRequirments(
                 "Feature name does not exist in pre-defined "
                 "df_features!")
@@ -368,7 +368,7 @@ class FeatureAnalysis(DataAnalysis):
                 two_dim_sub_dir = f"{dataset_name}/{target_feature}/Two feature analysis/{target_feature} by {feature_name}"
 
         # -----
-        if feature_name in self.__df_features.get_non_numerical_features() or feature_name in self.__df_features.get_bool_features():
+        if feature_name in self.__df_features.non_numerical_features() or feature_name in self.__df_features.bool_features():
 
             # Pie graph's should only have less than or equal to six.
             # (The function can handle ample more than this; just stylistically)
@@ -420,7 +420,7 @@ class FeatureAnalysis(DataAnalysis):
                                     display_print=display_print)
 
         # -----
-        elif feature_name in self.__df_features.get_continuous_numerical_features():
+        elif feature_name in self.__df_features.continuous_numerical_features():
 
             # Plot distance plot graph
             self.plot_distance_graph(df,
@@ -451,18 +451,18 @@ class FeatureAnalysis(DataAnalysis):
             num_features = []
             non_num_features = []
 
-            if target_feature in self.__df_features.get_continuous_numerical_features():
+            if target_feature in self.__df_features.continuous_numerical_features():
                 num_features.append(target_feature)
-            elif target_feature in self.__df_features.get_datetime_features():
+            elif target_feature in self.__df_features.datetime_features():
                 pass
-            elif target_feature not in self.__df_features.get_continuous_numerical_features():
+            elif target_feature not in self.__df_features.continuous_numerical_features():
                 non_num_features.append(target_feature)
 
-            if feature_name in self.__df_features.get_continuous_numerical_features():
+            if feature_name in self.__df_features.continuous_numerical_features():
                 num_features.append(feature_name)
-            elif feature_name in self.__df_features.get_datetime_features():
+            elif feature_name in self.__df_features.datetime_features():
                 pass
-            elif feature_name not in self.__df_features.get_continuous_numerical_features():
+            elif feature_name not in self.__df_features.continuous_numerical_features():
                 non_num_features.append(feature_name)
 
             # Two different types of features (numerical and non-numerical)
@@ -956,7 +956,7 @@ class FeatureAnalysis(DataAnalysis):
 
             x_values = copy.deepcopy(df[feature_name].dropna())
 
-            # if feature_name in self.__df_features.get_bool_features():
+            # if feature_name in self.__df_features.bool_features():
             #     x_values = pd.to_numeric(x_values,
             #                              errors='ignore')
             #
@@ -1137,7 +1137,7 @@ class FeatureAnalysis(DataAnalysis):
 
             plt.clf()
 
-            if feature_name in self.__df_features.get_bool_features():
+            if feature_name in self.__df_features.bool_features():
 
                 i = 0
                 for val in feature_values:
@@ -1296,7 +1296,7 @@ class FeatureAnalysis(DataAnalysis):
 
             plt.figure(figsize=figsize)
 
-            # if feature_name in self.__df_features.get_bool_features():
+            # if feature_name in self.__df_features.bool_features():
             #
             #     i = 0
             #     for val in feature_values:
@@ -1488,7 +1488,7 @@ class FeatureAnalysis(DataAnalysis):
             tmp_df[other_feature_name] = pd.to_numeric(tmp_df[other_feature_name],
                                                        errors='coerce')
 
-            # if feature_name in self.__df_features.get_bool_features():
+            # if feature_name in self.__df_features.bool_features():
             #
             #     tmp_df[feature_name] = pd.to_numeric(tmp_df[feature_name],
             #                                          errors='ignore')

@@ -184,7 +184,7 @@ def replace_df_vals(passed_df, replace_dict):
 # Returns encoded df and label encoded map
 def encode_df(df, df_features):
     
-    obj_cols = df_features.get_categorical_features()
+    obj_cols = df_features.categorical_features()
 
     df = copy.deepcopy(df)
     # ---

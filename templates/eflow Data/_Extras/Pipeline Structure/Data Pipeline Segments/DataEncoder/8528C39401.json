@@ -1,0 +1,76 @@
+{
+  "Pipeline Segment": {
+    "Object Type": "DataEncoder",
+    "Functions Performed Order": {
+      "Function Order 1": {
+        "apply_value_representation": {
+          "Params Dict": {}
+        }
+      },
+      "Function Order 2": {
+        "decode_data": {
+          "Params Dict": {
+            "apply_value_representation": true
+          }
+        }
+      },
+      "Function Order 3": {
+        "make_values_bool": {
+          "Params Dict": {}
+        }
+      },
+      "Function Order 4": {
+        "revert_value_representation": {
+          "Params Dict": {}
+        }
+      },
+      "Function Order 5": {
+        "encode_data": {
+          "Params Dict": {
+            "apply_value_representation": true
+          }
+        }
+      },
+      "Function Order 6": {
+        "decode_data": {
+          "Params Dict": {
+            "apply_value_representation": true
+          }
+        }
+      },
+      "Function Order 7": {
+        "make_dummies": {
+          "Params Dict": {
+            "qualtative_features": [
+              "fee_provider_type_id",
+              "fee_paid_to_type_id",
+              "sort_value",
+              "summary_fee_item_type_id",
+              "fee_item_desc",
+              "hud_line_number",
+              "default_tolerance_type_id",
+              "hud_section_type_id"
+            ]
+          }
+        }
+      },
+      "Function Order 8": {
+        "revert_dummies": {
+          "Params Dict": {
+            "qualtative_features": [
+              "fee_provider_type_id",
+              "fee_paid_to_type_id",
+              "sort_value",
+              "summary_fee_item_type_id",
+              "fee_item_desc",
+              "hud_line_number",
+              "default_tolerance_type_id",
+              "hud_section_type_id"
+            ]
+          }
+        }
+      }
+    },
+    "Function Count": 8
+  }
+}

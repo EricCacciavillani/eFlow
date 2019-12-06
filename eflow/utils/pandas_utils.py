@@ -210,6 +210,87 @@ def generate_meta_data(df,
                               "Dataframe Feature Types Text")
 
 
+def auto_binning(df,
+                 df_features,
+                 feature_name,
+                 bins=5):
+    """
+    Desc:
+        Takes a pandas series object and assigns generalized labels and binning
+        dimensions.
+
+    Args:
+        df: pd.Dataframe
+            Pandas Datafrane object
+
+        df_features: DataFrameTypes from eflow
+            DataFrameTypes object
+
+        feature_name: string
+            Name of the feature to extract the series from
+
+        bins: int
+            Number of bins to create.
+
+    Returns:
+        Gives back the bins and associated labels
+    """
+    if feature_name not in df_features.float_features() and feature_name not in df_features.integer_features():
+        raise ValueError("Reeeee")
+
+    # Create bins of type pandas.Interval
+    binned_list = list(pd.cut(df[feature_name].dropna().sort_values(),
+                              bins).unique())
+
+    # Iterate through all possible bins
+    bins = []
+    labels = []
+    for bin_count, binned_obj in enumerate(binned_list):
+
+        # Extract from pandas.Interval into a list; just nicer to read
+        binned_obj = [binned_obj.left, binned_obj.right]
+
+        # Convert to int if the feature is an int type
+        if feature_name in df_features.integer_features():
+            binned_obj[0] = int(binned_obj[0])
+            binned_obj[1] = int(binned_obj[1])
+
+        # -----
+        if bin_count == 0:
+
+            # Move bined value down so it properly captures the starting integer
+            if feature_name in df_features.integer_features():
+                bins.append(int(binned_obj[0]) - .000001)
+            else:
+                bins.append(binned_obj[0])
+
+        # -----
+        if feature_name in df_features.integer_features():
+
+            # Values are the same change label look
+            if bin_count != 0 and binned_obj[0] + 1 == binned_obj[1]:
+                labels.append("=" + str(binned_obj[1]))
+            else:
+
+                if bin_count == 0:
+                    labels.append(
+                        str(binned_obj[0]) + u" \u27f7 " + str(binned_obj[1]))
+                else:
+                    labels.append(str(binned_obj[0] + 1) + u" \u27f7 " + str(
+                        binned_obj[1]))
+
+            # Move bined value up so it properly captures the ending integer
+            binned_obj[1] = int(binned_obj[1]) + .000001
+        else:
+            labels.append(
+                str(binned_obj[0]) + "+ " u"\u27f7 " + str(binned_obj[1]))
+
+        bins.append(binned_obj[1])
+
+    return bins, labels
+
+
+
 def value_counts_table(df,
                        feature_name):
     """

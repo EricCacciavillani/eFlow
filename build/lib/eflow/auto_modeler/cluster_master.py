@@ -404,7 +404,7 @@ class ClusterMaster:
 
         # ---
         df["Cluster_Name"] = model.labels_
-        numerical_features = df_features.get_numerical_features()
+        numerical_features = df_features.numerical_features()
         clustered_dataframes, shrunken_labeled_df = \
             self.__create_cluster_sub_dfs(
                 df=df, model=model, numerical_features=numerical_features,
@@ -413,7 +413,7 @@ class ClusterMaster:
         rows_count, cluster_profiles_df = self.__create_cluster_profiles(
             clustered_dataframes=clustered_dataframes,
             shrunken_df=shrunken_labeled_df,
-            numerical_features=df_features.get_numerical_features(),
+            numerical_features=df_features.numerical_features(),
             le_map=le_map,
             output_path=output_path,
             show=show_extra,

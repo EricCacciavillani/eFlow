@@ -997,7 +997,7 @@ class ClassificationAnalysis(FileOutput):
         #               "Generating graphs for model's correctly predicted..." +
         #               "*" * 10 + "\n")
         #         FeatureAnalysis(pd.DataFrame(X[model_predictions == y],
-        #                                   columns=self.__df_features.get_all_features()),
+        #                                   columns=self.__df_features.all_features()),
         #                      self.__df_features,
         #                      overwrite_full_path=self.folder_path +
         #                                          sub_dir + "/Correctly Predicted Data/",
@@ -1016,7 +1016,7 @@ class ClassificationAnalysis(FileOutput):
         #               "*" * 10 + "\n")
         #
         #     DataAnalysis(pd.DataFrame(X[model_predictions != y],
-        #                               columns=self.__df_features.get_all_features()),
+        #                               columns=self.__df_features.all_features()),
         #                  self.__df_features,
         #                  overwrite_full_path=self.folder_path +
         #                                      sub_dir + "/Incorrectly Predicted Data/",

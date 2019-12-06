@@ -121,7 +121,7 @@ def create_color_dict_for_features(df,
     feature_value_color_dict = dict()
 
     # -----
-    for feature_name in df_features.get_non_continuous_features():
+    for feature_name in df_features.non_continuous_features():
 
         feature_values = []
         feature_value_color_dict[feature_name] = dict()
@@ -175,7 +175,7 @@ def create_color_dict_for_features(df,
 
                         # -----
                         if feature_val.lower() in defined_values or val_synonym_found:
-                            if feature_name in df_features.get_bool_features():
+                            if feature_name in df_features.bool_features():
 
                                 if feature_val in all_true_vals:
                                     feature_value_color_dict[feature_name][

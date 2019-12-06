@@ -128,7 +128,7 @@ class DataFrameSnapshot:
                     if self.__compare_feature_names:
 
                         snapshot_features = set(data["feature_names"])
-                        passed_features = set(df_features.get_all_features())
+                        passed_features = set(df_features.all_features())
 
                         feature_difference = snapshot_features.symmetric_difference(
                             passed_features)
@@ -264,13 +264,13 @@ class DataFrameSnapshot:
 
         feature_values = dict()
         random_indexes = set()
-        float_features = set(df_features.get_float_features())
+        float_features = set(df_features.float_features())
 
         # Empty dataframe check
         if not df.shape[0]:
             return feature_values
 
-        for feature in sorted(df_features.get_all_features()):
+        for feature in sorted(df_features.all_features()):
 
             # Ignore if feature is a float
             if feature in float_features:
@@ -341,7 +341,7 @@ class DataFrameSnapshot:
             meta_dict["shape"] = list(df.shape)
 
         if self.__compare_feature_names:
-            meta_dict["feature_names"] = sorted(df_features.get_all_features())
+            meta_dict["feature_names"] = sorted(df_features.all_features())
 
         if self.__compare_random_values:
             meta_dict["random_values"] = self.__create_random_values_dict(df,

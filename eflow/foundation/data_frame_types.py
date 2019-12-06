@@ -131,8 +131,8 @@ class DataFrameTypes:
                                       notebook_mode)
 
     # --- Getters ---
-    def get_numerical_features(self,
-                               exclude_target=False):
+    def numerical_features(self,
+                           exclude_target=False):
         """
         Desc:
             Gets all numerical features chosen by the object.
@@ -159,8 +159,8 @@ class DataFrameTypes:
         else:
             return tmp_set
 
-    def get_non_numerical_features(self,
-                                   exclude_target=False):
+    def non_numerical_features(self,
+                               exclude_target=False):
         """
         Desc:
             Gets all non-numerical features chosen by the object.
@@ -173,7 +173,7 @@ class DataFrameTypes:
         Returns:
             Returns a set of all non numerical features chosen by the object.
         """
-        tmp_set = self.__all_columns ^ self.get_numerical_features()
+        tmp_set = self.__all_columns ^ self.numerical_features()
         if exclude_target:
 
             # Target feature never init
@@ -187,8 +187,8 @@ class DataFrameTypes:
         else:
             return tmp_set
 
-    def get_continuous_numerical_features(self,
-                                          exclude_target=False):
+    def continuous_numerical_features(self,
+                                      exclude_target=False):
         """
         Desc:
             Gets all numerical features that are continuous (int/float).
@@ -215,8 +215,8 @@ class DataFrameTypes:
         else:
             return tmp_set
 
-    def get_non_continuous_numerical_features(self,
-                                              exclude_target=False):
+    def non_continuous_numerical_features(self,
+                                          exclude_target=False):
         """
         Desc:
             Gets all numerical features that are not continuous (bool)
@@ -243,8 +243,8 @@ class DataFrameTypes:
         else:
             return tmp_set
 
-    def get_continuous_features(self,
-                                exclude_target=False):
+    def continuous_features(self,
+                            exclude_target=False):
         """
         Desc:
             Gets all numerical features chosen by the object.
@@ -271,8 +271,8 @@ class DataFrameTypes:
         else:
             return tmp_set
 
-    def get_non_continuous_features(self,
-                                    exclude_target=False):
+    def non_continuous_features(self,
+                                exclude_target=False):
         """
         Desc:
             Gets all numerical features chosen by the object.
@@ -285,7 +285,7 @@ class DataFrameTypes:
         Returns:
             Returns a set of all numerical features chosen by the object.
         """
-        tmp_set = self.__all_columns ^ self.get_continuous_features()
+        tmp_set = self.__all_columns ^ self.continuous_features()
         if exclude_target:
 
             # Target feature never init
@@ -299,8 +299,8 @@ class DataFrameTypes:
         else:
             return tmp_set
 
-    def get_integer_features(self,
-                             exclude_target=False):
+    def integer_features(self,
+                         exclude_target=False):
         """
         Desc:
             All integer features chosen by df_features.
@@ -328,7 +328,7 @@ class DataFrameTypes:
         else:
             return copy.deepcopy(self.__integer_features)
 
-    def get_float_features(self,
+    def float_features(self,
                            exclude_target=False):
         """
         Desc:
@@ -357,8 +357,8 @@ class DataFrameTypes:
         else:
             return copy.deepcopy(self.__float_features)
 
-    def get_categorical_features(self,
-                                 exclude_target=False):
+    def categorical_features(self,
+                             exclude_target=False):
         """
         Desc:
             All categorical features chosen by df_features.
@@ -386,8 +386,8 @@ class DataFrameTypes:
         else:
             return copy.deepcopy(self.__categorical_features)
 
-    def get_string_features(self,
-                            exclude_target=False):
+    def string_features(self,
+                        exclude_target=False):
         """
         Desc:
             All string features chosen by df_features.
@@ -415,7 +415,7 @@ class DataFrameTypes:
         else:
             return copy.deepcopy(self.__string_features)
 
-    def get_bool_features(self,
+    def bool_features(self,
                           exclude_target=False):
 
         """
@@ -445,7 +445,7 @@ class DataFrameTypes:
         else:
             return copy.deepcopy(self.__bool_features)
 
-    def get_datetime_features(self,
+    def datetime_features(self,
                               exclude_target=False):
         """
         Desc:
@@ -474,7 +474,7 @@ class DataFrameTypes:
         else:
             return copy.deepcopy(self.__datetime_features)
 
-    def get_all_features(self,
+    def all_features(self,
                          exclude_target=False):
         """
         Desc:
@@ -539,7 +539,7 @@ class DataFrameTypes:
         else:
             raise KeyError(f"Feature '{feature_name}' can't be found in the set!")
 
-    def get_target_feature(self):
+    def target_feature(self):
         """
         Desc:
             Gets the target feature.
@@ -923,8 +923,8 @@ class DataFrameTypes:
                 print("Float Features: {0}\n".format(
                     self.__float_features))
 
-            print("---------" * 10)
             if self.__target_feature:
+                print("---------" * 10)
                 print("Target Feature: {0}\n".format(
                     self.__target_feature))
 
@@ -1002,14 +1002,14 @@ class DataFrameTypes:
                 pd.to_numeric(df[feature_name])
             except ValueError:
                 # Ignore all string features
-                if feature_name in self.get_string_features():
+                if feature_name in self.string_features():
                     continue
 
                 # Features that must be these set types
-                if feature_name in self.get_categorical_features():
+                if feature_name in self.categorical_features():
                     continue
 
-                if feature_name in self.get_bool_features():
+                if feature_name in self.bool_features():
                     continue
 
             feature_values = set(pd.to_numeric(df[feature_name],
@@ -1084,7 +1084,7 @@ class DataFrameTypes:
         type_conflict_dict = dict()
 
         # Currently this only performs
-        for feature_name in self.get_string_features():
+        for feature_name in self.string_features():
 
             # Float found
             float_flag = False
@@ -1349,37 +1349,37 @@ class DataFrameTypes:
                 File's given name
         """
         type_features = dict()
-        for feature_name in self.get_bool_features():
+        for feature_name in self.bool_features():
             if "bool" in type_features.keys():
                 type_features["bool"].append(feature_name)
             else:
                 type_features["bool"] = [feature_name]
 
-        for feature_name in self.get_string_features():
+        for feature_name in self.string_features():
             if "string" in type_features.keys():
                 type_features["string"].append(feature_name)
             else:
                 type_features["string"] = [feature_name]
 
-        for feature_name in self.get_integer_features():
+        for feature_name in self.integer_features():
             if "integer" in type_features.keys():
                 type_features["integer"].append(feature_name)
             else:
                 type_features["integer"] = [feature_name]
 
-        for feature_name in self.get_float_features():
+        for feature_name in self.float_features():
             if "float" in type_features.keys():
                 type_features["float"].append(feature_name)
             else:
                 type_features["float"] = [feature_name]
 
-        for feature_name in self.get_categorical_features():
+        for feature_name in self.categorical_features():
             if "categorical" in type_features.keys():
                 type_features["categorical"].append(feature_name)
             else:
                 type_features["categorical"] = [feature_name]
 
-        for feature_name in self.get_datetime_features():
+        for feature_name in self.datetime_features():
             if "datetime" in type_features.keys():
                 type_features["datetime"].append(feature_name)
             else:
@@ -1395,8 +1395,8 @@ class DataFrameTypes:
         type_features["label_decoder"] = self.__label_decoder
 
         dict_to_json_file(type_features,
-                                   directory_path,
-                                   filename)
+                          directory_path,
+                          filename)
 
     def init_on_json_file(self,
                           filepath):
@@ -1530,7 +1530,7 @@ class DataFrameTypes:
             Can handle a feature that have categories and strings in same series.
         """
 
-        if len(set(df.columns) ^ set(self.get_all_features())) > 0:
+        if len(set(df.columns) ^ set(self.all_features())) > 0:
             raise UnsatisfiedRequirments("The given Dataframe's features should "
                                          "be the same as the features saved in "
                                          "the DataFrameTypes.")
@@ -1538,7 +1538,7 @@ class DataFrameTypes:
         self.__label_encoder = dict()
 
         # Get all string and categorical features
-        categorical_string_features = self.get_categorical_features() | self.get_string_features()
+        categorical_string_features = self.categorical_features() | self.string_features()
 
         for feature_name in categorical_string_features:
 

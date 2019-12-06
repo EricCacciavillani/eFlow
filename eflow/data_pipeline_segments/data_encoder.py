@@ -294,7 +294,7 @@ class DataEncoder(DataPipelineSegment):
                         "params_dict"]:
                 del params_dict[arg]
 
-        for bool_feature in df_features.get_bool_features():
+        for bool_feature in df_features.bool_features():
             if df[bool_feature].dtype == "O":
                 bool_check,true_val,false_val = self.__bool_string_values_check(
                     df[bool_feature].dropna().unique())
@@ -349,7 +349,7 @@ class DataEncoder(DataPipelineSegment):
 
         for cat_feature in qualtative_features:
 
-            if cat_feature not in df_features.get_string_features() | df_features.get_categorical_features():
+            if cat_feature not in df_features.string_features() | df_features.categorical_features():
                 raise UnsatisfiedRequirments(f"No feature named '{cat_feature}' in categorical or string features.")
 
             # Make dummies and remove original feature

@@ -268,7 +268,7 @@ class DataCleaner(DataPipelineSegment):
                               df,
                               df_features):
 
-        for bool_feature in df_features.get_bool_features():
+        for bool_feature in df_features.bool_features():
             if len(df[bool_feature].dropna().value_counts().values) != 2:
                 print("testing")
 

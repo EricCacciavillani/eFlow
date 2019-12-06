@@ -477,11 +477,11 @@ class DataCleaningWidget:
     #         Returns back the data type of the feature that is created
     #     """
     #
-    #     if col_feature_name in df_features.get_numerical_features():
+    #     if col_feature_name in df_features.numerical_features():
     #         return "Number"
-    #     elif col_feature_name in df_features.get_categorical_features():
+    #     elif col_feature_name in df_features.categorical_features():
     #         return "Category"
-    #     elif col_feature_name in df_features.get_bool_features():
+    #     elif col_feature_name in df_features.bool_features():
     #         return "Bool"
     #     else:
     #         return "Unknown"
