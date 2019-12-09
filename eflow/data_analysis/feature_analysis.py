@@ -186,7 +186,12 @@ class FeatureAnalysis(DataAnalysis):
                 # Iterate through all dataframe features
                 for feature_name in df.columns:
 
+                   # Only compare selected features if user specfied features
                    if selected_features and feature_name not in selected_features and feature_name != target_feature:
+                       continue
+
+                   # Ignore if the feature is found to be purely null
+                   if feature_name in self.__df_features.null_only_features():
                        continue
 
                    self.analyze_feature(df,
@@ -209,22 +214,22 @@ class FeatureAnalysis(DataAnalysis):
 
                            target_feature_values = df[target_feature].value_counts(sort=False).index.to_list()
 
+                           # Begin aggregation
                            for target_feature_val in target_feature_values:
 
                                repr_target_feature_val = target_feature_val
 
+                               # Convert to best bool representation of value
                                if target_feature in self.__df_features.bool_features():
 
                                    try:
-                                       repr_target_feature_val = int(repr_target_feature_val)
+                                       repr_target_feature_val = bool(int(repr_target_feature_val))
 
                                    except ValueError:
                                        continue
 
                                    except TypeError:
                                        continue
-
-                                   repr_target_feature_val = str(bool(repr_target_feature_val))
 
                                # Iterate through all features to generate new graphs for aggregation
                                for f_name in df.columns:
@@ -1499,16 +1504,34 @@ class FeatureAnalysis(DataAnalysis):
             tmp_df.dropna(inplace=True)
 
             # Remove any values that only return a single value back
-            for val in set(tmp_df[feature_name]):
-                if len(tmp_df[other_feature_name][tmp_df[feature_name] == val]) <= 1:
+            for val in tmp_df[feature_name].dropna().unique():
+
+                feature_value_counts = tmp_df[other_feature_name][tmp_df[feature_name] == val].dropna().value_counts()
+
+                count_length = len(feature_value_counts.values)
+                if len(feature_value_counts.index.to_list()) <= 1 or count_length == 0:
                     tmp_df = tmp_df[tmp_df[feature_name] != val]
+
+                elif count_length == 1 and feature_value_counts.values[0] == 1:
+                    tmp_df = tmp_df[tmp_df[feature_name] != val]
+
+            # -----
+            # for val in tmp_df[other_feature_name].dropna().unique():
+            #
+            #     feature_value_counts = tmp_df[feature_name][tmp_df[other_feature_name] == val].dropna().value_counts()
+            #
+            #     count_length = len(feature_value_counts.values)
+            #     if len(feature_value_counts.index.to_list()) <= 1 or count_length == 0:
+            #         tmp_df = tmp_df[tmp_df[other_feature_name] != val]
+            #     elif count_length == 1 and feature_value_counts.values[0] == 1:
+            #         tmp_df = tmp_df[tmp_df[other_feature_name] != val]
 
             pd.options.mode.chained_assignment = chained_assignment
             del chained_assignment
 
-            # Sort by dataframe's series of 'feature_name'
-            tmp_df[feature_name], tmp_df[other_feature_name] = self.__sort_two_lists(tmp_df[feature_name],
-                                                                                     tmp_df[other_feature_name])
+            # # Sort by dataframe's series of 'feature_name'
+            # tmp_df[feature_name], tmp_df[other_feature_name] = self.__sort_two_lists(tmp_df[feature_name],
+            #                                                                          tmp_df[other_feature_name])
 
             # Suppress any warnings that the seaborn's backend raises
             warnings.filterwarnings("ignore")

@@ -1,6 +1,7 @@
 from eflow.utils.image_processing_utils import create_plt_png
 from eflow.utils.string_utils import correct_directory_path
 from eflow.utils.sys_utils import write_object_text_to_file
+from eflow._hidden.custom_exceptions import UnsatisfiedRequirments
 
 import pandas as pd
 from matplotlib import pyplot as plt
@@ -236,7 +237,7 @@ def auto_binning(df,
         Gives back the bins and associated labels
     """
     if feature_name not in df_features.float_features() and feature_name not in df_features.integer_features():
-        raise ValueError("Reeeee")
+        raise ValueError("Feature must be a float or an integer to properly bin the given data.")
 
     # Create bins of type pandas.Interval
     binned_list = list(pd.cut(df[feature_name].dropna().sort_values(),
@@ -332,13 +333,13 @@ def descr_table(df,
         Creates numerical description of a feature of a dataframe.
 
     Args:
-        df:
+        df: pd.Dataframe
             Pandas DataFrame object.
 
-        feature_name:
+        feature_name: string
             Specified feature column name.
 
-        to_numeric:
+        to_numeric: bool
             Converts the pandas series to all numeric.
 
     Returns/Descr:
@@ -362,16 +363,22 @@ def descr_table(df,
 
 def suggest_removal_features(df):
     """
+    Desc:
+        Will find features that appear to be almost index like with their
+        feature values.
     Args:
-        df:
+        df: pd.Dataframe
             Pandas DataFrame object.
 
     Returns:
         Returns back a list of features to remove.
     """
     features_to_remove = set()
+
+    # Return back index like features
     for feature in df.columns:
         if len(df[feature].value_counts().index.tolist()) >= int(
                 df.shape[0] / 2):
             features_to_remove.add(feature)
+
     return features_to_remove
