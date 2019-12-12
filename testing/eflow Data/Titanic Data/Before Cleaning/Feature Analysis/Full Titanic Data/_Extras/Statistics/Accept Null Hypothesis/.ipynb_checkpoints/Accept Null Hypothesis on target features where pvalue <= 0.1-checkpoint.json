@@ -1,0 +1,106 @@
+{
+  "Sex": {
+    "female -> male": {
+      "Survived": {
+        "Kolmogorov-Smirnov statistic": {
+          "P-Value": 5.551115123125783e-16,
+          "Statistic": 0.5531300709799203
+        }
+      },
+      "Pclass": {
+        "Kolmogorov-Smirnov statistic": {
+          "P-Value": 0.00043566681046303124,
+          "Statistic": 0.14278775568777666
+        }
+      },
+      "Age": {
+        "Kolmogorov-Smirnov statistic": {
+          "P-Value": 0.0515875016507471,
+          "Statistic": 0.10380350663520337
+        }
+      },
+      "SibSp": {
+        "Kolmogorov-Smirnov statistic": {
+          "P-Value": 1.8303092885751937e-07,
+          "Statistic": 0.19802625042775612
+        }
+      },
+      "Parch": {
+        "Kolmogorov-Smirnov statistic": {
+          "P-Value": 4.655380525520059e-09,
+          "Statistic": 0.2192539933104461
+        }
+      },
+      "Fare": {
+        "Kolmogorov-Smirnov statistic": {
+          "P-Value": 5.218048215738236e-15,
+          "Statistic": 0.2849573347757454
+        }
+      },
+      "Embarked": {
+        "Kolmogorov-Smirnov statistic": {
+          "P-Value": 0.009654005735787563,
+          "Statistic": 0.11365706794649602
+        }
+      }
+    },
+    "female -> All": {
+      "Survived": {
+        "Kolmogorov-Smirnov statistic": {
+          "P-Value": 7.771561172376096e-16,
+          "Statistic": 0.3581998327221257
+        }
+      },
+      "Pclass": {
+        "Kolmogorov-Smirnov statistic": {
+          "P-Value": 0.03493011267245483,
+          "Statistic": 0.09246749161823471
+        }
+      },
+      "SibSp": {
+        "Kolmogorov-Smirnov statistic": {
+          "P-Value": 0.0008566400028043875,
+          "Statistic": 0.12823922165748067
+        }
+      },
+      "Parch": {
+        "Kolmogorov-Smirnov statistic": {
+          "P-Value": 0.00014943175891490856,
+          "Statistic": 0.14198603158263456
+        }
+      },
+      "Fare": {
+        "Kolmogorov-Smirnov statistic": {
+          "P-Value": 2.1499728974916366e-07,
+          "Statistic": 0.18453466011852424
+        }
+      }
+    },
+    "male -> All": {
+      "Survived": {
+        "Kolmogorov-Smirnov statistic": {
+          "P-Value": 4.006128762057415e-12,
+          "Statistic": 0.1949302382577946
+        }
+      },
+      "SibSp": {
+        "Kolmogorov-Smirnov statistic": {
+          "P-Value": 0.06214300338423062,
+          "Statistic": 0.06978702877027544
+        }
+      },
+      "Parch": {
+        "Kolmogorov-Smirnov statistic": {
+          "P-Value": 0.028546759641122965,
+          "Statistic": 0.07726796172781153
+        }
+      },
+      "Fare": {
+        "Kolmogorov-Smirnov statistic": {
+          "P-Value": 0.0015596073353638662,
+          "Statistic": 0.10042267465722116
+        }
+      }
+    }
+  }
+}

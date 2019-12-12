@@ -98,7 +98,7 @@ def create_color_dict_for_features(df,
                                          ["0", "false",
                                           "#616369"]])
 
-    defined_feature_value_colors.append([["gender", "sex", " "],
+    defined_feature_value_colors.append([["gender", "sex",],
                                          ["Male", "M",
                                           "#7EAED3"],
                                          ["Female", "F",

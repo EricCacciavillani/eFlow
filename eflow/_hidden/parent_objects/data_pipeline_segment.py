@@ -66,8 +66,11 @@ class DataPipelineSegment(FileOutput):
             performed on a given pandas dataframe.
 
         Args:
-            df:
+            df: pd.Dataframe
                 Pandas Dataframe
+
+            df_features: DataFrameTypes from eflow
+                DataFrameTypes object.
         """
         for function_name, params_dict in self.__function_pipe:
 

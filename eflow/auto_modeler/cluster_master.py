@@ -633,8 +633,7 @@ class ClusterMaster:
                         zscore_cluster_df = zscore_cluster_df[
                             zscore_cluster_df[numerical_feature] >= zscore_low]
                         zscore_cluster_df = zscore_cluster_df[
-                            zscore_cluster_df[numerical_feature] <= zscore_high
-                        ]
+                            zscore_cluster_df[numerical_feature] <= zscore_high]
 
             # Dummy list of -1s alloc at given pos of 'zscore_cluster_df'
             # indexes

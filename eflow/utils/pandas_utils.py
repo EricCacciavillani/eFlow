@@ -236,6 +236,10 @@ def auto_binning(df,
     Returns:
         Gives back the bins and associated labels
     """
+
+    if feature_name not in df_features.all_features():
+        raise KeyError("Feature name must be encapsulated in df_features.")
+
     if feature_name not in df_features.float_features() and feature_name not in df_features.integer_features():
         raise ValueError("Feature must be a float or an integer to properly bin the given data.")
 

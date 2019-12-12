@@ -30,11 +30,11 @@ class FileOutput(object):
                  overwrite_full_path=None):
         """
         Args:
-            project_name:
+            project_name: string
                 Sub directory to create on top of the directory
                 'PARENT_OUTPUT_FOLDER_NAME'.
 
-            overwrite_full_path:
+            overwrite_full_path: string
                 The passed directory path must already exist. Will completely
                 ignore the project name and attempt to point to this already
                 created directory.

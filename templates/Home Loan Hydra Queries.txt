@@ -1,0 +1,2209 @@
+
+
+================== Home Loan Activities
+
+query MyQuery {
+  HomeLoan(homeLoanId: 3820, filter: {sort: "homeLoanActivities:activityDateTime", order: "desc", max: 5}) {
+    homeLoanActivities {
+      activityDateTime
+      activityTypeId
+      id
+    }
+  }
+}
+
+================== Fee Escrows
+
+query MyQuery {
+  HomeLoan(homeLoanId: 3820) {
+    lenderLoanNumber
+    extSysLoanNumber
+    homeLoanFees {
+      borrowerAmt
+      sellerAmt
+      totalFeeAmt
+      periodicAmt
+      feeClassificationTypeId
+      feeItemDescription
+      feeItemTypeId
+      sortValue
+      financedYn
+      feePaidToTypeId
+      paidToName
+      paidToContactName
+      providerContactName
+      respaBlockId
+      hudLineNumber
+      hudSectionTypeId
+      id
+      numberOfPeriods
+      paidToName
+    }
+    homeLoanSummaryDatas {
+      prepaidInterestDays
+      prepaidItemsAmt
+    }
+    homeLoanEscrows {
+      aggregateAdjustmentYn
+      annualEscrowAmt
+      escrowCategoryTypeId
+      escrowItemDescription
+      escrowItemId
+      feeProviderTypeId
+      hudLineNumber
+      hudSectionTypeId
+      id
+      payeeName
+      parentEscrowItemId
+    }
+  }
+}
+
+=================== Home Loan AUS
+
+{
+  HomeLoan(homeLoanId: 3086) {
+    id
+    lenderLoanNumber
+    extSysLoanNumber
+    universalLoanIdentifier
+    loanStatusTypeId
+    homeLoanAssignments {
+      userTypeId
+      userId
+      assignedDateTime
+      assignedByUserId
+      unassignedDateTime
+      unassignedByUserId
+    }
+    homeLoanBorrowers {
+      id
+      borrowerNumber
+      contact {
+        id
+        contactPersonalInfos {
+          firstName
+          lastName
+          middleName
+        }
+        contactEmails {
+          emailAddressTypeId
+          preferredEmailYn
+          emailAddress {
+            emailAddress
+          }
+        }
+        contactTelephones {
+          telephoneTypeId
+          preferredTelephoneYn
+          telephoneNumber {
+            telephoneNumber
+          }
+        }
+      }
+    }
+    homeLoanAusLogs {
+      ausTypeId
+      orderDateTime
+      orderByUserId
+      requestData
+      requestId
+      responseDateTime
+      responseResultCode
+      responseData
+      manuallyAddedYn
+      submissionNumber
+      findingsData
+      ausCasefileId
+      usedForLoanDecisionYn
+      lpTransactionIdentifier
+      lpKeyIdentifier
+      lpLoanIdentifier
+      lpCreditRiskClassId
+      lpDocumentationLevelId
+      lpPurchaseEligibilityId
+      lpEvaluationStatusId
+      lpAcceptPlusEligibleYn
+    }
+  }
+}
+
+===================== Borrower Declarations
+
+{
+  HomeLoan(homeLoanId: 3086) {
+    id
+    lenderLoanNumber
+    extSysLoanNumber
+    universalLoanIdentifier
+    loanStatusTypeId
+    homeLoanAssignments {
+      userTypeId
+      userId
+      assignedDateTime
+      assignedByUserId
+      unassignedDateTime
+      unassignedByUserId
+    }
+    homeLoanBorrowers {
+      id
+      borrowerNumber
+      contact {
+        id
+        contactPersonalInfos {
+          firstName
+          lastName
+          middleName
+        }
+        contactEmails {
+          emailAddressTypeId
+          preferredEmailYn
+          emailAddress {
+            emailAddress
+          }
+        }
+        contactTelephones {
+          telephoneTypeId
+          preferredTelephoneYn
+          telephoneNumber {
+            telephoneNumber
+          }
+        }
+      }
+    }
+    homeLoanAusLogs {
+      ausTypeId
+      orderDateTime
+      orderByUserId
+      requestData
+      requestId
+      responseDateTime
+      responseResultCode
+      responseData
+      manuallyAddedYn
+      submissionNumber
+      findingsData
+      ausCasefileId
+      usedForLoanDecisionYn
+      lpTransactionIdentifier
+      lpKeyIdentifier
+      lpLoanIdentifier
+      lpCreditRiskClassId
+      lpDocumentationLevelId
+      lpPurchaseEligibilityId
+      lpEvaluationStatusId
+      lpAcceptPlusEligibleYn
+    }
+  }
+}
+
+================== Contact Updated
+
+{
+  HomeLoan(homeLoanId: 3086) {
+    id
+    lenderLoanNumber
+    extSysLoanNumber
+    universalLoanIdentifier
+    loanStatusTypeId
+    homeLoanAssignments {
+      userTypeId
+      userId
+      assignedDateTime
+      assignedByUserId
+      unassignedDateTime
+      unassignedByUserId
+    }
+    homeLoanBorrowers {
+      id
+      borrowerNumber
+      contact {
+        id
+        contactPersonalInfos {
+          firstName
+          lastName
+          middleName
+        }
+        contactEmails {
+          emailAddressTypeId
+          preferredEmailYn
+          emailAddress {
+            emailAddress
+          }
+        }
+        contactTelephones {
+          telephoneTypeId
+          preferredTelephoneYn
+          telephoneNumber {
+            telephoneNumber
+          }
+        }
+      }
+    }
+    homeLoanAusLogs {
+      ausTypeId
+      orderDateTime
+      orderByUserId
+      requestData
+      requestId
+      responseDateTime
+      responseResultCode
+      responseData
+      manuallyAddedYn
+      submissionNumber
+      findingsData
+      ausCasefileId
+      usedForLoanDecisionYn
+      lpTransactionIdentifier
+      lpKeyIdentifier
+      lpLoanIdentifier
+      lpCreditRiskClassId
+      lpDocumentationLevelId
+      lpPurchaseEligibilityId
+      lpEvaluationStatusId
+      lpAcceptPlusEligibleYn
+    }
+  }
+}
+
+==================== Home Loan Change Reason
+
+query MyQuery {
+  HomeLoan(homeLoanId: 3820) {
+    lenderLoanNumber
+    lenderId
+    extSysLoanNumber
+    homeLoanChangeReasons {
+      changeByUserId
+      changeDateTime
+      changeReasonTypeId
+      changeType
+      comment
+      createdByUserId
+      createdDateTime
+      homeLoanChangeExplanations {
+        changeExplanationTypeId
+        createdByUserId
+        createdDateTime
+        version
+        modifiedDateTime
+        modifiedByUserId
+        id
+      }
+    }
+  }
+}
+
+=================== Home Loan Conditions
+
+query MyQuery {
+  HomeLoan(homeLoanId: 3820) {
+    lenderId
+    lenderLoanNumber
+    extSysLoanNumber
+    homeLoanConditions {
+      externalSystemConditionId
+      createdDateTime
+      deletedYn
+      addedByUserId
+      addedDateTime
+      allowBrokerToResolveYn
+      allowBrokerToWaiveYn
+      allowSellerToResolveYn
+      allowSellerToWaiveYn
+      communicatedByUserId
+      communicatedDateTime
+      completeByDateTime
+      condPartyTypeId
+      condRequiredTypeId
+      condSourceTypeId
+      condStatusByUserId
+      condStatusDateTime
+      condStatusId
+      condTextTypeId
+      conditionId
+      createdByUserId
+      version
+      referenceDocumentLocator
+      modifiedDateTime
+      modifiedByUserId
+      mergedText
+      longText
+      inapplicableYn
+      id
+      homeLoanCondStatuses {
+        condStatusByUserId
+        condStatusDateTime
+        condStatusId
+        createdByUserId
+        createdDateTime
+        id
+        modifiedByUserId
+        modifiedDateTime
+        version
+      }
+    }
+  }
+}
+
+=================== Home Loan Credit
+
+query MyQuery {
+  HomeLoan(homeLoanId: 3820) {
+    lenderId
+    lenderLoanNumber
+    extSysLoanNumber
+    homeLoanConditions {
+      externalSystemConditionId
+      createdDateTime
+      deletedYn
+      addedByUserId
+      addedDateTime
+      allowBrokerToResolveYn
+      allowBrokerToWaiveYn
+      allowSellerToResolveYn
+      allowSellerToWaiveYn
+      communicatedByUserId
+      communicatedDateTime
+      completeByDateTime
+      condPartyTypeId
+      condRequiredTypeId
+      condSourceTypeId
+      condStatusByUserId
+      condStatusDateTime
+      condStatusId
+      condTextTypeId
+      conditionId
+      createdByUserId
+      version
+      referenceDocumentLocator
+      modifiedDateTime
+      modifiedByUserId
+      mergedText
+      longText
+      inapplicableYn
+      id
+      homeLoanCondStatuses {
+        condStatusByUserId
+        condStatusDateTime
+        condStatusId
+        createdByUserId
+        createdDateTime
+        id
+        modifiedByUserId
+        modifiedDateTime
+        version
+      }
+    }
+  }
+}
+
+====================== Home Loan Consent
+
+{
+  HomeLoan(homeLoanId: 3086) {
+    id
+    lenderLoanNumber
+    extSysLoanNumber
+    universalLoanIdentifier
+    loanStatusTypeId
+    intentToProceedYn
+    intentToProceedDate
+    intentToProceedTypeId
+    intentToProceedByUserId
+    intentToProceedUserTypeId
+    homeLoanAssignments {
+      userTypeId
+      userId
+      assignedDateTime
+      assignedByUserId
+      unassignedDateTime
+      unassignedByUserId
+    }
+    homeLoanBorrowers {
+      id
+      borrowerNumber
+      contact {
+        id
+        contactPersonalInfos {
+          firstName
+          lastName
+          middleName
+        }
+        contactEmails {
+          emailAddressTypeId
+          preferredEmailYn
+          emailAddress {
+            emailAddress
+          }
+        }
+        contactTelephones {
+          telephoneTypeId
+          preferredTelephoneYn
+          telephoneNumber {
+            telephoneNumber
+          }
+        }
+      }
+    }
+    homeLoanBorrowerAuths {
+      id
+      borrowerAuthTypeId
+      consentReceivedYn
+      consentReceivedDateTime
+      consentReceivedByUserId
+      consentAuthCommTypeId
+      withdrawReceivedYn
+      withdrawReceivedDateTime
+      withdrawReceivedByUserId
+      withdrawAuthCommTypeId
+      homeLoanBorrower {
+        id
+      }
+    }
+  }
+}
+
+================== Home Loan Contact
+
+{
+  HomeLoan(homeLoanId: 3691) {
+    id
+    lenderLoanNumber
+    extSysLoanNumber
+    universalLoanIdentifier
+    loanStatusTypeId
+    homeLoanNotes {
+      createdByUserId
+    }
+    homeLoanAssignments {
+      userTypeId
+      userId
+      assignedDateTime
+      assignedByUserId
+      unassignedDateTime
+      unassignedByUserId
+    }
+    homeLoanRealEstAssets {
+      realEstateAsset {
+        id
+        contactRealEstAssets {
+          contact {
+            id
+          }
+          occupancyTypeId
+        }
+        realEstAssetRelships {
+          liability {
+            periodicPaymentAmt
+            mortgageLiabilityDetails{
+              piPaymentAmt
+              pmiPaymentAmt
+              lienTypeId
+            }
+            
+          }
+        }
+        propertyInfo {
+          id
+          hazardInsuranceAmt
+          propertyTaxesAmt
+          associationFeesAmt
+          floodInsuranceAmt
+          otherExpensesAmt
+        }
+      }
+    }
+    homeLoanPropertyInfos {
+      occupancyTypeId
+      proposedHazardInsuranceAmt
+      proposedPropertyTaxesAmt
+      proposedAssociationFeesAmt
+      proposedFloodInsuranceAmt
+      proposedOtherExpensesAmt
+    }
+    homeLoanAuthorizations {
+      authorizationTypeId
+    }
+    homeLoanBorrowerLinks {
+      applicantBorrower {
+        id
+      }
+      coapplicantBorrower {
+        id
+      }
+    }
+    homeLoanBorrowers {
+      id
+      employeeYn
+      borrowerNumber
+      firstTimeHomebuyerYn
+      contact {
+        id
+        leadTypeId
+        contactTypeId
+        leadSourceId
+        contactPersonalInfos {
+          taxIdNumber
+          salutationId
+          firstName
+          lastName
+          middleName
+          nameSuffix
+          birthDate
+          age
+          maritalStatusId
+          numberOfDependents
+          dependentAges
+          citizenshipTypeId
+          militaryDutyTypeId
+          militaryServiceBranchId
+        }
+        contactGenders {
+          genderId
+        }
+        contactRaces {
+          raceId
+        }
+        contactEthnicities {
+          ethnicityId
+        }
+        contactAddresses {
+          addressTypeId
+          address {
+            addressLineOne
+            addressLineTwo
+            city
+            stateId
+            postalCodeId
+            countryId
+          }
+        }
+        contactEmails {
+          emailAddressTypeId
+          preferredEmailYn
+          emailAddress {
+            emailAddress
+          }
+        }
+        contactTelephones {
+          telephoneTypeId
+          preferredTelephoneYn
+          telephoneNumber {
+            telephoneNumber
+          }
+        }
+        contactPreferences {
+          sundayAllowedYn
+          contactMethodTypeId
+          mondayAllowedYn
+          tuesdayAllowedYn
+          wednesdayAllowedYn
+          thursdayAllowedYn
+          fridayAllowedYn
+          saturdayAllowedYn
+          sundayAllowedYn
+          bestContactStartTime
+          bestContactEndTime
+          doNotContactYn
+        }
+        contactAlternateNames {
+          firstName
+          middleName
+          lastName
+        }
+        contactEmploymentInfos {
+          id
+          employmentTypeId
+          employerName
+          addressLineOne
+          addressLineTwo
+          city
+          stateId
+          postalCodeId
+          countryId
+          telephoneNumber
+          telephoneExtension
+          businessType
+          employeeTitle
+          employeePosition
+          yearsAtEmployer
+          monthsAtEmployer
+          yearsInProfession
+          monthsInProfession
+          employedFromDate
+          employedToDate
+          selfEmployedYn
+          currentlyEmployedYn
+          incomeAtTerminationAmt
+          businessTypeId
+          employerTaxIdNumber
+          alternateId
+          contact {
+            id
+          }
+        }
+        contactOtherExpenses {
+          id
+          expenseTypeId
+          expenseDescription
+          frequencyTypeId
+          periodicPaymentAmt
+        }
+      }
+    }
+  }
+}
+
+======================== Home Loan Funding Request
+
+{
+  HomeLoan(homeLoanId: 3086) {
+    id
+    lenderLoanNumber
+    extSysLoanNumber
+    universalLoanIdentifier
+    loanStatusTypeId
+    homeLoanAssignments {
+      userTypeId
+      userId
+      assignedDateTime
+      assignedByUserId
+      unassignedDateTime
+      unassignedByUserId
+    }
+    homeLoanBorrowers {
+      id
+      borrowerNumber
+      contact {
+        id
+        contactPersonalInfos {
+          firstName
+          lastName
+          middleName
+        }
+        contactEmails {
+          emailAddressTypeId
+          preferredEmailYn
+          emailAddress {
+            emailAddress
+          }
+        }
+        contactTelephones {
+          telephoneTypeId
+          preferredTelephoneYn
+          telephoneNumber {
+            telephoneNumber
+          }
+        }
+      }
+    }
+    homeLoanFundingRequests {
+      requestedDateTime
+      requestedByUserId
+      fundingMethodTypeId
+      grossFundingAmt
+      nettedFundsAmt
+      netFundingAmt
+      checkNumber
+      checkPayableTo
+      approvedDateTime
+      approvedByUserId
+      cancelledDateTime
+      cancelledByUserId
+      fundingStatusTypeId
+      fundingStatusDateTime
+      fundingStatusByUserId
+    }
+  }
+}
+
+========================= Home Loan Income
+
+query MyQuery {
+  HomeLoan(homeLoanId: 3820) {
+    lenderLoanNumber
+    extSysLoanNumber
+    homeLoanBorrowers {
+      borrowerNumber
+      borrowerRoleId
+      contact {
+        contactPersonalInfos {
+          firstName
+          middleName
+          lastName
+        }
+        contactIncomes {
+          incomeDescription
+          incomeTypeId
+          periodicAmt
+          taxableIncomeAmt
+        }
+      }
+    }
+  }
+}
+
+===================== Home Loan Key Dates
+
+query MyQuery {
+  HomeLoan(homeLoanId: 10) {
+    lenderLoanNumber
+    extSysLoanNumber
+    homeLoanKeyDates {
+      anticipatedSettlementDate
+      aporEffectiveDate
+      applicationDateTime
+      applicationTakenDate
+      appraisalSentBorrowerDate
+      appraisalWaiverDate
+      armIndexDateTime
+      ecoaNoticeDueDate
+      ecoaNoticeDeliveryDate
+      ecoaApplicationDate
+      createdDateTime
+      createdByUserId
+      clsPkgRequestedDate
+      borrAppraisalReceivedDate
+      fileReceivedDate
+      firstAllowableClosingDate
+      firstPaymentDueDate
+      floatDownExercisedDate
+      floatToMarketExercisedDate
+      floodCertSentBorrowerDate
+      fundsAdvancedDate
+      hmdaActionDate
+      hudTitleApprovalDate
+      id
+      initialAusSubmissionDate
+      initialCdDeliveryDate
+      initialCdReceiptDate
+      initialLeDeliveryDate
+      initialLeReceiptDate
+      loanClosedDate
+      maturityDate
+      loanNoteDate
+      modifiedByUserId
+      version
+      txHomeEquityDisclosureDate
+      thirdAppraisalSentDate
+      secondAppraisalSentDate
+      scheduledClosingDateTime
+      revisedLeReceiptDate
+      revisedLeDeliveryDate
+      revisedCdReceiptDate
+      revisedCdDeliveryDate
+      rescissionDate
+      rescindedDate
+      registrationDateTime
+      rateLockExpirationDate
+      relockDateTime
+      rateLockDateTime
+      pricingDateTime
+      modifiedDateTime
+      mortgageContingencyDate
+      noiaDocDeliveryDate
+      noiaDocExpDate
+      noteModificationDate
+      payoffDocsExpDate
+      pkgSentToClosingAgentDate
+      prcadjDeterminationDateTime
+      priceDeterminationDateTime
+    }
+  }
+}
+
+================== Home Loan Doc Packages
+
+query MyQuery {
+  HomeLoan(homeLoanId: 10) {
+    homeLoanDocPackages {
+      adjOtherCreditsAmt
+      version
+      totalSellerCreditsAmt
+      totalPayoffsAndPaymentsAmt
+      totalOfPaymentsAmt
+      totalInterestPct
+      totalInterestAmt
+      receiptDate
+      systemTypeId
+      disclosureGeneratedYn
+      discountFeeAmt
+      documentData
+      documentLocator
+      documentPackageId
+      documentVendorId
+      downpayFundsFromBorrAmt
+      earnestMoneyDepositedAmt
+      amortizationType
+      amountFinancedAmt
+      annualPercentageRatePct
+      assumableLoanYn
+      cashToCloseAmt
+      closingCostsAmt
+      closingCostsFinancedAmt
+      createdByUserId
+      createdDateTime
+      creditrSvcOfLoanStmntType
+      deficiencyRightsPreservedInd
+      deliveryDate
+      demandFeatureYn
+      generatedDateTime
+      generatedByUserId
+      fundsForBorrowerAmt
+      financeChargeAmt
+      feeSectionJBorrTotalAmt
+      feeSectionIBorrTotalAmt
+      feeSectionDBorrTotalAmt
+      printDestinationTypeId
+      principalAndInterestPmtAmt
+      prepaidItemsAmt
+      prepaidInterestPerDiemAmt
+      prepaidInterestDays
+      prepaidInterestAmt
+      partialPaymentAppMethodTyp
+      partialPaymentAllowedYn
+      packageSignedDateTime
+      packageExceptionText
+      mortgageInsuranceAmt
+      modifiedDateTime
+      modifiedByUserId
+      loanAmt
+      lenderCreditsAmt
+      lateChargePct
+      lateChargeGracePeriod
+      lateChargeAmt
+      interestRatePct
+      id
+    }
+  }
+}
+
+=================== Home Loan Decision
+
+{
+  HomeLoan(homeLoanId: 3086) {
+    id
+    lenderLoanNumber
+    extSysLoanNumber
+    universalLoanIdentifier
+    loanStatusTypeId
+    homeLoanAssignments {
+      userTypeId
+      userId
+      assignedDateTime
+      assignedByUserId
+      unassignedDateTime
+      unassignedByUserId
+    }
+    homeLoanBorrowers {
+      id
+      borrowerNumber
+      contact {
+        id
+        contactPersonalInfos {
+          firstName
+          lastName
+          middleName
+        }
+        contactEmails {
+          emailAddressTypeId
+          preferredEmailYn
+          emailAddress {
+            emailAddress
+          }
+        }
+        contactTelephones {
+          telephoneTypeId
+          preferredTelephoneYn
+          telephoneNumber {
+            telephoneNumber
+          }
+        }
+      }
+    }
+    homeLoanDecisions {
+      decisionTypeId
+      decisionDateTime
+      decisionByUserId
+      authorizedDateTime
+    }
+  }
+}
+
+==================== Home Loan Other Parties
+
+query MyQuery {
+  HomeLoan(homeLoanId: 3820) {
+    extSysLoanNumber
+    lenderLoanNumber
+    homeLoanOtherParties {
+      companyLicenseAuthorityName
+      city
+      addressLineTwo
+      addressLineOne
+      emailAddress
+      createdDateTime
+      createdByUserId
+      contactLicenseStateId
+      companyLicenseAuthorityType
+      companyLicenseAuthorityUrl
+      companyLicenseIssueDate
+      companyLicenseNumber
+      companyLicenseStateId
+      contactLicenseNumber
+      telephoneNumber
+      stateId
+      postalCodeId
+      otherPartyTypeId
+      noteText
+      nameSuffix
+      name
+      modifiedDateTime
+      middleName
+      modifiedByUserId
+      mobileNumber
+      lastName
+      id
+      faxNumber
+      firstName
+      contactLicenseAuthorityName
+      contactLicenseAuthorityType
+      contactLicenseAuthorityUrl
+      contactLicenseIssueDate
+      websiteUrl
+      version
+    }
+  }
+}
+
+=================== Home Loan Loan General 
+
+{
+  HomeLoan(homeLoanId: 4350) {
+    id
+    lenderLoanNumber
+    extSysLoanNumber
+    universalLoanIdentifier
+    loanStatusTypeId
+    interviewerName
+    interviewerEmailAddress
+    interviewerUserId
+    hmdaActionCodeId
+    homeLoanAssignments {
+      userTypeId
+      userId
+      assignedDateTime
+      assignedByUserId
+      unassignedDateTime
+      unassignedByUserId
+    }
+    homeLoanSourceInfos {
+      id
+      leadTypeId
+      leadSourceId
+      primarySourceYn
+      contact {
+        id
+        contactPersonalInfos{
+          lastName
+          firstName
+        }
+      }
+      referalPartner {
+        id
+        name
+      }
+      referalPartnerAssociate {
+        id
+        lastName
+        firstName
+        referalPartner{
+          name
+        }
+      }
+      sysUser {
+        id
+        sysUserInfos{
+          firstName
+          lastName
+        }
+      }
+    }
+    homeLoanDetails {
+      marketTypeId
+    }
+    homeLoanBorrowers {
+      id
+      borrowerNumber
+      contact {
+        id
+        contactPersonalInfos {
+          firstName
+          lastName
+          middleName
+        }
+        contactEmails {
+          emailAddressTypeId
+          preferredEmailYn
+          emailAddress {
+            emailAddress
+          }
+        }
+        contactTelephones {
+          telephoneTypeId
+          preferredTelephoneYn
+          telephoneNumber {
+            telephoneNumber
+          }
+        }
+      }
+    }
+    homeLoanKeyDates {
+      registrationDateTime
+      applicationDateTime
+      ecoaApplicationDate
+      pricingDateTime
+      priceDeterminationDateTime
+      anticipatedSettlementDate
+      rateLockDateTime
+      relockDateTime
+      firstPaymentDueDate
+      maturityDate
+      fundsAdvancedDate
+      fileReceivedDate
+      rateLockExpirationDate
+      loanClosedDate
+      initialAusSubmissionDate
+      rescissionDate
+      scheduledClosingDateTime
+      pkgSentToClosingAgentDate
+      hudTitleApprovalDate
+      loanNoteDate
+      mortgageContingencyDate
+      initialLeDeliveryDate
+      initialLeReceiptDate
+      revisedLeDeliveryDate
+      revisedLeReceiptDate
+      initialCdDeliveryDate
+      initialCdReceiptDate
+      revisedCdDeliveryDate
+      revisedCdReceiptDate
+      appraisalSentBorrowerDate
+      floodCertSentBorrowerDate
+      secondAppraisalSentDate
+      thirdAppraisalSentDate
+      applicationTakenDate
+      aporEffectiveDate
+      clsPkgRequestedDate
+      appraisalWaiverDate
+      firstAllowableClosingDate
+      prcadjDeterminationDateTime
+    }
+    homeLoanPostClosings {
+      actualRescissionDate
+      actualFundsAdvancedDate
+      actualFirstPaymentDueDate
+      actualMaturityDate
+      closingPackageReceivedDate
+    }
+    homeLoanStatuses {
+      statusChangeByUserId
+      statusChangeDateTime
+      oldLoanStatusTypeId
+      newLoanStatusTypeId
+    }
+  }
+}
+
+=================== Home Loan Property
+
+query MyQuery {
+  HomeLoan(homeLoanId: 3820) {
+    lenderId
+    lenderLoanNumber
+    extSysLoanNumber
+    homeLoanPropertyInfos {
+      asIsValueAmt
+      buildingStatusTypeId
+      id
+      maintenanceAndUtilitiesAmt
+      modifiedByUserId
+      modifiedDateTime
+      newConstructionYn
+      occupancyTypeId
+      propFloodInsInLiabilityYn
+      propTaxesInLiabilityYn
+      propOtherExpInLiabilityYn
+      propHoaFeesInLiabilityYn
+      propHazInsInLiabilityYn
+      version
+      ulddProposedUnit4RentAmt
+      ulddProposedUnit3RentAmt
+      ulddProposedUnit2RentAmt
+      ulddProposedUnit1RentAmt
+      purchasePriceAmt
+      proposedUnit4RentAmt
+      proposedUnit3RentAmt
+      proposedUnit2RentAmt
+      proposedUnit1RentAmt
+      proposedPropertyTaxesAmt
+      proposedOtherExpensesAmt
+      proposedHazardInsuranceAmt
+      proposedFloodInsuranceAmt
+      proposedAssociationFeesAmt
+      propertyInfo {
+        assessedValueAmt
+        associationFeesAmt
+        blockNumber
+        buildingTypeId
+        censusTractNumber
+        constructionTypeId
+        energyEfficientHomeYn
+        debtToIncomeRatio
+        familyUnits
+        floodInsInLiabilityYn
+        floodInsuranceAmt
+        fullyOccupiedYn
+        hazInsInLiabilityYn
+        hazardInsuranceAmt
+        hoaFeesInLiabilityYn
+        yearBuilt
+        unit4RoomsCount
+        unit4RentAmt
+        unit4BedroomsCount
+        unit4BathroomsCount
+        unit3RoomsCount
+        unit3RentAmt
+        unit3BedroomsCount
+        unit3BathroomsCount
+        unit2RoomsCount
+        unit2RentAmt
+        unit2BedroomsCount
+        unit2BathroomsCount
+        rentalIncomeAdjustmentAmt
+        rentalIncomeUsedPct
+        semiDetachedYn
+        squareFootage
+        taxParcelNumber
+        taxesInLiabilityYn
+        uniquePropertyYn
+        unit1BathroomsCount
+        unit1BedroomsCount
+        unit1RentAmt
+        unit1RoomsCount
+        remainingEconomicLifeYears
+        propertyTypeId
+        propertyTaxesAmt
+        propertyDescription
+        projClassTypeId
+        otherExpensesAmt
+        otherExpInLiabilityYn
+        originId
+        numberOfFloors
+        monthBuilt
+        mfSecuredPropertyTypeId
+        mfLandInterestTypeId
+        modifiedByUserId
+        modifiedDateTime
+        homesteadPropertyYn
+        id
+        landValueAmt
+        legalDescription
+        legalDescriptionMethodType
+        lotNumber
+        lotSize
+        manufacturedHomeTypeId
+        marketValueAmt
+        mfHomeHudLabelNumber
+        mfHomeLength
+        mfHomeMake
+        mfHomeModel
+        mfHomeModelYear
+        mfHomePudYn
+        mfHomeSerialNumber
+        mfHomeStatusId
+        mfHomeWidth
+      }
+    }
+  }
+}
+
+================ Home Loan Product Pricing
+
+{
+  HomeLoan(homeLoanId: 4044) {
+    id
+    lenderLoanNumber
+    extSysLoanNumber
+    universalLoanIdentifier
+    loanStatusTypeId
+    homeLoanAssignments {
+      userTypeId
+      userId
+      assignedDateTime
+      assignedByUserId
+      unassignedDateTime
+      unassignedByUserId
+    }
+    homeLoanBorrowers {
+      id
+      borrowerNumber
+      contact {
+        id
+        contactPersonalInfos {
+          firstName
+          lastName
+          middleName
+        }
+        contactEmails {
+          emailAddressTypeId
+          preferredEmailYn
+          emailAddress {
+            emailAddress
+          }
+        }
+        contactTelephones {
+          telephoneTypeId
+          preferredTelephoneYn
+          telephoneNumber {
+            telephoneNumber
+          }
+        }
+      }
+    }
+    homeLoanDetails {
+      rateLockTypeId
+      rateLockStatusTypeId
+      taxEscrowsWaivedYn
+      insEscrowsWaivedYn
+      channelTypeId
+      mortgageTypeId
+      loanPurposeTypeId
+      refiPurposeTypeId
+      refinanceTypeId
+      programTypeId
+      processTypeId
+      documentationTypeId
+      investorId
+      lienTypeId
+      lienPosition
+      pricingTierId
+      manuallyPricedYn
+      bondProgramTypeId
+      texasRefinanceTypeId
+    }
+    homeLoanProductDatas {
+      productPricingTemplateId
+      loanProductDesc
+      amortizationTermMonths
+      balloonTermMonths
+      amortizationTypeId
+    }
+    homeLoanFinancialDatas {
+      qualifyingInterestRatePct
+    }
+    homeLoanSummaryDatas {
+      discountFeeAmt
+      annualPercentageRatePct
+      qualHousingExpenseRatioPct
+      housingExpenseRatioPct
+      totalDebtRatioPct
+      qualTotalDebtRatioPct
+      totalLoanAmt
+      qualifyingPiPaymentAmt
+      actualPiPaymentAmt
+      pmiPmtAmt
+      ltvRatioPct
+      cltvRatioPct
+      hcltvRatioPct
+      baseLtvRatioPct
+      baseCltvRatioPct
+      baseHcltvRatioPct
+      totalLtvRatioPct
+      totalCltvRatioPct
+      totalHcltvRatioPct
+      cashFromToBorrowerAmt
+    }
+    homeLoanCustomFields {
+      customFieldId
+      customFieldValue
+    }
+    homeLoanAppraisals {
+      adjAppraisedValueAmt
+      appraisalOfRecordYn
+      propertyAppraisal {
+        appraisedValueAmt
+      }
+    }
+    homeLoanPriceRequests {
+      pricingActionTypeId
+      pricingActionStatusId
+      actionStatusDateTime
+      actionStatusByUserId
+      lienPosition
+      priceRequestDateTime
+      priceDeterminationDateTime
+      rateLockDateTime
+      relockDateTime
+      rateLockExpDate
+      productPricingTemplateId
+      lenderId
+      channelTypeId
+      mortgageTypeId
+      loanPurposeTypeId
+      refiPurposeTypeId
+      refinanceTypeId
+      programTypeId
+      processTypeId
+      documentationTypeId
+      investorId
+      lienTypeId
+      occupancyTypeId
+      propertyTypeId
+      buildingTypeId
+      projClassTypeId
+      amortizationTypeId
+      loanProductId
+      pricingTierId
+      loanTermMonths
+      rateLockTypeId
+      creditScore
+      familyUnits
+      taxEscrowsWaivedYn
+      insEscrowsWaivedYn
+      purchasePriceAmt
+      appraisedValueAmt
+      loanAmt
+      subordinateFinancingAmt
+      mortgageInsFinancedAmt
+      totalCreditLineAmt
+      subordinateCreditLineAmt
+      pmiPlanTypeId
+      pmiCoveragePct
+      ltvRatioPct
+      cltvRatioPct
+      hcltvRatioPct
+      baseLtvRatioPct
+      baseCltvRatioPct
+      baseHcltvRatioPct
+      totalLtvRatioPct
+      totalCltvRatioPct
+      totalHcltvRatioPct
+      rateLockStatusTypeId
+      pricingExceptionTypeId
+      numberOfExtensionDays
+      homeLoanPriceResults {
+        sequenceNumber
+        pricingItemType
+        pricingItemId
+        pricingItemDesc
+        noteRatePct
+        originationPointsPct
+        discountPointsPct
+        indexPct
+        marginPct
+        lifetimeCapPct
+        pricePct
+        costPct
+        manualItemYn
+        embeddedItemYn
+        restrictionItemYn
+        adjustmentCategoryId
+        costCenterId
+        lockExtensionAdjustmentYn
+      }
+    }
+  }
+}
+
+===================== Home Loan Purpose Property
+
+{
+  HomeLoan(homeLoanId: 6707, filter: [{value: "homeLoanLiabilities:concurrentLiabilityYn = true"}]) {
+    id
+    lenderLoanNumber
+    extSysLoanNumber
+    universalLoanIdentifier
+    loanStatusTypeId
+    homeLoanAssignments {
+      userTypeId
+      userId
+      assignedDateTime
+      assignedByUserId
+      unassignedDateTime
+      unassignedByUserId
+    }
+    homeLoanBorrowers {
+      id
+      borrowerNumber
+      contact {
+        id
+        contactPersonalInfos {
+          firstName
+          lastName
+          middleName
+        }
+        contactEmails {
+          emailAddressTypeId
+          preferredEmailYn
+          emailAddress {
+            emailAddress
+          }
+        }
+        contactTelephones {
+          telephoneTypeId
+          preferredTelephoneYn
+          telephoneNumber {
+            telephoneNumber
+          }
+        }
+      }
+    }
+    homeLoanDetails {
+      correspondentId
+      agencyBasedDecisionYn
+      manualUnderwritingYn
+      cemaYn
+      inHouseLoanRefinanceYn
+      assumedLoanYn
+      worstCasePricingYn
+      assetDepletionLoanYn
+      appraisalRequiredYn
+      appraisalRequiredComment
+      secondAppraisalYn
+      secondAppraisalComment
+      inspectionWaiverYn
+      inspectionWaiverComment
+      autoPayDeductionYn
+      zeroClosingCostsYn
+      helocDrawLockTerm
+      brokerCompensationTypeId
+      brokerCompensationPct
+      brokerCompensationPaidDate
+      borrowerPaidBrokerPtsPct
+      borrowerPaidBrokerPtsAmt
+      feeBuyoutYn
+      relationshipProfileId
+      secondLienPurposeTypeId
+      emergingBankerYn
+      pricingExceptionTypeId
+      constructionInterestRatePct
+      constructionTermMonths
+      waiveRightToReceiveApprYn
+      hmdaPurposePurchase
+      hmdaPurposeRefinance
+      hmdaPurposeHomeImprovement
+      atrTypeId
+      atrExemptionTypeId
+      atrExemptionDesc
+      hmdaPurposeOther
+      manuallyPricedYn
+      texasRefinanceTypeId
+      brokerTradeName
+      overrideAtrResIncomeAmtYn
+      creditScoreOverrideTypeId
+      loanPurposeTypeId
+    }
+    homeLoanLiabilities {
+      concurrentLiabilityYn
+      liability {
+        mortgageLiabilityDetails {
+          piPaymentAmt
+        }
+      }
+    }
+    homeLoanPropertyInfos {
+      occupancyTypeId
+      buildingStatusTypeId
+      newConstructionYn
+      purchasePriceAmt
+      maintenanceAndUtilitiesAmt
+      asIsValueAmt
+      proposedPropertyTaxesAmt
+      proposedHazardInsuranceAmt
+      proposedFloodInsuranceAmt
+      proposedAssociationFeesAmt
+      proposedOtherExpensesAmt
+      proposedUnit1RentAmt
+      proposedUnit2RentAmt
+      proposedUnit3RentAmt
+      proposedUnit4RentAmt
+      propTaxesInLiabilityYn
+      propHazInsInLiabilityYn
+      propFloodInsInLiabilityYn
+      propHoaFeesInLiabilityYn
+      propOtherExpInLiabilityYn
+      propertyInfo {
+        originId
+        propertyTypeId
+        buildingTypeId
+        constructionTypeId
+        projClassTypeId
+        familyUnits
+        legalDescriptionMethodType
+        legalDescription
+        numberOfFloors
+        yearBuilt
+        monthBuilt
+        squareFootage
+        lotSize
+        propertyDescription
+        lotNumber
+        blockNumber
+        taxParcelNumber
+        censusTractNumber
+        marketValueAmt
+        assessedValueAmt
+        landValueAmt
+        propertyTaxesAmt
+        hazardInsuranceAmt
+        floodInsuranceAmt
+        associationFeesAmt
+        otherExpensesAmt
+        unit1RentAmt
+        unit2RentAmt
+        unit3RentAmt
+        unit4RentAmt
+        unit1RoomsCount
+        unit2RoomsCount
+        unit3RoomsCount
+        unit4RoomsCount
+        unit1BedroomsCount
+        unit2BedroomsCount
+        unit3BedroomsCount
+        unit4BedroomsCount
+        unit1BathroomsCount
+        unit2BathroomsCount
+        unit3BathroomsCount
+        unit4BathroomsCount
+        energyEfficientHomeYn
+        manufacturedHomeTypeId
+        rentalIncomeAdjustmentAmt
+        rentalIncomeUsedPct
+        homesteadPropertyYn
+        remainingEconomicLifeYears
+        fullyOccupiedYn
+        debtToIncomeRatio
+        mfSecuredPropertyTypeId
+        mfLandInterestTypeId
+        taxesInLiabilityYn
+        hazInsInLiabilityYn
+        floodInsInLiabilityYn
+        hoaFeesInLiabilityYn
+        otherExpInLiabilityYn
+        mfHomeMake
+        mfHomeModel
+        mfHomeModelYear
+        mfHomeStatusId
+        mfHomeLength
+        mfHomeWidth
+        mfHomeSerialNumber
+        mfHomeHudLabelNumber
+        mfHomePudYn
+        address {
+          originId
+          addressLineOne
+          addressLineTwo
+          city
+          stateId
+          postalCodeId
+          stateFipsId
+          countyFipsId
+          countryId
+          msaId
+          msaDivisionId
+          latitude
+          longitude
+          houseNumber
+          apartmentUnitNumber
+          directionPrefix
+          streetName
+          streetSuffix
+          directionSuffix
+        }
+        propertyFloodInfos {
+          nfipCommunityName
+          nfipCommunityNumber
+          nfipMapPanelNumber
+          nfipMapEffectiveDate
+          lomaDate
+          lomrYn
+          lomrDate
+          floodZoneCode
+          nfipMapAvailableYn
+          floodInsuranceTypeId
+          cbraOpaAreaYn
+          cbraOpaDate
+          specialFloodAreaYn
+          floodCertCompanyId
+          floodCertificateNumber        
+         }
+        propertyFloodInses{
+          id
+          agentName
+          annualPremiumAmt
+          collectPremiumAtClosingYn
+          comments
+          coverageAmt
+          issueDate
+          expirationDate
+          floodInsuranceTypeId
+          floodInsuranceCompanyId
+          issueDate
+          payeeIdentifier
+          policyNumber
+        }
+        propertyHazardInses {
+          id
+          agentName
+          annualPremiumAmt
+          collectPremiumAtClosingYn
+          comments
+          coverageAmt
+          issueDate
+          expirationDate
+          hazardInsuranceTypeId
+          hazardInsuranceCompanyId
+          issueDate
+          payeeIdentifier
+          policyNumber
+        }
+        propertyOtherInses {
+          id
+          addlInfoOne
+          addlInfoTwo
+          addlInfoThree
+          agentName
+          annualPremiumAmt
+          collectPremiumAtClosingYn
+          comments
+          coverageAmt
+          issueDate
+          expirationDate
+          otherInsuranceTypeId
+          otherInsuranceCompanyId
+          issueDate
+          payeeIdentifier
+          policyNumber
+        } 
+      }
+    }
+  }
+}
+
+============== Home Loan Role Assignment
+
+{
+  HomeLoan(homeLoanId: 3086) {
+    id
+    lenderLoanNumber
+    extSysLoanNumber
+    universalLoanIdentifier
+    loanStatusTypeId
+    homeLoanAssignments {
+      userTypeId
+      userId
+      assignedDateTime
+      assignedByUserId
+      unassignedDateTime
+      unassignedByUserId
+    }
+    homeLoanBorrowers {
+      id
+      borrowerNumber
+      contact {
+        id
+        contactPersonalInfos {
+          firstName
+          lastName
+          middleName
+        }
+        contactEmails {
+          emailAddressTypeId
+          preferredEmailYn
+          emailAddress {
+            emailAddress
+          }
+        }
+        contactTelephones {
+          telephoneTypeId
+          preferredTelephoneYn
+          telephoneNumber {
+            telephoneNumber
+          }
+        }
+      }
+    }
+    
+  }
+}
+
+=================== Home Loan Vendor Services
+
+{
+  HomeLoan(homeLoanId: 4594) {
+    id
+    lenderLoanNumber
+    extSysLoanNumber
+    universalLoanIdentifier
+    loanStatusTypeId
+    homeLoanAssignments {
+      userTypeId
+      userId
+      assignedDateTime
+      assignedByUserId
+      unassignedDateTime
+      unassignedByUserId
+    }
+    homeLoanBorrowers {
+      id
+      borrowerNumber
+      contact {
+        id
+        contactPersonalInfos {
+          firstName
+          lastName
+          middleName
+        }
+        contactEmails {
+          emailAddressTypeId
+          preferredEmailYn
+          emailAddress {
+            emailAddress
+          }
+        }
+        contactTelephones {
+          telephoneTypeId
+          preferredTelephoneYn
+          telephoneNumber {
+            telephoneNumber
+          }
+        }
+      }
+    }
+    homeLoanClosingAgents {
+      id
+      additionalInstructions
+      addressLineOne
+      addressLineTwo
+      city
+      closingAgentCompanyId
+      closingAgentNmlsId
+      closingAgentTypeId
+      companyLicenseAuthorityName
+      companyLicenseAuthorityType
+      companyLicenseAuthorityUrl
+      companyLicenseIssueDate
+      companyLicenseNumber
+      companyName
+      companyNmlsId
+      contactLicenseAuthorityName
+      contactLicenseAuthorityType
+      contactLicenseAuthorityUrl
+      contactLicenseIssueDate
+      contactLicenseNumber
+      contactPerson
+      createdByUserId
+      createdDateTime
+      designatedSettlementAgentYn
+      designatedTitleCompanyYn
+      emailAddress
+      faxNumber
+    }
+    homeLoanAppraisals {
+      id
+      appraisalOfRecordYn
+      propertyAppraisal {
+        id
+        appraisalCompanyId
+        apprFieldworkTypeId
+        propertyAppraisalOrders {
+          id
+          orderDateTime
+          serviceStatusDateTime
+          anticipatedReceiptDateTime
+          manualOrderYn
+          propertyAppraisalOrderActs {
+            id
+            activityByUserId
+            activityDateTime
+            serviceActivityTypeId
+            detailText
+          }
+        }
+      }
+    }
+    homeLoanFloodDatas {
+      id
+      propertyFloodInfo {
+        id
+        propertyFloodInfoOrders {
+          id
+          orderDateTime
+          serviceStatusDateTime
+          anticipatedReceiptDateTime
+          manualOrderYn
+          propertyFloodInfoOrderActs {
+            id
+            activityByUserId
+            activityDateTime
+            serviceActivityTypeId
+            detailText
+          }
+        }
+      }
+    }
+    homeLoanFraudInfos {
+      id
+      homeLoanFraudOrders {
+        id
+        orderDateTime
+        anticipatedReceiptDateTime
+        serviceStatusDateTime
+        manualOrderYn
+        homeLoanFraudOrderActs {
+          id
+          activityByUserId
+          activityDateTime
+          serviceActivityTypeId
+          detailText
+        }
+      }
+    }
+    homeLoanTitleInses {
+      id
+      propertyTitleIns {
+        id
+        titleInsuranceTypeId
+        titleInsuranceCompanyId
+        propertyTitleInsOrders {
+          orderDateTime
+          anticipatedReceiptDateTime
+          serviceStatusDateTime
+          manualOrderYn
+          propertyTitleInsOrderActs {
+            id
+            activityByUserId
+            activityDateTime
+            serviceActivityTypeId
+            detailText
+          }
+        }
+      }
+    }
+    homeLoanMtgInsOrders {
+      id
+      pmiCompanyId
+      pmiPlanTypeId
+      orderDateTime
+      anticipatedReceiptDateTime
+      serviceStatusDateTime
+      manualOrderYn
+      homeLoanMtgInsOrderActs {
+        id
+        activityByUserId
+        activityDateTime
+        serviceActivityTypeId
+        detailText
+      }
+    }
+  }
+}
+
+================= Loan Data Updated
+
+{
+  HomeLoan(homeLoanId: 3086) {
+    id
+    lenderLoanNumber
+    extSysLoanNumber
+    universalLoanIdentifier
+    loanStatusTypeId
+    homeLoanAppraisals {
+      homeLoanAppraisalReviews {
+        reviewedDateTime
+        serviceReviewTypeId
+      }
+    }
+  }
+}
+
+================= Home Loan Third Party Info
+
+{
+  HomeLoan(homeLoanId: 3086) {
+    id
+    lenderLoanNumber
+    extSysLoanNumber
+    universalLoanIdentifier
+    loanStatusTypeId
+    homeLoanAssignments {
+      userTypeId
+      userId
+      assignedDateTime
+      assignedByUserId
+      unassignedDateTime
+      unassignedByUserId
+    }
+    homeLoanBorrowers {
+      id
+      borrowerNumber
+      contact {
+        id
+        contactPersonalInfos {
+          firstName
+          lastName
+          middleName
+        }
+        contactEmails {
+          emailAddressTypeId
+          preferredEmailYn
+          emailAddress {
+            emailAddress
+          }
+        }
+        contactTelephones {
+          telephoneTypeId
+          preferredTelephoneYn
+          telephoneNumber {
+            telephoneNumber
+          }
+        }
+      }
+    }
+    homeLoanOtherParties {
+      id
+      otherPartyTypeId
+      name
+      firstName
+      middleName
+      lastName
+      nameSuffix
+      addressLineOne
+      addressLineTwo
+      city
+      stateId
+      postalCodeId
+      telephoneNumber
+      faxNumber
+      mobileNumber
+      emailAddress
+      noteText
+      websiteUrl
+      referalPartner {
+        id
+      }
+      referalPartnerAssociate {
+        id
+      }
+    }
+  }
+}
+
+====================== Home Loan Mortgage Insurance Data
+
+query MyQuery {
+  HomeLoan(homeLoanId: 10) {
+    lenderId
+    lenderLoanNumber
+    homeLoanMtgInsDatas {
+      cancellationLtvRatioPct
+      coveragePct
+      createdByUserId
+      createdDateTime
+      customCoverageYn
+      financedUpFrontPremiumYn
+      id
+      version
+      upFrontPremiumSplitPct
+      upFrontPremiumPct
+      upFrontPremiumAmt
+      terminationLtvRatioPct
+      singlePremiumYn
+      refundablePremiumYn
+      premiumsDueAtClosing
+      pmiTypeId
+      pmiPlanTypeId
+      pmiRequiredYn
+      pmiEscrowsCushionedYn
+      pmiCompanyId
+      pmiCertificateNumber
+      pmiCertificateExpDate
+      pmiCertificateDecision
+      pmiCertificateDate
+      insuranceIssuedDate
+      lenderPaidPremiumYn
+      masterPmiPolicyNumber
+      miPremiumTaxRatePct
+      mipRefundAmt
+      mtgInsOfRecordYn
+      modifiedDateTime
+      modifiedByUserId
+      pmiCertDecisionDate
+    }
+  }
+}
+
+====================== Post Closing Data Updated
+
+{
+  HomeLoan(homeLoanId: 3545) {
+    id
+    lenderLoanNumber
+    originalLenderLoanNumber
+    extSysLoanNumber
+    universalLoanIdentifier
+    loanStatusTypeId
+    homeLoanShippings{
+      filePreparationDate
+    }
+  }
+}
+
+======================= Servicing Interface
+
+query MyQuery {
+  HomeLoan(homeLoanId: 3820) {
+    lenderLoanNumber
+    extSysLoanNumber
+    homeLoanPropertyInfos {
+      propertyInfo {
+        address {
+          addressLineOne
+          apartmentUnitNumber
+          city
+          stateId
+          postalCodeId
+          countyFipsId
+          propertyInfos {
+            homeLoanPropertyInfos {
+              errors {
+                message
+              }
+              propertyInfo {
+                propertyTypeId
+                familyUnits
+                rentalIncomeAdjustmentAmt
+                unit1BedroomsCount
+                unit2BedroomsCount
+                unit3BedroomsCount
+                unit4BedroomsCount
+              }
+              proposedAssociationFeesAmt
+              proposedFloodInsuranceAmt
+              proposedHazardInsuranceAmt
+              proposedOtherExpensesAmt
+              proposedPropertyTaxesAmt
+              newConstructionYn
+            }
+            familyUnits
+            hazardInsuranceAmt
+            floodInsuranceAmt
+            landValueAmt
+          }
+        }
+      }
+    }
+    homeLoanDetails {
+      loanPurposeTypeId
+      correspondentId
+      programTypeId
+    }
+    homeLoanKeyDates {
+      loanNoteDate
+      firstPaymentDueDate
+      maturityDate
+      scheduledClosingDateTime
+    }
+    homeLoanRecordingDatas {
+      mersMinNumber
+    }
+    homeLoanFinancialDatas {
+      interestRatePct
+      loanAmt
+    }
+    homeLoanSummaryDatas {
+      actualPiPaymentAmt
+      totalLoanAmt
+      firstMtgPmtAmt
+      borrowerSubsidyPaidAmt
+      sellerSubsidyPaidAmt
+      otherSubsidyPaidAmt
+      lenderSubsidyPaidAmt
+      netSubsidyAmt
+      representativeCreditScore
+    }
+    homeLoanProductDatas {
+      lateChargePct
+      amortizationTermMonths
+      loanProductId
+      buydownTypeId
+      buydownPlanDesc
+      buydownPlanId
+    }
+    homeLoanDocPackages {
+      lateChargeGracePeriod
+    }
+    homeLoanMtgInsDatas {
+      pmiCompanyId
+      pmiCertificateNumber
+      lenderPaidPremiumYn
+    }
+    homeLoanEscrows {
+      escrowCategoryTypeId
+      escrowItemDescription
+      escrowItemId
+      annualEscrowAmt
+      hudLineNumber
+    }
+    homeLoanSellPurchAdvs {
+      principalPurchasedAmt
+    }
+    homeLoanServicingInfos {
+      escrowBalanceAmt
+    }
+    homeLoanBorrowers {
+      contact {
+        contactPersonalInfos {
+          firstName
+          middleName
+          lastName
+          birthDate
+          age
+          genderId
+        }
+        contactAddresses {
+          address {
+            addressLineOne
+            city
+            stateId
+            postalCodeId
+          }
+        }
+        contactRaces {
+          raceId
+        }
+        contactEthnicities {
+          ethnicityId
+        }
+        contactEmails {
+          emailAddress {
+            emailAddress
+          }
+        }
+        homeLoanBorrowers {
+          borrowerNumber
+        }
+      }
+      firstTimeHomebuyerYn
+    }
+    homeLoanMtgInsRates {
+      paymentAmt
+    }
+    homeLoanClosingInfos {
+      fundingTypeId
+      warehouseBankId
+    }
+  }
+}

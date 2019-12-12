@@ -120,7 +120,8 @@ def create_dir_structure(directory_path,
 
 def write_object_text_to_file(obj,
                               directory_path,
-                              filename):
+                              filename,
+                              remove_file_extension=True):
     """
     Desc:
         Writes the object's string representation to a text file.
@@ -142,7 +143,7 @@ def write_object_text_to_file(obj,
     filename = filename.split(".")[0]
 
 
-    file_dir = f'{directory_path}{convert_to_filename(filename)}.txt'
+    file_dir = f'{directory_path}{convert_to_filename(filename,remove_file_extension=remove_file_extension)}.txt'
 
     f = open(file_dir, 'w')
     f.write('obj = ' + repr(obj) + '\n')
@@ -150,7 +151,8 @@ def write_object_text_to_file(obj,
 
 def pickle_object_to_file(obj,
                           directory_path,
-                          filename):
+                          filename,
+                          remove_file_extension=True):
     """
     Desc:
         Writes the object to a pickle file.
@@ -170,7 +172,7 @@ def pickle_object_to_file(obj,
 
     # Ensures no file extensions in filename
     filename = filename.split(".")[0]
-    file_dir = f'{directory_path}{convert_to_filename(filename)}.pkl'
+    file_dir = f'{directory_path}{convert_to_filename(filename,remove_file_extension=remove_file_extension)}.pkl'
     list_pickle = open(file_dir, 'wb')
     pickle.dump(obj,
                 list_pickle)
@@ -178,7 +180,8 @@ def pickle_object_to_file(obj,
 
 def dict_to_json_file(dict_obj,
                       directory_path,
-                      filename):
+                      filename,
+                      remove_file_extension=True):
     """
     Desc:
         Writes a dict to a json file.
@@ -196,7 +199,7 @@ def dict_to_json_file(dict_obj,
     directory_path = correct_directory_path(directory_path)
     check_if_directory_exists(directory_path)
 
-    with open(f'{directory_path}{convert_to_filename(filename)}.json',
+    with open(f'{directory_path}{convert_to_filename(filename,remove_file_extension=remove_file_extension)}.json',
               'w',
               encoding='utf-8') as outfile:
         json.dump(dict_obj,

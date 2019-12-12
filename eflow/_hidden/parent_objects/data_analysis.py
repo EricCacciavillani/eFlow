@@ -18,14 +18,32 @@ __maintainer__ = "EricCacciavillani"
 __email__ = "eric.cacciavillani@gmail.com"
 
 class DataAnalysis(FileOutput):
+    """
+        All objects in data_analysis folder of eflow are related to this object.
+    """
 
     def __init__(self,
                  df_features,
                  project_name,
                  overwrite_full_path=None):
+        """
+        Args:
+            df_features: DataFrameTypes from eflow
+                DataFrameTypes object.
+
+            project_name: string
+                Sub directory to create on top of the directory
+                'PARENT_OUTPUT_FOLDER_NAME'.
+
+            overwrite_full_path: string
+                The passed directory path must already exist. Will completely
+                ignore the project name and attempt to point to this already
+                created directory.
+        """
 
         self.__df_features = copy.deepcopy(df_features)
 
+        # Create/Setup project directory
         FileOutput.__init__(self,
                             project_name,
                             overwrite_full_path)
@@ -47,17 +65,17 @@ class DataAnalysis(FileOutput):
             an error if it can't.
 
         Args:
-            df:
+            df: pd.Dataframe
                 Pandas DataFrame object
 
-            filename:
+            filename: string
                 If set to 'None' will default to a pre-defined string;
                 unless it is set to an actual filename.
 
-            sub_dir:
+            sub_dir: string
                 Specify the sub directory to append to the pre-defined folder path.
 
-            dataframe_snapshot:
+            dataframe_snapshot: bool
                 Boolean value to determine whether or not generate and compare a
                 snapshot of the dataframe in the dataset's directory structure.
                 Helps ensure that data generated in that directory is correctly
@@ -87,6 +105,7 @@ class DataAnalysis(FileOutput):
                            sub_dir,
                            convert_to_filename(filename))
 
+        # Always raise snapshot error
         except SnapshotMismatchError as e:
             raise e
 
@@ -116,20 +135,20 @@ class DataAnalysis(FileOutput):
             raises an error if it can't.
 
         Args:
-            df:
+            df: pd.Dataframe
                 Pandas DataFrame object of all data.
 
-            table:
+            table: pd.Dataframe
                 Dataframe object to convert to plot.
 
-            filename:
+            filename: string
                 If set to 'None' will default to a pre-defined string;
                 unless it is set to an actual filename.
 
-            sub_dir:
+            sub_dir: string
                 Specify the sub directory to append to the pre-defined folder path.
 
-            dataframe_snapshot:
+            dataframe_snapshot: bool
                 Boolean value to determine whether or not generate and compare a
                 snapshot of the dataframe in the dataset's directory structure.
                 Helps ensure that data generated in that directory is correctly
@@ -139,19 +158,19 @@ class DataAnalysis(FileOutput):
                 If set to true; when generating any graphs will suppress any runtime
                 errors so the program can keep running.
 
-            compare_shape:
+            compare_shape: bool
                 When comparing and creating the dataframe snapshot of the data's
                 shape.
 
-            compare_feature_names:
+            compare_feature_names: bool
                 When comparing and creating the dataframe snapshot of the data's
                 column names.
 
-            compare_random_values:
+            compare_random_values: bool
                 When comparing and creating the dataframe snapshot of the data
                 sudo random values.
 
-            show_index:
+            show_index: bool
                 Show index of the saved dataframe.
         """
 
@@ -160,6 +179,7 @@ class DataAnalysis(FileOutput):
                 raise TypeError(
                     f"Expected param 'sub_dir' to be type string! Was found to be {type(sub_dir)}")
 
+            # Create new snapshot of given data or compare to saved snapshot
             if dataframe_snapshot:
                 df_snapshot = DataFrameSnapshot(compare_shape=compare_shape,
                                                 compare_feature_names=compare_feature_names,
@@ -177,6 +197,7 @@ class DataAnalysis(FileOutput):
                         show_index=show_index,
                         format_float_pos=2)
 
+        # Always raise snapshot error
         except SnapshotMismatchError as e:
             raise e
 
