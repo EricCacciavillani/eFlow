@@ -271,6 +271,7 @@ class NullAnalysis(DataAnalysis):
         """
 
         target_features = set(target_features)
+        print(target_features)
 
         for nan_feature_name in nan_features:
 

@@ -5,8 +5,7 @@ from eflow._hidden.custom_exceptions import UnsatisfiedRequirments, SnapshotMism
 from eflow._hidden.constants import GRAPH_DEFAULTS
 from eflow._hidden.parent_objects import DataAnalysis
 from eflow.utils.pandas_utils import check_if_feature_exists
-from eflow.utils.sys_utils import dict_to_json_file
-from eflow.utils.sys_utils import create_dir_structure
+from eflow.utils.sys_utils import dict_to_json_file, pickle_object_to_file, create_dir_structure
 
 import warnings
 import random
@@ -85,7 +84,8 @@ class FeatureAnalysis(DataAnalysis):
                          suppress_runtime_errors=True,
                          aggregate_target_feature=True,
                          selected_features=None,
-                         extra_tables=True):
+                         extra_tables=True,
+                         statistical_analysis_on_aggregates=True):
         """
         Desc:
             Performs all public methods that generate visualizations/insights
@@ -271,6 +271,11 @@ class FeatureAnalysis(DataAnalysis):
                     for feature_name in missed_features:
                         print(f"\t\tFeature:{feature_name}")
 
+            if statistical_analysis_on_aggregates and target_feature:
+                self.statistical_analysis_on_aggregates(df,
+                                                        target_feature,
+                                                        dataset_name,
+                                                        dataframe_snapshot=False)
         # Ensures that called from perform is turned off
         finally:
             self.__called_from_perform = False
@@ -1846,197 +1851,317 @@ class FeatureAnalysis(DataAnalysis):
             else:
                 raise e
 
-    def statistical_analysis(self,
-                             df,
-                             feature_name,
-                             dataset_name,
-                             display_visuals=True,
-                             display_print=True,
-                             filename=None,
-                             sub_dir=None,
-                             save_file=True,
-                             dataframe_snapshot=True,
-                             suppress_runtime_errors=True):
+    def statistical_analysis_on_aggregates(self,
+                                           df,
+                                           target_features,
+                                           dataset_name,
+                                           dataframe_snapshot=True):
+        """
+        Desc:
+            Aggregates the data of the target feature either by discrete values
+            or by binning/labeling continuous data.
 
-        bins = None
-        labels = None
-        if feature_name in self.__df_features.continuous_numerical_features():
+        Args:
+           df: pd.Dataframe
+               Pandas DataFrame object.
 
-            bins,labels = auto_binning(df,
-                                       self.__df_features,
-                                       feature_name)
+           target_features: list of string
+               Specified target features.
 
-        # for val in (df["SibSp"] <= bins[bin_count + 1]) & (
-        #         df["SibSp"] > bins[bin_count]):
-        #     if val == True:
-        #         print(df["SibSp"][i])
-        #         print(i)
-        #         print()
-        #     i += 1
+           dataset_name: string
+               The dataset's name; this will create a sub-directory in which your
+               generated graph will be inner-nested in.
 
+           dataframe_snapshot: bool
+                Boolean value to determine whether or not generate and compare a
+                snapshot of the dataframe in the dataset's directory structure.
+                Helps ensure that data generated in that directory is correctly
+                associated to a dataframe.
 
-        if labels:
-            feature_values = copy.deepcopy(labels)
-        else:
-            feature_values = list(df[feature_name].sort_values(ascending=True).dropna().unique())
+        Raises:
+            Raises error if the feature data is filled with only nulls or if
+            the json file's snapshot of the given dataframe doesn't match the
+            given dataframe.
+        """
 
-        feature_values.append("All")
-
-        other_feature_values = copy.deepcopy(feature_values)
+        if not self.__called_from_perform and dataframe_snapshot:
+            df_snapshot = DataFrameSnapshot()
+            df_snapshot.check_create_snapshot(df,
+                                              self.__df_features,
+                                              directory_path=self.folder_path + f"/{dataset_name}",
+                                              sub_dir=f"{dataset_name}/_Extras")
 
         feature_stats_dict = dict()
 
 
-        # FUTURE LOOP START HERE; TARGET FEATURE ITERATION
+        # Convert to list of the given string
+        if isinstance(target_features, str):
+            target_features = [target_features]
 
-        feature_stats_dict[feature_name] = dict()
-        feature_val_count = -1
-        feature_pvalues = dict()
+        # Iterate through all target features features
+        for feature_name in target_features:
 
-        for column in df.columns:
+            if feature_name:
+                check_if_feature_exists(df,
+                                        feature_name)
 
-            if feature_name == column:
-                continue
+            # Generate bins and labels for continuous numerical data
+            bins = None
+            labels = None
+            if feature_name in self.__df_features.continuous_numerical_features():
+                bins, labels = auto_binning(df,
+                                            self.__df_features,
+                                            feature_name)
 
-            feature_pvalues[column] = dict()
+            # Labels and bins will act as feature values for aggregation
+            if labels:
+                feature_values = copy.deepcopy(labels)
+            else:
+                feature_values = list(df[feature_name].sort_values(
+                    ascending=True).dropna().unique())
 
+            # Label to compare to all the data without any aggregations
+            feature_values.append("All")
 
-        for main_feature_val in feature_values:
+            # Copy feature values to remove one given value from the feature list at a time
+            other_feature_values = copy.deepcopy(feature_values)
 
-            if main_feature_val == "All":
-                continue
+            # Create target feature dict
+            feature_stats_dict[feature_name] = dict()
+            feature_val_count = -1
+            feature_pvalues = dict()
 
-            other_feature_values.remove(main_feature_val)
-            feature_val_count += 1
+            # Store all pvalues found for every feature
+            for column in df.columns:
 
-            other_feature_val_count = 0
-            for other_feature_val in other_feature_values:
-                feature_stats_dict[feature_name][f"{main_feature_val} -> {other_feature_val}"] = dict()
+                if feature_name == column:
+                    continue
 
-                other_feature_val_count += 1
+                feature_pvalues[column] = dict()
 
-                for iterate_feature_name in df.columns:
+            # Iterate through remaining features
+            for main_feature_val in feature_values:
 
-                    if iterate_feature_name == feature_name:
-                        continue
+                # Ignore "All" for the main feature val since it doesn't actually exist
+                if main_feature_val == "All":
+                    continue
 
-                    if labels:
-                        bool_array = (df[feature_name] <= bins[
-                            feature_val_count + 1]) & (df[feature_name] > bins[
-                            feature_val_count])
-                    else:
-                        bool_array = df[feature_name] == main_feature_val
+                # Don't want repeats or compare same subsets
+                other_feature_values.remove(main_feature_val)
+                feature_val_count += 1
 
-                    tmp_series_a = df[bool_array][iterate_feature_name].dropna()
-                    del bool_array
+                # Create series objects based on the main feature val compared to the other_feature_val
+                other_feature_val_count = 0
+                for other_feature_val in other_feature_values:
+                    feature_stats_dict[feature_name][
+                        f"{main_feature_val} -> {other_feature_val}"] = dict()
 
-                    if other_feature_val == "All":
-                        bool_array = [True for _ in range(0, df.shape[0])]
-                    else:
+                    # Generate series object based on bins/discrete values
+                    other_feature_val_count += 1
+                    for iterate_feature_name in df.columns:
+
+                        # -----
+                        if iterate_feature_name == feature_name:
+                            continue
+
+                        # Create bool array for series object(left)
                         if labels:
                             bool_array = (df[feature_name] <= bins[
-                                feature_val_count + other_feature_val_count + 1]) & (
+                                feature_val_count + 1]) & (
+                                                     df[feature_name] > bins[
+                                                 feature_val_count])
+                        else:
+                            bool_array = df[feature_name] == main_feature_val
+
+                        tmp_series_a = df[bool_array][
+                            iterate_feature_name].dropna()
+                        del bool_array
+
+                        # Create bool array for series object(right)
+                        if other_feature_val == "All":
+                            bool_array = [True for _ in range(0, df.shape[0])]
+                        else:
+                            if labels:
+                                bool_array = (df[feature_name] <= bins[
+                                    feature_val_count + other_feature_val_count + 1]) & (
                                                      df[feature_name] > bins[
                                                  feature_val_count + other_feature_val_count])
 
+                            else:
+                                bool_array = df[
+                                                 feature_name] == other_feature_val
+
+                        tmp_series_b = df[bool_array][
+                            iterate_feature_name].dropna()
+                        del bool_array
+
+                        # Extract out pvalue/statistic based on series data
+                        if len(tmp_series_a) == 0 or len(tmp_series_b) == 0:
+                            pvalue = "NaN"
+                            statistic = "NaN"
                         else:
-                            bool_array = df[feature_name] == other_feature_val
+                            ks_2samp = stats.ks_2samp(tmp_series_a,
+                                                      tmp_series_b)
+                            pvalue = ks_2samp.pvalue
+                            statistic = ks_2samp.statistic
 
-                    tmp_series_b = df[bool_array][iterate_feature_name].dropna()
-                    del bool_array
+                        # Init pvalue/statistic to proper values
+                        feature_stats_dict[feature_name][
+                            f"{main_feature_val} -> {other_feature_val}"][
+                            iterate_feature_name] = dict()
+                        feature_stats_dict[feature_name][
+                            f"{main_feature_val} -> {other_feature_val}"][
+                            iterate_feature_name][
+                            "Kolmogorov-Smirnov statistic"] = dict()
+                        feature_stats_dict[feature_name][
+                            f"{main_feature_val} -> {other_feature_val}"][
+                            iterate_feature_name][
+                            "Kolmogorov-Smirnov statistic"]["P-Value"] = pvalue
 
-                    if len(tmp_series_a) == 0 or len(tmp_series_b) == 0:
-                        pvalue = "NaN"
-                        statistic = "NaN"
-                    else:
-                        ks_2samp = stats.ks_2samp(tmp_series_a,
-                                                  tmp_series_b)
-                        pvalue = ks_2samp.pvalue
-                        statistic = ks_2samp.statistic
+                        feature_stats_dict[feature_name][
+                            f"{main_feature_val} -> {other_feature_val}"][
+                            iterate_feature_name][
+                            "Kolmogorov-Smirnov statistic"][
+                            "Statistic"] = statistic
 
-                    feature_stats_dict[feature_name][
-                        f"{main_feature_val} -> {other_feature_val}"][
-                        iterate_feature_name] = dict()
-                    feature_stats_dict[feature_name][
-                        f"{main_feature_val} -> {other_feature_val}"][
-                        iterate_feature_name][
-                        "Kolmogorov-Smirnov statistic"] = dict()
-                    feature_stats_dict[feature_name][
-                        f"{main_feature_val} -> {other_feature_val}"][
-                        iterate_feature_name][
-                        "Kolmogorov-Smirnov statistic"]["P-Value"] = pvalue
+                        # Don't add to list
+                        if pvalue == "NaN":
+                            continue
 
-                    if pvalue == "NaN":
-                        continue
+                        # Init dict/list if it doesn't exist
+                        if "Kolmogorov-Smirnov statistic" not in \
+                                feature_pvalues[iterate_feature_name]:
+                            feature_pvalues[iterate_feature_name][
+                                "Kolmogorov-Smirnov statistic"] = dict()
+                            feature_pvalues[iterate_feature_name][
+                                "Kolmogorov-Smirnov statistic"][
+                                "All pvalues"] = []
 
-                    if "Kolmogorov-Smirnov statistic" not in feature_pvalues[iterate_feature_name]:
-                        feature_pvalues[iterate_feature_name]["Kolmogorov-Smirnov statistic"] = dict()
-                        feature_pvalues[iterate_feature_name]["Kolmogorov-Smirnov statistic"]["All pvalues"] = []
+                        # Append new pvalue
+                        feature_pvalues[iterate_feature_name][
+                            "Kolmogorov-Smirnov statistic"][
+                            "All pvalues"].append(pvalue)
 
-                    feature_pvalues[iterate_feature_name]["Kolmogorov-Smirnov statistic"]["All pvalues"].append(pvalue)
+            # Generate summary data of pvalues
+            for column in df.columns:
+                if column == feature_name:
+                    continue
+                else:
+                    if column in feature_pvalues:
+                        feature_pvalues[column][
+                            "Kolmogorov-Smirnov statistic"][
+                            "All pvalues"].sort()
 
-                    feature_stats_dict[feature_name][
-                        f"{main_feature_val} -> {other_feature_val}"][
-                        iterate_feature_name][
-                        "Kolmogorov-Smirnov statistic"]["Statistic"] = statistic
+                        # Only create summary if the series is at least the of 2
+                        if len(feature_pvalues[column][
+                                   "Kolmogorov-Smirnov statistic"][
+                                   "All pvalues"]) >= 2:
 
-        for column in df.columns:
-            if column == feature_name:
-                continue
-            else:
-                if column in feature_pvalues:
-                    feature_pvalues[column]["Kolmogorov-Smirnov statistic"]["All pvalues"].sort()
-                    feature_pvalues[column]["Kolmogorov-Smirnov statistic"
-                    ]["Pvalues Summary"] = descr_table(pd.DataFrame({column:feature_pvalues[column][
-                        "Kolmogorov-Smirnov statistic"]["All pvalues"]}),
-                                                       column).to_dict()[column]
+                            feature_pvalues[column][
+                                "Kolmogorov-Smirnov statistic"
+                            ]["Pvalues Summary"] = descr_table(
+                                pd.DataFrame({column: feature_pvalues[column][
+                                    "Kolmogorov-Smirnov statistic"][
+                                    "All pvalues"]}),
+                                column).to_dict()[column]
+                        # Init to an empty dict
+                        else:
+                            feature_pvalues[column][
+                                "Kolmogorov-Smirnov statistic"][
+                                "Pvalues Summary"] = {}
 
-        feature_stats_dict[feature_name]["P-Values"] = feature_pvalues
-        # FEATURE NAMES ITERATION END
+            feature_stats_dict[feature_name]["P-Values"] = feature_pvalues
+        # End target feature loop
 
+        # Generate directories
         create_dir_structure(self.folder_path + dataset_name,
-                             "/_Extras/Statistics/Accept Null Hypothesis")
+                             "_Extras/Statistics/Accept Null Hypothesis")
         create_dir_structure(self.folder_path + dataset_name,
-                             "/_Extras/Statistics/Reject Null Hypothesis")
+                             "_Extras/Statistics/Reject Null Hypothesis")
 
+        # Create json file
         dict_to_json_file(feature_stats_dict,
                           self.folder_path + dataset_name + "/_Extras/Statistics",
                           "Statistics on target features")
 
+        stat_methods_dict = dict()
 
-        for accept_null_plvalue in [.01,.05,.1,.101,.2,.3,.4,.5,.6,.7,.8,.9,1]:
+        for main_feature, relationship_dict in feature_stats_dict.items():
+            for _, stats_on_features in relationship_dict.items():
+                for iterate_feature_name, stats_method_dict in stats_on_features.items():
+                    for stats_method, stats_dict in stats_method_dict.items():
+                        if "All pvalues" in stats_dict:
+
+                            if stats_method not in stat_methods_dict:
+                                stat_methods_dict[stats_method] = pd.DataFrame()
+
+                            stats_dict = copy.deepcopy(stats_dict)
+
+                            for k,v in stats_dict.items():
+                                if v == "NaN":
+                                    stats_dict[k] = [np.nan]
+                                else:
+                                    stats_dict[k] = [v]
+
+                            tmp_stats_df = pd.DataFrame.from_dict(stats_dict["Pvalues Summary"])[["mean","std","var"]]
+                            tmp_stats_df.index = [f"{main_feature} compared to {iterate_feature_name}"]
+                            stat_methods_dict[stats_method] = stat_methods_dict[stats_method].append(tmp_stats_df,
+                                                                                                     ignore_index=False)
+        for stats_method in stat_methods_dict:
+            stat_methods_dict[stats_method].sort_values(
+                by=["mean", "std", "var"],
+                ascending=True,
+                inplace=True)
+
+        pickle_object_to_file(stat_methods_dict,
+                              self.folder_path + dataset_name + "/_Extras/Statistics",
+                              "Stat methods of features dataframes",
+                              remove_file_extension=False)
+
+        # Generate multiple json files based on the following pvalues
+        for accept_null_plvalue in [.01, .05, .1, .101, .2, .3, .4, .5, .6, .7,
+                                    .8, .9, 1]:
             json_dict = copy.deepcopy(feature_stats_dict)
             tmp_dict = copy.deepcopy(feature_stats_dict)
-            for main_feature,relationship_dict in tmp_dict.items():
-                for relationship_string,stats_on_features in relationship_dict.items():
-                    for iterate_feature_name,stats_method_dict in stats_on_features.items():
+            for main_feature, relationship_dict in tmp_dict.items():
+                for relationship_string, stats_on_features in relationship_dict.items():
+                    for iterate_feature_name, stats_method_dict in stats_on_features.items():
                         for stats_method, stats_dict in stats_method_dict.items():
 
+                            # Not a relationship string; Re-access pvalue list and summary
                             if relationship_string == "P-Values":
 
-                                if "P-Values" not in json_dict[main_feature] or iterate_feature_name not in json_dict[main_feature]["P-Values"]:
+                                if "P-Values" not in json_dict[
+                                    main_feature] or iterate_feature_name not in \
+                                        json_dict[main_feature]["P-Values"]:
                                     break
 
                                 filter_pvalues = np.asarray(
                                     json_dict[main_feature]["P-Values"][
-                                        iterate_feature_name][stats_method]["All pvalues"])
+                                        iterate_feature_name][stats_method][
+                                        "All pvalues"])
 
                                 if accept_null_plvalue <= .1:
                                     filter_pvalues = filter_pvalues[
                                         filter_pvalues <= accept_null_plvalue]
                                 else:
                                     filter_pvalues = filter_pvalues[
-                                        filter_pvalues > accept_null_plvalue]
+                                        filter_pvalues >= accept_null_plvalue]
 
                                 json_dict[main_feature]["P-Values"][
-                                          iterate_feature_name][stats_method]["All pvalues"] = list(filter_pvalues)
+                                    iterate_feature_name][stats_method][
+                                    "All pvalues"] = list(filter_pvalues)
 
                                 if len(filter_pvalues) >= 2:
                                     json_dict[main_feature][
-                                    "P-Values"][iterate_feature_name][stats_method]["Pvalues Summary"] = descr_table(
+                                        "P-Values"][iterate_feature_name][
+                                        stats_method]["Pvalues Summary"] = \
+                                    descr_table(
                                         pd.DataFrame(
-                                            {iterate_feature_name: list(filter_pvalues)}),
-                                            iterate_feature_name).to_dict()[iterate_feature_name]
+                                            {iterate_feature_name: list(
+                                                filter_pvalues)}),
+                                        iterate_feature_name).to_dict()[
+                                        iterate_feature_name]
                                 else:
                                     json_dict[main_feature][
                                         "P-Values"][iterate_feature_name][
@@ -2047,12 +2172,16 @@ class FeatureAnalysis(DataAnalysis):
                             pvalue = stats_dict["P-Value"]
                             if accept_null_plvalue <= .1:
                                 if pvalue == "NaN" or pvalue > accept_null_plvalue:
-                                    del json_dict[main_feature][relationship_string][iterate_feature_name]
+                                    del json_dict[main_feature][
+                                        relationship_string][
+                                        iterate_feature_name]
                             else:
                                 if pvalue == "NaN" or pvalue < accept_null_plvalue:
-                                    del json_dict[main_feature][relationship_string][iterate_feature_name]
+                                    del json_dict[main_feature][
+                                        relationship_string][
+                                        iterate_feature_name]
 
-
+            # Push to accept or reject null hypothesis folder
             if accept_null_plvalue <= .1:
                 dict_to_json_file(json_dict,
                                   self.folder_path + dataset_name + "/_Extras/Statistics/Accept Null Hypothesis",
@@ -2063,7 +2192,6 @@ class FeatureAnalysis(DataAnalysis):
                                   self.folder_path + dataset_name + "/_Extras/Statistics/Reject Null Hypothesis",
                                   f"Reject Null Hypothesis on target features where pvalue >= {accept_null_plvalue}",
                                   remove_file_extension=False)
-
 
     def plot_jointplot_graph(self,
                              df,
