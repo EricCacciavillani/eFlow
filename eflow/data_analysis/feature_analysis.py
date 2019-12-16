@@ -150,6 +150,11 @@ class FeatureAnalysis(DataAnalysis):
                 Will only focus on these selected feature's and will ignore
                 the other given features.
 
+            statistical_analysis_on_aggregates: bool
+                If set to true then the function 'statistical_analysis_on_aggregates'
+                will run; which aggregates the data of the target feature either
+                by discrete values or by binning/labeling continuous data.
+
         Raises:
             If an empty dataframe is passed to this function or if the same
             dataframe is passed to it raise error.
@@ -273,7 +278,7 @@ class FeatureAnalysis(DataAnalysis):
 
             if statistical_analysis_on_aggregates and target_feature:
                 self.statistical_analysis_on_aggregates(df,
-                                                        target_feature,
+                                                        target_features,
                                                         dataset_name,
                                                         dataframe_snapshot=False)
         # Ensures that called from perform is turned off
@@ -1904,6 +1909,8 @@ class FeatureAnalysis(DataAnalysis):
             if feature_name:
                 check_if_feature_exists(df,
                                         feature_name)
+            else:
+                continue
 
             # Generate bins and labels for continuous numerical data
             bins = None

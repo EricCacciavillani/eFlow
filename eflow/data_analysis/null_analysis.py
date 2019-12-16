@@ -269,9 +269,7 @@ class NullAnalysis(DataAnalysis):
             If an empty dataframe is passed to this function or if the same
             dataframe is passed to it raise error.
         """
-
         target_features = set(target_features)
-        print(target_features)
 
         for nan_feature_name in nan_features:
 
@@ -292,6 +290,7 @@ class NullAnalysis(DataAnalysis):
                 dataframe_snapshot=False,
                 suppress_runtime_errors=suppress_runtime_errors,
                 aggregate_target_feature=aggregate_target_feature,
+                statistical_analysis_on_aggregates=False,
                 selected_features=selected_features,
                 extra_tables=extra_tables)
 

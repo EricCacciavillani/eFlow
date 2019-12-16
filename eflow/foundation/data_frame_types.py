@@ -101,6 +101,8 @@ class DataFrameTypes:
         # Dummy encoded feature dictionaries
         self.__dummy_encoded_features = dict()
 
+        # Feature's labels and bins
+        self.__feature_labels_bins_dict = dict()
 
         # Data type assertions without nulls
         if ignore_nulls and df.isnull().values.any():
@@ -769,12 +771,42 @@ class DataFrameTypes:
 
     def set_feature_to_null_only_features(self,
                                           feature_name):
+        """
+        Desc:
+            Moves feature to only null series data feature set.
+
+        Args:
+            feature_name:
+                Feature name or a list of feature names to move to given set.
+        """
         if isinstance(feature_name, str):
             feature_name = [feature_name]
 
         for name in feature_name:
             self.remove_feature(name)
             self.__null_only_features.add(name)
+
+    def set_feature_binning(self,
+                            feature_name,
+                            bins,
+                            labels):
+
+        if not isinstance(labels,list):
+            labels = list(labels)
+
+        if not isinstance(bins,list):
+            bins = list(bins)
+
+        self.__feature_labels_bins_dict[feature_name] = dict()
+        self.__feature_labels_bins_dict[feature_name]["bins"] = bins
+        self.__feature_labels_bins_dict[feature_name]["labels"] = labels
+
+    def get_feature_binning(self,
+                            feature_name):
+        if feature_name in self.__feature_labels_bins_dict:
+            return self.__feature_labels_bins_dict[feature_name]
+        else:
+            return None
 
     def set_feature_colors(self,
                            feature_value_color_dict):
