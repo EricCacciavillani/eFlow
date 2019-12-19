@@ -84,8 +84,7 @@ class DataEncoder(DataPipelineSegment):
 
             for feature_name in feature_value_represention.keys():
                 if feature_name not in df.columns:
-                    raise KeyError(
-                        f"Dataframe doesn't have feature name '{feature_name}'.")
+                    continue
 
                 if df[feature_name].dtype == "O":
                     df[feature_name].replace(
@@ -97,8 +96,7 @@ class DataEncoder(DataPipelineSegment):
         for feature_name in encoder_dict.keys():
 
             if feature_name not in df.columns:
-                raise KeyError(
-                    f"Dataframe doesn't have feature name '{feature_name}'.")
+                continue
 
             if df[feature_name].dtype == "O":
                 df[feature_name].replace(encoder_dict[feature_name],
@@ -147,8 +145,7 @@ class DataEncoder(DataPipelineSegment):
         for feature_name in decoder_dict.keys():
 
             if feature_name not in df.columns:
-                raise KeyError(
-                    f"Dataframe doesn't have feature name '{feature_name}'.")
+                continue
 
             if df[feature_name].dtype != "O":
                 df[feature_name].replace(decoder_dict[feature_name],
@@ -160,8 +157,7 @@ class DataEncoder(DataPipelineSegment):
             # Replace values by each corresponding feature value related dict
             for feature_name in feature_value_represention.keys():
                 if feature_name not in df.columns:
-                    raise KeyError(
-                        f"Dataframe doesn't have feature name '{feature_name}'.")
+                    continue
 
                 if df[feature_name].dtype == "O":
                     df[feature_name].replace(feature_value_represention[feature_name],
@@ -434,10 +430,10 @@ class DataEncoder(DataPipelineSegment):
             # Add feature back to original set in df_features
             try:
                 pd.to_numeric(new_series.dropna())
-                df_features._DataFrameTypes__categorical_features.add(feature_name)
+                df_features.add_new_categorical_feature(feature_name)
 
             except ValueError:
-                df_features._DataFrameTypes__string_features.add(feature_name)
+                df_features.add_new_string_feature(feature_name)
 
         if _add_to_que:
             self._DataPipelineSegment__add_function_to_que("revert_dummies",

@@ -4,7 +4,7 @@ from eflow.utils.pandas_utils import descr_table,value_counts_table
 from eflow._hidden.custom_exceptions import UnsatisfiedRequirments, SnapshotMismatchError
 from eflow._hidden.constants import GRAPH_DEFAULTS
 from eflow._hidden.parent_objects import DataAnalysis
-from eflow.utils.pandas_utils import check_if_feature_exists
+from eflow.utils.pandas_utils import check_if_feature_exists, generate_meta_data
 from eflow.utils.sys_utils import dict_to_json_file, pickle_object_to_file, create_dir_structure
 
 import warnings
@@ -39,7 +39,7 @@ class FeatureAnalysis(DataAnalysis):
                  project_sub_dir="",
                  project_name="Feature Analysis",
                  overwrite_full_path=None,
-                 notebook_mode=True):
+                 notebook_mode=False):
         """
         Args:
 
@@ -61,7 +61,6 @@ class FeatureAnalysis(DataAnalysis):
         """
 
         DataAnalysis.__init__(self,
-                              df_features,
                               f'{project_sub_dir}/{project_name}',
                               overwrite_full_path)
 
@@ -176,6 +175,10 @@ class FeatureAnalysis(DataAnalysis):
                                                  self.__df_features,
                                                  directory_path=self.folder_path,
                                                  sub_dir=f"{dataset_name}/_Extras")
+
+            generate_meta_data(df,
+                               self.folder_path,
+                               f"{dataset_name}" + "/_Extras")
 
             # Set to true to represent the function call was made with perform
             self.__called_from_perform = True
@@ -367,6 +370,7 @@ class FeatureAnalysis(DataAnalysis):
 
         # Check if feature exist in df_features and by extension the dataframe
         if target_feature:
+
             if target_feature not in self.__df_features.all_features():
                 raise UnsatisfiedRequirments("Target feature does not exist in pre-defined "
                                              "df_features!")
@@ -381,7 +385,6 @@ class FeatureAnalysis(DataAnalysis):
         if feature_name not in df.columns:
             raise UnsatisfiedRequirments("Feature name does not exist in "
                                          "the dataframe!")
-
         # Generate sub directory structure for plots involving two features
         two_dim_sub_dir = None
         if sub_dir:
@@ -800,11 +803,12 @@ class FeatureAnalysis(DataAnalysis):
                     dataframe_snapshot = False
 
                 self.save_plot(df=df,
+                               df_features=self.__df_features,
                                filename=filename,
                                sub_dir=sub_dir,
                                dataframe_snapshot=dataframe_snapshot,
-                               suppress_runtime_errors=suppress_runtime_errors)
-
+                               suppress_runtime_errors=suppress_runtime_errors,
+                               meta_data=not self.__called_from_perform)
 
             if self.__notebook_mode and display_visuals:
                 plt.show()
@@ -1033,10 +1037,12 @@ class FeatureAnalysis(DataAnalysis):
                     dataframe_snapshot = False
 
                 self.save_plot(df=df,
+                               df_features=self.__df_features,
                                filename=filename,
                                sub_dir=sub_dir,
                                dataframe_snapshot=dataframe_snapshot,
-                               suppress_runtime_errors=suppress_runtime_errors)
+                               suppress_runtime_errors=suppress_runtime_errors,
+                               meta_data=not self.__called_from_perform)
 
             if self.__notebook_mode and display_visuals:
                 plt.show()
@@ -1229,10 +1235,12 @@ class FeatureAnalysis(DataAnalysis):
                     dataframe_snapshot = False
 
                 self.save_plot(df=df,
+                               df_features=self.__df_features,
                                filename=filename,
                                sub_dir=sub_dir,
                                dataframe_snapshot=dataframe_snapshot,
-                               suppress_runtime_errors=suppress_runtime_errors)
+                               suppress_runtime_errors=suppress_runtime_errors,
+                               meta_data=not self.__called_from_perform)
 
             if self.__notebook_mode and display_visuals:
                 plt.show()
@@ -1407,10 +1415,12 @@ class FeatureAnalysis(DataAnalysis):
                     dataframe_snapshot = False
 
                 self.save_plot(df=df,
+                               df_features=self.__df_features,
                                filename=filename,
                                sub_dir=sub_dir,
                                dataframe_snapshot=dataframe_snapshot,
-                               suppress_runtime_errors=suppress_runtime_errors)
+                               suppress_runtime_errors=suppress_runtime_errors,
+                               meta_data=not self.__called_from_perform)
 
 
             if self.__notebook_mode and display_visuals:
@@ -1664,10 +1674,12 @@ class FeatureAnalysis(DataAnalysis):
                     dataframe_snapshot = False
 
                 self.save_plot(df=df,
+                               df_features=self.__df_features,
                                filename=filename,
                                sub_dir=sub_dir,
                                dataframe_snapshot=dataframe_snapshot,
-                               suppress_runtime_errors=suppress_runtime_errors)
+                               suppress_runtime_errors=suppress_runtime_errors,
+                               meta_data=not self.__called_from_perform)
 
             if self.__notebook_mode and display_visuals:
                 plt.show()
@@ -1832,11 +1844,12 @@ class FeatureAnalysis(DataAnalysis):
                     dataframe_snapshot = False
 
                 self.save_plot(df=df,
+                               df_features=self.__df_features,
                                filename=filename,
                                sub_dir=sub_dir,
                                dataframe_snapshot=dataframe_snapshot,
-                               suppress_runtime_errors=suppress_runtime_errors)
-
+                               suppress_runtime_errors=suppress_runtime_errors,
+                               meta_data=not self.__called_from_perform)
 
             if self.__notebook_mode and display_visuals:
                 plt.show()
@@ -2009,8 +2022,8 @@ class FeatureAnalysis(DataAnalysis):
                         else:
                             ks_2samp = stats.ks_2samp(tmp_series_a,
                                                       tmp_series_b)
-                            pvalue = ks_2samp.pvalue
-                            statistic = ks_2samp.statistic
+                            pvalue = float(ks_2samp.pvalue)
+                            statistic = float(ks_2samp.statistic)
 
                         # Init pvalue/statistic to proper values
                         feature_stats_dict[feature_name][
@@ -2051,8 +2064,9 @@ class FeatureAnalysis(DataAnalysis):
 
             # Generate summary data of pvalues
             for column in df.columns:
-                if column == feature_name:
+                if column == feature_name or len(feature_pvalues[column].keys()) == 0:
                     continue
+
                 else:
                     if column in feature_pvalues:
                         feature_pvalues[column][
@@ -2110,10 +2124,11 @@ class FeatureAnalysis(DataAnalysis):
                                 else:
                                     stats_dict[k] = [v]
 
-                            tmp_stats_df = pd.DataFrame.from_dict(stats_dict["Pvalues Summary"])[["mean","std","var"]]
-                            tmp_stats_df.index = [f"{main_feature} compared to {iterate_feature_name}"]
-                            stat_methods_dict[stats_method] = stat_methods_dict[stats_method].append(tmp_stats_df,
-                                                                                                     ignore_index=False)
+                            if len(stats_dict['Pvalues Summary'][0]) > 0:
+                                tmp_stats_df = pd.DataFrame.from_dict(stats_dict["Pvalues Summary"])[["mean","std","var"]]
+                                tmp_stats_df.index = [f"{main_feature} compared to {iterate_feature_name}"]
+                                stat_methods_dict[stats_method] = stat_methods_dict[stats_method].append(tmp_stats_df,
+                                                                                           ignore_index=False)
         for stats_method in stat_methods_dict:
             stat_methods_dict[stats_method].sort_values(
                 by=["mean", "std", "var"],
@@ -2366,10 +2381,12 @@ class FeatureAnalysis(DataAnalysis):
                     dataframe_snapshot = False
 
                 self.save_plot(df=df,
+                               df_features=self.__df_features,
                                filename=filename,
                                sub_dir=sub_dir,
                                dataframe_snapshot=dataframe_snapshot,
-                               suppress_runtime_errors=suppress_runtime_errors)
+                               suppress_runtime_errors=suppress_runtime_errors,
+                               meta_data=not self.__called_from_perform)
 
             if self.__notebook_mode and display_visuals:
                 plt.show()
@@ -2501,12 +2518,14 @@ class FeatureAnalysis(DataAnalysis):
                     dataframe_snapshot = False
 
                 self.save_table_as_plot(df=df,
+                                        df_features=self.__df_features,
                                         filename=filename,
                                         sub_dir=sub_dir,
                                         dataframe_snapshot=dataframe_snapshot,
                                         suppress_runtime_errors=suppress_runtime_errors,
                                         table=val_counts_df,
-                                        show_index=True)
+                                        show_index=True,
+                                        meta_data=not self.__called_from_perform)
 
         except SnapshotMismatchError as e:
             raise e
@@ -2622,11 +2641,14 @@ class FeatureAnalysis(DataAnalysis):
                     dataframe_snapshot = False
 
                 self.save_table_as_plot(df=df,
+                                        df_features=self.__df_features,
                                         filename=filename,
                                         sub_dir=sub_dir,
                                         dataframe_snapshot=dataframe_snapshot,
                                         suppress_runtime_errors=suppress_runtime_errors,
-                                        table=desc_df)
+                                        table=desc_df,
+                                        meta_data=not self.__called_from_perform,
+                                        show_index=True)
 
         except SnapshotMismatchError as e:
             raise e
@@ -2729,7 +2751,6 @@ class FeatureAnalysis(DataAnalysis):
             tmp_df = tmp_df.groupby([feature_name, other_feature_name]).size().to_frame()
             tmp_df.columns = ["Counts"]
 
-
             if self.__notebook_mode:
                 if display_visuals:
                     display(tmp_df)
@@ -2745,18 +2766,22 @@ class FeatureAnalysis(DataAnalysis):
             if not sub_dir:
                 sub_dir = f"{dataset_name}/{feature_name}"
 
+            tmp_df["Counts"] = tmp_df["Counts"].sort_values(ascending=False)
+
             if save_file:
 
                 if self.__called_from_perform:
                     dataframe_snapshot = False
 
-                self.save_table_as_plot(df=df,
+                self.save_table_as_plot(df=tmp_df,
+                                        df_features=self.__df_features,
                                         filename=filename,
                                         sub_dir=sub_dir,
                                         dataframe_snapshot=dataframe_snapshot,
                                         suppress_runtime_errors=suppress_runtime_errors,
                                         table=tmp_df,
-                                        show_index=True)
+                                        show_index=True,
+                                        meta_data=not self.__called_from_perform)
 
         except SnapshotMismatchError as e:
             raise e

@@ -95,7 +95,6 @@ class DataFrameSnapshot:
             Will raise a Mismatch error if the json file didn't match upp with the
             passed dataframe snapshot; causing the program to stop in runtime.
         """
-
         if not isinstance(df, pd.DataFrame):
             raise TypeError(f"'df' must be a pandas datafram object not a {type(df)}")
 

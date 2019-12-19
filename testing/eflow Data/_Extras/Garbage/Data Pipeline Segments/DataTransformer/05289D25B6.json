@@ -1,0 +1,20 @@
+{
+  "Pipeline Segment": {
+    "Object Type": "DataEncoder",
+    "Functions Performed Order": {
+      "Function Order 1": {
+        "encode_data": {
+          "Params Dict": {
+            "apply_value_representation": true
+          }
+        }
+      },
+      "Function Order 2": {
+        "make_values_bool": {
+          "Params Dict": {}
+        }
+      }
+    },
+    "Function Count": 2
+  }
+}

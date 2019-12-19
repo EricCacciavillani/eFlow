@@ -1,6 +1,6 @@
 from eflow.utils.image_processing_utils import create_plt_png
 from eflow.utils.string_utils import correct_directory_path
-from eflow.utils.sys_utils import write_object_text_to_file
+from eflow.utils.sys_utils import write_object_text_to_file, create_dir_structure
 from eflow._hidden.custom_exceptions import UnsatisfiedRequirments
 
 import pandas as pd
@@ -168,47 +168,60 @@ def missing_values_table(df):
 
 
 def generate_meta_data(df,
-                       output_folder_path):
+                       output_folder_path,
+                       sub_dir):
     """
     Desc:
         Creates files representing the shape and feature types of the dataframe.
 
     Args:
-        df:
+        df: pd.Dataframe
             Pandas DataFrame object
 
-        output_folder_path:
+        output_folder_path: str
             Pre defined path to already existing directory to output file(s).
+
+        sub_dir: str
+            Path to be possibly generated.
 
     Returns:
         Creates meta data on the passed datafrane.
     """
+    create_dir_structure(output_folder_path,
+                         correct_directory_path(sub_dir + "/Meta Data"))
+
+    output_folder_path = correct_directory_path(output_folder_path)
 
     # Create files relating to dataframe's shape
     shape_df = pd.DataFrame.from_dict({'Rows': [df.shape[0]],
                                        'Columns': [df.shape[1]]})
     df_to_image(shape_df,
-                output_folder_path,
-                "_Extras",
+                f"{output_folder_path}/{sub_dir}",
+                "Meta Data",
                 "Dataframe Shape Table",
                 show_index=False)
 
     write_object_text_to_file(shape_df.to_dict('records'),
-                              output_folder_path,
+                              f"{output_folder_path}/{sub_dir}/Meta Data",
                               "Dataframe Shape Text")
 
     # Create files relating to dataframe's types
     dtypes_df = data_types_table(df)
 
     df_to_image(dtypes_df,
-                output_folder_path,
-                "_Extras",
+                f"{output_folder_path}/{sub_dir}",
+                "Meta Data",
                 "Dataframe Types Table",
-                show_index=False)
+                show_index=True)
 
-    write_object_text_to_file(shape_df.to_dict('index'),
-                              output_folder_path,
-                              "Dataframe Feature Types Text")
+
+    # Missing value table
+    mis_val_table = missing_values_table(df)
+    df_to_image(mis_val_table,
+                f"{output_folder_path}/{sub_dir}",
+                "Meta Data",
+                "Missing Data Table",
+                show_index=True)
 
 
 def auto_binning(df,

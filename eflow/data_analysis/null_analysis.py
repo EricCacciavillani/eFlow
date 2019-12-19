@@ -1,9 +1,9 @@
 from eflow._hidden.constants import GRAPH_DEFAULTS
 from eflow._hidden.custom_exceptions import SnapshotMismatchError
-from eflow.utils.pandas_utils import missing_values_table
 from eflow._hidden.general_objects import DataFrameSnapshot
 from eflow._hidden.parent_objects import DataAnalysis
 from eflow.data_analysis.feature_analysis import FeatureAnalysis
+from eflow.utils.pandas_utils import missing_values_table, generate_meta_data
 import copy
 from IPython.display import display
 
@@ -32,7 +32,7 @@ class NullAnalysis(DataAnalysis):
                  project_sub_dir="",
                  project_name="Missing Data",
                  overwrite_full_path=None,
-                 notebook_mode=True):
+                 notebook_mode=False):
         """
         Args:
             df_features:
@@ -53,7 +53,6 @@ class NullAnalysis(DataAnalysis):
         """
 
         DataAnalysis.__init__(self,
-                              df_features,
                               f'{project_sub_dir}/{project_name}',
                               overwrite_full_path)
 
@@ -133,6 +132,9 @@ class NullAnalysis(DataAnalysis):
                                                       directory_path=self.folder_path,
                                                       sub_dir=f"{dataset_name}/_Extras")
 
+                generate_meta_data(df,
+                                   self.folder_path,
+                                   f"{dataset_name}" + "/_Extras")
 
                 # Set to true to represent the function call was made with perform
                 self.__called_from_perform = True
@@ -202,6 +204,7 @@ class NullAnalysis(DataAnalysis):
                                       aggregate_target_feature=True,
                                       selected_features=None,
                                       extra_tables=True,
+                                      statistical_analysis_on_aggregates=True,
                                       nan_features=[]):
         """
         Desc:
@@ -250,6 +253,11 @@ class NullAnalysis(DataAnalysis):
                         These graphics may create duplicates if you already applied
                         an aggregation in 'perform_analysis'
 
+            statistical_analysis_on_aggregates: bool
+                If set to true then the function 'statistical_analysis_on_aggregates'
+                will run; which aggregates the data of the target feature either
+                by discrete values or by binning/labeling continuous data.
+
             aggregate_target_feature: bool
                 Aggregate the data of the target feature if the data is
                 non-continuous data.
@@ -272,25 +280,31 @@ class NullAnalysis(DataAnalysis):
         target_features = set(target_features)
 
         for nan_feature_name in nan_features:
+            print(nan_features)
+
+            new_target_features = copy.deepcopy(target_features)
+
+            if nan_feature_name in new_target_features:
+                new_target_features.discard(nan_feature_name)
 
             # No null data ignore feature
             if df[df[nan_feature_name].isna()].shape[0] == 0:
                 print(f"No nan data found for {nan_feature_name}")
                 continue
 
-            print(f"All nan data for {nan_feature_name}")
+            print(f"Feature Analysis on data where {nan_feature_name} = NaN")
 
             self.__feature_analysis.perform_analysis(
                 df[df[nan_feature_name].isna()].drop(columns=[nan_feature_name]),
                 dataset_name=dataset_name + "/Feature Analysis of Null Data/" + nan_feature_name + " = NaN",
-                target_features=target_features.discard(nan_feature_name),
+                target_features=new_target_features,
                 display_visuals=display_visuals,
                 display_print=display_print,
                 save_file=save_file,
                 dataframe_snapshot=False,
                 suppress_runtime_errors=suppress_runtime_errors,
                 aggregate_target_feature=aggregate_target_feature,
-                statistical_analysis_on_aggregates=False,
+                statistical_analysis_on_aggregates=statistical_analysis_on_aggregates,
                 selected_features=selected_features,
                 extra_tables=extra_tables)
 
@@ -417,10 +431,12 @@ class NullAnalysis(DataAnalysis):
                     dataframe_snapshot = False
 
                 self.save_plot(df=df,
+                               df_features=self.__df_features,
                                filename=filename,
                                sub_dir=sub_dir,
                                dataframe_snapshot=dataframe_snapshot,
-                               suppress_runtime_errors=suppress_runtime_errors)
+                               suppress_runtime_errors=suppress_runtime_errors,
+                               meta_data=not self.__called_from_perform)
 
             if self.__notebook_mode and display_visuals:
                 plt.show()
@@ -570,10 +586,12 @@ class NullAnalysis(DataAnalysis):
                     dataframe_snapshot = False
 
                 self.save_plot(df=df,
+                               df_features=self.__df_features,
                                filename=filename,
                                sub_dir=sub_dir,
                                dataframe_snapshot=dataframe_snapshot,
-                               suppress_runtime_errors=suppress_runtime_errors)
+                               suppress_runtime_errors=suppress_runtime_errors,
+                               meta_data=not self.__called_from_perform)
 
             if self.__notebook_mode and display_visuals:
                 plt.show()
@@ -706,10 +724,12 @@ class NullAnalysis(DataAnalysis):
                     dataframe_snapshot = False
 
                 self.save_plot(df=df,
+                               df_features=self.__df_features,
                                filename=filename,
                                sub_dir=sub_dir,
                                dataframe_snapshot=dataframe_snapshot,
-                               suppress_runtime_errors=suppress_runtime_errors)
+                               suppress_runtime_errors=suppress_runtime_errors,
+                               meta_data=not self.__called_from_perform)
 
             if self.__notebook_mode and display_visuals:
                 plt.show()
@@ -837,10 +857,12 @@ class NullAnalysis(DataAnalysis):
                     dataframe_snapshot = False
 
                 self.save_plot(df=df,
+                               df_features=self.__df_features,
                                filename=filename,
                                sub_dir=sub_dir,
                                dataframe_snapshot=dataframe_snapshot,
-                               suppress_runtime_errors=suppress_runtime_errors)
+                               suppress_runtime_errors=suppress_runtime_errors,
+                               meta_data=not self.__called_from_perform)
 
 
             if self.__notebook_mode and display_visuals:
@@ -953,6 +975,7 @@ class NullAnalysis(DataAnalysis):
                     dataframe_snapshot = False
 
                 self.save_table_as_plot(df=df,
+                                        df_features=self.__df_features,
                                         filename=filename,
                                         sub_dir=sub_dir,
                                         dataframe_snapshot=dataframe_snapshot,

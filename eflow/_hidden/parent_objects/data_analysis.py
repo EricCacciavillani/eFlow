@@ -1,7 +1,7 @@
 from eflow._hidden.parent_objects import FileOutput
 from eflow._hidden.general_objects import DataFrameSnapshot
 from eflow._hidden.custom_exceptions import SnapshotMismatchError
-from eflow.utils.pandas_utils import df_to_image
+from eflow.utils.pandas_utils import df_to_image, generate_meta_data
 from eflow.utils.image_processing_utils import create_plt_png
 from eflow.utils.string_utils import convert_to_filename
 
@@ -23,14 +23,10 @@ class DataAnalysis(FileOutput):
     """
 
     def __init__(self,
-                 df_features,
                  project_name,
                  overwrite_full_path=None):
         """
         Args:
-            df_features: DataFrameTypes from eflow
-                DataFrameTypes object.
-
             project_name: string
                 Sub directory to create on top of the directory
                 'PARENT_OUTPUT_FOLDER_NAME'.
@@ -41,24 +37,23 @@ class DataAnalysis(FileOutput):
                 created directory.
         """
 
-        self.__df_features = copy.deepcopy(df_features)
-
         # Create/Setup project directory
         FileOutput.__init__(self,
                             project_name,
                             overwrite_full_path)
 
 
-
     def save_plot(self,
                   df,
+                  df_features,
                   filename="Unknown filename",
-                  sub_dir=None,
+                  sub_dir="",
                   dataframe_snapshot=True,
                   suppress_runtime_errors=True,
                   compare_shape=True,
                   compare_feature_names=True,
-                  compare_random_values=True):
+                  compare_random_values=True,
+                  meta_data=True):
         """
         Desc:
             Checks the passed data to see if a plot can be saved; raises
@@ -67,6 +62,9 @@ class DataAnalysis(FileOutput):
         Args:
             df: pd.Dataframe
                 Pandas DataFrame object
+
+            df_features: DataFrameTypes from eflow
+                DataFrameTypes object.
 
             filename: string
                 If set to 'None' will default to a pre-defined string;
@@ -80,6 +78,21 @@ class DataAnalysis(FileOutput):
                 snapshot of the dataframe in the dataset's directory structure.
                 Helps ensure that data generated in that directory is correctly
                 associated to a dataframe.
+
+            compare_shape: bool
+                When comparing and creating the dataframe snapshot of the data's
+                shape.
+
+            compare_feature_names: bool
+                When comparing and creating the dataframe snapshot of the data's
+                column names.
+
+            compare_random_values: bool
+                When comparing and creating the dataframe snapshot of the data
+                sudo random values.
+
+            meta_data:bool
+                If set to true then it will generate meta data on the dataframe.
 
             suppress_runtime_errors: bool
                 If set to true; when generating any graphs will suppress any runtime
@@ -97,13 +110,20 @@ class DataAnalysis(FileOutput):
                                                 compare_feature_names=compare_feature_names,
                                                 compare_random_values=compare_random_values)
                 df_snapshot.check_create_snapshot(df,
-                                                  self.__df_features,
+                                                  df_features,
                                                   directory_path=self.folder_path,
                                                   sub_dir=f"{sub_dir}/_Extras")
+
+            if meta_data:
+                generate_meta_data(df,
+                                   self.folder_path,
+                                   f"{sub_dir}" + "/_Extras")
+
             # Create the png to save
             create_plt_png(self.folder_path,
                            sub_dir,
                            convert_to_filename(filename))
+
 
         # Always raise snapshot error
         except SnapshotMismatchError as e:
@@ -120,15 +140,17 @@ class DataAnalysis(FileOutput):
 
     def save_table_as_plot(self,
                            df,
+                           df_features,
                            table,
                            filename="Unknown filename",
-                           sub_dir=None,
+                           sub_dir="",
                            dataframe_snapshot=True,
                            suppress_runtime_errors=True,
                            compare_shape=True,
                            compare_feature_names=True,
                            compare_random_values=True,
-                           show_index=False):
+                           show_index=False,
+                           meta_data=True):
         """
         Desc:
             Checks the passed data to see if a table can be saved as a plot;
@@ -136,7 +158,10 @@ class DataAnalysis(FileOutput):
 
         Args:
             df: pd.Dataframe
-                Pandas DataFrame object of all data.
+                Pandas DataFrame object of all data.\
+
+            df_features: DataFrameTypes from eflow
+                DataFrameTypes object.
 
             table: pd.Dataframe
                 Dataframe object to convert to plot.
@@ -170,6 +195,9 @@ class DataAnalysis(FileOutput):
                 When comparing and creating the dataframe snapshot of the data
                 sudo random values.
 
+            meta_data:bool
+                If set to true then it will generate meta data on the dataframe.
+
             show_index: bool
                 Show index of the saved dataframe.
         """
@@ -185,9 +213,13 @@ class DataAnalysis(FileOutput):
                                                 compare_feature_names=compare_feature_names,
                                                 compare_random_values=compare_random_values)
                 df_snapshot.check_create_snapshot(df,
-                                                  self.__df_features,
+                                                  df_features,
                                                   directory_path=self.folder_path,
                                                   sub_dir=f"{sub_dir}/_Extras")
+            if meta_data:
+                generate_meta_data(df,
+                                   self.folder_path,
+                                   f"{sub_dir}" + "/_Extras")
 
             # Convert dataframe to plot
             df_to_image(table,

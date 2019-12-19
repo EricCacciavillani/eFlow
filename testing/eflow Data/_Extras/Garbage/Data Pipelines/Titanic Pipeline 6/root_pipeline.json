@@ -1,0 +1,12 @@
+{
+  "Pipeline Name": "Titanic Pipeline",
+  "Pipeline Segment Order": {
+    "1": {
+      "Pipeline Segment Path": "_Extras/Pipeline Structure/Data Pipeline Segments/FeatureTransformer/B67F2F1D63.json",
+      "Pipeline Segment Type": "FeatureTransformer",
+      "Pipeline Segment Name": "Remove unresolvable null features",
+      "Pipeline Segment ID": "B67F2F1D63"
+    }
+  },
+  "Pipeline Segment Count": 1
+}

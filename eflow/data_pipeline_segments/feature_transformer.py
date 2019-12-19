@@ -96,12 +96,15 @@ class FeatureTransformer(DataPipelineSegment):
         for feature_n in feature_names:
 
             try:
+
+                if feature_n in df_features.all_features():
+                    df_features.remove_feature(feature_n)
+
                 check_if_feature_exists(df,
                                         feature_n)
                 df.drop(columns=[feature_n],
                         inplace=True)
 
-                df_features.remove_feature(feature_n)
             except KeyError:
                 pass
 

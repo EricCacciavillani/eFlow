@@ -30,6 +30,7 @@ class DataPipeline(FileOutput):
     """
     def __init__(self,
                  pipeline_name,
+                 df,
                  df_features=None,
                  pipeline_modify_id=None,
                  remove_past_contents=False):
@@ -108,6 +109,13 @@ class DataPipeline(FileOutput):
             else:
                 print("Now configuring object with proper pipeline segments...")
                 self.__configure_pipeline_with_existing_file()
+
+        print()
+        for removal_feature in set(df.columns) ^ set(
+                df_features.all_features()):
+            print(f"Removing the feature: \"{removal_feature}\"")
+            df.drop(columns=removal_feature,
+                    inplace=True)
 
     @property
     def file_path(self):

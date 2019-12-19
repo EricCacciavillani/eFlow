@@ -1,0 +1,228 @@
+{
+  "Age": {
+    "0.346+ ⟷ 15.136 -> 15.136+ ⟷ 29.852": {},
+    "0.346+ ⟷ 15.136 -> 29.852+ ⟷ 44.568": {},
+    "0.346+ ⟷ 15.136 -> 44.568+ ⟷ 59.284": {},
+    "0.346+ ⟷ 15.136 -> 59.284+ ⟷ 74.0": {},
+    "0.346+ ⟷ 15.136 -> All": {},
+    "15.136+ ⟷ 29.852 -> 29.852+ ⟷ 44.568": {
+      "Survived": {
+        "Kolmogorov-Smirnov statistic": {
+          "P-Value": 1.0,
+          "Statistic": 0.014489329868493581
+        }
+      },
+      "Sex": {
+        "Kolmogorov-Smirnov statistic": {
+          "P-Value": 1.0,
+          "Statistic": 0.011496968265217733
+        }
+      },
+      "Embarked": {
+        "Kolmogorov-Smirnov statistic": {
+          "P-Value": 1.0,
+          "Statistic": 0.012284431845027168
+        }
+      }
+    },
+    "15.136+ ⟷ 29.852 -> 44.568+ ⟷ 59.284": {
+      "Survived": {
+        "Kolmogorov-Smirnov statistic": {
+          "P-Value": 1.0,
+          "Statistic": 0.022362175976633807
+        }
+      }
+    },
+    "15.136+ ⟷ 29.852 -> 59.284+ ⟷ 74.0": {},
+    "15.136+ ⟷ 29.852 -> All": {},
+    "29.852+ ⟷ 44.568 -> 44.568+ ⟷ 59.284": {
+      "Survived": {
+        "Kolmogorov-Smirnov statistic": {
+          "P-Value": 1,
+          "Statistic": 0.007872846108140225
+        }
+      }
+    },
+    "29.852+ ⟷ 44.568 -> 59.284+ ⟷ 74.0": {},
+    "29.852+ ⟷ 44.568 -> All": {
+      "Survived": {
+        "Kolmogorov-Smirnov statistic": {
+          "P-Value": 1.0,
+          "Statistic": 0.01227274024602563
+        }
+      }
+    },
+    "44.568+ ⟷ 59.284 -> 59.284+ ⟷ 74.0": {},
+    "44.568+ ⟷ 59.284 -> All": {
+      "Survived": {
+        "Kolmogorov-Smirnov statistic": {
+          "P-Value": 1,
+          "Statistic": 0.004399894137885404
+        }
+      }
+    },
+    "59.284+ ⟷ 74.0 -> All": {},
+    "P-Values": {
+      "Survived": {
+        "Kolmogorov-Smirnov statistic": {
+          "All pvalues": [
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ],
+          "Pvalues Summary": {
+            "count": 5.0,
+            "mean": 1.0,
+            "std": 0.0,
+            "min": 1.0,
+            "25%": 1.0,
+            "50%": 1.0,
+            "75%": 1.0,
+            "max": 1.0,
+            "var": 0.0
+          }
+        }
+      },
+      "Pclass": {
+        "Kolmogorov-Smirnov statistic": {
+          "All pvalues": [],
+          "Pvalues Summary": {}
+        }
+      },
+      "Sex": {
+        "Kolmogorov-Smirnov statistic": {
+          "All pvalues": [
+            1.0
+          ],
+          "Pvalues Summary": {}
+        }
+      },
+      "SibSp": {
+        "Kolmogorov-Smirnov statistic": {
+          "All pvalues": [],
+          "Pvalues Summary": {}
+        }
+      },
+      "Parch": {
+        "Kolmogorov-Smirnov statistic": {
+          "All pvalues": [],
+          "Pvalues Summary": {}
+        }
+      },
+      "Fare": {
+        "Kolmogorov-Smirnov statistic": {
+          "All pvalues": [],
+          "Pvalues Summary": {}
+        }
+      },
+      "Embarked": {
+        "Kolmogorov-Smirnov statistic": {
+          "All pvalues": [
+            1.0
+          ],
+          "Pvalues Summary": {}
+        }
+      }
+    }
+  },
+  "Survived": {
+    "0 -> 1": {},
+    "0 -> All": {},
+    "1 -> All": {},
+    "P-Values": {
+      "Pclass": {
+        "Kolmogorov-Smirnov statistic": {
+          "All pvalues": [],
+          "Pvalues Summary": {}
+        }
+      },
+      "Sex": {
+        "Kolmogorov-Smirnov statistic": {
+          "All pvalues": [],
+          "Pvalues Summary": {}
+        }
+      },
+      "Age": {
+        "Kolmogorov-Smirnov statistic": {
+          "All pvalues": [],
+          "Pvalues Summary": {}
+        }
+      },
+      "SibSp": {
+        "Kolmogorov-Smirnov statistic": {
+          "All pvalues": [],
+          "Pvalues Summary": {}
+        }
+      },
+      "Parch": {
+        "Kolmogorov-Smirnov statistic": {
+          "All pvalues": [],
+          "Pvalues Summary": {}
+        }
+      },
+      "Fare": {
+        "Kolmogorov-Smirnov statistic": {
+          "All pvalues": [],
+          "Pvalues Summary": {}
+        }
+      },
+      "Embarked": {
+        "Kolmogorov-Smirnov statistic": {
+          "All pvalues": [],
+          "Pvalues Summary": {}
+        }
+      }
+    }
+  },
+  "Sex": {
+    "female -> male": {},
+    "female -> All": {},
+    "male -> All": {},
+    "P-Values": {
+      "Survived": {
+        "Kolmogorov-Smirnov statistic": {
+          "All pvalues": [],
+          "Pvalues Summary": {}
+        }
+      },
+      "Pclass": {
+        "Kolmogorov-Smirnov statistic": {
+          "All pvalues": [],
+          "Pvalues Summary": {}
+        }
+      },
+      "Age": {
+        "Kolmogorov-Smirnov statistic": {
+          "All pvalues": [],
+          "Pvalues Summary": {}
+        }
+      },
+      "SibSp": {
+        "Kolmogorov-Smirnov statistic": {
+          "All pvalues": [],
+          "Pvalues Summary": {}
+        }
+      },
+      "Parch": {
+        "Kolmogorov-Smirnov statistic": {
+          "All pvalues": [],
+          "Pvalues Summary": {}
+        }
+      },
+      "Fare": {
+        "Kolmogorov-Smirnov statistic": {
+          "All pvalues": [],
+          "Pvalues Summary": {}
+        }
+      },
+      "Embarked": {
+        "Kolmogorov-Smirnov statistic": {
+          "All pvalues": [],
+          "Pvalues Summary": {}
+        }
+      }
+    }
+  }
+}

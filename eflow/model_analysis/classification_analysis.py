@@ -1,7 +1,7 @@
 from eflow.utils.sys_utils import *
 from eflow.utils.pandas_utils import df_to_image
 from eflow.utils.image_processing_utils import create_plt_png
-from eflow._hidden.parent_objects import FileOutput
+from eflow._hidden.parent_objects import ModelAnalysis
 from eflow._hidden.custom_exceptions import RequiresPredictionMethods, ProbasNotPossible, \
     UnsatisfiedRequirments
 from eflow.data_analysis import FeatureAnalysis
@@ -29,7 +29,7 @@ __license__ = "MIT"
 __maintainer__ = "EricCacciavillani"
 __email__ = "eric.cacciavillani@gmail.com"
 
-class ClassificationAnalysis(FileOutput):
+class ClassificationAnalysis(ModelAnalysis):
 
     """
         Analyzes a classification model's result's based on the prediction
@@ -38,6 +38,7 @@ class ClassificationAnalysis(FileOutput):
     """
 
     def __init__(self,
+                 dataset_name,
                  model,
                  model_name,
                  target_feature,
@@ -47,7 +48,8 @@ class ClassificationAnalysis(FileOutput):
                  project_sub_dir="Classification Analysis",
                  overwrite_full_path=None,
                  target_classes=None,
-                 save_model=True):
+                 save_model=True,
+                 notebook_mode=False):
         """
         Args:
             model:
@@ -87,9 +89,9 @@ class ClassificationAnalysis(FileOutput):
         """
 
         # Init parent object
-        FileOutput.__init__(self,
-                            f'{project_sub_dir}/Target Feature: {target_feature}/{model_name}',
-                            overwrite_full_path)
+        ModelAnalysis.__init__(self,
+                               f'{dataset_name}/{project_sub_dir}/Target Feature: {target_feature}/{model_name}',
+                               overwrite_full_path)
 
         # Init objects without pass by refrence
         self.__model = copy.deepcopy(model)
@@ -98,6 +100,10 @@ class ClassificationAnalysis(FileOutput):
         self.__df_features = copy.deepcopy(df_features)
         self.__pred_funcs_dict = copy.deepcopy(pred_funcs_dict)
         self.__pred_funcs_types = dict()
+        self.__notebook_mode = copy.deepcopy(notebook_mode)
+
+        # Determines if the perform was called
+        self.__called_from_perform = False
 
         # Init on sklearns default target classes attribute
         if not self.__target_values:
@@ -108,12 +114,14 @@ class ClassificationAnalysis(FileOutput):
         else:
             self.__binary_classifcation = True
 
-        # Save machine learning model
-        if save_model:
-            pickle_object_to_file(self.__model,
-                                  self.folder_path,
-                                  f'{self.__model_name}')
-
+        # Attempt to save machine learning model
+        try:
+            if save_model:
+                pickle_object_to_file(self.__model,
+                                      self.folder_path,
+                                      f'{self.__model_name}')
+        except:
+            pass
         # ---
         create_dir_structure(self.folder_path,
                              "_Extras")
@@ -128,6 +136,7 @@ class ClassificationAnalysis(FileOutput):
 
         self.__sample_data = None
 
+        # Extract sample data
         if len(sample_data.shape) == 2:
             self.__sample_data = np.reshape(sample_data[0],
                                             (-1, sample_data.shape[1]))
@@ -136,7 +145,6 @@ class ClassificationAnalysis(FileOutput):
         else:
             raise UnsatisfiedRequirments("This program can only handle 1D and 2D matrices.")
 
-        print(self.__sample_data)
 
         # Find the 'type' of each prediction. Probabilities or Predictions
         if self.__pred_funcs_dict:
@@ -160,7 +168,6 @@ class ClassificationAnalysis(FileOutput):
                          y,
                          dataset_name,
                          thresholds_matrix=None,
-                         figsize=GRAPH_DEFAULTS.FIGSIZE,
                          ignore_metrics=[],
                          custom_metrics_dict=dict(),
                          average_scoring=["micro",
@@ -219,115 +226,118 @@ class ClassificationAnalysis(FileOutput):
                 * classification_evaluation
                 * plot_confusion_matrix
         """
+        try:
+            # Convert to
+            if isinstance(thresholds_matrix, np.ndarray):
+                thresholds_matrix = thresholds_matrix.tolist()
 
-        # Convert to
-        if isinstance(thresholds_matrix, np.ndarray):
-            thresholds_matrix = thresholds_matrix.tolist()
+            if not thresholds_matrix:
+                thresholds_matrix = [[]]
 
-        if not thresholds_matrix:
-            thresholds_matrix = list()
+            if isinstance(thresholds_matrix, list) and not isinstance(
+                    thresholds_matrix[0], list):
+                thresholds_matrix = list(thresholds_matrix)
 
-        if isinstance(thresholds_matrix, list) and not isinstance(
-                thresholds_matrix[0], list):
-            thresholds_matrix = list(thresholds_matrix)
+            if None not in thresholds_matrix:
+                thresholds_matrix.append(None)
 
-        if None not in thresholds_matrix:
-            thresholds_matrix.append(None)
+            self.__called_from_perform = True
 
-        print("\n\n" + "---" * 10 + f'{dataset_name}' + "---" * 10)
-        first_iteration = True
-        for pred_name, pred_type in self.__pred_funcs_types.items():
+            self.generate_matrix_meta_data(X,
+                                           dataset_name + "/_Extras")
 
-            # Nicer formating
-            if not first_iteration:
-                print("\n\n\n")
-            first_iteration = False
+            print("\n\n" + "---" * 10 + f'{dataset_name}' + "---" * 10)
+            first_iteration = True
 
-            for thresholds in thresholds_matrix:
+            for pred_name, pred_type in self.__pred_funcs_types.items():
 
+                # Nicer formating
+                if not first_iteration:
+                    print("\n\n\n")
+                first_iteration = False
 
-                print(f"Now running classification on {pred_name}", end='')
-                if pred_type == "Predictions":
-                    print()
-                    thresholds = None
-                else:
-                    if thresholds:
-                        print(f" on thresholds:\n{thresholds}")
+                for thresholds in thresholds_matrix:
+
+                    print(f"Now running classification on {pred_name}", end='')
+                    if pred_type == "Predictions":
+                        print()
+                        thresholds = None
                     else:
-                        print(" on no thresholds.")
-                print("-" * (len(dataset_name) + 60))
+                        if thresholds:
+                            print(f" on thresholds:")
+                            for i,target_val in enumerate(self.__target_values):
+                                try:
+                                    print(f"\tTarget Value:{target_val}: Prediction weight: {thresholds[i]}")
 
-                self.classification_metrics(X,
+                                except IndexError:
+                                    raise IndexError("Thresholds must of the same length as the target values!")
+                        else:
+                            print(" on no thresholds.")
+
+                    self.classification_metrics(X,
+                                                y,
+                                                pred_name=pred_name,
+                                                dataset_name=dataset_name,
+                                                thresholds=thresholds,
+                                                ignore_metrics=ignore_metrics,
+                                                custom_metrics_dict=custom_metrics_dict,
+                                                average_scoring=average_scoring,
+                                                display_visuals=display_visuals)
+
+                    self.plot_confusion_matrix(X,
+                                               y,
+                                               pred_name=pred_name,
+                                               dataset_name=dataset_name,
+                                               thresholds=thresholds,
+                                               normalize=True,
+                                               display_visuals=display_visuals)
+
+                    self.plot_confusion_matrix(X,
+                                               y,
+                                               pred_name=pred_name,
+                                               dataset_name=dataset_name,
+                                               thresholds=thresholds,
+                                               normalize=False,
+                                               display_visuals=display_visuals)
+
+                    if pred_type == "Probabilities":
+                        self.plot_precision_recall_curve(X,
+                                                         y,
+                                                         pred_name=pred_name,
+                                                         dataset_name=dataset_name,
+                                                         thresholds=thresholds,
+                                                         display_visuals=display_visuals)
+                        self.plot_roc_curve(X,
                                             y,
                                             pred_name=pred_name,
                                             dataset_name=dataset_name,
                                             thresholds=thresholds,
-                                            ignore_metrics=ignore_metrics,
-                                            custom_metrics_dict=custom_metrics_dict,
-                                            average_scoring=average_scoring,
                                             display_visuals=display_visuals)
 
-                self.plot_confusion_matrix(X,
-                                           y,
-                                           pred_name=pred_name,
-                                           dataset_name=dataset_name,
-                                           thresholds=thresholds,
-                                           figsize=figsize,
-                                           normalize=True,
-                                           display_visuals=display_visuals)
+                        if self.__binary_classifcation:
 
-                self.plot_confusion_matrix(X,
-                                           y,
-                                           pred_name=pred_name,
-                                           dataset_name=dataset_name,
-                                           thresholds=thresholds,
-                                           figsize=figsize,
-                                           normalize=False,
-                                           display_visuals=display_visuals)
+                            self.plot_lift_curve(X,
+                                                 y,
+                                                 pred_name=pred_name,
+                                                 dataset_name=dataset_name,
+                                                 thresholds=thresholds,
+                                                 display_visuals=display_visuals)
 
-                if pred_type == "Probabilities":
-                    self.plot_precision_recall_curve(X,
-                                                     y,
-                                                     pred_name=pred_name,
-                                                     dataset_name=dataset_name,
-                                                     figsize=figsize,
-                                                     thresholds=thresholds,
-                                                     display_visuals=display_visuals)
-                    self.plot_roc_curve(X,
-                                        y,
-                                        pred_name=pred_name,
-                                        dataset_name=dataset_name,
-                                        figsize=figsize,
-                                        thresholds=thresholds,
-                                        display_visuals=display_visuals)
+                            self.plot_ks_statistic(X,
+                                                   y,
+                                                   pred_name=pred_name,
+                                                   dataset_name=dataset_name,
+                                                   thresholds=thresholds,
+                                                   display_visuals=display_visuals)
 
-                    if self.__binary_classifcation:
+                            self.plot_cumulative_gain(X,
+                                                      y,
+                                                      pred_name=pred_name,
+                                                      dataset_name=dataset_name,
+                                                      thresholds=thresholds,
+                                                      display_visuals=display_visuals)
 
-                        self.plot_lift_curve(X,
-                                             y,
-                                             pred_name=pred_name,
-                                             dataset_name=dataset_name,
-                                             figsize=figsize,
-                                             thresholds=thresholds,
-                                             display_visuals=display_visuals)
 
-                        self.plot_ks_statistic(X,
-                                               y,
-                                               pred_name=pred_name,
-                                               dataset_name=dataset_name,
-                                               figsize=figsize,
-                                               thresholds=thresholds,
-                                               display_visuals=display_visuals)
-
-                        self.plot_cumulative_gain(X,
-                                                  y,
-                                                  pred_name=pred_name,
-                                                  dataset_name=dataset_name,
-                                                  figsize=figsize,
-                                                  thresholds=thresholds,
-                                                  display_visuals=display_visuals)
-
-                # if self.__df_features:
                 #     self.classification_error_analysis(X,
                 #                                        y,
                 #                                        pred_name=pred_name,
@@ -335,9 +345,11 @@ class ClassificationAnalysis(FileOutput):
                 #                                        thresholds=thresholds,
                 #                                        display_analysis_graphs=display_analysis_graphs)
 
-                print("-" * (len(dataset_name) + 60))
-                if pred_type == "Predictions":
-                    break
+                    print("-" * (len(dataset_name) + 60) + "\n")
+                    if pred_type == "Predictions":
+                        break
+        finally:
+            self.__called_from_perform = False
 
     def plot_ks_statistic(self,
                           X,
@@ -349,7 +361,7 @@ class ClassificationAnalysis(FileOutput):
                           save_file=True,
                           title=None,
                           ax=None,
-                          figsize=None,
+                          figsize=GRAPH_DEFAULTS.FIGSIZE,
                           title_fontsize='large',
                           text_fontsize='medium'):
 
@@ -403,9 +415,12 @@ class ClassificationAnalysis(FileOutput):
                                         title_fontsize=title_fontsize,
                                         text_fontsize=text_fontsize)
         if save_file:
-            create_plt_png(self.folder_path,
-                           sub_dir,
-                           convert_to_filename(filename))
+            self.save_plot(filename=filename,
+                           sub_dir=sub_dir)
+
+            if not self.__called_from_perform:
+                self.generate_matrix_meta_data(X,
+                                               dataset_name + "/_Extras")
 
         if display_visuals:
             plt.show()
@@ -475,9 +490,11 @@ class ClassificationAnalysis(FileOutput):
                                text_fontsize=text_fontsize)
 
         if save_file:
-            create_plt_png(self.folder_path,
-                           sub_dir,
-                           convert_to_filename(filename))
+            self.save_plot(filename=filename,
+                           sub_dir=sub_dir)
+            if not self.__called_from_perform:
+                self.generate_matrix_meta_data(X,
+                                               dataset_name + "/_Extras")
 
         if display_visuals:
             plt.show()
@@ -547,9 +564,8 @@ class ClassificationAnalysis(FileOutput):
                                            text_fontsize=text_fontsize)
 
         if save_file:
-            create_plt_png(self.folder_path,
-                           sub_dir,
-                           convert_to_filename(filename))
+            self.save_plot(filename=filename,
+                           sub_dir=sub_dir)
 
         if display_visuals:
             plt.show()
@@ -625,9 +641,12 @@ class ClassificationAnalysis(FileOutput):
                                             text_fontsize=text_fontsize)
 
         if save_file:
-            create_plt_png(self.folder_path,
-                           sub_dir,
-                           convert_to_filename(filename))
+            self.save_plot(filename=filename,
+                           sub_dir=sub_dir)
+
+            if not self.__called_from_perform:
+                self.generate_matrix_meta_data(X,
+                                               dataset_name + "/_Extras")
 
         if display_visuals:
             plt.show()
@@ -699,9 +718,12 @@ class ClassificationAnalysis(FileOutput):
                                       text_fontsize=text_fontsize)
 
         if save_file:
-            create_plt_png(self.folder_path,
-                           sub_dir,
-                           convert_to_filename(filename))
+            self.save_plot(filename=filename,
+                           sub_dir=sub_dir)
+
+            if not self.__called_from_perform:
+                self.generate_matrix_meta_data(X,
+                                               dataset_name + "/_Extras")
 
         if display_visuals:
             plt.show()
@@ -788,9 +810,11 @@ class ClassificationAnalysis(FileOutput):
         warnings.filterwarnings('default')
 
         if save_file:
-            create_plt_png(self.folder_path,
-                           sub_dir,
-                           convert_to_filename(filename))
+            self.save_plot(filename=filename,
+                           sub_dir=sub_dir)
+            if self.__called_from_perform:
+                self.generate_matrix_meta_data(X,
+                                               dataset_name + "/_Extras")
 
         if display_visuals:
             plt.show()
@@ -928,9 +952,10 @@ class ClassificationAnalysis(FileOutput):
                                          index=list(evaluation_report.keys()))
 
         if display_visuals:
-            display(evaluation_report)
-        else:
-            print(evaluation_report)
+            if self.__notebook_mode:
+                display(evaluation_report)
+            else:
+                print(evaluation_report)
 
         if save_file:
             df_to_image(evaluation_report,
@@ -940,6 +965,15 @@ class ClassificationAnalysis(FileOutput):
                         col_width=20,
                         show_index=True,
                         format_float_pos=4)
+
+            if not self.__called_from_perform:
+                self.generate_matrix_meta_data(X,
+                                               dataset_name + "/_Extras")
+            # self.save_table_as_plot(filename=filename,
+            #                         sub_dir=sub_dir,
+            #                         col_width=20,
+            #                         show_index=True,
+            #                         format_float_pos=4)
 
     def classification_error_analysis(self,
                                       X,
@@ -1081,9 +1115,10 @@ class ClassificationAnalysis(FileOutput):
 
         # ---
         if display_visuals:
-            display(report_df)
-        else:
-            print(report_df)
+            if self.__notebook_mode:
+                display(report_df)
+            else:
+                print(report_df)
 
         if save_file:
             # Output dataframe as png
@@ -1094,6 +1129,11 @@ class ClassificationAnalysis(FileOutput):
                         col_width=20,
                         show_index=True,
                         format_float_pos=4)
+
+            if not self.__called_from_perform:
+                self.generate_matrix_meta_data(X,
+                                               dataset_name + "/_Extras")
+
 
     def __get_model_prediction(self,
                                pred_name,
