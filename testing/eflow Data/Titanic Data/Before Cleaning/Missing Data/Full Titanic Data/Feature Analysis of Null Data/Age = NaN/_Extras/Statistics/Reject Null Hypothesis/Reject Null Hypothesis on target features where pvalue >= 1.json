@@ -1,18 +1,27 @@
 {
-  "Survived": {
-    "0 -> 1": {},
-    "0 -> All": {},
-    "1 -> All": {},
-    "P-Values": {
+  "Sex": {
+    "female -> male": {},
+    "female -> All": {},
+    "male -> All": {
       "Pclass": {
+        "Kolmogorov-Smirnov statistic": {
+          "P-Value": 1.0,
+          "Statistic": 0.010297065791871696
+        }
+      }
+    },
+    "P-Values": {
+      "Survived": {
         "Kolmogorov-Smirnov statistic": {
           "All pvalues": [],
           "Pvalues Summary": {}
         }
       },
-      "Sex": {
+      "Pclass": {
         "Kolmogorov-Smirnov statistic": {
-          "All pvalues": [],
+          "All pvalues": [
+            1.0
+          ],
           "Pvalues Summary": {}
         }
       },
@@ -48,29 +57,20 @@
       }
     }
   },
-  "Sex": {
-    "female -> male": {},
-    "female -> All": {},
-    "male -> All": {
-      "Pclass": {
-        "Kolmogorov-Smirnov statistic": {
-          "P-Value": 1.0,
-          "Statistic": 0.010297065791871696
-        }
-      }
-    },
+  "Survived": {
+    "0 -> 1": {},
+    "0 -> All": {},
+    "1 -> All": {},
     "P-Values": {
-      "Survived": {
+      "Pclass": {
         "Kolmogorov-Smirnov statistic": {
           "All pvalues": [],
           "Pvalues Summary": {}
         }
       },
-      "Pclass": {
+      "Sex": {
         "Kolmogorov-Smirnov statistic": {
-          "All pvalues": [
-            1.0
-          ],
+          "All pvalues": [],
           "Pvalues Summary": {}
         }
       },

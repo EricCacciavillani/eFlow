@@ -2766,7 +2766,9 @@ class FeatureAnalysis(DataAnalysis):
             if not sub_dir:
                 sub_dir = f"{dataset_name}/{feature_name}"
 
-            tmp_df["Counts"] = tmp_df["Counts"].sort_values(ascending=False)
+            tmp_df.sort_values(by=["Counts"],
+                               ascending=False,
+                               inplace=True)
 
             if save_file:
 

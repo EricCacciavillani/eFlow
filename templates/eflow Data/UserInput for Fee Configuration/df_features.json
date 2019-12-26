@@ -1,0 +1,210 @@
+{
+  "bool": [
+    "net_fundable_yn",
+    "allow_freeform_provider_yn",
+    "allowable_fha_closing_cost_yn",
+    "refundable_fee_yn",
+    "property_sensitive_yn",
+    "finance_charge_yn",
+    "cascade_fee_provider_info_yn",
+    "escrow_item_yn",
+    "default_payee_to_provider_yn",
+    "item_paid_in_advance_yn",
+    "selectable_provider_yn",
+    "pricing_sensitive_yn",
+    "allowable_va_closing_cost_yn",
+    "standard_item_yn",
+    "include_on_provider_list_yn",
+    "fee_provider_type_change_yn",
+    "summary_item_yn",
+    "allow_zero_value_yn",
+    "amount_editable_yn",
+    "display_only_item_yn",
+    "loan_terms_sensitive_yn",
+    "product_sensitive_yn",
+    "description_editable_yn"
+  ],
+  "string": [
+    "default_tolerance_type_id",
+    "fee_provider_type_id",
+    "escrow_category_type_id",
+    "sort_value",
+    "fee_paid_to_type_id",
+    "summary_fee_item_type_id"
+  ],
+  "categorical": [
+    "respa_block_id",
+    "int_disc_section_type_id",
+    "hud_section_type_id",
+    "fee_classification_type_id"
+  ],
+  "target": "sort_value",
+  "feature_values_colors": {},
+  "feature_value_representation": {},
+  "label_encoder": {
+    "int_disc_section_type_id": {
+      "1": 1,
+      "2": 2,
+      "3": 3,
+      "4": 4,
+      "7": 7,
+      "8": 8,
+      "9": 9
+    },
+    "default_tolerance_type_id": {
+      "TENPCT": 0,
+      "ZEROPCT": 1
+    },
+    "fee_provider_type_id": {
+      "APPRAISE": 0,
+      "ATTORNEY": 1,
+      "CREDIT": 2,
+      "FLOODCERT": 3,
+      "FREEFORM": 4,
+      "PEST": 5,
+      "PMI": 6,
+      "SURVEY": 7,
+      "TAXSERV": 8,
+      "TITLE": 9
+    },
+    "escrow_category_type_id": {
+      "INS": 0,
+      "TAX": 1
+    },
+    "hud_section_type_id": {
+      "1000": 1000,
+      "1100": 1100,
+      "1200": 1200,
+      "1300": 1300,
+      "800": 800,
+      "900": 900
+    },
+    "respa_block_id": {
+      "1": 1,
+      "10": 10,
+      "11": 11,
+      "2": 2,
+      "3": 3,
+      "4": 4,
+      "6": 6,
+      "7": 7,
+      "8": 8,
+      "9": 9
+    },
+    "fee_classification_type_id": {
+      "10": 10,
+      "11": 11,
+      "2": 2,
+      "3": 3,
+      "6": 6,
+      "7": 7,
+      "8": 8,
+      "9": 9
+    },
+    "sort_value": {
+      "A": 0,
+      "B": 1,
+      "C": 2,
+      "E": 3,
+      "F": 4,
+      "G": 5,
+      "H": 6
+    },
+    "fee_paid_to_type_id": {
+      "AFFILIATE": 0,
+      "LENDER": 1,
+      "THIRDPARTY": 2
+    },
+    "summary_fee_item_type_id": {
+      "CANNOT_SHOP": 0,
+      "CAN_SHOP": 1,
+      "ORIGINATION": 2,
+      "OTHER": 3,
+      "PREPAIDS": 4,
+      "TAXES_GOV_FEES": 5
+    }
+  },
+  "label_decoder": {
+    "int_disc_section_type_id": {
+      "1": 1,
+      "2": 2,
+      "3": 3,
+      "4": 4,
+      "7": 7,
+      "8": 8,
+      "9": 9
+    },
+    "default_tolerance_type_id": {
+      "0": "TENPCT",
+      "1": "ZEROPCT"
+    },
+    "fee_provider_type_id": {
+      "0": "APPRAISE",
+      "1": "ATTORNEY",
+      "2": "CREDIT",
+      "3": "FLOODCERT",
+      "4": "FREEFORM",
+      "5": "PEST",
+      "6": "PMI",
+      "7": "SURVEY",
+      "8": "TAXSERV",
+      "9": "TITLE"
+    },
+    "escrow_category_type_id": {
+      "0": "INS",
+      "1": "TAX"
+    },
+    "hud_section_type_id": {
+      "1000": 1000,
+      "1100": 1100,
+      "1200": 1200,
+      "1300": 1300,
+      "800": 800,
+      "900": 900
+    },
+    "respa_block_id": {
+      "1": 1,
+      "10": 10,
+      "11": 11,
+      "2": 2,
+      "3": 3,
+      "4": 4,
+      "6": 6,
+      "7": 7,
+      "8": 8,
+      "9": 9
+    },
+    "fee_classification_type_id": {
+      "10": 10,
+      "11": 11,
+      "2": 2,
+      "3": 3,
+      "6": 6,
+      "7": 7,
+      "8": 8,
+      "9": 9
+    },
+    "sort_value": {
+      "0": "A",
+      "1": "B",
+      "2": "C",
+      "3": "E",
+      "4": "F",
+      "5": "G",
+      "6": "H"
+    },
+    "fee_paid_to_type_id": {
+      "0": "AFFILIATE",
+      "1": "LENDER",
+      "2": "THIRDPARTY"
+    },
+    "summary_fee_item_type_id": {
+      "0": "CANNOT_SHOP",
+      "1": "CAN_SHOP",
+      "2": "ORIGINATION",
+      "3": "OTHER",
+      "4": "PREPAIDS",
+      "5": "TAXES_GOV_FEES"
+    }
+  }
+}

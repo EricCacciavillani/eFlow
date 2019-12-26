@@ -1,4 +1,4 @@
-from eflow._hidden.widgets.DataCleaningWidget import *
+from eflow._hidden.widgets.feature_data_cleaning_widget import *
 from eflow._hidden.parent_objects.data_pipeline_segment import *
 from eflow.foundation import DataFrameTypes
 

@@ -1592,6 +1592,8 @@ class DataFrameTypes:
 
         type_features["target"] = self.__target_feature
 
+        type_features["feature_labels_bins"] = self.__feature_labels_bins_dict
+
         type_features["feature_values_colors"] = self.__feature_value_color_dict
 
         type_features["feature_value_representation"] = self.__feature_value_representation
@@ -1682,9 +1684,11 @@ class DataFrameTypes:
             elif type == "label_encoder":
                 self.__label_encoder = obj
 
+            elif type == "feature_labels_bins":
+                self.__feature_labels_bins_dict = obj
+
             else:
                 raise ValueError(f"Unknown type {type} was found!")
-
 
         # Convert any values that are supposed to numeric back to numeric in colors
         for feature_name,value_color_dict in tmp_feature_value_color_dict.items():

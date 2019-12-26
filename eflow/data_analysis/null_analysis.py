@@ -280,7 +280,6 @@ class NullAnalysis(DataAnalysis):
         target_features = set(target_features)
 
         for nan_feature_name in nan_features:
-            print(nan_features)
 
             new_target_features = copy.deepcopy(target_features)
 

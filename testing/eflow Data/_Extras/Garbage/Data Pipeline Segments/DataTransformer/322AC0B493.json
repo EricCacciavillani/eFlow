@@ -1,0 +1,38 @@
+{
+  "Pipeline Segment": {
+    "Object Type": "FeatureDataCleaner",
+    "Functions Performed Order": {
+      "Function Order 1": {
+        "ignore_feature": {
+          "Params Dict": {
+            "feature_name": "Age"
+          }
+        }
+      },
+      "Function Order 2": {
+        "ignore_feature": {
+          "Params Dict": {
+            "feature_name": "Embarked"
+          }
+        }
+      },
+      "Function Order 3": {
+        "fill_nan_by_distribution": {
+          "Params Dict": {
+            "feature_name": "Age",
+            "percentile": 10,
+            "z_score": 1.0
+          }
+        }
+      },
+      "Function Order 4": {
+        "ignore_feature": {
+          "Params Dict": {
+            "feature_name": "Embarked"
+          }
+        }
+      }
+    },
+    "Function Count": 4
+  }
+}
