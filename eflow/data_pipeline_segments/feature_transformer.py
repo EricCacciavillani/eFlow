@@ -42,7 +42,8 @@ class FeatureTransformer(DataPipelineSegment):
         Combines, removes, scales, etc features of a pandas dataframe.
     """
     def __init__(self,
-                 segment_id=None):
+                 segment_id=None,
+                 create_file=True):
         """
         Args:
             segment_id:
@@ -56,7 +57,8 @@ class FeatureTransformer(DataPipelineSegment):
         """
         DataPipelineSegment.__init__(self,
                                      object_type=self.__class__.__name__,
-                                     segment_id=segment_id)
+                                     segment_id=segment_id,
+                                     create_file=create_file)
 
     def remove_features(self,
                         df,

@@ -1,7 +1,6 @@
 from eflow._hidden.constants import SYS_CONSTANTS
 from eflow.utils.sys_utils import write_object_text_to_file
 from eflow.utils.misc_utils import string_condtional
-from eflow._hidden.parent_objects import DataPipelineSegment
 
 import pandas as pd
 
@@ -14,12 +13,11 @@ import os.path
 import copy
 
 
-class DataCleaningWidget(DataPipelineSegment):
+class DataCleaningWidget():
 
     def __init__(self,
                  require_input=None,
-                 data_cleaning_options=None,
-                 test=dict()):
+                 data_cleaning_options=None):
         """
         df:
             Pandas dataframe object
@@ -63,8 +61,7 @@ class DataCleaningWidget(DataPipelineSegment):
 
     def run_widget(self,
                    nan_feature_names,
-                   df_features,
-                   segment_id=None):
+                   df_features):
         """
         df:
             A pandas dataframe object
@@ -75,21 +72,25 @@ class DataCleaningWidget(DataPipelineSegment):
         Returns/Descr:
             Returns a UI widget to create a JSON file for cleaning.
         """
+        if not nan_feature_names:
+            print("Nan features must not be an empty list!")
+            return None
 
         self.__df_features = df_features
-        self.__feature_input_holder = dict()
-        self.__feature_zscore_holder = dict()
 
-        if segment_id:
-            raise ValueError("THIS FUNCTIONALITY ISN'T COMPLETED YET!")
-        else:
-            self.__selected_options = {feature_name: "Ignore feature"
-                                       for feature_name in nan_feature_names}
+        print(self.__selected_options)
+        for feature_name in nan_feature_names:
+            if feature_name not in self.__selected_options:
+                self.__selected_options[feature_name] = "Ignore feature"
+        # self.__selected_options = {feature_name: "Ignore feature"
+        #                            for feature_name in nan_feature_names}
 
         feature_cleaning_options = {col_feature_name:self.__data_cleaning_options[
             self.__get_dtype_key(df_features,
                                  col_feature_name)].keys()
                                     for col_feature_name in nan_feature_names}
+
+        print(feature_cleaning_options)
 
         self.__feature_cleaning_options_w = {key: widgets.Select(
             options=feature_cleaning_options[key],
@@ -223,6 +224,7 @@ class DataCleaningWidget(DataPipelineSegment):
             self.__input_w.layout.visibility = 'visible'
         else:
             self.__input_w.layout.visibility = 'hidden'
+            self.__input_w.value = ""
             # self.__input_w.value = ""
 
         if self.__features_w.value in self.__feature_input_holder and self.__feature_input_holder[self.__features_w.value] == self.__input_w.value:

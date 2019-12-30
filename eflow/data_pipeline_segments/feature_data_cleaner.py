@@ -12,6 +12,7 @@ __email__ = "eric.cacciavillani@gmail.com"
 import pandas as pd
 import numpy as np
 from scipy import stats
+import warnings
 
 class FeatureDataCleaner(DataPipelineSegment):
     """
@@ -19,7 +20,8 @@ class FeatureDataCleaner(DataPipelineSegment):
     """
 
     def __init__(self,
-                 segment_id=None):
+                 segment_id=None,
+                 create_file=True):
         """
         Args:
             segment_id:
@@ -33,7 +35,8 @@ class FeatureDataCleaner(DataPipelineSegment):
         """
         DataPipelineSegment.__init__(self,
                                      object_type=self.__class__.__name__,
-                                     segment_id=segment_id)
+                                     segment_id=segment_id,
+                                     create_file=create_file)
 
         # self.__requires_nan_removal = df.isnull().values.any()
         #
@@ -165,7 +168,8 @@ class FeatureDataCleaner(DataPipelineSegment):
 
     def run_widget(self,
                    df,
-                   df_features):
+                   df_features,
+                   nan_feature_names=[]):
         """
         df:
             A pandas dataframe object
@@ -181,14 +185,17 @@ class FeatureDataCleaner(DataPipelineSegment):
         if df is None:
             return
 
-        nan_feature_names = df.columns[df.isna().any()].tolist()
+        if not nan_feature_names:
+            nan_feature_names = df.columns[df.isna().any()].tolist()
 
         self.__ui_widget.run_widget(nan_feature_names,
                                     df_features)
 
     def perform_saved_widget_input(self,
                                    df,
-                                   df_features):
+                                   df_features,
+                                   suppress_runtime_errors=True,
+                                   reset_segment_file=False):
         selected_options, \
         feature_input_holder, \
         feature_zscore_holder = self.__ui_widget.get_user_inputs()
@@ -209,12 +216,37 @@ class FeatureDataCleaner(DataPipelineSegment):
 
                     if feature_name in feature_zscore_holder and \
                             feature_zscore_holder[feature_name]:
-                        exec_str += feature_zscore_holder[feature_name]
+                        exec_str += feature_zscore_holder[feature_name] + ","
+
+                    if function_option == "Fill nan with min value of distribution":
+                        exec_str += "0,"
+                    elif function_option == "Fill nan with median value of distribution":
+                        exec_str += "50,"
+                    elif function_option == "Fill nan with max value of distribution":
+                        exec_str += "100,"
 
                     exec_str += ")"
+                    print(exec_str)
+                    try:
+                        exec(exec_str)
+                        print()
+                    except Exception as e:
 
-                    exec(exec_str)
-                    print()
+                        if reset_segment_file:
+                            print("Exception hit when trying to perform all "
+                                  "cleaning functions. "
+                                  "Resetting json object for feature data cleaner segment!")
+                            self.reset_segment_file()
+                            raise e
+
+                        if suppress_runtime_errors:
+                            warnings.warn(
+                                f"Feature Data Cleaner raised an error on feature '{feature_name}' on option {function_option} with error: \n{str(e)}",
+                                RuntimeWarning)
+
+                        else:
+                            raise e
+
                     break
 
     # --- Cleaning options

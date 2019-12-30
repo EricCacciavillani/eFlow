@@ -1,37 +1,30 @@
 {
-  "Survived": {
-    "0 -> 1": {
+  "Sex": {
+    "female -> male": {},
+    "female -> All": {
       "Cabin": {
         "Kolmogorov-Smirnov statistic": {
-          "P-Value": 0.9222287458210936,
-          "Statistic": 0.08088235294117647
+          "P-Value": 0.935236686193998,
+          "Statistic": 0.06322013341419042
         }
       }
     },
-    "0 -> All": {
+    "male -> All": {
       "Cabin": {
         "Kolmogorov-Smirnov statistic": {
-          "P-Value": 0.9977536858327906,
-          "Statistic": 0.05392156862745098
-        }
-      }
-    },
-    "1 -> All": {
-      "Cabin": {
-        "Kolmogorov-Smirnov statistic": {
-          "P-Value": 0.9999999501813993,
-          "Statistic": 0.02696078431372549
+          "P-Value": 0.9613651060743447,
+          "Statistic": 0.05731170973062122
         }
       }
     },
     "P-Values": {
-      "Pclass": {
+      "Survived": {
         "Kolmogorov-Smirnov statistic": {
           "All pvalues": [],
           "Pvalues Summary": {}
         }
       },
-      "Sex": {
+      "Pclass": {
         "Kolmogorov-Smirnov statistic": {
           "All pvalues": [],
           "Pvalues Summary": {}
@@ -64,20 +57,19 @@
       "Cabin": {
         "Kolmogorov-Smirnov statistic": {
           "All pvalues": [
-            0.9222287458210936,
-            0.9977536858327906,
-            0.9999999501813993
+            0.935236686193998,
+            0.9613651060743447
           ],
           "Pvalues Summary": {
-            "count": 3.0,
-            "mean": 0.9733274606117611,
-            "std": 0.04426703531776719,
-            "min": 0.9222287458210936,
-            "25%": 0.9599912158269421,
-            "50%": 0.9977536858327906,
-            "75%": 0.9988768180070949,
-            "max": 0.9999999501813993,
-            "var": 0.001959570415824448
+            "count": 2.0,
+            "mean": 0.9483008961341713,
+            "std": 0.018475582879082512,
+            "min": 0.935236686193998,
+            "25%": 0.9417687911640846,
+            "50%": 0.9483008961341713,
+            "75%": 0.9548330011042581,
+            "max": 0.9613651060743447,
+            "var": 0.00034134716272184683
           }
         }
       },
@@ -459,32 +451,39 @@
       }
     }
   },
-  "Sex": {
-    "female -> male": {},
-    "female -> All": {
+  "Survived": {
+    "0 -> 1": {
       "Cabin": {
         "Kolmogorov-Smirnov statistic": {
-          "P-Value": 0.935236686193998,
-          "Statistic": 0.06322013341419042
+          "P-Value": 0.9222287458210936,
+          "Statistic": 0.08088235294117647
         }
       }
     },
-    "male -> All": {
+    "0 -> All": {
       "Cabin": {
         "Kolmogorov-Smirnov statistic": {
-          "P-Value": 0.9613651060743447,
-          "Statistic": 0.05731170973062122
+          "P-Value": 0.9977536858327906,
+          "Statistic": 0.05392156862745098
+        }
+      }
+    },
+    "1 -> All": {
+      "Cabin": {
+        "Kolmogorov-Smirnov statistic": {
+          "P-Value": 0.9999999501813993,
+          "Statistic": 0.02696078431372549
         }
       }
     },
     "P-Values": {
-      "Survived": {
+      "Pclass": {
         "Kolmogorov-Smirnov statistic": {
           "All pvalues": [],
           "Pvalues Summary": {}
         }
       },
-      "Pclass": {
+      "Sex": {
         "Kolmogorov-Smirnov statistic": {
           "All pvalues": [],
           "Pvalues Summary": {}
@@ -517,19 +516,20 @@
       "Cabin": {
         "Kolmogorov-Smirnov statistic": {
           "All pvalues": [
-            0.935236686193998,
-            0.9613651060743447
+            0.9222287458210936,
+            0.9977536858327906,
+            0.9999999501813993
           ],
           "Pvalues Summary": {
-            "count": 2.0,
-            "mean": 0.9483008961341713,
-            "std": 0.018475582879082512,
-            "min": 0.935236686193998,
-            "25%": 0.9417687911640846,
-            "50%": 0.9483008961341713,
-            "75%": 0.9548330011042581,
-            "max": 0.9613651060743447,
-            "var": 0.00034134716272184683
+            "count": 3.0,
+            "mean": 0.9733274606117611,
+            "std": 0.04426703531776719,
+            "min": 0.9222287458210936,
+            "25%": 0.9599912158269421,
+            "50%": 0.9977536858327906,
+            "75%": 0.9988768180070949,
+            "max": 0.9999999501813993,
+            "var": 0.001959570415824448
           }
         }
       },

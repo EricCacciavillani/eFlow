@@ -21,7 +21,8 @@ class DataEncoder(DataPipelineSegment):
         dataframe and df_features.
     """
     def __init__(self,
-                 segment_id=None):
+                 segment_id=None,
+                 create_file=True):
         """
         Args:
             segment_id:
@@ -35,7 +36,8 @@ class DataEncoder(DataPipelineSegment):
         """
         DataPipelineSegment.__init__(self,
                                      object_type=self.__class__.__name__,
-                                     segment_id=segment_id)
+                                     segment_id=segment_id,
+                                     create_file=create_file)
 
     def encode_data(self,
                     df,
@@ -167,6 +169,35 @@ class DataEncoder(DataPipelineSegment):
 
         if _add_to_que:
             self._DataPipelineSegment__add_function_to_que("decode_data",
+                                                           params_dict)
+
+    def apply_binning(self,
+                      df,
+                      df_features,
+                      binable_features,
+                      _add_to_que=True):
+
+        params_dict = locals()
+
+        # Remove any unwanted arguments in params_dict
+        if _add_to_que:
+            params_dict = locals()
+            for arg in ["self", "df", "df_features", "_add_to_que",
+                        "params_dict"]:
+                del params_dict[arg]
+
+        # Apply binning
+        for feature_name in binable_features:
+            bin_labels_dict = df_features.get_feature_binning(feature_name)
+            if bin_labels_dict:
+                print(bin_labels_dict)
+                df[feature_name] = pd.to_numeric(df[feature_name].dropna(),
+                                                 errors='coerce')
+                df[feature_name] = pd.cut(df[feature_name],
+                                          bins=bin_labels_dict["bins"],
+                                          labels=bin_labels_dict["labels"])
+        if _add_to_que:
+            self._DataPipelineSegment__add_function_to_que("apply_binning",
                                                            params_dict)
 
     def apply_value_representation(self,

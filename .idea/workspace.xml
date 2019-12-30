@@ -3,106 +3,49 @@
   <component name="BookmarkManager">
     <bookmark url="file://$PROJECT_DIR$/eflow/foundation/data_frame_types.py" line="317" />
     <bookmark url="file://$PROJECT_DIR$/eflow/utils/sys_utils.py" line="164" />
-    <bookmark url="file://$PROJECT_DIR$/eflow/data_pipeline_segments/type_fixer.py" line="32" />
+    <bookmark url="file://$PROJECT_DIR$/eflow/data_pipeline_segments/type_fixer.py" line="33" />
     <bookmark url="file://$PROJECT_DIR$/eflow/utils/pandas_utils.py" line="274" />
   </component>
   <component name="ChangeListManager">
     <list default="true" id="178261e3-0830-4d8e-91ef-8172f5216aca" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/lib/eflow/data_pipeline_segments/data_cleaner.py" beforeDir="false" afterPath="$PROJECT_DIR$/build/lib/eflow/data_pipeline_segments/data_cleaner.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/eflow/_hidden/widgets/DataCleaningWidget.py" beforeDir="false" afterPath="$PROJECT_DIR$/eflow/_hidden/widgets/feature_data_cleaning_widget.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/eflow/data_analysis/feature_analysis.py" beforeDir="false" afterPath="$PROJECT_DIR$/eflow/data_analysis/feature_analysis.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/eflow/data_analysis/null_analysis.py" beforeDir="false" afterPath="$PROJECT_DIR$/eflow/data_analysis/null_analysis.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/eflow/data_pipeline_segments/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/eflow/data_pipeline_segments/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/eflow/data_pipeline_segments/data_cleaner.py" beforeDir="false" afterPath="$PROJECT_DIR$/eflow/data_pipeline_segments/feature_data_cleaner.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/eflow/foundation/data_frame_types.py" beforeDir="false" afterPath="$PROJECT_DIR$/eflow/foundation/data_frame_types.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/.ipynb_checkpoints/1.) Inspect data_MM_Dev-checkpoint.ipynb" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/1.) Inspect data_MM_Dev.ipynb" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/eflow/_hidden/parent_objects/data_pipeline_segment.py" beforeDir="false" afterPath="$PROJECT_DIR$/eflow/_hidden/parent_objects/data_pipeline_segment.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/eflow/_hidden/widgets/feature_data_cleaning_widget.py" beforeDir="false" afterPath="$PROJECT_DIR$/eflow/_hidden/widgets/feature_data_cleaning_widget.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/eflow/data_pipeline_segments/data_encoder.py" beforeDir="false" afterPath="$PROJECT_DIR$/eflow/data_pipeline_segments/data_encoder.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/eflow/data_pipeline_segments/feature_data_cleaner.py" beforeDir="false" afterPath="$PROJECT_DIR$/eflow/data_pipeline_segments/feature_data_cleaner.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/eflow/data_pipeline_segments/feature_transformer.py" beforeDir="false" afterPath="$PROJECT_DIR$/eflow/data_pipeline_segments/feature_transformer.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/eflow/data_pipeline_segments/string_cleaner.py" beforeDir="false" afterPath="$PROJECT_DIR$/eflow/data_pipeline_segments/string_cleaner.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/eflow/data_pipeline_segments/type_fixer.py" beforeDir="false" afterPath="$PROJECT_DIR$/eflow/data_pipeline_segments/type_fixer.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/testing/.ipynb_checkpoints/1.) Inspect data-checkpoint.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/testing/.ipynb_checkpoints/1.) Inspect data-checkpoint.ipynb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/testing/.ipynb_checkpoints/2.) Pre Production-checkpoint.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/testing/.ipynb_checkpoints/2.) Pre Production-checkpoint.ipynb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/testing/1.) Inspect data.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/testing/1.) Inspect data.ipynb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/testing/2.) Pre Production.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/testing/2.) Pre Production.ipynb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Feature Analysis/Full Titanic Data/Age/Age Description Table.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Feature Analysis/Full Titanic Data/Age/Age Description Table.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Feature Analysis/Full Titanic Data/Age/Two feature analysis/Age by Cabin/A/Age Description Table.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Feature Analysis/Full Titanic Data/Age/Two feature analysis/Age by Cabin/A/Age Description Table.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Feature Analysis/Full Titanic Data/Age/Two feature analysis/Age by Cabin/B/Age Description Table.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Feature Analysis/Full Titanic Data/Age/Two feature analysis/Age by Cabin/B/Age Description Table.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Feature Analysis/Full Titanic Data/Age/Two feature analysis/Age by Cabin/C/Age Description Table.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Feature Analysis/Full Titanic Data/Age/Two feature analysis/Age by Cabin/C/Age Description Table.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Feature Analysis/Full Titanic Data/Age/Two feature analysis/Age by Cabin/D/Age Description Table.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Feature Analysis/Full Titanic Data/Age/Two feature analysis/Age by Cabin/D/Age Description Table.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Feature Analysis/Full Titanic Data/Age/Two feature analysis/Age by Cabin/E/Age Description Table.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Feature Analysis/Full Titanic Data/Age/Two feature analysis/Age by Cabin/E/Age Description Table.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Feature Analysis/Full Titanic Data/Age/Two feature analysis/Age by Cabin/F/Age Description Table.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Feature Analysis/Full Titanic Data/Age/Two feature analysis/Age by Cabin/F/Age Description Table.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Feature Analysis/Full Titanic Data/Age/Two feature analysis/Age by Cabin/G/Age Description Table.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Feature Analysis/Full Titanic Data/Age/Two feature analysis/Age by Cabin/G/Age Description Table.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Feature Analysis/Full Titanic Data/Age/Two feature analysis/Age by Cabin/T/Age Description Table.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Feature Analysis/Full Titanic Data/Age/Two feature analysis/Age by Cabin/T/Age Description Table.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Feature Analysis/Full Titanic Data/Age/Two feature analysis/Age by Embarked/Cherbourg/Age Description Table.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Feature Analysis/Full Titanic Data/Age/Two feature analysis/Age by Embarked/Cherbourg/Age Description Table.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Feature Analysis/Full Titanic Data/Age/Two feature analysis/Age by Embarked/Queenstown/Age Description Table.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Feature Analysis/Full Titanic Data/Age/Two feature analysis/Age by Embarked/Queenstown/Age Description Table.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Feature Analysis/Full Titanic Data/Age/Two feature analysis/Age by Embarked/Southampton/Age Description Table.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Feature Analysis/Full Titanic Data/Age/Two feature analysis/Age by Embarked/Southampton/Age Description Table.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Feature Analysis/Full Titanic Data/Age/Two feature analysis/Age by Pclass/1st Class/Age Description Table.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Feature Analysis/Full Titanic Data/Age/Two feature analysis/Age by Pclass/1st Class/Age Description Table.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Feature Analysis/Full Titanic Data/Age/Two feature analysis/Age by Pclass/2nd Class/Age Description Table.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Feature Analysis/Full Titanic Data/Age/Two feature analysis/Age by Pclass/2nd Class/Age Description Table.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Feature Analysis/Full Titanic Data/Age/Two feature analysis/Age by Pclass/3rd Class/Age Description Table.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Feature Analysis/Full Titanic Data/Age/Two feature analysis/Age by Pclass/3rd Class/Age Description Table.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Feature Analysis/Full Titanic Data/Age/Two feature analysis/Age by Sex/female/Age Description Table.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Feature Analysis/Full Titanic Data/Age/Two feature analysis/Age by Sex/female/Age Description Table.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Feature Analysis/Full Titanic Data/Age/Two feature analysis/Age by Sex/male/Age Description Table.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Feature Analysis/Full Titanic Data/Age/Two feature analysis/Age by Sex/male/Age Description Table.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Feature Analysis/Full Titanic Data/Age/Two feature analysis/Age by Survived/0/Age Description Table.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Feature Analysis/Full Titanic Data/Age/Two feature analysis/Age by Survived/0/Age Description Table.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Feature Analysis/Full Titanic Data/Age/Two feature analysis/Age by Survived/1/Age Description Table.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Feature Analysis/Full Titanic Data/Age/Two feature analysis/Age by Survived/1/Age Description Table.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Feature Analysis/Full Titanic Data/Fare/Fare Description Table.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Feature Analysis/Full Titanic Data/Fare/Fare Description Table.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Feature Analysis/Full Titanic Data/Parch/Parch Description Table.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Feature Analysis/Full Titanic Data/Parch/Parch Description Table.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Feature Analysis/Full Titanic Data/Sex/Two feature analysis/Sex by Age/female/Age Description Table.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Feature Analysis/Full Titanic Data/Sex/Two feature analysis/Sex by Age/female/Age Description Table.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Feature Analysis/Full Titanic Data/Sex/Two feature analysis/Sex by Age/male/Age Description Table.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Feature Analysis/Full Titanic Data/Sex/Two feature analysis/Sex by Age/male/Age Description Table.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Feature Analysis/Full Titanic Data/Sex/Two feature analysis/Sex by Cabin/Group by Cabin and Sex Table.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Feature Analysis/Full Titanic Data/Sex/Two feature analysis/Sex by Cabin/Group by Cabin and Sex Table.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Feature Analysis/Full Titanic Data/Sex/Two feature analysis/Sex by Embarked/Group by Embarked and Sex Table.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Feature Analysis/Full Titanic Data/Sex/Two feature analysis/Sex by Embarked/Group by Embarked and Sex Table.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Feature Analysis/Full Titanic Data/Sex/Two feature analysis/Sex by Fare/female/Fare Description Table.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Feature Analysis/Full Titanic Data/Sex/Two feature analysis/Sex by Fare/female/Fare Description Table.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Feature Analysis/Full Titanic Data/Sex/Two feature analysis/Sex by Fare/male/Fare Description Table.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Feature Analysis/Full Titanic Data/Sex/Two feature analysis/Sex by Fare/male/Fare Description Table.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Feature Analysis/Full Titanic Data/Sex/Two feature analysis/Sex by Parch/female/Parch Description Table.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Feature Analysis/Full Titanic Data/Sex/Two feature analysis/Sex by Parch/female/Parch Description Table.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Feature Analysis/Full Titanic Data/Sex/Two feature analysis/Sex by Parch/male/Parch Description Table.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Feature Analysis/Full Titanic Data/Sex/Two feature analysis/Sex by Parch/male/Parch Description Table.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Feature Analysis/Full Titanic Data/Sex/Two feature analysis/Sex by Pclass/Group by Pclass and Sex Table.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Feature Analysis/Full Titanic Data/Sex/Two feature analysis/Sex by Pclass/Group by Pclass and Sex Table.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Feature Analysis/Full Titanic Data/Sex/Two feature analysis/Sex by SibSp/female/SibSp Description Table.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Feature Analysis/Full Titanic Data/Sex/Two feature analysis/Sex by SibSp/female/SibSp Description Table.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Feature Analysis/Full Titanic Data/Sex/Two feature analysis/Sex by SibSp/male/SibSp Description Table.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Feature Analysis/Full Titanic Data/Sex/Two feature analysis/Sex by SibSp/male/SibSp Description Table.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Feature Analysis/Full Titanic Data/Sex/Two feature analysis/Sex by Survived/Group by Survived and Sex Table.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Feature Analysis/Full Titanic Data/Sex/Two feature analysis/Sex by Survived/Group by Survived and Sex Table.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Feature Analysis/Full Titanic Data/Sex/Where Sex = female/Age/Age Description Table.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Feature Analysis/Full Titanic Data/Sex/Where Sex = female/Age/Age Description Table.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Feature Analysis/Full Titanic Data/Sex/Where Sex = female/Cabin/Cabin Value Counts Table.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Feature Analysis/Full Titanic Data/Sex/Where Sex = female/Cabin/Cabin Value Counts Table.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Feature Analysis/Full Titanic Data/Sex/Where Sex = female/Cabin/Group by Cabin and Sex Table.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Feature Analysis/Full Titanic Data/Sex/Where Sex = female/Cabin/Group by Cabin and Sex Table.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Feature Analysis/Full Titanic Data/Sex/Where Sex = female/Embarked/Group by Embarked and Sex Table.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Feature Analysis/Full Titanic Data/Sex/Where Sex = female/Embarked/Group by Embarked and Sex Table.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Feature Analysis/Full Titanic Data/Sex/Where Sex = female/Fare/Fare Description Table.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Feature Analysis/Full Titanic Data/Sex/Where Sex = female/Fare/Fare Description Table.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Feature Analysis/Full Titanic Data/Sex/Where Sex = female/Parch/Parch Description Table.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Feature Analysis/Full Titanic Data/Sex/Where Sex = female/Parch/Parch Description Table.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Feature Analysis/Full Titanic Data/Sex/Where Sex = female/Pclass/Group by Pclass and Sex Table.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Feature Analysis/Full Titanic Data/Sex/Where Sex = female/Pclass/Group by Pclass and Sex Table.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Feature Analysis/Full Titanic Data/Sex/Where Sex = female/SibSp/SibSp Description Table.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Feature Analysis/Full Titanic Data/Sex/Where Sex = female/SibSp/SibSp Description Table.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Feature Analysis/Full Titanic Data/Sex/Where Sex = female/Survived/Group by Survived and Sex Table.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Feature Analysis/Full Titanic Data/Sex/Where Sex = female/Survived/Group by Survived and Sex Table.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Feature Analysis/Full Titanic Data/Sex/Where Sex = male/Age/Age Description Table.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Feature Analysis/Full Titanic Data/Sex/Where Sex = male/Age/Age Description Table.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Feature Analysis/Full Titanic Data/Sex/Where Sex = male/Cabin/Group by Cabin and Sex Table.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Feature Analysis/Full Titanic Data/Sex/Where Sex = male/Cabin/Group by Cabin and Sex Table.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Feature Analysis/Full Titanic Data/Sex/Where Sex = male/Embarked/Group by Embarked and Sex Table.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Feature Analysis/Full Titanic Data/Sex/Where Sex = male/Embarked/Group by Embarked and Sex Table.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Feature Analysis/Full Titanic Data/Sex/Where Sex = male/Fare/Fare Description Table.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Feature Analysis/Full Titanic Data/Sex/Where Sex = male/Fare/Fare Description Table.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Feature Analysis/Full Titanic Data/Sex/Where Sex = male/Parch/Parch Description Table.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Feature Analysis/Full Titanic Data/Sex/Where Sex = male/Parch/Parch Description Table.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Feature Analysis/Full Titanic Data/Sex/Where Sex = male/Pclass/Group by Pclass and Sex Table.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Feature Analysis/Full Titanic Data/Sex/Where Sex = male/Pclass/Group by Pclass and Sex Table.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Feature Analysis/Full Titanic Data/Sex/Where Sex = male/SibSp/SibSp Description Table.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Feature Analysis/Full Titanic Data/Sex/Where Sex = male/SibSp/SibSp Description Table.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Feature Analysis/Full Titanic Data/Sex/Where Sex = male/Survived/Group by Survived and Sex Table.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Feature Analysis/Full Titanic Data/Sex/Where Sex = male/Survived/Group by Survived and Sex Table.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Feature Analysis/Full Titanic Data/SibSp/SibSp Description Table.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Feature Analysis/Full Titanic Data/SibSp/SibSp Description Table.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Feature Analysis/Full Titanic Data/Survived/Pie graph on Survived.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Feature Analysis/Full Titanic Data/Survived/Pie graph on Survived.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Feature Analysis/Full Titanic Data/Survived/Two feature analysis/Survived by Age/0/Age Description Table.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Feature Analysis/Full Titanic Data/Survived/Two feature analysis/Survived by Age/0/Age Description Table.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Feature Analysis/Full Titanic Data/Survived/Two feature analysis/Survived by Age/1/Age Description Table.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Feature Analysis/Full Titanic Data/Survived/Two feature analysis/Survived by Age/1/Age Description Table.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Feature Analysis/Full Titanic Data/Survived/Two feature analysis/Survived by Cabin/Group by Cabin and Survived Table.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Feature Analysis/Full Titanic Data/Survived/Two feature analysis/Survived by Cabin/Group by Cabin and Survived Table.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Feature Analysis/Full Titanic Data/Survived/Two feature analysis/Survived by Embarked/Group by Embarked and Survived Table.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Feature Analysis/Full Titanic Data/Survived/Two feature analysis/Survived by Embarked/Group by Embarked and Survived Table.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Feature Analysis/Full Titanic Data/Survived/Two feature analysis/Survived by Fare/0/Fare Description Table.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Feature Analysis/Full Titanic Data/Survived/Two feature analysis/Survived by Fare/0/Fare Description Table.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Feature Analysis/Full Titanic Data/Survived/Two feature analysis/Survived by Fare/1/Fare Description Table.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Feature Analysis/Full Titanic Data/Survived/Two feature analysis/Survived by Fare/1/Fare Description Table.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Feature Analysis/Full Titanic Data/Survived/Two feature analysis/Survived by Parch/0/Parch Description Table.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Feature Analysis/Full Titanic Data/Survived/Two feature analysis/Survived by Parch/0/Parch Description Table.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Feature Analysis/Full Titanic Data/Survived/Two feature analysis/Survived by Parch/1/Parch Description Table.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Feature Analysis/Full Titanic Data/Survived/Two feature analysis/Survived by Parch/1/Parch Description Table.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Feature Analysis/Full Titanic Data/Survived/Two feature analysis/Survived by Pclass/Group by Pclass and Survived Table.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Feature Analysis/Full Titanic Data/Survived/Two feature analysis/Survived by Pclass/Group by Pclass and Survived Table.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Feature Analysis/Full Titanic Data/Survived/Two feature analysis/Survived by Sex/Group by Sex and Survived Table.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Feature Analysis/Full Titanic Data/Survived/Two feature analysis/Survived by Sex/Group by Sex and Survived Table.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Feature Analysis/Full Titanic Data/Survived/Two feature analysis/Survived by SibSp/0/SibSp Description Table.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Feature Analysis/Full Titanic Data/Survived/Two feature analysis/Survived by SibSp/0/SibSp Description Table.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Feature Analysis/Full Titanic Data/Survived/Two feature analysis/Survived by SibSp/1/SibSp Description Table.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Feature Analysis/Full Titanic Data/Survived/Two feature analysis/Survived by SibSp/1/SibSp Description Table.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Feature Analysis/Full Titanic Data/Survived/Where Survived = False/Age/Age Description Table.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Feature Analysis/Full Titanic Data/Survived/Where Survived = False/Age/Age Description Table.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Feature Analysis/Full Titanic Data/Survived/Where Survived = False/Cabin/Cabin Value Counts Table.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Feature Analysis/Full Titanic Data/Survived/Where Survived = False/Cabin/Cabin Value Counts Table.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Feature Analysis/Full Titanic Data/Survived/Where Survived = False/Cabin/Count plot graph on Cabin with count color ranking.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Feature Analysis/Full Titanic Data/Survived/Where Survived = False/Cabin/Count plot graph on Cabin with count color ranking.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Feature Analysis/Full Titanic Data/Survived/Where Survived = False/Cabin/Group by Cabin and Survived Table.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Feature Analysis/Full Titanic Data/Survived/Where Survived = False/Cabin/Group by Cabin and Survived Table.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Feature Analysis/Full Titanic Data/Survived/Where Survived = False/Embarked/Group by Embarked and Survived Table.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Feature Analysis/Full Titanic Data/Survived/Where Survived = False/Embarked/Group by Embarked and Survived Table.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Feature Analysis/Full Titanic Data/Survived/Where Survived = False/Fare/Fare Description Table.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Feature Analysis/Full Titanic Data/Survived/Where Survived = False/Fare/Fare Description Table.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Feature Analysis/Full Titanic Data/Survived/Where Survived = False/Parch/Parch Description Table.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Feature Analysis/Full Titanic Data/Survived/Where Survived = False/Parch/Parch Description Table.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Feature Analysis/Full Titanic Data/Survived/Where Survived = False/SibSp/SibSp Description Table.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Feature Analysis/Full Titanic Data/Survived/Where Survived = False/SibSp/SibSp Description Table.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Feature Analysis/Full Titanic Data/Survived/Where Survived = True/Age/Age Description Table.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Feature Analysis/Full Titanic Data/Survived/Where Survived = True/Age/Age Description Table.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Feature Analysis/Full Titanic Data/Survived/Where Survived = False/Pclass/Group by Pclass and Survived Table.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Feature Analysis/Full Titanic Data/Survived/Where Survived = False/Pclass/Group by Pclass and Survived Table.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Feature Analysis/Full Titanic Data/Survived/Where Survived = False/Sex/Group by Sex and Survived Table.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Feature Analysis/Full Titanic Data/Survived/Where Survived = False/Sex/Group by Sex and Survived Table.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Feature Analysis/Full Titanic Data/Survived/Where Survived = True/Cabin/Cabin Value Counts Table.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Feature Analysis/Full Titanic Data/Survived/Where Survived = True/Cabin/Cabin Value Counts Table.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Feature Analysis/Full Titanic Data/Survived/Where Survived = True/Cabin/Group by Cabin and Survived Table.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Feature Analysis/Full Titanic Data/Survived/Where Survived = True/Cabin/Group by Cabin and Survived Table.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Feature Analysis/Full Titanic Data/Survived/Where Survived = True/Embarked/Group by Embarked and Survived Table.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Feature Analysis/Full Titanic Data/Survived/Where Survived = True/Embarked/Group by Embarked and Survived Table.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Feature Analysis/Full Titanic Data/Survived/Where Survived = True/Fare/Fare Description Table.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Feature Analysis/Full Titanic Data/Survived/Where Survived = True/Fare/Fare Description Table.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Feature Analysis/Full Titanic Data/Survived/Where Survived = True/Parch/Parch Description Table.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Feature Analysis/Full Titanic Data/Survived/Where Survived = True/Parch/Parch Description Table.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Feature Analysis/Full Titanic Data/Survived/Where Survived = True/Pclass/Group by Pclass and Survived Table.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Feature Analysis/Full Titanic Data/Survived/Where Survived = True/Pclass/Group by Pclass and Survived Table.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Feature Analysis/Full Titanic Data/Survived/Where Survived = True/Sex/Group by Sex and Survived Table.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Feature Analysis/Full Titanic Data/Survived/Where Survived = True/Sex/Group by Sex and Survived Table.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Feature Analysis/Full Titanic Data/Survived/Where Survived = True/SibSp/SibSp Description Table.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Feature Analysis/Full Titanic Data/Survived/Where Survived = True/SibSp/SibSp Description Table.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Feature Analysis/Full Titanic Data/_Extras/Statistics/Accept Null Hypothesis/Accept Null Hypothesis on target features where pvalue &lt;= 0.01.json" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Feature Analysis/Full Titanic Data/_Extras/Statistics/Accept Null Hypothesis/Accept Null Hypothesis on target features where pvalue &lt;= 0.01.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Feature Analysis/Full Titanic Data/_Extras/Statistics/Accept Null Hypothesis/Accept Null Hypothesis on target features where pvalue &lt;= 0.05.json" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Feature Analysis/Full Titanic Data/_Extras/Statistics/Accept Null Hypothesis/Accept Null Hypothesis on target features where pvalue &lt;= 0.05.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Feature Analysis/Full Titanic Data/_Extras/Statistics/Accept Null Hypothesis/Accept Null Hypothesis on target features where pvalue &lt;= 0.1.json" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Feature Analysis/Full Titanic Data/_Extras/Statistics/Accept Null Hypothesis/Accept Null Hypothesis on target features where pvalue &lt;= 0.1.json" afterDir="false" />
@@ -119,105 +62,56 @@
       <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Feature Analysis/Full Titanic Data/_Extras/Statistics/Statistics on target features.json" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Feature Analysis/Full Titanic Data/_Extras/Statistics/Statistics on target features.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Missing Data/Full Titanic Data/Feature Analysis of Null Data/Age = NaN/Cabin/Cabin Value Counts Table.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Missing Data/Full Titanic Data/Feature Analysis of Null Data/Age = NaN/Cabin/Cabin Value Counts Table.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Missing Data/Full Titanic Data/Feature Analysis of Null Data/Age = NaN/Cabin/Count plot graph on Cabin with count color ranking.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Missing Data/Full Titanic Data/Feature Analysis of Null Data/Age = NaN/Cabin/Count plot graph on Cabin with count color ranking.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Missing Data/Full Titanic Data/Feature Analysis of Null Data/Age = NaN/Fare/Fare Description Table.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Missing Data/Full Titanic Data/Feature Analysis of Null Data/Age = NaN/Fare/Fare Description Table.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Missing Data/Full Titanic Data/Feature Analysis of Null Data/Age = NaN/Parch/Parch Description Table.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Missing Data/Full Titanic Data/Feature Analysis of Null Data/Age = NaN/Parch/Parch Description Table.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Missing Data/Full Titanic Data/Feature Analysis of Null Data/Age = NaN/Sex/Two feature analysis/Sex by Fare/female/Fare Description Table.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Missing Data/Full Titanic Data/Feature Analysis of Null Data/Age = NaN/Sex/Two feature analysis/Sex by Fare/female/Fare Description Table.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Missing Data/Full Titanic Data/Feature Analysis of Null Data/Age = NaN/Sex/Two feature analysis/Sex by Fare/male/Fare Description Table.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Missing Data/Full Titanic Data/Feature Analysis of Null Data/Age = NaN/Sex/Two feature analysis/Sex by Fare/male/Fare Description Table.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Missing Data/Full Titanic Data/Feature Analysis of Null Data/Age = NaN/Sex/Two feature analysis/Sex by Parch/female/Parch Description Table.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Missing Data/Full Titanic Data/Feature Analysis of Null Data/Age = NaN/Sex/Two feature analysis/Sex by Parch/female/Parch Description Table.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Missing Data/Full Titanic Data/Feature Analysis of Null Data/Age = NaN/Sex/Two feature analysis/Sex by Parch/male/Parch Description Table.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Missing Data/Full Titanic Data/Feature Analysis of Null Data/Age = NaN/Sex/Two feature analysis/Sex by Parch/male/Parch Description Table.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Missing Data/Full Titanic Data/Feature Analysis of Null Data/Age = NaN/Sex/Two feature analysis/Sex by SibSp/female/SibSp Description Table.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Missing Data/Full Titanic Data/Feature Analysis of Null Data/Age = NaN/Sex/Two feature analysis/Sex by SibSp/female/SibSp Description Table.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Missing Data/Full Titanic Data/Feature Analysis of Null Data/Age = NaN/Sex/Two feature analysis/Sex by SibSp/male/SibSp Description Table.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Missing Data/Full Titanic Data/Feature Analysis of Null Data/Age = NaN/Sex/Two feature analysis/Sex by SibSp/male/SibSp Description Table.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Missing Data/Full Titanic Data/Feature Analysis of Null Data/Age = NaN/Sex/Two feature analysis/Sex by Cabin/B/Sex Value Counts Table.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Missing Data/Full Titanic Data/Feature Analysis of Null Data/Age = NaN/Sex/Two feature analysis/Sex by Cabin/B/Sex Value Counts Table.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Missing Data/Full Titanic Data/Feature Analysis of Null Data/Age = NaN/Sex/Two feature analysis/Sex by Cabin/D/Sex Value Counts Table.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Missing Data/Full Titanic Data/Feature Analysis of Null Data/Age = NaN/Sex/Two feature analysis/Sex by Cabin/D/Sex Value Counts Table.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Missing Data/Full Titanic Data/Feature Analysis of Null Data/Age = NaN/Sex/Two feature analysis/Sex by Cabin/F/Sex Value Counts Table.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Missing Data/Full Titanic Data/Feature Analysis of Null Data/Age = NaN/Sex/Two feature analysis/Sex by Cabin/F/Sex Value Counts Table.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Missing Data/Full Titanic Data/Feature Analysis of Null Data/Age = NaN/Sex/Two feature analysis/Sex by Cabin/Group by Cabin and Sex Table.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Missing Data/Full Titanic Data/Feature Analysis of Null Data/Age = NaN/Sex/Two feature analysis/Sex by Cabin/Group by Cabin and Sex Table.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Missing Data/Full Titanic Data/Feature Analysis of Null Data/Age = NaN/Sex/Two feature analysis/Sex by Embarked/Group by Embarked and Sex Table.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Missing Data/Full Titanic Data/Feature Analysis of Null Data/Age = NaN/Sex/Two feature analysis/Sex by Embarked/Group by Embarked and Sex Table.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Missing Data/Full Titanic Data/Feature Analysis of Null Data/Age = NaN/Sex/Two feature analysis/Sex by Pclass/Group by Pclass and Sex Table.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Missing Data/Full Titanic Data/Feature Analysis of Null Data/Age = NaN/Sex/Two feature analysis/Sex by Pclass/Group by Pclass and Sex Table.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Missing Data/Full Titanic Data/Feature Analysis of Null Data/Age = NaN/Sex/Two feature analysis/Sex by Survived/Group by Survived and Sex Table.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Missing Data/Full Titanic Data/Feature Analysis of Null Data/Age = NaN/Sex/Two feature analysis/Sex by Survived/Group by Survived and Sex Table.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Missing Data/Full Titanic Data/Feature Analysis of Null Data/Age = NaN/Sex/Where Sex = female/Cabin/Cabin Value Counts Table.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Missing Data/Full Titanic Data/Feature Analysis of Null Data/Age = NaN/Sex/Where Sex = female/Cabin/Cabin Value Counts Table.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Missing Data/Full Titanic Data/Feature Analysis of Null Data/Age = NaN/Sex/Where Sex = female/Cabin/Count plot graph on Cabin with count color ranking.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Missing Data/Full Titanic Data/Feature Analysis of Null Data/Age = NaN/Sex/Where Sex = female/Cabin/Count plot graph on Cabin with count color ranking.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Missing Data/Full Titanic Data/Feature Analysis of Null Data/Age = NaN/Sex/Where Sex = female/Fare/Fare Description Table.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Missing Data/Full Titanic Data/Feature Analysis of Null Data/Age = NaN/Sex/Where Sex = female/Fare/Fare Description Table.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Missing Data/Full Titanic Data/Feature Analysis of Null Data/Age = NaN/Sex/Where Sex = female/Parch/Parch Description Table.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Missing Data/Full Titanic Data/Feature Analysis of Null Data/Age = NaN/Sex/Where Sex = female/Parch/Parch Description Table.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Missing Data/Full Titanic Data/Feature Analysis of Null Data/Age = NaN/Sex/Where Sex = female/SibSp/SibSp Description Table.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Missing Data/Full Titanic Data/Feature Analysis of Null Data/Age = NaN/Sex/Where Sex = female/SibSp/SibSp Description Table.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Missing Data/Full Titanic Data/Feature Analysis of Null Data/Age = NaN/Sex/Where Sex = female/Cabin/Group by Cabin and Sex Table.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Missing Data/Full Titanic Data/Feature Analysis of Null Data/Age = NaN/Sex/Where Sex = female/Cabin/Group by Cabin and Sex Table.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Missing Data/Full Titanic Data/Feature Analysis of Null Data/Age = NaN/Sex/Where Sex = female/Embarked/Group by Embarked and Sex Table.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Missing Data/Full Titanic Data/Feature Analysis of Null Data/Age = NaN/Sex/Where Sex = female/Embarked/Group by Embarked and Sex Table.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Missing Data/Full Titanic Data/Feature Analysis of Null Data/Age = NaN/Sex/Where Sex = female/Pclass/Group by Pclass and Sex Table.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Missing Data/Full Titanic Data/Feature Analysis of Null Data/Age = NaN/Sex/Where Sex = female/Pclass/Group by Pclass and Sex Table.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Missing Data/Full Titanic Data/Feature Analysis of Null Data/Age = NaN/Sex/Where Sex = female/Survived/Group by Survived and Sex Table.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Missing Data/Full Titanic Data/Feature Analysis of Null Data/Age = NaN/Sex/Where Sex = female/Survived/Group by Survived and Sex Table.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Missing Data/Full Titanic Data/Feature Analysis of Null Data/Age = NaN/Sex/Where Sex = male/Cabin/Cabin Value Counts Table.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Missing Data/Full Titanic Data/Feature Analysis of Null Data/Age = NaN/Sex/Where Sex = male/Cabin/Cabin Value Counts Table.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Missing Data/Full Titanic Data/Feature Analysis of Null Data/Age = NaN/Sex/Where Sex = male/Cabin/Count plot graph on Cabin with count color ranking.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Missing Data/Full Titanic Data/Feature Analysis of Null Data/Age = NaN/Sex/Where Sex = male/Cabin/Count plot graph on Cabin with count color ranking.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Missing Data/Full Titanic Data/Feature Analysis of Null Data/Age = NaN/Sex/Where Sex = male/Fare/Fare Description Table.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Missing Data/Full Titanic Data/Feature Analysis of Null Data/Age = NaN/Sex/Where Sex = male/Fare/Fare Description Table.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Missing Data/Full Titanic Data/Feature Analysis of Null Data/Age = NaN/Sex/Where Sex = male/Parch/Parch Description Table.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Missing Data/Full Titanic Data/Feature Analysis of Null Data/Age = NaN/Sex/Where Sex = male/Parch/Parch Description Table.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Missing Data/Full Titanic Data/Feature Analysis of Null Data/Age = NaN/Sex/Where Sex = male/SibSp/SibSp Description Table.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Missing Data/Full Titanic Data/Feature Analysis of Null Data/Age = NaN/Sex/Where Sex = male/SibSp/SibSp Description Table.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Missing Data/Full Titanic Data/Feature Analysis of Null Data/Age = NaN/SibSp/SibSp Description Table.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Missing Data/Full Titanic Data/Feature Analysis of Null Data/Age = NaN/SibSp/SibSp Description Table.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Missing Data/Full Titanic Data/Feature Analysis of Null Data/Age = NaN/Survived/Two feature analysis/Survived by Fare/0/Fare Description Table.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Missing Data/Full Titanic Data/Feature Analysis of Null Data/Age = NaN/Survived/Two feature analysis/Survived by Fare/0/Fare Description Table.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Missing Data/Full Titanic Data/Feature Analysis of Null Data/Age = NaN/Survived/Two feature analysis/Survived by Fare/1/Fare Description Table.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Missing Data/Full Titanic Data/Feature Analysis of Null Data/Age = NaN/Survived/Two feature analysis/Survived by Fare/1/Fare Description Table.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Missing Data/Full Titanic Data/Feature Analysis of Null Data/Age = NaN/Survived/Two feature analysis/Survived by Parch/0/Parch Description Table.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Missing Data/Full Titanic Data/Feature Analysis of Null Data/Age = NaN/Survived/Two feature analysis/Survived by Parch/0/Parch Description Table.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Missing Data/Full Titanic Data/Feature Analysis of Null Data/Age = NaN/Survived/Two feature analysis/Survived by Parch/1/Parch Description Table.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Missing Data/Full Titanic Data/Feature Analysis of Null Data/Age = NaN/Survived/Two feature analysis/Survived by Parch/1/Parch Description Table.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Missing Data/Full Titanic Data/Feature Analysis of Null Data/Age = NaN/Survived/Two feature analysis/Survived by SibSp/0/SibSp Description Table.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Missing Data/Full Titanic Data/Feature Analysis of Null Data/Age = NaN/Survived/Two feature analysis/Survived by SibSp/0/SibSp Description Table.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Missing Data/Full Titanic Data/Feature Analysis of Null Data/Age = NaN/Survived/Two feature analysis/Survived by SibSp/1/SibSp Description Table.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Missing Data/Full Titanic Data/Feature Analysis of Null Data/Age = NaN/Survived/Two feature analysis/Survived by SibSp/1/SibSp Description Table.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Missing Data/Full Titanic Data/Feature Analysis of Null Data/Age = NaN/Sex/Where Sex = male/Cabin/Group by Cabin and Sex Table.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Missing Data/Full Titanic Data/Feature Analysis of Null Data/Age = NaN/Sex/Where Sex = male/Cabin/Group by Cabin and Sex Table.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Missing Data/Full Titanic Data/Feature Analysis of Null Data/Age = NaN/Sex/Where Sex = male/Embarked/Group by Embarked and Sex Table.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Missing Data/Full Titanic Data/Feature Analysis of Null Data/Age = NaN/Sex/Where Sex = male/Embarked/Group by Embarked and Sex Table.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Missing Data/Full Titanic Data/Feature Analysis of Null Data/Age = NaN/Sex/Where Sex = male/Pclass/Group by Pclass and Sex Table.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Missing Data/Full Titanic Data/Feature Analysis of Null Data/Age = NaN/Sex/Where Sex = male/Pclass/Group by Pclass and Sex Table.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Missing Data/Full Titanic Data/Feature Analysis of Null Data/Age = NaN/Survived/Two feature analysis/Survived by Cabin/Group by Cabin and Survived Table.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Missing Data/Full Titanic Data/Feature Analysis of Null Data/Age = NaN/Survived/Two feature analysis/Survived by Cabin/Group by Cabin and Survived Table.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Missing Data/Full Titanic Data/Feature Analysis of Null Data/Age = NaN/Survived/Two feature analysis/Survived by Embarked/Group by Embarked and Survived Table.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Missing Data/Full Titanic Data/Feature Analysis of Null Data/Age = NaN/Survived/Two feature analysis/Survived by Embarked/Group by Embarked and Survived Table.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Missing Data/Full Titanic Data/Feature Analysis of Null Data/Age = NaN/Survived/Two feature analysis/Survived by Pclass/Group by Pclass and Survived Table.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Missing Data/Full Titanic Data/Feature Analysis of Null Data/Age = NaN/Survived/Two feature analysis/Survived by Pclass/Group by Pclass and Survived Table.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Missing Data/Full Titanic Data/Feature Analysis of Null Data/Age = NaN/Survived/Two feature analysis/Survived by Sex/Group by Sex and Survived Table.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Missing Data/Full Titanic Data/Feature Analysis of Null Data/Age = NaN/Survived/Two feature analysis/Survived by Sex/Group by Sex and Survived Table.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Missing Data/Full Titanic Data/Feature Analysis of Null Data/Age = NaN/Survived/Where Survived = False/Cabin/Cabin Value Counts Table.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Missing Data/Full Titanic Data/Feature Analysis of Null Data/Age = NaN/Survived/Where Survived = False/Cabin/Cabin Value Counts Table.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Missing Data/Full Titanic Data/Feature Analysis of Null Data/Age = NaN/Survived/Where Survived = False/Fare/Fare Description Table.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Missing Data/Full Titanic Data/Feature Analysis of Null Data/Age = NaN/Survived/Where Survived = False/Fare/Fare Description Table.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Missing Data/Full Titanic Data/Feature Analysis of Null Data/Age = NaN/Survived/Where Survived = False/Parch/Parch Description Table.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Missing Data/Full Titanic Data/Feature Analysis of Null Data/Age = NaN/Survived/Where Survived = False/Parch/Parch Description Table.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Missing Data/Full Titanic Data/Feature Analysis of Null Data/Age = NaN/Survived/Where Survived = False/SibSp/SibSp Description Table.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Missing Data/Full Titanic Data/Feature Analysis of Null Data/Age = NaN/Survived/Where Survived = False/SibSp/SibSp Description Table.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Missing Data/Full Titanic Data/Feature Analysis of Null Data/Age = NaN/Survived/Where Survived = False/Cabin/Count plot graph on Cabin with count color ranking.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Missing Data/Full Titanic Data/Feature Analysis of Null Data/Age = NaN/Survived/Where Survived = False/Cabin/Count plot graph on Cabin with count color ranking.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Missing Data/Full Titanic Data/Feature Analysis of Null Data/Age = NaN/Survived/Where Survived = False/Cabin/Group by Cabin and Survived Table.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Missing Data/Full Titanic Data/Feature Analysis of Null Data/Age = NaN/Survived/Where Survived = False/Cabin/Group by Cabin and Survived Table.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Missing Data/Full Titanic Data/Feature Analysis of Null Data/Age = NaN/Survived/Where Survived = False/Embarked/Group by Embarked and Survived Table.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Missing Data/Full Titanic Data/Feature Analysis of Null Data/Age = NaN/Survived/Where Survived = False/Embarked/Group by Embarked and Survived Table.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Missing Data/Full Titanic Data/Feature Analysis of Null Data/Age = NaN/Survived/Where Survived = False/Pclass/Group by Pclass and Survived Table.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Missing Data/Full Titanic Data/Feature Analysis of Null Data/Age = NaN/Survived/Where Survived = False/Pclass/Group by Pclass and Survived Table.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Missing Data/Full Titanic Data/Feature Analysis of Null Data/Age = NaN/Survived/Where Survived = False/Sex/Group by Sex and Survived Table.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Missing Data/Full Titanic Data/Feature Analysis of Null Data/Age = NaN/Survived/Where Survived = False/Sex/Group by Sex and Survived Table.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Missing Data/Full Titanic Data/Feature Analysis of Null Data/Age = NaN/Survived/Where Survived = True/Cabin/Cabin Value Counts Table.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Missing Data/Full Titanic Data/Feature Analysis of Null Data/Age = NaN/Survived/Where Survived = True/Cabin/Cabin Value Counts Table.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Missing Data/Full Titanic Data/Feature Analysis of Null Data/Age = NaN/Survived/Where Survived = True/Cabin/Count plot graph on Cabin with count color ranking.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Missing Data/Full Titanic Data/Feature Analysis of Null Data/Age = NaN/Survived/Where Survived = True/Cabin/Count plot graph on Cabin with count color ranking.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Missing Data/Full Titanic Data/Feature Analysis of Null Data/Age = NaN/Survived/Where Survived = True/Fare/Fare Description Table.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Missing Data/Full Titanic Data/Feature Analysis of Null Data/Age = NaN/Survived/Where Survived = True/Fare/Fare Description Table.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Missing Data/Full Titanic Data/Feature Analysis of Null Data/Age = NaN/Survived/Where Survived = True/Parch/Parch Description Table.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Missing Data/Full Titanic Data/Feature Analysis of Null Data/Age = NaN/Survived/Where Survived = True/Parch/Parch Description Table.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Missing Data/Full Titanic Data/Feature Analysis of Null Data/Age = NaN/Survived/Where Survived = True/SibSp/SibSp Description Table.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Missing Data/Full Titanic Data/Feature Analysis of Null Data/Age = NaN/Survived/Where Survived = True/SibSp/SibSp Description Table.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Missing Data/Full Titanic Data/Feature Analysis of Null Data/Age = NaN/_Extras/Statistics/Accept Null Hypothesis/Accept Null Hypothesis on target features where pvalue &lt;= 0.01.json" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Missing Data/Full Titanic Data/Feature Analysis of Null Data/Age = NaN/_Extras/Statistics/Accept Null Hypothesis/Accept Null Hypothesis on target features where pvalue &lt;= 0.01.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Missing Data/Full Titanic Data/Feature Analysis of Null Data/Age = NaN/_Extras/Statistics/Accept Null Hypothesis/Accept Null Hypothesis on target features where pvalue &lt;= 0.05.json" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Missing Data/Full Titanic Data/Feature Analysis of Null Data/Age = NaN/_Extras/Statistics/Accept Null Hypothesis/Accept Null Hypothesis on target features where pvalue &lt;= 0.05.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Missing Data/Full Titanic Data/Feature Analysis of Null Data/Age = NaN/_Extras/Statistics/Accept Null Hypothesis/Accept Null Hypothesis on target features where pvalue &lt;= 0.1.json" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Missing Data/Full Titanic Data/Feature Analysis of Null Data/Age = NaN/_Extras/Statistics/Accept Null Hypothesis/Accept Null Hypothesis on target features where pvalue &lt;= 0.1.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Missing Data/Full Titanic Data/Feature Analysis of Null Data/Age = NaN/_Extras/Statistics/Reject Null Hypothesis/Reject Null Hypothesis on target features where pvalue &gt;= 0.101.json" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Missing Data/Full Titanic Data/Feature Analysis of Null Data/Age = NaN/_Extras/Statistics/Reject Null Hypothesis/Reject Null Hypothesis on target features where pvalue &gt;= 0.101.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Missing Data/Full Titanic Data/Feature Analysis of Null Data/Age = NaN/_Extras/Statistics/Reject Null Hypothesis/Reject Null Hypothesis on target features where pvalue &gt;= 0.2.json" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Missing Data/Full Titanic Data/Feature Analysis of Null Data/Age = NaN/_Extras/Statistics/Reject Null Hypothesis/Reject Null Hypothesis on target features where pvalue &gt;= 0.2.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Missing Data/Full Titanic Data/Feature Analysis of Null Data/Age = NaN/_Extras/Statistics/Reject Null Hypothesis/Reject Null Hypothesis on target features where pvalue &gt;= 0.3.json" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Missing Data/Full Titanic Data/Feature Analysis of Null Data/Age = NaN/_Extras/Statistics/Reject Null Hypothesis/Reject Null Hypothesis on target features where pvalue &gt;= 0.3.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Missing Data/Full Titanic Data/Feature Analysis of Null Data/Age = NaN/_Extras/Statistics/Reject Null Hypothesis/Reject Null Hypothesis on target features where pvalue &gt;= 0.4.json" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Missing Data/Full Titanic Data/Feature Analysis of Null Data/Age = NaN/_Extras/Statistics/Reject Null Hypothesis/Reject Null Hypothesis on target features where pvalue &gt;= 0.4.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Missing Data/Full Titanic Data/Feature Analysis of Null Data/Age = NaN/_Extras/Statistics/Reject Null Hypothesis/Reject Null Hypothesis on target features where pvalue &gt;= 0.5.json" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Missing Data/Full Titanic Data/Feature Analysis of Null Data/Age = NaN/_Extras/Statistics/Reject Null Hypothesis/Reject Null Hypothesis on target features where pvalue &gt;= 0.5.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Missing Data/Full Titanic Data/Feature Analysis of Null Data/Age = NaN/_Extras/Statistics/Reject Null Hypothesis/Reject Null Hypothesis on target features where pvalue &gt;= 0.6.json" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Missing Data/Full Titanic Data/Feature Analysis of Null Data/Age = NaN/_Extras/Statistics/Reject Null Hypothesis/Reject Null Hypothesis on target features where pvalue &gt;= 0.6.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Missing Data/Full Titanic Data/Feature Analysis of Null Data/Age = NaN/_Extras/Statistics/Reject Null Hypothesis/Reject Null Hypothesis on target features where pvalue &gt;= 0.7.json" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Missing Data/Full Titanic Data/Feature Analysis of Null Data/Age = NaN/_Extras/Statistics/Reject Null Hypothesis/Reject Null Hypothesis on target features where pvalue &gt;= 0.7.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Missing Data/Full Titanic Data/Feature Analysis of Null Data/Age = NaN/_Extras/Statistics/Reject Null Hypothesis/Reject Null Hypothesis on target features where pvalue &gt;= 0.8.json" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Missing Data/Full Titanic Data/Feature Analysis of Null Data/Age = NaN/_Extras/Statistics/Reject Null Hypothesis/Reject Null Hypothesis on target features where pvalue &gt;= 0.8.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Missing Data/Full Titanic Data/Feature Analysis of Null Data/Age = NaN/_Extras/Statistics/Reject Null Hypothesis/Reject Null Hypothesis on target features where pvalue &gt;= 0.9.json" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Missing Data/Full Titanic Data/Feature Analysis of Null Data/Age = NaN/_Extras/Statistics/Reject Null Hypothesis/Reject Null Hypothesis on target features where pvalue &gt;= 0.9.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Missing Data/Full Titanic Data/Feature Analysis of Null Data/Age = NaN/_Extras/Statistics/Reject Null Hypothesis/Reject Null Hypothesis on target features where pvalue &gt;= 1.json" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Missing Data/Full Titanic Data/Feature Analysis of Null Data/Age = NaN/_Extras/Statistics/Reject Null Hypothesis/Reject Null Hypothesis on target features where pvalue &gt;= 1.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Missing Data/Full Titanic Data/Feature Analysis of Null Data/Age = NaN/_Extras/Statistics/Statistics on target features.json" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Missing Data/Full Titanic Data/Feature Analysis of Null Data/Age = NaN/_Extras/Statistics/Statistics on target features.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Missing Data/Full Titanic Data/Feature Analysis of Null Data/Cabin = NaN/Age/Age Description Table.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Missing Data/Full Titanic Data/Feature Analysis of Null Data/Cabin = NaN/Age/Age Description Table.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Missing Data/Full Titanic Data/Feature Analysis of Null Data/Cabin = NaN/Age/Two feature analysis/Age by Embarked/Cherbourg/Age Description Table.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Missing Data/Full Titanic Data/Feature Analysis of Null Data/Cabin = NaN/Age/Two feature analysis/Age by Embarked/Cherbourg/Age Description Table.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Missing Data/Full Titanic Data/Feature Analysis of Null Data/Cabin = NaN/Age/Two feature analysis/Age by Embarked/Queenstown/Age Description Table.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Missing Data/Full Titanic Data/Feature Analysis of Null Data/Cabin = NaN/Age/Two feature analysis/Age by Embarked/Queenstown/Age Description Table.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Missing Data/Full Titanic Data/Feature Analysis of Null Data/Cabin = NaN/Age/Two feature analysis/Age by Embarked/Southampton/Age Description Table.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Missing Data/Full Titanic Data/Feature Analysis of Null Data/Cabin = NaN/Age/Two feature analysis/Age by Embarked/Southampton/Age Description Table.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Missing Data/Full Titanic Data/Feature Analysis of Null Data/Cabin = NaN/Age/Two feature analysis/Age by Pclass/1st Class/Age Description Table.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Missing Data/Full Titanic Data/Feature Analysis of Null Data/Cabin = NaN/Age/Two feature analysis/Age by Pclass/1st Class/Age Description Table.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Missing Data/Full Titanic Data/Feature Analysis of Null Data/Cabin = NaN/Age/Two feature analysis/Age by Pclass/2nd Class/Age Description Table.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Missing Data/Full Titanic Data/Feature Analysis of Null Data/Cabin = NaN/Age/Two feature analysis/Age by Pclass/2nd Class/Age Description Table.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Missing Data/Full Titanic Data/Feature Analysis of Null Data/Cabin = NaN/Age/Two feature analysis/Age by Pclass/3rd Class/Age Description Table.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Missing Data/Full Titanic Data/Feature Analysis of Null Data/Cabin = NaN/Age/Two feature analysis/Age by Pclass/3rd Class/Age Description Table.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Missing Data/Full Titanic Data/Feature Analysis of Null Data/Cabin = NaN/Age/Two feature analysis/Age by Sex/female/Age Description Table.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Missing Data/Full Titanic Data/Feature Analysis of Null Data/Cabin = NaN/Age/Two feature analysis/Age by Sex/female/Age Description Table.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Missing Data/Full Titanic Data/Feature Analysis of Null Data/Cabin = NaN/Age/Two feature analysis/Age by Sex/male/Age Description Table.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Missing Data/Full Titanic Data/Feature Analysis of Null Data/Cabin = NaN/Age/Two feature analysis/Age by Sex/male/Age Description Table.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Missing Data/Full Titanic Data/Feature Analysis of Null Data/Cabin = NaN/Age/Two feature analysis/Age by Survived/0/Age Description Table.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Missing Data/Full Titanic Data/Feature Analysis of Null Data/Cabin = NaN/Age/Two feature analysis/Age by Survived/0/Age Description Table.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Missing Data/Full Titanic Data/Feature Analysis of Null Data/Cabin = NaN/Age/Two feature analysis/Age by Survived/1/Age Description Table.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Missing Data/Full Titanic Data/Feature Analysis of Null Data/Cabin = NaN/Age/Two feature analysis/Age by Survived/1/Age Description Table.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Missing Data/Full Titanic Data/Feature Analysis of Null Data/Cabin = NaN/Fare/Fare Description Table.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Missing Data/Full Titanic Data/Feature Analysis of Null Data/Cabin = NaN/Fare/Fare Description Table.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Missing Data/Full Titanic Data/Feature Analysis of Null Data/Cabin = NaN/Parch/Parch Description Table.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Missing Data/Full Titanic Data/Feature Analysis of Null Data/Cabin = NaN/Parch/Parch Description Table.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Missing Data/Full Titanic Data/Feature Analysis of Null Data/Cabin = NaN/Sex/Two feature analysis/Sex by Age/female/Age Description Table.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Missing Data/Full Titanic Data/Feature Analysis of Null Data/Cabin = NaN/Sex/Two feature analysis/Sex by Age/female/Age Description Table.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Missing Data/Full Titanic Data/Feature Analysis of Null Data/Cabin = NaN/Sex/Two feature analysis/Sex by Age/male/Age Description Table.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Missing Data/Full Titanic Data/Feature Analysis of Null Data/Cabin = NaN/Sex/Two feature analysis/Sex by Age/male/Age Description Table.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Missing Data/Full Titanic Data/Feature Analysis of Null Data/Cabin = NaN/Sex/Two feature analysis/Sex by Fare/female/Fare Description Table.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Missing Data/Full Titanic Data/Feature Analysis of Null Data/Cabin = NaN/Sex/Two feature analysis/Sex by Fare/female/Fare Description Table.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Missing Data/Full Titanic Data/Feature Analysis of Null Data/Cabin = NaN/Sex/Two feature analysis/Sex by Fare/male/Fare Description Table.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Missing Data/Full Titanic Data/Feature Analysis of Null Data/Cabin = NaN/Sex/Two feature analysis/Sex by Fare/male/Fare Description Table.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Missing Data/Full Titanic Data/Feature Analysis of Null Data/Cabin = NaN/Sex/Two feature analysis/Sex by Parch/female/Parch Description Table.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Missing Data/Full Titanic Data/Feature Analysis of Null Data/Cabin = NaN/Sex/Two feature analysis/Sex by Parch/female/Parch Description Table.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Missing Data/Full Titanic Data/Feature Analysis of Null Data/Cabin = NaN/Sex/Two feature analysis/Sex by Parch/male/Parch Description Table.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Missing Data/Full Titanic Data/Feature Analysis of Null Data/Cabin = NaN/Sex/Two feature analysis/Sex by Parch/male/Parch Description Table.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Missing Data/Full Titanic Data/Feature Analysis of Null Data/Cabin = NaN/Sex/Two feature analysis/Sex by SibSp/female/SibSp Description Table.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Missing Data/Full Titanic Data/Feature Analysis of Null Data/Cabin = NaN/Sex/Two feature analysis/Sex by SibSp/female/SibSp Description Table.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Missing Data/Full Titanic Data/Feature Analysis of Null Data/Cabin = NaN/Sex/Two feature analysis/Sex by SibSp/male/SibSp Description Table.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Missing Data/Full Titanic Data/Feature Analysis of Null Data/Cabin = NaN/Sex/Two feature analysis/Sex by SibSp/male/SibSp Description Table.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Missing Data/Full Titanic Data/Feature Analysis of Null Data/Cabin = NaN/Sex/Where Sex = female/Age/Age Description Table.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Missing Data/Full Titanic Data/Feature Analysis of Null Data/Cabin = NaN/Sex/Where Sex = female/Age/Age Description Table.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Missing Data/Full Titanic Data/Feature Analysis of Null Data/Cabin = NaN/Sex/Where Sex = female/Fare/Fare Description Table.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Missing Data/Full Titanic Data/Feature Analysis of Null Data/Cabin = NaN/Sex/Where Sex = female/Fare/Fare Description Table.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Missing Data/Full Titanic Data/Feature Analysis of Null Data/Cabin = NaN/Sex/Where Sex = female/Parch/Parch Description Table.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Missing Data/Full Titanic Data/Feature Analysis of Null Data/Cabin = NaN/Sex/Where Sex = female/Parch/Parch Description Table.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Missing Data/Full Titanic Data/Feature Analysis of Null Data/Cabin = NaN/Sex/Where Sex = female/SibSp/SibSp Description Table.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Missing Data/Full Titanic Data/Feature Analysis of Null Data/Cabin = NaN/Sex/Where Sex = female/SibSp/SibSp Description Table.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Missing Data/Full Titanic Data/Feature Analysis of Null Data/Cabin = NaN/Sex/Where Sex = male/Age/Age Description Table.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Missing Data/Full Titanic Data/Feature Analysis of Null Data/Cabin = NaN/Sex/Where Sex = male/Age/Age Description Table.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Missing Data/Full Titanic Data/Feature Analysis of Null Data/Cabin = NaN/Sex/Where Sex = male/Fare/Fare Description Table.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Missing Data/Full Titanic Data/Feature Analysis of Null Data/Cabin = NaN/Sex/Where Sex = male/Fare/Fare Description Table.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Missing Data/Full Titanic Data/Feature Analysis of Null Data/Cabin = NaN/Sex/Where Sex = male/Parch/Parch Description Table.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Missing Data/Full Titanic Data/Feature Analysis of Null Data/Cabin = NaN/Sex/Where Sex = male/Parch/Parch Description Table.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Missing Data/Full Titanic Data/Feature Analysis of Null Data/Cabin = NaN/Sex/Where Sex = male/SibSp/SibSp Description Table.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Missing Data/Full Titanic Data/Feature Analysis of Null Data/Cabin = NaN/Sex/Where Sex = male/SibSp/SibSp Description Table.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Missing Data/Full Titanic Data/Feature Analysis of Null Data/Cabin = NaN/SibSp/SibSp Description Table.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Missing Data/Full Titanic Data/Feature Analysis of Null Data/Cabin = NaN/SibSp/SibSp Description Table.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Missing Data/Full Titanic Data/Feature Analysis of Null Data/Cabin = NaN/Survived/Two feature analysis/Survived by Age/0/Age Description Table.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Missing Data/Full Titanic Data/Feature Analysis of Null Data/Cabin = NaN/Survived/Two feature analysis/Survived by Age/0/Age Description Table.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Missing Data/Full Titanic Data/Feature Analysis of Null Data/Cabin = NaN/Survived/Two feature analysis/Survived by Age/1/Age Description Table.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Missing Data/Full Titanic Data/Feature Analysis of Null Data/Cabin = NaN/Survived/Two feature analysis/Survived by Age/1/Age Description Table.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Missing Data/Full Titanic Data/Feature Analysis of Null Data/Age = NaN/Survived/Where Survived = True/Cabin/Group by Cabin and Survived Table.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Missing Data/Full Titanic Data/Feature Analysis of Null Data/Age = NaN/Survived/Where Survived = True/Cabin/Group by Cabin and Survived Table.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Missing Data/Full Titanic Data/Feature Analysis of Null Data/Age = NaN/Survived/Where Survived = True/Embarked/Group by Embarked and Survived Table.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Missing Data/Full Titanic Data/Feature Analysis of Null Data/Age = NaN/Survived/Where Survived = True/Embarked/Group by Embarked and Survived Table.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Missing Data/Full Titanic Data/Feature Analysis of Null Data/Age = NaN/Survived/Where Survived = True/Pclass/Group by Pclass and Survived Table.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Missing Data/Full Titanic Data/Feature Analysis of Null Data/Age = NaN/Survived/Where Survived = True/Pclass/Group by Pclass and Survived Table.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Missing Data/Full Titanic Data/Feature Analysis of Null Data/Cabin = NaN/Sex/Two feature analysis/Sex by Embarked/Group by Embarked and Sex Table.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Missing Data/Full Titanic Data/Feature Analysis of Null Data/Cabin = NaN/Sex/Two feature analysis/Sex by Embarked/Group by Embarked and Sex Table.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Missing Data/Full Titanic Data/Feature Analysis of Null Data/Cabin = NaN/Sex/Two feature analysis/Sex by Pclass/Group by Pclass and Sex Table.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Missing Data/Full Titanic Data/Feature Analysis of Null Data/Cabin = NaN/Sex/Two feature analysis/Sex by Pclass/Group by Pclass and Sex Table.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Missing Data/Full Titanic Data/Feature Analysis of Null Data/Cabin = NaN/Sex/Two feature analysis/Sex by Survived/Group by Survived and Sex Table.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Missing Data/Full Titanic Data/Feature Analysis of Null Data/Cabin = NaN/Sex/Two feature analysis/Sex by Survived/Group by Survived and Sex Table.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Missing Data/Full Titanic Data/Feature Analysis of Null Data/Cabin = NaN/Sex/Where Sex = female/Embarked/Group by Embarked and Sex Table.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Missing Data/Full Titanic Data/Feature Analysis of Null Data/Cabin = NaN/Sex/Where Sex = female/Embarked/Group by Embarked and Sex Table.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Missing Data/Full Titanic Data/Feature Analysis of Null Data/Cabin = NaN/Sex/Where Sex = female/Pclass/Group by Pclass and Sex Table.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Missing Data/Full Titanic Data/Feature Analysis of Null Data/Cabin = NaN/Sex/Where Sex = female/Pclass/Group by Pclass and Sex Table.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Missing Data/Full Titanic Data/Feature Analysis of Null Data/Cabin = NaN/Sex/Where Sex = female/Survived/Group by Survived and Sex Table.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Missing Data/Full Titanic Data/Feature Analysis of Null Data/Cabin = NaN/Sex/Where Sex = female/Survived/Group by Survived and Sex Table.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Missing Data/Full Titanic Data/Feature Analysis of Null Data/Cabin = NaN/Sex/Where Sex = male/Embarked/Group by Embarked and Sex Table.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Missing Data/Full Titanic Data/Feature Analysis of Null Data/Cabin = NaN/Sex/Where Sex = male/Embarked/Group by Embarked and Sex Table.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Missing Data/Full Titanic Data/Feature Analysis of Null Data/Cabin = NaN/Sex/Where Sex = male/Pclass/Group by Pclass and Sex Table.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Missing Data/Full Titanic Data/Feature Analysis of Null Data/Cabin = NaN/Sex/Where Sex = male/Pclass/Group by Pclass and Sex Table.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Missing Data/Full Titanic Data/Feature Analysis of Null Data/Cabin = NaN/Survived/Two feature analysis/Survived by Embarked/Group by Embarked and Survived Table.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Missing Data/Full Titanic Data/Feature Analysis of Null Data/Cabin = NaN/Survived/Two feature analysis/Survived by Embarked/Group by Embarked and Survived Table.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Missing Data/Full Titanic Data/Feature Analysis of Null Data/Cabin = NaN/Survived/Two feature analysis/Survived by Fare/0/Fare Description Table.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Missing Data/Full Titanic Data/Feature Analysis of Null Data/Cabin = NaN/Survived/Two feature analysis/Survived by Fare/0/Fare Description Table.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Missing Data/Full Titanic Data/Feature Analysis of Null Data/Cabin = NaN/Survived/Two feature analysis/Survived by Fare/1/Fare Description Table.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Missing Data/Full Titanic Data/Feature Analysis of Null Data/Cabin = NaN/Survived/Two feature analysis/Survived by Fare/1/Fare Description Table.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Missing Data/Full Titanic Data/Feature Analysis of Null Data/Cabin = NaN/Survived/Two feature analysis/Survived by Parch/0/Parch Description Table.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Missing Data/Full Titanic Data/Feature Analysis of Null Data/Cabin = NaN/Survived/Two feature analysis/Survived by Parch/0/Parch Description Table.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Missing Data/Full Titanic Data/Feature Analysis of Null Data/Cabin = NaN/Survived/Two feature analysis/Survived by Parch/1/Parch Description Table.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Missing Data/Full Titanic Data/Feature Analysis of Null Data/Cabin = NaN/Survived/Two feature analysis/Survived by Parch/1/Parch Description Table.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Missing Data/Full Titanic Data/Feature Analysis of Null Data/Cabin = NaN/Survived/Two feature analysis/Survived by Pclass/Group by Pclass and Survived Table.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Missing Data/Full Titanic Data/Feature Analysis of Null Data/Cabin = NaN/Survived/Two feature analysis/Survived by Pclass/Group by Pclass and Survived Table.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Missing Data/Full Titanic Data/Feature Analysis of Null Data/Cabin = NaN/Survived/Two feature analysis/Survived by Sex/Group by Sex and Survived Table.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Missing Data/Full Titanic Data/Feature Analysis of Null Data/Cabin = NaN/Survived/Two feature analysis/Survived by Sex/Group by Sex and Survived Table.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Missing Data/Full Titanic Data/Feature Analysis of Null Data/Cabin = NaN/Survived/Two feature analysis/Survived by SibSp/0/SibSp Description Table.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Missing Data/Full Titanic Data/Feature Analysis of Null Data/Cabin = NaN/Survived/Two feature analysis/Survived by SibSp/0/SibSp Description Table.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Missing Data/Full Titanic Data/Feature Analysis of Null Data/Cabin = NaN/Survived/Two feature analysis/Survived by SibSp/1/SibSp Description Table.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Missing Data/Full Titanic Data/Feature Analysis of Null Data/Cabin = NaN/Survived/Two feature analysis/Survived by SibSp/1/SibSp Description Table.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Missing Data/Full Titanic Data/Feature Analysis of Null Data/Cabin = NaN/Survived/Where Survived = False/Age/Age Description Table.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Missing Data/Full Titanic Data/Feature Analysis of Null Data/Cabin = NaN/Survived/Where Survived = False/Age/Age Description Table.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Missing Data/Full Titanic Data/Feature Analysis of Null Data/Cabin = NaN/Survived/Where Survived = False/Embarked/Group by Embarked and Survived Table.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Missing Data/Full Titanic Data/Feature Analysis of Null Data/Cabin = NaN/Survived/Where Survived = False/Embarked/Group by Embarked and Survived Table.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Missing Data/Full Titanic Data/Feature Analysis of Null Data/Cabin = NaN/Survived/Where Survived = False/Fare/Fare Description Table.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Missing Data/Full Titanic Data/Feature Analysis of Null Data/Cabin = NaN/Survived/Where Survived = False/Fare/Fare Description Table.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Missing Data/Full Titanic Data/Feature Analysis of Null Data/Cabin = NaN/Survived/Where Survived = False/Parch/Parch Description Table.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Missing Data/Full Titanic Data/Feature Analysis of Null Data/Cabin = NaN/Survived/Where Survived = False/Parch/Parch Description Table.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Missing Data/Full Titanic Data/Feature Analysis of Null Data/Cabin = NaN/Survived/Where Survived = False/SibSp/SibSp Description Table.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Missing Data/Full Titanic Data/Feature Analysis of Null Data/Cabin = NaN/Survived/Where Survived = False/SibSp/SibSp Description Table.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Missing Data/Full Titanic Data/Feature Analysis of Null Data/Cabin = NaN/Survived/Where Survived = True/Age/Age Description Table.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Missing Data/Full Titanic Data/Feature Analysis of Null Data/Cabin = NaN/Survived/Where Survived = True/Age/Age Description Table.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Missing Data/Full Titanic Data/Feature Analysis of Null Data/Cabin = NaN/Survived/Where Survived = False/Pclass/Group by Pclass and Survived Table.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Missing Data/Full Titanic Data/Feature Analysis of Null Data/Cabin = NaN/Survived/Where Survived = False/Pclass/Group by Pclass and Survived Table.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Missing Data/Full Titanic Data/Feature Analysis of Null Data/Cabin = NaN/Survived/Where Survived = False/Sex/Group by Sex and Survived Table.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Missing Data/Full Titanic Data/Feature Analysis of Null Data/Cabin = NaN/Survived/Where Survived = False/Sex/Group by Sex and Survived Table.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Missing Data/Full Titanic Data/Feature Analysis of Null Data/Cabin = NaN/Survived/Where Survived = True/Embarked/Group by Embarked and Survived Table.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Missing Data/Full Titanic Data/Feature Analysis of Null Data/Cabin = NaN/Survived/Where Survived = True/Embarked/Group by Embarked and Survived Table.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Missing Data/Full Titanic Data/Feature Analysis of Null Data/Cabin = NaN/Survived/Where Survived = True/Fare/Fare Description Table.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Missing Data/Full Titanic Data/Feature Analysis of Null Data/Cabin = NaN/Survived/Where Survived = True/Fare/Fare Description Table.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Missing Data/Full Titanic Data/Feature Analysis of Null Data/Cabin = NaN/Survived/Where Survived = True/Parch/Parch Description Table.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Missing Data/Full Titanic Data/Feature Analysis of Null Data/Cabin = NaN/Survived/Where Survived = True/Parch/Parch Description Table.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Missing Data/Full Titanic Data/Feature Analysis of Null Data/Cabin = NaN/Survived/Where Survived = True/Pclass/Group by Pclass and Survived Table.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Missing Data/Full Titanic Data/Feature Analysis of Null Data/Cabin = NaN/Survived/Where Survived = True/Pclass/Group by Pclass and Survived Table.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Missing Data/Full Titanic Data/Feature Analysis of Null Data/Cabin = NaN/Survived/Where Survived = True/Sex/Group by Sex and Survived Table.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Missing Data/Full Titanic Data/Feature Analysis of Null Data/Cabin = NaN/Survived/Where Survived = True/Sex/Group by Sex and Survived Table.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Missing Data/Full Titanic Data/Feature Analysis of Null Data/Cabin = NaN/Survived/Where Survived = True/SibSp/SibSp Description Table.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Missing Data/Full Titanic Data/Feature Analysis of Null Data/Cabin = NaN/Survived/Where Survived = True/SibSp/SibSp Description Table.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Missing Data/Full Titanic Data/Feature Analysis of Null Data/Cabin = NaN/_Extras/Statistics/Accept Null Hypothesis/Accept Null Hypothesis on target features where pvalue &lt;= 0.01.json" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Missing Data/Full Titanic Data/Feature Analysis of Null Data/Cabin = NaN/_Extras/Statistics/Accept Null Hypothesis/Accept Null Hypothesis on target features where pvalue &lt;= 0.01.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Missing Data/Full Titanic Data/Feature Analysis of Null Data/Cabin = NaN/_Extras/Statistics/Accept Null Hypothesis/Accept Null Hypothesis on target features where pvalue &lt;= 0.05.json" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Missing Data/Full Titanic Data/Feature Analysis of Null Data/Cabin = NaN/_Extras/Statistics/Accept Null Hypothesis/Accept Null Hypothesis on target features where pvalue &lt;= 0.05.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Missing Data/Full Titanic Data/Feature Analysis of Null Data/Cabin = NaN/_Extras/Statistics/Accept Null Hypothesis/Accept Null Hypothesis on target features where pvalue &lt;= 0.1.json" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Missing Data/Full Titanic Data/Feature Analysis of Null Data/Cabin = NaN/_Extras/Statistics/Accept Null Hypothesis/Accept Null Hypothesis on target features where pvalue &lt;= 0.1.json" afterDir="false" />
@@ -232,21 +126,290 @@
       <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Missing Data/Full Titanic Data/Feature Analysis of Null Data/Cabin = NaN/_Extras/Statistics/Reject Null Hypothesis/Reject Null Hypothesis on target features where pvalue &gt;= 0.9.json" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Missing Data/Full Titanic Data/Feature Analysis of Null Data/Cabin = NaN/_Extras/Statistics/Reject Null Hypothesis/Reject Null Hypothesis on target features where pvalue &gt;= 0.9.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Missing Data/Full Titanic Data/Feature Analysis of Null Data/Cabin = NaN/_Extras/Statistics/Reject Null Hypothesis/Reject Null Hypothesis on target features where pvalue &gt;= 1.json" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Missing Data/Full Titanic Data/Feature Analysis of Null Data/Cabin = NaN/_Extras/Statistics/Reject Null Hypothesis/Reject Null Hypothesis on target features where pvalue &gt;= 1.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Missing Data/Full Titanic Data/Feature Analysis of Null Data/Cabin = NaN/_Extras/Statistics/Statistics on target features.json" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Missing Data/Full Titanic Data/Feature Analysis of Null Data/Cabin = NaN/_Extras/Statistics/Statistics on target features.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Missing Data/Full Titanic Data/Graphics/Missing data bar graph.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Missing Data/Full Titanic Data/Graphics/Missing data bar graph.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Missing Data/Full Titanic Data/Graphics/Missing data dendrogram graph average.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Missing Data/Full Titanic Data/Graphics/Missing data dendrogram graph average.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Missing Data/Full Titanic Data/Graphics/Missing data heatmap graph.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Missing Data/Full Titanic Data/Graphics/Missing data heatmap graph.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Missing Data/Full Titanic Data/Graphics/Missing data matrix graph.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Missing Data/Full Titanic Data/Graphics/Missing data matrix graph.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Missing Data/Full Titanic Data/Tables/Missing Data Table.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Missing Data/Full Titanic Data/Tables/Missing Data Table.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Missing Data/Full Titanic Data/Tables/_Extras/Meta Data/Dataframe Shape Table.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Missing Data/Full Titanic Data/Tables/_Extras/Meta Data/Dataframe Shape Table.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Missing Data/Full Titanic Data/Tables/_Extras/Meta Data/Dataframe Types Table.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Missing Data/Full Titanic Data/Tables/_Extras/Meta Data/Dataframe Types Table.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Missing Data/Full Titanic Data/Tables/_Extras/Meta Data/Missing Data Table.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Missing Data/Full Titanic Data/Tables/_Extras/Meta Data/Missing Data Table.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Missing Data/Full Titanic Data/_Extras/Meta Data/Dataframe Shape Table.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Missing Data/Full Titanic Data/_Extras/Meta Data/Dataframe Shape Table.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Missing Data/Full Titanic Data/_Extras/Meta Data/Dataframe Types Table.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Missing Data/Full Titanic Data/_Extras/Meta Data/Dataframe Types Table.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Missing Data/Full Titanic Data/_Extras/Meta Data/Missing Data Table.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Missing Data/Full Titanic Data/_Extras/Meta Data/Missing Data Table.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Classification Analysis/Target Feature: Survived/DecisionTreeClassifier/_Extras/df_features.json" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Classification Analysis/Target Feature: Survived/DecisionTreeClassifier/_Extras/df_features.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/df_features.json" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/df_features.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Pipeline Structure/Data Pipeline Segments/DataEncoder/E139B20C10.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Pipeline Structure/Data Pipeline Segments/FeatureTransformer/80A967A7BE.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Data Pipeline Segments/DataTransformer/05289D25B6.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Data Pipeline Segments/DataTransformer/0BC0E45E9B.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Data Pipeline Segments/DataTransformer/0E99BA7A74.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Data Pipeline Segments/DataTransformer/10AB9057B1.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Data Pipeline Segments/DataTransformer/127899C6CC.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Data Pipeline Segments/DataTransformer/1351A20597.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Data Pipeline Segments/DataTransformer/1507F9315F.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Data Pipeline Segments/DataTransformer/1511EA9D8D.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Data Pipeline Segments/DataTransformer/1511EA9D8D_1.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Data Pipeline Segments/DataTransformer/1524C6C1FF.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Data Pipeline Segments/DataTransformer/1524C6C1FF_1.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Data Pipeline Segments/DataTransformer/17F0F95F1C.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Data Pipeline Segments/DataTransformer/1893E0D89D.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Data Pipeline Segments/DataTransformer/1DED9462E5.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Data Pipeline Segments/DataTransformer/1EF0F5668A.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Data Pipeline Segments/DataTransformer/21A3459648.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Data Pipeline Segments/DataTransformer/24F9020746.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Data Pipeline Segments/DataTransformer/2733D30683.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Data Pipeline Segments/DataTransformer/279A4A9DFB.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Data Pipeline Segments/DataTransformer/2A9F8F085F.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Data Pipeline Segments/DataTransformer/2D5A554BAE.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Data Pipeline Segments/DataTransformer/2E5B9B80D0.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Data Pipeline Segments/DataTransformer/322AC0B493.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Data Pipeline Segments/DataTransformer/32B9D2D484.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Data Pipeline Segments/DataTransformer/348868C738.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Data Pipeline Segments/DataTransformer/358C65F114.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Data Pipeline Segments/DataTransformer/390375FA97.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Data Pipeline Segments/DataTransformer/3C0A7B2F19.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Data Pipeline Segments/DataTransformer/3EB0153002.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Data Pipeline Segments/DataTransformer/4120C1C0CC.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Data Pipeline Segments/DataTransformer/422FD9EBFE.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Data Pipeline Segments/DataTransformer/48DBA803D2.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Data Pipeline Segments/DataTransformer/4BBD4AC024.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Data Pipeline Segments/DataTransformer/4C1843B69F.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Data Pipeline Segments/DataTransformer/5146DDECCF.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Data Pipeline Segments/DataTransformer/525B356FC7.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Data Pipeline Segments/DataTransformer/52A2C8A03B.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Data Pipeline Segments/DataTransformer/530318FE7C.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Data Pipeline Segments/DataTransformer/54F50456BC.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Data Pipeline Segments/DataTransformer/57FF5F9384.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Data Pipeline Segments/DataTransformer/5F1FB1DBB2.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Data Pipeline Segments/DataTransformer/5F6890E0E8.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Data Pipeline Segments/DataTransformer/64C2D2EB75.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Data Pipeline Segments/DataTransformer/668483FC38.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Data Pipeline Segments/DataTransformer/689F0D7ED6.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Data Pipeline Segments/DataTransformer/7485785114.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Data Pipeline Segments/DataTransformer/74F0A9E803.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Data Pipeline Segments/DataTransformer/7B61F4F0D0.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Data Pipeline Segments/DataTransformer/7B61F4F0D0_1.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Data Pipeline Segments/DataTransformer/7B68689AB6.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Data Pipeline Segments/DataTransformer/7C359B24F1.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Data Pipeline Segments/DataTransformer/8097D7AB8C.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Data Pipeline Segments/DataTransformer/80A967A7BE.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Data Pipeline Segments/DataTransformer/80ECF9D47F.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Data Pipeline Segments/DataTransformer/820882B02C.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Data Pipeline Segments/DataTransformer/8331293BF0.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Data Pipeline Segments/DataTransformer/8331293BF0_1.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Data Pipeline Segments/DataTransformer/8332E5CDDD.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Data Pipeline Segments/DataTransformer/835E32C0B5.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Data Pipeline Segments/DataTransformer/866D8A7826.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Data Pipeline Segments/DataTransformer/88853D4012.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Data Pipeline Segments/DataTransformer/88D01BEEA7.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Data Pipeline Segments/DataTransformer/8A63365B22.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Data Pipeline Segments/DataTransformer/8CCDC2D1EC.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Data Pipeline Segments/DataTransformer/9043E3420C.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Data Pipeline Segments/DataTransformer/92A839741F.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Data Pipeline Segments/DataTransformer/93B6290B0D.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Data Pipeline Segments/DataTransformer/93B6290B0D_1.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Data Pipeline Segments/DataTransformer/979304A485.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Data Pipeline Segments/DataTransformer/99604D2D74.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Data Pipeline Segments/DataTransformer/99604D2D74_1.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Data Pipeline Segments/DataTransformer/9F325A6041.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Data Pipeline Segments/DataTransformer/9F72ED5755.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Data Pipeline Segments/DataTransformer/A1B217355D.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Data Pipeline Segments/DataTransformer/A2F7B095F0.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Data Pipeline Segments/DataTransformer/A4367C311B.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Data Pipeline Segments/DataTransformer/A57A8C4892.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Data Pipeline Segments/DataTransformer/A6CAEF8E71.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Data Pipeline Segments/DataTransformer/A73364F6B9.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Data Pipeline Segments/DataTransformer/A7D7C10B4B.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Data Pipeline Segments/DataTransformer/AA22CD7439.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Data Pipeline Segments/DataTransformer/AAB2584E3C.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Data Pipeline Segments/DataTransformer/AAF8D89349.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Data Pipeline Segments/DataTransformer/B4AD0C43FB.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Data Pipeline Segments/DataTransformer/B62964DAA3.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Data Pipeline Segments/DataTransformer/B67F2F1D63.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Data Pipeline Segments/DataTransformer/B7E7E1F95F.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Data Pipeline Segments/DataTransformer/B8702BE173.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Data Pipeline Segments/DataTransformer/B8AE7F28A2.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Data Pipeline Segments/DataTransformer/BAC69AD9B6.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Data Pipeline Segments/DataTransformer/BBCDDBEB5F.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Data Pipeline Segments/DataTransformer/BBF7761C4D.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Data Pipeline Segments/DataTransformer/BD2AA20840.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Data Pipeline Segments/DataTransformer/C079544873.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Data Pipeline Segments/DataTransformer/C16BD9030F.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Data Pipeline Segments/DataTransformer/C45C4B522E.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Data Pipeline Segments/DataTransformer/C4EA8EF4AC.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Data Pipeline Segments/DataTransformer/C834D604F9.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Data Pipeline Segments/DataTransformer/C92745B364.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Data Pipeline Segments/DataTransformer/CB1F434B27.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Data Pipeline Segments/DataTransformer/CE4B152404.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Data Pipeline Segments/DataTransformer/CF3C5B2594.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Data Pipeline Segments/DataTransformer/D0241A9DC2.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Data Pipeline Segments/DataTransformer/D1B1DDFBD8.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Data Pipeline Segments/DataTransformer/DAC30BC382.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Data Pipeline Segments/DataTransformer/DD023A2DB3.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Data Pipeline Segments/DataTransformer/DD114708CA.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Data Pipeline Segments/DataTransformer/DD1E1A182A.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Data Pipeline Segments/DataTransformer/E139B20C10.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Data Pipeline Segments/DataTransformer/E2C9A36E42.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Data Pipeline Segments/DataTransformer/EC5C169B72.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Data Pipeline Segments/DataTransformer/EED78C568C.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Data Pipeline Segments/DataTransformer/F976C40F5E.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Data Pipeline Segments/DataTransformer/FACCBEAB9A.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Data Pipeline Segments/DataTransformer/FEFA1C648A.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Data Pipelines/Titanic Pipeline 1/df_features.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Data Pipelines/Titanic Pipeline 1/root_pipeline.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Data Pipelines/Titanic Pipeline 10/df_features.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Data Pipelines/Titanic Pipeline 10/root_pipeline.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Data Pipelines/Titanic Pipeline 11/df_features.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Data Pipelines/Titanic Pipeline 11/root_pipeline.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Data Pipelines/Titanic Pipeline 12/df_features.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Data Pipelines/Titanic Pipeline 12/root_pipeline.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Data Pipelines/Titanic Pipeline 13/df_features.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Data Pipelines/Titanic Pipeline 13/root_pipeline.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Data Pipelines/Titanic Pipeline 14/df_features.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Data Pipelines/Titanic Pipeline 14/root_pipeline.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Data Pipelines/Titanic Pipeline 15/df_features.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Data Pipelines/Titanic Pipeline 15/root_pipeline.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Data Pipelines/Titanic Pipeline 16/df_features.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Data Pipelines/Titanic Pipeline 16/root_pipeline.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Data Pipelines/Titanic Pipeline 17/df_features.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Data Pipelines/Titanic Pipeline 17/root_pipeline.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Data Pipelines/Titanic Pipeline 18/df_features.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Data Pipelines/Titanic Pipeline 18/root_pipeline.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Data Pipelines/Titanic Pipeline 19/df_features.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Data Pipelines/Titanic Pipeline 19/root_pipeline.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Data Pipelines/Titanic Pipeline 2/df_features.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Data Pipelines/Titanic Pipeline 2/root_pipeline.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Data Pipelines/Titanic Pipeline 20/df_features.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Data Pipelines/Titanic Pipeline 20/root_pipeline.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Data Pipelines/Titanic Pipeline 21/df_features.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Data Pipelines/Titanic Pipeline 21/root_pipeline.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Data Pipelines/Titanic Pipeline 22/df_features.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Data Pipelines/Titanic Pipeline 22/root_pipeline.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Data Pipelines/Titanic Pipeline 23/df_features.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Data Pipelines/Titanic Pipeline 23/root_pipeline.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Data Pipelines/Titanic Pipeline 24/df_features.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Data Pipelines/Titanic Pipeline 24/root_pipeline.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Data Pipelines/Titanic Pipeline 25/df_features.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Data Pipelines/Titanic Pipeline 25/root_pipeline.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Data Pipelines/Titanic Pipeline 26/df_features.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Data Pipelines/Titanic Pipeline 26/root_pipeline.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Data Pipelines/Titanic Pipeline 27/df_features.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Data Pipelines/Titanic Pipeline 27/root_pipeline.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Data Pipelines/Titanic Pipeline 28/df_features.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Data Pipelines/Titanic Pipeline 28/root_pipeline.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Data Pipelines/Titanic Pipeline 29/df_features.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Data Pipelines/Titanic Pipeline 29/root_pipeline.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Data Pipelines/Titanic Pipeline 3/df_features.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Data Pipelines/Titanic Pipeline 3/root_pipeline.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Data Pipelines/Titanic Pipeline 30/df_features.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Data Pipelines/Titanic Pipeline 30/root_pipeline.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Data Pipelines/Titanic Pipeline 31/df_features.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Data Pipelines/Titanic Pipeline 31/root_pipeline.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Data Pipelines/Titanic Pipeline 32/df_features.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Data Pipelines/Titanic Pipeline 32/root_pipeline.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Data Pipelines/Titanic Pipeline 33/df_features.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Data Pipelines/Titanic Pipeline 33/root_pipeline.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Data Pipelines/Titanic Pipeline 34/df_features.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Data Pipelines/Titanic Pipeline 34/root_pipeline.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Data Pipelines/Titanic Pipeline 35/df_features.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Data Pipelines/Titanic Pipeline 35/root_pipeline.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Data Pipelines/Titanic Pipeline 36/df_features.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Data Pipelines/Titanic Pipeline 36/root_pipeline.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Data Pipelines/Titanic Pipeline 37/df_features.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Data Pipelines/Titanic Pipeline 37/root_pipeline.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Data Pipelines/Titanic Pipeline 38/df_features.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Data Pipelines/Titanic Pipeline 38/root_pipeline.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Data Pipelines/Titanic Pipeline 39/df_features.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Data Pipelines/Titanic Pipeline 39/root_pipeline.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Data Pipelines/Titanic Pipeline 4/df_features.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Data Pipelines/Titanic Pipeline 4/root_pipeline.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Data Pipelines/Titanic Pipeline 40/df_features.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Data Pipelines/Titanic Pipeline 40/root_pipeline.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Data Pipelines/Titanic Pipeline 41/df_features.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Data Pipelines/Titanic Pipeline 41/root_pipeline.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Data Pipelines/Titanic Pipeline 42/df_features.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Data Pipelines/Titanic Pipeline 42/root_pipeline.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Data Pipelines/Titanic Pipeline 43/df_features.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Data Pipelines/Titanic Pipeline 43/root_pipeline.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Data Pipelines/Titanic Pipeline 44/df_features.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Data Pipelines/Titanic Pipeline 44/root_pipeline.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Data Pipelines/Titanic Pipeline 45/df_features.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Data Pipelines/Titanic Pipeline 45/root_pipeline.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Data Pipelines/Titanic Pipeline 46/df_features.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Data Pipelines/Titanic Pipeline 46/root_pipeline.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Data Pipelines/Titanic Pipeline 47/df_features.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Data Pipelines/Titanic Pipeline 47/root_pipeline.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Data Pipelines/Titanic Pipeline 48/df_features.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Data Pipelines/Titanic Pipeline 48/root_pipeline.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Data Pipelines/Titanic Pipeline 49/df_features.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Data Pipelines/Titanic Pipeline 49/root_pipeline.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Data Pipelines/Titanic Pipeline 5/df_features.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Data Pipelines/Titanic Pipeline 5/root_pipeline.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Data Pipelines/Titanic Pipeline 50/df_features.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Data Pipelines/Titanic Pipeline 50/root_pipeline.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Data Pipelines/Titanic Pipeline 51/df_features.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Data Pipelines/Titanic Pipeline 51/root_pipeline.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Data Pipelines/Titanic Pipeline 52/df_features.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Data Pipelines/Titanic Pipeline 52/root_pipeline.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Data Pipelines/Titanic Pipeline 53/df_features.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Data Pipelines/Titanic Pipeline 53/root_pipeline.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Data Pipelines/Titanic Pipeline 54/df_features.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Data Pipelines/Titanic Pipeline 54/root_pipeline.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Data Pipelines/Titanic Pipeline 55/df_features.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Data Pipelines/Titanic Pipeline 55/root_pipeline.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Data Pipelines/Titanic Pipeline 56/df_features.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Data Pipelines/Titanic Pipeline 56/root_pipeline.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Data Pipelines/Titanic Pipeline 57/df_features.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Data Pipelines/Titanic Pipeline 57/root_pipeline.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Data Pipelines/Titanic Pipeline 58/df_features.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Data Pipelines/Titanic Pipeline 58/root_pipeline.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Data Pipelines/Titanic Pipeline 59/df_features.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Data Pipelines/Titanic Pipeline 59/root_pipeline.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Data Pipelines/Titanic Pipeline 6/df_features.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Data Pipelines/Titanic Pipeline 6/root_pipeline.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Data Pipelines/Titanic Pipeline 60/df_features.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Data Pipelines/Titanic Pipeline 60/root_pipeline.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Data Pipelines/Titanic Pipeline 61/df_features.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Data Pipelines/Titanic Pipeline 61/root_pipeline.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Data Pipelines/Titanic Pipeline 62/df_features.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Data Pipelines/Titanic Pipeline 62/root_pipeline.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Data Pipelines/Titanic Pipeline 63/df_features.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Data Pipelines/Titanic Pipeline 63/root_pipeline.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Data Pipelines/Titanic Pipeline 64/df_features.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Data Pipelines/Titanic Pipeline 64/root_pipeline.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Data Pipelines/Titanic Pipeline 65/df_features.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Data Pipelines/Titanic Pipeline 65/root_pipeline.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Data Pipelines/Titanic Pipeline 66/df_features.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Data Pipelines/Titanic Pipeline 66/root_pipeline.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Data Pipelines/Titanic Pipeline 67/df_features.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Data Pipelines/Titanic Pipeline 67/root_pipeline.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Data Pipelines/Titanic Pipeline 68/df_features.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Data Pipelines/Titanic Pipeline 68/root_pipeline.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Data Pipelines/Titanic Pipeline 69/df_features.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Data Pipelines/Titanic Pipeline 69/root_pipeline.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Data Pipelines/Titanic Pipeline 7/df_features.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Data Pipelines/Titanic Pipeline 7/root_pipeline.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Data Pipelines/Titanic Pipeline 70/df_features.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Data Pipelines/Titanic Pipeline 70/root_pipeline.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Data Pipelines/Titanic Pipeline 71/df_features.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Data Pipelines/Titanic Pipeline 71/root_pipeline.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Data Pipelines/Titanic Pipeline 72/df_features.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Data Pipelines/Titanic Pipeline 72/root_pipeline.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Data Pipelines/Titanic Pipeline 73/df_features.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Data Pipelines/Titanic Pipeline 73/root_pipeline.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Data Pipelines/Titanic Pipeline 74/df_features.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Data Pipelines/Titanic Pipeline 74/root_pipeline.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Data Pipelines/Titanic Pipeline 75/df_features.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Data Pipelines/Titanic Pipeline 75/root_pipeline.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Data Pipelines/Titanic Pipeline 76/df_features.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Data Pipelines/Titanic Pipeline 76/root_pipeline.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Data Pipelines/Titanic Pipeline 77/df_features.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Data Pipelines/Titanic Pipeline 77/root_pipeline.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Data Pipelines/Titanic Pipeline 78/df_features.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Data Pipelines/Titanic Pipeline 78/root_pipeline.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Data Pipelines/Titanic Pipeline 79/df_features.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Data Pipelines/Titanic Pipeline 79/root_pipeline.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Data Pipelines/Titanic Pipeline 8/df_features.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Data Pipelines/Titanic Pipeline 8/root_pipeline.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Data Pipelines/Titanic Pipeline 80/df_features.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Data Pipelines/Titanic Pipeline 80/root_pipeline.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Data Pipelines/Titanic Pipeline 81/df_features.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Data Pipelines/Titanic Pipeline 81/root_pipeline.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Data Pipelines/Titanic Pipeline 82/df_features.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Data Pipelines/Titanic Pipeline 82/root_pipeline.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Data Pipelines/Titanic Pipeline 9/df_features.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Data Pipelines/Titanic Pipeline 9/root_pipeline.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Data Pipelines/Titanic Pipeline/df_features.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Data Pipelines/Titanic Pipeline/root_pipeline.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Pipeline Structure/Data Pipeline Segments/FeatureDataCleaner/31C2934EA3.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Pipeline Structure/Data Pipeline Segments/FeatureTransformer/BAD7AAB893.json" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Pipeline Structure/Data Pipeline/Titanic Pipeline/df_features.json" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/_Extras/Pipeline Structure/Data Pipeline/Titanic Pipeline/df_features.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Pipeline Structure/Data Pipeline/Titanic Pipeline/root_pipeline.json" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/_Extras/Pipeline Structure/Data Pipeline/Titanic Pipeline/root_pipeline.json" afterDir="false" />
     </list>
@@ -263,25 +426,13 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/eflow/data_pipeline_segments/feature_data_cleaner.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="408">
-              <caret line="216" column="26" selection-start-line="216" selection-start-column="26" selection-end-line="216" selection-end-column="26" />
+            <state relative-caret-position="498">
+              <caret line="38" column="60" selection-start-line="38" selection-start-column="60" selection-end-line="38" selection-end-column="60" />
               <folding>
-                <element signature="e#0#54#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/eflow/_hidden/widgets/feature_data_cleaning_widget.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-1169">
-              <caret line="61" column="97" selection-start-line="61" selection-start-column="15" selection-end-line="61" selection-end-column="97" />
-              <folding>
-                <element signature="e#0#49#0" expanded="true" />
+                <element signature="e#0#64#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -290,10 +441,34 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/eflow/_hidden/parent_objects/data_pipeline_segment.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="160">
-              <caret line="52" column="38" selection-start-line="52" selection-start-column="38" selection-end-line="52" selection-end-column="38" />
+            <state relative-caret-position="705">
+              <caret line="47" column="10" selection-start-line="47" selection-start-column="10" selection-end-line="47" selection-end-column="10" />
               <folding>
                 <element signature="e#0#51#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/eflow/data_analysis/feature_analysis.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="307">
+              <caret line="1553" column="69" selection-start-line="1553" selection-start-column="63" selection-end-line="1553" selection-end-column="69" />
+              <folding>
+                <element signature="e#0#51#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/eflow/data_analysis/null_analysis.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="572">
+              <caret line="281" column="45" selection-start-line="281" selection-start-column="45" selection-end-line="281" selection-end-column="45" />
+              <folding>
+                <element signature="e#0#50#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -302,8 +477,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/eflow/data_pipeline_segments/feature_transformer.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="538">
-              <caret line="81" column="80" selection-start-line="81" selection-start-column="16" selection-end-line="81" selection-end-column="80" />
+            <state relative-caret-position="311">
+              <caret line="66" column="32" selection-start-line="66" selection-start-column="32" selection-end-line="66" selection-end-column="32" />
               <folding>
                 <element signature="e#0#60#0" expanded="true" />
               </folding>
@@ -311,58 +486,13 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/eflow/utils/sys_utils.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="395">
-              <caret line="27" column="16" selection-start-line="27" selection-start-column="16" selection-end-line="27" selection-end-column="16" />
-              <folding>
-                <element signature="e#0#86#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/eflow/utils/string_utils.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="273">
-              <caret line="32" selection-start-line="32" selection-end-line="58" selection-end-column="21" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/eflow/data_pipeline_segments/data_encoder.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state>
-              <caret selection-end-column="60" />
+            <state relative-caret-position="565">
+              <caret line="193" column="16" lean-forward="true" selection-start-line="193" selection-start-column="16" selection-end-line="194" selection-end-column="65" />
               <folding>
                 <element signature="e#0#60#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/eflow/foundation/data_pipeline.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1665">
-              <caret line="111" selection-start-line="111" selection-end-line="111" />
-              <folding>
-                <element signature="e#0#51#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/eflow/foundation/data_frame_types.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="178">
-              <caret line="198" column="37" selection-start-line="198" selection-start-column="8" selection-end-line="198" selection-end-column="37" />
-              <folding>
-                <element signature="e#0#69#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -379,27 +509,11 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>self.__file_name_w</find>
-      <find>__feature_zscore_holder</find>
-      <find>self.__a</find>
-      <find>__notebook_mode</find>
-      <find>input</find>
-      <find>__init_update_updateable_widgets</find>
-      <find>input</find>
-      <find>condtional</find>
-      <find>__create_data_cleaning_json_file</find>
-      <find>self.__input_w</find>
-      <find>__save_option</find>
-      <find>__hide_init_input_w</find>
-      <find>join</find>
       <find>__validate_save_input_w</find>
       <find>__feature_input_holder</find>
-      <find>DataCleaningWidget</find>
       <find>__full_widgets_ui</find>
       <find>__feature_cleaning_options_w</find>
       <find>self.__selected_options</find>
-      <find>__selected_options</find>
-      <find>zcore_remove_outliers</find>
       <find>zscore</find>
       <find>fill_nan_by_distribution</find>
       <find>__submit_button</find>
@@ -408,7 +522,23 @@
       <find>fill_nan_with_existing_values</find>
       <find>__data_cleaning_options</find>
       <find>__zcore_remove_outliers</find>
+      <find>zcore_remove_outliers</find>
+      <find>exec</find>
+      <find>dict_to_json_file</find>
+      <find>selected</find>
       <find>__su</find>
+      <find>Ignore</find>
+      <find>DataCleaningWidget</find>
+      <find>reset</find>
+      <find>runtime</find>
+      <find>suppress_runtime_errors</find>
+      <find>__selected_options</find>
+      <find>feature</find>
+      <find>FeatureDataCleaner</find>
+      <find>__create_json_pipeline_segment_file</find>
+      <find>to_numeric</find>
+      <find>errors=</find>
+      <find>to_num</find>
     </findStrings>
     <replaceStrings>
       <replace>create_dir_structure</replace>
@@ -469,9 +599,7 @@
         <option value="$PROJECT_DIR$/eflow/_hidden/parent_objects/jupyter_widget.py" />
         <option value="$PROJECT_DIR$/eflow/widgets/color_labeling_widget.py" />
         <option value="$PROJECT_DIR$/eflow/data_pipeline_segments/data_transformer.py" />
-        <option value="$PROJECT_DIR$/eflow/data_pipeline_segments/string_cleaner.py" />
         <option value="$PROJECT_DIR$/eflow/_hidden/parent_objects/analysis_object.py" />
-        <option value="$PROJECT_DIR$/eflow/data_pipeline_segments/type_fixer.py" />
         <option value="$PROJECT_DIR$/eflow/utils/language_processing_utils.py" />
         <option value="$PROJECT_DIR$/eflow/_hidden/custom_exceptions.py" />
         <option value="$PROJECT_DIR$/installation/main_packages.txt" />
@@ -479,7 +607,6 @@
         <option value="$PROJECT_DIR$/README.md" />
         <option value="$PROJECT_DIR$/eflow/auto_modeler/cluster_master.py" />
         <option value="$PROJECT_DIR$/eflow/_hidden/general_objects/enum.py" />
-        <option value="$PROJECT_DIR$/eflow/_hidden/parent_objects/data_pipeline_segment.py" />
         <option value="$PROJECT_DIR$/eflow/_hidden/constants.py" />
         <option value="$PROJECT_DIR$/eflow/utils/eflow_utils.py" />
         <option value="$PROJECT_DIR$/eflow/utils/string_utils.py" />
@@ -491,7 +618,6 @@
         <option value="$PROJECT_DIR$/eflow/_hidden/general_objects/dataframe_snapshot.py" />
         <option value="$PROJECT_DIR$/eflow/utils/sys_utils.py" />
         <option value="$PROJECT_DIR$/eflow/_hidden/parent_objects/data_analysis.py" />
-        <option value="$PROJECT_DIR$/eflow/data_pipeline_segments/data_encoder.py" />
         <option value="$PROJECT_DIR$/eflow/utils/pandas_utils.py" />
         <option value="$PROJECT_DIR$/eflow/_hidden/parent_objects/model_analysis.py" />
         <option value="$PROJECT_DIR$/eflow/model_analysis/classification_analysis.py" />
@@ -500,13 +626,17 @@
         <option value="$PROJECT_DIR$/eflow/data_analysis/feature_analysis.py" />
         <option value="$PROJECT_DIR$/eflow/data_pipeline_segments/data_cleaner.py" />
         <option value="$PROJECT_DIR$/eflow/data_pipeline_segments/__init__.py" />
-        <option value="$PROJECT_DIR$/eflow/data_pipeline_segments/feature_transformer.py" />
         <option value="$PROJECT_DIR$/eflow/_hidden/widgets/feature_data_cleaning_widget.py" />
         <option value="$PROJECT_DIR$/eflow/data_pipeline_segments/feature_data_cleaner.py" />
+        <option value="$PROJECT_DIR$/eflow/data_pipeline_segments/feature_transformer.py" />
+        <option value="$PROJECT_DIR$/eflow/data_pipeline_segments/type_fixer.py" />
+        <option value="$PROJECT_DIR$/eflow/data_pipeline_segments/string_cleaner.py" />
+        <option value="$PROJECT_DIR$/eflow/_hidden/parent_objects/data_pipeline_segment.py" />
+        <option value="$PROJECT_DIR$/eflow/data_pipeline_segments/data_encoder.py" />
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6" fullScreen="true">
+  <component name="ProjectFrameBounds" fullScreen="true">
     <option name="width" value="958" />
     <option name="height" value="1080" />
   </component>
@@ -516,7 +646,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -617,6 +746,7 @@
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -807,18 +937,19 @@
       <workItem from="1575917230747" duration="7407000" />
       <workItem from="1575988657326" duration="2202000" />
       <workItem from="1576078362671" duration="43755000" />
-      <workItem from="1576507290916" duration="48166000" />
+      <workItem from="1576507290916" duration="54144000" />
+      <workItem from="1577730742153" duration="2797000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="613192000" />
+    <option name="totallyTimeSpent" value="621967000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="0" width="1680" height="1050" extended-state="6" />
+    <frame x="0" y="0" width="1920" height="1080" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.48351648" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.4259851" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -982,13 +1113,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/eflow/data_pipeline_segments/string_cleaner.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="15">
-          <caret line="1" selection-start-line="1" selection-end-line="1" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/eflow/_hidden/constants.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="75">
@@ -1126,23 +1250,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/eflow/data_analysis/null_analysis.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-340">
-          <caret line="281" column="45" selection-start-line="281" selection-start-column="45" selection-end-line="281" selection-end-column="45" />
-          <folding>
-            <element signature="e#0#50#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/eflow/data_pipeline_segments/type_fixer.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="540">
-          <caret line="38" column="12" selection-start-line="38" selection-start-column="12" selection-end-line="38" selection-end-column="12" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/eflow/data_pipeline_segments/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="30">
@@ -1157,20 +1264,61 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/eflow/data_analysis/feature_analysis.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="806">
-          <caret line="777" column="12" selection-start-line="777" selection-start-column="12" selection-end-line="777" selection-end-column="39" />
-          <folding>
-            <element signature="e#0#51#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/eflow/utils/misc_utils.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="375">
           <caret line="25" column="9" selection-start-line="25" selection-start-column="9" selection-end-line="25" selection-end-column="9" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/eflow/utils/sys_utils.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2640">
+          <caret line="180" column="31" selection-start-line="178" selection-start-column="22" selection-end-line="180" selection-end-column="31" />
+          <folding>
+            <element signature="e#0#86#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/eflow/data_pipeline_segments/type_fixer.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="480">
+          <caret line="34" column="60" selection-start-line="34" selection-start-column="60" selection-end-line="34" selection-end-column="60" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/eflow/data_pipeline_segments/string_cleaner.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="17" column="60" selection-start-line="17" selection-start-column="60" selection-end-line="17" selection-end-column="60" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/eflow/_hidden/widgets/feature_data_cleaning_widget.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1110">
+          <caret line="74" column="15" selection-start-line="74" selection-start-column="15" selection-end-line="74" selection-end-column="15" />
+          <folding>
+            <element signature="e#0#49#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/eflow/utils/string_utils.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="273">
+          <caret line="32" selection-start-line="32" selection-end-line="58" selection-end-column="21" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/eflow/foundation/data_pipeline.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="919">
+          <caret line="111" selection-start-line="111" selection-end-line="111" />
+          <folding>
+            <element signature="e#0#51#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -1184,47 +1332,40 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/eflow/foundation/data_pipeline.py">
+    <entry file="file://$PROJECT_DIR$/eflow/_hidden/parent_objects/data_pipeline_segment.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1665">
-          <caret line="111" selection-start-line="111" selection-end-line="111" />
+        <state relative-caret-position="705">
+          <caret line="47" column="10" selection-start-line="47" selection-start-column="10" selection-end-line="47" selection-end-column="10" />
           <folding>
             <element signature="e#0#51#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/eflow/utils/string_utils.py">
+    <entry file="file://$PROJECT_DIR$/eflow/data_pipeline_segments/feature_data_cleaner.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="273">
-          <caret line="32" selection-start-line="32" selection-end-line="58" selection-end-column="21" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/eflow/utils/sys_utils.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="395">
-          <caret line="27" column="16" selection-start-line="27" selection-start-column="16" selection-end-line="27" selection-end-column="16" />
+        <state relative-caret-position="498">
+          <caret line="38" column="60" selection-start-line="38" selection-start-column="60" selection-end-line="38" selection-end-column="60" />
           <folding>
-            <element signature="e#0#86#0" expanded="true" />
+            <element signature="e#0#64#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/eflow/data_pipeline_segments/data_encoder.py">
+    <entry file="file://$PROJECT_DIR$/eflow/data_analysis/null_analysis.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret selection-end-column="60" />
+        <state relative-caret-position="572">
+          <caret line="281" column="45" selection-start-line="281" selection-start-column="45" selection-end-line="281" selection-end-column="45" />
           <folding>
-            <element signature="e#0#60#0" expanded="true" />
+            <element signature="e#0#50#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/eflow/_hidden/parent_objects/data_pipeline_segment.py">
+    <entry file="file://$PROJECT_DIR$/eflow/data_analysis/feature_analysis.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="160">
-          <caret line="52" column="38" selection-start-line="52" selection-start-column="38" selection-end-line="52" selection-end-column="38" />
+        <state relative-caret-position="307">
+          <caret line="1553" column="69" selection-start-line="1553" selection-start-column="63" selection-end-line="1553" selection-end-column="69" />
           <folding>
             <element signature="e#0#51#0" expanded="true" />
           </folding>
@@ -1233,30 +1374,20 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/eflow/data_pipeline_segments/feature_transformer.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="538">
-          <caret line="81" column="80" selection-start-line="81" selection-start-column="16" selection-end-line="81" selection-end-column="80" />
+        <state relative-caret-position="311">
+          <caret line="66" column="32" selection-start-line="66" selection-start-column="32" selection-end-line="66" selection-end-column="32" />
           <folding>
             <element signature="e#0#60#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/eflow/_hidden/widgets/feature_data_cleaning_widget.py">
+    <entry file="file://$PROJECT_DIR$/eflow/data_pipeline_segments/data_encoder.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1169">
-          <caret line="61" column="97" selection-start-line="61" selection-start-column="15" selection-end-line="61" selection-end-column="97" />
+        <state relative-caret-position="565">
+          <caret line="193" column="16" lean-forward="true" selection-start-line="193" selection-start-column="16" selection-end-line="194" selection-end-column="65" />
           <folding>
-            <element signature="e#0#49#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/eflow/data_pipeline_segments/feature_data_cleaner.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="408">
-          <caret line="216" column="26" selection-start-line="216" selection-start-column="26" selection-end-line="216" selection-end-column="26" />
-          <folding>
-            <element signature="e#0#54#0" expanded="true" />
+            <element signature="e#0#60#0" expanded="true" />
           </folding>
         </state>
       </provider>
