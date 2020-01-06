@@ -42,7 +42,7 @@ def create_plt_png(directory_path,
 
     # Ensure directory structure is init correctly
     abs_path = create_dir_structure(directory_path,
-                                          sub_dir)
+                                    sub_dir)
 
     # Ensure file ext is on the file.
     if filename[-4:] != ".png":

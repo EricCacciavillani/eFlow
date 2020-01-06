@@ -1,5 +1,6 @@
 # General/Misc somethings that don't quite fit it the other utils
 import itertools
+from eflow.utils.sys_utils import write_object_text_to_file
 
 __author__ = "Eric Cacciavillani"
 __copyright__ = "Copyright 2019, eFlow"
@@ -26,6 +27,12 @@ def string_condtional(given_val,
     Note:
         Currently only handles and conditionals (no 'or' statements yet)
     """
+
+    try:
+        given_val = float(given_val)
+    except Exception as _:
+        return False
+
     condtional_returns = []
     operators = [i for i in full_condtional.split(" ")
                  if i == "or" or i == "and"]

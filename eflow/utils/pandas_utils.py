@@ -1,7 +1,8 @@
 from eflow.utils.image_processing_utils import create_plt_png
 from eflow.utils.string_utils import correct_directory_path
-from eflow.utils.sys_utils import write_object_text_to_file, create_dir_structure
+from eflow.utils.sys_utils import write_object_text_to_file, create_dir_structure, pickle_object_to_file
 from eflow._hidden.custom_exceptions import UnsatisfiedRequirments
+from eflow.utils.math_utils import calculate_entropy
 
 import pandas as pd
 from matplotlib import pyplot as plt
@@ -22,7 +23,7 @@ def df_to_image(df,
                 sub_dir,
                 filename,
                 sharpness=1.7,
-                col_width=5.0,
+                col_width=8,
                 row_height=0.625,
                 font_size=14,
                 header_color='#40466e',
@@ -46,16 +47,17 @@ def df_to_image(df,
             df[col_feature] = df[col_feature].map(float_format.format)
 
     if ax is None:
-        size = (np.array(df.shape[::-1]) + np.array([0, 1])) * np.array(
-            [col_width, row_height])
+        size = (np.array(df.shape[::-1]) + np.array([0, 1])) * np.array([col_width, row_height])
         fig, ax = plt.subplots(figsize=size)
         ax.axis('off')
 
     if show_index:
         df.reset_index(inplace=True)
 
-    mpl_table = ax.table(cellText=df.values, bbox=bbox,
-                         colLabels=df.columns, **kwargs)
+    mpl_table = ax.table(cellText=df.values,
+                         bbox=bbox,
+                         colLabels=df.columns,
+                         **kwargs)
 
     mpl_table.auto_set_font_size(False)
     mpl_table.set_fontsize(font_size)
@@ -223,6 +225,53 @@ def generate_meta_data(df,
                 "Missing Data Table",
                 show_index=True)
 
+def generate_entropy_table(df,
+                           df_features,
+                           output_folder_path,
+                           sub_dir,
+                           file_name="Entropy Table"):
+    """
+    Desc:
+        Calculate the entropy of each non-continous numerical feature in a pandas
+        dataframe object and store in a pandas dataframe object in the proper
+        directory structure.
+
+    Args:
+        df: pd.Dataframe
+            Pandas DataFrame object
+
+        df_features: DataFrameTypes from eflow
+            DataFrameTypes object
+
+        output_folder_path: str
+            Pre defined path to already existing directory to output file(s).
+
+        sub_dir: str
+            Path to be possibly generated.
+
+        file_name: str
+            Name of the given file to save
+
+    Returns:
+        Nothing
+    """
+    entropy_dict = dict()
+    for feature_name in df.columns:
+        if feature_name in df_features.all_features() and \
+                feature_name not in df_features.null_only_features() and \
+                feature_name not in df_features.continuous_numerical_features():
+            entropy_dict[feature_name] = calculate_entropy(
+                df[feature_name].dropna())
+
+    entropy_table = pd.DataFrame.from_dict(entropy_dict,
+                                           orient='index').rename(columns={0: "Entropy"})
+
+    entropy_table.sort_values(by=["Entropy"],
+                              ascending=True,
+                              inplace=True)
+    pickle_object_to_file(entropy_table,
+                          output_folder_path + sub_dir,
+                          file_name)
 
 def auto_binning(df,
                  df_features,
@@ -305,6 +354,7 @@ def auto_binning(df,
 
         bins.append(binned_obj[1])
 
+    bins = [float(bins[i]) for i in range(0, len(bins))]
     return bins, labels
 
 

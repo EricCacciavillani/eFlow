@@ -17,14 +17,6 @@
           "Pvalues Summary": {}
         }
       },
-      "Pclass": {
-        "Kolmogorov-Smirnov statistic": {
-          "All pvalues": [
-            1.0
-          ],
-          "Pvalues Summary": {}
-        }
-      },
       "SibSp": {
         "Kolmogorov-Smirnov statistic": {
           "All pvalues": [],
@@ -46,6 +38,14 @@
       "Cabin": {
         "Kolmogorov-Smirnov statistic": {
           "All pvalues": [],
+          "Pvalues Summary": {}
+        }
+      },
+      "Pclass": {
+        "Kolmogorov-Smirnov statistic": {
+          "All pvalues": [
+            1.0
+          ],
           "Pvalues Summary": {}
         }
       },
@@ -62,18 +62,6 @@
     "0 -> All": {},
     "1 -> All": {},
     "P-Values": {
-      "Pclass": {
-        "Kolmogorov-Smirnov statistic": {
-          "All pvalues": [],
-          "Pvalues Summary": {}
-        }
-      },
-      "Sex": {
-        "Kolmogorov-Smirnov statistic": {
-          "All pvalues": [],
-          "Pvalues Summary": {}
-        }
-      },
       "SibSp": {
         "Kolmogorov-Smirnov statistic": {
           "All pvalues": [],
@@ -92,7 +80,19 @@
           "Pvalues Summary": {}
         }
       },
+      "Sex": {
+        "Kolmogorov-Smirnov statistic": {
+          "All pvalues": [],
+          "Pvalues Summary": {}
+        }
+      },
       "Cabin": {
+        "Kolmogorov-Smirnov statistic": {
+          "All pvalues": [],
+          "Pvalues Summary": {}
+        }
+      },
+      "Pclass": {
         "Kolmogorov-Smirnov statistic": {
           "All pvalues": [],
           "Pvalues Summary": {}

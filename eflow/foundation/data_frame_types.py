@@ -919,7 +919,7 @@ class DataFrameTypes:
     def get_feature_binning(self,
                             feature_name):
         if feature_name in self.__feature_labels_bins_dict:
-            return self.__feature_labels_bins_dict[feature_name]
+            return copy.deepcopy(self.__feature_labels_bins_dict[feature_name])
         else:
             return None
 

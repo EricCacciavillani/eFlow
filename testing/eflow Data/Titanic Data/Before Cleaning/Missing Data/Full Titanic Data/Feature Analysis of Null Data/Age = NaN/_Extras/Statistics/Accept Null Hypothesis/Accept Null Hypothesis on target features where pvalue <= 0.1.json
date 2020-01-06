@@ -69,12 +69,6 @@
           }
         }
       },
-      "Pclass": {
-        "Kolmogorov-Smirnov statistic": {
-          "All pvalues": [],
-          "Pvalues Summary": {}
-        }
-      },
       "SibSp": {
         "Kolmogorov-Smirnov statistic": {
           "All pvalues": [
@@ -112,6 +106,12 @@
           "Pvalues Summary": {}
         }
       },
+      "Pclass": {
+        "Kolmogorov-Smirnov statistic": {
+          "All pvalues": [],
+          "Pvalues Summary": {}
+        }
+      },
       "Embarked": {
         "Kolmogorov-Smirnov statistic": {
           "All pvalues": [
@@ -135,16 +135,16 @@
   },
   "Survived": {
     "0 -> 1": {
-      "Sex": {
-        "Kolmogorov-Smirnov statistic": {
-          "P-Value": 4.8967052634907304e-11,
-          "Statistic": 0.5563076923076923
-        }
-      },
       "Fare": {
         "Kolmogorov-Smirnov statistic": {
           "P-Value": 0.01323225854875898,
           "Statistic": 0.2553846153846154
+        }
+      },
+      "Sex": {
+        "Kolmogorov-Smirnov statistic": {
+          "P-Value": 4.8967052634907304e-11,
+          "Statistic": 0.5563076923076923
         }
       },
       "Embarked": {
@@ -177,9 +177,23 @@
       }
     },
     "P-Values": {
-      "Pclass": {
+      "SibSp": {
         "Kolmogorov-Smirnov statistic": {
           "All pvalues": [],
+          "Pvalues Summary": {}
+        }
+      },
+      "Parch": {
+        "Kolmogorov-Smirnov statistic": {
+          "All pvalues": [],
+          "Pvalues Summary": {}
+        }
+      },
+      "Fare": {
+        "Kolmogorov-Smirnov statistic": {
+          "All pvalues": [
+            0.01323225854875898
+          ],
           "Pvalues Summary": {}
         }
       },
@@ -203,27 +217,13 @@
           }
         }
       },
-      "SibSp": {
-        "Kolmogorov-Smirnov statistic": {
-          "All pvalues": [],
-          "Pvalues Summary": {}
-        }
-      },
-      "Parch": {
-        "Kolmogorov-Smirnov statistic": {
-          "All pvalues": [],
-          "Pvalues Summary": {}
-        }
-      },
-      "Fare": {
-        "Kolmogorov-Smirnov statistic": {
-          "All pvalues": [
-            0.01323225854875898
-          ],
-          "Pvalues Summary": {}
-        }
-      },
       "Cabin": {
+        "Kolmogorov-Smirnov statistic": {
+          "All pvalues": [],
+          "Pvalues Summary": {}
+        }
+      },
+      "Pclass": {
         "Kolmogorov-Smirnov statistic": {
           "All pvalues": [],
           "Pvalues Summary": {}

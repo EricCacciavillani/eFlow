@@ -57,7 +57,11 @@ class DataCleaningWidget():
         self.__selected_options = dict()
 
     def get_user_inputs(self):
-        return self.__selected_options, self.__feature_input_holder, self.__feature_zscore_holder
+        return self.__selected_options, \
+               {feature: value for feature, value in
+                self.__feature_input_holder.items() if value}, \
+               {feature: value for feature, value in
+                self.__feature_zscore_holder.items() if value}
 
     def run_widget(self,
                    nan_feature_names,
@@ -78,7 +82,6 @@ class DataCleaningWidget():
 
         self.__df_features = df_features
 
-        print(self.__selected_options)
         for feature_name in nan_feature_names:
             if feature_name not in self.__selected_options:
                 self.__selected_options[feature_name] = "Ignore feature"
@@ -89,8 +92,6 @@ class DataCleaningWidget():
             self.__get_dtype_key(df_features,
                                  col_feature_name)].keys()
                                     for col_feature_name in nan_feature_names}
-
-        print(feature_cleaning_options)
 
         self.__feature_cleaning_options_w = {key: widgets.Select(
             options=feature_cleaning_options[key],
@@ -140,11 +141,18 @@ class DataCleaningWidget():
         self.__features_w.observe(self.__hide_init_zscore_w,
                                   'value')
 
+        self.__input_visible = False
+        self.__zscore_visible = False
+
         self.__zscore_w.observe(self.__validate_save_zscore)
-        self.__input_w.observe(self.__validate_save_input_w)
+        self.__input_w.observe(self.__validate_save_input)
+        self.__options_w.observe(self.__set_input_value,
+                                 "value")
+        self.__features_w.observe(self.__set_zscore_value,
+                                  "value")
 
         self.__validate_save_zscore(None)
-        self.__validate_save_input_w(None)
+        self.__validate_save_input(None)
 
         # Setup and display full UI
         self.__full_widgets_ui = widgets.interactive(
@@ -162,37 +170,46 @@ class DataCleaningWidget():
         init = self.__features_w.value
         self.__options_w = self.__feature_cleaning_options_w[init]
 
-    def __validate_save_input_w(self,
-                                _):
+        if self.__input_w:
+            self.__hide_init_input_w(None)
+
+    def __validate_save_input(self,
+                              _):
         """
         Returns/Descr:
             Ensures the input field is within specified parameters defined
             by the 'require_input' dictionary.
         """
-
-        if len(self.__input_w.value) == 0:
-            return
+        #
+        # if len(self.__input_w.value) == 0:
+        #     return
+        #
+        # if self.__features_w.value in self.__feature_input_holder and self.__feature_input_holder[self.__features_w.value]:
+        #     self.__feature_input_holder.pop(self.__features_w.value,
+        #                                     None)
 
         if self.__options_w.value in self.__require_input:
-            self.__feature_input_holder[self.__features_w.value] = \
-                self.__input_w.value
 
             feature_type = self.__get_dtype_key(
                     self.__df_features,
                     self.__features_w.value)
-            if feature_type == "Number" and len(self.__input_w.value) > 0:
+            if len(self.__input_w.value) > 0:
                 self.__input_w.value = ''.join(
-                    [i for i in self.__input_w.value if i.isdigit() or i == '.'])
+                    [i for i in self.__input_w.value if i.isdigit() or i == '.'
+                     or i == "-"])
 
                 if self.__require_input[self.__options_w.value] is not None \
-                        and not string_condtional(float(self.__input_w.value),
+                        and not string_condtional(self.__input_w.value,
                                                   self.__require_input[
-                                                      self.__options_w.value]):
+                                                      self.__options_w.value]) and \
+                        (self.__input_w.value.strip() != "-" and self.__input_w.value.strip() != "."):
                     self.__input_w.value = self.__input_w.value[:-1]
+
+            self.__feature_input_holder[self.__features_w.value] = \
+                self.__input_w.value
         else:
-            if self.__features_w.value in self.__feature_input_holder:
-                self.__feature_input_holder.pop(self.__features_w.value,
-                                                None)
+            self.__feature_input_holder[self.__features_w.value] = ""
+            self.__input_w.value = ""
 
     def __validate_save_zscore(self,
                                _):
@@ -209,40 +226,31 @@ class DataCleaningWidget():
             self.__zscore_w.value = "0.0"
 
         if self.__zscore_w.value != "":
-            if self.__zscore_w.value[-1] == ".":
-                self.__zscore_w.value += "0"
+            # if self.__zscore_w.value[-1] == ".":
+            #     self.__zscore_w.value += "0"
 
             self.__feature_zscore_holder[self.__features_w.value] = \
                 self.__zscore_w.value
-        else:
-            self.__feature_zscore_holder[self.__features_w.value] = None
 
     def __hide_init_input_w(self,
                            _):
 
         if self.__options_w.value in self.__require_input:
             self.__input_w.layout.visibility = 'visible'
+            self.__input_visible = True
         else:
             self.__input_w.layout.visibility = 'hidden'
-            self.__input_w.value = ""
-            # self.__input_w.value = ""
-
-        if self.__features_w.value in self.__feature_input_holder and self.__feature_input_holder[self.__features_w.value] == self.__input_w.value:
-            self.__input_w.value = self.__feature_input_holder[
-                self.__features_w.value]
+            self.__input_visible = False
 
     def __hide_init_zscore_w(self,
                              _):
         if self.__get_dtype_key(self.__df_features,
                                 self.__features_w.value) == "Number":
             self.__zscore_w.layout.visibility = "visible"
+            self.__zscore_visible = True
         else:
             self.__zscore_w.layout.visibility = "hidden"
-
-        if self.__features_w.value in self.__feature_zscore_holder and \
-                self.__feature_zscore_holder[self.__features_w.value]:
-            self.__zscore_w.value = str(
-                self.__feature_zscore_holder[self.__features_w.value])
+            self.__zscore_visible = False
 
     def __save_option(self,
                       **func_kwargs):
@@ -263,8 +271,41 @@ class DataCleaningWidget():
         #         feature,
         #         option)
         #           + "           " + "----" * 7)
-
         self.__hide_init_input_w(None)
+
+    def __set_input_value(self,
+                          _):
+        write_object_text_to_file(self.__input_w.layout.visibility,
+                                  os.getcwd(),
+                                  "fdssdd")
+        write_object_text_to_file(self.__input_visible,
+                                  os.getcwd(),
+                                  "featy")
+
+        if self.__input_visible:
+            if self.__features_w.value in self.__feature_input_holder:
+                self.__input_w.value = self.__feature_input_holder[self.__features_w.value]
+            else:
+                self.__input_w.value = ""
+        else:
+            self.__input_w.value = ""
+            if self.__features_w.value in self.__feature_input_holder:
+                self.__feature_input_holder[self.__features_w.value] = ""
+
+
+    def __set_zscore_value(self,
+                          _):
+
+        if self.__zscore_visible:
+            if self.__features_w.value in self.__feature_zscore_holder:
+                self.__zscore_w.value = self.__feature_zscore_holder[self.__features_w.value]
+            else:
+                self.__zscore_w.value = ""
+        else:
+            self.__zscore_w.value = ""
+            if self.__features_w.value in self.__feature_zscore_holder:
+                self.__feature_zscore_holder[self.__features_w.value] = ""
+
 
     def __select_feature(self,
                          feature):
@@ -273,6 +314,10 @@ class DataCleaningWidget():
             When a feature selection is chosen all the widgets are
             re-initialized.
         """
+
+        write_object_text_to_file(self.__feature_input_holder,
+                                  os.getcwd(),
+        "fuckk")
 
         self.__init_update_updateable_widgets()
 
@@ -284,6 +329,8 @@ class DataCleaningWidget():
                                     Selected=self.__selected_options_w)
 
         self.__full_widgets_ui.children = new_i.children
+
+        self.__set_input_value("really?")
 
     # --- General functionality
 

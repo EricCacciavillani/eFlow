@@ -4,7 +4,7 @@ from eflow.utils.pandas_utils import descr_table,value_counts_table
 from eflow._hidden.custom_exceptions import UnsatisfiedRequirments, SnapshotMismatchError
 from eflow._hidden.constants import GRAPH_DEFAULTS
 from eflow._hidden.parent_objects import DataAnalysis
-from eflow.utils.pandas_utils import check_if_feature_exists, generate_meta_data
+from eflow.utils.pandas_utils import check_if_feature_exists, generate_meta_data, generate_entropy_table
 from eflow.utils.sys_utils import dict_to_json_file, pickle_object_to_file, create_dir_structure
 
 import warnings
@@ -179,6 +179,11 @@ class FeatureAnalysis(DataAnalysis):
             generate_meta_data(df,
                                self.folder_path,
                                f"{dataset_name}" + "/_Extras")
+
+            generate_entropy_table(df,
+                                   self.__df_features,
+                                   self.folder_path,
+                                   f"{dataset_name}" + "/_Extras")
 
             # Set to true to represent the function call was made with perform
             self.__called_from_perform = True

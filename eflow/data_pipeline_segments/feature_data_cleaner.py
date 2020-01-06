@@ -1,6 +1,7 @@
 from eflow._hidden.widgets.feature_data_cleaning_widget import *
 from eflow._hidden.parent_objects.data_pipeline_segment import *
 from eflow.foundation import DataFrameTypes
+from eflow.utils.pandas_utils import check_if_feature_exists
 
 __author__ = "Eric Cacciavillani"
 __copyright__ = "Copyright 2019, eFlow"
@@ -12,6 +13,7 @@ __email__ = "eric.cacciavillani@gmail.com"
 import pandas as pd
 import numpy as np
 from scipy import stats
+from collections import deque
 import warnings
 
 class FeatureDataCleaner(DataPipelineSegment):
@@ -37,6 +39,8 @@ class FeatureDataCleaner(DataPipelineSegment):
                                      object_type=self.__class__.__name__,
                                      segment_id=segment_id,
                                      create_file=create_file)
+
+        self.__test_cleaning_methods = False
 
         # self.__requires_nan_removal = df.isnull().values.any()
         #
@@ -67,8 +71,6 @@ class FeatureDataCleaner(DataPipelineSegment):
             "---------------------" + (" " * space_counters.pop())] = \
             self.ignore_feature
 
-        self.__data_cleaning_options["Number"]["Ignore feature"] = \
-            self.ignore_feature
         self.__data_cleaning_options["Number"][
             "Fill nan with min value of distribution"] = \
             self.fill_nan_by_distribution
@@ -104,16 +106,37 @@ class FeatureDataCleaner(DataPipelineSegment):
         self.__data_cleaning_options["Number"][
             "Fill with x% count distribution"] = \
             self.fill_nan_by_occurance_percentaile
-        self.__data_cleaning_options["Number"]["Fill with random existing values"] = \
-            self.fill_nan_with_random_existing_values
 
         # Set up category cleaning options
         space_counters = {i for i in range(1, 50)}
         self.__data_cleaning_options["Category"] = dict()
         self.__data_cleaning_options["Category"]["Ignore feature"] = self.ignore_feature
-        self.__data_cleaning_options["Category"]["Fill null with specfic value"] = self.fill_nan_with_specfic_value
         self.__data_cleaning_options["Category"]["Drop feature"] = \
             self.drop_feature
+        self.__data_cleaning_options["Category"]["Remove all nans"] = \
+            self.remove_nans
+
+        self.__data_cleaning_options["Category"][
+            "---------------------" + (" " * space_counters.pop())] = \
+            self.ignore_feature
+        self.__data_cleaning_options["Category"][
+            "Fill null with specfic value"] = self.fill_nan_with_specfic_value
+        self.__data_cleaning_options["Category"][
+            "---------------------" + (" " * space_counters.pop())] = \
+            self.ignore_feature
+
+        self.__data_cleaning_options["Category"][
+            "Fill nan with mode of distribution"] = self.fill_nan_by_mode
+        self.__data_cleaning_options["Category"][
+            "Fill with least common count of distribution"] = \
+            self.fill_nan_by_occurance_percentaile
+        self.__data_cleaning_options["Category"][
+            "Fill with most common count of distribution"] = \
+            self.fill_nan_by_occurance_percentaile
+        self.__data_cleaning_options["Category"][
+            "Fill with x% count distribution"] = \
+            self.fill_nan_by_occurance_percentaile
+
 
         # Set up boolean cleaning options
         space_counters = {i for i in range(1, 50)}
@@ -122,6 +145,24 @@ class FeatureDataCleaner(DataPipelineSegment):
             "Ignore feature"] = self.ignore_feature
         self.__data_cleaning_options["Bool"]["Drop feature"] = \
             self.drop_feature
+        self.__data_cleaning_options["Bool"]["Remove all nans"] = \
+            self.remove_nans
+
+        self.__data_cleaning_options["Bool"][
+            "---------------------" + (" " * space_counters.pop())] = \
+            self.ignore_feature
+
+        self.__data_cleaning_options["Bool"]["Make nan Assertions"] = self.make_nan_assertions
+
+        self.__data_cleaning_options["Bool"][
+            "Fill null with specfic bool value"] = self.fill_nan_with_specfic_value
+
+        self.__data_cleaning_options["Bool"][
+            "Fill with least common count of distribution"] = \
+            self.fill_nan_by_occurance_percentaile
+        self.__data_cleaning_options["Bool"][
+            "Fill with most common count of distribution"] = \
+            self.fill_nan_by_occurance_percentaile
 
         # Set up boolean cleaning options
         space_counters = {i for i in range(1, 50)}
@@ -145,6 +186,7 @@ class FeatureDataCleaner(DataPipelineSegment):
 
         # Written conditionals for functions requiring input fields
         self.__require_input = {"Fill null with specfic value": None,
+                                "Fill null with specfic bool value": 'x == 1 or x == 0',
                                 "Fill nan with x% value of distribution":
                                     'x >= 0 and x <=100',
                                 "Fill with random existing values": 'x > 0',
@@ -156,12 +198,7 @@ class FeatureDataCleaner(DataPipelineSegment):
         self.__ui_widget = DataCleaningWidget(
             require_input=self.__require_input,
             data_cleaning_options=self.__data_cleaning_options)
-        #
-        # if make_nan_assertions:
-        #     df_features = DataFrameTypes(df,
-        #                                  display_init=False)
-        #     self.__make_nan_assertions(df,
-        #                                df_features)
+
 
     def get_user_inputs(self):
         return self.__ui_widget.get_user_inputs()
@@ -196,58 +233,76 @@ class FeatureDataCleaner(DataPipelineSegment):
                                    df_features,
                                    suppress_runtime_errors=True,
                                    reset_segment_file=False):
-        selected_options, \
-        feature_input_holder, \
-        feature_zscore_holder = self.__ui_widget.get_user_inputs()
-        print(selected_options)
-        for feature_name, function_option in selected_options.items():
 
-            for dtype in ["Number","Bool","Category", "Date"]:
+        try:
+            for bool_value in [True,False]:
+                self.__test_cleaning_methods = bool_value
 
-                if function_option in self.__data_cleaning_options[dtype]:
+                selected_options, \
+                feature_input_holder, \
+                feature_zscore_holder = self.__ui_widget.get_user_inputs()
 
-                    saved_function = self.__data_cleaning_options[dtype][function_option]
+                for feature_name, function_option in selected_options.items():
 
-                    exec_str = f"saved_function(df,df_features,feature_name,"
+                    for dtype in ["Number","Bool","Category", "Date"]:
 
-                    if feature_name in feature_input_holder and \
-                            feature_input_holder[feature_name]:
-                        exec_str += feature_input_holder[feature_name] + ","
+                        if function_option in self.__data_cleaning_options[dtype]:
 
-                    if feature_name in feature_zscore_holder and \
-                            feature_zscore_holder[feature_name]:
-                        exec_str += feature_zscore_holder[feature_name] + ","
+                            saved_function = self.__data_cleaning_options[dtype][function_option]
+                            exec_str = f"saved_function(df,df_features,feature_name,"
 
-                    if function_option == "Fill nan with min value of distribution":
-                        exec_str += "0,"
-                    elif function_option == "Fill nan with median value of distribution":
-                        exec_str += "50,"
-                    elif function_option == "Fill nan with max value of distribution":
-                        exec_str += "100,"
+                            if feature_name in feature_input_holder and \
+                                    feature_input_holder[feature_name]:
+                                    try:
+                                        int(feature_input_holder[feature_name])
+                                        exec_str += feature_input_holder[
+                                                        feature_name] + ","
+                                    except:
+                                        exec_str += "\"" + feature_input_holder[feature_name] + "\","
 
-                    exec_str += ")"
-                    print(exec_str)
-                    try:
-                        exec(exec_str)
-                        print()
-                    except Exception as e:
+                            if function_option == "Fill nan with min value of distribution" or function_option == "Fill with least common count of distribution":
+                                exec_str += "0,"
+                            elif function_option == "Fill nan with median value of distribution":
+                                exec_str += "50,"
+                            elif function_option == "Fill nan with max value of distribution" or function_option == "Fill with most common count of distribution":
+                                exec_str += "100,"
 
-                        if reset_segment_file:
-                            print("Exception hit when trying to perform all "
-                                  "cleaning functions. "
-                                  "Resetting json object for feature data cleaner segment!")
-                            self.reset_segment_file()
-                            raise e
+                            if feature_name in feature_zscore_holder and \
+                                    feature_zscore_holder[feature_name]:
+                                exec_str += feature_zscore_holder[feature_name] + ","
 
-                        if suppress_runtime_errors:
-                            warnings.warn(
-                                f"Feature Data Cleaner raised an error on feature '{feature_name}' on option {function_option} with error: \n{str(e)}",
-                                RuntimeWarning)
+                            exec_str += ")"
 
-                        else:
-                            raise e
+                            if self.__test_cleaning_methods:
+                                defined_function_string = exec_str.replace("saved_function",
+                                                                           saved_function.__name__).replace("feature_name",
+                                                                                                            f"\"{feature_name}\"")
+                                print("***" * 10)
+                                print("Testing function")
+                                print(defined_function_string)
+                            # print(exec_str)
+                            try:
+                                exec(exec_str)
 
-                    break
+                                if self.__test_cleaning_methods:
+                                    print("PASSED TEST!")
+                                    print("***" * 10)
+                                print()
+                            except Exception as e:
+
+                                if self.__test_cleaning_methods:
+                                    print("FAILED TEST!")
+                                    print("***" * 10)
+                                self.__test_cleaning_methods = False
+                                if reset_segment_file:
+                                    print("Exception hit when trying to perform all "
+                                          "cleaning functions. "
+                                          "Resetting json object for feature data cleaner segment!")
+                                    self.reset_segment_file()
+                                raise e
+                            break
+        finally:
+            self.__test_cleaning_methods = False
 
     # --- Cleaning options
     def make_nan_assertions(self,
@@ -272,28 +327,33 @@ class FeatureDataCleaner(DataPipelineSegment):
             _add_to_que: bool
                 Pushes the function to pipeline segment parent if set to 'True'.
         """
+
+        check_if_feature_exists(df,
+                                feature_name)
+
+        if feature_name not in df_features.all_features():
+            raise KeyError(
+                f"The feature \'{feature_name}\' was not found in the dataframe!"
+                + " Please select a valid feature from the df_features.")
+
+
         if feature_name not in df_features.bool_features():
             raise UnsatisfiedRequirments(f"{feature_name} must be a bool feature.")
 
-        params_dict = locals()
+        unique_series = df[feature_name].dropna().unique().tolist()
 
-        # Remove any unwanted arguments in params_dict
-        if _add_to_que:
-            params_dict = locals()
-            for arg in ["self", "df", "df_features", "_add_to_que",
-                        "params_dict"]:
-                del params_dict[arg]
+        if len(unique_series) == 1 and (
+                unique_series[0] == 1 or unique_series[0] == 0):
+            replace_value = int(unique_series[0] == 1)
 
+            self.fill_nan_with_specfic_value(df,
+                                             df_features,
+                                             feature_name=feature_name,
+                                             replace_value=replace_value,
+                                             _add_to_que=_add_to_que)
 
-        print(f"Make nan assertions for {feature_name}")
-
-        for bool_feature in df_features.bool_features():
-            if len(df[bool_feature].dropna().value_counts().values) != 2:
-                print("testing")
-
-        if _add_to_que:
-            self._DataPipelineSegment__add_function_to_que("make_nan_assertions",
-                                                           params_dict)
+        else:
+            raise UnsatisfiedRequirments(f"Boolean assertions can't be made with this given feature {feature_name}.")
 
     def ignore_feature(self,
                        df,
@@ -317,20 +377,31 @@ class FeatureDataCleaner(DataPipelineSegment):
             _add_to_que: bool
                 Pushes the function to pipeline segment parent if set to 'True'.
         """
-        params_dict = locals()
+        check_if_feature_exists(df,
+                                feature_name)
 
-        # Remove any unwanted arguments in params_dict
-        if _add_to_que:
-            params_dict = locals()
-            for arg in ["self", "df", "df_features", "_add_to_que",
-                        "params_dict"]:
-                del params_dict[arg]
+        if feature_name not in df_features.all_features():
+            raise KeyError(
+                f"The feature \'{feature_name}\' was not found in the dataframe!"
+                + " Please select a valid feature from the df_features.")
 
-        print("Ignore feature: ", feature_name)
+        if not self.__test_cleaning_methods:
+            print("Ignore feature: ", feature_name)
 
-        if _add_to_que:
+            # Remove any unwanted arguments in params_dict
+            if _add_to_que:
+                # Remove any unwanted arguments in params_dict
+                params_dict = locals()
+                for arg in ["self", "df", "df_features", "_add_to_que",
+                            "params_dict"]:
+                    try:
+                        del params_dict[arg]
+                    except KeyError:
+                        pass
+
             self._DataPipelineSegment__add_function_to_que("ignore_feature",
                                                            params_dict)
+
 
     def drop_feature(self,
                      df,
@@ -354,25 +425,37 @@ class FeatureDataCleaner(DataPipelineSegment):
             _add_to_que: bool
                 Pushes the function to pipeline segment parent if set to 'True'.
         """
+        check_if_feature_exists(df,
+                                feature_name)
 
-        params_dict = locals()
+        if feature_name not in df_features.all_features():
+            raise KeyError(
+                f"The feature \'{feature_name}\' was not found in the dataframe!"
+                + " Please select a valid feature from the df_features.")
 
-        # Remove any unwanted arguments in params_dict
-        if _add_to_que:
-            params_dict = locals()
-            for arg in ["self", "df", "df_features", "_add_to_que",
-                        "params_dict"]:
-                del params_dict[arg]
+        if not self.__test_cleaning_methods:
 
-        print("Droping Feature: ", feature_name)
-        df.drop(columns=feature_name,
-                inplace=True)
-        df.reset_index(drop=True,
-                       inplace=True)
+            print("Droping Feature: ", feature_name)
 
-        if _add_to_que:
-            self._DataPipelineSegment__add_function_to_que("drop_feature",
-                                                           params_dict)
+            df.drop(columns=feature_name,
+                    inplace=True)
+            df.reset_index(drop=True,
+                           inplace=True)
+            df_features.remove_feature(feature_name)
+
+            if _add_to_que:
+
+                # Remove any unwanted arguments in params_dict
+                params_dict = locals()
+                for arg in ["self", "df", "df_features", "_add_to_que",
+                            "params_dict"]:
+                    try:
+                        del params_dict[arg]
+                    except KeyError:
+                        pass
+
+                self._DataPipelineSegment__add_function_to_que("drop_feature",
+                                                               params_dict)
 
     def remove_nans(self,
                     df,
@@ -396,27 +479,37 @@ class FeatureDataCleaner(DataPipelineSegment):
             _add_to_que: bool
                 Pushes the function to pipeline segment parent if set to 'True'.
         """
+        check_if_feature_exists(df,
+                                feature_name)
 
+        if feature_name not in df_features.all_features():
+            raise KeyError(
+                f"The feature \'{feature_name}\' was not found in the dataframe!"
+                + " Please select a valid feature from the df_features.")
 
-        params_dict = locals()
+        if not self.__test_cleaning_methods:
 
-        # Remove any unwanted arguments in params_dict
-        if _add_to_que:
-            params_dict = locals()
-            for arg in ["self", "df", "df_features", "_add_to_que",
-                        "params_dict"]:
-                del params_dict[arg]
+            print(f"Remove data from rows where the feature {feature_name} is equal to nan")
 
+            df[feature_name].dropna(inplace=True)
+            df.reset_index(drop=True,
+                           inplace=True)
+            df_features.remove_feature(feature_name)
 
-        print(f"Remove all nans from the feature {feature_name}")
+            if _add_to_que:
 
-        df[feature_name].dropna(inplace=True)
-        df.reset_index(drop=True,
-                       inplace=True)
+                # Remove any unwanted arguments in params_dict
+                params_dict = locals()
+                for arg in ["self", "df", "df_features", "_add_to_que",
+                            "params_dict"]:
+                    try:
+                        del params_dict[arg]
+                    except KeyError:
+                        pass
 
-        if _add_to_que:
-            self._DataPipelineSegment__add_function_to_que("remove_nans",
-                                                           params_dict)
+                self._DataPipelineSegment__add_function_to_que("remove_nans",
+                                                               params_dict)
+
 
     def fill_nan_by_distribution(self,
                                  df,
@@ -441,23 +534,18 @@ class FeatureDataCleaner(DataPipelineSegment):
 
             percentile: float or int
 
-
             z_score:
 
             _add_to_que: bool
                 Pushes the function to pipeline segment parent if set to 'True'.
         """
+        check_if_feature_exists(df,
+                                feature_name)
 
-        params_dict = locals()
-
-        # Remove any unwanted arguments in params_dict
-        if _add_to_que:
-            params_dict = locals()
-            for arg in ["self", "df", "df_features", "_add_to_que",
-                        "params_dict"]:
-                del params_dict[arg]
-
-        print(f"Fill nan by distribution for: {feature_name}")
+        if feature_name not in df_features.all_features():
+            raise KeyError(
+                f"The feature \'{feature_name}\' was not found in the dataframe!"
+                + " Please select a valid feature from the df_features.")
 
         if feature_name in df_features.continuous_numerical_features():
             series_obj = df[feature_name].sort_values()
@@ -475,18 +563,24 @@ class FeatureDataCleaner(DataPipelineSegment):
         else:
             series_obj = df[feature_name].dropna()
 
-        fill_na_val = np.percentile(series_obj, percentile)
+        replace_value = np.percentile(series_obj, percentile)
 
-        print("Replace nan with {0} on feature: {1}".format(
-            fill_na_val,
-            feature_name))
+        # Remove any unwanted arguments in params_dict
+        params_dict = locals()
+        for arg in ["self", "df", "df_features", "_add_to_que",
+                    "params_dict"]:
+            try:
+                del params_dict[arg]
+            except KeyError:
+                pass
 
-        df[feature_name].fillna(fill_na_val,
-                                inplace=True)
-
-        if _add_to_que:
-            self._DataPipelineSegment__add_function_to_que("fill_nan_by_distribution",
-                                                           params_dict)
+        if not self.__test_cleaning_methods:
+            print(f"Fill nan on distribution; {percentile}% of {feature_name}")
+            self.fill_nan_with_specfic_value(df,
+                                             df_features,
+                                             feature_name=feature_name,
+                                             replace_value=replace_value,
+                                             _add_to_que=_add_to_que)
 
     def fill_nan_by_average(self,
                             df,
@@ -494,6 +588,14 @@ class FeatureDataCleaner(DataPipelineSegment):
                             feature_name,
                             z_score=None,
                             _add_to_que=True):
+
+        check_if_feature_exists(df,
+                                feature_name)
+
+        if feature_name not in df_features.all_features():
+            raise KeyError(
+                f"The feature \'{feature_name}\' was not found in the dataframe!"
+                + " Please select a valid feature from the df_features.")
 
         params_dict = locals()
 
@@ -507,8 +609,6 @@ class FeatureDataCleaner(DataPipelineSegment):
         if feature_name not in df_features.continuous_numerical_features():
             raise UnsatisfiedRequirments(f"{feature_name} must be a saved as float or integer in df_features")
 
-        print("Fill nan by average: ", feature_name)
-
         if z_score:
             if isinstance(z_score,float) or isinstance(z_score,int):
                 series_obj = self.__zcore_remove_outliers(df,
@@ -521,17 +621,13 @@ class FeatureDataCleaner(DataPipelineSegment):
 
         replace_value = series_obj.mean()
 
-        print("Replace nan with {0} on feature: {1}".format(
-            replace_value,
-            feature_name))
-
-        df[feature_name].fillna(
-            replace_value,
-            inplace=True)
-
-        if _add_to_que:
-            self._DataPipelineSegment__add_function_to_que("fill_nan_by_average",
-                                                           params_dict)
+        if not self.__test_cleaning_methods:
+            print("Fill nan based on the average of the distribution.")
+            self.fill_nan_with_specfic_value(df,
+                                             df_features,
+                                             feature_name=feature_name,
+                                             replace_value=replace_value,
+                                             _add_to_que=_add_to_que)
 
     def fill_nan_by_mode(self,
                          df,
@@ -540,16 +636,14 @@ class FeatureDataCleaner(DataPipelineSegment):
                          z_score=None,
                          _add_to_que=True):
 
-        params_dict = locals()
+        check_if_feature_exists(df,
+                                feature_name)
 
-        # Remove any unwanted arguments in params_dict
-        if _add_to_que:
-            params_dict = locals()
-            for arg in ["self", "df", "df_features", "_add_to_que",
-                        "params_dict"]:
-                del params_dict[arg]
+        if feature_name not in df_features.all_features():
+            raise KeyError(
+                f"The feature \'{feature_name}\' was not found in the dataframe!"
+                + " Please select a valid feature from the df_features.")
 
-        print("Fill nan by mode")
         if z_score:
             series_obj = self.__zcore_remove_outliers(df,
                                                       feature_name,
@@ -563,42 +657,55 @@ class FeatureDataCleaner(DataPipelineSegment):
         else:
             replace_value = mode_series[0]
 
-            print("Replace nan with {0} on feature: {1}".format(
-                replace_value,
-                feature_name))
-
-            df[feature_name].fillna(
-                replace_value,
-                inplace=True)
-
-        if _add_to_que:
-            self._DataPipelineSegment__add_function_to_que("fill_nan_by_mode",
-                                                           params_dict)
+        if not self.__test_cleaning_methods:
+            print("Fill nan by mode")
+            self.fill_nan_with_specfic_value(df,
+                                             df_features,
+                                             feature_name=feature_name,
+                                             replace_value=replace_value,
+                                             _add_to_que=_add_to_que)
 
     def fill_nan_with_specfic_value(self,
                                     df,
                                     df_features,
                                     feature_name,
-                                    specfic_value,
+                                    replace_value,
                                     _add_to_que=True):
-        params_dict = locals()
 
-        # Remove any unwanted arguments in params_dict
+        check_if_feature_exists(df,
+                                feature_name)
+
+        if feature_name not in df_features.all_features():
+            raise KeyError(
+                f"The feature \'{feature_name}\' was not found in the dataframe!"
+                + " Please select a valid feature from the df_features.")
+
+        try:
+            replace_value = replace_value.item()
+        except AttributeError:
+            pass
+
+        if not self.__test_cleaning_methods:
+            df[feature_name].fillna(replace_value,
+                                    inplace=True)
+
         if _add_to_que:
+
+            # Remove any unwanted arguments in params_dict
             params_dict = locals()
             for arg in ["self", "df", "df_features", "_add_to_que",
                         "params_dict"]:
-                del params_dict[arg]
+                try:
+                    del params_dict[arg]
+                except KeyError:
+                    pass
 
-        print("Replace nan with {0} on feature: {1}".format(specfic_value,
-                                                            feature_name))
+            print("Replace nan with {0} on feature: {1}".format(replace_value,
+                                                                feature_name))
 
-        df[feature_name].fillna(specfic_value,
-                                inplace=True)
-
-        if _add_to_que:
             self._DataPipelineSegment__add_function_to_que("fill_nan_with_specfic_value",
                                                            params_dict)
+
 
     def fill_nan_by_occurance_percentaile(self,
                                           df,
@@ -607,14 +714,23 @@ class FeatureDataCleaner(DataPipelineSegment):
                                           percentaile,
                                           z_score=None,
                                           _add_to_que=True):
-        params_dict = locals()
+        check_if_feature_exists(df,
+                                feature_name)
+
+        if feature_name not in df_features.all_features():
+            raise KeyError(
+                f"The feature \'{feature_name}\' was not found in the dataframe!"
+                + " Please select a valid feature from the df_features.")
 
         # Remove any unwanted arguments in params_dict
         if _add_to_que:
             params_dict = locals()
             for arg in ["self", "df", "df_features", "_add_to_que",
                         "params_dict"]:
-                del params_dict[arg]
+                try:
+                    del params_dict[arg]
+                except KeyError:
+                    pass
 
         if z_score:
             series_obj = self.__zcore_remove_outliers(df,
@@ -623,53 +739,17 @@ class FeatureDataCleaner(DataPipelineSegment):
         else:
             series_obj = df[feature_name].dropna()
 
-        array = np.asarray(series_obj.value_counts() / df.shape[0])
-        idx = (np.abs(array - percentaile)).argmin()
+        array = np.asarray(series_obj.value_counts() / df.dropna().shape[0])
+        idx = (np.abs(array - (percentaile / 100))).argmin()
         replace_value = series_obj.value_counts().keys()[idx]
 
-        print("Replace nan with {0} on feature: {1}".format(
-            replace_value,
-            feature_name))
-
-        df[feature_name].fillna(replace_value,
-                           inplace=True)
-
-        if _add_to_que:
-            self._DataPipelineSegment__add_function_to_que("fill_nan_by_occurance_percentaile",
-                                                           params_dict)
-
-
-    def fill_nan_with_random_existing_values(self,
-                                             df,
+        if not self.__test_cleaning_methods:
+            print("Fill nan by occurance percentaile.")
+            self.fill_nan_with_specfic_value(df,
                                              df_features,
-                                             feature_name,
-                                             z_score=None,
-                                             _add_to_que=True):
-        params_dict = locals()
-
-        # Remove any unwanted arguments in params_dict
-        if _add_to_que:
-            params_dict = locals()
-            for arg in ["self", "df", "df_features", "_add_to_que",
-                        "params_dict"]:
-                del params_dict[arg]
-
-        print("Fill nan with random existing values on feature {0}".format(feature_name))
-
-        if z_score:
-            series_obj = self.__zcore_remove_outliers(df,
-                                                      feature_name,
-                                                      z_score)
-        else:
-            series_obj = df[feature_name].dropna()
-
-        df[feature_name].fillna(
-            pd.Series(np.random.choice(list(series_obj.value_counts().keys()),
-                                       size=len(df.index))))
-
-        if _add_to_que:
-            self._DataPipelineSegment__add_function_to_que("fill_nan_with_random_existing_values",
-                                                           params_dict)
+                                             feature_name=feature_name,
+                                             replace_value=replace_value,
+                                             _add_to_que=_add_to_que)
 
     def __zcore_remove_outliers(self,
                                 df,
@@ -684,3 +764,5 @@ class FeatureDataCleaner(DataPipelineSegment):
         return df[feature_name].dropna()[
             (z_score_return >= (zscore_val * -1)) & (
                     z_score_return <= zscore_val)]
+
+

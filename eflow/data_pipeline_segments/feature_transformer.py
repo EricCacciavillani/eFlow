@@ -83,14 +83,16 @@ class FeatureTransformer(DataPipelineSegment):
             _add_to_que:
                 Pushes the function to pipeline segment parent if set to 'True'.
         """
-        params_dict = locals()
-
         # Remove any unwanted arguments in params_dict
         if _add_to_que:
+            # Remove any unwanted arguments in params_dict
             params_dict = locals()
             for arg in ["self", "df", "df_features", "_add_to_que",
                         "params_dict"]:
-                del params_dict[arg]
+                try:
+                    del params_dict[arg]
+                except KeyError:
+                    pass
 
         if isinstance(feature_names, str):
             feature_names = [feature_names]
@@ -110,7 +112,8 @@ class FeatureTransformer(DataPipelineSegment):
             except KeyError:
                 pass
 
-        if isinstance(feature_names,set):
+        if isinstance(feature_names,
+                      set):
             feature_names = list(feature_names)
 
         if _add_to_que:
