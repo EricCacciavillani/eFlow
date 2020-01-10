@@ -4,9 +4,9 @@
   ],
   "string": [
     "Pclass",
+    "Embarked",
     "Sex",
-    "Cabin",
-    "Embarked"
+    "Cabin"
   ],
   "integer": [
     "Parch",

@@ -3,8 +3,8 @@
     "Survived"
   ],
   "string": [
-    "Pclass",
     "Sex",
+    "Pclass",
     "Cabin",
     "Embarked"
   ],

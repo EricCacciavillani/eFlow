@@ -110,7 +110,6 @@ class DataPipeline(FileOutput):
                 print("Now configuring object with proper pipeline segments...")
                 self.__configure_pipeline_with_existing_file()
 
-        print()
         for removal_feature in set(df.columns) ^ set(
                 df_features.all_features()):
             print(f"Removing the feature: \"{removal_feature}\"")
@@ -234,6 +233,13 @@ class DataPipeline(FileOutput):
         if self.__df_features is None:
             raise PipelineError("Default type holder somehow is equal to none for "
                                 "this pipeline structure.")
+
+
+        for removal_feature in set(df.columns) ^ set(
+                df_features.all_features()):
+            print(f"Removing the feature: \"{removal_feature}\"")
+            df.drop(columns=removal_feature,
+                    inplace=True)
 
         for _, _, pipeline_segment in self.__pipeline_segment_deque:
             pipeline_segment.perform_segment(df,

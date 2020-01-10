@@ -3,9 +3,9 @@
     "Survived"
   ],
   "string": [
-    "Pclass",
-    "Sex",
     "Cabin",
+    "Sex",
+    "Pclass",
     "Embarked"
   ],
   "integer": [
@@ -13,8 +13,8 @@
     "SibSp"
   ],
   "float": [
-    "Fare",
-    "Age"
+    "Age",
+    "Fare"
   ],
   "target": "Survived",
   "feature_labels_bins": {

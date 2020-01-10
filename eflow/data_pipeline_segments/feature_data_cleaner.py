@@ -399,8 +399,8 @@ class FeatureDataCleaner(DataPipelineSegment):
                     except KeyError:
                         pass
 
-            self._DataPipelineSegment__add_function_to_que("ignore_feature",
-                                                           params_dict)
+                self._DataPipelineSegment__add_function_to_que("ignore_feature",
+                                                               params_dict)
 
 
     def drop_feature(self,

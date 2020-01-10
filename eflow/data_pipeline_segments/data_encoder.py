@@ -368,6 +368,13 @@ class DataEncoder(DataPipelineSegment):
                 Hidden variable to determine if the function should be pushed
                 to the pipeline segment.
         """
+        # Convert to the correct types
+        if isinstance(qualtative_features,str):
+            qualtative_features = [qualtative_features]
+
+        if not _feature_values_dict:
+            _feature_values_dict = dict()
+
         # Remove any unwanted arguments in params_dict
         params_dict = locals()
         for arg in ["self", "df", "df_features", "_add_to_que",
@@ -376,13 +383,6 @@ class DataEncoder(DataPipelineSegment):
                 del params_dict[arg]
             except KeyError:
                 pass
-
-        # Convert to the correct types
-        if isinstance(qualtative_features,str):
-            qualtative_features = [qualtative_features]
-
-        if not _feature_values_dict:
-            _feature_values_dict = dict()
 
         for cat_feature in qualtative_features:
 
@@ -393,11 +393,8 @@ class DataEncoder(DataPipelineSegment):
                 _feature_values_dict[cat_feature] = df[cat_feature].dropna().unique().tolist()
 
             # Make dummies and remove original feature
-            dummies_df = pd.get_dummies(df[cat_feature],
+            dummies_df = pd.get_dummies(_feature_values_dict[cat_feature],
                                         prefix=cat_feature)
-
-            if len(df) == 1:
-                print("ok maybe this can work!")
 
             df.drop(columns=[cat_feature],
                     inplace=True)

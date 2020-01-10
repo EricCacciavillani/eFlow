@@ -275,6 +275,7 @@ class DataPipelineSegment(FileOutput):
 
     def __add_function_to_que(self,
                               function_name,
+                              parameters,
                               params_dict):
         """
         Desc:
@@ -294,7 +295,9 @@ class DataPipelineSegment(FileOutput):
         """
         tmp_params_dict = copy.deepcopy(params_dict)
         for k,v in params_dict.items():
-            if isinstance(v,set):
+            if k not in parameters:
+                del tmp_params_dict[k]
+            elif isinstance(v,set):
                 tmp_params_dict[k] = list(v)
         params_dict = tmp_params_dict
         self.__function_pipe.append((function_name,
