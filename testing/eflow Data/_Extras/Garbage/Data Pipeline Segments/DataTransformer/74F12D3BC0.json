@@ -1,0 +1,45 @@
+{
+  "Pipeline Segment": {
+    "Object Type": "DataEncoder",
+    "Functions Performed Order": {
+      "Function Order 1": {
+        "apply_value_representation": {
+          "Params Dict": {}
+        }
+      },
+      "Function Order 2": {
+        "make_dummies": {
+          "Params Dict": {
+            "qualtative_features": [
+              "Sex",
+              "Pclass",
+              "Embarked"
+            ],
+            "_feature_values_dict": {
+              "Sex": [
+                "male",
+                "female"
+              ],
+              "Pclass": [
+                3,
+                1,
+                2
+              ],
+              "Embarked": [
+                "Southampton",
+                "Cherbourg",
+                "Queenstown"
+              ]
+            }
+          }
+        }
+      },
+      "Function Order 3": {
+        "make_values_bool": {
+          "Params Dict": {}
+        }
+      }
+    },
+    "Function Count": 3
+  }
+}

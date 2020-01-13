@@ -58,6 +58,7 @@ class DataPipelineSegment(FileOutput):
         self.__function_pipe = deque()
 
         self.__create_file = create_file
+        self.__lock_interaction = False
 
         # Attempt to get json file into object's attributes.
         if self.__segment_id:
@@ -249,10 +250,23 @@ class DataPipelineSegment(FileOutput):
 
         raise ValueError("This function hasn't been completed yet!")
 
-        for que_function_name, que_params_dict in self.__function_pipe.iteritems():
-            print(que_function_name)
+        if self.__lock_interaction:
+            raise PipelineSegmentError("This pipeline has be locked down and "
+                                       "will prevent futher changes to the generated flat file.")
 
+        for delete_key in {"self", "df", "df_features", "_add_to_que",
+                           "params_dict"}:
+            if delete_key in params_dict.keys():
+                del params_dict[delete_key]
 
+        for k, v in {k: v for k, v in params_dict.items()}.items():
+            if k not in parameters:
+                del params_dict[k]
+            elif isinstance(v, set):
+                params_dict[k] = list(v)
+
+        self.__function_pipe.append((function_name,
+                                     params_dict))
 
         # Generate new json file name with proper file/folder output attributes
         if len(self.__function_pipe) == 1 and not self.__json_file_name:
@@ -293,13 +307,23 @@ class DataPipelineSegment(FileOutput):
             This function should only ever be called by children of
             this object.
         """
-        tmp_params_dict = copy.deepcopy(params_dict)
-        for k,v in params_dict.items():
+        if self.__lock_interaction:
+            raise PipelineSegmentError("This pipeline has be locked down and "
+                                       "will prevent futher changes to the generated flat file.")
+
+
+        for delete_key in {"self", "df", "df_features", "_add_to_que",
+                    "params_dict"}:
+            if delete_key in params_dict.keys():
+                del params_dict[delete_key]
+
+
+        for k,v in {k:v for k,v in params_dict.items()}.items():
             if k not in parameters:
-                del tmp_params_dict[k]
+                del params_dict[k]
             elif isinstance(v,set):
-                tmp_params_dict[k] = list(v)
-        params_dict = tmp_params_dict
+                params_dict[k] = list(v)
+
         self.__function_pipe.append((function_name,
                                      params_dict))
 

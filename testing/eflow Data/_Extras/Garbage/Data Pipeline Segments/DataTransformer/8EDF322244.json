@@ -1,0 +1,64 @@
+{
+  "Pipeline Segment": {
+    "Object Type": "FeatureDataCleaner",
+    "Functions Performed Order": {
+      "Function Order 1": {
+        "drop_feature": {
+          "Params Dict": {
+            "feature_name": "Survived"
+          }
+        }
+      },
+      "Function Order 2": {
+        "drop_feature": {
+          "Params Dict": {
+            "feature_name": "Pclass"
+          }
+        }
+      },
+      "Function Order 3": {
+        "drop_feature": {
+          "Params Dict": {
+            "feature_name": "Sex"
+          }
+        }
+      },
+      "Function Order 4": {
+        "drop_feature": {
+          "Params Dict": {
+            "feature_name": "Age"
+          }
+        }
+      },
+      "Function Order 5": {
+        "drop_feature": {
+          "Params Dict": {
+            "feature_name": "SibSp"
+          }
+        }
+      },
+      "Function Order 6": {
+        "drop_feature": {
+          "Params Dict": {
+            "feature_name": "Parch"
+          }
+        }
+      },
+      "Function Order 7": {
+        "drop_feature": {
+          "Params Dict": {
+            "feature_name": "Fare"
+          }
+        }
+      },
+      "Function Order 8": {
+        "drop_feature": {
+          "Params Dict": {
+            "feature_name": "Embarked"
+          }
+        }
+      }
+    },
+    "Function Count": 8
+  }
+}

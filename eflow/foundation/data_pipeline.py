@@ -177,8 +177,12 @@ class DataPipeline(FileOutput):
         if segment_name in self.__pipeline_segment_names:
             raise PipelineError(f"The '{segment_name}' pipeline segment is already in this pipeline. Please choose a different segment name.")
 
-        # Check if the pipeline segment has already been used
-        segment_path_id = pipeline_segment_obj.relative_folder_path + pipeline_segment_obj.file_name
+        try:
+            # Check if the pipeline segment has already been used
+            segment_path_id = pipeline_segment_obj.relative_folder_path + pipeline_segment_obj.file_name
+        except AttributeError:
+            raise UnsatisfiedRequirments("The given pipeline segment didn't perform any functions.")
+
         if segment_path_id in self.__pipeline_segment_path_id:
             raise PipelineError("The segment has been already found "
                                 "in this pipeline Segment path id: " +
@@ -210,6 +214,9 @@ class DataPipeline(FileOutput):
         self.__pipeline_segment_deque.append((segment_name,
                                               segment_path_id,
                                               pipeline_segment_obj))
+
+        # Lock down the object to prevent users from continuing to interact with it after adding it to the pipeline
+        pipeline_segment_obj._DataPipelineSegment__lock_interaction = True
 
         # Update/Create the json file
         self.__create_json_pipeline_file()

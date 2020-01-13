@@ -2,6 +2,7 @@ from eflow._hidden.widgets.feature_data_cleaning_widget import *
 from eflow._hidden.parent_objects.data_pipeline_segment import *
 from eflow.foundation import DataFrameTypes
 from eflow.utils.pandas_utils import check_if_feature_exists
+from eflow.utils.misc_utils import get_parameters
 
 __author__ = "Eric Cacciavillani"
 __copyright__ = "Copyright 2019, eFlow"
@@ -388,19 +389,22 @@ class FeatureDataCleaner(DataPipelineSegment):
         if not self.__test_cleaning_methods:
             print("Ignore feature: ", feature_name)
 
-            # Remove any unwanted arguments in params_dict
             if _add_to_que:
-                # Remove any unwanted arguments in params_dict
                 params_dict = locals()
-                for arg in ["self", "df", "df_features", "_add_to_que",
-                            "params_dict"]:
-                    try:
-                        del params_dict[arg]
-                    except KeyError:
-                        pass
+                parameters = get_parameters(self.drop_feature)
 
                 self._DataPipelineSegment__add_function_to_que("ignore_feature",
+                                                               parameters,
                                                                params_dict)
+
+            # Remove any unwanted arguments in params_dict
+            # if _add_to_que:
+            #     params_dict = locals()
+            #     parameters = get_parameters(self.ignore_feature)
+            #
+            #     self._DataPipelineSegmentfunction_name("ignore_feature",
+            #                                            parameters,
+            #                                            params_dict)
 
 
     def drop_feature(self,
@@ -444,17 +448,11 @@ class FeatureDataCleaner(DataPipelineSegment):
             df_features.remove_feature(feature_name)
 
             if _add_to_que:
-
-                # Remove any unwanted arguments in params_dict
                 params_dict = locals()
-                for arg in ["self", "df", "df_features", "_add_to_que",
-                            "params_dict"]:
-                    try:
-                        del params_dict[arg]
-                    except KeyError:
-                        pass
+                parameters = get_parameters(self.drop_feature)
 
                 self._DataPipelineSegment__add_function_to_que("drop_feature",
+                                                               parameters,
                                                                params_dict)
 
     def remove_nans(self,
@@ -500,14 +498,10 @@ class FeatureDataCleaner(DataPipelineSegment):
 
                 # Remove any unwanted arguments in params_dict
                 params_dict = locals()
-                for arg in ["self", "df", "df_features", "_add_to_que",
-                            "params_dict"]:
-                    try:
-                        del params_dict[arg]
-                    except KeyError:
-                        pass
+                parameters = get_parameters(self.remove_nans)
 
                 self._DataPipelineSegment__add_function_to_que("remove_nans",
+                                                               parameters,
                                                                params_dict)
 
 
@@ -566,13 +560,6 @@ class FeatureDataCleaner(DataPipelineSegment):
         replace_value = np.percentile(series_obj, percentile)
 
         # Remove any unwanted arguments in params_dict
-        params_dict = locals()
-        for arg in ["self", "df", "df_features", "_add_to_que",
-                    "params_dict"]:
-            try:
-                del params_dict[arg]
-            except KeyError:
-                pass
 
         if not self.__test_cleaning_methods:
             print(f"Fill nan on distribution; {percentile}% of {feature_name}")
@@ -689,22 +676,16 @@ class FeatureDataCleaner(DataPipelineSegment):
             df[feature_name].fillna(replace_value,
                                     inplace=True)
 
-        if _add_to_que:
+            if _add_to_que:
+                params_dict = locals()
+                parameters = get_parameters(self.fill_nan_with_specfic_value)
 
-            # Remove any unwanted arguments in params_dict
-            params_dict = locals()
-            for arg in ["self", "df", "df_features", "_add_to_que",
-                        "params_dict"]:
-                try:
-                    del params_dict[arg]
-                except KeyError:
-                    pass
+                print("Replace nan with {0} on feature: {1}".format(replace_value,
+                                                                    feature_name))
 
-            print("Replace nan with {0} on feature: {1}".format(replace_value,
-                                                                feature_name))
-
-            self._DataPipelineSegment__add_function_to_que("fill_nan_with_specfic_value",
-                                                           params_dict)
+                self._DataPipelineSegment__add_function_to_que("fill_nan_with_specfic_value",
+                                                               parameters,
+                                                               params_dict)
 
 
     def fill_nan_by_occurance_percentaile(self,

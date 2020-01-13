@@ -1,5 +1,6 @@
 from eflow._hidden.parent_objects import DataPipelineSegment
 from eflow.utils.pandas_utils import check_if_feature_exists
+from eflow.utils.misc_utils import get_parameters
 
 import copy
 
@@ -16,25 +17,20 @@ __email__ = "eric.cacciavillani@gmail.com"
 #                 df_features,
 #                 '''ALL YOUR OTHER ARGS'''
 #                 _add_to_que=True):
-#     params_dict = locals()
-#
-#     # Remove any unwanted arguments in params_dict
-#     if _add_to_que:
-#         params_dict = locals()
-#         for arg in ["self", "df", "df_features", "_add_to_que",
-#                     "params_dict"]:
-#             del params_dict[arg]
+
 #
 #     '''
 #     YOUR CUSTOM CODE HERE
 #     '''
 #
-#     IMPORTANT UPDATE 'df_features' if changed type at all.
 #
 #     # Add to the given pipeline segment
 #     if _add_to_que:
-#         self._DataPipelineSegment__add_function_to_que(METHOD_NAME,
-#                                                        params_dict)
+#         params_dict = locals()
+#          parameters = get_parameters(self.METHOD_NAME)
+#          self._DataPipelineSegment__add_function_to_que("METHOD_NAME",
+#                                                         parameters,
+#                                                         params_dict)
 
 
 class FeatureTransformer(DataPipelineSegment):
@@ -83,16 +79,6 @@ class FeatureTransformer(DataPipelineSegment):
             _add_to_que:
                 Pushes the function to pipeline segment parent if set to 'True'.
         """
-        # Remove any unwanted arguments in params_dict
-        if _add_to_que:
-            # Remove any unwanted arguments in params_dict
-            params_dict = locals()
-            for arg in ["self", "df", "df_features", "_add_to_que",
-                        "params_dict"]:
-                try:
-                    del params_dict[arg]
-                except KeyError:
-                    pass
 
         if isinstance(feature_names, str):
             feature_names = [feature_names]
@@ -112,10 +98,9 @@ class FeatureTransformer(DataPipelineSegment):
             except KeyError:
                 pass
 
-        if isinstance(feature_names,
-                      set):
-            feature_names = list(feature_names)
-
         if _add_to_que:
+            params_dict = locals()
+            parameters = get_parameters(self.remove_features)
             self._DataPipelineSegment__add_function_to_que("remove_features",
+                                                           parameters,
                                                            params_dict)

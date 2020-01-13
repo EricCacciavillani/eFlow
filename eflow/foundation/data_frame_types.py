@@ -547,7 +547,7 @@ class DataFrameTypes:
             Return's a feature's type as a string
 
         Args:
-            feature_name:
+            feature_name: str
                 The given's feature's name.
 
         Returns:
@@ -616,7 +616,7 @@ class DataFrameTypes:
             Get's the color values for that given feature.
 
         Args:
-            feature_name:
+            feature_name: str
                 The given feature name of the
 
         Returns:
@@ -638,6 +638,36 @@ class DataFrameTypes:
             Returns a copy of feature's value colors.
         """
         return copy.deepcopy(self.__feature_value_color_dict)
+
+    def get_feature_binning(self,
+                            feature_name):
+        """
+       Desc:
+           Get's the feature's bin and labels for that given feature.
+
+       Args:
+           feature_name: str
+               The given feature name of the feature
+
+       Returns:
+           Returns the bin and labels for the given feature; returns None if
+           the feature name is not saved in the feature value color dict.
+       """
+
+        if feature_name in self.__feature_labels_bins_dict:
+            return copy.deepcopy(self.__feature_labels_bins_dict[feature_name])
+        else:
+            return None
+
+    def get_all_feature_binning(self):
+        """
+        Desc:
+           Get's the entire dict of the feature's bins and labels.
+
+        Returns:
+            Returns a copy of the labels and bins for the given feature.
+        """
+        return copy.deepcopy(self.__feature_labels_bins_dict)
 
     def get_feature_value_representation(self):
         """
@@ -916,13 +946,6 @@ class DataFrameTypes:
         for name in feature_name:
             self.__datetime_features.add(name)
 
-    def get_feature_binning(self,
-                            feature_name):
-        if feature_name in self.__feature_labels_bins_dict:
-            return copy.deepcopy(self.__feature_labels_bins_dict[feature_name])
-        else:
-            return None
-
     def set_feature_colors(self,
                            feature_value_color_dict):
         """
@@ -996,6 +1019,33 @@ class DataFrameTypes:
             self.__bool_features.add(bool_feature)
 
     # --- Functions ---
+    def feature_types_dict(self):
+        feature_types = dict()
+
+        # -----
+        for feature_name in self.__string_features:
+            feature_types[feature_name] = "string"
+
+        for feature_name in self.__bool_features:
+            feature_types[feature_name] = "bool"
+
+        for feature_name in self.__integer_features:
+            feature_types[feature_name] = "integer"
+
+        for feature_name in self.__float_features:
+            feature_types[feature_name] = "float"
+
+        for feature_name in self.__datetime_features:
+            feature_types[feature_name] = "datetime"
+
+        for feature_name in self.__categorical_features:
+            feature_types[feature_name] = "categorical"
+
+        for feature_name in self.__null_only_features:
+            feature_types[feature_name] = "null_only"
+
+        return feature_types
+
     def feature_types_dataframe(self):
         features = list()
         feature_types = list()
@@ -1994,3 +2044,33 @@ class DataFrameTypes:
                 categorical_check = False
 
         return True, float_check, not float_check, categorical_check
+
+
+    def __eq__(self,
+               other):
+
+        if isinstance(other,DataFrameTypes):
+
+            if self.feature_types_dict() != other.feature_types_dict():
+                return False
+
+            elif self.get_label_encoder() != other.get_label_encoder():
+                return False
+
+            elif self.get_label_decoder() != other.get_label_decoder():
+                return False
+
+            elif self.get_all_feature_colors() != other.get_all_feature_colors():
+                return False
+
+            elif self.get_all_feature_binning() != other.get_all_feature_binning():
+                return False
+
+            elif self.target_feature() != other.target_feature():
+                return False
+
+            else:
+                return True
+
+        else:
+            return False

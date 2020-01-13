@@ -1,0 +1,18 @@
+{
+  "Pipeline Name": "Titanic Pipeline",
+  "Pipeline Segment Order": {
+    "1": {
+      "Pipeline Segment Path": "_Extras/Pipeline Structure/Data Pipeline Segments/FeatureTransformer/F89BB97F14.json",
+      "Pipeline Segment Type": "FeatureTransformer",
+      "Pipeline Segment Name": "Remove unresolvable null features",
+      "Pipeline Segment ID": "F89BB97F14"
+    },
+    "2": {
+      "Pipeline Segment Path": "_Extras/Pipeline Structure/Data Pipeline Segments/FeatureDataCleaner/270C3A3C1F.json",
+      "Pipeline Segment Type": "FeatureDataCleaner",
+      "Pipeline Segment Name": "Cleaning features with methods that only apply to that one feature.",
+      "Pipeline Segment ID": "270C3A3C1F"
+    }
+  },
+  "Pipeline Segment Count": 2
+}

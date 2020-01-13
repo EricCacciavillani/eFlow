@@ -2,7 +2,7 @@ from eflow._hidden.parent_objects import DataPipelineSegment
 from eflow._hidden.constants import BOOL_STRINGS
 from eflow._hidden.custom_exceptions import UnsatisfiedRequirments
 from eflow.utils.language_processing_utils import get_synonyms
-
+from eflow.utils.misc_utils import get_parameters
 
 import copy
 import pandas as pd
@@ -62,14 +62,6 @@ class DataEncoder(DataPipelineSegment):
                 Hidden variable to determine if the function should be pushed
                 to the pipeline segment.
         """
-        # Remove any unwanted arguments in params_dict
-        params_dict = locals()
-        for arg in ["self", "df", "df_features", "_add_to_que",
-                    "params_dict"]:
-            try:
-                del params_dict[arg]
-            except KeyError:
-                pass
 
         # Apply value representation to feature values
         if apply_value_representation:
@@ -107,7 +99,10 @@ class DataEncoder(DataPipelineSegment):
                 df_features.set_feature_to_categorical(feature_name)
 
         if _add_to_que:
+            params_dict = locals()
+            parameters = get_parameters(self.encode_data)
             self._DataPipelineSegment__add_function_to_que("encode_data",
+                                                           parameters,
                                                            params_dict)
 
     def decode_data(self,
@@ -133,15 +128,6 @@ class DataEncoder(DataPipelineSegment):
                 Hidden variable to determine if the function should be pushed
                 to the pipeline segment.
         """
-        # Remove any unwanted arguments in params_dict
-        params_dict = locals()
-        for arg in ["self", "df", "df_features", "_add_to_que",
-                    "params_dict"]:
-            try:
-                del params_dict[arg]
-            except KeyError:
-                pass
-
         # Decode data from categorical values to proper strings.
         decoder_dict = df_features.get_label_decoder()
         for feature_name in decoder_dict.keys():
@@ -168,7 +154,10 @@ class DataEncoder(DataPipelineSegment):
                 df_features.set_feature_to_string(feature_name)
 
         if _add_to_que:
+            params_dict = locals()
+            parameters = get_parameters(self.decode_data)
             self._DataPipelineSegment__add_function_to_que("decode_data",
+                                                           parameters,
                                                            params_dict)
 
     def apply_binning(self,
@@ -204,7 +193,10 @@ class DataEncoder(DataPipelineSegment):
                 df_features.set_feature_to_categorical(feature_name)
 
         if _add_to_que:
+            params_dict = locals()
+            parameters = get_parameters(self.decode_data)
             self._DataPipelineSegment__add_function_to_que("apply_binning",
+                                                           parameters,
                                                            params_dict)
 
     def apply_value_representation(self,
@@ -226,15 +218,6 @@ class DataEncoder(DataPipelineSegment):
                 Hidden variable to determine if the function should be pushed
                 to the pipeline segment.
         """
-        # Remove any unwanted arguments in params_dict
-        params_dict = locals()
-        for arg in ["self", "df", "df_features", "_add_to_que",
-                    "params_dict"]:
-            try:
-                del params_dict[arg]
-            except KeyError:
-                pass
-
         feature_value_represention = df_features.get_feature_value_representation()
 
         # Replace values by each corresponding feature value related dict
@@ -248,7 +231,10 @@ class DataEncoder(DataPipelineSegment):
                                      inplace=True)
 
         if _add_to_que:
+            params_dict = locals()
+            parameters = get_parameters(self.decode_data)
             self._DataPipelineSegment__add_function_to_que("apply_value_representation",
+                                                           parameters,
                                                            params_dict)
 
     def revert_value_representation(self,
@@ -270,15 +256,6 @@ class DataEncoder(DataPipelineSegment):
                 Hidden variable to determine if the function should be pushed
                 to the pipeline segment.
         """
-        # Remove any unwanted arguments in params_dict
-        params_dict = locals()
-        for arg in ["self", "df", "df_features", "_add_to_que",
-                    "params_dict"]:
-            try:
-                del params_dict[arg]
-            except KeyError:
-                pass
-
         feature_value_represention = df_features.get_feature_value_representation()
 
         # Replace values by each corresponding feature value related dict
@@ -295,7 +272,10 @@ class DataEncoder(DataPipelineSegment):
                                      inplace=True)
 
         if _add_to_que:
+            params_dict = locals()
+            parameters = get_parameters(self.revert_value_representation)
             self._DataPipelineSegment__add_function_to_que("revert_value_representation",
+                                                           parameters,
                                                            params_dict)
 
     def make_values_bool(self,
@@ -316,15 +296,6 @@ class DataEncoder(DataPipelineSegment):
                 Hidden variable to determine if the function should be pushed
                 to the pipeline segment.
         """
-        # Remove any unwanted arguments in params_dict
-        params_dict = locals()
-        for arg in ["self", "df", "df_features", "_add_to_que",
-                    "params_dict"]:
-            try:
-                del params_dict[arg]
-            except KeyError:
-                pass
-
         for bool_feature in df_features.bool_features():
             if df[bool_feature].dtype == "O":
                 bool_check,true_val,false_val = self.__bool_string_values_check(
@@ -336,7 +307,10 @@ class DataEncoder(DataPipelineSegment):
                                               false_val:0},
                                              inplace=True)
         if _add_to_que:
+            params_dict = locals()
+            parameters = get_parameters(self.make_values_bool)
             self._DataPipelineSegment__add_function_to_que("make_values_bool",
+                                                           parameters,
                                                            params_dict)
 
     def make_dummies(self,
@@ -375,39 +349,42 @@ class DataEncoder(DataPipelineSegment):
         if not _feature_values_dict:
             _feature_values_dict = dict()
 
-        # Remove any unwanted arguments in params_dict
-        params_dict = locals()
-        for arg in ["self", "df", "df_features", "_add_to_que",
-                    "params_dict"]:
-            try:
-                del params_dict[arg]
-            except KeyError:
-                pass
-
         for cat_feature in qualtative_features:
 
             if cat_feature not in df_features.string_features() | df_features.categorical_features():
                 raise UnsatisfiedRequirments(f"No feature named '{cat_feature}' in categorical or string features.")
 
             if cat_feature not in _feature_values_dict:
-                _feature_values_dict[cat_feature] = df[cat_feature].dropna().unique().tolist()
+                _feature_values_dict[cat_feature] = df[cat_feature].dropna().unique()
+                _feature_values_dict[cat_feature].sort()
+                _feature_values_dict[cat_feature] = _feature_values_dict[cat_feature].tolist()
 
-            # Make dummies and remove original feature
-            dummies_df = pd.get_dummies(_feature_values_dict[cat_feature],
-                                        prefix=cat_feature)
+
+            dummy_features = []
+            for feature_value in  _feature_values_dict[cat_feature]:
+                new_feature = cat_feature + f"_{feature_value}"
+                df[new_feature] = df[cat_feature] == feature_value
+                dummy_features.append(new_feature)
+
+            # # Make dummies and remove original feature
+            # dummies_df = pd.get_dummies(_feature_values_dict[cat_feature],
+            #                             prefix=cat_feature)
 
             df.drop(columns=[cat_feature],
                     inplace=True)
             df_features.remove_feature(cat_feature)
             df_features.set_feature_to_dummy_encoded(cat_feature,
-                                                     dummies_df.columns.to_list())
+                                                     dummy_features)
 
-            # Apply to dataframe
-            for feature_name in dummies_df.columns:
-                df[feature_name] = dummies_df[feature_name]
+            # # Apply to dataframe
+            # for feature_name in dummies_df.columns:
+            #     df[feature_name] = dummies_df[feature_name]
 
         if _add_to_que:
+            params_dict = locals()
+            parameters = get_parameters(self.make_dummies)
             self._DataPipelineSegment__add_function_to_que("make_dummies",
+                                                           parameters,
                                                            params_dict)
 
     def revert_dummies(self,
@@ -436,15 +413,6 @@ class DataEncoder(DataPipelineSegment):
         """
         if isinstance(qualtative_features,str):
             feature_name = [qualtative_features]
-
-        # Remove any unwanted arguments in params_dict
-        params_dict = locals()
-        for arg in ["self", "df", "df_features", "_add_to_que",
-                    "params_dict"]:
-            try:
-                del params_dict[arg]
-            except KeyError:
-                pass
 
 
         for feature_name in qualtative_features:
@@ -481,7 +449,10 @@ class DataEncoder(DataPipelineSegment):
                 df_features.add_new_string_feature(feature_name)
 
         if _add_to_que:
+            params_dict = locals()
+            parameters = get_parameters(self.revert_dummies)
             self._DataPipelineSegment__add_function_to_que("revert_dummies",
+                                                           parameters,
                                                            params_dict)
 
 
