@@ -3,10 +3,10 @@
     "Survived"
   ],
   "string": [
-    "Pclass",
-    "Sex",
+    "Cabin",
     "Embarked",
-    "Cabin"
+    "Sex",
+    "Pclass"
   ],
   "integer": [
     "Parch",
