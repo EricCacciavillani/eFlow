@@ -172,16 +172,16 @@
           "Statistic": 0.043478260869565216
         }
       },
-      "Pclass": {
-        "Kolmogorov-Smirnov statistic": {
-          "P-Value": 0.9733171871341685,
-          "Statistic": 0.1422924901185771
-        }
-      },
       "Embarked": {
         "Kolmogorov-Smirnov statistic": {
           "P-Value": 0.9308257618625322,
           "Statistic": 0.16042780748663102
+        }
+      },
+      "Pclass": {
+        "Kolmogorov-Smirnov statistic": {
+          "P-Value": 0.9733171871341685,
+          "Statistic": 0.1422924901185771
         }
       }
     },
@@ -294,14 +294,6 @@
           "Pvalues Summary": {}
         }
       },
-      "Pclass": {
-        "Kolmogorov-Smirnov statistic": {
-          "All pvalues": [
-            0.9733171871341685
-          ],
-          "Pvalues Summary": {}
-        }
-      },
       "Cabin": {
         "Kolmogorov-Smirnov statistic": {
           "All pvalues": [
@@ -342,6 +334,14 @@
             "max": 1.0,
             "var": 0.0010634296352193392
           }
+        }
+      },
+      "Pclass": {
+        "Kolmogorov-Smirnov statistic": {
+          "All pvalues": [
+            0.9733171871341685
+          ],
+          "Pvalues Summary": {}
         }
       },
       "Sex": {
@@ -419,12 +419,6 @@
           "Pvalues Summary": {}
         }
       },
-      "Pclass": {
-        "Kolmogorov-Smirnov statistic": {
-          "All pvalues": [],
-          "Pvalues Summary": {}
-        }
-      },
       "Cabin": {
         "Kolmogorov-Smirnov statistic": {
           "All pvalues": [
@@ -446,6 +440,12 @@
         }
       },
       "Embarked": {
+        "Kolmogorov-Smirnov statistic": {
+          "All pvalues": [],
+          "Pvalues Summary": {}
+        }
+      },
+      "Pclass": {
         "Kolmogorov-Smirnov statistic": {
           "All pvalues": [],
           "Pvalues Summary": {}
@@ -508,12 +508,6 @@
           "Pvalues Summary": {}
         }
       },
-      "Pclass": {
-        "Kolmogorov-Smirnov statistic": {
-          "All pvalues": [],
-          "Pvalues Summary": {}
-        }
-      },
       "Cabin": {
         "Kolmogorov-Smirnov statistic": {
           "All pvalues": [
@@ -534,6 +528,12 @@
         }
       },
       "Embarked": {
+        "Kolmogorov-Smirnov statistic": {
+          "All pvalues": [],
+          "Pvalues Summary": {}
+        }
+      },
+      "Pclass": {
         "Kolmogorov-Smirnov statistic": {
           "All pvalues": [],
           "Pvalues Summary": {}

@@ -57,12 +57,6 @@
           "Pvalues Summary": {}
         }
       },
-      "Pclass": {
-        "Kolmogorov-Smirnov statistic": {
-          "All pvalues": [],
-          "Pvalues Summary": {}
-        }
-      },
       "Cabin": {
         "Kolmogorov-Smirnov statistic": {
           "All pvalues": [],
@@ -74,6 +68,12 @@
           "All pvalues": [
             0.003989659887148278
           ],
+          "Pvalues Summary": {}
+        }
+      },
+      "Pclass": {
+        "Kolmogorov-Smirnov statistic": {
+          "All pvalues": [],
           "Pvalues Summary": {}
         }
       },
@@ -194,12 +194,6 @@
           "Pvalues Summary": {}
         }
       },
-      "Pclass": {
-        "Kolmogorov-Smirnov statistic": {
-          "All pvalues": [],
-          "Pvalues Summary": {}
-        }
-      },
       "Cabin": {
         "Kolmogorov-Smirnov statistic": {
           "All pvalues": [],
@@ -211,6 +205,12 @@
           "All pvalues": [
             0.007490886967476573
           ],
+          "Pvalues Summary": {}
+        }
+      },
+      "Pclass": {
+        "Kolmogorov-Smirnov statistic": {
+          "All pvalues": [],
           "Pvalues Summary": {}
         }
       }

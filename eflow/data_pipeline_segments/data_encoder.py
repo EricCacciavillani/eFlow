@@ -349,6 +349,8 @@ class DataEncoder(DataPipelineSegment):
         if not _feature_values_dict:
             _feature_values_dict = dict()
 
+        pd.set_option('mode.chained_assignment', None)
+
         for cat_feature in qualtative_features:
 
             if cat_feature not in df_features.string_features() | df_features.categorical_features():
@@ -359,11 +361,11 @@ class DataEncoder(DataPipelineSegment):
                 _feature_values_dict[cat_feature].sort()
                 _feature_values_dict[cat_feature] = _feature_values_dict[cat_feature].tolist()
 
-
             dummy_features = []
             for feature_value in  _feature_values_dict[cat_feature]:
                 new_feature = cat_feature + f"_{feature_value}"
-                df[new_feature] = df[cat_feature] == feature_value
+                bool_array = df[cat_feature] == feature_value
+                df[new_feature] = copy.deepcopy(bool_array)
                 dummy_features.append(new_feature)
 
             # # Make dummies and remove original feature

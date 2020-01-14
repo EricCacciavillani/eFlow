@@ -204,16 +204,16 @@
           "Statistic": 0.043478260869565216
         }
       },
-      "Pclass": {
-        "Kolmogorov-Smirnov statistic": {
-          "P-Value": 0.9733171871341685,
-          "Statistic": 0.1422924901185771
-        }
-      },
       "Embarked": {
         "Kolmogorov-Smirnov statistic": {
           "P-Value": 0.9308257618625322,
           "Statistic": 0.16042780748663102
+        }
+      },
+      "Pclass": {
+        "Kolmogorov-Smirnov statistic": {
+          "P-Value": 0.9733171871341685,
+          "Statistic": 0.1422924901185771
         }
       }
     },
@@ -335,25 +335,6 @@
           "Pvalues Summary": {}
         }
       },
-      "Pclass": {
-        "Kolmogorov-Smirnov statistic": {
-          "All pvalues": [
-            0.8367822415413693,
-            0.9733171871341685
-          ],
-          "Pvalues Summary": {
-            "count": 2.0,
-            "mean": 0.9050497143377689,
-            "std": 0.09654478589760464,
-            "min": 0.8367822415413693,
-            "25%": 0.870915977939569,
-            "50%": 0.9050497143377689,
-            "75%": 0.9391834507359687,
-            "max": 0.9733171871341685,
-            "var": 0.00932089568401432
-          }
-        }
-      },
       "Cabin": {
         "Kolmogorov-Smirnov statistic": {
           "All pvalues": [
@@ -396,6 +377,25 @@
             "75%": 0.9881882963931795,
             "max": 1.0,
             "var": 0.00577127495829455
+          }
+        }
+      },
+      "Pclass": {
+        "Kolmogorov-Smirnov statistic": {
+          "All pvalues": [
+            0.8367822415413693,
+            0.9733171871341685
+          ],
+          "Pvalues Summary": {
+            "count": 2.0,
+            "mean": 0.9050497143377689,
+            "std": 0.09654478589760464,
+            "min": 0.8367822415413693,
+            "25%": 0.870915977939569,
+            "50%": 0.9050497143377689,
+            "75%": 0.9391834507359687,
+            "max": 0.9733171871341685,
+            "var": 0.00932089568401432
           }
         }
       },
@@ -482,12 +482,6 @@
           "Pvalues Summary": {}
         }
       },
-      "Pclass": {
-        "Kolmogorov-Smirnov statistic": {
-          "All pvalues": [],
-          "Pvalues Summary": {}
-        }
-      },
       "Cabin": {
         "Kolmogorov-Smirnov statistic": {
           "All pvalues": [
@@ -509,6 +503,12 @@
         }
       },
       "Embarked": {
+        "Kolmogorov-Smirnov statistic": {
+          "All pvalues": [],
+          "Pvalues Summary": {}
+        }
+      },
+      "Pclass": {
         "Kolmogorov-Smirnov statistic": {
           "All pvalues": [],
           "Pvalues Summary": {}
@@ -579,12 +579,6 @@
           "Pvalues Summary": {}
         }
       },
-      "Pclass": {
-        "Kolmogorov-Smirnov statistic": {
-          "All pvalues": [],
-          "Pvalues Summary": {}
-        }
-      },
       "Cabin": {
         "Kolmogorov-Smirnov statistic": {
           "All pvalues": [
@@ -605,6 +599,12 @@
         }
       },
       "Embarked": {
+        "Kolmogorov-Smirnov statistic": {
+          "All pvalues": [],
+          "Pvalues Summary": {}
+        }
+      },
+      "Pclass": {
         "Kolmogorov-Smirnov statistic": {
           "All pvalues": [],
           "Pvalues Summary": {}

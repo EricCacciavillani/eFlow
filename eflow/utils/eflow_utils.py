@@ -219,7 +219,7 @@ def remove_unconnected_pipeline_segments():
         Removes all pipeline segments that aren't connected to a pipeline structure.
     """
 
-    # Directory to pipeline section
+
     pipeline_struct_dir = os.getcwd() + f"/{SYS_CONSTANTS.PARENT_OUTPUT_FOLDER_NAME}/_Extras/Pipeline Structure/"
 
     if not os.path.exists(pipeline_struct_dir):
@@ -251,16 +251,9 @@ def remove_unconnected_pipeline_segments():
                     segment_type = json_file["Pipeline Segment Order"][str(i)][
                         'Pipeline Segment Type']
 
-                    if segment_type not in pipeline_segments_dict.keys():
-                        pipeline_segments_dict[segment_type] = {segment_id + ".json"}
-                    else:
-                        pipeline_segments_dict[segment_type].add(segment_id + ".json")
-
-        # Remove given segments
-        for segment_type, segment_ids in pipeline_segments_dict.items():
-            if segment_type in segment_dict[segment_type]:
-                for _id in segment_ids:
-                    segment_dict[segment_type].remove(_id)
+                    if segment_type in segment_dict.keys() and segment_id + ".json" in \
+                            segment_dict[segment_type]:
+                        segment_dict[segment_type].remove(segment_id + ".json")
 
         # Create path to eflow's garbage
         garbage_folder_path = create_dir_structure(os.getcwd(),
@@ -275,7 +268,8 @@ def remove_unconnected_pipeline_segments():
                 i = 1
                 while file_to_remove in files_in_garbage:
                     file_to_remove = _id
-                    file_to_remove = file_to_remove.split(".")[0] + f"_{i}.json"
+                    file_to_remove = file_to_remove.split(".")[
+                                         0] + f"_{i}.json"
                     i += 1
 
                 os.rename(
@@ -284,4 +278,3 @@ def remove_unconnected_pipeline_segments():
                 shutil.move(
                     pipeline_struct_dir + f"Data Pipeline Segments/{segment_type}/{file_to_remove}",
                     garbage_folder_path + file_to_remove)
-

@@ -2,11 +2,23 @@
   "Pipeline Name": "Titanic Pipeline",
   "Pipeline Segment Order": {
     "1": {
-      "Pipeline Segment Path": "_Extras/Pipeline Structure/Data Pipeline Segments/FeatureTransformer/D21EB36910.json",
+      "Pipeline Segment Path": "_Extras/Pipeline Structure/Data Pipeline Segments/FeatureTransformer/793B240711.json",
       "Pipeline Segment Type": "FeatureTransformer",
       "Pipeline Segment Name": "Remove unresolvable null features",
-      "Pipeline Segment ID": "D21EB36910"
+      "Pipeline Segment ID": "793B240711"
+    },
+    "2": {
+      "Pipeline Segment Path": "_Extras/Pipeline Structure/Data Pipeline Segments/FeatureDataCleaner/25CB8A98EC.json",
+      "Pipeline Segment Type": "FeatureDataCleaner",
+      "Pipeline Segment Name": "Cleaning features with methods that only apply to that one feature.",
+      "Pipeline Segment ID": "25CB8A98EC"
+    },
+    "3": {
+      "Pipeline Segment Path": "_Extras/Pipeline Structure/Data Pipeline Segments/DataEncoder/B0173F0245.json",
+      "Pipeline Segment Type": "DataEncoder",
+      "Pipeline Segment Name": "Ensure values are in proper form; convert proper values to dummies!",
+      "Pipeline Segment ID": "B0173F0245"
     }
   },
-  "Pipeline Segment Count": 1
+  "Pipeline Segment Count": 3
 }

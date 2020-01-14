@@ -22,12 +22,6 @@
           "Pvalues Summary": {}
         }
       },
-      "Pclass": {
-        "Kolmogorov-Smirnov statistic": {
-          "All pvalues": [],
-          "Pvalues Summary": {}
-        }
-      },
       "Cabin": {
         "Kolmogorov-Smirnov statistic": {
           "All pvalues": [],
@@ -35,6 +29,12 @@
         }
       },
       "Embarked": {
+        "Kolmogorov-Smirnov statistic": {
+          "All pvalues": [],
+          "Pvalues Summary": {}
+        }
+      },
+      "Pclass": {
         "Kolmogorov-Smirnov statistic": {
           "All pvalues": [],
           "Pvalues Summary": {}
@@ -84,14 +84,6 @@
           "Pvalues Summary": {}
         }
       },
-      "Pclass": {
-        "Kolmogorov-Smirnov statistic": {
-          "All pvalues": [
-            1.0
-          ],
-          "Pvalues Summary": {}
-        }
-      },
       "Cabin": {
         "Kolmogorov-Smirnov statistic": {
           "All pvalues": [],
@@ -101,6 +93,14 @@
       "Embarked": {
         "Kolmogorov-Smirnov statistic": {
           "All pvalues": [],
+          "Pvalues Summary": {}
+        }
+      },
+      "Pclass": {
+        "Kolmogorov-Smirnov statistic": {
+          "All pvalues": [
+            1.0
+          ],
           "Pvalues Summary": {}
         }
       }

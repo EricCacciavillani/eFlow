@@ -275,12 +275,6 @@ class DataCleaningWidget():
 
     def __set_input_value(self,
                           _):
-        write_object_text_to_file(self.__input_w.layout.visibility,
-                                  os.getcwd(),
-                                  "fdssdd")
-        write_object_text_to_file(self.__input_visible,
-                                  os.getcwd(),
-                                  "featy")
 
         if self.__input_visible:
             if self.__features_w.value in self.__feature_input_holder:
