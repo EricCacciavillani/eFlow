@@ -1,1 +1,2 @@
 from .classification_analysis import ClassificationAnalysis
+from .regression_analysis import RegressionAnalysis

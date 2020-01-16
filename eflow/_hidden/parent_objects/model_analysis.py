@@ -129,4 +129,3 @@ class ModelAnalysis(FileOutput):
                     "Meta Data",
                     "Matrix Shape Table",
                     show_index=False)
-

@@ -1,22 +1,22 @@
 {
   "bool": [
+    "Embarked_Cherbourg",
     "Pclass_1",
+    "Embarked_Southampton",
     "Embarked_Queenstown",
     "Survived",
-    "Embarked_Cherbourg",
     "Pclass_3",
-    "Sex_female",
+    "Pclass_2",
     "Sex_male",
-    "Embarked_Southampton",
-    "Pclass_2"
+    "Sex_female"
   ],
   "integer": [
     "Parch",
     "SibSp"
   ],
   "float": [
-    "Age",
-    "Fare"
+    "Fare",
+    "Age"
   ],
   "target": "Survived",
   "feature_labels_bins": {

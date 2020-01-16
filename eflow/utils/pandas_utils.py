@@ -197,11 +197,13 @@ def generate_meta_data(df,
     # Create files relating to dataframe's shape
     shape_df = pd.DataFrame.from_dict({'Rows': [df.shape[0]],
                                        'Columns': [df.shape[1]]})
-    df_to_image(shape_df,
-                f"{output_folder_path}/{sub_dir}",
-                "Meta Data",
-                "Dataframe Shape Table",
-                show_index=False)
+
+    if shape_df.shape[0]:
+        df_to_image(shape_df,
+                    f"{output_folder_path}/{sub_dir}",
+                    "Meta Data",
+                    "Dataframe Shape Table",
+                    show_index=False)
 
     write_object_text_to_file(shape_df.to_dict('records'),
                               f"{output_folder_path}/{sub_dir}/Meta Data",
@@ -209,21 +211,22 @@ def generate_meta_data(df,
 
     # Create files relating to dataframe's types
     dtypes_df = data_types_table(df)
-
-    df_to_image(dtypes_df,
-                f"{output_folder_path}/{sub_dir}",
-                "Meta Data",
-                "Dataframe Types Table",
-                show_index=True)
+    if dtypes_df.shape[0]:
+        df_to_image(dtypes_df,
+                    f"{output_folder_path}/{sub_dir}",
+                    "Meta Data",
+                    "Dataframe Types Table",
+                    show_index=True)
 
 
     # Missing value table
     mis_val_table = missing_values_table(df)
-    df_to_image(mis_val_table,
-                f"{output_folder_path}/{sub_dir}",
-                "Meta Data",
-                "Missing Data Table",
-                show_index=True)
+    if mis_val_table.shape[0]:
+        df_to_image(mis_val_table,
+                    f"{output_folder_path}/{sub_dir}",
+                    "Meta Data",
+                    "Missing Data Table",
+                    show_index=True)
 
 def generate_entropy_table(df,
                            df_features,

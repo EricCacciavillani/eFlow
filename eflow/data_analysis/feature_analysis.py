@@ -1901,6 +1901,11 @@ class FeatureAnalysis(DataAnalysis):
                 Helps ensure that data generated in that directory is correctly
                 associated to a dataframe.
 
+        Note:
+            This function has a lot going on and it's infancy so I am going to
+            purposely not give it suppress_runtime_errors so people will find
+            problems with it and report it to me.
+
         Raises:
             Raises error if the feature data is filled with only nulls or if
             the json file's snapshot of the given dataframe doesn't match the
@@ -2135,10 +2140,11 @@ class FeatureAnalysis(DataAnalysis):
                                 stat_methods_dict[stats_method] = stat_methods_dict[stats_method].append(tmp_stats_df,
                                                                                            ignore_index=False)
         for stats_method in stat_methods_dict:
-            stat_methods_dict[stats_method].sort_values(
-                by=["mean", "std", "var"],
-                ascending=True,
-                inplace=True)
+            if stat_methods_dict[stats_method].shape[0]:
+                stat_methods_dict[stats_method].sort_values(
+                    by=["mean", "std", "var"],
+                    ascending=True,
+                    inplace=True)
 
         pickle_object_to_file(stat_methods_dict,
                               self.folder_path + dataset_name + "/_Extras/Statistics",

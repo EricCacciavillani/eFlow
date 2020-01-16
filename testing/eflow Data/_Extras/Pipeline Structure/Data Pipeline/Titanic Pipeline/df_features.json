@@ -3,14 +3,14 @@
     "Survived"
   ],
   "string": [
-    "Embarked",
-    "Pclass",
     "Sex",
-    "Cabin"
+    "Cabin",
+    "Pclass",
+    "Embarked"
   ],
   "integer": [
-    "Parch",
-    "SibSp"
+    "SibSp",
+    "Parch"
   ],
   "float": [
     "Fare",
