@@ -113,7 +113,19 @@ class ModelAnalysis(FileOutput):
     def generate_matrix_meta_data(self,
                                   X,
                                   sub_dir):
+        """
+        Desc:
+            Generates files/graphics in the proper directory for the matrix.
 
+        Args:
+            X: list of list; numpy array of numpy array or numpy matrix
+                Numpy matrix
+
+            sub_dir: string
+                Specify the sub directory to append to the pre-defined folder path.
+        """
+
+        # Convert to numpy array if possible
         X = np.array(X)
 
         create_dir_structure(self.folder_path,

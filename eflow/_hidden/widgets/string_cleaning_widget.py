@@ -26,11 +26,14 @@ class StringCleaningWidget(JupyterWidget):
                    df,
                    df_features):
         """
-        df:
-            A pandas dataframe object
+        Desc:
 
-        df_features:
-            DataFrameTypes object; organizes feature types into groups.
+        Args:
+            df: pd.Dataframe
+                A pandas dataframe object
+
+            df_features: DataFrameType
+                DataFrameTypes object; organizes feature types into groups.
 
         Returns/Descr:
             Returns a UI widget to create a JSON file for cleaning.

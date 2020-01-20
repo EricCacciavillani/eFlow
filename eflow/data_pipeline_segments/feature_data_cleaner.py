@@ -27,7 +27,7 @@ class FeatureDataCleaner(DataPipelineSegment):
                  create_file=True):
         """
         Args:
-            segment_id:
+            segment_id: str
                 Reference id to past segments of this object.
 
         Note/Caveats:

@@ -7,7 +7,7 @@ MAIN_PACKAGES = [i.strip() for i in open("installation/main_packages.txt").readl
 
 setuptools.setup(
      name='eflow',
-     version='0.1.7',
+     version='0.1.8',
      scripts=['init_env'],
      author="Eric Cacciavillani",
      author_email="eric.cacciavillani@gmail.com",

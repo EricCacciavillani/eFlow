@@ -43,10 +43,8 @@ class RegressionAnalysis(ModelAnalysis):
                  model_name,
                  feature_order,
                  target_feature,
-                 pred_funcs_dict,
                  df_features,
-                 sample_data,
-                 project_sub_dir="Classification Analysis",
+                 project_sub_dir="Regression Analysis",
                  overwrite_full_path=None,
                  target_classes=None,
                  save_model=True,
@@ -110,27 +108,16 @@ class RegressionAnalysis(ModelAnalysis):
         if self.__target_feature in self.__feature_order:
             self.__feature_order.remove(self.__target_feature)
 
-
         self.__model = copy.deepcopy(model)
 
         self.__model_name = copy.deepcopy(model_name)
         self.__target_values = copy.deepcopy(target_classes)
         self.__df_features = copy.deepcopy(df_features)
-        self.__pred_funcs_dict = copy.deepcopy(pred_funcs_dict)
         self.__pred_funcs_types = dict()
         self.__notebook_mode = copy.deepcopy(notebook_mode)
 
         # Determines if the perform was called
         self.__called_from_perform = False
-
-        # Init on sklearns default target classes attribute
-        if not self.__target_values:
-            self.__target_values = copy.deepcopy(model.classes_)
-        # ---
-        if len(self.__target_values) != 2:
-            self.__binary_classifcation = False
-        else:
-            self.__binary_classifcation = True
 
         # Attempt to save machine learning model
         try:
@@ -152,47 +139,14 @@ class RegressionAnalysis(ModelAnalysis):
         df_features.create_json_file_representation(self.folder_path + "_Extras",
                                                     "df_features.json")
 
-        self.__sample_data = None
-
-        # Extract sample data
-        if len(sample_data.shape) == 2:
-            self.__sample_data = np.reshape(sample_data[0],
-                                            (-1, sample_data.shape[1]))
-        elif len(sample_data.shape) == 1:
-            self.__sample_data = [sample_data]
-        else:
-            raise UnsatisfiedRequirments("This program can only handle 1D and 2D matrices.")
-
-
-        # Find the 'type' of each prediction. Probabilities or Predictions
-        if self.__pred_funcs_dict:
-            for pred_name, pred_func in self.__pred_funcs_dict.items():
-                model_output = pred_func(self.__sample_data)[0]
-
-                # Confidence / Probability (Continuous output)
-                if isinstance(model_output, list) or isinstance(model_output,
-                                                                np.ndarray):
-                    self.__pred_funcs_types[pred_name] = "Probabilities"
-
-                # Classification (Discrete output)
-                else:
-                    self.__pred_funcs_types[pred_name] = "Predictions"
-        else:
-            raise RequiresPredictionMethods("This object requires you to pass the prediction methods in a dict with the name of the method as the key.")
-
-
     def perform_analysis(self,
                          X,
                          y,
                          dataset_name,
-                         thresholds_matrix=None,
-                         classification_error_analysis=False,
-                         classification_correct_analysis=False,
+                         regression_error_analysis=False,
+                         regression_correct_analysis=False,
                          ignore_metrics=[],
                          custom_metrics_dict=dict(),
-                         average_scoring=["micro",
-                                          "macro",
-                                          "weighted"],
                          display_visuals=True):
         """
         Desc:
@@ -253,125 +207,29 @@ class RegressionAnalysis(ModelAnalysis):
                 * plot_confusion_matrix
         """
         try:
-            # Convert to
-            if isinstance(thresholds_matrix, np.ndarray):
-                thresholds_matrix = thresholds_matrix.tolist()
-
-            if not thresholds_matrix:
-                thresholds_matrix = [[]]
-
-            if isinstance(thresholds_matrix, list) and not isinstance(
-                    thresholds_matrix[0], list):
-                thresholds_matrix = list(thresholds_matrix)
-
-            if None not in thresholds_matrix:
-                thresholds_matrix.append(None)
-
             self.__called_from_perform = True
 
             self.generate_matrix_meta_data(X,
                                            dataset_name + "/_Extras")
 
             print("\n\n" + "---" * 10 + f'{dataset_name}' + "---" * 10)
-            first_iteration = True
-
-            for pred_name, pred_type in self.__pred_funcs_types.items():
-
-                # Nicer formating
-                if not first_iteration:
-                    print("\n\n\n")
-                first_iteration = False
-
-                for thresholds in thresholds_matrix:
-
-                    print(f"Now running classification on {pred_name}", end='')
-                    if pred_type == "Predictions":
-                        print()
-                        thresholds = None
-                    else:
-                        if thresholds:
-                            print(f" on thresholds:")
-                            for i,target_val in enumerate(self.__target_values):
-                                try:
-                                    print(f"\tTarget Value:{target_val}: Prediction weight: {thresholds[i]}")
-
-                                except IndexError:
-                                    raise IndexError("Thresholds must of the same length as the target values!")
-                        else:
-                            print(" on no thresholds.")
-
-                    if display_visuals:
-                        try:
-                            print(f"\nShape of the data is {X.shape}")
-                        except AttributeError:
-                            pass
-
-                    self.classification_metrics(X,
-                                                y,
-                                                pred_name=pred_name,
-                                                dataset_name=dataset_name,
-                                                thresholds=thresholds,
-                                                ignore_metrics=ignore_metrics,
-                                                custom_metrics_dict=custom_metrics_dict,
-                                                average_scoring=average_scoring,
-                                                display_visuals=display_visuals)
-
-                    if pred_type == "Probabilities":
-                        pass
-
-
-                    if classification_error_analysis:
-                        self.classification_error_analysis(X,
-                                                           y,
-                                                           pred_name,
-                                                           dataset_name,
-                                                           thresholds=thresholds,
-                                                           display_visuals=False,
-                                                           save_file=True,
-                                                           aggerate_target=True,
-                                                           display_print=False,
-                                                           suppress_runtime_errors=True,
-                                                           aggregate_target_feature=True,
-                                                           selected_features=None,
-                                                           extra_tables=True,
-                                                           statistical_analysis_on_aggregates=True)
-
-                    if classification_correct_analysis:
-                        self.classification_correct_analysis(X,
-                                                             y,
-                                                             pred_name,
-                                                             dataset_name,
-                                                             thresholds=thresholds,
-                                                             display_visuals=False,
-                                                             save_file=True,
-                                                             aggerate_target=True,
-                                                             display_print=False,
-                                                             suppress_runtime_errors=True,
-                                                             aggregate_target_feature=True,
-                                                             selected_features=None,
-                                                             extra_tables=True,
-                                                             statistical_analysis_on_aggregates=True)
-
-                    print("-" * (len(dataset_name) + 60) + "\n")
-                    if pred_type == "Predictions":
-                        break
         finally:
             self.__called_from_perform = False
 
-    def classification_metrics(self,
-                               X,
-                               y,
-                               pred_name,
-                               dataset_name,
-                               thresholds=None,
-                               display_visuals=True,
-                               save_file=True,
-                               title="",
-                               custom_metrics_dict=dict(),
-                               ignore_metrics=[],
-                               average_scoring=["micro",
-                                                "macro",
-                                                "weighted"]):
+    def regression_metrics(self,
+                           X,
+                           y,
+                           pred_name,
+                           dataset_name,
+                           thresholds=None,
+                           display_visuals=True,
+                           save_file=True,
+                           title="",
+                           custom_metrics_dict=dict(),
+                           ignore_metrics=[],
+                           average_scoring=["micro",
+                                            "macro",
+                                            "weighted"]):
         """
         Desc:
             Creates a dataframe based on the prediction metrics
@@ -509,21 +367,21 @@ class RegressionAnalysis(ModelAnalysis):
                                                dataset_name + "/_Extras")
 
 
-    def classification_correct_analysis(self,
-                                        X,
-                                        y,
-                                        pred_name,
-                                        dataset_name,
-                                        thresholds=None,
-                                        display_visuals=True,
-                                        save_file=True,
-                                        aggerate_target=False,
-                                        display_print=True,
-                                        suppress_runtime_errors=True,
-                                        aggregate_target_feature=True,
-                                        selected_features=None,
-                                        extra_tables=True,
-                                        statistical_analysis_on_aggregates=True):
+    def regression_correct_analysis(self,
+                                    X,
+                                    y,
+                                    pred_name,
+                                    dataset_name,
+                                    thresholds=None,
+                                    display_visuals=True,
+                                    save_file=True,
+                                    aggerate_target=False,
+                                    display_print=True,
+                                    suppress_runtime_errors=True,
+                                    aggregate_target_feature=True,
+                                    selected_features=None,
+                                    extra_tables=True,
+                                    statistical_analysis_on_aggregates=True):
         """
         Desc:
             Compares the actual target value to the predicted value and performs
@@ -670,21 +528,21 @@ class RegressionAnalysis(ModelAnalysis):
                                                               extra_tables=extra_tables,
                                                               statistical_analysis_on_aggregates=statistical_analysis_on_aggregates)
 
-    def classification_error_analysis(self,
-                                      X,
-                                      y,
-                                      pred_name,
-                                      dataset_name,
-                                      thresholds=None,
-                                      display_visuals=True,
-                                      save_file=True,
-                                      aggerate_target=False,
-                                      display_print=True,
-                                      suppress_runtime_errors=True,
-                                      aggregate_target_feature=True,
-                                      selected_features=None,
-                                      extra_tables=True,
-                                      statistical_analysis_on_aggregates=True):
+    def regression_error_analysis(self,
+                                  X,
+                                  y,
+                                  pred_name,
+                                  dataset_name,
+                                  thresholds=None,
+                                  display_visuals=True,
+                                  save_file=True,
+                                  aggerate_target=False,
+                                  display_print=True,
+                                  suppress_runtime_errors=True,
+                                  aggregate_target_feature=True,
+                                  selected_features=None,
+                                  extra_tables=True,
+                                  statistical_analysis_on_aggregates=True):
         """
         Desc:
             Compares the actual target value to the predicted value and performs
@@ -836,291 +694,3 @@ class RegressionAnalysis(ModelAnalysis):
                                                                   dataframe_snapshot=False,
                                                                   extra_tables=extra_tables,
                                                                   statistical_analysis_on_aggregates=statistical_analysis_on_aggregates)
-
-
-    def regression_report(self,
-                              X,
-                              y,
-                              pred_name,
-                              dataset_name,
-                              thresholds=None,
-                              display_visuals=True,
-                              save_file=True):
-        """
-        Desc:
-            Creates a report of all target's metric evaluations
-            based on the model's prediction output from the classification report
-            from the sklearn.
-
-        Args:
-            X:
-                Feature matrix.
-
-             y:
-                Target data vector.
-
-            pred_name:
-                The name of the prediction function in questioned
-                stored in 'self.__pred_funcs_dict'
-
-            dataset_name:
-                The dataset's name; this will create a sub-directory in which your
-                generated graph will be inner-nested in.
-
-            thresholds:
-                If the model outputs a probability list/numpy array then we apply
-                thresholds to the ouput of the model.
-                For classification only; will not affect the direct output of
-                the probabilities.
-
-            display_visuals:
-                Visualize graph if needed.
-
-            save_file:
-                Boolean value to whether or not to save the file.
-        """
-        filename = f'Classification Report {dataset_name} on {self.__model_name}'
-        sub_dir = self.__create_sub_dir_with_thresholds(pred_name,
-                                                        dataset_name,
-                                                        thresholds)
-
-        # Create dataframe report
-        report_df = pd.DataFrame(classification_report(y,
-                                                       self.__get_model_prediction(
-                                                           pred_name,
-                                                           X,
-                                                           thresholds),
-                                                       output_dict=True))
-
-        # ---
-        if display_visuals:
-            if self.__notebook_mode:
-                display(report_df)
-            else:
-                print(report_df)
-
-        if save_file:
-            # Output dataframe as png
-            df_to_image(report_df,
-                        self.folder_path,
-                        sub_dir,
-                        filename,
-                        col_width=20,
-                        show_index=True,
-                        format_float_pos=4)
-
-            if not self.__called_from_perform:
-                self.generate_matrix_meta_data(X,
-                                               dataset_name + "/_Extras")
-
-
-    def __get_model_prediction(self,
-                               pred_name,
-                               X,
-                               thresholds=None):
-        """
-        Desc:
-            Finds the model's predicted labels.
-
-        Args:
-            X:
-                Feature matrix.
-
-            pred_name:
-                The name of the prediction function in questioned stored in 'self.__pred_funcs_dict'
-
-            thresholds:
-                If the model outputs a probability list/numpy array then we apply
-                thresholds to the ouput of the model.
-                For classification only; will not affect the direct output of
-                the probabilities.
-
-        Returns:
-            Returns back a predicted value based for a given matrix.
-            Handles prediction function 'types' Predictions and Probabilities.
-            Helps streamline the entire process of evaluating classes.
-        """
-
-        # Check if function name exists in the dictionary
-        if pred_name not in self.__pred_funcs_types:
-            raise KeyError("The function name has not be recorded!")
-
-        # Must be a prediction function
-        if self.__pred_funcs_types[pred_name] == "Predictions":
-            return self.__pred_funcs_dict[pred_name](X)
-
-        # Output must be continuous; Probabilities
-        elif self.__pred_funcs_types[pred_name] == "Probabilities":
-
-            # Validate probabilities
-            if thresholds:
-                if isinstance(thresholds, list) or \
-                        isinstance(thresholds, np.ndarray):
-                    if len(thresholds) != len(self.__target_values):
-                        raise UnsatisfiedRequirments("Length of thresholds must match the same length as the associated classes.")
-                else:
-                    raise UnsatisfiedRequirments("Threshold object is not a list or numpy array!")
-
-            # Get model probability output
-            model_output = self.__get_model_probas(pred_name,
-                                                   X)
-
-            # No thresholds found
-            if not thresholds:
-                return np.asarray([self.__target_values[np.argmax(proba)]
-                                   for proba in model_output])
-
-            # Apply thresholds to model's probability output
-            else:
-                model_output = model_output - thresholds
-
-                return np.asarray([self.__target_values[np.argmax(proba)]
-                                   for proba in model_output])
-        else:
-            raise ValueError(f"Unknown type '{self.__pred_funcs_types[pred_name]}' was found!")
-
-    def __get_model_probas(self,
-                           pred_name,
-                           X):
-        """
-        Desc:
-            Attempts to get the probabilities from the prediction function.
-
-        Args:
-            X:
-                Feature matrix.
-
-            pred_name:
-                The name of the prediction function in questioned stored in 'self.__pred_funcs_dict'
-
-        Raises:
-             If probabilities isn't possible with the given function that it will invoke an error.
-
-        Returns:
-            Returns back a series of values between 0-1 to represent it's confidence.
-        """
-
-        if self.__pred_funcs_types[pred_name] == "Probabilities":
-            model_output = self.__pred_funcs_dict[pred_name](X)
-
-            # ---
-            if isinstance(model_output, list):
-                model_output = np.asarray(model_output)
-
-            return model_output
-        else:
-            raise ProbasNotPossible
-
-    def __create_sub_dir_with_thresholds(self,
-                                         pred_name,
-                                         dataset_name,
-                                         thresholds):
-        """
-        Desc:
-            Iterates through directory structure looking at each text file
-            containing a string representation of the given threshold;
-            keeps comparing the passed value of 'thresholds' to the text file.
-
-        Args:
-            pred_name:
-                The name of the prediction function in questioned stored in 'self.__pred_funcs_dict'
-
-            dataset_name:
-                The dataset's name; this will create a sub-directory in which your
-                generated graph will be inner-nested in.
-
-            thresholds:
-                If the model outputs a probability list/numpy array then we apply
-                thresholds to the ouput of the model.
-                For classification only; will not affect the direct output of
-                the probabilities.
-
-        Returns:
-            Looking at the root of the starting directory and looking at each
-            '_Thresholds.txt' file to determine if the files can be outputed
-            to that directory. The content of the file must match the content
-            of the list/numpy array 'thresholds'.
-        """
-
-        sub_dir = f'{dataset_name}/{pred_name}'
-
-        # Only generate extra folder structure if function type is Probabilities
-        if self.__pred_funcs_types[pred_name] == "Probabilities":
-
-            # ------
-            if not thresholds:
-                sub_dir = f'{sub_dir}/No Thresholds'
-            else:
-                i = 0
-                sub_dir = f'{sub_dir}/Thresholds'
-                tmp_sub_dir = copy.deepcopy(sub_dir)
-                while True:
-                    threshold_dir = self.folder_path
-                    if i > 0:
-                        tmp_sub_dir = (sub_dir + f' {i}')
-                    threshold_dir += tmp_sub_dir
-
-                    # If file exists with the same thresholds; than use this directory
-                    if os.path.exists(threshold_dir):
-                        if self.__compare_thresholds_to_saved_thresholds(
-                                threshold_dir,
-                                thresholds):
-                            sub_dir = tmp_sub_dir
-                            break
-
-                    # Create new directory
-                    else:
-                        os.makedirs(threshold_dir)
-                        write_object_text_to_file(thresholds,
-                                                  threshold_dir,
-                                                  "_Thresholds")
-                        sub_dir = tmp_sub_dir
-                        break
-
-                    # Iterate for directory name change
-                    i += 1
-
-        return sub_dir
-
-    def __compare_thresholds_to_saved_thresholds(self,
-                                                 directory_path,
-                                                 thresholds):
-        """
-        Desc:
-            Compare the thresholds object to a threshold text file found in
-            the directory; returns true if the file exists and the object's
-            value matches up.
-
-        Args:
-            directory_path:
-                Path to the given folder where the "_Thresholds.txt"
-
-            thresholds:
-                If the model outputs a probability list/numpy array then we apply
-                thresholds to the ouput of the model.
-                For classification only; will not affect the direct output of
-                the probabilities.
-
-        Returns:
-            Compare the thresholds object to the text file; returns true if
-            the file exists and the object's value matches up.
-        """
-
-        file_directory = correct_directory_path(directory_path)
-
-        if os.path.exists(file_directory):
-
-            # Extract file contents and convert to a list object
-            file = open(file_directory + "_Thresholds.txt", "r")
-            line = file.read()
-            converted_list = line.split("=")[-1].strip().strip('][').split(
-                ', ')
-            converted_list = [float(val) for val in converted_list]
-            file.close()
-
-            if thresholds == converted_list:
-                return True
-            else:
-                return False
-        else:
-            return False

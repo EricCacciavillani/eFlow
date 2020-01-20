@@ -28,10 +28,10 @@ class DataPipelineSegment(FileOutput):
                  create_file=True):
         """
         Args:
-            object_type:
+            object_type: string
                 The child type of all object's that inherited DataPipelineSegment
 
-            segment_id:
+            segment_id: string
                  If init as a string instead of None; the object will attempt
                  to find the json file in the provided directory.
         Note:
@@ -297,10 +297,10 @@ class DataPipelineSegment(FileOutput):
             json file name then generate one for it the given directory.
 
         Args:
-            function_name:
+            function_name: string
                 Functions name
 
-            params_dict:
+            params_dict: dict
                 Parameter's name to their associated values.
 
         Note:

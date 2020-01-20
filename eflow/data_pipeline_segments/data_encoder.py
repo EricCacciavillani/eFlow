@@ -468,8 +468,9 @@ class DataEncoder(DataPipelineSegment):
             Note -
                 Modified from data frame types
         Args:
-            feature_values:
-                Collection object of strings.
+            feature_values: collection
+                Collection of strings to apply natural language process to
+                determine if the series data is boolean or not.
 
         Returns:
             Returns true or false if the values can be considered a bool and

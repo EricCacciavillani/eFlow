@@ -19,14 +19,14 @@ class DataCleaningWidget():
                  require_input=None,
                  data_cleaning_options=None):
         """
-        df:
+        df: pd.Dataframe
             Pandas dataframe object
 
-        project_name:
+        project_name: string
             Appending directory structure/name to the absolute path of the
             output directory.
 
-        overwrite_full_path:
+        overwrite_full_path: string
             Define the entire output path of the cleaner.
         """
 
@@ -67,11 +67,15 @@ class DataCleaningWidget():
                    nan_feature_names,
                    df_features):
         """
-        df:
-            A pandas dataframe object
+        Desc:
+            Spin up widget display for in jupyter UI.
 
-        df_features:
-            DataFrameTypes object; organizes feature types into groups.
+        Args:
+            df: pd.Dataframe
+                A pandas dataframe object
+
+            df_features: DataFrameTypes
+                DataFrameTypes object; organizes feature types into groups.
 
         Returns/Descr:
             Returns a UI widget to create a JSON file for cleaning.

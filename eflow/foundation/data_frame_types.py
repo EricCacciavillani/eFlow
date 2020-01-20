@@ -35,29 +35,26 @@ class DataFrameTypes:
                  notebook_mode=False):
         """
         Args:
-            df:
+            df: pd.DataFrame
                 Pandas dataframe object.
 
-            target_feature:
+            target_feature: string
                 If the project is using a supervised learning approach we can
                 specify the target column. (Note: Not required)
 
-            ignore_nulls:
+            ignore_nulls: bool
                 If set to true than a temporary dataframe is created with each
                 feature removes it's nan values to assert what data type the series
                 object would be without nans existing inside it.
 
-            fix_numeric_features:
+            fix_numeric_features: bool
                 Will attempt to convert all numeric features to the most proper
                 numerical types.
 
-            fix_string_features:
+            fix_string_features: bool
                 Will attempt to convert all string features to ALL proper types.
 
-            categorical_value_dict:
-                Any pre-defined category to string value relationships.
-
-            notebook_mode:
+            notebook_mode: bool
                 Boolean value to determine if any notebook functions can be used here.
         """
 
@@ -147,7 +144,7 @@ class DataFrameTypes:
             Gets all numerical features chosen by the object.
 
         Args:
-            exclude_target:
+            exclude_target: bool
                 If the target feature is an numerical (int/float/bool); then it will be ignored
                 when passing back the set.
 
@@ -175,7 +172,7 @@ class DataFrameTypes:
             Gets all non-numerical features chosen by the object.
 
         Args:
-            exclude_target:
+            exclude_target: bool
                 If the target feature is an numerical (int/float/bool); then it will be ignored
                 when passing back the set.
 
@@ -203,7 +200,7 @@ class DataFrameTypes:
             Gets all numerical features that are continuous (int/float).
 
         Args:
-            exclude_target:
+            exclude_target: bool
                 If the target feature is an numerical (int/float); then it will be ignored
                 when passing back the set.
 
@@ -231,7 +228,7 @@ class DataFrameTypes:
             Gets all numerical features that are not continuous (bool)
 
         Args:
-            exclude_target:
+            exclude_target: bool
                 If the target feature is a bool; then it will be ignored
                 when passing back the set.
 
@@ -259,7 +256,7 @@ class DataFrameTypes:
             Gets all numerical features chosen by the object.
 
         Args:
-            exclude_target:
+            exclude_target: bool
                 If the target feature is an numerical (int/float/time); then it will be ignored
                 when passing back the set.
 
@@ -287,7 +284,7 @@ class DataFrameTypes:
             Gets all numerical features chosen by the object.
 
         Args:
-            exclude_target:
+            exclude_target: bool
                 If the target feature is an numerical (int/float/time); then it will be ignored
                 when passing back the set.
 
@@ -315,7 +312,7 @@ class DataFrameTypes:
             All integer features chosen by df_features.
 
         Args:
-            exclude_target:
+            exclude_target: bool
                 If the target feature is an integer; then it will be ignored
                 when passing back the set.
 
@@ -344,7 +341,7 @@ class DataFrameTypes:
             All float features chosen by df_features.
 
         Args:
-            exclude_target:
+            exclude_target: bool
                 If the target feature is an float; then it will be ignored
                 when passing back the set.
 
@@ -373,7 +370,7 @@ class DataFrameTypes:
             All categorical features chosen by df_features.
 
         Args:
-            exclude_target:
+            exclude_target: bool
                 If the target feature is an categorical; then it will be ignored
                 when passing back the set.
 
@@ -402,7 +399,7 @@ class DataFrameTypes:
             All string features chosen by df_features.
 
         Args:
-            exclude_target:
+            exclude_target: bool
                 If the target feature is an string; then it will be ignored
                 when passing back the set.
 
@@ -432,7 +429,7 @@ class DataFrameTypes:
             All bool features chosen by df_features.
 
         Args:
-            exclude_target:
+            exclude_target: bool
                 If the target feature is an bool; then it will be ignored
                 when passing back the set.
 
@@ -461,7 +458,7 @@ class DataFrameTypes:
             All datetime features chosen by df_features.
 
         Args:
-            exclude_target:
+            exclude_target: bool
                 If the target feature is an datetime; then it will be ignored
                 when passing back the set.
 
@@ -510,7 +507,7 @@ class DataFrameTypes:
             Returns all features found in the dataset.
 
         Args:
-            exclude_target:
+            exclude_target: bool
                 If the target feature is an datetime; then it will be ignored
                 when passing back the set.
         Returns:
@@ -845,6 +842,7 @@ class DataFrameTypes:
         """
         Desc:
             Adds a new feature/feature(s) to the feature set bool
+
         Args:
             feature_name: str
                 Name of the new feature
@@ -861,6 +859,7 @@ class DataFrameTypes:
         """
         Desc:
             Adds a new feature/feature(s) to the feature set string
+
         Args:
             feature_name: str
                 Name of the new feature
@@ -876,6 +875,7 @@ class DataFrameTypes:
         """
         Desc:
             Adds a new feature/feature(s) to the feature set integer
+
         Args:
             feature_name: str
                 Name of the new feature
@@ -891,6 +891,7 @@ class DataFrameTypes:
         """
         Desc:
             Adds a new feature/feature(s) to the feature set float
+
         Args:
             feature_name: str
                 Name of the new feature
@@ -906,6 +907,7 @@ class DataFrameTypes:
         """
         Desc:
             Adds a new feature/feature(s) to the feature set categorical
+
         Args:
             feature_name: str
                 Name of the new feature
@@ -921,6 +923,7 @@ class DataFrameTypes:
         """
         Desc:
             Adds a new feature/feature(s) to the feature set null only features
+
         Args:
             feature_name: str
                 Name of the new feature
@@ -936,6 +939,7 @@ class DataFrameTypes:
         """
         Desc:
             Adds a new feature/feature(s) to the feature set datetime
+
         Args:
             feature_name: str
                 Name of the new feature
@@ -1549,7 +1553,7 @@ class DataFrameTypes:
             inside it.
 
         Args:
-            df:
+            df: pd.DataFrame
                 Pandas Dataframe object.
         """
         nan_features = [feature for feature, nan_found in
@@ -1597,10 +1601,10 @@ class DataFrameTypes:
             and the targeted feature.
 
         Args:
-            directory_path:
+            directory_path: string
                 Absolute directory path.
 
-            filename:
+            filename: string
                 File's given name
         """
         type_features = dict()
@@ -1771,10 +1775,10 @@ class DataFrameTypes:
             Create's encoder dict for strings and categories.
 
         Args:
-            df:
+            df: pd.DataFrame
                 Pandas dataframe.
 
-            categorical_value_dict:
+            categorical_value_dict: dict
                 Relationship between category and string label.
 
         Note:
@@ -1871,7 +1875,7 @@ class DataFrameTypes:
             the numeric values passed to it.
 
         Args:
-            feature_values:
+            feature_values: collection
                 Distinct values of the given feature.
 
         Returns:
@@ -1895,8 +1899,9 @@ class DataFrameTypes:
         Desc:
             Checks if a collection of strings can be considered a bool feature
             based on the amount of strings and the values of those strings.
+
         Args:
-            feature_values:
+            feature_values: collection
                 Collection object of strings.
 
         Returns:
