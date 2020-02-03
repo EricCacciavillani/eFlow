@@ -8,12 +8,14 @@ from eflow.data_analysis import FeatureAnalysis
 
 from eflow._hidden.constants import GRAPH_DEFAULTS
 
-from sklearn.metrics import accuracy_score
-from sklearn.metrics import f1_score
-from sklearn.metrics import matthews_corrcoef
-from sklearn.metrics import recall_score
-from sklearn.metrics import precision_score
-from sklearn.metrics import classification_report
+from sklearn.metrics import max_error
+from sklearn.metrics import explained_variance_score
+from sklearn.metrics import mean_absolute_error
+from sklearn.metrics import mean_squared_error
+from sklearn.metrics import mean_squared_log_error
+from sklearn.metrics import median_absolute_error
+from sklearn.metrics import r2_score
+
 import scikitplot as skplt
 import numpy as np
 import warnings
@@ -43,10 +45,10 @@ class RegressionAnalysis(ModelAnalysis):
                  model_name,
                  feature_order,
                  target_feature,
+                 pred_funcs_dict,
                  df_features,
                  project_sub_dir="Regression Analysis",
                  overwrite_full_path=None,
-                 target_classes=None,
                  save_model=True,
                  notebook_mode=False):
         """
@@ -84,12 +86,6 @@ class RegressionAnalysis(ModelAnalysis):
 
             overwrite_full_path:
                 Overwrites the path to the parent folder.
-
-            target_classes:
-                Specfied list/np.array of targeted classes the model predicts. If set to
-                none then it will attempt to pull from the sklearn's default attribute
-                '.classes_'.
-
             df_features:
                 DataFrameTypes object; organizes feature types into groups.
         """
@@ -111,9 +107,8 @@ class RegressionAnalysis(ModelAnalysis):
         self.__model = copy.deepcopy(model)
 
         self.__model_name = copy.deepcopy(model_name)
-        self.__target_values = copy.deepcopy(target_classes)
+        self.__pred_funcs_dict = copy.deepcopy(pred_funcs_dict)
         self.__df_features = copy.deepcopy(df_features)
-        self.__pred_funcs_types = dict()
         self.__notebook_mode = copy.deepcopy(notebook_mode)
 
         # Determines if the perform was called
@@ -130,14 +125,14 @@ class RegressionAnalysis(ModelAnalysis):
         # ---
         create_dir_structure(self.folder_path,
                              "_Extras")
-        # Save predicted classes
-        write_object_text_to_file(self.__target_values,
-                                  self.folder_path + "_Extras",
-                                  "_Classes")
 
         # Save features and or df_features object
         df_features.create_json_file_representation(self.folder_path + "_Extras",
                                                     "df_features.json")
+
+
+    def get_predictions_names(self):
+        return self.__pred_funcs_dict.keys()
 
     def perform_analysis(self,
                          X,
@@ -163,38 +158,24 @@ class RegressionAnalysis(ModelAnalysis):
                 The dataset's name; this will create a sub-directory in which your
                 generated graph will be inner-nested in.
 
-            thresholds_matrix:
-                List of list/matrix of thresholds.
-
-                If the model outputs a probability list/numpy array then we apply
-                thresholds to the ouput of the model.
-                For classification only; will not affect the direct output of
-                the probabilities.
-
-            classification_error_analysis: bool
+            regression_error_analysis: bool
                 Perform feature analysis on data that was incorrectly predicted.
 
-            classification_correct_analysis: bool
+            regression_correct_analysis: bool
                 Perform feature analysis on data that was correctly predicted.
-
-            figsize:
-                All plot's dimension's.
 
             ignore_metrics:
                 Specify the default metrics to not apply to the classification
                 data_analysis.
-                    * Precision
-                    * MCC
-                    * Recall
-                    * F1-Score
-                    * Accuracy
+                    *
+                    *
+                    *
+                    *
+                    *
 
             custom_metrics_dict:
                 Pass the name of metric(s) with the function definition(s) in a
                 dictionary.
-
-            average_scoring:
-                Determines the type of averaging performed on the data.
 
             display_visuals:
                 Controls visual display of error error data_analysis if it is able to run.
@@ -213,6 +194,38 @@ class RegressionAnalysis(ModelAnalysis):
                                            dataset_name + "/_Extras")
 
             print("\n\n" + "---" * 10 + f'{dataset_name}' + "---" * 10)
+
+
+
+            for pred_name in self.__pred_funcs_dict.keys():
+
+                self.regression_metrics(X,
+                                        y,
+                                        pred_name,
+                                        dataset_name,
+                                        display_visuals=display_visuals,
+                                        ignore_metrics=ignore_metrics,
+                                        custom_metrics_dict=custom_metrics_dict)
+
+                if regression_error_analysis:
+                    self.regression_error_analysis(X,
+                                                   y,
+                                                   pred_name,
+                                                   dataset_name,
+                                                   mse_score=.2,
+                                                   display_print=False,
+                                                   display_visuals=display_visuals)
+
+                if regression_correct_analysis:
+                    self.regression_correct_analysis(X,
+                                                     y,
+                                                     pred_name,
+                                                     dataset_name,
+                                                     mse_score=.2,
+                                                     display_print=False,
+                                                     display_visuals=display_visuals,)
+
+
         finally:
             self.__called_from_perform = False
 
@@ -221,15 +234,14 @@ class RegressionAnalysis(ModelAnalysis):
                            y,
                            pred_name,
                            dataset_name,
-                           thresholds=None,
                            display_visuals=True,
                            save_file=True,
                            title="",
                            custom_metrics_dict=dict(),
                            ignore_metrics=[],
-                           average_scoring=["micro",
-                                            "macro",
-                                            "weighted"]):
+                           multioutput=[None,
+                                        "uniform_average",
+                                        "variance_weighted"]):
         """
         Desc:
             Creates a dataframe based on the prediction metrics
@@ -288,21 +300,21 @@ class RegressionAnalysis(ModelAnalysis):
             Return a dataframe object of the metrics value.
         """
         filename = f'Metric Evaluation on {dataset_name} on {self.__model_name}'
-        sub_dir = self.__create_sub_dir_with_thresholds(pred_name,
-                                                        dataset_name,
-                                                        thresholds)
+        sub_dir = f'{dataset_name}/{pred_name}'
 
-        if not isinstance(average_scoring, list):
-            average_scoring = [average_scoring]
+        if not isinstance(multioutput, list):
+            multioutput = [multioutput]
+
 
         # Default metric name's and their function
         metric_functions = dict()
-        metric_functions["Precision"] = precision_score
-        metric_functions["MCC"] = matthews_corrcoef
-        metric_functions["Recall"] = recall_score
-        metric_functions["F1-Score"] = f1_score
-        metric_functions["Accuracy"] = accuracy_score
-
+        metric_functions["Explained Variance Score"] = explained_variance_score
+        metric_functions["Max Error"] = max_error
+        metric_functions["Mean Absolute Error"] = mean_absolute_error
+        metric_functions["Mean Squared Error"] = mean_squared_error
+        metric_functions["Mean Squared Log Error"] = mean_squared_log_error
+        metric_functions["Mean Squared Log Error"] = median_absolute_error
+        metric_functions["R2 Score"] = r2_score
         warnings.filterwarnings('ignore')
 
         # Ignore default metrics if needed
@@ -317,21 +329,30 @@ class RegressionAnalysis(ModelAnalysis):
         # Evaluate model on metrics
         evaluation_report = dict()
         for metric_name in metric_functions:
-            for average_score in average_scoring:
+            for multi in multioutput:
 
                 model_predictions = self.__get_model_prediction(pred_name,
-                                                                X,
-                                                                thresholds)
+                                                                X)
+
                 try:
-                    evaluation_report[f'{metric_name}({average_score})'] = \
-                        metric_functions[metric_name](y_true=y,
-                                                      y_pred=model_predictions,
-                                                      average=average_score)
+                    if multi:
+                        evaluation_report[f'{metric_name}({multi})'] = \
+                            metric_functions[metric_name](y_true=y,
+                                                          y_pred=model_predictions,
+                                                          multioutput=multi)
+                    else:
+                        if metric_name not in evaluation_report.keys():
+                            evaluation_report[f'{metric_name}'] = \
+                                metric_functions[metric_name](y_true=y,
+                                                              y_pred=model_predictions,
+                                                              multioutput=multi)
+
                 except TypeError:
-                    evaluation_report[metric_name] = metric_functions[
-                        metric_name](y,
-                                     model_predictions)
-                    break
+                    if metric_name not in evaluation_report.keys():
+                        evaluation_report[metric_name] = metric_functions[
+                            metric_name](y,
+                                         model_predictions)
+
 
         warnings.filterwarnings('default')
 
@@ -372,10 +393,9 @@ class RegressionAnalysis(ModelAnalysis):
                                     y,
                                     pred_name,
                                     dataset_name,
-                                    thresholds=None,
+                                    mse_score,
                                     display_visuals=True,
                                     save_file=True,
-                                    aggerate_target=False,
                                     display_print=True,
                                     suppress_runtime_errors=True,
                                     aggregate_target_feature=True,
@@ -404,12 +424,6 @@ class RegressionAnalysis(ModelAnalysis):
 
             feature_order: collection object
                 Features names in proper order to re-create the pandas dataframe.
-
-            thresholds:
-                If the model outputs a probability list/numpy array then we apply
-                thresholds to the ouput of the model.
-                For classification only; will not affect the direct output of
-                the probabilities.
 
             display_visuals: bool
                 Boolean value to whether or not to display visualizations.
@@ -455,14 +469,9 @@ class RegressionAnalysis(ModelAnalysis):
                 will run; which aggregates the data of the target feature either
                 by discrete values or by binning/labeling continuous data.
         """
-
-        sub_dir = self.__create_sub_dir_with_thresholds(pred_name,
-                                                        dataset_name,
-                                                        thresholds)
-
         model_predictions = self.__get_model_prediction(pred_name,
-                                                        X,
-                                                        thresholds=thresholds)
+                                                        X)
+        sub_dir = f'{dataset_name}/{pred_name}'
 
         if sum(model_predictions != y) == len(y):
             print("Your model predicted everything correctly for this dataset! No correct analysis needed!")
@@ -472,19 +481,25 @@ class RegressionAnalysis(ModelAnalysis):
                   "Generating graphs for when the model predicted correctly" +
                   "*" * 10 + "\n")
 
+            all_mse_scores = []
+            for i, pred in enumerate(model_predictions):
+                all_mse_scores.append(mean_squared_error([pred], [y[i]]))
+
             # Generate error dataframe
-            correct_df = pd.DataFrame.from_records(X[model_predictions == y])
+            bool_list = np.array(all_mse_scores) < mse_score
+
+            correct_df = pd.DataFrame.from_records(X[bool_list])
             correct_df.columns = self.__feature_order
-            correct_df[self.__target_feature] = y[model_predictions == y]
+            correct_df[self.__target_feature] = y[bool_list]
 
             # Directory path
             create_dir_structure(self.folder_path,
-                                 sub_dir + "/Correctly Predicted Data/All Correct Data")
-            output_path = f"{self.folder_path}/{sub_dir}/Correctly Predicted Data"
+                                 sub_dir + f"/MSE score less than {mse_score}")
+            output_path = f"{self.folder_path}/{sub_dir}/MSE score less than {mse_score}"
 
             # Create feature analysis
             feature_analysis = FeatureAnalysis(self.__df_features,
-                                               overwrite_full_path=output_path + "/All Correct Data")
+                                               overwrite_full_path=output_path)
             feature_analysis.perform_analysis(correct_df,
                                               dataset_name=dataset_name,
                                               target_features=[self.__target_feature],
@@ -498,45 +513,14 @@ class RegressionAnalysis(ModelAnalysis):
                                               extra_tables=extra_tables,
                                               statistical_analysis_on_aggregates=statistical_analysis_on_aggregates)
 
-            # Aggregate target by predicted and actual
-            if aggerate_target:
-                targets = set(y)
-                for pred_target in targets:
-                    if pred_target != pred_target:
-                        create_dir_structure(output_path,
-                                             f"/Actual and Predicted:{pred_target}")
-
-                        # Create predicted vs actual dataframe
-                        tmp_df = copy.deepcopy(correct_df[correct_df[
-                                                              self.__target_feature] == pred_target])
-
-                        if tmp_df.shape[0]:
-                            # Create feature analysis directory structure with given graphics
-                            feature_analysis = FeatureAnalysis(
-                                self.__df_features,
-                                overwrite_full_path=f"/Actual and Predicted:{pred_target}")
-                            feature_analysis.perform_analysis(tmp_df,
-                                                              dataset_name=dataset_name,
-                                                              target_features=[
-                                                                  self.__target_feature],
-                                                              save_file=save_file,
-                                                              selected_features=selected_features,
-                                                              suppress_runtime_errors=suppress_runtime_errors,
-                                                              display_print=display_print,
-                                                              display_visuals=display_visuals,
-                                                              dataframe_snapshot=False,
-                                                              extra_tables=extra_tables,
-                                                              statistical_analysis_on_aggregates=statistical_analysis_on_aggregates)
-
     def regression_error_analysis(self,
                                   X,
                                   y,
                                   pred_name,
                                   dataset_name,
-                                  thresholds=None,
+                                  mse_score,
                                   display_visuals=True,
                                   save_file=True,
-                                  aggerate_target=False,
                                   display_print=True,
                                   suppress_runtime_errors=True,
                                   aggregate_target_feature=True,
@@ -617,13 +601,13 @@ class RegressionAnalysis(ModelAnalysis):
                 by discrete values or by binning/labeling continuous data.
         """
 
-        sub_dir = self.__create_sub_dir_with_thresholds(pred_name,
-                                                        dataset_name,
-                                                        thresholds)
+        # sub_dir = self.__create_sub_dir_with_thresholds(pred_name,
+        #                                                 dataset_name,
+        #                                                 thresholds)
 
         model_predictions = self.__get_model_prediction(pred_name,
-                                                        X,
-                                                        thresholds=thresholds)
+                                                        X)
+        sub_dir = f'{dataset_name}/{pred_name}'
 
         if sum(model_predictions == y) == len(y):
             print("Your model predicted everything correctly for this dataset! No error analysis needed!")
@@ -632,19 +616,25 @@ class RegressionAnalysis(ModelAnalysis):
                   "Generating graphs for when the model predicted incorrectly" +
                   "*" * 10 + "\n")
 
+            all_mse_scores = []
+            for i,pred in enumerate(model_predictions):
+                all_mse_scores.append(mean_squared_error([pred],[y[i]]))
+
             # Generate error dataframe
-            error_df = pd.DataFrame.from_records(X[model_predictions != y])
+            bool_list = np.array(all_mse_scores) > mse_score
+
+            error_df = pd.DataFrame.from_records(X[bool_list])
             error_df.columns = self.__feature_order
-            error_df[self.__target_feature] = y[model_predictions != y]
+            error_df[self.__target_feature] = y[bool_list]
 
             # Directory path
             create_dir_structure(self.folder_path,
-                                 sub_dir + "/Incorrectly Predicted Data/All Incorrect Data")
-            output_path = f"{self.folder_path}/{sub_dir}/Incorrectly Predicted Data"
+                                 sub_dir + f"/MSE score greater than {mse_score}")
+            output_path = f"{self.folder_path}/{sub_dir}/MSE score greater than {mse_score}"
 
             # Create feature analysis
             feature_analysis = FeatureAnalysis(self.__df_features,
-                                               overwrite_full_path=output_path + "/All Incorrect Data")
+                                               overwrite_full_path=output_path)
             feature_analysis.perform_analysis(error_df,
                                               dataset_name=dataset_name,
                                               target_features=[self.__target_feature],
@@ -658,39 +648,11 @@ class RegressionAnalysis(ModelAnalysis):
                                               extra_tables=extra_tables,
                                               statistical_analysis_on_aggregates=statistical_analysis_on_aggregates)
 
-            # Aggregate target by predicted and actual
-            if aggerate_target:
-                targets = set(y)
-                prediction_feature = self.__target_feature + "_MODEL_PREDICTIONS_"
-                error_df[prediction_feature] = model_predictions[model_predictions != y]
-                for actual_target in targets:
-                    for pred_target in targets:
-                        if pred_target != actual_target:
-                            create_dir_structure(output_path,
-                                                 f"/Predicted:{pred_target} Actual: {actual_target}")
+    def __get_model_prediction(self,
+                               pred_name,
+                               X):
 
-                            # Create predicted vs actual dataframe
-                            tmp_df = copy.deepcopy(error_df[error_df[
-                                                                self.__target_feature] == actual_target][
-                                                       error_df[
-                                                           prediction_feature] == pred_target])
-
-                            tmp_df.drop(columns=[prediction_feature],
-                                        inplace=True)
-                            if tmp_df.shape[0]:
-                                # Create feature analysis directory structure with given graphics
-                                feature_analysis = FeatureAnalysis(
-                                    self.__df_features,
-                                    overwrite_full_path=f"{output_path}/Predicted:{pred_target} Actual: {actual_target}")
-                                feature_analysis.perform_analysis(tmp_df,
-                                                                  dataset_name=dataset_name,
-                                                                  target_features=[
-                                                                      self.__target_feature],
-                                                                  save_file=save_file,
-                                                                  selected_features=selected_features,
-                                                                  suppress_runtime_errors=suppress_runtime_errors,
-                                                                  display_print=display_print,
-                                                                  display_visuals=display_visuals,
-                                                                  dataframe_snapshot=False,
-                                                                  extra_tables=extra_tables,
-                                                                  statistical_analysis_on_aggregates=statistical_analysis_on_aggregates)
+        if pred_name in self.__pred_funcs_dict.keys():
+            return self.__pred_funcs_dict[pred_name](X)
+        else:
+            raise KeyError(f"No prediction name found of {pred_name}.")

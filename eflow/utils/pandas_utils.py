@@ -41,7 +41,7 @@ def df_to_image(df,
     directory_path = correct_directory_path(directory_path)
     df = copy.deepcopy(df)
 
-    if format_float_pos and format_float_pos > 1:
+    if format_float_pos and format_float_pos >= 1:
         float_format = '{:,.' + str(2) + 'f}'
         for col_feature in set(df.select_dtypes(include=["float"]).columns):
             df[col_feature] = df[col_feature].map(float_format.format)
@@ -218,6 +218,8 @@ def generate_meta_data(df,
                     "Dataframe Types Table",
                     show_index=True)
 
+    plt.close("all")
+
 
     # Missing value table
     mis_val_table = missing_values_table(df)
@@ -227,6 +229,8 @@ def generate_meta_data(df,
                     "Meta Data",
                     "Missing Data Table",
                     show_index=True)
+
+    plt.close("all")
 
 def generate_entropy_table(df,
                            df_features,
@@ -275,6 +279,14 @@ def generate_entropy_table(df,
     pickle_object_to_file(entropy_table,
                           output_folder_path + sub_dir,
                           file_name)
+
+    df_to_image(entropy_table,
+                output_folder_path,
+                sub_dir,
+                "Entropy Table",
+                show_index=True,
+                format_float_pos=5)
+
 
 def auto_binning(df,
                  df_features,

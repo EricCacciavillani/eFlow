@@ -114,15 +114,18 @@ class DataAnalysis(FileOutput):
                                                   directory_path=self.folder_path,
                                                   sub_dir=f"{sub_dir}/_Extras")
 
-            if meta_data:
-                generate_meta_data(df,
-                                   self.folder_path,
-                                   f"{sub_dir}" + "/_Extras")
-
             # Create the png to save
             create_plt_png(self.folder_path,
                            sub_dir,
                            convert_to_filename(filename))
+
+            plt.close("all")
+
+
+            if meta_data:
+                generate_meta_data(df,
+                                   self.folder_path,
+                                   f"{sub_dir}" + "/_Extras")
 
 
         # Always raise snapshot error

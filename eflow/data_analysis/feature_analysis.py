@@ -838,7 +838,7 @@ class FeatureAnalysis(DataAnalysis):
                           df,
                           feature_name,
                           dataset_name,
-                          other_feature_name=None,
+                          other_feature_name,
                           display_visuals=True,
                           display_print=True,
                           filename=None,
@@ -990,7 +990,6 @@ class FeatureAnalysis(DataAnalysis):
 
             # Set plot structure
             fig = plt.figure(figsize=figsize)
-            fig.set_tight_layout(True)
 
             plt.title("Violin Plot: " + feature_title)
 
@@ -1172,7 +1171,6 @@ class FeatureAnalysis(DataAnalysis):
             # Set graph info
             plt.figure(figsize=figsize)
             sns.set(style="whitegrid")
-            plt.title("Category Count Plot: " + feature_name)
 
             value_counts = df[feature_name].dropna().value_counts(sort=True)
 
@@ -1221,6 +1219,8 @@ class FeatureAnalysis(DataAnalysis):
                         height + 3,
                         '{:1}'.format(height),
                         ha="center")
+
+            plt.title("Category Count Plot: " + feature_name)
 
             # Pass a default name if needed
             if not filename:
@@ -1396,14 +1396,13 @@ class FeatureAnalysis(DataAnalysis):
             )
 
             # Set foundation graph info
-            fig = plt.gcf()
+            plt.gcf()
             plt.title("Pie Chart: " + feature_name)
             plt.legend(fancybox=True,
                        facecolor='w')
 
             # Set foundation
             plt.axis('equal')
-            plt.tight_layout()
 
             # Pass a default name if needed
             if not filename:
@@ -1648,7 +1647,6 @@ class FeatureAnalysis(DataAnalysis):
                         transform=ax.transAxes)
 
             g.map(label, other_feature_name)
-            g.fig.set_tight_layout(True)
 
             # Set the subplots to overlap
             g.fig.subplots_adjust(hspace=-.25)
@@ -1659,8 +1657,7 @@ class FeatureAnalysis(DataAnalysis):
             g.despine(bottom=True, left=True)
             g.fig.set_size_inches(10, 10, forward=True)
             g.fig.suptitle(f'{feature_name} by {other_feature_name}')
-            fig = plt.figure(figsize=figsize)
-            fig.set_tight_layout(True)
+            plt.figure(figsize=figsize)
 
             warnings.filterwarnings("default")
 
@@ -2356,6 +2353,7 @@ class FeatureAnalysis(DataAnalysis):
             if not kind:
                 kind = "scatter"
 
+            warnings.filterwarnings("ignore")
             if kind == "scatter and kde":
                 g = sns.jointplot(feature_name,
                                   other_feature_name,
@@ -2373,6 +2371,8 @@ class FeatureAnalysis(DataAnalysis):
                                   color=color,
                                   ratio=ratio,
                                   height=height)
+
+            warnings.filterwarnings("default")
 
             plt.subplots_adjust(top=0.93)
             g.fig.suptitle("Jointplot: " + f"{feature_name} by {other_feature_name}")

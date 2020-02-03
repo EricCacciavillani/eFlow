@@ -48,8 +48,9 @@ def create_plt_png(directory_path,
     if filename[-4:] != ".png":
         filename += ".png"
 
-    fig = plt.figure(1)
-    fig.savefig(abs_path + "/" + filename, bbox_inches='tight')
+    # plt.show()
+
+    plt.savefig(abs_path + "/" + filename, bbox_inches='tight')
 
     if sharpness:
         full_path = directory_path + sub_dir + "/" + filename

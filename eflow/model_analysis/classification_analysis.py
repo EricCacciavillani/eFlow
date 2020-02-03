@@ -180,6 +180,8 @@ class ClassificationAnalysis(ModelAnalysis):
         else:
             raise RequiresPredictionMethods("This object requires you to pass the prediction methods in a dict with the name of the method as the key.")
 
+    def get_predictions_names(self):
+        return self.__pred_funcs_dict.keys()
 
     def perform_analysis(self,
                          X,
@@ -992,10 +994,12 @@ class ClassificationAnalysis(ModelAnalysis):
                                                       y_pred=model_predictions,
                                                       average=average_score)
                 except TypeError:
-                    evaluation_report[metric_name] = metric_functions[
-                        metric_name](y,
-                                     model_predictions)
-                    break
+
+                    if metric_name not in evaluation_report[metric_name].keys():
+                        evaluation_report[metric_name] = metric_functions[
+                            metric_name](y,
+                                         model_predictions)
+                    continue
 
         warnings.filterwarnings('default')
 

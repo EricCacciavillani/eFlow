@@ -301,7 +301,7 @@ class NullAnalysis(DataAnalysis):
                 display_print=display_print,
                 save_file=save_file,
                 dataframe_snapshot=False,
-                suppress_runtime_errors=suppress_runtime_errors,
+                suppress_runtime_errors=False,
                 aggregate_target_feature=aggregate_target_feature,
                 statistical_analysis_on_aggregates=statistical_analysis_on_aggregates,
                 selected_features=selected_features,
