@@ -259,7 +259,7 @@ class FeatureAnalysis(DataAnalysis):
 
                                    if display_print:
                                        if repr_target_feature_val:
-                                            print(f"Target feature {target_feature} set to {target_feature_val}; also known as {repr_target_feature_val}.")
+                                           print(f"Target feature {target_feature} set to {target_feature_val}; also known as {repr_target_feature_val}.")
                                        else:
                                            print(f"Target feature {target_feature} set to {target_feature_val}.")
                                    try:

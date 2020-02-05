@@ -142,7 +142,8 @@ class RegressionAnalysis(ModelAnalysis):
                          regression_correct_analysis=False,
                          ignore_metrics=[],
                          custom_metrics_dict=dict(),
-                         display_visuals=True):
+                         display_visuals=True,
+                         mse_score=None):
         """
         Desc:
             Runs all available analysis functions on the models predicted data.
@@ -212,7 +213,7 @@ class RegressionAnalysis(ModelAnalysis):
                                                    y,
                                                    pred_name,
                                                    dataset_name,
-                                                   mse_score=.2,
+                                                   mse_score=mse_score,
                                                    display_print=False,
                                                    display_visuals=display_visuals)
 
@@ -221,7 +222,7 @@ class RegressionAnalysis(ModelAnalysis):
                                                      y,
                                                      pred_name,
                                                      dataset_name,
-                                                     mse_score=.2,
+                                                     mse_score=mse_score,
                                                      display_print=False,
                                                      display_visuals=display_visuals,)
 

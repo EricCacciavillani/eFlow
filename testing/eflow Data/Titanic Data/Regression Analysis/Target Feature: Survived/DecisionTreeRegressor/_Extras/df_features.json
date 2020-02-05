@@ -1,18 +1,18 @@
 {
   "bool": [
+    "Sex_female",
+    "Sex_male",
     "Survived",
+    "Pclass_1",
+    "Pclass_2",
     "Embarked_Queenstown",
     "Pclass_3",
-    "Pclass_2",
-    "Pclass_1",
-    "Sex_female",
-    "Embarked_Cherbourg",
     "Embarked_Southampton",
-    "Sex_male"
+    "Embarked_Cherbourg"
   ],
   "integer": [
-    "SibSp",
-    "Parch"
+    "Parch",
+    "SibSp"
   ],
   "float": [
     "Age",

@@ -707,8 +707,8 @@ class NullAnalysis(DataAnalysis):
                               vmax=vmax,
                               cbar=cbar)
 
-            bottom, top = ax.get_ylim()
-            ax.set_ylim(bottom + 0.5, top - 0.5)
+            # bottom, top = ax.get_ylim()
+            # ax.set_ylim(bottom + 0.5, top - 0.5)
 
             # Sets filename with a default name
             if not filename:

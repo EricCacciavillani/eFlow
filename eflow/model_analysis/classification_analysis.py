@@ -266,7 +266,12 @@ class ClassificationAnalysis(ModelAnalysis):
                     thresholds_matrix[0], list):
                 thresholds_matrix = list(thresholds_matrix)
 
-            if None not in thresholds_matrix:
+            none_required = False
+            for vector in thresholds_matrix:
+                if not vector or len(vector) == 0:
+                    none_required = True
+
+            if not none_required:
                 thresholds_matrix.append(None)
 
             self.__called_from_perform = True
@@ -285,6 +290,8 @@ class ClassificationAnalysis(ModelAnalysis):
                 first_iteration = False
 
                 for thresholds in thresholds_matrix:
+
+                    print(thresholds_matrix)
 
                     print(f"Now running classification on {pred_name}", end='')
                     if pred_type == "Predictions":
@@ -865,10 +872,6 @@ class ClassificationAnalysis(ModelAnalysis):
              cmap=cmap,
              title_fontsize=title_fontsize,
              text_fontsize=text_fontsize)
-
-        bottom, top = ax.get_ylim()
-        ax.set_ylim(bottom + 0.5, top - 0.5)
-
         warnings.filterwarnings('default')
 
         if save_file:
@@ -982,7 +985,7 @@ class ClassificationAnalysis(ModelAnalysis):
 
         # Evaluate model on metrics
         evaluation_report = dict()
-        for metric_name in metric_functions:
+        for metric_name in metric_functions.keys():
             for average_score in average_scoring:
 
                 model_predictions = self.__get_model_prediction(pred_name,
@@ -995,7 +998,7 @@ class ClassificationAnalysis(ModelAnalysis):
                                                       average=average_score)
                 except TypeError:
 
-                    if metric_name not in evaluation_report[metric_name].keys():
+                    if metric_name not in evaluation_report.keys():
                         evaluation_report[metric_name] = metric_functions[
                             metric_name](y,
                                          model_predictions)
