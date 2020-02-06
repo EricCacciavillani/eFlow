@@ -119,8 +119,6 @@ class DataAnalysis(FileOutput):
                            sub_dir,
                            convert_to_filename(filename))
 
-            plt.close("all")
-
 
             if meta_data:
                 generate_meta_data(df,
@@ -153,6 +151,7 @@ class DataAnalysis(FileOutput):
                            compare_feature_names=True,
                            compare_random_values=True,
                            show_index=False,
+                           format_float_pos=2,
                            meta_data=True):
         """
         Desc:
@@ -230,7 +229,7 @@ class DataAnalysis(FileOutput):
                         sub_dir,
                         convert_to_filename(filename),
                         show_index=show_index,
-                        format_float_pos=2)
+                        format_float_pos=format_float_pos)
 
         # Always raise snapshot error
         except SnapshotMismatchError as e:

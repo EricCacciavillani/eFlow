@@ -1,7 +1,10 @@
+
+from eflow._hidden.parent_objects import AutoModeler
+
 # Getting Sklearn Models
 from sklearn.decomposition import PCA
 from sklearn.cluster import KMeans
-from scipy.cluster.hierarchy import linkage, dendrogram
+from scipy.cluster.hierarchy import linkage, dendrogram,set_link_color_palette
 from sklearn.preprocessing import StandardScaler
 from sklearn.cluster import AgglomerativeClustering
 from sklearn.neighbors import kneighbors_graph
@@ -13,13 +16,12 @@ import seaborn as sns
 from IPython.display import display, HTML
 
 # Misc
+from collections import Counter
 from scipy.stats import zscore
 from kneed import DataGenerator, KneeLocator
 import pandas as pd
 import six
-import sys
 import numpy as np
-import os
 import copy
 
 __author__ = "Eric Cacciavillani"
@@ -30,41 +32,40 @@ __maintainer__ = "EricCacciavillani"
 __email__ = "eric.cacciavillani@gmail.com"
 
 
-class ClusterMaster:
+class AutoCluster(AutoModeler):
 
     def __init__(self,
                  df,
-                 apply_pca=True,
-                 pca_perc=.8,
-                 project_name="Default",
-                 overwrite_figure_path=None
-                 ):
+                 df_features,
+                 project_sub_dir="",
+                 project_name="Auto Clustering",
+                 overwrite_full_path=None,
+                 notebook_mode=False):
 
-        if overwrite_figure_path:
-            output_fig_sub_dir = overwrite_figure_path
-        else:
-            if pca_perc > 1:
-                pca_perc = 1
-            output_fig_sub_dir = "/Figures/" + project_name +\
-                                 "/Clustering_PCA={0}".format(pca_perc)
-
-        # Project directory structure
-        self.__PROJECT = enum(
-            PATH_TO_OUTPUT_FOLDER=''.join(
-                os.getcwd().partition('/eflow')[0:1]) + output_fig_sub_dir)
+        AutoModeler.__init__(self,
+                             f'{project_sub_dir}/{project_name}',
+                             overwrite_full_path)
 
         # Define model
         self.__all_cluster_models = dict()
 
+        self.__df_features = copy.deepcopy(df_features)
+
+        self.__notebook_mode = copy.deepcopy(notebook_mode)
+
+        pca_perc = .8
+
         # --- Apply pca ---
-        if apply_pca:
+        if pca_perc:
 
             # Create scaler object
             scaler = StandardScaler()
             scaled = scaler.fit_transform(df)
 
             print("\nInspecting scaled results!")
-            self.__inspect_feature_matrix(matrix=scaled,
+            self.__inspect_feature_matrix(sub_dir="PCA",
+                                          filename="Applied scaler results",
+                                          matrix=scaled,
                                           feature_names=df.columns)
 
             pca, scaled = self.__visualize_pca_variance(scaled)
@@ -74,8 +75,10 @@ class ClusterMaster:
                                  str(i) for i in range(1,
                                                        len(df.columns) + 1)]
 
-            print("\nInspecting applied pca results!")
-            self.__inspect_feature_matrix(matrix=scaled,
+            print("\nInspecting applied scaler and pca results!")
+            self.__inspect_feature_matrix(sub_dir="PCA",
+                                          filename="Applied scaler and PCA results",
+                                          matrix=scaled,
                                           feature_names=pca_feature_names)
 
             if pca_perc < 1.0:
@@ -99,8 +102,10 @@ class ClusterMaster:
 
             scaled = scaler.fit_transform(scaled)
 
-            print("\nInspecting re-applied scaled results!")
-            self.__inspect_feature_matrix(matrix=scaled,
+            print("\nInspecting data after final scaler applied!")
+            self.__inspect_feature_matrix(sub_dir="PCA",
+                                          filename="Applied final sclaer to process.",
+                                          matrix=scaled,
                                           feature_names=pca_feature_names)
 
             self.__scaled = scaled
@@ -109,32 +114,18 @@ class ClusterMaster:
         else:
             self.__scaled = df.values
 
-    def __display_rank_graph(self, feature_names, metric,
-                             output_path, model_name,
-                             title="", y_title="", x_title="",):
-        """
-            Darker colors have higher rankings (values)
-        """
-        plt.figure(figsize=(7, 7))
 
-        # Init color ranking fo plot
-        # Ref: http://tinyurl.com/ydgjtmty
-        pal = sns.color_palette("GnBu_d", len(metric))
-        rank = np.array(metric).argsort().argsort()
-        ax = sns.barplot(y=feature_names, x=metric,
-                         palette=np.array(pal[::-1])[rank])
-        plt.xticks(rotation=0, fontsize=15)
-        plt.yticks(fontsize=15)
-        plt.xlabel(x_title, fontsize=20, labelpad=20)
-        plt.ylabel(y_title, fontsize=20, labelpad=20)
-        plt.title(title, fontsize=15)
-        self.__image_processing_utils(output_path,
-                              model_name + "_Cluster_Count")
-        plt.show()
-        plt.close()
+    # --- Getters/Setters
+    def get_scaled_data(self):
+        return copy.deepcopy(self.__scaled)
+
+    def get_all_cluster_models(self):
+        return copy.deepcopy(self.__all_cluster_models)
 
     def visualize_hierarchical_clustering(self,
-                                          linkage_methods=None):
+                                          linkage_methods=None,
+                                          display_print=True,
+                                          display_visuals=True):
         """
             Displays hierarchical cluster graphs with provided methods.
         """
@@ -150,22 +141,111 @@ class ClusterMaster:
 
         for method in linkage_methods:
 
+            if display_print:
+                print(f"Creating graphic for Hierarchical Clustering Method: {method}...")
+
             plt.figure(figsize=(12, 7))
             # Calculate the linkage: mergings
             mergings = linkage(self.__scaled, method=method)
 
+
+             # {"Yellow":"#d3d255",
+             # "Magenta":"#c82bc9",
+             # "Black":"#030303",
+             # "Red":"#ff403e",
+             # "Green":"#3f9f3f",
+             # "Cyan":"#0ec1c2",
+             # "Brown": "#775549",
+             # "Silver": "#C0C0C0",
+             # "Blue":"#24326f",
+             # "Orange":"#cc7722"}
+
+            set_link_color_palette(None)
+
             # Plot the dendrogram, using varieties as labels
-            dendrogram(mergings,
-                       labels=list(range(0, len(self.__scaled,))),
-                       leaf_rotation=90,
-                       leaf_font_size=3)
+            color_list = dendrogram(mergings,
+                                    labels=list(range(0, len(self.__scaled,))),
+                                    leaf_rotation=90,
+                                    leaf_font_size=3)["color_list"]
 
-            plt.title("hierarchical Clustering Method : " + method)
-            self.__image_processing_utils("Hierarchical_Clustering",
-                                  "Hierarchical_Clustering_Method_" + method)
+            method = method.capitalize()
 
-            plt.show()
-            plt.close()
+            plt.title(f"Hierarchical Clustering Method : \'{method}\'")
+            self.save_plot("Hierarchical Clustering",
+                           f"Hierarchical Clustering Method {method} without legend")
+
+            color_cluster_count = dict()
+            last_color = None
+            known_colors = set()
+            color_cluster_order = list()
+            seq_len = 0
+            i = 0
+            for color in copy.deepcopy(color_list):
+
+                color = self.__get_color_name(color)
+                if color in known_colors:
+                    color_list[i] = f"{color} cluster {color_cluster_count[color]}"
+                else:
+                    color_list[i] = f"{color} cluster 0"
+
+                if color_list[i] not in color_cluster_order:
+                    color_cluster_order.append(color_list[i])
+
+                if last_color:
+                    # Sequence of color has yet to be broken
+                    if last_color == color:
+
+                        if seq_len <= 2:
+                            seq_len += 1
+
+                    # Sequence break
+                    else:
+                        if seq_len > 1:
+
+                            if last_color not in known_colors:
+                                known_colors.add(last_color)
+
+                            if last_color not in color_cluster_count.keys():
+                                color_cluster_count[last_color] = 1
+                            else:
+                                color_cluster_count[last_color] += 1
+                        else:
+                            color_list.pop(i-1)
+                            i -= 1
+
+                        seq_len = 0
+
+                last_color = color
+                i += 1
+
+            counter_object = Counter(color_list)
+            cluster_color_count = dict()
+            import matplotlib.patches as mpatches
+            handles = []
+            for color_cluster_name in color_cluster_order:
+                if color_cluster_name in counter_object.keys():
+                    cluster_color_count[color_cluster_name] = counter_object[color_cluster_name]
+                    try:
+                        handles.append(mpatches.Patch(
+                            color=color_cluster_name.split(" cluster ")[0],
+                            label=color_cluster_name + f": {counter_object[color_cluster_name]} samples"))
+                    except:
+                        handles.append(mpatches.Patch(
+                            color="black",
+                            label=color_cluster_name + f": {counter_object[color_cluster_name]} samples"))
+
+
+            plt.legend(handles=handles,
+                       loc=(1.01, .72))
+
+            if display_visuals:
+                plt.show()
+
+            plt.close('all')
+
+            self.save_plot("Hierarchical Clustering",
+                           f"Hierarchical Clustering Method {method} with legend")
+
 
     def __visualize_clusters(self, model, output_path, model_name=""):
         """
@@ -188,8 +268,6 @@ class ClusterMaster:
                                   model_name=model_name,
                                   y_title="Clusters",
                                   x_title="Found per cluster")
-
-        self.__vertical_spacing(2)
         pl.figure(figsize=(8, 7))
 
         # Display clustered graph
@@ -210,9 +288,6 @@ class ClusterMaster:
         plt.show()
         plt.close()
         pl.close()
-
-        # Spacing for next model
-        self.__vertical_spacing(8)
 
     def create_kmeans_models(self,
                              n_cluster_list,
@@ -658,6 +733,8 @@ class ClusterMaster:
         return clustered_dataframes, shrunken_full_df
 
     def __inspect_feature_matrix(self,
+                                 sub_dir,
+                                 filename,
                                  matrix,
                                  feature_names):
         """
@@ -674,9 +751,16 @@ class ClusterMaster:
                                         orient='index',
                                         columns=['Mean', 'Standard Dev'])
 
-        display(tmp_df)
+        if self.__notebook_mode:
+            display(tmp_df)
+        else:
+            print(tmp_df)
 
-        return tmp_df
+        self.save_table_as_plot(tmp_df,
+                                sub_dir=sub_dir,
+                                filename=filename,
+                                show_index=True,
+                                format_float_pos=5)
 
     # Not created by me!
     # Created by my teacher: Narine Hall
@@ -693,78 +777,87 @@ class ClusterMaster:
         plt.bar(range(1, len(pca.explained_variance_ratio_) + 1),
                 pca.explained_variance_ratio_)
         plt.xticks()
-        plt.ylabel('variance ratio')
+        plt.ylabel('Variance ratio')
         plt.xlabel('PCA feature')
         plt.tight_layout()
-        self.__image_processing_utils("PCA", "PCA_Feature_Variance_Ratio")
-        plt.show()
-        plt.close()
+
+        self.save_plot("PCA",
+                       "PCA Feature Variance Ratio")
+
+        if self.__notebook_mode:
+            plt.show()
+            plt.close("all")
 
         # ----
         plt.bar(range(1, len(pca.explained_variance_ratio_) + 1),
                 pca.explained_variance_ratio_.cumsum())
         plt.xticks()
-        plt.ylabel('cumulative sum of variances')
+        plt.ylabel('Cumulative sum of variances')
         plt.xlabel('PCA feature')
         plt.tight_layout()
-        self.__image_processing_utils("PCA", "PCA_Cumulative_Sum_of_Variances")
-        plt.show()
-        plt.close()
+        self.save_plot("PCA",
+                       "PCA Cumulative Sum of Variances")
+
+        if self.__notebook_mode:
+            plt.show()
+            plt.close("all")
 
         return pca, data
 
-    # --- Figures maintaining ---
-    def __check_create_figure_dir(self,
-                                  sub_dir):
+    def __display_rank_graph(self,
+                             feature_names,
+                             metric,
+                             output_path,
+                             model_name,
+                             title="",
+                             y_title="",
+                             x_title="", ):
         """
-            Checks/Creates required directory structures inside
-            the parent directory figures.
+            Darker colors have higher rankings (values)
         """
+        plt.figure(figsize=(7, 7))
 
-        directory_path = self.__PROJECT.PATH_TO_OUTPUT_FOLDER
+        # Init color ranking fo plot
+        # Ref: http://tinyurl.com/ydgjtmty
+        pal = sns.color_palette("GnBu_d", len(metric))
+        rank = np.array(metric).argsort().argsort()
+        ax = sns.barplot(y=feature_names, x=metric,
+                         palette=np.array(pal[::-1])[rank])
+        plt.xticks(rotation=0, fontsize=15)
+        plt.yticks(fontsize=15)
+        plt.xlabel(x_title, fontsize=20, labelpad=20)
+        plt.ylabel(y_title, fontsize=20, labelpad=20)
+        plt.title(title, fontsize=15)
+        plt.show()
 
-        for dir in sub_dir.split("/"):
-            directory_path += "/" + dir
-            if not os.path.exists(directory_path):
-                os.makedirs(directory_path)
+    def __get_color_name(self,
+                         color):
 
-        return directory_path
+        if color == "b":
+            return "Blue"
 
-    def __image_processing_utils(self,
-                         sub_dir,
-                         filename):
-        """
-            Saves the plt based image in the correct directory.
-        """
+        elif color == "g":
+            return "Green"
 
-        # Ensure directory structure is init correctly
-        abs_path = self.__check_create_figure_dir(sub_dir)
+        elif color == "r":
+            return "Red"
 
-        # Ensure file ext is on the file.
-        if filename[-4:] != ".png":
-            filename += ".png"
+        elif color == "c":
+            return "Cyan"
 
-        fig = plt.figure(1)
-        fig.savefig(abs_path + "/" + filename, bbox_inches='tight')
+        elif color == "m":
+            return "Magenta"
 
-    # --- Misc
-    # I am this lazy yes...
-    def __vertical_spacing(self, spaces=1):
-        for _ in range(0, spaces):
-            print()
+        elif color == "y":
+            return "Yellow"
 
-    # --- Getters/Setters
-    def get_scaled_data(self):
-        return copy.deepcopy(self.__scaled)
+        elif color == "k":
+            return "Black"
 
-    def get_all_cluster_models(self):
-        return copy.deepcopy(self.__all_cluster_models)
+        elif color == "w":
+            return "White"
 
-    # def append_model(self,
-    #                  model_name,
-    #                  model):
-    #     try:
-    #         model.labels_
-    #         self.__all_cluster_models[model_name] = model
-    #     except AttributeError:
-    #         print("Can not append model to the rest of the models")
+        else:
+            return color
+
+

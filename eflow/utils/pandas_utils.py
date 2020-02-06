@@ -83,7 +83,7 @@ def df_to_image(df,
     if show_plot:
         plt.show()
 
-    plt.close()
+    plt.close("all")
 
 
 def check_if_feature_exists(df,
