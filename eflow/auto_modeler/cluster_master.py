@@ -1,16 +1,22 @@
-
 from eflow._hidden.parent_objects import AutoModeler
+from eflow.utils.sys_utils import pickle_object_to_file, create_dir_structure
 
 # Getting Sklearn Models
 from sklearn.decomposition import PCA
-from sklearn.cluster import KMeans
 from scipy.cluster.hierarchy import linkage, dendrogram,set_link_color_palette
 from sklearn.preprocessing import StandardScaler
 from sklearn.cluster import AgglomerativeClustering
 from sklearn.neighbors import kneighbors_graph
 
+# Getting pyclustering
+from pyclustering.cluster.kmeans import kmeans
+from pyclustering.cluster.kmedians import kmedians
+from pyclustering.cluster.kmedoids import kmedoids
+from pyclustering.cluster.center_initializer import kmeans_plusplus_initializer,random_center_initializer
+
 # Visuals libs
 import matplotlib.pyplot as plt
+import matplotlib.patches as mpatches
 import pylab as pl
 import seaborn as sns
 from IPython.display import display, HTML
@@ -33,6 +39,9 @@ __email__ = "eric.cacciavillani@gmail.com"
 
 
 class AutoCluster(AutoModeler):
+    """
+        Analyzes the feature data of a pandas Dataframe object.
+    """
 
     def __init__(self,
                  df,
@@ -40,7 +49,28 @@ class AutoCluster(AutoModeler):
                  project_sub_dir="",
                  project_name="Auto Clustering",
                  overwrite_full_path=None,
-                 notebook_mode=False):
+                 notebook_mode=False,
+                 pca_perc=None):
+        """
+        Args:
+            df: pd.Dataframe
+                pd.Dataframe
+
+            df_features: Dataframes type holder
+                Dataframes type holder
+
+            project_sub_dir: string
+                Sub directory to write data.
+
+            project_name: string
+                Main project directory
+
+            overwrite_full_path: string
+                Overwrite full directory path to a given output folder
+
+            notebook_mode: bool
+                Display and show in notebook if set to true.
+        """
 
         AutoModeler.__init__(self,
                              f'{project_sub_dir}/{project_name}',
@@ -52,8 +82,6 @@ class AutoCluster(AutoModeler):
         self.__df_features = copy.deepcopy(df_features)
 
         self.__notebook_mode = copy.deepcopy(notebook_mode)
-
-        pca_perc = .8
 
         # --- Apply pca ---
         if pca_perc:
@@ -110,6 +138,8 @@ class AutoCluster(AutoModeler):
 
             self.__scaled = scaled
 
+            print(scaled)
+
         # Assumed PCA has already been applied; pass as matrix
         else:
             self.__scaled = df.values
@@ -127,7 +157,18 @@ class AutoCluster(AutoModeler):
                                           display_print=True,
                                           display_visuals=True):
         """
+        Desc:
             Displays hierarchical cluster graphs with provided methods.
+
+        Args:
+            linkage_methods:
+                All methods applied to the linkage
+
+            display_print:
+                Display print outputs
+
+            display_visuals:
+                Display plot data
         """
 
         if not linkage_methods:
@@ -144,10 +185,8 @@ class AutoCluster(AutoModeler):
             if display_print:
                 print(f"Creating graphic for Hierarchical Clustering Method: {method}...")
 
-            plt.figure(figsize=(12, 7))
-            # Calculate the linkage: mergings
+            # Create mergings
             mergings = linkage(self.__scaled, method=method)
-
 
              # {"Yellow":"#d3d255",
              # "Magenta":"#c82bc9",
@@ -158,8 +197,11 @@ class AutoCluster(AutoModeler):
              # "Brown": "#775549",
              # "Silver": "#C0C0C0",
              # "Blue":"#24326f",
-             # "Orange":"#cc7722"}
+             # "Orange":"#cc7722",
+             # "Mauve":"#9c7c8c"}
 
+            # Set plot
+            plt.figure(figsize=(12, 7))
             set_link_color_palette(None)
 
             # Plot the dendrogram, using varieties as labels
@@ -169,25 +211,38 @@ class AutoCluster(AutoModeler):
                                     leaf_font_size=3)["color_list"]
 
             method = method.capitalize()
-
             plt.title(f"Hierarchical Clustering Method : \'{method}\'")
+
+            # -----
             self.save_plot("Hierarchical Clustering",
                            f"Hierarchical Clustering Method {method} without legend")
 
+            del mergings
+
+
+            # Create proper cluster names based on the color names
             color_cluster_count = dict()
             last_color = None
             known_colors = set()
             color_cluster_order = list()
             seq_len = 0
             i = 0
+
+            # -----
             for color in copy.deepcopy(color_list):
 
+                # Proper color name
                 color = self.__get_color_name(color)
+
+                # Name for old cluster color sequence found
                 if color in known_colors:
                     color_list[i] = f"{color} cluster {color_cluster_count[color]}"
+
+                # Name for new cluster color sequence found
                 else:
                     color_list[i] = f"{color} cluster 0"
 
+                # Track unique cluster color order
                 if color_list[i] not in color_cluster_order:
                     color_cluster_order.append(color_list[i])
 
@@ -195,20 +250,27 @@ class AutoCluster(AutoModeler):
                     # Sequence of color has yet to be broken
                     if last_color == color:
 
+                        # Only really need to check if the sequence has a length of 1
                         if seq_len <= 2:
                             seq_len += 1
 
                     # Sequence break
                     else:
+
+                        # Valid cluster found
                         if seq_len > 1:
 
+                            # Track all known color names
                             if last_color not in known_colors:
                                 known_colors.add(last_color)
 
+                            # If color is repeated; then make a new cluster count name
                             if last_color not in color_cluster_count.keys():
                                 color_cluster_count[last_color] = 1
                             else:
                                 color_cluster_count[last_color] += 1
+
+                        # Invalid color cluster found; apply needed changes
                         else:
                             color_list.pop(i-1)
                             i -= 1
@@ -218,10 +280,12 @@ class AutoCluster(AutoModeler):
                 last_color = color
                 i += 1
 
+            # Create legend for each cluster name and the amount of per sample
             counter_object = Counter(color_list)
             cluster_color_count = dict()
-            import matplotlib.patches as mpatches
             handles = []
+
+            # Make sure the legend is in the same order the cluster appear in the dendrogram
             for color_cluster_name in color_cluster_order:
                 if color_cluster_name in counter_object.keys():
                     cluster_color_count[color_cluster_name] = counter_object[color_cluster_name]
@@ -229,14 +293,17 @@ class AutoCluster(AutoModeler):
                         handles.append(mpatches.Patch(
                             color=color_cluster_name.split(" cluster ")[0],
                             label=color_cluster_name + f": {counter_object[color_cluster_name]} samples"))
+
                     except:
                         handles.append(mpatches.Patch(
                             color="black",
                             label=color_cluster_name + f": {counter_object[color_cluster_name]} samples"))
 
-
+            # Plot the legend
             plt.legend(handles=handles,
-                       loc=(1.01, .72))
+                       loc='upper right',
+                       bbox_to_anchor=(1.32, 1.01),
+                       title=f"Clusters ({len(handles)})")
 
             if display_visuals:
                 plt.show()
@@ -247,107 +314,223 @@ class AutoCluster(AutoModeler):
                            f"Hierarchical Clustering Method {method} with legend")
 
 
-    def __visualize_clusters(self, model, output_path, model_name=""):
-        """
-            Creates visualization of clustering model on given data.
-        """
-        markers = ["+", "*", "X", "o", "v", "P", "H", "4", "p", "D", "s",
-                   "1", "x", "d", "_"]
-        colors = ['b', 'g', 'r', 'c', 'm', 'y',
-                  '#007BA7', '#ff69b4', '#CD5C5C', '#7eab19', '#1a4572',
-                  '#2F4F4F', '#4B0082', '#d11141', '#5b2504']
+    # def __visualize_clusters(self, model, output_path, model_name=""):
+    #     """
+    #         Creates visualization of clustering model on given data.
+    #     """
+    #     markers = ["+", "*", "X", "o", "v", "P", "H", "4", "p", "D", "s",
+    #                "1", "x", "d", "_"]
+    #     colors = ['b', 'g', 'r', 'c', 'm', 'y',
+    #               '#007BA7', '#ff69b4', '#CD5C5C', '#7eab19', '#1a4572',
+    #               '#2F4F4F', '#4B0082', '#d11141', '#5b2504']
+    #
+    #     # Display ranking on color based on amount data points per cluster
+    #     unique, counts = np.unique(model.labels_, return_counts=True)
+    #     cluster_names = ["Cluster:" + str(cluster_label)
+    #                      for cluster_label in unique]
+    #     self.__display_rank_graph(feature_names=cluster_names,
+    #                               metric=counts,
+    #                               title=model_name,
+    #                               output_path=output_path,
+    #                               model_name=model_name,
+    #                               y_title="Clusters",
+    #                               x_title="Found per cluster")
+    #     pl.figure(figsize=(8, 7))
+    #
+    #     # Display clustered graph
+    #     cluster_array = list(range(0, len(cluster_names)))
+    #     scaled_cluster_label = np.hstack(
+    #         (self.__scaled, np.reshape(
+    #             model.labels_.astype(int), (self.__scaled.shape[0], 1))))
+    #     for i in range(0, scaled_cluster_label.shape[0]):
+    #         cluster_label = int(scaled_cluster_label[i][-1])
+    #         cluster_array[cluster_label] = pl.scatter(
+    #             scaled_cluster_label[i, 0], scaled_cluster_label[i, 1],
+    #             c=colors[cluster_label], marker=str(markers[cluster_label]))
+    #
+    #     pl.legend(cluster_array, cluster_names)
+    #     pl.title(model_name + ' visualized with data', fontsize=15)
+    #     self.__image_processing_utils(output_path,
+    #                           model_name + "_Visualized_Cluster")
+    #     plt.show()
+    #     plt.close()
+    #     pl.close()
+    def create_pyclustering_models(self,
+                                   model_names=["K-Means",
+                                                "K-Medians",
+                                                "K-Medoids",],
+                                   repeat_operation=3,
+                                   max_k_value=15):
 
-        # Display ranking on color based on amount data points per cluster
-        unique, counts = np.unique(model.labels_, return_counts=True)
-        cluster_names = ["Cluster:" + str(cluster_label)
-                         for cluster_label in unique]
-        self.__display_rank_graph(feature_names=cluster_names,
-                                  metric=counts,
-                                  title=model_name,
-                                  output_path=output_path,
-                                  model_name=model_name,
-                                  y_title="Clusters",
-                                  x_title="Found per cluster")
-        pl.figure(figsize=(8, 7))
+        names_model_dict = {"K-Means":kmeans,
+                            "K-Medians":kmedians,
+                            "K-Medoids":kmedoids,}
 
-        # Display clustered graph
-        cluster_array = list(range(0, len(cluster_names)))
-        scaled_cluster_label = np.hstack(
-            (self.__scaled, np.reshape(
-                model.labels_.astype(int), (self.__scaled.shape[0], 1))))
-        for i in range(0, scaled_cluster_label.shape[0]):
-            cluster_label = int(scaled_cluster_label[i][-1])
-            cluster_array[cluster_label] = pl.scatter(
-                scaled_cluster_label[i, 0], scaled_cluster_label[i, 1],
-                c=colors[cluster_label], marker=str(markers[cluster_label]))
+        for name, model in names_model_dict.items():
+            if name in model_names:
+                self.__create_elbow_seq_with_pyclustering(name,
+                                                          model,
+                                                          repeat_operation=repeat_operation,
+                                                          max_k_value=max_k_value)
 
-        pl.legend(cluster_array, cluster_names)
-        pl.title(model_name + ' visualized with data', fontsize=15)
-        self.__image_processing_utils(output_path,
-                              model_name + "_Visualized_Cluster")
-        plt.show()
-        plt.close()
-        pl.close()
 
-    def create_kmeans_models(self,
-                             n_cluster_list,
-                             random_state=None):
-        """
-            Create kmeans models based on a list of 'n_clusters' values
-        """
 
-        if isinstance(n_cluster_list, int):
-            n_cluster_list = [n_cluster_list]
 
-        for k_val in n_cluster_list:
-            self.__all_cluster_models["Kmeans_Cluster_" + str(k_val)] = KMeans(
-                n_clusters=k_val, random_state=random_state).fit(self.__scaled)
-            print(
-                "Successfully generate Kmeans model on "
-                "pre_defined_k={0}".format(k_val))
 
-    def create_kmeans_models_with_elbow_graph(self,
-                                              random_state=None):
+    def __create_elbow_seq_with_pyclustering(self,
+                                             pyclustering_model_name,
+                                             pyclustering_model,
+                                             repeat_operation,
+                                             max_k_value):
         """
             Generate models based on the found 'elbow' of the interia values.
         """
 
-        ks = range(1, 15)
+        max_k_value += 1
+
+        # K FAMILY LOOP START
+
+        k_models = []
         inertias = []
 
-        for k in ks:
-            # Create a KMeans instance with k clusters: model
-            model = KMeans(n_clusters=k,
-                           random_state=random_state).fit(self.__scaled)
+        for _ in range(0,repeat_operation):
+            tmp_inertias = []
+            tmp_k_models = []
 
-            # Append the inertia to the list of inertias
-            inertias.append(model.inertia_)
+            for k_val in range(1,max_k_value):
+                # Prepare initial centers using K-Means++ method.
+                initial_centers = random_center_initializer(self.__scaled,
+                                                               k_val).initialize()
 
-        # Plot ks vs inertias
+                # Create instance of K-Means algorithm with prepared centers.
+                model = kmeans(self.__scaled, initial_centers)
+
+                # Run cluster analysis and obtain results.
+                model.process()
+                final_centers = model.get_centers()
+
+                final_centers = np.array(final_centers)
+                labels = [self.__nearest(final_centers, x) for x in self.__scaled]
+
+                inertia = sum(((final_centers[l] - x) ** 2).sum()
+                              for x, l in zip(self.__scaled, labels))
+
+                # Append the inertia to the list of inertias
+                tmp_inertias.append(inertia)
+                tmp_k_models.append(model)
+
+            k_models.append(tmp_k_models)
+            inertias.append(tmp_inertias)
+
+        self.__find_best_elbow_models(pyclustering_model_name,
+                                      k_models,
+                                      inertias)
+
+    def __find_best_elbow_models(self,
+                                 model_name,
+                                 k_models,
+                                 inertias,
+                                 display_visuals=True):
+
+        ks = range(1, len(inertias[0]) + 1)
+
         plt.figure(figsize=(13, 6))
-        plt.plot(ks, inertias, '-o')
+        plt.title(f"All possible {model_name} Elbow's", fontsize=15)
         plt.xlabel('Number of clusters, k')
         plt.ylabel('Inertia')
         plt.xticks(ks)
-        plt.title("Kmeans Elbow", fontsize=15)
 
-        a = KneeLocator(inertias, ks, curve='convex', direction='decreasing')
-        elbow_index = np.where(inertias == a.knee)
-        elbow_index = elbow_index[0][0] + 1
+        elbow_inertias_matrix = None
+        inertias_matrix = None
+        elbow_models = []
 
-        for k_val in [elbow_index - 1, elbow_index, elbow_index + 1]:
-            self.__all_cluster_models["Kmeans_Cluster_" + str(k_val)] = KMeans(
-                n_clusters=k_val, random_state=random_state).fit(self.__scaled)
-            plt.plot(ks[k_val - 1], inertias[k_val - 1], 'r*')
+        # Plot ks vs inertias
+        for i in range(0,len(inertias)):
+            plt.plot(ks,
+                     inertias[i],
+                     '-o',
+                     color='#367588')
 
-            print(
-                "Successfully generate Kmeans model on k_val={0}".format(k_val)
-            )
 
-        self.__image_processing_utils("Kmeans",
-                              "Kmeans_Visualized_Cluster")
+            elbow_cluster = KneeLocator(ks,
+                                        inertias[i],
+                                        curve='convex',
+                                        direction='decreasing').knee
+
+            for k_val in [elbow_cluster - 1, elbow_cluster, elbow_cluster + 1]:
+                plt.plot(ks[k_val - 1],
+                         inertias[i][k_val - 1],
+                         'r*')
+
+                if isinstance(elbow_inertias_matrix, type(None)):
+                    inertias_matrix = np.matrix(inertias)
+                    elbow_inertias_matrix = np.matrix(inertias)
+
+                else:
+                    inertias_matrix = np.vstack([inertias_matrix, inertias])
+
+                    elbow_inertias_matrix = np.vstack(
+                        [elbow_inertias_matrix, inertias])
+
+
+            elbow_models.append(k_models[i][elbow_cluster - 2:elbow_cluster + 1])
+
+
+        del inertias
+        del k_models
+        del elbow_cluster
+
+        self.save_plot(f"{model_name}",f"All possible {model_name} Elbow's",)
+
         plt.show()
-        plt.close()
+        plt.close("all")
+
+        plt.figure(figsize=(13, 6))
+        plt.title(f"Best of all {model_name} Elbows", fontsize=15)
+        plt.xlabel('Number of clusters, k')
+        plt.ylabel('Inertia')
+        plt.xticks(ks)
+
+        average_elbow_inertias = elbow_inertias_matrix.mean(0)
+
+        knee_vote = []
+        for vector in elbow_inertias_matrix:
+            knee_vote.append(
+                np.absolute(vector - average_elbow_inertias).sum())
+
+        best_elbow_index = np.array(knee_vote).argmin()
+
+        plt.plot(ks,
+                 inertias_matrix[best_elbow_index].tolist()[0],
+                 '-o',
+                 color='#367588')
+
+        for model in elbow_models[best_elbow_index]:
+            try:
+                k_val = len(model.get_centers())
+            except AttributeError:
+                try:
+                    k_val = model.n_clusters
+                except Exception as e:
+                    raise e
+
+            self.__all_cluster_models[f"{model_name}_Cluster_" + str(k_val)] = model
+
+            create_dir_structure(self.folder_path,
+                                 f"{model_name}/Clusters={k_val}")
+
+            pickle_object_to_file(model,
+                                  self.folder_path + f"{model_name}/Clusters={k_val}",
+                                  f"{model_name}_Cluster_" + str(k_val))
+            plt.plot(ks[k_val - 1],
+                     inertias_matrix[best_elbow_index].tolist()[0][k_val - 1],
+                     'r*')
+
+        self.save_plot(f"{model_name}",
+                       f"Best of all {model_name} Elbows")
+        plt.show()
+        plt.close("all")
+        print("\n\n")
 
     def create_agglomerative_models(self,
                                     n_cluster_list,
@@ -473,9 +656,9 @@ class AutoCluster(AutoModeler):
             output_path = output_folder + "/" + model_name
 
         # ---
-        self.__visualize_clusters(model=model,
-                                  output_path=output_path,
-                                  model_name=model_name)
+        # self.__visualize_clusters(model=model,
+        #                           output_path=output_path,
+        #                           model_name=model_name)
 
         # ---
         df["Cluster_Name"] = model.labels_
@@ -860,4 +1043,9 @@ class AutoCluster(AutoModeler):
         else:
             return color
 
+    def __nearest(self, clusters, x):
+        return np.argmin([self.__distance(x, c) for c in clusters])
+
+    def __distance(self, a, b):
+        return np.sqrt(((a - b) ** 2).sum())
 
