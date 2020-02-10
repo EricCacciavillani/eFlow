@@ -1,5 +1,7 @@
 from eflow._hidden.parent_objects import AutoModeler
-from eflow.utils.sys_utils import pickle_object_to_file, create_dir_structure
+from eflow.utils.sys_utils import pickle_object_to_file, create_dir_structure, write_object_text_to_file, check_if_directory_exists
+from eflow.utils.eflow_utils import move_folder_to_eflow_garbage
+
 
 # Getting Sklearn Models
 from sklearn.decomposition import PCA
@@ -12,6 +14,7 @@ from sklearn.neighbors import kneighbors_graph
 from pyclustering.cluster.kmeans import kmeans
 from pyclustering.cluster.kmedians import kmedians
 from pyclustering.cluster.kmedoids import kmedoids
+from pyclustering.cluster.ema import ema
 from pyclustering.cluster.center_initializer import kmeans_plusplus_initializer,random_center_initializer
 
 # Visuals libs
@@ -27,8 +30,12 @@ from scipy.stats import zscore
 from kneed import DataGenerator, KneeLocator
 import pandas as pd
 import six
+import random
 import numpy as np
 import copy
+import os
+from tqdm import tqdm
+
 
 __author__ = "Eric Cacciavillani"
 __copyright__ = "Copyright 2019, eFlow"
@@ -76,12 +83,20 @@ class AutoCluster(AutoModeler):
                              f'{project_sub_dir}/{project_name}',
                              overwrite_full_path)
 
+
+        if os.path.exists(self.folder_path + "_Extras"):
+            move_folder_to_eflow_garbage(self.folder_path+"_Extras",
+                                         "Auto Clustering")
+
+
         # Define model
         self.__all_cluster_models = dict()
 
         self.__df_features = copy.deepcopy(df_features)
 
         self.__notebook_mode = copy.deepcopy(notebook_mode)
+
+        self.__models_suggested_clusters = dict()
 
         # --- Apply pca ---
         if pca_perc:
@@ -138,8 +153,6 @@ class AutoCluster(AutoModeler):
 
             self.__scaled = scaled
 
-            print(scaled)
-
         # Assumed PCA has already been applied; pass as matrix
         else:
             self.__scaled = df.values
@@ -170,6 +183,8 @@ class AutoCluster(AutoModeler):
             display_visuals:
                 Display plot data
         """
+
+        best_clusters = []
 
         if not linkage_methods:
             linkage_methods = ["complete",
@@ -305,6 +320,7 @@ class AutoCluster(AutoModeler):
                        bbox_to_anchor=(1.32, 1.01),
                        title=f"Clusters ({len(handles)})")
 
+            best_clusters.append(len(handles))
             if display_visuals:
                 plt.show()
 
@@ -312,6 +328,11 @@ class AutoCluster(AutoModeler):
 
             self.save_plot("Hierarchical Clustering",
                            f"Hierarchical Clustering Method {method} with legend")
+
+        best_clusters.sort()
+        self.__models_suggested_clusters["Hierarchical Clustering"] = best_clusters
+        self.__save_update_best_model_clusters()
+        return best_clusters
 
 
     # def __visualize_clusters(self, model, output_path, model_name=""):
@@ -355,182 +376,27 @@ class AutoCluster(AutoModeler):
     #     plt.show()
     #     plt.close()
     #     pl.close()
-    def create_pyclustering_models(self,
-                                   model_names=["K-Means",
-                                                "K-Medians",
-                                                "K-Medoids",],
+    def create_kmeans_elbow_models(self,
                                    repeat_operation=3,
-                                   max_k_value=15):
+                                   max_k_value=15,
+                                   display_visuals=True):
 
         names_model_dict = {"K-Means":kmeans,
                             "K-Medians":kmedians,
-                            "K-Medoids":kmedoids,}
+                            "K-Medoids":kmedoids}
 
         for name, model in names_model_dict.items():
-            if name in model_names:
-                self.__create_elbow_seq_with_pyclustering(name,
-                                                          model,
-                                                          repeat_operation=repeat_operation,
-                                                          max_k_value=max_k_value)
+            best_clusters = self.__create_elbow_seq(name,
+                                                    model,
+                                                    repeat_operation=repeat_operation,
+                                                    max_k_value=max_k_value,
+                                                    display_visuals=display_visuals)
 
+            best_clusters.sort()
+            self.__models_suggested_clusters["K-Means"] = best_clusters
+            self.__save_update_best_model_clusters()
 
-
-
-
-    def __create_elbow_seq_with_pyclustering(self,
-                                             pyclustering_model_name,
-                                             pyclustering_model,
-                                             repeat_operation,
-                                             max_k_value):
-        """
-            Generate models based on the found 'elbow' of the interia values.
-        """
-
-        max_k_value += 1
-
-        # K FAMILY LOOP START
-
-        k_models = []
-        inertias = []
-
-        for _ in range(0,repeat_operation):
-            tmp_inertias = []
-            tmp_k_models = []
-
-            for k_val in range(1,max_k_value):
-                # Prepare initial centers using K-Means++ method.
-                initial_centers = random_center_initializer(self.__scaled,
-                                                               k_val).initialize()
-
-                # Create instance of K-Means algorithm with prepared centers.
-                model = kmeans(self.__scaled, initial_centers)
-
-                # Run cluster analysis and obtain results.
-                model.process()
-                final_centers = model.get_centers()
-
-                final_centers = np.array(final_centers)
-                labels = [self.__nearest(final_centers, x) for x in self.__scaled]
-
-                inertia = sum(((final_centers[l] - x) ** 2).sum()
-                              for x, l in zip(self.__scaled, labels))
-
-                # Append the inertia to the list of inertias
-                tmp_inertias.append(inertia)
-                tmp_k_models.append(model)
-
-            k_models.append(tmp_k_models)
-            inertias.append(tmp_inertias)
-
-        self.__find_best_elbow_models(pyclustering_model_name,
-                                      k_models,
-                                      inertias)
-
-    def __find_best_elbow_models(self,
-                                 model_name,
-                                 k_models,
-                                 inertias,
-                                 display_visuals=True):
-
-        ks = range(1, len(inertias[0]) + 1)
-
-        plt.figure(figsize=(13, 6))
-        plt.title(f"All possible {model_name} Elbow's", fontsize=15)
-        plt.xlabel('Number of clusters, k')
-        plt.ylabel('Inertia')
-        plt.xticks(ks)
-
-        elbow_inertias_matrix = None
-        inertias_matrix = None
-        elbow_models = []
-
-        # Plot ks vs inertias
-        for i in range(0,len(inertias)):
-            plt.plot(ks,
-                     inertias[i],
-                     '-o',
-                     color='#367588')
-
-
-            elbow_cluster = KneeLocator(ks,
-                                        inertias[i],
-                                        curve='convex',
-                                        direction='decreasing').knee
-
-            for k_val in [elbow_cluster - 1, elbow_cluster, elbow_cluster + 1]:
-                plt.plot(ks[k_val - 1],
-                         inertias[i][k_val - 1],
-                         'r*')
-
-                if isinstance(elbow_inertias_matrix, type(None)):
-                    inertias_matrix = np.matrix(inertias)
-                    elbow_inertias_matrix = np.matrix(inertias)
-
-                else:
-                    inertias_matrix = np.vstack([inertias_matrix, inertias])
-
-                    elbow_inertias_matrix = np.vstack(
-                        [elbow_inertias_matrix, inertias])
-
-
-            elbow_models.append(k_models[i][elbow_cluster - 2:elbow_cluster + 1])
-
-
-        del inertias
-        del k_models
-        del elbow_cluster
-
-        self.save_plot(f"{model_name}",f"All possible {model_name} Elbow's",)
-
-        plt.show()
-        plt.close("all")
-
-        plt.figure(figsize=(13, 6))
-        plt.title(f"Best of all {model_name} Elbows", fontsize=15)
-        plt.xlabel('Number of clusters, k')
-        plt.ylabel('Inertia')
-        plt.xticks(ks)
-
-        average_elbow_inertias = elbow_inertias_matrix.mean(0)
-
-        knee_vote = []
-        for vector in elbow_inertias_matrix:
-            knee_vote.append(
-                np.absolute(vector - average_elbow_inertias).sum())
-
-        best_elbow_index = np.array(knee_vote).argmin()
-
-        plt.plot(ks,
-                 inertias_matrix[best_elbow_index].tolist()[0],
-                 '-o',
-                 color='#367588')
-
-        for model in elbow_models[best_elbow_index]:
-            try:
-                k_val = len(model.get_centers())
-            except AttributeError:
-                try:
-                    k_val = model.n_clusters
-                except Exception as e:
-                    raise e
-
-            self.__all_cluster_models[f"{model_name}_Cluster_" + str(k_val)] = model
-
-            create_dir_structure(self.folder_path,
-                                 f"{model_name}/Clusters={k_val}")
-
-            pickle_object_to_file(model,
-                                  self.folder_path + f"{model_name}/Clusters={k_val}",
-                                  f"{model_name}_Cluster_" + str(k_val))
-            plt.plot(ks[k_val - 1],
-                     inertias_matrix[best_elbow_index].tolist()[0][k_val - 1],
-                     'r*')
-
-        self.save_plot(f"{model_name}",
-                       f"Best of all {model_name} Elbows")
-        plt.show()
-        plt.close("all")
-        print("\n\n")
+        return best_clusters
 
     def create_agglomerative_models(self,
                                     n_cluster_list,
@@ -568,6 +434,8 @@ class AutoCluster(AutoModeler):
                         "Successfully generate Agglomerative model with "
                         "linkage {0} on n_clusters={1}".format(
                             linkage, n_clusters))
+
+        # self.__models_suggested_clusters["Agglomerative models"] =
 
     def evaluate_all_models(self,
                             df,
@@ -696,62 +564,6 @@ class AutoCluster(AutoModeler):
             self.__render_mpl_table(cluster_profiles_df, sub_dir=output_path,
                                     filename="All_Clusters",
                                     header_columns=0, col_width=2.0)
-
-    # Takes a dict of LabelEncoders to decode the dataframe
-    def __decode_df(self, df, le_map):
-
-        df = copy.deepcopy(df)
-        decode_cols = list(le_map.keys())
-        df[decode_cols] = df[decode_cols].apply(
-            lambda x: le_map[x.name].inverse_transform(x))
-
-        return df
-
-    # Not created by me!
-    # Author: http://tinyurl.com/y2hjhbwf
-    def __render_mpl_table(
-            self,
-            data,
-            sub_dir,
-            filename,
-            col_width=3.0,
-            row_height=0.625,
-            font_size=14,
-            header_color='#40466e',
-            row_colors=['#f1f1f2', 'w'],
-            edge_color='w',
-            bbox=[0, 0, 1, 1],
-            header_columns=0,
-            ax=None,
-            **kwargs):
-
-        if ax is None:
-            size = (np.array(
-                data.shape[::-1]) + np.array([0, 1])) * np.array([col_width,
-                                                                  row_height])
-            fig, ax = plt.subplots(figsize=size)
-            ax.axis('off')
-
-        mpl_table = ax.table(
-            cellText=data.values,
-            bbox=bbox,
-            colLabels=data.columns,
-            **kwargs)
-
-        mpl_table.auto_set_font_size(False)
-        mpl_table.set_fontsize(font_size)
-
-        for k, cell in six.iteritems(mpl_table._cells):
-            cell.set_edgecolor(edge_color)
-            if k[0] == 0 or k[1] < header_columns:
-                cell.set_text_props(weight='bold', color='w')
-                cell.set_facecolor(header_color)
-            else:
-                cell.set_facecolor(row_colors[k[0] % len(row_colors)])
-
-        self.__image_processing_utils(sub_dir, filename)
-
-        plt.close()
 
     def __create_cluster_profiles(self,
                                   clustered_dataframes,
@@ -1048,4 +860,246 @@ class AutoCluster(AutoModeler):
 
     def __distance(self, a, b):
         return np.sqrt(((a - b) ** 2).sum())
+
+    def __get_unique_random_indexes(self,
+                                    k_val):
+        random_indexes = set()
+        while len(random_indexes) != k_val:
+
+            index = random.randint(0, len(self.__scaled) - 1)
+
+            if index not in random_indexes:
+                random_indexes.add(index)
+
+        return random_indexes
+
+
+    def __create_elbow_seq(self,
+                           pyclustering_model_name,
+                           pyclustering_model,
+                           repeat_operation,
+                           max_k_value,
+                           display_visuals):
+        """
+            Generate models based on the found 'elbow' of the interia values.
+        """
+
+        max_k_value += 1
+
+        k_models = []
+        inertias = []
+
+        for elbow_seq_count in range(0,repeat_operation):
+            tmp_inertias = []
+            tmp_k_models = []
+
+            if display_visuals:
+                pbar = tqdm(range(1,max_k_value), desc=f"{pyclustering_model_name} Elbow Seq Count {elbow_seq_count + 1}")
+            else:
+                pbar = range(1,max_k_value)
+
+            for k_val in pbar:
+
+                if display_visuals:
+                    pbar.set_postfix(model_count=k_val, refresh=True)
+
+                if pyclustering_model_name == "K-Medoids":
+                    model = pyclustering_model(self.__scaled,
+                                               [i for i in self.__get_unique_random_indexes(k_val)])
+                else:
+                    # Create instance of K-Means algorithm with prepared centers.
+                    initial_centers = random_center_initializer(self.__scaled,
+                                                                k_val).initialize()
+                    model = pyclustering_model(self.__scaled, initial_centers)
+
+                # Run cluster analysis and obtain results.
+                model.process()
+                final_centers = np.array(self.__get_centers(model))
+                labels = [self.__nearest(final_centers, x) for x in self.__scaled]
+
+                inertia = sum(((final_centers[l] - x) ** 2).sum()
+                              for x, l in zip(self.__scaled, labels))
+
+                # Append the inertia to the list of inertias
+                tmp_inertias.append(inertia)
+                tmp_k_models.append(model)
+
+            k_models.append(tmp_k_models)
+            inertias.append(tmp_inertias)
+
+        return self.__find_best_elbow_models(pyclustering_model_name,
+                                             k_models,
+                                             inertias,
+                                             display_visuals)
+
+    def __get_centers(self,
+                      model):
+        try:
+            return model.get_centers()
+        except AttributeError:
+
+            center_points = []
+
+            for cluster_indexes in model.get_clusters():
+                all_dps = np.matrix([self.__scaled[i] for i in cluster_indexes])
+                center_dp = all_dps.mean(0)
+
+                # Grave Yard code: Use existing point rather than generating abstract average data point
+                # np.absolute(all_dps - center_dp).sum(1).argmin()
+
+                center_points.append(np.array(center_dp.tolist()[0]))
+
+            return center_points
+
+
+
+    def __find_best_elbow_models(self,
+                                 model_name,
+                                 k_models,
+                                 inertias,
+                                 display_visuals=True):
+
+        ks = range(1, len(inertias[0]) + 1)
+
+        plt.figure(figsize=(13, 6))
+        plt.title(f"All possible {model_name} Elbow's", fontsize=15)
+        plt.xlabel('Number of clusters, k')
+        plt.ylabel('Inertia')
+        plt.xticks(ks)
+
+        elbow_inertias_matrix = None
+        inertias_matrix = None
+        elbow_models = []
+        elbow_sections = []
+
+        # Plot ks vs inertias
+        for i in range(0,len(inertias)):
+            plt.plot(ks,
+                     inertias[i],
+                     '-o',
+                     color='#367588',
+                     alpha=0.5)
+
+
+            elbow_cluster = KneeLocator(ks,
+                                        inertias[i],
+                                        curve='convex',
+                                        direction='decreasing').knee
+
+            print(f"elbow_cluster:{elbow_cluster}")
+
+            for k_val in [elbow_cluster - 1, elbow_cluster, elbow_cluster + 1]:
+                # plt.plot(ks[k_val - 1],
+                #          inertias[i][k_val - 1],
+                #          'r*',)
+                elbow_sections.append([ks[k_val - 1],inertias[i][k_val - 1]])
+
+                if isinstance(elbow_inertias_matrix, type(None)):
+                    inertias_matrix = np.matrix(inertias)
+                    elbow_inertias_matrix = np.matrix(inertias)
+
+                else:
+                    inertias_matrix = np.vstack([inertias_matrix, inertias])
+
+                    elbow_inertias_matrix = np.vstack(
+                        [elbow_inertias_matrix, inertias])
+
+            elbow_models.append(k_models[i][elbow_cluster - 2:elbow_cluster + 1])
+
+        for elbow in elbow_sections:
+            k_val = elbow[0]
+            intertia = elbow[1]
+            plt.plot(k_val,
+                     intertia,
+                     'r*',)
+
+        del inertias
+        del k_models
+        del elbow_cluster
+
+        self.save_plot(f"{model_name}",f"All possible {model_name} Elbow's",)
+
+        if display_visuals:
+            plt.show()
+        plt.close("all")
+
+        plt.figure(figsize=(13, 6))
+        plt.title(f"Best of all {model_name} Elbows", fontsize=15)
+        plt.xlabel('Number of clusters, k')
+        plt.ylabel('Inertia')
+        plt.xticks(ks)
+
+        average_elbow_inertias = elbow_inertias_matrix.mean(0)
+
+        knee_vote = []
+        for vector in elbow_inertias_matrix:
+            knee_vote.append(
+                np.absolute(vector - average_elbow_inertias).sum())
+
+        best_elbow_index = np.array(knee_vote).argmin()
+
+        plt.plot(ks,
+                 inertias_matrix[best_elbow_index].tolist()[0],
+                 '-o',
+                 color='#367588')
+
+        best_clusters = []
+        for model in elbow_models[best_elbow_index]:
+            k_val = len(model.get_clusters())
+
+            self.__all_cluster_models[f"{model_name}_Cluster_" + str(k_val)] = model
+
+            create_dir_structure(self.folder_path,
+                                 f"{model_name}/Clusters={k_val}")
+
+            try:
+                pickle_object_to_file(model,
+                                      self.folder_path + f"{model_name}/Clusters={k_val}",
+                                      f"{model_name}_Cluster_" + str(k_val))
+            except:
+                print(f"Something went wrong when trying to save the model: {model_name}")
+            plt.plot(ks[k_val - 1],
+                     inertias_matrix[best_elbow_index].tolist()[0][k_val - 1],
+                     'r*')
+            best_clusters.append(k_val)
+
+        self.save_plot(f"{model_name}",
+                       f"Best of all {model_name} Elbows")
+
+        if display_visuals:
+            plt.show()
+        plt.close("all")
+
+        best_clusters.sort()
+
+        return best_clusters
+
+    def __save_update_best_model_clusters(self):
+
+        create_dir_structure(self.folder_path,
+                             "_Extras")
+
+        pickle_object_to_file(self.__models_suggested_clusters,
+                              self.folder_path + "_Extras",
+                              "All suggested clusters")
+        write_object_text_to_file(self.__models_suggested_clusters,
+                                  self.folder_path + "_Extras",
+                                  "All suggested clusters")
+
+        all_clusters = []
+        for model_name, best_clusters in self.__models_suggested_clusters.items():
+            write_object_text_to_file(best_clusters,
+                                      self.folder_path + "_Extras",
+                                      f"{model_name} suggested clusters")
+
+            all_clusters += best_clusters
+
+
+        write_object_text_to_file(round(sum(all_clusters) / len(all_clusters)),
+                                  self.folder_path + "_Extras",
+                                  "Average of suggested clusters")
+
+
+
+
 
