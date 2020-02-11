@@ -46,8 +46,7 @@ class AutoModeler(FileOutput):
     def save_plot(self,
                   sub_dir="",
                   filename="Unknown filename",
-                  suppress_runtime_errors=True,
-                  meta_data=True):
+                  suppress_runtime_errors=True):
         """
         Desc:
             Checks the passed data to see if a plot can be saved; raises
@@ -101,8 +100,7 @@ class AutoModeler(FileOutput):
                            filename="Unknown filename",
                            suppress_runtime_errors=True,
                            show_index=False,
-                           format_float_pos=2,
-                           meta_data=True):
+                           format_float_pos=2):
         """
         Desc:
             Checks the passed data to see if a table can be saved as a plot;

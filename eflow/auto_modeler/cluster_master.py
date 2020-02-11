@@ -1,7 +1,7 @@
 from eflow._hidden.parent_objects import AutoModeler
 from eflow.utils.sys_utils import pickle_object_to_file, create_dir_structure, write_object_text_to_file, check_if_directory_exists
 from eflow.utils.eflow_utils import move_folder_to_eflow_garbage
-
+from eflow._hidden.custom_exceptions import UnsatisfiedRequirments
 
 # Getting Sklearn Models
 from sklearn.decomposition import PCA
@@ -15,6 +15,9 @@ from pyclustering.cluster.kmeans import kmeans
 from pyclustering.cluster.kmedians import kmedians
 from pyclustering.cluster.kmedoids import kmedoids
 from pyclustering.cluster.ema import ema
+from pyclustering.cluster.cure import cure
+from pyclustering.cluster.fcm import fcm
+from pyclustering.cluster.somsc import somsc
 from pyclustering.cluster.center_initializer import kmeans_plusplus_initializer,random_center_initializer
 
 # Visuals libs
@@ -160,10 +163,34 @@ class AutoCluster(AutoModeler):
 
     # --- Getters/Setters
     def get_scaled_data(self):
+        """
+        Desc:
+            Gets the stored data
+
+        Returns:
+            Returns the stored data
+        """
+
         return copy.deepcopy(self.__scaled)
 
     def get_all_cluster_models(self):
+        """
+        Desc:
+            Gets the model names and model instances in dictionary form.
+
+        Return:
+            Returns the model name to model instance dict
+        """
         return copy.deepcopy(self.__all_cluster_models)
+
+    def delete_stored_data(self):
+        """
+        Desc:
+            Removes the matrix data in order to save RAM when running
+            analysis on the actual data.
+        """
+        del self.__scaled
+        self.__scaled = None
 
     def visualize_hierarchical_clustering(self,
                                           linkage_methods=None,
@@ -186,6 +213,7 @@ class AutoCluster(AutoModeler):
 
         best_clusters = []
 
+        # ---
         if not linkage_methods:
             linkage_methods = ["complete",
                                "single",
@@ -195,6 +223,7 @@ class AutoCluster(AutoModeler):
                                "centroid",
                                "median"]
 
+        # Apply methods to each dendrogram
         for method in linkage_methods:
 
             if display_print:
@@ -314,21 +343,22 @@ class AutoCluster(AutoModeler):
                             color="black",
                             label=color_cluster_name + f": {counter_object[color_cluster_name]} samples"))
 
-            # Plot the legend
+            # Plot the legend and save the plot
             plt.legend(handles=handles,
                        loc='upper right',
                        bbox_to_anchor=(1.32, 1.01),
                        title=f"Clusters ({len(handles)})")
 
             best_clusters.append(len(handles))
-            if display_visuals:
+            if display_visuals and self.__notebook_mode:
                 plt.show()
-
-            plt.close('all')
 
             self.save_plot("Hierarchical Clustering",
                            f"Hierarchical Clustering Method {method} with legend")
 
+            plt.close('all')
+
+        # Save results into _Extras folder
         best_clusters.sort()
         self.__models_suggested_clusters["Hierarchical Clustering"] = best_clusters
         self.__save_update_best_model_clusters()
@@ -376,25 +406,51 @@ class AutoCluster(AutoModeler):
     #     plt.show()
     #     plt.close()
     #     pl.close()
-    def create_kmeans_elbow_models(self,
-                                   repeat_operation=3,
-                                   max_k_value=15,
-                                   display_visuals=True):
+    def create_elbow_models(self,
+                            model_names=["K-Means",
+                                         "K-Medians",
+                                         "K-Medoids",
+                                         "Somsc",
+                                         "Cure",
+                                         "Fuzzy C-means"],
+                            repeat_operation=3,
+                            max_k_value=15,
+                            display_visuals=True):
+
+        model_names = set(model_names)
 
         names_model_dict = {"K-Means":kmeans,
                             "K-Medians":kmedians,
-                            "K-Medoids":kmedoids}
+                            "K-Medoids":kmedoids,
+                            "Somsc":somsc,
+                            "Cure":cure,
+                            "Fuzzy C-means": fcm}
 
-        for name, model in names_model_dict.items():
-            best_clusters = self.__create_elbow_seq(name,
-                                                    model,
-                                                    repeat_operation=repeat_operation,
-                                                    max_k_value=max_k_value,
-                                                    display_visuals=display_visuals)
+        # Iterate through passed model names
+        for name in model_names:
 
-            best_clusters.sort()
-            self.__models_suggested_clusters["K-Means"] = best_clusters
-            self.__save_update_best_model_clusters()
+            if name in names_model_dict.keys():
+
+                # Only requires 1 elbow sequence
+                if name == "Somsc" or name == "Cure":
+                    best_clusters = self.__create_elbow_seq(name,
+                                                            names_model_dict[name],
+                                                            repeat_operation=1,
+                                                            max_k_value=max_k_value,
+                                                            display_visuals=display_visuals)
+                else:
+                    best_clusters = self.__create_elbow_seq(name,
+                                                            names_model_dict[name],
+                                                            repeat_operation=repeat_operation,
+                                                            max_k_value=max_k_value,
+                                                            display_visuals=display_visuals)
+
+                # Save cluster results in
+                best_clusters.sort()
+                self.__models_suggested_clusters[name] = best_clusters
+                self.__save_update_best_model_clusters()
+            else:
+                raise UnsatisfiedRequirments(f"Unknown model name passed: \"{name}\"")
 
         return best_clusters
 
@@ -875,8 +931,8 @@ class AutoCluster(AutoModeler):
 
 
     def __create_elbow_seq(self,
-                           pyclustering_model_name,
-                           pyclustering_model,
+                           model_name,
+                           model_instance,
                            repeat_operation,
                            max_k_value,
                            display_visuals):
@@ -894,7 +950,7 @@ class AutoCluster(AutoModeler):
             tmp_k_models = []
 
             if display_visuals:
-                pbar = tqdm(range(1,max_k_value), desc=f"{pyclustering_model_name} Elbow Seq Count {elbow_seq_count + 1}")
+                pbar = tqdm(range(1,max_k_value), desc=f"{model_name} Elbow Seq Count {elbow_seq_count + 1}")
             else:
                 pbar = range(1,max_k_value)
 
@@ -903,14 +959,10 @@ class AutoCluster(AutoModeler):
                 if display_visuals:
                     pbar.set_postfix(model_count=k_val, refresh=True)
 
-                if pyclustering_model_name == "K-Medoids":
-                    model = pyclustering_model(self.__scaled,
-                                               [i for i in self.__get_unique_random_indexes(k_val)])
-                else:
-                    # Create instance of K-Means algorithm with prepared centers.
-                    initial_centers = random_center_initializer(self.__scaled,
-                                                                k_val).initialize()
-                    model = pyclustering_model(self.__scaled, initial_centers)
+
+                model = self.__create_pyclustering_model(model_name=model_name,
+                                                         model_instance=model_instance,
+                                                         k_val=k_val)
 
                 # Run cluster analysis and obtain results.
                 model.process()
@@ -927,7 +979,7 @@ class AutoCluster(AutoModeler):
             k_models.append(tmp_k_models)
             inertias.append(tmp_inertias)
 
-        return self.__find_best_elbow_models(pyclustering_model_name,
+        return self.__find_best_elbow_models(model_name,
                                              k_models,
                                              inertias,
                                              display_visuals)
@@ -952,6 +1004,33 @@ class AutoCluster(AutoModeler):
             return center_points
 
 
+    def __create_pyclustering_model(self,
+                                    model_name,
+                                    model_instance,
+                                    k_val):
+        if model_name == "K-Medoids":
+            model = model_instance(self.__scaled,
+                                       [i for i in
+                                        self.__get_unique_random_indexes(
+                                            k_val)])
+        elif model_name == "Somsc" or model_name == "Cure":
+            model = model_instance(self.__scaled,
+                               k_val)
+
+        elif model_name == "K-Means" or model_name == "Fuzzy C-means":
+            initial_centers = kmeans_plusplus_initializer(self.__scaled, k_val).initialize()
+            model = model_instance(self.__scaled, initial_centers)
+
+        else:
+            # Create instance of K-Means algorithm with prepared centers.
+            initial_centers = random_center_initializer(self.__scaled,
+                                                        k_val).initialize()
+            model = model_instance(self.__scaled, initial_centers)
+
+        return model
+
+
+
 
     def __find_best_elbow_models(self,
                                  model_name,
@@ -971,38 +1050,50 @@ class AutoCluster(AutoModeler):
         inertias_matrix = None
         elbow_models = []
         elbow_sections = []
+        center_elbow_count = dict()
+        proximity_elbow_count = dict()
 
         # Plot ks vs inertias
         for i in range(0,len(inertias)):
-            plt.plot(ks,
-                     inertias[i],
-                     '-o',
-                     color='#367588',
-                     alpha=0.5)
-
 
             elbow_cluster = KneeLocator(ks,
                                         inertias[i],
                                         curve='convex',
                                         direction='decreasing').knee
 
-            print(f"elbow_cluster:{elbow_cluster}")
+            if elbow_cluster == 1 or not elbow_cluster:
+                print("Elbow was either one or None for the elbow seq.")
+                continue
+
+            plt.plot(ks,
+                     inertias[i],
+                     '-o',
+                     color='#367588',
+                     alpha=0.5)
+
+            if str(elbow_cluster) not in center_elbow_count.keys():
+                center_elbow_count[str(elbow_cluster)] = 1
+            else:
+                center_elbow_count[str(elbow_cluster)] += 1
 
             for k_val in [elbow_cluster - 1, elbow_cluster, elbow_cluster + 1]:
-                # plt.plot(ks[k_val - 1],
-                #          inertias[i][k_val - 1],
-                #          'r*',)
                 elbow_sections.append([ks[k_val - 1],inertias[i][k_val - 1]])
 
-                if isinstance(elbow_inertias_matrix, type(None)):
-                    inertias_matrix = np.matrix(inertias)
-                    elbow_inertias_matrix = np.matrix(inertias)
-
+                if str(k_val) not in proximity_elbow_count.keys():
+                    proximity_elbow_count[str(k_val)] = 1
                 else:
-                    inertias_matrix = np.vstack([inertias_matrix, inertias])
+                    proximity_elbow_count[str(k_val)] += 1
 
-                    elbow_inertias_matrix = np.vstack(
-                        [elbow_inertias_matrix, inertias])
+
+            if isinstance(elbow_inertias_matrix, type(None)):
+                inertias_matrix = np.matrix(inertias[i])
+                elbow_inertias_matrix = np.matrix(inertias[i][elbow_cluster - 2:elbow_cluster + 1])
+
+            else:
+                inertias_matrix = np.vstack([inertias_matrix, inertias[i]])
+
+                elbow_inertias_matrix = np.vstack(
+                    [elbow_inertias_matrix, inertias[i][elbow_cluster - 2:elbow_cluster + 1]])
 
             elbow_models.append(k_models[i][elbow_cluster - 2:elbow_cluster + 1])
 
@@ -1017,11 +1108,33 @@ class AutoCluster(AutoModeler):
         del k_models
         del elbow_cluster
 
-        self.save_plot(f"{model_name}",f"All possible {model_name} Elbow's",)
+        self.save_plot(f"Models/{model_name}",f"All possible {model_name} Elbow's",)
 
-        if display_visuals:
+        if display_visuals and self.__notebook_mode:
             plt.show()
         plt.close("all")
+
+        center_elbow_count = pd.DataFrame({"Main Knees": list(center_elbow_count.keys()),
+                                           "Counts": list(center_elbow_count.values())})
+        center_elbow_count.sort_values(by=['Counts'],
+                                       ascending=False,
+                                       inplace=True)
+
+        self.save_table_as_plot(
+            center_elbow_count,
+            sub_dir=f"Models/{model_name}",
+            filename="Center Elbow Count")
+
+        proximity_elbow_count = pd.DataFrame({"Proximity Knees": list(proximity_elbow_count.keys()),
+                                              "Counts": list(proximity_elbow_count.values())})
+        proximity_elbow_count.sort_values(by=['Counts'],
+                                          ascending=False,
+                                          inplace=True)
+
+        self.save_table_as_plot(
+            proximity_elbow_count,
+            sub_dir=f"Models/{model_name}",
+            filename="Proximity Elbow Count")
 
         plt.figure(figsize=(13, 6))
         plt.title(f"Best of all {model_name} Elbows", fontsize=15)
@@ -1050,11 +1163,11 @@ class AutoCluster(AutoModeler):
             self.__all_cluster_models[f"{model_name}_Cluster_" + str(k_val)] = model
 
             create_dir_structure(self.folder_path,
-                                 f"{model_name}/Clusters={k_val}")
+                                 f"Models/{model_name}/Clusters={k_val}")
 
             try:
                 pickle_object_to_file(model,
-                                      self.folder_path + f"{model_name}/Clusters={k_val}",
+                                      self.folder_path + f"Models/{model_name}/Clusters={k_val}",
                                       f"{model_name}_Cluster_" + str(k_val))
             except:
                 print(f"Something went wrong when trying to save the model: {model_name}")
@@ -1063,14 +1176,18 @@ class AutoCluster(AutoModeler):
                      'r*')
             best_clusters.append(k_val)
 
-        self.save_plot(f"{model_name}",
+        self.save_plot(f"Models/{model_name}",
                        f"Best of all {model_name} Elbows")
 
-        if display_visuals:
+        if display_visuals and self.__notebook_mode:
             plt.show()
         plt.close("all")
 
         best_clusters.sort()
+
+        if display_visuals and self.__notebook_mode:
+            display(proximity_elbow_count)
+            display(center_elbow_count)
 
         return best_clusters
 
