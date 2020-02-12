@@ -30,7 +30,7 @@ from IPython.display import display, HTML
 # Misc
 from collections import Counter
 from scipy.stats import zscore
-from kneed import DataGenerator, KneeLocator
+from kneed import KneeLocator
 import pandas as pd
 import six
 import random
@@ -101,6 +101,8 @@ class AutoCluster(AutoModeler):
 
         self.__models_suggested_clusters = dict()
 
+        self.__pca_perc = None
+
         # --- Apply pca ---
         if pca_perc:
 
@@ -156,6 +158,8 @@ class AutoCluster(AutoModeler):
 
             self.__scaled = scaled
 
+            self.__pca_perc = pca_perc
+
         # Assumed PCA has already been applied; pass as matrix
         else:
             self.__scaled = df.values
@@ -201,14 +205,17 @@ class AutoCluster(AutoModeler):
             Displays hierarchical cluster graphs with provided methods.
 
         Args:
-            linkage_methods:
+            linkage_methods: list of strings
                 All methods applied to the linkage
 
-            display_print:
+            display_print: bool
                 Display print outputs
 
-            display_visuals:
+            display_visuals: bool
                 Display plot data
+
+        Returns:
+            All cluster counts found.
         """
 
         best_clusters = []
@@ -413,12 +420,31 @@ class AutoCluster(AutoModeler):
                                          "Somsc",
                                          "Cure",
                                          "Fuzzy C-means"],
-                            repeat_operation=3,
+                            sequences=3,
                             max_k_value=15,
                             display_visuals=True):
+        """
+        Desc:
+            Create multiple sequences of defined clusters and their related
+            inertia values to find the most agreed
+
+        Args:
+            model_names: list of strings
+                Defines which models should be created.
+
+            sequences: int
+                How many model sequences to create
+
+            max_k_value: int
+                Max clusters to create
+
+            display_visuals: bool
+                Display graphics and tables if set to True.
+        """
 
         model_names = set(model_names)
 
+        # Model names and their model instances
         names_model_dict = {"K-Means":kmeans,
                             "K-Medians":kmedians,
                             "K-Medoids":kmedoids,
@@ -431,17 +457,17 @@ class AutoCluster(AutoModeler):
 
             if name in names_model_dict.keys():
 
-                # Only requires 1 elbow sequence
+                # Only requires 1 elbow sequence needed
                 if name == "Somsc" or name == "Cure":
                     best_clusters = self.__create_elbow_seq(name,
                                                             names_model_dict[name],
-                                                            repeat_operation=1,
+                                                            sequences=1,
                                                             max_k_value=max_k_value,
                                                             display_visuals=display_visuals)
                 else:
                     best_clusters = self.__create_elbow_seq(name,
                                                             names_model_dict[name],
-                                                            repeat_operation=repeat_operation,
+                                                            sequences=sequences,
                                                             max_k_value=max_k_value,
                                                             display_visuals=display_visuals)
 
@@ -458,6 +484,7 @@ class AutoCluster(AutoModeler):
                                     n_cluster_list,
                                     linkage_methods=None):
         """
+        Desc:
             Create multiple agglomerative models based on a list of
             'n_clusters' values and defined linkage methods.
         """
@@ -933,7 +960,7 @@ class AutoCluster(AutoModeler):
     def __create_elbow_seq(self,
                            model_name,
                            model_instance,
-                           repeat_operation,
+                           sequences,
                            max_k_value,
                            display_visuals):
         """
@@ -945,7 +972,7 @@ class AutoCluster(AutoModeler):
         k_models = []
         inertias = []
 
-        for elbow_seq_count in range(0,repeat_operation):
+        for elbow_seq_count in range(0,sequences):
             tmp_inertias = []
             tmp_k_models = []
 
@@ -1059,7 +1086,7 @@ class AutoCluster(AutoModeler):
             elbow_cluster = KneeLocator(ks,
                                         inertias[i],
                                         curve='convex',
-                                        direction='decreasing').knee
+                                        direction='decreasing').elbow
 
             if elbow_cluster == 1 or not elbow_cluster:
                 print("Elbow was either one or None for the elbow seq.")
@@ -1103,7 +1130,6 @@ class AutoCluster(AutoModeler):
             plt.plot(k_val,
                      intertia,
                      'r*',)
-
         del inertias
         del k_models
         del elbow_cluster
@@ -1151,6 +1177,7 @@ class AutoCluster(AutoModeler):
 
         best_elbow_index = np.array(knee_vote).argmin()
 
+        print(inertias_matrix[best_elbow_index].tolist()[0])
         plt.plot(ks,
                  inertias_matrix[best_elbow_index].tolist()[0],
                  '-o',
