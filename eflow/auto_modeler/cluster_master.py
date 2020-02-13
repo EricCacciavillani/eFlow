@@ -1,7 +1,8 @@
 from eflow._hidden.parent_objects import AutoModeler
-from eflow.utils.sys_utils import pickle_object_to_file, create_dir_structure, write_object_text_to_file, check_if_directory_exists
+from eflow.utils.sys_utils import load_pickle_object,get_all_files_from_path, get_all_directories_from_path, pickle_object_to_file, create_dir_structure, write_object_text_to_file, json_file_to_dict, dict_to_json_file
 from eflow.utils.eflow_utils import move_folder_to_eflow_garbage
 from eflow._hidden.custom_exceptions import UnsatisfiedRequirments
+from eflow.data_analysis.feature_analysis import FeatureAnalysis
 
 # Getting Sklearn Models
 from sklearn.decomposition import PCA
@@ -55,7 +56,6 @@ class AutoCluster(AutoModeler):
 
     def __init__(self,
                  df,
-                 df_features,
                  project_sub_dir="",
                  project_name="Auto Clustering",
                  overwrite_full_path=None,
@@ -65,9 +65,6 @@ class AutoCluster(AutoModeler):
         Args:
             df: pd.Dataframe
                 pd.Dataframe
-
-            df_features: Dataframes type holder
-                Dataframes type holder
 
             project_sub_dir: string
                 Sub directory to write data.
@@ -93,9 +90,7 @@ class AutoCluster(AutoModeler):
 
 
         # Define model
-        self.__all_cluster_models = dict()
-
-        self.__df_features = copy.deepcopy(df_features)
+        self.__cluster_models_paths = dict()
 
         self.__notebook_mode = copy.deepcopy(notebook_mode)
 
@@ -164,6 +159,27 @@ class AutoCluster(AutoModeler):
         else:
             self.__scaled = df.values
 
+        if os.path.exists(self.folder_path + "Models"):
+
+            print("Found past models in directory structure! Attempting to re-initalize models...")
+
+            cluster_directories = get_all_directories_from_path(self.folder_path + "Models")
+            for cluster_dir in cluster_directories:
+                if cluster_dir[0] != ".":
+                    for dir in get_all_directories_from_path(self.folder_path + f"Models/{cluster_dir}"):
+                        if dir[0] != ".":
+                            for model_name in get_all_files_from_path(self.folder_path + f"Models/{cluster_dir}/{dir}",
+                                                                ".pkl"):
+
+                                model_path = self.folder_path + f"Models/{cluster_dir}/{dir}/{model_name}"
+
+                                model_name = model_name.split(".")[0]
+
+                                self.__cluster_models_paths[model_name] = model_path
+
+            if self.__cluster_models_paths:
+                for model_name, model_path in self.__cluster_models_paths.items():
+                    print(f"{model_name} was found at {model_path}\n")
 
     # --- Getters/Setters
     def get_scaled_data(self):
@@ -185,7 +201,11 @@ class AutoCluster(AutoModeler):
         Return:
             Returns the model name to model instance dict
         """
-        return copy.deepcopy(self.__all_cluster_models)
+        tmp_dict = dict()
+        for model_name, model_path in self.__cluster_models_paths.items():
+            tmp_dict[model_name] = load_pickle_object(model_path)
+
+        return tmp_dict
 
     def delete_stored_data(self):
         """
@@ -419,7 +439,7 @@ class AutoCluster(AutoModeler):
                                          "K-Medoids",
                                          "Somsc",
                                          "Cure",
-                                         "Fuzzy C-means"],
+                                         "Fuzzy C-Means"],
                             sequences=3,
                             max_k_value=15,
                             display_visuals=True):
@@ -450,7 +470,7 @@ class AutoCluster(AutoModeler):
                             "K-Medoids":kmedoids,
                             "Somsc":somsc,
                             "Cure":cure,
-                            "Fuzzy C-means": fcm}
+                            "Fuzzy C-Means": fcm}
 
         # Iterate through passed model names
         for name in model_names:
@@ -488,44 +508,42 @@ class AutoCluster(AutoModeler):
             Create multiple agglomerative models based on a list of
             'n_clusters' values and defined linkage methods.
         """
-
-        if isinstance(n_cluster_list, int):
-            n_cluster_list = [n_cluster_list]
-
-        if not linkage_methods:
-            linkage_methods = ["ward", "complete", "average", "single"]
-
-        knn_graph = kneighbors_graph(
-            self.__scaled, len(
-                self.__scaled) - 1, include_self=False)
-
-        for n_clusters in n_cluster_list:
-            for connectivity in (None, knn_graph):
-
-                for _, linkage in enumerate(linkage_methods):
-                    model = AgglomerativeClustering(linkage=linkage,
-                                                    connectivity=connectivity,
-                                                    n_clusters=n_clusters)
-                    model.fit(self.__scaled)
-                    self.__all_cluster_models[
-                        "AgglomerativeClustering_{0}_"
-                        "cluster{1}_Connectivity{2}".format(
-                            linkage,
-                            n_clusters, connectivity is not None)] = model
-
-                    print(
-                        "Successfully generate Agglomerative model with "
-                        "linkage {0} on n_clusters={1}".format(
-                            linkage, n_clusters))
+        raise ValueError("This functionality has been clamped!...Hopefully someone get's this refrence")
+        pass
+        # if isinstance(n_cluster_list, int):
+        #     n_cluster_list = [n_cluster_list]
+        #
+        # if not linkage_methods:
+        #     linkage_methods = ["ward", "complete", "average", "single"]
+        #
+        # knn_graph = kneighbors_graph(
+        #     self.__scaled, len(
+        #         self.__scaled) - 1, include_self=False)
+        #
+        # for n_clusters in n_cluster_list:
+        #     for connectivity in (None, knn_graph):
+        #
+        #         for _, linkage in enumerate(linkage_methods):
+        #             model = AgglomerativeClustering(linkage=linkage,
+        #                                             connectivity=connectivity,
+        #                                             n_clusters=n_clusters)
+        #             model.fit(self.__scaled)
+        #             self.__cluster_models[
+        #                 "AgglomerativeClustering_{0}_"
+        #                 "cluster{1}_Connectivity{2}".format(
+        #                     linkage,
+        #                     n_clusters, connectivity is not None)] = model
+        #
+        #             print(
+        #                 "Successfully generate Agglomerative model with "
+        #                 "linkage {0} on n_clusters={1}".format(
+        #                     linkage, n_clusters))
 
         # self.__models_suggested_clusters["Agglomerative models"] =
 
     def evaluate_all_models(self,
                             df,
                             df_features,
-                            le_map=None,
-                            show_extra=True,
-                            find_nearest_on_cols=False,
                             zscore_low=-2,
                             zscore_high=2):
         """
@@ -533,29 +551,17 @@ class AutoCluster(AutoModeler):
             'evaluate_model'. Read 'evaluate_model' to learn more.
         """
 
-        for model_name, model in self.__all_cluster_models.items():
+        for model_name, model_path in self.__cluster_models_paths.items():
             self.evaluate_model(model_name=model_name,
-                                model=model,
                                 df=df,
                                 df_features=df_features,
-                                le_map=le_map,
-                                find_nearest_on_cols=find_nearest_on_cols,
-                                show_extra=show_extra,
                                 zscore_low=zscore_low,
                                 zscore_high=zscore_high)
 
-            self.__vertical_spacing(5)
-            print("----" * 20)
-
     def evaluate_model(self,
                        model_name,
-                       model,
                        df,
                        df_features,
-                       output_folder=None,
-                       le_map=None,
-                       show_extra=True,
-                       find_nearest_on_cols=False,
                        zscore_low=-2,
                        zscore_high=2):
         """
@@ -571,24 +577,6 @@ class AutoCluster(AutoModeler):
         df_features:
             DataFrameTypes object; organizes feature types into groups.
 
-        output_folder:
-            Sub directory to put the pngs
-
-        le_map:
-            Dict of dataframe cols to LabelEncoders
-
-        show_extra:
-            Show extra information from all functions
-
-        find_nearest_on_cols:
-                Allows columns to be converted to actual values found within
-                the dataset.
-                Ex: Can't have .7 in a bool column convert's it to 1.
-
-                False: Just apply to obj columns and bool columns
-
-                True: Apply to all columns
-
         zscore_low/zscore_high:
             Defines how the threshold to remove data points when profiling the
             cluster.
@@ -598,55 +586,101 @@ class AutoCluster(AutoModeler):
         accoiated with describing the model's 'findings'.
         """
 
-        df = copy.deepcopy(df)
+        model = load_pickle_object(self.__cluster_models_paths[model_name])
+        model_path = self.__cluster_models_paths[model_name]
+        model_dir = os.path.dirname(model_path)
+        model_sub_dir = model_dir.replace(self.folder_path,"",1)
 
-        # Create folder structure for png outputs
-        if not output_folder:
-            output_path = str(model).split("(", 1)[0] + "/" + model_name
-        else:
-            output_path = output_folder + "/" + model_name
+        cluster_labels = json_file_to_dict(f"{model_dir}/Cluster Labels.json")
+        print(f"Model Name: {model_name}")
+        print(f"Clusters: {len(model.get_clusters())}")
 
-        # ---
-        # self.__visualize_clusters(model=model,
-        #                           output_path=output_path,
-        #                           model_name=model_name)
+        for i,cluster_indexes in enumerate(model.get_clusters()):
 
-        # ---
-        df["Cluster_Name"] = model.labels_
-        numerical_features = df_features.numerical_features()
-        clustered_dataframes, shrunken_labeled_df = \
-            self.__create_cluster_sub_dfs(
-                df=df, model=model, numerical_features=numerical_features,
-                zscore_low=zscore_low, zscore_high=zscore_high)
+            print(f"Feature Analysis on cluster {cluster_labels[str(i)]}")
+            tmp_df = df.loc[cluster_indexes].reset_index(drop=True)
 
-        rows_count, cluster_profiles_df = self.__create_cluster_profiles(
-            clustered_dataframes=clustered_dataframes,
-            shrunken_df=shrunken_labeled_df,
-            numerical_features=df_features.numerical_features(),
-            le_map=le_map,
-            output_path=output_path,
-            show=show_extra,
-            find_nearest_on_cols=find_nearest_on_cols)
+            feature_analysis = FeatureAnalysis(df_features,
+                                               overwrite_full_path=model_dir,
+                                               notebook_mode=self.__notebook_mode)
 
-        # Check to see how many data points were removed during the profiling
-        # stage
-        print("Orginal points in dataframe: ", df.shape[0])
-        print("Total points in all modified clusters: ", rows_count)
-        print("Shrank by: ", df.shape[0] - rows_count)
+            feature_analysis.perform_analysis(tmp_df,
+                                              dataset_name=f"Cluster: {cluster_labels[str(i)]}",
+                                              display_visuals=False,
+                                              display_print=False)
 
-        # In case to many data points were removed
-        if cluster_profiles_df.shape[0] == 0:
-            print(
-                "The applied Z-scores caused the cluster profiles "
-                "to shrink to far for the model {0}!".format(
-                    model_name))
+            self.__create_cluster_profile(df,
+                                          df_features,
+                                          sub_dir=f"{model_sub_dir}/Cluster: {cluster_labels[str(i)]}")
 
-        # Display and save dataframe table
-        else:
-            display(cluster_profiles_df)
-            self.__render_mpl_table(cluster_profiles_df, sub_dir=output_path,
-                                    filename="All_Clusters",
-                                    header_columns=0, col_width=2.0)
+        print("------" * 10)
+
+        #
+        # # ---
+        # # self.__visualize_clusters(model=model,
+        # #                           output_path=output_path,
+        # #                           model_name=model_name)
+        #
+        # # ---
+        # df["Cluster_Name"] = model.labels_
+        # numerical_features = df_features.numerical_features()
+        # clustered_dataframes, shrunken_labeled_df = \
+        #     self.__create_cluster_sub_dfs(
+        #         df=df, model=model, numerical_features=numerical_features,
+        #         zscore_low=zscore_low, zscore_high=zscore_high)
+        #
+        # rows_count, cluster_profiles_df = self.__create_cluster_profiles(
+        #     clustered_dataframes=clustered_dataframes,
+        #     shrunken_df=shrunken_labeled_df,
+        #     numerical_features=df_features.numerical_features(),
+        #     le_map=le_map,
+        #     output_path=output_path,
+        #     show=show_extra,
+        #     find_nearest_on_cols=find_nearest_on_cols)
+        #
+        # # Check to see how many data points were removed during the profiling
+        # # stage
+        # print("Orginal points in dataframe: ", df.shape[0])
+        # print("Total points in all modified clusters: ", rows_count)
+        # print("Shrank by: ", df.shape[0] - rows_count)
+        #
+        # # In case to many data points were removed
+        # if cluster_profiles_df.shape[0] == 0:
+        #     print(
+        #         "The applied Z-scores caused the cluster profiles "
+        #         "to shrink to far for the model {0}!".format(
+        #             model_name))
+        #
+        # # Display and save dataframe table
+        # else:
+        #     display(cluster_profiles_df)
+        #     self.__render_mpl_table(cluster_profiles_df, sub_dir=output_path,
+        #                             filename="All_Clusters",
+        #                             header_columns=0, col_width=2.0)
+
+
+    def __create_cluster_profile(self,
+                                 df,
+                                 df_features,
+                                 sub_dir):
+        cluster_profile_dict = dict()
+
+        for feature_name in df.columns:
+            if feature_name in df_features.continuous_numerical_features():
+                cluster_profile_dict[feature_name] = df[feature_name].mean()
+            else:
+                cluster_profile_dict[feature_name] = ":".join([str(i) for i in df[feature_name].mode()])
+                if feature_name in df_features.bool_features():
+                    if cluster_profile_dict[feature_name] == "1":
+                        cluster_profile_dict[feature_name] = True
+                    elif cluster_profile_dict[feature_name] == "0":
+                        cluster_profile_dict[feature_name] = False
+
+
+        self.save_table_as_plot(pd.DataFrame(cluster_profile_dict, index=[0]),
+                                sub_dir=sub_dir,
+                                filename="Cluster Profile")
+
 
     def __create_cluster_profiles(self,
                                   clustered_dataframes,
@@ -981,14 +1015,18 @@ class AutoCluster(AutoModeler):
             else:
                 pbar = range(1,max_k_value)
 
+            initial_centers = self.__create_random_initial_centers(model_name,
+                                                                   max_k_value)
+
             for k_val in pbar:
 
                 if display_visuals:
-                    pbar.set_postfix(model_count=k_val, refresh=True)
-
+                    pbar.set_postfix(model_count=k_val,
+                                     refresh=True)
 
                 model = self.__create_pyclustering_model(model_name=model_name,
                                                          model_instance=model_instance,
+                                                         initial_centers=initial_centers,
                                                          k_val=k_val)
 
                 # Run cluster analysis and obtain results.
@@ -1034,29 +1072,34 @@ class AutoCluster(AutoModeler):
     def __create_pyclustering_model(self,
                                     model_name,
                                     model_instance,
+                                    initial_centers,
                                     k_val):
-        if model_name == "K-Medoids":
-            model = model_instance(self.__scaled,
-                                       [i for i in
-                                        self.__get_unique_random_indexes(
-                                            k_val)])
-        elif model_name == "Somsc" or model_name == "Cure":
-            model = model_instance(self.__scaled,
-                               k_val)
 
-        elif model_name == "K-Means" or model_name == "Fuzzy C-means":
-            initial_centers = kmeans_plusplus_initializer(self.__scaled, k_val).initialize()
-            model = model_instance(self.__scaled, initial_centers)
-
+        if model_name == "Somsc" or model_name == "Cure":
+            model = model_instance(self.__scaled,
+                                   k_val)
         else:
-            # Create instance of K-Means algorithm with prepared centers.
-            initial_centers = random_center_initializer(self.__scaled,
-                                                        k_val).initialize()
-            model = model_instance(self.__scaled, initial_centers)
+
+            model = model_instance(self.__scaled,
+                                   initial_centers[0:k_val])
 
         return model
 
+    def __create_random_initial_centers(self,
+                                        model_name,
+                                        k_val):
+        if model_name == "Somsc" or model_name == "Cure":
+            return None
+        elif model_name == "K-Medoids":
+            return [i for i in self.__get_unique_random_indexes(k_val)]
 
+        elif model_name == "K-Means" or model_name == "Fuzzy C-means":
+            return kmeans_plusplus_initializer(self.__scaled,
+                                               k_val).initialize()
+        else:
+            # Create instance of K-Means algorithm with prepared centers.
+            return random_center_initializer(self.__scaled,
+                                             k_val).initialize()
 
 
     def __find_best_elbow_models(self,
@@ -1085,8 +1128,16 @@ class AutoCluster(AutoModeler):
 
             elbow_cluster = KneeLocator(ks,
                                         inertias[i],
+                                        S=.7,
                                         curve='convex',
                                         direction='decreasing').elbow
+
+            print(f"elbow_cluster:{elbow_cluster}")
+            print(KneeLocator(ks,
+                              inertias[i],
+                              curve='concave',
+                              online=True,
+                              direction='decreasing').elbow)
 
             if elbow_cluster == 1 or not elbow_cluster:
                 print("Elbow was either one or None for the elbow seq.")
@@ -1134,7 +1185,8 @@ class AutoCluster(AutoModeler):
         del k_models
         del elbow_cluster
 
-        self.save_plot(f"Models/{model_name}",f"All possible {model_name} Elbow's",)
+        self.save_plot(f"Models/{model_name}",
+                       f"All possible {model_name} Elbow's",)
 
         if display_visuals and self.__notebook_mode:
             plt.show()
@@ -1170,12 +1222,12 @@ class AutoCluster(AutoModeler):
 
         average_elbow_inertias = elbow_inertias_matrix.mean(0)
 
-        knee_vote = []
+        elbow_vote = []
         for vector in elbow_inertias_matrix:
-            knee_vote.append(
+            elbow_vote.append(
                 np.absolute(vector - average_elbow_inertias).sum())
 
-        best_elbow_index = np.array(knee_vote).argmin()
+        best_elbow_index = np.array(elbow_vote).argmin()
 
         print(inertias_matrix[best_elbow_index].tolist()[0])
         plt.plot(ks,
@@ -1187,17 +1239,25 @@ class AutoCluster(AutoModeler):
         for model in elbow_models[best_elbow_index]:
             k_val = len(model.get_clusters())
 
-            self.__all_cluster_models[f"{model_name}_Cluster_" + str(k_val)] = model
+            model_path = create_dir_structure(self.folder_path,
+                                              f"Models/{model_name}/Clusters={k_val}")
 
-            create_dir_structure(self.folder_path,
-                                 f"Models/{model_name}/Clusters={k_val}")
 
             try:
-                pickle_object_to_file(model,
-                                      self.folder_path + f"Models/{model_name}/Clusters={k_val}",
-                                      f"{model_name}_Cluster_" + str(k_val))
+                file_dir = pickle_object_to_file(model,
+                                                 model_path,
+                                                 f"{model_name}_Clusters={str(k_val)}")
+
+                dict_to_json_file({i:i for i in range(0,len(model.get_clusters()))},
+                                  model_path,
+                                  "Cluster Labels")
+
+                self.__cluster_models_paths[
+                    f"{model_name}_Clusters={str(k_val)}"] = file_dir
+
             except:
                 print(f"Something went wrong when trying to save the model: {model_name}")
+
             plt.plot(ks[k_val - 1],
                      inertias_matrix[best_elbow_index].tolist()[0][k_val - 1],
                      'r*')
@@ -1242,8 +1302,6 @@ class AutoCluster(AutoModeler):
         write_object_text_to_file(round(sum(all_clusters) / len(all_clusters)),
                                   self.folder_path + "_Extras",
                                   "Average of suggested clusters")
-
-
 
 
 

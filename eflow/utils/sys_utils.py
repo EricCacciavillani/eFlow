@@ -176,6 +176,12 @@ def pickle_object_to_file(obj,
                 list_pickle)
     list_pickle.close()
 
+    return file_dir
+
+def load_pickle_object(file_path):
+    with open(file_path, 'rb') as handle:
+        return pickle.load(handle)
+
 def dict_to_json_file(dict_obj,
                       directory_path,
                       filename,

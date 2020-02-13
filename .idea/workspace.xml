@@ -6,25 +6,147 @@
     <bookmark url="file://$PROJECT_DIR$/eflow/data_pipeline_segments/type_fixer.py" line="33" />
     <bookmark url="file://$PROJECT_DIR$/eflow/utils/pandas_utils.py" line="338" />
     <bookmark url="file://$PROJECT_DIR$/eflow/data_pipeline_segments/data_encoder.py" line="358" />
+    <bookmark url="file://$PROJECT_DIR$/eflow/auto_modeler/cluster_master.py" line="1079" />
   </component>
   <component name="ChangeListManager">
     <list default="true" id="178261e3-0830-4d8e-91ef-8172f5216aca" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/Backlogged Code/cluster_master_1.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/eflow/_hidden/Backlogged Code/Global_Utils.py" beforeDir="false" afterPath="$PROJECT_DIR$/Backlogged Code/Global_Utils.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/eflow/_hidden/Backlogged Code/Multi_Threading_Functions.py" beforeDir="false" afterPath="$PROJECT_DIR$/Backlogged Code/Multi_Threading_Functions.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/eflow/_hidden/Backlogged Code/MyEncoder.py" beforeDir="false" afterPath="$PROJECT_DIR$/Backlogged Code/MyEncoder.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/eflow/_hidden/Backlogged Code/SampleRemoval 2.py" beforeDir="false" afterPath="$PROJECT_DIR$/Backlogged Code/SampleRemoval 2.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/eflow/_hidden/Backlogged Code/SampleRemoval.py" beforeDir="false" afterPath="$PROJECT_DIR$/Backlogged Code/SampleRemoval.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/eflow/_hidden/Backlogged Code/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/Backlogged Code/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/eflow/_hidden/Backlogged Code/cluster_master.py" beforeDir="false" afterPath="$PROJECT_DIR$/Backlogged Code/cluster_master.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/eflow/_hidden/Backlogged Code/data_manipulation.py" beforeDir="false" afterPath="$PROJECT_DIR$/Backlogged Code/data_manipulation.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/eflow/_hidden/parent_objects/auto_modeler.py" beforeDir="false" afterPath="$PROJECT_DIR$/eflow/_hidden/parent_objects/auto_modeler.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/eflow/auto_modeler/cluster_master.py" beforeDir="false" afterPath="$PROJECT_DIR$/eflow/auto_modeler/cluster_master.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/eflow/utils/sys_utils.py" beforeDir="false" afterPath="$PROJECT_DIR$/eflow/utils/sys_utils.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/testing/.ipynb_checkpoints/3.) Clustering of data-checkpoint.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/testing/.ipynb_checkpoints/3.) Clustering of data-checkpoint.ipynb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/testing/3.) Clustering of data.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/testing/3.) Clustering of data.ipynb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/Datasets/.ipynb_checkpoints/.testing-checkpoint.csv.icloud" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Auto Clustering/Hierarchical Clustering/Hierarchical Clustering Method Average with legend.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Auto Clustering/Hierarchical Clustering/Hierarchical Clustering Method Average without legend.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Auto Clustering/Hierarchical Clustering/Hierarchical Clustering Method Centroid with legend.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Auto Clustering/Hierarchical Clustering/Hierarchical Clustering Method Centroid without legend.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Auto Clustering/Hierarchical Clustering/Hierarchical Clustering Method Complete with legend.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Auto Clustering/Hierarchical Clustering/Hierarchical Clustering Method Complete without legend.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Auto Clustering/Hierarchical Clustering/Hierarchical Clustering Method Median with legend.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Auto Clustering/Hierarchical Clustering/Hierarchical Clustering Method Median without legend.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Auto Clustering/Hierarchical Clustering/Hierarchical Clustering Method Single with legend.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Auto Clustering/Hierarchical Clustering/Hierarchical Clustering Method Single without legend.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Auto Clustering/Hierarchical Clustering/Hierarchical Clustering Method Ward with legend.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Auto Clustering/Hierarchical Clustering/Hierarchical Clustering Method Ward without legend.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Auto Clustering/Hierarchical Clustering/Hierarchical Clustering Method Weighted with legend.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Auto Clustering/Hierarchical Clustering/Hierarchical Clustering Method Weighted without legend.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Auto Clustering/Models/Cure/Clusters=2/Cure_Cluster_2.pkl" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Auto Clustering/Models/Cure/Clusters=3/Cure_Cluster_3.pkl" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Auto Clustering/Models/Cure/Clusters=4/Cure_Cluster_4.pkl" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Auto Clustering/Models/Fuzzy C-means/All possible Fuzzy C-means Elbow's.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Auto Clustering/Models/Fuzzy C-means/All possible Fuzzy C-means Elbow's.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Auto Clustering/Models/Fuzzy C-means/Best of all Fuzzy C-means Elbows.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Auto Clustering/Models/Fuzzy C-means/Best of all Fuzzy C-means Elbows.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Auto Clustering/Models/Fuzzy C-means/Center Elbow Count.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Auto Clustering/Models/Fuzzy C-means/Center Elbow Count.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Auto Clustering/Models/Fuzzy C-means/Clusters=1/Fuzzy C-means_Cluster_1.pkl" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Auto Clustering/Models/Fuzzy C-means/Clusters=2/Fuzzy C-means_Cluster_2.pkl" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Auto Clustering/Models/Fuzzy C-means/Clusters=3/Fuzzy C-means_Cluster_3.pkl" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Auto Clustering/Models/Fuzzy C-means/Clusters=4/Fuzzy C-means_Cluster_4.pkl" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Auto Clustering/Models/Fuzzy C-means/Clusters=5/Fuzzy C-means_Cluster_5.pkl" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Auto Clustering/Models/Fuzzy C-means/Proximity Elbow Count.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Auto Clustering/Models/Fuzzy C-means/Proximity Elbow Count.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Auto Clustering/Models/K-Means/All possible K-Means Elbow's.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Auto Clustering/Models/K-Means/All possible K-Means Elbow's.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Auto Clustering/Models/K-Means/Best of all K-Means Elbows.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Auto Clustering/Models/K-Means/Best of all K-Means Elbows.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Auto Clustering/Models/K-Means/Center Elbow Count.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Auto Clustering/Models/K-Means/Center Elbow Count.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Auto Clustering/Models/K-Means/Clusters=4/K-Means_Cluster_4.pkl" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Auto Clustering/Models/K-Means/Clusters=5/K-Means_Cluster_5.pkl" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Auto Clustering/Models/K-Means/Clusters=6/K-Means_Cluster_6.pkl" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Auto Clustering/Models/K-Means/Clusters=7/K-Means_Cluster_7.pkl" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Auto Clustering/Models/K-Means/Clusters=8/K-Means_Cluster_8.pkl" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Auto Clustering/Models/K-Means/Proximity Elbow Count.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Auto Clustering/Models/K-Means/Proximity Elbow Count.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Auto Clustering/Models/K-Medians/All possible K-Medians Elbow's.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Auto Clustering/Models/K-Medians/All possible K-Medians Elbow's.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Auto Clustering/Models/K-Medians/Best of all K-Medians Elbows.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Auto Clustering/Models/K-Medians/Best of all K-Medians Elbows.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Auto Clustering/Models/K-Medians/Center Elbow Count.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Auto Clustering/Models/K-Medians/Center Elbow Count.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Auto Clustering/Models/K-Medians/Clusters=3/K-Medians_Cluster_3.pkl" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Auto Clustering/Models/K-Medians/Clusters=4/K-Medians_Cluster_4.pkl" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Auto Clustering/Models/K-Medians/Clusters=5/K-Medians_Cluster_5.pkl" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Auto Clustering/Models/K-Medians/Clusters=6/K-Medians_Cluster_6.pkl" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Auto Clustering/Models/K-Medians/Clusters=7/K-Medians_Cluster_7.pkl" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Auto Clustering/Models/K-Medians/Clusters=8/K-Medians_Cluster_8.pkl" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Auto Clustering/Models/K-Medians/Proximity Elbow Count.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Auto Clustering/Models/K-Medians/Proximity Elbow Count.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Auto Clustering/Models/K-Medoids/All possible K-Medoids Elbow's.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Auto Clustering/Models/K-Medoids/All possible K-Medoids Elbow's.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Auto Clustering/Models/K-Medoids/Best of all K-Medoids Elbows.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Auto Clustering/Models/K-Medoids/Best of all K-Medoids Elbows.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Auto Clustering/Models/K-Medoids/Center Elbow Count.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Auto Clustering/Models/K-Medoids/Center Elbow Count.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Auto Clustering/Models/K-Medoids/Clusters=10/K-Medoids_Cluster_10.pkl" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Auto Clustering/Models/K-Medoids/Clusters=4/K-Medoids_Cluster_4.pkl" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Auto Clustering/Models/K-Medoids/Clusters=5/K-Medoids_Cluster_5.pkl" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Auto Clustering/Models/K-Medoids/Clusters=6/K-Medoids_Cluster_6.pkl" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Auto Clustering/Models/K-Medoids/Clusters=7/K-Medoids_Cluster_7.pkl" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Auto Clustering/Models/K-Medoids/Clusters=8/K-Medoids_Cluster_8.pkl" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Auto Clustering/Models/K-Medoids/Clusters=9/K-Medoids_Cluster_9.pkl" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Auto Clustering/Models/K-Medoids/Proximity Elbow Count.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Auto Clustering/Models/K-Medoids/Proximity Elbow Count.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Auto Clustering/Models/Somsc/Clusters=5/Somsc_Cluster_5.pkl" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Auto Clustering/Models/Somsc/Clusters=6/Somsc_Cluster_6.pkl" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Auto Clustering/Models/Somsc/Clusters=7/Somsc_Cluster_7.pkl" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Auto Clustering/_Extras/All suggested clusters.pkl" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Auto Clustering/_Extras/All suggested clusters.pkl" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Auto Clustering/_Extras/All suggested clusters.txt" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Auto Clustering/_Extras/All suggested clusters.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Auto Clustering/_Extras/Average of suggested clusters.txt" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Auto Clustering/_Extras/Average of suggested clusters.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Auto Clustering/_Extras/K-Medians suggested clusters.txt" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Auto Clustering/_Extras/K-Medians suggested clusters.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Auto Clustering/_Extras/K-Medoids suggested clusters.txt" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Auto Clustering/_Extras/K-Medoids suggested clusters.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Auto Clustering/_Extras 1/All suggested clusters.pkl" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Auto Clustering/_Extras 1/All suggested clusters.pkl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Auto Clustering/_Extras 1/All suggested clusters.txt" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Auto Clustering/_Extras 1/All suggested clusters.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Auto Clustering/_Extras 1/Average of suggested clusters.txt" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Auto Clustering/_Extras 1/Average of suggested clusters.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Auto Clustering/_Extras 1/Fuzzy C-means suggested clusters.txt" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Auto Clustering/_Extras 1/Fuzzy C-means suggested clusters.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Auto Clustering/_Extras 1/Hierarchical Clustering suggested clusters.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Auto Clustering/_Extras 10/All suggested clusters.pkl" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Auto Clustering/_Extras 10/All suggested clusters.pkl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Auto Clustering/_Extras 10/All suggested clusters.txt" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Auto Clustering/_Extras 10/All suggested clusters.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Auto Clustering/_Extras 10/Average of suggested clusters.txt" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Auto Clustering/_Extras 10/Average of suggested clusters.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Auto Clustering/_Extras 10/Cure suggested clusters.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Auto Clustering/_Extras 10/K-Means suggested clusters.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Auto Clustering/_Extras 10/K-Medians suggested clusters.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Auto Clustering/_Extras 10/K-Medoids suggested clusters.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Auto Clustering/_Extras 10/Somsc suggested clusters.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Auto Clustering/_Extras 2/All suggested clusters.pkl" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Auto Clustering/_Extras 2/All suggested clusters.pkl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Auto Clustering/_Extras 2/All suggested clusters.txt" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Auto Clustering/_Extras 2/All suggested clusters.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Auto Clustering/_Extras 2/Average of suggested clusters.txt" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Auto Clustering/_Extras 2/Average of suggested clusters.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Auto Clustering/_Extras 2/K-Medians suggested clusters.txt" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Auto Clustering/_Extras 2/K-Medians suggested clusters.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Auto Clustering/_Extras 2/K-Medoids suggested clusters.txt" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Auto Clustering/_Extras 2/K-Medoids suggested clusters.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Auto Clustering/_Extras 3/All suggested clusters.pkl" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Auto Clustering/_Extras 3/All suggested clusters.pkl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Auto Clustering/_Extras 3/All suggested clusters.txt" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Auto Clustering/_Extras 3/All suggested clusters.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Auto Clustering/_Extras 3/Average of suggested clusters.txt" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Auto Clustering/_Extras 3/Average of suggested clusters.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Auto Clustering/_Extras 3/K-Medians suggested clusters.txt" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Auto Clustering/_Extras 3/K-Medians suggested clusters.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Auto Clustering/_Extras 3/K-Medoids suggested clusters.txt" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Auto Clustering/_Extras 3/K-Medoids suggested clusters.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Auto Clustering/_Extras 4/All suggested clusters.pkl" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Auto Clustering/_Extras 4/All suggested clusters.pkl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Auto Clustering/_Extras 4/All suggested clusters.txt" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Auto Clustering/_Extras 4/All suggested clusters.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Auto Clustering/_Extras 4/K-Medians suggested clusters.txt" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Auto Clustering/_Extras 4/K-Medians suggested clusters.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Auto Clustering/_Extras 5/All suggested clusters.pkl" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Auto Clustering/_Extras 5/All suggested clusters.pkl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Auto Clustering/_Extras 5/All suggested clusters.txt" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Auto Clustering/_Extras 5/All suggested clusters.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Auto Clustering/_Extras 5/Average of suggested clusters.txt" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Auto Clustering/_Extras 5/Average of suggested clusters.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Auto Clustering/_Extras 5/Cure suggested clusters.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Auto Clustering/_Extras 5/K-Means suggested clusters.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Auto Clustering/_Extras 5/K-Medians suggested clusters.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Auto Clustering/_Extras 5/K-Medoids suggested clusters.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Auto Clustering/_Extras 5/Somsc suggested clusters.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Auto Clustering/_Extras 6/All suggested clusters.pkl" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Auto Clustering/_Extras 6/All suggested clusters.pkl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Auto Clustering/_Extras 6/All suggested clusters.txt" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Auto Clustering/_Extras 6/All suggested clusters.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Auto Clustering/_Extras 6/Average of suggested clusters.txt" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Auto Clustering/_Extras 6/Average of suggested clusters.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Auto Clustering/_Extras 6/Cure suggested clusters.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Auto Clustering/_Extras 6/K-Means suggested clusters.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Auto Clustering/_Extras 6/K-Medians suggested clusters.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Auto Clustering/_Extras 6/K-Medoids suggested clusters.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Auto Clustering/_Extras 6/Somsc suggested clusters.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Auto Clustering/_Extras 7/All suggested clusters.pkl" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Auto Clustering/_Extras 7/All suggested clusters.pkl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Auto Clustering/_Extras 7/All suggested clusters.txt" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Auto Clustering/_Extras 7/All suggested clusters.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Auto Clustering/_Extras 7/Average of suggested clusters.txt" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Auto Clustering/_Extras 7/Average of suggested clusters.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Auto Clustering/_Extras 7/Fuzzy C-means suggested clusters.txt" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Auto Clustering/_Extras 7/Fuzzy C-means suggested clusters.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Auto Clustering/_Extras 7/K-Medians suggested clusters.txt" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Auto Clustering/_Extras 7/K-Medians suggested clusters.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Auto Clustering/_Extras 7/K-Medoids suggested clusters.txt" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Auto Clustering/_Extras 7/K-Medoids suggested clusters.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Auto Clustering/_Extras 8/All suggested clusters.pkl" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Auto Clustering/_Extras 8/All suggested clusters.pkl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Auto Clustering/_Extras 8/All suggested clusters.txt" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Auto Clustering/_Extras 8/All suggested clusters.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Auto Clustering/_Extras 8/Average of suggested clusters.txt" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Auto Clustering/_Extras 8/Average of suggested clusters.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Auto Clustering/_Extras 8/Fuzzy C-means suggested clusters.txt" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Auto Clustering/_Extras 8/Fuzzy C-means suggested clusters.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Auto Clustering/_Extras 8/K-Means suggested clusters.txt" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Auto Clustering/_Extras 8/K-Means suggested clusters.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Auto Clustering/_Extras 8/K-Medians suggested clusters.txt" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Auto Clustering/_Extras 8/K-Medians suggested clusters.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Auto Clustering/_Extras 8/K-Medoids suggested clusters.txt" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Auto Clustering/_Extras 8/K-Medoids suggested clusters.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Auto Clustering/_Extras 9/All suggested clusters.pkl" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Auto Clustering/_Extras 9/All suggested clusters.pkl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Auto Clustering/_Extras 9/All suggested clusters.txt" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Auto Clustering/_Extras 9/All suggested clusters.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Auto Clustering/_Extras 9/Average of suggested clusters.txt" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Auto Clustering/_Extras 9/Average of suggested clusters.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Auto Clustering/_Extras 9/K-Means suggested clusters.txt" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Auto Clustering/_Extras 9/K-Means suggested clusters.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Auto Clustering/_Extras 9/K-Medians suggested clusters.txt" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Auto Clustering/_Extras 9/K-Medians suggested clusters.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Auto Clustering/_Extras 9/K-Medoids suggested clusters.txt" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Auto Clustering/_Extras 9/K-Medoids suggested clusters.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Auto Clustering/_Extras/All suggested clusters.pkl" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Auto Clustering/_Extras/All suggested clusters.pkl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Auto Clustering/_Extras/All suggested clusters.txt" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Auto Clustering/_Extras/All suggested clusters.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Auto Clustering/_Extras/Average of suggested clusters.txt" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Auto Clustering/_Extras/Average of suggested clusters.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Auto Clustering/_Extras/Hierarchical Clustering suggested clusters.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Garbage/Data Pipeline Segments/DataTransformer/FE00C31F97.json" beforeDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -34,6 +156,7 @@
   </component>
   <component name="CoverageDataManager">
     <SUITE FILE_PATH="coverage/eFlow$dataframe_snapshot.coverage" NAME="dataframe_snapshot Coverage Results" MODIFIED="1569440910365" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/eflow/_hidden/objects" />
+    <SUITE FILE_PATH="coverage/eFlow$cluster_master.coverage" NAME="cluster_master Coverage Results" MODIFIED="1581531457825" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/eflow/auto_modeler" />
     <SUITE FILE_PATH="coverage/eFlow$sys_utils.coverage" NAME="sys_utils Coverage Results" MODIFIED="1569435156328" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/eflow/utils" />
     <SUITE FILE_PATH="coverage/eFlow$feature_analysis.coverage" NAME="feature_analysis Coverage Results" MODIFIED="1581042885229" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/eflow/data_analysis" />
   </component>
@@ -42,10 +165,64 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/eflow/auto_modeler/cluster_master.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="479">
-              <caret line="745" column="46" lean-forward="true" selection-start-line="549" selection-start-column="4" selection-end-line="745" selection-end-column="46" />
+            <state relative-caret-position="247">
+              <caret line="1130" column="45" selection-start-line="1130" selection-start-column="45" selection-end-line="1130" selection-end-column="45" />
               <folding>
                 <element signature="e#0#52#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/eflow/_hidden/parent_objects/auto_modeler.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="334">
+              <caret line="98" column="38" selection-start-line="98" selection-start-column="38" selection-end-line="98" selection-end-column="38" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/eflow/foundation/data_frame_types.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="679">
+              <caret line="195" column="37" selection-start-line="195" selection-start-column="8" selection-end-line="195" selection-end-column="37" />
+              <folding>
+                <element signature="e#0#69#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/eflow/utils/sys_utils.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="601">
+              <caret line="215" column="21" selection-start-line="215" selection-start-column="4" selection-end-line="215" selection-end-column="21" />
+              <folding>
+                <element signature="e#0#86#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/eflow/data_analysis/null_analysis.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="135">
+              <caret line="9" column="19" selection-start-line="9" selection-start-column="19" selection-end-line="9" selection-end-column="19" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/eflow/data_analysis/feature_analysis.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="273">
+              <caret line="78" column="40" selection-start-line="78" selection-start-column="25" selection-end-line="78" selection-end-column="40" />
+              <folding>
+                <element signature="e#0#51#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -62,36 +239,36 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>__save_update_best_model_clusters</find>
-      <find>best_clusters</find>
-      <find>Hierarchical Clustering</find>
-      <find>__get_model_centers</find>
-      <find>get_centers</find>
+      <find>load_pickle_object</find>
+      <find>self.__cluster_models</find>
+      <find>__cluster_models_paths</find>
+      <find>pickle</find>
+      <find>eval</find>
+      <find>write_object</find>
+      <find>write_ob</find>
       <find>pickle_object_to_file</find>
-      <find>Elbow Seq</find>
+      <find>write_object_text_to_file</find>
+      <find>json_file_to_dict</find>
+      <find>create_elbow</find>
+      <find>cluster_profile_dict</find>
+      <find>non_con</find>
+      <find>save_plot</find>
+      <find>dict_to_json_file</find>
       <find>display_visuals</find>
-      <find>elbow_models</find>
-      <find>ema</find>
-      <find>elbow_inertias_matrix</find>
-      <find>__get_centers</find>
-      <find>get_</find>
-      <find>fcm</find>
-      <find>K-</find>
-      <find>Cure</find>
-      <find>model_name</find>
-      <find>revert</find>
-      <find>__dummy_encoded_features</find>
-      <find>make_values_bool</find>
-      <find>DataGenerator</find>
-      <find>interia</find>
-      <find>KneeLocator</find>
-      <find>K-Means</find>
+      <find>save_table_as_plot</find>
+      <find>sub_dir</find>
+      <find>__create_cluster_profile</find>
+      <find>__create_elbow_seq</find>
       <find>__create_pyclustering_model</find>
       <find>__find_best_elbow_models</find>
-      <find>sequnces</find>
-      <find>sequences</find>
-      <find>__create_elbow_seq</find>
-      <find>__create_cluster_profiles</find>
+      <find>k_val +</find>
+      <find>elbow</find>
+      <find>k_val</find>
+      <find>k_val</find>
+      <find>__create_random_initial_centers</find>
+      <find>knee</find>
+      <find>kneed</find>
+      <find>KneeLocator</find>
     </findStrings>
     <replaceStrings>
       <replace>create_dir_structure</replace>
@@ -164,7 +341,6 @@
         <option value="$PROJECT_DIR$/eflow/utils/misc_utils.py" />
         <option value="$PROJECT_DIR$/eflow/data_pipeline_segments/feature_transformer.py" />
         <option value="$PROJECT_DIR$/build/lib/eflow/_hidden/parent_objects/data_pipeline_segment.py" />
-        <option value="$PROJECT_DIR$/eflow/utils/sys_utils.py" />
         <option value="$PROJECT_DIR$/eflow/foundation/data_pipeline.py" />
         <option value="$PROJECT_DIR$/eflow/utils/eflow_utils.py" />
         <option value="$PROJECT_DIR$/eflow/model_analysis/__init__.py" />
@@ -184,6 +360,7 @@
         <option value="$PROJECT_DIR$/eflow/_hidden/parent_objects/__init__.py" />
         <option value="$PROJECT_DIR$/eflow/_hidden/parent_objects/data_analysis.py" />
         <option value="$PROJECT_DIR$/eflow/utils/pandas_utils.py" />
+        <option value="$PROJECT_DIR$/eflow/utils/sys_utils.py" />
         <option value="$PROJECT_DIR$/eflow/_hidden/parent_objects/auto_modeler.py" />
         <option value="$PROJECT_DIR$/eflow/auto_modeler/cluster_master.py" />
       </list>
@@ -324,7 +501,29 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.feature_analysis">
+  <component name="RunManager" selected="Python.cluster_master">
+    <configuration name="cluster_master" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="eFlow" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/eflow/auto_modeler" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/eflow/auto_modeler/cluster_master.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <configuration name="dataframe_snapshot" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="eFlow" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -393,6 +592,7 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.cluster_master" />
         <item itemvalue="Python.feature_analysis" />
         <item itemvalue="Python.dataframe_snapshot" />
         <item itemvalue="Python.sys_utils" />
@@ -504,7 +704,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="803719000" />
+    <option name="totallyTimeSpent" value="824809000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="47" y="53" width="1633" height="1027" extended-state="0" />
@@ -787,16 +987,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/eflow/data_analysis/null_analysis.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="302">
-          <caret line="295" column="35" selection-start-line="295" selection-start-column="17" selection-end-line="295" selection-end-column="35" />
-          <folding>
-            <element signature="e#0#50#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/eflow/model_analysis/regression_analysis.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="661">
@@ -885,30 +1075,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/eflow/data_analysis/feature_analysis.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="195">
-          <caret line="31" column="8" selection-start-line="31" selection-start-column="8" selection-end-line="33" selection-end-column="63" />
-          <folding>
-            <element signature="e#0#51#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$USER_HOME$/Library/Caches/PyCharm2018.3/python_stubs/-1247972723/__builtin__.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="303">
           <caret line="3437" column="8" selection-start-line="3437" selection-start-column="8" selection-end-line="3437" selection-end-column="8" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/eflow/utils/sys_utils.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-572">
-          <caret line="25" column="25" selection-start-line="25" selection-start-column="11" selection-end-line="25" selection-end-column="25" />
-          <folding>
-            <element signature="e#0#86#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -932,29 +1102,12 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/eflow/_hidden/parent_objects/auto_modeler.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="174">
-          <caret line="99" column="35" selection-start-line="99" selection-start-column="27" selection-end-line="99" selection-end-column="35" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/eflow/utils/eflow_utils.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="165">
           <caret line="11" column="32" selection-start-line="11" selection-start-column="4" selection-end-line="11" selection-end-column="32" />
           <folding>
             <element signature="e#0#43#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/eflow/foundation/data_frame_types.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="554">
-          <caret line="702" column="13" selection-start-line="702" selection-start-column="13" selection-end-line="702" selection-end-column="13" />
-          <folding>
-            <element signature="e#0#69#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -979,10 +1132,54 @@
     <entry file="file://$PROJECT_DIR$/Backlogged Code/cluster_master_1.py">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
+    <entry file="file://$PROJECT_DIR$/eflow/data_analysis/null_analysis.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="135">
+          <caret line="9" column="19" selection-start-line="9" selection-start-column="19" selection-end-line="9" selection-end-column="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/eflow/foundation/data_frame_types.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="679">
+          <caret line="195" column="37" selection-start-line="195" selection-start-column="8" selection-end-line="195" selection-end-column="37" />
+          <folding>
+            <element signature="e#0#69#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/eflow/utils/sys_utils.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="601">
+          <caret line="215" column="21" selection-start-line="215" selection-start-column="4" selection-end-line="215" selection-end-column="21" />
+          <folding>
+            <element signature="e#0#86#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/eflow/data_analysis/feature_analysis.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="273">
+          <caret line="78" column="40" selection-start-line="78" selection-start-column="25" selection-end-line="78" selection-end-column="40" />
+          <folding>
+            <element signature="e#0#51#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/eflow/_hidden/parent_objects/auto_modeler.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="334">
+          <caret line="98" column="38" selection-start-line="98" selection-start-column="38" selection-end-line="98" selection-end-column="38" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/eflow/auto_modeler/cluster_master.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="479">
-          <caret line="745" column="46" lean-forward="true" selection-start-line="549" selection-start-column="4" selection-end-line="745" selection-end-column="46" />
+        <state relative-caret-position="247">
+          <caret line="1130" column="45" selection-start-line="1130" selection-start-column="45" selection-end-line="1130" selection-end-column="45" />
           <folding>
             <element signature="e#0#52#0" expanded="true" />
           </folding>
