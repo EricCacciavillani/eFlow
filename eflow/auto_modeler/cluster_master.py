@@ -1101,6 +1101,24 @@ class AutoCluster(AutoModeler):
             return random_center_initializer(self.__scaled,
                                              k_val).initialize()
 
+    def __determine_curve(self,
+                          intertia):
+        convex_count = 0
+        concave_count = 0
+        for i in range(2, len(intertia) + 1):
+            x = range(len(intertia))
+            poly = np.polyfit(x[0:i],
+                              intertia[0:i],
+                              2)
+            if poly[0] >= 0:
+                convex_count += 1
+            else:
+                concave_count += 1
+
+        if concave_count >= convex_count:
+            return "concave"
+        else:
+            return "convex"
 
     def __find_best_elbow_models(self,
                                  model_name,
@@ -1126,18 +1144,21 @@ class AutoCluster(AutoModeler):
         # Plot ks vs inertias
         for i in range(0,len(inertias)):
 
+            curve = self.__determine_curve(inertias[i])
+
+            if curve == "concave":
+                online = True
+            else:
+                online = False
+
+            print(curve)
+            print(online)
             elbow_cluster = KneeLocator(ks,
                                         inertias[i],
-                                        S=.7,
-                                        curve='convex',
+                                        curve="convex",
+                                        online=online,
                                         direction='decreasing').elbow
-
             print(f"elbow_cluster:{elbow_cluster}")
-            print(KneeLocator(ks,
-                              inertias[i],
-                              curve='concave',
-                              online=True,
-                              direction='decreasing').elbow)
 
             if elbow_cluster == 1 or not elbow_cluster:
                 print("Elbow was either one or None for the elbow seq.")
