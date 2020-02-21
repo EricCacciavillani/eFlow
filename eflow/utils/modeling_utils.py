@@ -1,11 +1,42 @@
 from sklearn.model_selection import GridSearchCV
 
+from eflow.utils.math_utils import euclidean_distance
+
+import numpy as np
+from scipy import stats
+
 __author__ = "Eric Cacciavillani"
 __copyright__ = "Copyright 2019, eFlow"
 __credits__ = ["Eric Cacciavillani"]
 __license__ = "MIT"
 __maintainer__ = "EricCacciavillani"
 __email__ = "eric.cacciavillani@gmail.com"
+
+
+def get_cluster_probas(center_points,
+                       data):
+
+    for dp in data:
+
+        cluster_distances = []
+        for cp in center_points:
+            cluster_distances.append(euclidean_distance(cp, dp))
+
+        probas = 1 - np.array(cluster_distances) / (
+            np.array(cluster_distances).sum())
+        return probas / probas.sum()
+
+
+def find_all_zscore_distances_from_target(data_points,
+                                          target_point):
+    """
+        Finds all distances between the target and the other points.
+    """
+    distances = []
+    for dp in data_points:
+        distances.append(euclidean_distance(dp, target_point))
+
+    return stats.zscore(np.array(distances))
 
 
 def optimize_model_grid(model,

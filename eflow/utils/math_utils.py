@@ -1,5 +1,6 @@
 from math import log, e
 import numpy as np
+import math
 
 __author__ = "Eric Cacciavillani"
 __copyright__ = "Copyright 2019, eFlow"
@@ -41,3 +42,9 @@ def calculate_entropy(labels,
         ent -= i * log(i, base)
 
     return ent
+
+
+def euclidean_distance(v1, v2):
+    dist = [(a - b)**2 for a, b in zip(v1, v2)]
+    dist = math.sqrt(sum(dist))
+    return dist

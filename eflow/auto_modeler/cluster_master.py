@@ -1,8 +1,12 @@
+
 from eflow._hidden.parent_objects import AutoModeler
+from eflow._hidden.custom_exceptions import UnsatisfiedRequirments
 from eflow.utils.sys_utils import load_pickle_object,get_all_files_from_path, get_all_directories_from_path, pickle_object_to_file, create_dir_structure, write_object_text_to_file, json_file_to_dict, dict_to_json_file
 from eflow.utils.eflow_utils import move_folder_to_eflow_garbage
-from eflow._hidden.custom_exceptions import UnsatisfiedRequirments
+from eflow.utils.modeling_utils import find_all_zscore_distances_from_target
+from eflow.utils.math_utils import euclidean_distance
 from eflow.data_analysis.feature_analysis import FeatureAnalysis
+from eflow.data_pipeline_segments import DataEncoder
 
 # Getting Sklearn Models
 from sklearn.decomposition import PCA
@@ -39,6 +43,7 @@ import numpy as np
 import copy
 import os
 from tqdm import tqdm
+import warnings
 
 
 __author__ = "Eric Cacciavillani"
@@ -96,7 +101,13 @@ class AutoCluster(AutoModeler):
 
         self.__models_suggested_clusters = dict()
 
+        self.__pca = None
         self.__pca_perc = None
+
+        self.__first_scaler = None
+        self.__second_scaler = None
+        self.__cutoff_index = None
+        self.__pca_perc = pca_perc
 
         # --- Apply pca ---
         if pca_perc:
@@ -105,6 +116,8 @@ class AutoCluster(AutoModeler):
             scaler = StandardScaler()
             scaled = scaler.fit_transform(df)
 
+            self.__first_scaler = copy.deepcopy(scaler)
+
             print("\nInspecting scaled results!")
             self.__inspect_feature_matrix(sub_dir="PCA",
                                           filename="Applied scaler results",
@@ -112,6 +125,8 @@ class AutoCluster(AutoModeler):
                                           feature_names=df.columns)
 
             pca, scaled = self.__visualize_pca_variance(scaled)
+
+            self.__pca = pca
 
             # Generate "dummy" feature names
             pca_feature_names = ["PCA_Feature_" +
@@ -151,9 +166,10 @@ class AutoCluster(AutoModeler):
                                           matrix=scaled,
                                           feature_names=pca_feature_names)
 
-            self.__scaled = scaled
+            self.__second_scaler = copy.deepcopy(scaler)
 
-            self.__pca_perc = pca_perc
+            self.__scaled = scaled
+            self.__cutoff_index = cutoff_index
 
         # Assumed PCA has already been applied; pass as matrix
         else:
@@ -169,7 +185,7 @@ class AutoCluster(AutoModeler):
                     for dir in get_all_directories_from_path(self.folder_path + f"Models/{cluster_dir}"):
                         if dir[0] != ".":
                             for model_name in get_all_files_from_path(self.folder_path + f"Models/{cluster_dir}/{dir}",
-                                                                ".pkl"):
+                                                                      ".pkl"):
 
                                 model_path = self.folder_path + f"Models/{cluster_dir}/{dir}/{model_name}"
 
@@ -181,16 +197,49 @@ class AutoCluster(AutoModeler):
                 for model_name, model_path in self.__cluster_models_paths.items():
                     print(f"{model_name} was found at {model_path}\n")
 
+        # Save objects to directory structure
+        if self.__pca:
+            pipeline_path = create_dir_structure(self.folder_path,
+                                                 "Data Pipeline")
+
+
+            # Pickle data pipeline objects
+            pickle_object_to_file(self.__pca,
+                                  pipeline_path,
+                                  "PCA")
+
+            pickle_object_to_file(self.__first_scaler,
+                                  pipeline_path,
+                                  "First Scaler")
+
+            pickle_object_to_file(self.__second_scaler,
+                                  pipeline_path,
+                                  "First Scaler")
+
+            pickle_object_to_file(self.__pca_perc,
+                                  pipeline_path,
+                                  "PCA Percentage")
+
+            # Save Dimensions and Cutoff Index
+            write_object_text_to_file(self.__cutoff_index,
+                                      pipeline_path,
+                                      "Cutoff Index")
+
+            write_object_text_to_file(self.__cutoff_index + 1,
+                                      pipeline_path,
+                                      "Dimensions")
+
+
+
     # --- Getters/Setters
     def get_scaled_data(self):
         """
         Desc:
-            Gets the stored data
+            Get a copy of the stored data
 
         Returns:
             Returns the stored data
         """
-
         return copy.deepcopy(self.__scaled)
 
     def get_all_cluster_models(self):
@@ -203,11 +252,18 @@ class AutoCluster(AutoModeler):
         """
         tmp_dict = dict()
         for model_name, model_path in self.__cluster_models_paths.items():
-            tmp_dict[model_name] = load_pickle_object(model_path)
+
+            try:
+
+                model = load_pickle_object(model_path)
+
+                tmp_dict[model_name] = model
+            except EOFError:
+                pass
 
         return tmp_dict
 
-    def delete_stored_data(self):
+    def delete_scaled_data(self):
         """
         Desc:
             Removes the matrix data in order to save RAM when running
@@ -215,6 +271,48 @@ class AutoCluster(AutoModeler):
         """
         del self.__scaled
         self.__scaled = None
+
+    def apply_clustering_data_pipeline(self,
+                                       data):
+        """
+        Desc:
+            Apply the scaler, dimension reduction transformation, matrix shrink
+            and second scaler to the data.
+
+        Args:
+            data: np.matrix, list of lists, pd.DataFrame
+                Data that is similar in form and value structure to the data passed
+                on initialization.
+
+        Returns:
+            Returns back data after transformations are applied.
+        """
+
+        data = self.__first_scaler.transform(data)
+        data = self.__pca.transform(data)
+        data = data[:, :self.__cutoff_index + 1]
+        data = self.__second_scaler.transform(data)
+
+        return data
+
+    def get_model(self,
+                  model_name):
+        """
+        Desc:
+            Get the model object from the stored dirctories based on the model
+            name.
+
+        Args:
+            model_name: str
+                Name of the model that references the saved model in
+                the provided directory.
+
+        Returns:
+            Gives back the model object.
+        """
+
+        return load_pickle_object(self.__cluster_models_paths[model_name])
+
 
     def visualize_hierarchical_clustering(self,
                                           linkage_methods=None,
@@ -544,119 +642,240 @@ class AutoCluster(AutoModeler):
     def evaluate_all_models(self,
                             df,
                             df_features,
-                            zscore_low=-2,
-                            zscore_high=2):
+                            qualitative_features=[],
+                            zscore=None):
         """
+        Desc:
             Loop through all models and evaluate the given model with
             'evaluate_model'. Read 'evaluate_model' to learn more.
+
+        Args:
+            df: pd.DataFrame
+                Pandas dataframe
+
+            df_features: DataFrameTypes object from eflow.
+                DataFrameTypes object; organizes feature types into groups.
+
+            zscore: float, int, None
+                Will find the distances between given the given clusters then
+                we apply data pipeline.
         """
 
         for model_name, model_path in self.__cluster_models_paths.items():
             self.evaluate_model(model_name=model_name,
                                 df=df,
                                 df_features=df_features,
-                                zscore_low=zscore_low,
-                                zscore_high=zscore_high)
+                                qualitative_features=qualitative_features,
+                                zscore=zscore)
+            print("------" * 10)
 
     def evaluate_model(self,
                        model_name,
                        df,
                        df_features,
-                       zscore_low=-2,
-                       zscore_high=2):
+                       qualitative_features=[],
+                       zscore=None,
+                       target_features=None,
+                       display_visuals=False,
+                       display_print=False,
+                       suppress_runtime_errors=True,
+                       aggregate_target_feature=True,
+                       selected_features=None,
+                       extra_tables=True,
+                       statistical_analysis_on_aggregates=True):
         """
-        model_name:
-            The string key to give the dict
+        Desc:
+            The main purpose of 'evaluate_model' is to display/save tables/plots
+            accoiated with describing the model's 'findings' for each cluster.
 
-        model:
-            Cluster model type; it must have '.labels_' as an attribute
+        Args:
 
-        df:
-            Dataframe object
+            model_name: str
+                The string key to give the dict
 
-        df_features:
-            DataFrameTypes object; organizes feature types into groups.
+            df: pd.Dataframe
+                Dataframe object
 
-        zscore_low/zscore_high:
-            Defines how the threshold to remove data points when profiling the
-            cluster.
+            df_features: DataFrameTypes object from eflow.
+                DataFrameTypes object; organizes feature types into groups.
 
+            qualitative_features: list
+                Any features that are currently dummy encoded will be reversed
+                when doing feature analysis.
 
-        The main purpose of 'evaluate_model' is to display/save tables/plots
-        accoiated with describing the model's 'findings'.
+            zscore: float, int, None, or list of ints/floats
+                After calculating each distance to the center point; a zscore
+                value for distance will be found. Setting this parameter defines
+                a cut off point where data exceeding a certain zscore will be
+                ignored when doing FeatureAnalysis
+
+            target_features: collection of strings or None
+                A feature name that both exists in the init df_features
+                and the passed dataframe.
+
+                Note
+                    If init to 'None' then df_features will try to extract out
+                    the target feature.
+
+            display_visuals: bool
+                Boolean value to whether or not to display visualizations.
+
+            display_print: bool
+                Determines whether or not to print function's embedded print
+                statements.
+
+            suppress_runtime_errors: bool
+                If set to true; when generating any graphs will suppress any runtime
+                errors so the program can keep running.
+
+            extra_tables: bool
+                When handling two types of features if set to true this will
+                    generate any extra tables that might be helpful.
+                    Note -
+                        These graphics may create duplicates if you already applied
+                        an aggregation in 'perform_analysis'
+
+            aggregate_target_feature: bool
+                Aggregate the data of the target feature if the data is
+                non-continuous data.
+
+                Note
+                    In the future I will have this also working with continuous
+                    data.
+
+            selected_features: collection object of features
+                Will only focus on these selected feature's and will ignore
+                the other given features.
+
+            statistical_analysis_on_aggregates: bool
+                If set to true then the function 'statistical_analysis_on_aggregates'
+                will run; which aggregates the data of the target feature either
+                by discrete values or by binning/labeling continuous data.
         """
 
+        # Get/Set model related data
         model = load_pickle_object(self.__cluster_models_paths[model_name])
         model_path = self.__cluster_models_paths[model_name]
         model_dir = os.path.dirname(model_path)
         model_sub_dir = model_dir.replace(self.folder_path,"",1)
-
+        center_points = load_pickle_object(os.path.dirname(
+            self.__cluster_models_paths[model_name]) + "/Center points.pkl")
         cluster_labels = json_file_to_dict(f"{model_dir}/Cluster Labels.json")
-        print(f"Model Name: {model_name}")
-        print(f"Clusters: {len(model.get_clusters())}")
 
-        for i,cluster_indexes in enumerate(model.get_clusters()):
+        # Store single instance of int/float/None in a list
+        if isinstance(zscore,float) or isinstance(zscore,type(None)) or isinstance(zscore,int):
+            zscore = [zscore]
 
-            print(f"Feature Analysis on cluster {cluster_labels[str(i)]}")
-            tmp_df = df.loc[cluster_indexes].reset_index(drop=True)
+        # Iterate through all zscore values
+        for z_val in zscore:
 
-            feature_analysis = FeatureAnalysis(df_features,
-                                               overwrite_full_path=model_dir,
-                                               notebook_mode=self.__notebook_mode)
+            # Handling all zscore values
+            no_zscore = False
 
-            feature_analysis.perform_analysis(tmp_df,
-                                              dataset_name=f"Cluster: {cluster_labels[str(i)]}",
-                                              display_visuals=False,
-                                              display_print=False)
+            if not z_val:
+                z_val = float("inf")
+                no_zscore = True
+            else:
+                z_val = round(z_val, 5)
 
-            self.__create_cluster_profile(df,
-                                          df_features,
-                                          sub_dir=f"{model_sub_dir}/Cluster: {cluster_labels[str(i)]}")
+            print(f"Model Name: {model_name}")
+            print(f"Clusters: {len(model.get_clusters())}")
+            print(f"Distance Zscore: {z_val}")
+            print()
 
-        print("------" * 10)
+            for i,cluster_indexes in enumerate(model.get_clusters()):
 
-        #
-        # # ---
-        # # self.__visualize_clusters(model=model,
-        # #                           output_path=output_path,
-        # #                           model_name=model_name)
-        #
-        # # ---
-        # df["Cluster_Name"] = model.labels_
-        # numerical_features = df_features.numerical_features()
-        # clustered_dataframes, shrunken_labeled_df = \
-        #     self.__create_cluster_sub_dfs(
-        #         df=df, model=model, numerical_features=numerical_features,
-        #         zscore_low=zscore_low, zscore_high=zscore_high)
-        #
-        # rows_count, cluster_profiles_df = self.__create_cluster_profiles(
-        #     clustered_dataframes=clustered_dataframes,
-        #     shrunken_df=shrunken_labeled_df,
-        #     numerical_features=df_features.numerical_features(),
-        #     le_map=le_map,
-        #     output_path=output_path,
-        #     show=show_extra,
-        #     find_nearest_on_cols=find_nearest_on_cols)
-        #
-        # # Check to see how many data points were removed during the profiling
-        # # stage
-        # print("Orginal points in dataframe: ", df.shape[0])
-        # print("Total points in all modified clusters: ", rows_count)
-        # print("Shrank by: ", df.shape[0] - rows_count)
-        #
-        # # In case to many data points were removed
-        # if cluster_profiles_df.shape[0] == 0:
-        #     print(
-        #         "The applied Z-scores caused the cluster profiles "
-        #         "to shrink to far for the model {0}!".format(
-        #             model_name))
-        #
-        # # Display and save dataframe table
-        # else:
-        #     display(cluster_profiles_df)
-        #     self.__render_mpl_table(cluster_profiles_df, sub_dir=output_path,
-        #                             filename="All_Clusters",
-        #                             header_columns=0, col_width=2.0)
+                label = cluster_labels[str(i)]
+
+                print(f"Feature Analysis on cluster {label}")
+
+                # Create cluster dataframe
+                tmp_df = df.loc[cluster_indexes].reset_index(drop=True)
+
+                display(tmp_df)
+
+                # Find and apply zscore cut off point
+                bool_array = find_all_zscore_distances_from_target(self.apply_clustering_data_pipeline(tmp_df.values),
+                                                                   center_points[i])
+
+                bool_array = (bool_array >= -z_val) & (bool_array <= z_val)
+
+                removed_dp_count = len(bool_array) - bool_array.sum()
+                removed_dp_percentage = removed_dp_count / len(tmp_df)
+
+                tmp_df = tmp_df[bool_array]
+                tmp_df.reset_index(drop=True)
+
+                del bool_array
+
+                # Decode and revert dummies data
+                tmp_df_features = copy.deepcopy(df_features)
+
+                data_encoder = DataEncoder(create_file=False)
+                data_encoder.revert_dummies(tmp_df,
+                                            tmp_df_features,
+                                            qualitative_features=qualitative_features)
+                data_encoder.decode_data(tmp_df,
+                                         tmp_df_features,
+                                         apply_value_representation=False)
+
+                data_encoder.apply_value_representation(tmp_df,
+                                                        df_features)
+                del data_encoder
+
+
+                # Handle naming/managing the directory structure
+                if no_zscore:
+                    create_dir_structure(directory_path=model_dir,
+                                         create_sub_dir="No Distance Zscore")
+
+                    self.__create_cluster_profile(tmp_df,
+                                                  tmp_df_features,
+                                                  sub_dir=f"{model_sub_dir}/No Distance Zscore/Cluster: {label}")
+
+
+                    feature_analysis = FeatureAnalysis(tmp_df_features,
+                                                       overwrite_full_path=f"{model_dir}/No Distance Zscore",
+                                                       notebook_mode=self.__notebook_mode)
+                else:
+                    create_dir_structure(directory_path=model_dir,
+                                         create_sub_dir=f"Distance Zscore = {z_val}/Cluster: {label}")
+
+                    self.__create_cluster_profile(tmp_df,
+                                                  tmp_df_features,
+                                                  sub_dir=f"{model_sub_dir}/Distance Zscore = {z_val}/Cluster: {label}")
+
+
+                    feature_analysis = FeatureAnalysis(tmp_df_features,
+                                                       overwrite_full_path=f"{model_dir}/Distance Zscore = {z_val}",
+                                                       notebook_mode=self.__notebook_mode)
+
+                display(tmp_df)
+                display(tmp_df.isnull().sum())
+
+                # Analyze the cluster dataframe
+                feature_analysis.perform_analysis(tmp_df,
+                                                  dataset_name=f"Cluster: {label}",
+                                                  target_features=target_features,
+                                                  display_visuals=display_visuals,
+                                                  display_print=display_print,
+                                                  dataframe_snapshot=True,
+                                                  save_file=True,
+                                                  suppress_runtime_errors=suppress_runtime_errors,
+                                                  aggregate_target_feature=aggregate_target_feature,
+                                                  selected_features=selected_features,
+                                                  extra_tables=extra_tables,
+                                                  statistical_analysis_on_aggregates=statistical_analysis_on_aggregates)
+
+                write_object_text_to_file(removed_dp_count,
+                                          f"{feature_analysis.folder_path}/Cluster: {label}",
+                                          filename="Removed dp count")
+
+                write_object_text_to_file(removed_dp_percentage,
+                                          f"{feature_analysis.folder_path}/Cluster: {label}",
+                                          filename="Removed dp percentage")
+
+            print("###" * 4)
 
 
     def __create_cluster_profile(self,
@@ -677,172 +896,10 @@ class AutoCluster(AutoModeler):
                         cluster_profile_dict[feature_name] = False
 
 
-        self.save_table_as_plot(pd.DataFrame(cluster_profile_dict, index=[0]),
+        self.save_table_as_plot(pd.DataFrame(cluster_profile_dict, index=[0]).transpose(),
                                 sub_dir=sub_dir,
-                                filename="Cluster Profile")
-
-
-    def __create_cluster_profiles(self,
-                                  clustered_dataframes,
-                                  shrunken_df,
-                                  numerical_features,
-                                  le_map,
-                                  output_path,
-                                  find_nearest_on_cols=False,
-                                  show=True):
-        """
-            Profile each clustered dataframe based off the given mean.
-            Displays extra information in dataframe tables to be understand
-            each cluster.
-
-            find_nearest_on_cols:
-                Allows columns to be converted to actual values found within
-                the dataset.
-                Ex: Can't have .7 in a bool column convert's it to 1.
-
-                False: Just apply to obj columns and bool columns
-
-                True: Apply to all columns
-        """
-
-        def find_nearest(numbers, target):
-            """
-                Find the closest fitting number to the target number
-            """
-            numbers = np.asarray(numbers)
-            idx = (np.abs(numbers - target)).argmin()
-            return numbers[idx]
-
-        cluster_profiles_df = pd.DataFrame(columns=shrunken_df.columns).drop(
-            'Cluster_Name', axis=1)
-        rows_count = 0
-        for cluster_identfier, cluster_dataframe in \
-                clustered_dataframes.items():
-            df = pd.DataFrame(columns=cluster_dataframe.columns)
-            df = df.append(cluster_dataframe.mean(), ignore_index=True)
-            df.index = [cluster_identfier]
-
-            if cluster_dataframe.shape[0] <= 1:
-                continue
-
-            # Attempt to convert numbers found within the full set of data
-            for col in cluster_dataframe.columns:
-                if col not in numerical_features or find_nearest_on_cols:
-                    df[col] = find_nearest(numbers=shrunken_df[
-                        col].value_counts().index.tolist(),
-                        target=df[col].values[0])
-
-            # Evaluate cluster dataframe by dataframe
-            eval_df = pd.DataFrame(columns=cluster_dataframe.columns)
-            eval_df = eval_df.append(
-                cluster_dataframe.mean(), ignore_index=True)
-            eval_df = eval_df.append(
-                cluster_dataframe.min(), ignore_index=True)
-            eval_df = eval_df.append(
-                cluster_dataframe.median(),
-                ignore_index=True)
-            eval_df = eval_df.append(
-                cluster_dataframe.max(), ignore_index=True)
-            eval_df = eval_df.append(
-                cluster_dataframe.std(), ignore_index=True)
-            eval_df = eval_df.append(
-                cluster_dataframe.var(), ignore_index=True)
-            eval_df.index = ["Mean", "Min", "Median",
-                             "Max", "Standard Deviation", "Variance"]
-
-            if show:
-                print("Total found in {0} is {1}".format(
-                    cluster_identfier, cluster_dataframe.shape[0]))
-                self.__render_mpl_table(
-                    df,
-                    sub_dir=output_path,
-                    filename=cluster_identfier +
-                    "_Means_Rounded_To_Nearest_Real_Numbers",
-                    header_columns=0,
-                    col_width=4.0)
-
-                self.__render_mpl_table(
-                    eval_df,
-                    sub_dir=output_path,
-                    filename=cluster_identfier +
-                    "_Eval_Df",
-                    header_columns=0,
-                    col_width=4.0)
-                display(df)
-                display(eval_df)
-                self.__vertical_spacing(7)
-
-            cluster_profiles_df = cluster_profiles_df.append(
-                self.__decode_df(df, le_map))
-
-            rows_count += cluster_dataframe.shape[0]
-
-        return rows_count, cluster_profiles_df
-
-    def __create_cluster_sub_dfs(self,
-                                 df,
-                                 model,
-                                 numerical_features,
-                                 zscore_low=-2,
-                                 zscore_high=2):
-        """
-            Shrinks the clustered dataframe by rows based on outliers
-            found within each cluster.
-
-            Returns back a dict of dataframes with specficed clustered values
-            alongside a full dataframe comprised of those clustered dataframes.
-        """
-        # Dataframe to analyze model 'better' choices
-        shrunken_full_df = df.drop('Cluster_Name', axis=1).drop(df.index)
-
-        # Store each sub-dataframe based on cluster label
-        clustered_dataframes = dict()
-
-        for cluster_label in set(model.labels_):
-            cluster_df = df[df["Cluster_Name"] == cluster_label]
-            # Ignore cluster with only one patient
-            if len(cluster_df) <= 1:
-                continue
-            # ---
-            zscore_cluster_df = cluster_df.drop(
-                'Cluster_Name', axis=1).apply(zscore)
-
-            # Check if cluster is only comprised of one data point
-            if cluster_df.shape[0] > 1:
-
-                # Iterate through all numerical features
-                for numerical_feature in numerical_features:
-
-                    nan_check = zscore_cluster_df[
-                        numerical_feature].isnull().values.any()
-                    # Check for nans
-                    if not nan_check:
-                        zscore_cluster_df = zscore_cluster_df[
-                            zscore_cluster_df[numerical_feature] >= zscore_low]
-                        zscore_cluster_df = zscore_cluster_df[
-                            zscore_cluster_df[numerical_feature] <= zscore_high]
-
-            # Dummy list of -1s alloc at given pos of 'zscore_cluster_df'
-            # indexes
-            reshaped_index = [-1] * len(df.index.values)
-
-            for given_index in list(zscore_cluster_df.index.values):
-                reshaped_index[given_index] = given_index
-
-            # Pass back all vectors that passed the zscore test
-            bool_array = pd.Series(reshaped_index).astype(int) == pd.Series(
-                list(df.index.values)).astype(int)
-
-            temp_cluster_df = df[bool_array].reset_index(drop=True)
-
-            # Store in proper collection objs
-            shrunken_full_df = shrunken_full_df.append(temp_cluster_df)
-
-            clustered_dataframes[
-                "Cluster:" + str(cluster_label)] = temp_cluster_df.drop(
-                'Cluster_Name', axis=1)
-
-        return clustered_dataframes, shrunken_full_df
+                                filename="Cluster Profile",
+                                show_index=True)
 
     def __inspect_feature_matrix(self,
                                  sub_dir,
@@ -972,11 +1029,9 @@ class AutoCluster(AutoModeler):
         else:
             return color
 
-    def __nearest(self, clusters, x):
-        return np.argmin([self.__distance(x, c) for c in clusters])
-
-    def __distance(self, a, b):
-        return np.sqrt(((a - b) ** 2).sum())
+    def __nearest(self,
+                  clusters, x):
+        return np.argmin([euclidean_distance(x, c) for c in clusters])
 
     def __get_unique_random_indexes(self,
                                     k_val):
@@ -1103,13 +1158,18 @@ class AutoCluster(AutoModeler):
 
     def __determine_curve(self,
                           intertia):
+
         convex_count = 0
         concave_count = 0
         for i in range(2, len(intertia) + 1):
             x = range(len(intertia))
+
+            warnings.filterwarnings("ignore")
+
             poly = np.polyfit(x[0:i],
                               intertia[0:i],
                               2)
+            warnings.filterwarnings("default")
             if poly[0] >= 0:
                 convex_count += 1
             else:
@@ -1151,8 +1211,6 @@ class AutoCluster(AutoModeler):
             else:
                 online = False
 
-            print(curve)
-            print(online)
             elbow_cluster = KneeLocator(ks,
                                         inertias[i],
                                         curve="convex",
@@ -1182,7 +1240,6 @@ class AutoCluster(AutoModeler):
                     proximity_elbow_count[str(k_val)] = 1
                 else:
                     proximity_elbow_count[str(k_val)] += 1
-
 
             if isinstance(elbow_inertias_matrix, type(None)):
                 inertias_matrix = np.matrix(inertias[i])
@@ -1265,16 +1322,21 @@ class AutoCluster(AutoModeler):
 
 
             try:
-                file_dir = pickle_object_to_file(model,
-                                                 model_path,
-                                                 f"{model_name}_Clusters={str(k_val)}")
+                file_path = pickle_object_to_file(model,
+                                                  model_path,
+                                                  f"{model_name}_Clusters={str(k_val)}")
+
+                pickle_object_to_file(self.__get_centers(model),
+                                      model_path,
+                                      f"Center points")
+
 
                 dict_to_json_file({i:i for i in range(0,len(model.get_clusters()))},
                                   model_path,
                                   "Cluster Labels")
 
                 self.__cluster_models_paths[
-                    f"{model_name}_Clusters={str(k_val)}"] = file_dir
+                    f"{model_name}_Clusters={str(k_val)}"] = file_path
 
             except:
                 print(f"Something went wrong when trying to save the model: {model_name}")

@@ -183,7 +183,7 @@ class FeatureAnalysis(DataAnalysis):
             generate_entropy_table(df,
                                    self.__df_features,
                                    self.folder_path,
-                                   f"{dataset_name}" + "/_Extras")
+                                   f"{dataset_name}" + "/_Extras/Statistics")
 
             # Set to true to represent the function call was made with perform
             self.__called_from_perform = True
