@@ -890,12 +890,12 @@ class AutoCluster(AutoModeler):
                 self.__display_cluster_label_rank_graph(list(cluster_labels_lengths.keys()),
                                                         list(cluster_labels_lengths.values()),
                                                         sub_dir=f"{model_dir}/No Distance Zscore",
-                                                        display_visuals=display_visuals)
+                                                        display_visuals=self.__notebook_mode)
             else:
                 self.__display_cluster_label_rank_graph(list(cluster_labels_lengths.keys()),
                                                         list(cluster_labels_lengths.values()),
                                                         sub_dir=f"{model_sub_dir}/Distance Zscore = {z_val}",
-                                                        display_visuals=display_visuals)
+                                                        display_visuals=self.__notebook_mode)
 
             print("###" * 4)
 

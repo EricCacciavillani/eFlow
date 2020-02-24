@@ -1,1 +1,0 @@
-obj = [{'Rows': 112, 'Columns': 8}]
