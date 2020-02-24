@@ -6,108 +6,127 @@
     <bookmark url="file://$PROJECT_DIR$/eflow/data_pipeline_segments/type_fixer.py" line="33" />
     <bookmark url="file://$PROJECT_DIR$/eflow/utils/pandas_utils.py" line="343" />
     <bookmark url="file://$PROJECT_DIR$/eflow/data_pipeline_segments/data_encoder.py" line="358" />
-    <bookmark url="file://$PROJECT_DIR$/eflow/auto_modeler/cluster_master.py" line="1131" />
+    <bookmark url="file://$PROJECT_DIR$/eflow/auto_modeler/cluster_master.py" line="1190" />
   </component>
   <component name="ChangeListManager">
     <list default="true" id="178261e3-0830-4d8e-91ef-8172f5216aca" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/eflow/utils/multi_threading.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/eflow/auto_modeler/cluster_master.py" beforeDir="false" afterPath="$PROJECT_DIR$/eflow/auto_modeler/cluster_master.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/eflow/data_analysis/feature_analysis.py" beforeDir="false" afterPath="$PROJECT_DIR$/eflow/data_analysis/feature_analysis.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/eflow/data_pipeline_segments/data_encoder.py" beforeDir="false" afterPath="$PROJECT_DIR$/eflow/data_pipeline_segments/data_encoder.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/eflow/data_pipeline_segments/feature_data_cleaner.py" beforeDir="false" afterPath="$PROJECT_DIR$/eflow/data_pipeline_segments/feature_data_cleaner.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/eflow/utils/math_utils.py" beforeDir="false" afterPath="$PROJECT_DIR$/eflow/utils/math_utils.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/eflow/utils/modeling_utils.py" beforeDir="false" afterPath="$PROJECT_DIR$/eflow/utils/modeling_utils.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/eflow/utils/pandas_utils.py" beforeDir="false" afterPath="$PROJECT_DIR$/eflow/utils/pandas_utils.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/eflow/utils/sys_utils.py" beforeDir="false" afterPath="$PROJECT_DIR$/eflow/utils/sys_utils.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/.ipynb_checkpoints/1.) Inspect data-checkpoint.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/testing/.ipynb_checkpoints/1.) Inspect data-checkpoint.ipynb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/.ipynb_checkpoints/2.) Create data pipeline-checkpoint.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/testing/.ipynb_checkpoints/2.) Create data pipeline-checkpoint.ipynb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/testing/.ipynb_checkpoints/3.) Clustering of data-checkpoint.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/testing/.ipynb_checkpoints/3.) Clustering of data-checkpoint.ipynb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/1.) Inspect data.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/testing/1.) Inspect data.ipynb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/2.) Create data pipeline.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/testing/2.) Create data pipeline.ipynb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/testing/3.) Clustering of data.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/testing/3.) Clustering of data.ipynb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Auto Clustering/Models/Cure/Clusters=10/Cluster Labels.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Auto Clustering/Models/Cure/Clusters=10/Cure_Clusters=10.pkl" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Auto Clustering/Models/Cure/Clusters=11/Cluster Labels.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Auto Clustering/Models/Cure/Clusters=11/Cure_Clusters=11.pkl" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Auto Clustering/Models/Cure/Clusters=9/Cluster Labels.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Auto Clustering/Models/Cure/Clusters=9/Cure_Clusters=9.pkl" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Auto Clustering/Models/Fuzzy C-means/.ipynb_checkpoints/Best of all Fuzzy C-Means Elbows-checkpoint.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Auto Clustering/Models/Cure/Center Elbow Count.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Auto Clustering/Models/Cure/Center Elbow Count.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Auto Clustering/Models/Cure/Proximity Elbow Count.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Auto Clustering/Models/Cure/Proximity Elbow Count.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Auto Clustering/Models/Fuzzy C-means/All possible Fuzzy C-means Elbow's.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Auto Clustering/Models/Fuzzy C-means/All possible Fuzzy C-means Elbow's.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Auto Clustering/Models/Fuzzy C-means/Best of all Fuzzy C-means Elbows.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Auto Clustering/Models/Fuzzy C-means/Best of all Fuzzy C-means Elbows.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Auto Clustering/Models/Fuzzy C-means/Center Elbow Count.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Auto Clustering/Models/Fuzzy C-means/Center Elbow Count.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Auto Clustering/Models/Fuzzy C-means/Clusters=1/Cluster Labels.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Auto Clustering/Models/Fuzzy C-means/Clusters=1/Fuzzy C-Means_Clusters=1.pkl" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Auto Clustering/Models/Fuzzy C-means/Clusters=2/Cluster Labels.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Auto Clustering/Models/Fuzzy C-means/Clusters=2/Fuzzy C-Means_Clusters=2.pkl" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Auto Clustering/Models/Fuzzy C-means/Clusters=3/Cluster Labels.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Auto Clustering/Models/Fuzzy C-means/Clusters=3/Fuzzy C-Means_Clusters=3.pkl" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Auto Clustering/Models/Fuzzy C-means/Clusters=4/Cluster Labels.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Auto Clustering/Models/Fuzzy C-means/Clusters=4/Fuzzy C-Means_Clusters=4.pkl" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Auto Clustering/Models/Fuzzy C-means/Clusters=5/Center points.pkl" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Auto Clustering/Models/Fuzzy C-means/Clusters=5/Center points.pkl" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Auto Clustering/Models/Fuzzy C-means/Clusters=5/Fuzzy C-Means_Clusters=5.pkl" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Auto Clustering/Models/Fuzzy C-means/Clusters=5/Fuzzy C-Means_Clusters=5.pkl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Auto Clustering/Models/Fuzzy C-means/Clusters=6/Center points.pkl" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Auto Clustering/Models/Fuzzy C-means/Clusters=6/Center points.pkl" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Auto Clustering/Models/Fuzzy C-means/Clusters=6/Fuzzy C-Means_Clusters=6.pkl" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Auto Clustering/Models/Fuzzy C-means/Clusters=6/Fuzzy C-Means_Clusters=6.pkl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Auto Clustering/Models/Fuzzy C-means/Clusters=7/Center points.pkl" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Auto Clustering/Models/Fuzzy C-means/Clusters=7/Center points.pkl" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Auto Clustering/Models/Fuzzy C-means/Clusters=7/Fuzzy C-Means_Clusters=7.pkl" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Auto Clustering/Models/Fuzzy C-means/Clusters=7/Fuzzy C-Means_Clusters=7.pkl" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Auto Clustering/Models/Fuzzy C-means/Clusters=8/Cluster Labels.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Auto Clustering/Models/Fuzzy C-means/Clusters=8/Fuzzy C-Means_Clusters=8.pkl" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Auto Clustering/Models/Fuzzy C-means/Proximity Elbow Count.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Auto Clustering/Models/Fuzzy C-means/Proximity Elbow Count.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Auto Clustering/Models/K-Means/.ipynb_checkpoints/Best of all K-Means Elbows-checkpoint.png" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Auto Clustering/Models/K-Means/All possible K-Means Elbow's.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Auto Clustering/Models/K-Means/All possible K-Means Elbow's.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Auto Clustering/Models/K-Means/Best of all K-Means Elbows.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Auto Clustering/Models/K-Means/Best of all K-Means Elbows.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Auto Clustering/Models/K-Means/Center Elbow Count.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Auto Clustering/Models/K-Means/Center Elbow Count.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Auto Clustering/Models/K-Means/Clusters=4/Cluster Labels.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Auto Clustering/Models/K-Means/Clusters=4/K-Means_Clusters=4.pkl" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Auto Clustering/Models/K-Means/Clusters=5/Center points.pkl" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Auto Clustering/Models/K-Means/Clusters=5/Center points.pkl" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Auto Clustering/Models/K-Means/Clusters=5/K-Means_Clusters=5.pkl" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Auto Clustering/Models/K-Means/Clusters=5/K-Means_Clusters=5.pkl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Auto Clustering/Models/K-Means/Clusters=6/Center points.pkl" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Auto Clustering/Models/K-Means/Clusters=6/Center points.pkl" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Auto Clustering/Models/K-Means/Clusters=6/K-Means_Clusters=6.pkl" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Auto Clustering/Models/K-Means/Clusters=6/K-Means_Clusters=6.pkl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Auto Clustering/Models/K-Means/Clusters=7/Center points.pkl" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Auto Clustering/Models/K-Means/Clusters=7/Center points.pkl" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Auto Clustering/Models/K-Means/Clusters=7/K-Means_Clusters=7.pkl" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Auto Clustering/Models/K-Means/Clusters=7/K-Means_Clusters=7.pkl" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Auto Clustering/Models/K-Means/Clusters=8/Cluster Labels.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Auto Clustering/Models/K-Means/Clusters=8/K-Means_Clusters=8.pkl" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Auto Clustering/Models/K-Means/Clusters=9/Cluster Labels.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Auto Clustering/Models/K-Means/Clusters=9/K-Means_Clusters=9.pkl" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Auto Clustering/Models/K-Means/Proximity Elbow Count.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Auto Clustering/Models/K-Means/Proximity Elbow Count.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Auto Clustering/Models/K-Medians/All possible K-Medians Elbow's.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Auto Clustering/Models/K-Medians/All possible K-Medians Elbow's.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Auto Clustering/Models/K-Medians/Best of all K-Medians Elbows.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Auto Clustering/Models/K-Medians/Best of all K-Medians Elbows.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Auto Clustering/Models/K-Medians/Center Elbow Count.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Auto Clustering/Models/K-Medians/Center Elbow Count.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Auto Clustering/Models/K-Medians/Clusters=10/Cluster Labels.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Auto Clustering/Models/K-Medians/Clusters=10/K-Medians_Clusters=10.pkl" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Auto Clustering/Models/K-Medians/Clusters=11/Cluster Labels.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Auto Clustering/Models/K-Medians/Clusters=11/K-Medians_Clusters=11.pkl" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Auto Clustering/Models/K-Medians/Clusters=2/Cluster Labels.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Auto Clustering/Models/K-Medians/Clusters=2/K-Medians_Clusters=2.pkl" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Auto Clustering/Models/K-Medians/Clusters=3/Cluster Labels.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Auto Clustering/Models/K-Medians/Clusters=3/K-Medians_Clusters=3.pkl" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Auto Clustering/Models/K-Medians/Clusters=4/Cluster Labels.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Auto Clustering/Models/K-Medians/Clusters=4/K-Medians_Clusters=4.pkl" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Auto Clustering/Models/K-Medians/Clusters=5/Center points.pkl" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Auto Clustering/Models/K-Medians/Clusters=5/Center points.pkl" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Auto Clustering/Models/K-Medians/Clusters=5/K-Medians_Clusters=5.pkl" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Auto Clustering/Models/K-Medians/Clusters=5/K-Medians_Clusters=5.pkl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Auto Clustering/Models/K-Medians/Clusters=6/Center points.pkl" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Auto Clustering/Models/K-Medians/Clusters=6/Center points.pkl" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Auto Clustering/Models/K-Medians/Clusters=6/K-Medians_Clusters=6.pkl" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Auto Clustering/Models/K-Medians/Clusters=6/K-Medians_Clusters=6.pkl" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Auto Clustering/Models/K-Medians/Clusters=7/K-Medians_Clusters=7.pkl" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Auto Clustering/Models/K-Medians/Clusters=7/K-Medians_Clusters=7.pkl" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Auto Clustering/Models/K-Medians/Clusters=8/K-Medians_Clusters=8.pkl" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Auto Clustering/Models/K-Medians/Clusters=8/K-Medians_Clusters=8.pkl" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Auto Clustering/Models/K-Medians/Clusters=9/Cluster Labels.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Auto Clustering/Models/K-Medians/Clusters=9/K-Medians_Clusters=9.pkl" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Auto Clustering/Models/K-Medians/Proximity Elbow Count.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Auto Clustering/Models/K-Medians/Proximity Elbow Count.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Auto Clustering/Models/K-Medoids/.ipynb_checkpoints/Best of all K-Medoids Elbows-checkpoint.png" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Auto Clustering/Models/K-Medoids/All possible K-Medoids Elbow's.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Auto Clustering/Models/K-Medoids/All possible K-Medoids Elbow's.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Auto Clustering/Models/K-Medoids/Best of all K-Medoids Elbows.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Auto Clustering/Models/K-Medoids/Best of all K-Medoids Elbows.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Auto Clustering/Models/K-Medoids/Center Elbow Count.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Auto Clustering/Models/K-Medoids/Center Elbow Count.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Auto Clustering/Models/K-Medoids/Clusters=10/K-Medoids_Clusters=10.pkl" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Auto Clustering/Models/K-Medoids/Clusters=3/K-Medoids_Clusters=3.pkl" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Auto Clustering/Models/K-Medoids/Clusters=9/K-Medoids_Clusters=9.pkl" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Auto Clustering/Models/K-Medoids/Proximity Elbow Count.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Auto Clustering/Models/K-Medoids/Proximity Elbow Count.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Auto Clustering/_Extras/All suggested clusters.pkl" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Auto Clustering/_Extras/All suggested clusters.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Auto Clustering/_Extras/Average of suggested clusters.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Auto Clustering/_Extras/Cure suggested clusters.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Auto Clustering/_Extras/Fuzzy C-means suggested clusters.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Auto Clustering/_Extras/K-Means suggested clusters.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Auto Clustering/_Extras/K-Medians suggested clusters.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Auto Clustering/_Extras/K-Medoids suggested clusters.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Auto Clustering/_Extras/Somsc suggested clusters.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Feature Analysis/Full Titanic Data/_Extras/Dataframe Snapshot 2.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Feature Analysis/Full Titanic Data/_Extras/Entropy Table 2.pkl" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Feature Analysis/Full Titanic Data/_Extras/Entropy Table 2.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Feature Analysis/Full Titanic Data/_Extras/Entropy Table.pkl" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Feature Analysis/Full Titanic Data/_Extras/Entropy Table.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/eflow Data/_Extras/Pipeline Structure/Data Pipeline Segments/DataEncoder/7C6F82082E.json" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/_Extras/Pipeline Structure/Data Pipeline Segments/DataEncoder/7C6F82082E.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/fuckk.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Auto Clustering/Models/Somsc/Center Elbow Count.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Auto Clustering/Models/Somsc/Center Elbow Count.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Auto Clustering/Models/Somsc/Clusters=5/Distance Zscore = 1.5/Cluster: 0/Cluster Profile.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Auto Clustering/Models/Somsc/Clusters=5/Distance Zscore = 1.5/Cluster: 0/Cluster Profile.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Auto Clustering/Models/Somsc/Clusters=5/Distance Zscore = 1.5/Cluster: 0/Embarked/Count plot graph on Embarked with count color ranking.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Auto Clustering/Models/Somsc/Clusters=5/Distance Zscore = 1.5/Cluster: 0/Embarked/Count plot graph on Embarked with count color ranking.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Auto Clustering/Models/Somsc/Clusters=5/Distance Zscore = 1.5/Cluster: 0/Embarked/Embarked Value Counts Table.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Auto Clustering/Models/Somsc/Clusters=5/Distance Zscore = 1.5/Cluster: 0/Embarked/Embarked Value Counts Table.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Auto Clustering/Models/Somsc/Clusters=5/Distance Zscore = 1.5/Cluster: 0/Pclass/Count plot graph on Pclass with count color ranking.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Auto Clustering/Models/Somsc/Clusters=5/Distance Zscore = 1.5/Cluster: 0/Pclass/Count plot graph on Pclass with count color ranking.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Auto Clustering/Models/Somsc/Clusters=5/Distance Zscore = 1.5/Cluster: 0/Pclass/Count plot graph on Pclass.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Auto Clustering/Models/Somsc/Clusters=5/Distance Zscore = 1.5/Cluster: 0/Pclass/Count plot graph on Pclass.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Auto Clustering/Models/Somsc/Clusters=5/Distance Zscore = 1.5/Cluster: 0/Pclass/Pclass Value Counts Table.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Auto Clustering/Models/Somsc/Clusters=5/Distance Zscore = 1.5/Cluster: 0/Pclass/Pclass Value Counts Table.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Auto Clustering/Models/Somsc/Clusters=5/Distance Zscore = 1.5/Cluster: 0/Sex/Count plot graph on Sex with count color ranking.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Auto Clustering/Models/Somsc/Clusters=5/Distance Zscore = 1.5/Cluster: 0/Sex/Count plot graph on Sex with count color ranking.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Auto Clustering/Models/Somsc/Clusters=5/Distance Zscore = 1.5/Cluster: 0/Sex/Count plot graph on Sex.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Auto Clustering/Models/Somsc/Clusters=5/Distance Zscore = 1.5/Cluster: 0/Sex/Count plot graph on Sex.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Auto Clustering/Models/Somsc/Clusters=5/Distance Zscore = 1.5/Cluster: 0/Sex/Pie graph on Sex.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Auto Clustering/Models/Somsc/Clusters=5/Distance Zscore = 1.5/Cluster: 0/Sex/Pie graph on Sex.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Auto Clustering/Models/Somsc/Clusters=5/Distance Zscore = 1.5/Cluster: 0/Sex/Sex Value Counts Table.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Auto Clustering/Models/Somsc/Clusters=5/Distance Zscore = 1.5/Cluster: 0/Sex/Sex Value Counts Table.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Auto Clustering/Models/Somsc/Clusters=5/Distance Zscore = 1.5/Cluster: 0/Survived/Pie graph on Survived.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Auto Clustering/Models/Somsc/Clusters=5/Distance Zscore = 1.5/Cluster: 0/Survived/Pie graph on Survived.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Auto Clustering/Models/Somsc/Clusters=5/Distance Zscore = 1.5/Cluster: 0/_Extras/Dataframe Snapshot.json" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Auto Clustering/Models/Somsc/Clusters=5/Distance Zscore = 1.5/Cluster: 0/_Extras/Dataframe Snapshot.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Auto Clustering/Models/Somsc/Clusters=5/Distance Zscore = 1.5/Cluster: 0/_Extras/Meta Data/Dataframe Shape Table.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Auto Clustering/Models/Somsc/Clusters=5/Distance Zscore = 1.5/Cluster: 0/_Extras/Meta Data/Dataframe Shape Table.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Auto Clustering/Models/Somsc/Clusters=5/Distance Zscore = 1.5/Cluster: 0/_Extras/Meta Data/Dataframe Types Table.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Auto Clustering/Models/Somsc/Clusters=5/Distance Zscore = 1.5/Cluster: 0/_Extras/Meta Data/Dataframe Types Table.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Auto Clustering/Models/Somsc/Clusters=5/Distance Zscore = 1.5/Cluster: 0/_Extras/Meta Data/Missing Data Table.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Auto Clustering/Models/Somsc/Clusters=5/Distance Zscore = 1.5/Cluster: 0/_Extras/Statistics/Entropy Table.pkl" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Auto Clustering/Models/Somsc/Clusters=5/Distance Zscore = 1.5/Cluster: 0/_Extras/Statistics/Entropy Table.pkl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Auto Clustering/Models/Somsc/Clusters=5/Distance Zscore = 1.5/Cluster: 0/_Extras/Statistics/Entropy Table.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Auto Clustering/Models/Somsc/Clusters=5/Distance Zscore = 1.5/Cluster: 0/_Extras/Statistics/Entropy Table.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Auto Clustering/Models/Somsc/Clusters=5/Distance Zscore = 1.5/Cluster: 1/.ipynb_checkpoints/Removed dp count-checkpoint.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Auto Clustering/Models/Somsc/Clusters=5/Distance Zscore = 1.5/Cluster: 1/.ipynb_checkpoints/Removed dp percentage-checkpoint.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Auto Clustering/Models/Somsc/Clusters=5/Distance Zscore = 1.5/Cluster: 1/Embarked/Count plot graph on Embarked with count color ranking.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Auto Clustering/Models/Somsc/Clusters=5/Distance Zscore = 1.5/Cluster: 1/Embarked/Count plot graph on Embarked with count color ranking.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Auto Clustering/Models/Somsc/Clusters=5/Distance Zscore = 1.5/Cluster: 1/Embarked/Embarked Value Counts Table.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Auto Clustering/Models/Somsc/Clusters=5/Distance Zscore = 1.5/Cluster: 1/Embarked/Embarked Value Counts Table.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Auto Clustering/Models/Somsc/Clusters=5/Distance Zscore = 1.5/Cluster: 1/Pclass/Count plot graph on Pclass with count color ranking.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Auto Clustering/Models/Somsc/Clusters=5/Distance Zscore = 1.5/Cluster: 1/Pclass/Count plot graph on Pclass with count color ranking.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Auto Clustering/Models/Somsc/Clusters=5/Distance Zscore = 1.5/Cluster: 1/Pclass/Count plot graph on Pclass.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Auto Clustering/Models/Somsc/Clusters=5/Distance Zscore = 1.5/Cluster: 1/Pclass/Count plot graph on Pclass.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Auto Clustering/Models/Somsc/Clusters=5/Distance Zscore = 1.5/Cluster: 1/Pclass/Pclass Value Counts Table.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Auto Clustering/Models/Somsc/Clusters=5/Distance Zscore = 1.5/Cluster: 1/Pclass/Pclass Value Counts Table.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Auto Clustering/Models/Somsc/Clusters=5/Distance Zscore = 1.5/Cluster: 1/Pclass/Pie graph on Pclass.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Auto Clustering/Models/Somsc/Clusters=5/Distance Zscore = 1.5/Cluster: 1/Pclass/Pie graph on Pclass.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Auto Clustering/Models/Somsc/Clusters=5/Distance Zscore = 1.5/Cluster: 1/Sex/Count plot graph on Sex with count color ranking.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Auto Clustering/Models/Somsc/Clusters=5/Distance Zscore = 1.5/Cluster: 1/Sex/Count plot graph on Sex with count color ranking.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Auto Clustering/Models/Somsc/Clusters=5/Distance Zscore = 1.5/Cluster: 1/Sex/Count plot graph on Sex.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Auto Clustering/Models/Somsc/Clusters=5/Distance Zscore = 1.5/Cluster: 1/Sex/Count plot graph on Sex.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Auto Clustering/Models/Somsc/Clusters=5/Distance Zscore = 1.5/Cluster: 1/Sex/Pie graph on Sex.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Auto Clustering/Models/Somsc/Clusters=5/Distance Zscore = 1.5/Cluster: 1/Sex/Pie graph on Sex.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Auto Clustering/Models/Somsc/Clusters=5/Distance Zscore = 1.5/Cluster: 1/Sex/Sex Value Counts Table.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Auto Clustering/Models/Somsc/Clusters=5/Distance Zscore = 1.5/Cluster: 1/Sex/Sex Value Counts Table.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Auto Clustering/Models/Somsc/Clusters=5/Distance Zscore = 1.5/Cluster: 1/_Extras/Dataframe Snapshot.json" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Auto Clustering/Models/Somsc/Clusters=5/Distance Zscore = 1.5/Cluster: 1/_Extras/Dataframe Snapshot.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Auto Clustering/Models/Somsc/Clusters=5/Distance Zscore = 1.5/Cluster: 1/_Extras/Meta Data/.ipynb_checkpoints/Missing Data Table-checkpoint.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Auto Clustering/Models/Somsc/Clusters=5/Distance Zscore = 1.5/Cluster: 1/_Extras/Meta Data/Missing Data Table.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Auto Clustering/Models/Somsc/Clusters=5/Distance Zscore = 1.5/Cluster: 1/_Extras/Statistics/Entropy Table.pkl" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Auto Clustering/Models/Somsc/Clusters=5/Distance Zscore = 1.5/Cluster: 1/_Extras/Statistics/Entropy Table.pkl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Auto Clustering/Models/Somsc/Clusters=5/Distance Zscore = 1.5/Cluster: 1/_Extras/Statistics/Entropy Table.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Auto Clustering/Models/Somsc/Clusters=5/Distance Zscore = 1.5/Cluster: 1/_Extras/Statistics/Entropy Table.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Auto Clustering/Models/Somsc/Clusters=5/Distance Zscore = 1.5/Cluster: 2/Embarked/Count plot graph on Embarked with count color ranking.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Auto Clustering/Models/Somsc/Clusters=5/Distance Zscore = 1.5/Cluster: 2/Embarked/Count plot graph on Embarked with count color ranking.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Auto Clustering/Models/Somsc/Clusters=5/Distance Zscore = 1.5/Cluster: 2/Embarked/Embarked Value Counts Table.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Auto Clustering/Models/Somsc/Clusters=5/Distance Zscore = 1.5/Cluster: 2/Embarked/Embarked Value Counts Table.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Auto Clustering/Models/Somsc/Clusters=5/Distance Zscore = 1.5/Cluster: 2/Pclass/Count plot graph on Pclass with count color ranking.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Auto Clustering/Models/Somsc/Clusters=5/Distance Zscore = 1.5/Cluster: 2/Pclass/Count plot graph on Pclass with count color ranking.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Auto Clustering/Models/Somsc/Clusters=5/Distance Zscore = 1.5/Cluster: 2/Pclass/Count plot graph on Pclass.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Auto Clustering/Models/Somsc/Clusters=5/Distance Zscore = 1.5/Cluster: 2/Pclass/Count plot graph on Pclass.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Auto Clustering/Models/Somsc/Clusters=5/Distance Zscore = 1.5/Cluster: 2/Pclass/Pclass Value Counts Table.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Auto Clustering/Models/Somsc/Clusters=5/Distance Zscore = 1.5/Cluster: 2/Pclass/Pclass Value Counts Table.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Auto Clustering/Models/Somsc/Clusters=5/Distance Zscore = 1.5/Cluster: 2/Sex/Count plot graph on Sex with count color ranking.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Auto Clustering/Models/Somsc/Clusters=5/Distance Zscore = 1.5/Cluster: 2/Sex/Count plot graph on Sex with count color ranking.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Auto Clustering/Models/Somsc/Clusters=5/Distance Zscore = 1.5/Cluster: 2/Sex/Count plot graph on Sex.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Auto Clustering/Models/Somsc/Clusters=5/Distance Zscore = 1.5/Cluster: 2/Sex/Count plot graph on Sex.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Auto Clustering/Models/Somsc/Clusters=5/Distance Zscore = 1.5/Cluster: 2/Sex/Pie graph on Sex.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Auto Clustering/Models/Somsc/Clusters=5/Distance Zscore = 1.5/Cluster: 2/Sex/Pie graph on Sex.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Auto Clustering/Models/Somsc/Clusters=5/Distance Zscore = 1.5/Cluster: 2/Sex/Sex Value Counts Table.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Auto Clustering/Models/Somsc/Clusters=5/Distance Zscore = 1.5/Cluster: 2/Sex/Sex Value Counts Table.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Auto Clustering/Models/Somsc/Clusters=5/Distance Zscore = 1.5/Cluster: 2/_Extras/Dataframe Snapshot.json" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Auto Clustering/Models/Somsc/Clusters=5/Distance Zscore = 1.5/Cluster: 2/_Extras/Dataframe Snapshot.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Auto Clustering/Models/Somsc/Clusters=5/Distance Zscore = 1.5/Cluster: 2/_Extras/Meta Data/Missing Data Table.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Auto Clustering/Models/Somsc/Clusters=5/Distance Zscore = 1.5/Cluster: 2/_Extras/Statistics/Entropy Table.pkl" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Auto Clustering/Models/Somsc/Clusters=5/Distance Zscore = 1.5/Cluster: 2/_Extras/Statistics/Entropy Table.pkl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Auto Clustering/Models/Somsc/Clusters=5/Distance Zscore = 1.5/Cluster: 3/Embarked/Count plot graph on Embarked with count color ranking.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Auto Clustering/Models/Somsc/Clusters=5/Distance Zscore = 1.5/Cluster: 3/Embarked/Count plot graph on Embarked with count color ranking.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Auto Clustering/Models/Somsc/Clusters=5/Distance Zscore = 1.5/Cluster: 3/Embarked/Embarked Value Counts Table.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Auto Clustering/Models/Somsc/Clusters=5/Distance Zscore = 1.5/Cluster: 3/Embarked/Embarked Value Counts Table.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Auto Clustering/Models/Somsc/Clusters=5/Distance Zscore = 1.5/Cluster: 3/Pclass/Count plot graph on Pclass with count color ranking.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Auto Clustering/Models/Somsc/Clusters=5/Distance Zscore = 1.5/Cluster: 3/Pclass/Count plot graph on Pclass with count color ranking.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Auto Clustering/Models/Somsc/Clusters=5/Distance Zscore = 1.5/Cluster: 3/Pclass/Count plot graph on Pclass.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Auto Clustering/Models/Somsc/Clusters=5/Distance Zscore = 1.5/Cluster: 3/Pclass/Count plot graph on Pclass.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Auto Clustering/Models/Somsc/Clusters=5/Distance Zscore = 1.5/Cluster: 3/Pclass/Pclass Value Counts Table.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Auto Clustering/Models/Somsc/Clusters=5/Distance Zscore = 1.5/Cluster: 3/Pclass/Pclass Value Counts Table.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Auto Clustering/Models/Somsc/Clusters=5/Distance Zscore = 1.5/Cluster: 3/Pclass/Pie graph on Pclass.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Auto Clustering/Models/Somsc/Clusters=5/Distance Zscore = 1.5/Cluster: 3/Pclass/Pie graph on Pclass.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Auto Clustering/Models/Somsc/Clusters=5/Distance Zscore = 1.5/Cluster: 3/Sex/Count plot graph on Sex with count color ranking.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Auto Clustering/Models/Somsc/Clusters=5/Distance Zscore = 1.5/Cluster: 3/Sex/Count plot graph on Sex with count color ranking.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Auto Clustering/Models/Somsc/Clusters=5/Distance Zscore = 1.5/Cluster: 3/Sex/Count plot graph on Sex.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Auto Clustering/Models/Somsc/Clusters=5/Distance Zscore = 1.5/Cluster: 3/Sex/Count plot graph on Sex.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Auto Clustering/Models/Somsc/Clusters=5/Distance Zscore = 1.5/Cluster: 3/Sex/Pie graph on Sex.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Auto Clustering/Models/Somsc/Clusters=5/Distance Zscore = 1.5/Cluster: 3/Sex/Pie graph on Sex.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Auto Clustering/Models/Somsc/Clusters=5/Distance Zscore = 1.5/Cluster: 3/Sex/Sex Value Counts Table.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Auto Clustering/Models/Somsc/Clusters=5/Distance Zscore = 1.5/Cluster: 3/Sex/Sex Value Counts Table.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Auto Clustering/Models/Somsc/Clusters=5/Distance Zscore = 1.5/Cluster: 3/_Extras/Dataframe Snapshot.json" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Auto Clustering/Models/Somsc/Clusters=5/Distance Zscore = 1.5/Cluster: 3/_Extras/Dataframe Snapshot.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Auto Clustering/Models/Somsc/Clusters=5/Distance Zscore = 1.5/Cluster: 3/_Extras/Meta Data/Missing Data Table.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Auto Clustering/Models/Somsc/Clusters=5/Distance Zscore = 1.5/Cluster: 3/_Extras/Statistics/Entropy Table.pkl" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Auto Clustering/Models/Somsc/Clusters=5/Distance Zscore = 1.5/Cluster: 3/_Extras/Statistics/Entropy Table.pkl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Auto Clustering/Models/Somsc/Clusters=5/Distance Zscore = 1.5/Cluster: 3/_Extras/Statistics/Entropy Table.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Auto Clustering/Models/Somsc/Clusters=5/Distance Zscore = 1.5/Cluster: 3/_Extras/Statistics/Entropy Table.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Auto Clustering/Models/Somsc/Clusters=5/Distance Zscore = 1.5/Cluster: 4/Cluster Profile.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Auto Clustering/Models/Somsc/Clusters=5/Distance Zscore = 1.5/Cluster: 4/Cluster Profile.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Auto Clustering/Models/Somsc/Clusters=5/Distance Zscore = 1.5/Cluster: 4/Embarked/Count plot graph on Embarked with count color ranking.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Auto Clustering/Models/Somsc/Clusters=5/Distance Zscore = 1.5/Cluster: 4/Embarked/Count plot graph on Embarked with count color ranking.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Auto Clustering/Models/Somsc/Clusters=5/Distance Zscore = 1.5/Cluster: 4/Embarked/Embarked Value Counts Table.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Auto Clustering/Models/Somsc/Clusters=5/Distance Zscore = 1.5/Cluster: 4/Embarked/Embarked Value Counts Table.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Auto Clustering/Models/Somsc/Clusters=5/Distance Zscore = 1.5/Cluster: 4/Pclass/Count plot graph on Pclass with count color ranking.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Auto Clustering/Models/Somsc/Clusters=5/Distance Zscore = 1.5/Cluster: 4/Pclass/Count plot graph on Pclass with count color ranking.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Auto Clustering/Models/Somsc/Clusters=5/Distance Zscore = 1.5/Cluster: 4/Pclass/Count plot graph on Pclass.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Auto Clustering/Models/Somsc/Clusters=5/Distance Zscore = 1.5/Cluster: 4/Pclass/Count plot graph on Pclass.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Auto Clustering/Models/Somsc/Clusters=5/Distance Zscore = 1.5/Cluster: 4/Pclass/Pclass Value Counts Table.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Auto Clustering/Models/Somsc/Clusters=5/Distance Zscore = 1.5/Cluster: 4/Pclass/Pclass Value Counts Table.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Auto Clustering/Models/Somsc/Clusters=5/Distance Zscore = 1.5/Cluster: 4/Pclass/Pie graph on Pclass.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Auto Clustering/Models/Somsc/Clusters=5/Distance Zscore = 1.5/Cluster: 4/Pclass/Pie graph on Pclass.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Auto Clustering/Models/Somsc/Clusters=5/Distance Zscore = 1.5/Cluster: 4/Sex/Count plot graph on Sex with count color ranking.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Auto Clustering/Models/Somsc/Clusters=5/Distance Zscore = 1.5/Cluster: 4/Sex/Count plot graph on Sex with count color ranking.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Auto Clustering/Models/Somsc/Clusters=5/Distance Zscore = 1.5/Cluster: 4/Sex/Count plot graph on Sex.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Auto Clustering/Models/Somsc/Clusters=5/Distance Zscore = 1.5/Cluster: 4/Sex/Count plot graph on Sex.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Auto Clustering/Models/Somsc/Clusters=5/Distance Zscore = 1.5/Cluster: 4/Sex/Pie graph on Sex.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Auto Clustering/Models/Somsc/Clusters=5/Distance Zscore = 1.5/Cluster: 4/Sex/Pie graph on Sex.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Auto Clustering/Models/Somsc/Clusters=5/Distance Zscore = 1.5/Cluster: 4/Sex/Sex Value Counts Table.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Auto Clustering/Models/Somsc/Clusters=5/Distance Zscore = 1.5/Cluster: 4/Sex/Sex Value Counts Table.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Auto Clustering/Models/Somsc/Clusters=5/Distance Zscore = 1.5/Cluster: 4/_Extras/Dataframe Snapshot.json" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Auto Clustering/Models/Somsc/Clusters=5/Distance Zscore = 1.5/Cluster: 4/_Extras/Dataframe Snapshot.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Auto Clustering/Models/Somsc/Clusters=5/Distance Zscore = 1.5/Cluster: 4/_Extras/Meta Data/Missing Data Table.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Auto Clustering/Models/Somsc/Clusters=5/Distance Zscore = 1.5/Cluster: 4/_Extras/Statistics/Entropy Table.pkl" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Auto Clustering/Models/Somsc/Clusters=5/Distance Zscore = 1.5/Cluster: 4/_Extras/Statistics/Entropy Table.pkl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Auto Clustering/Models/Somsc/Clusters=5/No Distance Zscore/Cluster: 4/Pclass/Count plot graph on Pclass.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Auto Clustering/Models/Somsc/Clusters=5/No Distance Zscore/Cluster: 4/Pclass/Count plot graph on Pclass.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Auto Clustering/Models/Somsc/Clusters=5/No Distance Zscore/Cluster: 4/Pclass/Pie graph on Pclass.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Auto Clustering/Models/Somsc/Clusters=5/No Distance Zscore/Cluster: 4/Pclass/Pie graph on Pclass.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Auto Clustering/Models/Somsc/Proximity Elbow Count.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Auto Clustering/Models/Somsc/Proximity Elbow Count.png" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -126,8 +145,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/eflow/auto_modeler/cluster_master.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="368">
-              <caret line="851" column="45" selection-start-line="851" selection-start-column="45" selection-end-line="851" selection-end-column="45" />
+            <state relative-caret-position="-211">
+              <caret line="1576" column="11" selection-start-line="1576" selection-start-column="11" selection-end-line="1576" selection-end-column="11" />
               <folding>
                 <element signature="e#1#53#0" expanded="true" />
               </folding>
@@ -136,10 +155,22 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/eflow/foundation/data_frame_types.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="252">
+              <caret line="502" column="20" selection-start-line="502" selection-start-column="8" selection-end-line="502" selection-end-column="20" />
+              <folding>
+                <element signature="e#0#69#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/eflow/data_analysis/feature_analysis.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-10439">
-              <caret line="201" lean-forward="true" selection-start-line="201" selection-end-line="201" />
+            <state relative-caret-position="-8566">
+              <caret line="86" column="65" selection-start-line="86" selection-start-column="65" selection-end-line="86" selection-end-column="65" />
               <folding>
                 <element signature="e#0#51#0" expanded="true" />
               </folding>
@@ -150,7 +181,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/eflow/utils/sys_utils.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="298">
+            <state relative-caret-position="2310">
               <caret line="158" column="50" selection-start-line="158" selection-start-column="50" selection-end-line="158" selection-end-column="50" />
               <folding>
                 <element signature="e#0#86#0" expanded="true" />
@@ -162,7 +193,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/eflow/utils/math_utils.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="690">
+            <state relative-caret-position="660">
               <caret line="46" column="22" selection-start-line="46" selection-start-column="4" selection-end-line="46" selection-end-column="22" />
               <folding>
                 <element signature="e#0#23#0" expanded="true" />
@@ -172,18 +203,9 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/eflow/_hidden/parent_objects/auto_modeler.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state>
-              <caret column="18" selection-start-column="15" selection-end-column="18" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/eflow/utils/pandas_utils.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1174">
+            <state relative-caret-position="3210">
               <caret line="224" column="40" selection-start-line="224" selection-start-column="20" selection-end-line="224" selection-end-column="40" />
               <folding>
                 <element signature="e#0#61#0" expanded="true" />
@@ -248,36 +270,36 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>find_all_dist_with_target</find>
-      <find>den</find>
-      <find>df_to_image</find>
-      <find>stats</find>
-      <find>revert_dummies</find>
-      <find>qualitative_features</find>
-      <find>create_dir_structure</find>
-      <find>__cluster_models_paths</find>
-      <find>centers</find>
-      <find>cluster_profile</find>
-      <find>__create_cluster_profile</find>
-      <find>Stats</find>
-      <find>print</find>
-      <find>__determine_curve</find>
-      <find>warn</find>
-      <find>curve</find>
-      <find>warnings</find>
-      <find>zscore</find>
-      <find>os.</find>
-      <find>isinstance</find>
-      <find>str</find>
-      <find>z_val</find>
-      <find>df_features</find>
-      <find>apply_value</find>
-      <find>folder_path</find>
-      <find>pickle_object_to_file</find>
-      <find>perform_analysis</find>
-      <find>missing data</find>
-      <find>def __</find>
       <find>missing_values_table</find>
+      <find>t1</find>
+      <find>clamped</find>
+      <find>revert_dummies</find>
+      <find>display</find>
+      <find>eflow</find>
+      <find>sub_dir</find>
+      <find>__inspect_feature_matrix</find>
+      <find>__nearest</find>
+      <find>__create_elbow_seq</find>
+      <find>get_</find>
+      <find>get_centers</find>
+      <find>__create_pyclustering_model</find>
+      <find>__find_best_elbow_models</find>
+      <find>knee</find>
+      <find>Knee</find>
+      <find>__cluster_models_paths</find>
+      <find>__display_rank_graph</find>
+      <find>__display_rank</find>
+      <find>rank</find>
+      <find>from_dict</find>
+      <find>plt</find>
+      <find>feature_analysis</find>
+      <find>all_features</find>
+      <find>fig</find>
+      <find>plt.figure</find>
+      <find>__display</find>
+      <find>save_plot</find>
+      <find>__display_cluster_label_rank_graph</find>
+      <find>display_visuals</find>
     </findStrings>
     <replaceStrings>
       <replace>create_dir_structure</replace>
@@ -365,12 +387,12 @@
         <option value="$PROJECT_DIR$/eflow/utils/math_utils.py" />
         <option value="$PROJECT_DIR$/eflow/data_pipeline_segments/feature_data_cleaner.py" />
         <option value="$PROJECT_DIR$/eflow/utils/multi_threading.py" />
-        <option value="$PROJECT_DIR$/eflow/data_pipeline_segments/data_encoder.py" />
         <option value="$PROJECT_DIR$/eflow/utils/modeling_utils.py" />
         <option value="$PROJECT_DIR$/eflow/_hidden/parent_objects/auto_modeler.py" />
-        <option value="$PROJECT_DIR$/eflow/data_analysis/feature_analysis.py" />
         <option value="$PROJECT_DIR$/eflow/utils/pandas_utils.py" />
         <option value="$PROJECT_DIR$/eflow/utils/sys_utils.py" />
+        <option value="$PROJECT_DIR$/eflow/data_pipeline_segments/data_encoder.py" />
+        <option value="$PROJECT_DIR$/eflow/data_analysis/feature_analysis.py" />
         <option value="$PROJECT_DIR$/eflow/auto_modeler/cluster_master.py" />
       </list>
     </option>
@@ -385,7 +407,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -476,6 +497,7 @@
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -716,18 +738,19 @@
       <workItem from="1581866481337" duration="22788000" />
       <workItem from="1582233119277" duration="11000" />
       <workItem from="1582240277392" duration="1494000" />
-      <workItem from="1582243599807" duration="5942000" />
+      <workItem from="1582243599807" duration="8159000" />
+      <workItem from="1582324402749" duration="15326000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="858418000" />
+    <option name="totallyTimeSpent" value="875961000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1920" height="1080" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.26890308" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.23748669" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -1092,30 +1115,50 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/eflow/_hidden/parent_objects/auto_modeler.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret column="18" selection-start-column="15" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/eflow/data_pipeline_segments/data_encoder.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="5070">
-          <caret line="346" column="55" selection-start-line="346" selection-start-column="35" selection-end-line="346" selection-end-column="55" />
+        <state relative-caret-position="6735">
+          <caret line="457" column="30" selection-start-line="457" selection-start-column="30" selection-end-line="457" selection-end-column="30" />
           <folding>
             <element signature="e#0#60#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/eflow/foundation/data_frame_types.py">
+    <entry file="file://$PROJECT_DIR$/eflow/utils/sys_utils.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="10005">
-          <caret line="678" column="34" selection-start-line="678" selection-start-column="8" selection-end-line="678" selection-end-column="34" />
+        <state relative-caret-position="2310">
+          <caret line="158" column="50" selection-start-line="158" selection-start-column="50" selection-end-line="158" selection-end-column="50" />
           <folding>
-            <element signature="e#0#69#0" expanded="true" />
+            <element signature="e#0#86#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/eflow/_hidden/parent_objects/auto_modeler.py">
+    <entry file="file://$PROJECT_DIR$/eflow/utils/math_utils.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret column="18" selection-start-column="15" selection-end-column="18" />
+        <state relative-caret-position="660">
+          <caret line="46" column="22" selection-start-line="46" selection-start-column="4" selection-end-line="46" selection-end-column="22" />
+          <folding>
+            <element signature="e#0#23#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/eflow/utils/pandas_utils.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="3210">
+          <caret line="224" column="40" selection-start-line="224" selection-start-column="20" selection-end-line="224" selection-end-column="40" />
+          <folding>
+            <element signature="e#0#61#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -1156,50 +1199,30 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/eflow/utils/sys_utils.py">
+    <entry file="file://$PROJECT_DIR$/eflow/foundation/data_frame_types.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="298">
-          <caret line="158" column="50" selection-start-line="158" selection-start-column="50" selection-end-line="158" selection-end-column="50" />
+        <state relative-caret-position="252">
+          <caret line="502" column="20" selection-start-line="502" selection-start-column="8" selection-end-line="502" selection-end-column="20" />
           <folding>
-            <element signature="e#0#86#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/eflow/utils/math_utils.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="690">
-          <caret line="46" column="22" selection-start-line="46" selection-start-column="4" selection-end-line="46" selection-end-column="22" />
-          <folding>
-            <element signature="e#0#23#0" expanded="true" />
+            <element signature="e#0#69#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/eflow/data_analysis/feature_analysis.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-10439">
-          <caret line="201" lean-forward="true" selection-start-line="201" selection-end-line="201" />
+        <state relative-caret-position="-8566">
+          <caret line="86" column="65" selection-start-line="86" selection-start-column="65" selection-end-line="86" selection-end-column="65" />
           <folding>
             <element signature="e#0#51#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/eflow/utils/pandas_utils.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1174">
-          <caret line="224" column="40" selection-start-line="224" selection-start-column="20" selection-end-line="224" selection-end-column="40" />
-          <folding>
-            <element signature="e#0#61#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/eflow/auto_modeler/cluster_master.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="368">
-          <caret line="851" column="45" selection-start-line="851" selection-start-column="45" selection-end-line="851" selection-end-column="45" />
+        <state relative-caret-position="-211">
+          <caret line="1576" column="11" selection-start-line="1576" selection-start-column="11" selection-end-line="1576" selection-end-column="11" />
           <folding>
             <element signature="e#1#53#0" expanded="true" />
           </folding>

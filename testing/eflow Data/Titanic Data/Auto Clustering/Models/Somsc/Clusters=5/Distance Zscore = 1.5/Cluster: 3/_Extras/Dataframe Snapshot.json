@@ -21,7 +21,7 @@
       "Random Value 4": "Southampton",
       "Random Value 5": "Southampton",
       "Random Value 6": "Southampton",
-      "Random Value 7": "NaN",
+      "Random Value 7": "Southampton",
       "Random Value 8": "Southampton",
       "Random Value 9": "Southampton",
       "Random Value 10": "Southampton"
@@ -39,13 +39,13 @@
       "Random Value 10": "NaN"
     },
     "Pclass": {
-      "Random Value 1": "NaN",
+      "Random Value 1": "1",
       "Random Value 2": "1",
       "Random Value 3": "1",
       "Random Value 4": "1",
-      "Random Value 5": "NaN",
-      "Random Value 6": "NaN",
-      "Random Value 7": "NaN",
+      "Random Value 5": "1",
+      "Random Value 6": "1",
+      "Random Value 7": "1",
       "Random Value 8": "1",
       "Random Value 9": "1",
       "Random Value 10": "1"

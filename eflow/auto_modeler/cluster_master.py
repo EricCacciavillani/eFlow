@@ -119,10 +119,10 @@ class AutoCluster(AutoModeler):
             self.__first_scaler = copy.deepcopy(scaler)
 
             print("\nInspecting scaled results!")
-            self.__inspect_feature_matrix(sub_dir="PCA",
-                                          filename="Applied scaler results",
-                                          matrix=scaled,
-                                          feature_names=df.columns)
+            self.__inspect_feature_matrix(matrix=scaled,
+                                          feature_names=df.columns,
+                                          sub_dir="PCA",
+                                          filename="Applied scaler results")
 
             pca, scaled = self.__visualize_pca_variance(scaled)
 
@@ -134,10 +134,10 @@ class AutoCluster(AutoModeler):
                                                        len(df.columns) + 1)]
 
             print("\nInspecting applied scaler and pca results!")
-            self.__inspect_feature_matrix(sub_dir="PCA",
-                                          filename="Applied scaler and PCA results",
-                                          matrix=scaled,
-                                          feature_names=pca_feature_names)
+            self.__inspect_feature_matrix(matrix=scaled,
+                                          feature_names=pca_feature_names,
+                                          sub_dir="PCA",
+                                          filename="Applied scaler and PCA results")
 
             if pca_perc < 1.0:
                 # Find cut off point on cumulative sum
@@ -161,10 +161,10 @@ class AutoCluster(AutoModeler):
             scaled = scaler.fit_transform(scaled)
 
             print("\nInspecting data after final scaler applied!")
-            self.__inspect_feature_matrix(sub_dir="PCA",
-                                          filename="Applied final sclaer to process.",
-                                          matrix=scaled,
-                                          feature_names=pca_feature_names)
+            self.__inspect_feature_matrix(matrix=scaled,
+                                          feature_names=pca_feature_names,
+                                          sub_dir="PCA",
+                                          filename="Applied final sclaer to process.")
 
             self.__second_scaler = copy.deepcopy(scaler)
 
@@ -189,9 +189,20 @@ class AutoCluster(AutoModeler):
 
                                 model_path = self.folder_path + f"Models/{cluster_dir}/{dir}/{model_name}"
 
-                                model_name = model_name.split(".")[0]
+                                try:
+                                    obj = load_pickle_object(model_path)
 
-                                self.__cluster_models_paths[model_name] = model_path
+                                    if isinstance(obj,list) or isinstance(obj, np.ndarray):
+                                        continue
+                                    else:
+                                        del obj
+
+                                    model_name = model_name.split(".")[0]
+
+                                    self.__cluster_models_paths[
+                                        model_name] = model_path
+                                except Exception:
+                                    pass
 
             if self.__cluster_models_paths:
                 for model_name, model_path in self.__cluster_models_paths.items():
@@ -330,7 +341,7 @@ class AutoCluster(AutoModeler):
                 Display print outputs
 
             display_visuals: bool
-                Display plot data
+                Display plot data if set to ture.
 
         Returns:
             All cluster counts found.
@@ -769,6 +780,8 @@ class AutoCluster(AutoModeler):
         # Iterate through all zscore values
         for z_val in zscore:
 
+            cluster_labels_lengths = dict()
+
             # Handling all zscore values
             no_zscore = False
 
@@ -792,8 +805,6 @@ class AutoCluster(AutoModeler):
                 # Create cluster dataframe
                 tmp_df = df.loc[cluster_indexes].reset_index(drop=True)
 
-                display(tmp_df)
-
                 # Find and apply zscore cut off point
                 bool_array = find_all_zscore_distances_from_target(self.apply_clustering_data_pipeline(tmp_df.values),
                                                                    center_points[i])
@@ -803,8 +814,7 @@ class AutoCluster(AutoModeler):
                 removed_dp_count = len(bool_array) - bool_array.sum()
                 removed_dp_percentage = removed_dp_count / len(tmp_df)
 
-                tmp_df = tmp_df[bool_array]
-                tmp_df.reset_index(drop=True)
+                tmp_df = tmp_df[bool_array].reset_index(drop=True)
 
                 del bool_array
 
@@ -812,9 +822,11 @@ class AutoCluster(AutoModeler):
                 tmp_df_features = copy.deepcopy(df_features)
 
                 data_encoder = DataEncoder(create_file=False)
+
                 data_encoder.revert_dummies(tmp_df,
                                             tmp_df_features,
                                             qualitative_features=qualitative_features)
+
                 data_encoder.decode_data(tmp_df,
                                          tmp_df_features,
                                          apply_value_representation=False)
@@ -823,6 +835,7 @@ class AutoCluster(AutoModeler):
                                                         df_features)
                 del data_encoder
 
+                cluster_labels_lengths[label] = len(tmp_df)
 
                 # Handle naming/managing the directory structure
                 if no_zscore:
@@ -850,9 +863,6 @@ class AutoCluster(AutoModeler):
                                                        overwrite_full_path=f"{model_dir}/Distance Zscore = {z_val}",
                                                        notebook_mode=self.__notebook_mode)
 
-                display(tmp_df)
-                display(tmp_df.isnull().sum())
-
                 # Analyze the cluster dataframe
                 feature_analysis.perform_analysis(tmp_df,
                                                   dataset_name=f"Cluster: {label}",
@@ -867,6 +877,7 @@ class AutoCluster(AutoModeler):
                                                   extra_tables=extra_tables,
                                                   statistical_analysis_on_aggregates=statistical_analysis_on_aggregates)
 
+                # Save removed data points
                 write_object_text_to_file(removed_dp_count,
                                           f"{feature_analysis.folder_path}/Cluster: {label}",
                                           filename="Removed dp count")
@@ -875,6 +886,17 @@ class AutoCluster(AutoModeler):
                                           f"{feature_analysis.folder_path}/Cluster: {label}",
                                           filename="Removed dp percentage")
 
+            if no_zscore:
+                self.__display_cluster_label_rank_graph(list(cluster_labels_lengths.keys()),
+                                                        list(cluster_labels_lengths.values()),
+                                                        sub_dir=f"{model_dir}/No Distance Zscore",
+                                                        display_visuals=display_visuals)
+            else:
+                self.__display_cluster_label_rank_graph(list(cluster_labels_lengths.keys()),
+                                                        list(cluster_labels_lengths.values()),
+                                                        sub_dir=f"{model_sub_dir}/Distance Zscore = {z_val}",
+                                                        display_visuals=display_visuals)
+
             print("###" * 4)
 
 
@@ -882,9 +904,29 @@ class AutoCluster(AutoModeler):
                                  df,
                                  df_features,
                                  sub_dir):
+        """
+        Desc:
+            Generate a cluster profile based on the clustered data. A cluster
+            profile gets the mean of a numerical series data and the mode of
+            a non-numerical one.
+
+        Args:
+            df: pd.DataFrame
+                Dataframe object
+
+            df_features: DataFrameTypes object from eflow.
+                DataFrameTypes object; organizes feature types into groups.
+
+            sub_dir: string
+                Sub directory to create when writing data.
+        """
         cluster_profile_dict = dict()
 
         for feature_name in df.columns:
+
+            if feature_name not in df_features.all_features():
+                raise ValueError(f"No feature named {feature_name} was found in df_features.")
+
             if feature_name in df_features.continuous_numerical_features():
                 cluster_profile_dict[feature_name] = df[feature_name].mean()
             else:
@@ -895,27 +937,47 @@ class AutoCluster(AutoModeler):
                     elif cluster_profile_dict[feature_name] == "0":
                         cluster_profile_dict[feature_name] = False
 
-
         self.save_table_as_plot(pd.DataFrame(cluster_profile_dict, index=[0]).transpose(),
                                 sub_dir=sub_dir,
                                 filename="Cluster Profile",
                                 show_index=True)
 
     def __inspect_feature_matrix(self,
-                                 sub_dir,
-                                 filename,
                                  matrix,
-                                 feature_names):
+                                 feature_names,
+                                 sub_dir,
+                                 filename):
         """
-            Creates a dataframe to quickly analyze a matrix
+        Desc:
+            Creates a dataframe to quickly analyze a matrix of data by mean and
+            standard deviation.
+
+        Args:
+
+            matrix: list of lists, np.matrix, pd.DataFrame
+                Matrix data to convert to mean and
+
+            feature_names: list of strings
+                Each dimension's name.
+
+            sub_dir: string
+                Sub directory to create when writing data.
+
+            filename: string
+                Name of the file
         """
+
+        # Calculate mean and std for each dimension
         mean_matrix = np.mean(matrix, axis=0)
         std_matrix = np.std(matrix, axis=0)
+
+        # Create relationship dict
         data_dict = dict()
         for index, feature_name in enumerate(feature_names):
             data_dict[feature_name] = [mean_matrix[index],
                                        std_matrix[index]]
 
+        # Convert to dataframe, display, and save to directory.
         tmp_df = pd.DataFrame.from_dict(data_dict,
                                         orient='index',
                                         columns=['Mean', 'Standard Dev'])
@@ -931,11 +993,19 @@ class AutoCluster(AutoModeler):
                                 show_index=True,
                                 format_float_pos=5)
 
-    # Not created by me!
-    # Created by my teacher: Narine Hall
-    def __visualize_pca_variance(self, data):
+
+    def __visualize_pca_variance(self,
+                                 data):
         """
-            Visualize PCA matrix feature importance
+        Desc:
+            Visualize PCA matrix feature importance.
+
+        Args:
+            data: list of list, np.matrix,
+                Values to have pca applied too.
+
+        Credit to favorite teacher Narine Hall for making this function.
+        I wouldn't be the programmer I am today if it wasn't for her.
         """
 
         # Check for pca variance
@@ -973,78 +1043,6 @@ class AutoCluster(AutoModeler):
 
         return pca, data
 
-    def __display_rank_graph(self,
-                             feature_names,
-                             metric,
-                             output_path,
-                             model_name,
-                             title="",
-                             y_title="",
-                             x_title="", ):
-        """
-            Darker colors have higher rankings (values)
-        """
-        plt.figure(figsize=(7, 7))
-
-        # Init color ranking fo plot
-        # Ref: http://tinyurl.com/ydgjtmty
-        pal = sns.color_palette("GnBu_d", len(metric))
-        rank = np.array(metric).argsort().argsort()
-        ax = sns.barplot(y=feature_names, x=metric,
-                         palette=np.array(pal[::-1])[rank])
-        plt.xticks(rotation=0, fontsize=15)
-        plt.yticks(fontsize=15)
-        plt.xlabel(x_title, fontsize=20, labelpad=20)
-        plt.ylabel(y_title, fontsize=20, labelpad=20)
-        plt.title(title, fontsize=15)
-        plt.show()
-
-    def __get_color_name(self,
-                         color):
-
-        if color == "b":
-            return "Blue"
-
-        elif color == "g":
-            return "Green"
-
-        elif color == "r":
-            return "Red"
-
-        elif color == "c":
-            return "Cyan"
-
-        elif color == "m":
-            return "Magenta"
-
-        elif color == "y":
-            return "Yellow"
-
-        elif color == "k":
-            return "Black"
-
-        elif color == "w":
-            return "White"
-
-        else:
-            return color
-
-    def __nearest(self,
-                  clusters, x):
-        return np.argmin([euclidean_distance(x, c) for c in clusters])
-
-    def __get_unique_random_indexes(self,
-                                    k_val):
-        random_indexes = set()
-        while len(random_indexes) != k_val:
-
-            index = random.randint(0, len(self.__scaled) - 1)
-
-            if index not in random_indexes:
-                random_indexes.add(index)
-
-        return random_indexes
-
 
     def __create_elbow_seq(self,
                            model_name,
@@ -1053,11 +1051,36 @@ class AutoCluster(AutoModeler):
                            max_k_value,
                            display_visuals):
         """
-            Generate models based on the found 'elbow' of the interia values.
+        Desc:
+            Fit's multiple cluster models and calculates each model's intertia
+            value. Because the clustering is subjective; finding the 'elbow' of
+            the elbow determines the 'best' model. That job is passed on to
+            "__find_best_elbow_models" to find the elbow of each sequence and
+            then the best matching elbow of all elbows.
+
+        Args:
+            model_name: string
+                Model's name
+
+            model_instance: pyclustering model
+                Model's instance
+
+            sequences: int
+                How many model sequences to create
+
+            max_k_value: int
+                How long to create the model sequence
+
+            display_visuals: bool
+                Display the graphics
+
+        Returns:
+            Get's the best cluster amounts
         """
 
         max_k_value += 1
 
+        # Matrix declarations
         k_models = []
         inertias = []
 
@@ -1065,14 +1088,15 @@ class AutoCluster(AutoModeler):
             tmp_inertias = []
             tmp_k_models = []
 
+            # Set up progress bar
             if display_visuals:
                 pbar = tqdm(range(1,max_k_value), desc=f"{model_name} Elbow Seq Count {elbow_seq_count + 1}")
             else:
                 pbar = range(1,max_k_value)
 
+            # Find random center points for clusters
             initial_centers = self.__create_random_initial_centers(model_name,
                                                                    max_k_value)
-
             for k_val in pbar:
 
                 if display_visuals:
@@ -1087,7 +1111,8 @@ class AutoCluster(AutoModeler):
                 # Run cluster analysis and obtain results.
                 model.process()
                 final_centers = np.array(self.__get_centers(model))
-                labels = [self.__nearest(final_centers, x) for x in self.__scaled]
+                labels = [self.__nearest_cluster(final_centers, dp)
+                          for dp in self.__scaled]
 
                 inertia = sum(((final_centers[l] - x) ** 2).sum()
                               for x, l in zip(self.__scaled, labels))
@@ -1106,6 +1131,16 @@ class AutoCluster(AutoModeler):
 
     def __get_centers(self,
                       model):
+        """
+        Desc:
+            Get's/creates the center point of each cluster.
+        Args:
+            model: pyclustering
+                Clustering model instance.
+
+        Returns:
+            The center points of the clusters
+        """
         try:
             return model.get_centers()
         except AttributeError:
@@ -1129,20 +1164,51 @@ class AutoCluster(AutoModeler):
                                     model_instance,
                                     initial_centers,
                                     k_val):
+        """
+        Desc:
+            Generates simple clustering model's that only require the clustering
+            amount.
+
+        Args:
+            model_name: string
+                Name of the model
+
+            model_instance: pyclustering
+                Clustering model
+
+            initial_centers: list of list of floats
+                Center points of each cluster
+
+            k_val:
+                Value of how many cluster's that should be generated.
+
+        Returns:
+            Returns a init instance of the needed pyclustering model.
+        """
+
 
         if model_name == "Somsc" or model_name == "Cure":
             model = model_instance(self.__scaled,
                                    k_val)
         else:
-
             model = model_instance(self.__scaled,
                                    initial_centers[0:k_val])
-
         return model
 
     def __create_random_initial_centers(self,
                                         model_name,
                                         k_val):
+        """
+        Desc:
+            Generates multiple random starting center points.
+
+        Args:
+            model_name: string
+                Name of the given model (some models have different requirements)
+
+            k_val: int
+                How many random center points/clusters need to be created.
+        """
         if model_name == "Somsc" or model_name == "Cure":
             return None
         elif model_name == "K-Medoids":
@@ -1152,58 +1218,59 @@ class AutoCluster(AutoModeler):
             return kmeans_plusplus_initializer(self.__scaled,
                                                k_val).initialize()
         else:
-            # Create instance of K-Means algorithm with prepared centers.
             return random_center_initializer(self.__scaled,
                                              k_val).initialize()
-
-    def __determine_curve(self,
-                          intertia):
-
-        convex_count = 0
-        concave_count = 0
-        for i in range(2, len(intertia) + 1):
-            x = range(len(intertia))
-
-            warnings.filterwarnings("ignore")
-
-            poly = np.polyfit(x[0:i],
-                              intertia[0:i],
-                              2)
-            warnings.filterwarnings("default")
-            if poly[0] >= 0:
-                convex_count += 1
-            else:
-                concave_count += 1
-
-        if concave_count >= convex_count:
-            return "concave"
-        else:
-            return "convex"
 
     def __find_best_elbow_models(self,
                                  model_name,
                                  k_models,
                                  inertias,
                                  display_visuals=True):
+        """
+        Desc:
+            Find the elbow of each sequence and then find the best matching
+            elbow that all sequences agree upon.
 
-        ks = range(1, len(inertias[0]) + 1)
+        Args:
+            model_name: string
+                Name of all model instance
 
+            k_models: list of list of pyclustering models
+                All pyclustering models
+
+            inertias: list of list of floats
+                All model's intertia's
+
+            display_visuals: bool
+                Determines if graphics should be displayed
+
+        Returns:
+            Returns back the best numbers of clusters.
+        """
+
+        ks = range(1,
+                   len(inertias[0]) + 1)
+
+        # Set graphic info
         plt.figure(figsize=(13, 6))
         plt.title(f"All possible {model_name} Elbow's", fontsize=15)
         plt.xlabel('Number of clusters, k')
         plt.ylabel('Inertia')
         plt.xticks(ks)
 
+        # ----
         elbow_inertias_matrix = None
         inertias_matrix = None
         elbow_models = []
         elbow_sections = []
         center_elbow_count = dict()
         proximity_elbow_count = dict()
+        elbow_cluster = None
 
-        # Plot ks vs inertias
+        # Plot inertias against ks (y values against x values)
         for i in range(0,len(inertias)):
 
+            # Determine curve
             curve = self.__determine_curve(inertias[i])
 
             if curve == "concave":
@@ -1211,6 +1278,7 @@ class AutoCluster(AutoModeler):
             else:
                 online = False
 
+            # Find the best cluster model
             elbow_cluster = KneeLocator(ks,
                                         inertias[i],
                                         curve="convex",
@@ -1222,17 +1290,20 @@ class AutoCluster(AutoModeler):
                 print("Elbow was either one or None for the elbow seq.")
                 continue
 
+            # Plot sequence
             plt.plot(ks,
                      inertias[i],
                      '-o',
                      color='#367588',
                      alpha=0.5)
 
+            # Count all center elbows found
             if str(elbow_cluster) not in center_elbow_count.keys():
                 center_elbow_count[str(elbow_cluster)] = 1
             else:
                 center_elbow_count[str(elbow_cluster)] += 1
 
+            # Get elbow section (1 before center and 1 after center)
             for k_val in [elbow_cluster - 1, elbow_cluster, elbow_cluster + 1]:
                 elbow_sections.append([ks[k_val - 1],inertias[i][k_val - 1]])
 
@@ -1241,10 +1312,10 @@ class AutoCluster(AutoModeler):
                 else:
                     proximity_elbow_count[str(k_val)] += 1
 
+            # Get inertia values
             if isinstance(elbow_inertias_matrix, type(None)):
                 inertias_matrix = np.matrix(inertias[i])
                 elbow_inertias_matrix = np.matrix(inertias[i][elbow_cluster - 2:elbow_cluster + 1])
-
             else:
                 inertias_matrix = np.vstack([inertias_matrix, inertias[i]])
 
@@ -1253,12 +1324,14 @@ class AutoCluster(AutoModeler):
 
             elbow_models.append(k_models[i][elbow_cluster - 2:elbow_cluster + 1])
 
-        for elbow in elbow_sections:
-            k_val = elbow[0]
-            intertia = elbow[1]
+        # Plot elbow sections
+        for elbow_s in elbow_sections:
+            k_val = elbow_s[0]
+            intertia = elbow_s[1]
             plt.plot(k_val,
                      intertia,
                      'r*',)
+
         del inertias
         del k_models
         del elbow_cluster
@@ -1268,9 +1341,11 @@ class AutoCluster(AutoModeler):
 
         if display_visuals and self.__notebook_mode:
             plt.show()
+
         plt.close("all")
 
-        center_elbow_count = pd.DataFrame({"Main Knees": list(center_elbow_count.keys()),
+        # Get the counts of the center elbows
+        center_elbow_count = pd.DataFrame({"Main Elbows": list(center_elbow_count.keys()),
                                            "Counts": list(center_elbow_count.values())})
         center_elbow_count.sort_values(by=['Counts'],
                                        ascending=False,
@@ -1281,7 +1356,8 @@ class AutoCluster(AutoModeler):
             sub_dir=f"Models/{model_name}",
             filename="Center Elbow Count")
 
-        proximity_elbow_count = pd.DataFrame({"Proximity Knees": list(proximity_elbow_count.keys()),
+        # Get the counts of the proximity elbows
+        proximity_elbow_count = pd.DataFrame({"Proximity Elbow": list(proximity_elbow_count.keys()),
                                               "Counts": list(proximity_elbow_count.values())})
         proximity_elbow_count.sort_values(by=['Counts'],
                                           ascending=False,
@@ -1292,12 +1368,16 @@ class AutoCluster(AutoModeler):
             sub_dir=f"Models/{model_name}",
             filename="Proximity Elbow Count")
 
+        # Set up graphic
         plt.figure(figsize=(13, 6))
         plt.title(f"Best of all {model_name} Elbows", fontsize=15)
         plt.xlabel('Number of clusters, k')
         plt.ylabel('Inertia')
         plt.xticks(ks)
 
+
+
+        # Find the most agreed upon elbow section
         average_elbow_inertias = elbow_inertias_matrix.mean(0)
 
         elbow_vote = []
@@ -1308,11 +1388,14 @@ class AutoCluster(AutoModeler):
         best_elbow_index = np.array(elbow_vote).argmin()
 
         print(inertias_matrix[best_elbow_index].tolist()[0])
+
+        # Plot most agreed upon elbow section
         plt.plot(ks,
                  inertias_matrix[best_elbow_index].tolist()[0],
                  '-o',
                  color='#367588')
 
+        # Save the best cluster models
         best_clusters = []
         for model in elbow_models[best_elbow_index]:
             k_val = len(model.get_clusters())
@@ -1320,7 +1403,7 @@ class AutoCluster(AutoModeler):
             model_path = create_dir_structure(self.folder_path,
                                               f"Models/{model_name}/Clusters={k_val}")
 
-
+            # Save model and meta data
             try:
                 file_path = pickle_object_to_file(model,
                                                   model_path,
@@ -1362,6 +1445,11 @@ class AutoCluster(AutoModeler):
         return best_clusters
 
     def __save_update_best_model_clusters(self):
+        """
+        Desc:
+            Generates a directory structure for saving the suggested cluster
+            amounts.
+        """
 
         create_dir_structure(self.folder_path,
                              "_Extras")
@@ -1385,6 +1473,202 @@ class AutoCluster(AutoModeler):
         write_object_text_to_file(round(sum(all_clusters) / len(all_clusters)),
                                   self.folder_path + "_Extras",
                                   "Average of suggested clusters")
+
+
+    def __get_unique_random_indexes(self,
+                                    k_val):
+        """
+        Desc:
+            Helper function for pyclustering models that require list indexes
+            to the scaled data.
+
+        Args:
+            k_val: int
+                How many random center points or clusters are required.
+
+        Returns:
+            Returns a list of randomly indexes.
+        """
+
+        if len(self.__scaled) < k_val:
+            raise ValueError("Can't generate more random indexes/center points "
+                             "than avaliable.")
+
+        random_indexes = set()
+        while len(random_indexes) != k_val:
+
+            index = random.randint(0, len(self.__scaled) - 1)
+
+            if index not in random_indexes:
+                random_indexes.add(index)
+
+        return random_indexes
+
+
+    def __determine_curve(self,
+                          intertia):
+        """
+        Desc:
+            When for finding the elbow of the graph it's important to understand
+            if the curve of the intertia vector is convex or concaved
+
+        Args:
+            intertia: list of floats
+                Cluster models evaluated by calculating their intertia.
+
+        Returns:
+            Returns a string that says either "concave" or "convex". Returns
+            nothing if the intertia vector has a length less than 2.
+        """
+
+        # Can't determine concaved or convexed; return None
+        if len(intertia) < 2:
+            return None
+
+        # Look at the vector in different lengths to determine the best shape
+        convex_count = 0
+        concave_count = 0
+        for i in range(2, len(intertia) + 1):
+            x = range(len(intertia))
+
+            warnings.filterwarnings("ignore")
+
+            # Calculate shape
+            poly = np.polyfit(x[0:i],
+                              intertia[0:i],
+                              2)
+            warnings.filterwarnings("default")
+
+            # Derivative greater than 0 must be concaved
+            if poly[0] >= 0:
+                convex_count += 1
+            else:
+                concave_count += 1
+
+        # Which shape was found more frequently within the vector.
+        if concave_count >= convex_count:
+            return "concave"
+        else:
+            return "convex"
+
+
+    def __display_cluster_label_rank_graph(self,
+                                           cluster_labels,
+                                           counts,
+                                           sub_dir="",
+                                           display_visuals=True):
+        """
+        Desc:
+            Darker colors have higher rankings (values)
+
+        Args:
+            cluster_labels: list of strings
+                List of label names.
+
+            counts: list of ints
+                Counts for how many each cluster label had. Order must match
+                'cluster_labels'.
+
+            sub_dir: string
+                Directory to create and write data to.
+
+            display_visuals: bool
+                If set to True will display graphic
+        """
+        plt.figure(figsize=(12, 7))
+
+        palette = "PuBu"
+
+        # Color rank
+        if isinstance(palette, str):
+            rank_list = np.argsort(-np.array(counts)).argsort()
+            pal = sns.color_palette(palette, len(counts))
+            palette = np.array(pal[::-1])[rank_list]
+
+        plt.clf()
+
+        plt.title("Cluster labels and data points count")
+
+        ax = sns.barplot(x=cluster_labels,
+                         y=counts,
+                         palette=palette,
+                         order=cluster_labels)
+
+        # Labels for numerical count of each bar
+        for p in ax.patches:
+            height = p.get_height()
+            ax.text(p.get_x() + p.get_width() / 2.,
+                    height + 3,
+                    '{:1}'.format(height),
+                    ha="center")
+
+        self.save_plot(sub_dir,
+                       "Cluster labels and data points count")
+
+        if display_visuals and self.__notebook_mode:
+            plt.show()
+
+        plt.close("all")
+
+    def __get_color_name(self,
+                         color):
+        """
+        Desc:
+            Simple helper function for a simple switch statement.
+
+        Args:
+            color: char
+                Single character value representing a real color name.
+
+        Returns:
+            A full color name.
+        """
+
+        if color == "b":
+            return "Blue"
+
+        elif color == "g":
+            return "Green"
+
+        elif color == "r":
+            return "Red"
+
+        elif color == "c":
+            return "Cyan"
+
+        elif color == "m":
+            return "Magenta"
+
+        elif color == "y":
+            return "Yellow"
+
+        elif color == "k":
+            return "Black"
+
+        elif color == "w":
+            return "White"
+
+        else:
+            return color
+
+    def __nearest_cluster(self,
+                          center_points,
+                          dp):
+        """
+        Desc:
+            Simple helper function to get the right cluster label. Cluster label
+            is determined by how close the given data point is to the center
+
+        Args:
+            center_points: list of lists of floats (list of data points)
+                Cluster's center point.
+
+            dp: list of floats, (data point)
+                Data point
+        """
+
+        return np.argmin([euclidean_distance(dp, c)
+                          for c in center_points])
 
 
 

@@ -413,9 +413,14 @@ class DataEncoder(DataPipelineSegment):
                 Hidden variable to determine if the function should be pushed
                 to the pipeline segment.
         """
+
+        old_indexes = copy.deepcopy(df.index)
+
+        df.reset_index(inplace=True,
+                       drop=True)
+
         if isinstance(qualitative_features,str):
             feature_name = [qualitative_features]
-
 
         for feature_name in qualitative_features:
             dummies_df = df[df_features.get_dummy_encoded_features()[feature_name]]
@@ -450,6 +455,7 @@ class DataEncoder(DataPipelineSegment):
             except ValueError:
                 df_features.add_new_string_feature(feature_name)
 
+        df.index = old_indexes
         if _add_to_que:
             params_dict = locals()
             parameters = get_parameters(self.revert_dummies)
