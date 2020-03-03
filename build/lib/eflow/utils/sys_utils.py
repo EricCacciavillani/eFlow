@@ -110,8 +110,8 @@ def create_dir_structure(directory_path,
     directory_path = correct_directory_path(directory_path)
     check_if_directory_exists(directory_path)
 
-    for dir in create_sub_dir.split("/"):
-        directory_path += "/" + dir
+    for directory in create_sub_dir.split("/"):
+        directory_path += "/" + directory
         if not os.path.exists(directory_path):
             os.makedirs(directory_path)
 
@@ -120,7 +120,8 @@ def create_dir_structure(directory_path,
 
 def write_object_text_to_file(obj,
                               directory_path,
-                              filename):
+                              filename,
+                              remove_file_extension=True):
     """
     Desc:
         Writes the object's string representation to a text file.
@@ -138,11 +139,8 @@ def write_object_text_to_file(obj,
     directory_path = correct_directory_path(directory_path)
     check_if_directory_exists(directory_path)
 
-    # Ensures no file extensions in filename
-    filename = filename.split(".")[0]
-
-
-    file_dir = f'{directory_path}{convert_to_filename(filename)}.txt'
+    filename = convert_to_filename(filename, remove_file_extension=remove_file_extension)
+    file_dir = f'{directory_path}{filename}.txt'
 
     f = open(file_dir, 'w')
     f.write('obj = ' + repr(obj) + '\n')
@@ -150,7 +148,8 @@ def write_object_text_to_file(obj,
 
 def pickle_object_to_file(obj,
                           directory_path,
-                          filename):
+                          filename,
+                          remove_file_extension=True):
     """
     Desc:
         Writes the object to a pickle file.
@@ -165,20 +164,30 @@ def pickle_object_to_file(obj,
         filename: string
              Pickle file's name.
     """
-    directory_path = correct_directory_path(directory_path)
-    check_if_directory_exists(directory_path)
+    try:
+        directory_path = correct_directory_path(directory_path)
+        check_if_directory_exists(directory_path)
 
-    # Ensures no file extensions in filename
-    filename = filename.split(".")[0]
-    file_dir = f'{directory_path}{convert_to_filename(filename)}.pkl'
-    list_pickle = open(file_dir, 'wb')
-    pickle.dump(obj,
-                list_pickle)
-    list_pickle.close()
+        # Ensures no file extensions in filename
+        filename = convert_to_filename(filename,
+                                       remove_file_extension=remove_file_extension)
+        file_dir = f'{directory_path}{filename}.pkl'
+        list_pickle = open(file_dir, 'wb')
+        pickle.dump(obj,
+                    list_pickle)
+    finally:
+        list_pickle.close()
+
+    return file_dir
+
+def load_pickle_object(file_path):
+    with open(file_path, 'rb') as handle:
+        return pickle.load(handle)
 
 def dict_to_json_file(dict_obj,
                       directory_path,
-                      filename):
+                      filename,
+                      remove_file_extension=True):
     """
     Desc:
         Writes a dict to a json file.
@@ -196,7 +205,9 @@ def dict_to_json_file(dict_obj,
     directory_path = correct_directory_path(directory_path)
     check_if_directory_exists(directory_path)
 
-    with open(f'{directory_path}{convert_to_filename(filename)}.json',
+    filename = convert_to_filename(filename,remove_file_extension=remove_file_extension)
+
+    with open(f'{directory_path}{filename}.json',
               'w',
               encoding='utf-8') as outfile:
         json.dump(dict_obj,
@@ -219,6 +230,7 @@ def json_file_to_dict(filepath):
     json_file = open(filepath)
     json_str = json_file.read()
     json_data = json.loads(json_str)
+    json_file.close()
 
     return json_data
 

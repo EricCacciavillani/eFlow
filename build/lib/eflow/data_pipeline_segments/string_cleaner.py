@@ -10,10 +10,12 @@ __email__ = "eric.cacciavillani@gmail.com"
 class StringCleaner(DataPipelineSegment):
 
     def __init__(self,
-                 segment_id=None):
+                 segment_id=None,
+                 create_file=True):
         DataPipelineSegment.__init__(self,
                                      object_type=self.__class__.__name__,
-                                     segment_id=segment_id)
+                                     segment_id=segment_id,
+                                     create_file=create_file)
 
     def run_widget(self):
         pass

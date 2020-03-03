@@ -1,7 +1,7 @@
 from eflow.utils.sys_utils import *
 from eflow.utils.pandas_utils import df_to_image
 from eflow.utils.image_processing_utils import create_plt_png
-from eflow._hidden.parent_objects import FileOutput
+from eflow._hidden.parent_objects import ModelAnalysis
 from eflow._hidden.custom_exceptions import RequiresPredictionMethods, ProbasNotPossible, \
     UnsatisfiedRequirments
 from eflow.data_analysis import FeatureAnalysis
@@ -21,6 +21,7 @@ import copy
 import pandas as pd
 from IPython.display import display
 import matplotlib.pyplot as plt
+import seaborn as sns
 
 __author__ = "Eric Cacciavillani"
 __copyright__ = "Copyright 2019, eFlow"
@@ -29,7 +30,7 @@ __license__ = "MIT"
 __maintainer__ = "EricCacciavillani"
 __email__ = "eric.cacciavillani@gmail.com"
 
-class ClassificationAnalysis(FileOutput):
+class ClassificationAnalysis(ModelAnalysis):
 
     """
         Analyzes a classification model's result's based on the prediction
@@ -38,8 +39,10 @@ class ClassificationAnalysis(FileOutput):
     """
 
     def __init__(self,
+                 dataset_name,
                  model,
                  model_name,
+                 feature_order,
                  target_feature,
                  pred_funcs_dict,
                  df_features,
@@ -47,14 +50,22 @@ class ClassificationAnalysis(FileOutput):
                  project_sub_dir="Classification Analysis",
                  overwrite_full_path=None,
                  target_classes=None,
-                 save_model=True):
+                 save_model=True,
+                 notebook_mode=False):
         """
         Args:
+            dataset_name:
+                The dataset's name; this will create a sub-directory in which your
+                generated graph will be inner-nested in.
+
             model:
                 A fitted supervised machine learning model.
 
             model_name:
                 The name of the model in string form.
+
+            feature_order: collection object
+                Features names in proper order to re-create the pandas dataframe.
 
             pred_funcs_dict:
                 A dict of the name of the function and the function defintion for the
@@ -87,17 +98,33 @@ class ClassificationAnalysis(FileOutput):
         """
 
         # Init parent object
-        FileOutput.__init__(self,
-                            f'{project_sub_dir}/Target Feature: {target_feature}/{model_name}',
-                            overwrite_full_path)
+        ModelAnalysis.__init__(self,
+                               f'{dataset_name}/{project_sub_dir}/Target Feature: {target_feature}/{model_name}',
+                               overwrite_full_path)
 
         # Init objects without pass by refrence
+
+        # Remove target feature from feature order when trying to recreate dataframe
+        self.__target_feature = copy.deepcopy(target_feature)
+        self.__feature_order = copy.deepcopy(feature_order)
+
+        if self.__target_feature in self.__feature_order:
+            self.__feature_order.remove(self.__target_feature)
+
+        del feature_order
+        del target_feature
+
         self.__model = copy.deepcopy(model)
+
         self.__model_name = copy.deepcopy(model_name)
         self.__target_values = copy.deepcopy(target_classes)
         self.__df_features = copy.deepcopy(df_features)
         self.__pred_funcs_dict = copy.deepcopy(pred_funcs_dict)
         self.__pred_funcs_types = dict()
+        self.__notebook_mode = copy.deepcopy(notebook_mode)
+
+        # Determines if the perform was called
+        self.__called_from_perform = False
 
         # Init on sklearns default target classes attribute
         if not self.__target_values:
@@ -108,12 +135,14 @@ class ClassificationAnalysis(FileOutput):
         else:
             self.__binary_classifcation = True
 
-        # Save machine learning model
-        if save_model:
-            pickle_object_to_file(self.__model,
-                                  self.folder_path,
-                                  f'{self.__model_name}')
-
+        # Attempt to save machine learning model
+        try:
+            if save_model:
+                pickle_object_to_file(self.__model,
+                                      self.folder_path,
+                                      f'{self.__model_name}')
+        except:
+            pass
         # ---
         create_dir_structure(self.folder_path,
                              "_Extras")
@@ -128,6 +157,7 @@ class ClassificationAnalysis(FileOutput):
 
         self.__sample_data = None
 
+        # Extract sample data
         if len(sample_data.shape) == 2:
             self.__sample_data = np.reshape(sample_data[0],
                                             (-1, sample_data.shape[1]))
@@ -136,7 +166,6 @@ class ClassificationAnalysis(FileOutput):
         else:
             raise UnsatisfiedRequirments("This program can only handle 1D and 2D matrices.")
 
-        print(self.__sample_data)
 
         # Find the 'type' of each prediction. Probabilities or Predictions
         if self.__pred_funcs_dict:
@@ -152,21 +181,36 @@ class ClassificationAnalysis(FileOutput):
                 else:
                     self.__pred_funcs_types[pred_name] = "Predictions"
         else:
-            raise RequiresPredictionMethods
+            raise RequiresPredictionMethods("This object requires you to pass the prediction methods in a dict with the name of the method as the key.")
 
+
+        try:
+            feature_importances = model.feature_importances_
+
+            self.graph_model_importances(copy.deepcopy(self.__feature_order),
+                                         feature_importances,
+                                         display_visuals=False)
+
+        except AttributeError:
+            pass
+
+
+    def get_predictions_names(self):
+        return self.__pred_funcs_dict.keys()
 
     def perform_analysis(self,
                          X,
                          y,
                          dataset_name,
                          thresholds_matrix=None,
-                         figsize=GRAPH_DEFAULTS.FIGSIZE,
+                         classification_error_analysis=False,
+                         classification_correct_analysis=False,
                          ignore_metrics=[],
                          custom_metrics_dict=dict(),
                          average_scoring=["micro",
                                           "macro",
                                           "weighted"],
-                         display_visuals=False):
+                         display_visuals=True):
         """
         Desc:
             Runs all available analysis functions on the models predicted data.
@@ -189,6 +233,12 @@ class ClassificationAnalysis(FileOutput):
                 thresholds to the ouput of the model.
                 For classification only; will not affect the direct output of
                 the probabilities.
+
+            classification_error_analysis: bool
+                Perform feature analysis on data that was incorrectly predicted.
+
+            classification_correct_analysis: bool
+                Perform feature analysis on data that was correctly predicted.
 
             figsize:
                 All plot's dimension's.
@@ -219,125 +269,165 @@ class ClassificationAnalysis(FileOutput):
                 * classification_evaluation
                 * plot_confusion_matrix
         """
+        try:
+            # Convert to
+            if isinstance(thresholds_matrix, np.ndarray):
+                thresholds_matrix = thresholds_matrix.tolist()
 
-        # Convert to
-        if isinstance(thresholds_matrix, np.ndarray):
-            thresholds_matrix = thresholds_matrix.tolist()
+            if not thresholds_matrix:
+                thresholds_matrix = [[]]
 
-        if not thresholds_matrix:
-            thresholds_matrix = list()
+            if isinstance(thresholds_matrix, list) and not isinstance(
+                    thresholds_matrix[0], list):
+                thresholds_matrix = list(thresholds_matrix)
 
-        if isinstance(thresholds_matrix, list) and not isinstance(
-                thresholds_matrix[0], list):
-            thresholds_matrix = list(thresholds_matrix)
+            none_required = False
+            for vector in thresholds_matrix:
+                if not vector or len(vector) == 0:
+                    none_required = True
 
-        if None not in thresholds_matrix:
-            thresholds_matrix.append(None)
+            if not none_required:
+                thresholds_matrix.append(None)
 
-        print("\n\n" + "---" * 10 + f'{dataset_name}' + "---" * 10)
-        first_iteration = True
-        for pred_name, pred_type in self.__pred_funcs_types.items():
+            self.__called_from_perform = True
 
-            # Nicer formating
-            if not first_iteration:
-                print("\n\n\n")
-            first_iteration = False
+            self.generate_matrix_meta_data(X,
+                                           dataset_name + "/_Extras")
 
-            for thresholds in thresholds_matrix:
+            print("\n\n" + "---" * 10 + f'{dataset_name}' + "---" * 10)
+            first_iteration = True
 
+            for pred_name, pred_type in self.__pred_funcs_types.items():
 
-                print(f"Now running classification on {pred_name}", end='')
-                if pred_type == "Predictions":
-                    print()
-                    thresholds = None
-                else:
-                    if thresholds:
-                        print(f" on thresholds:\n{thresholds}")
+                # Nicer formating
+                if not first_iteration:
+                    print("\n\n\n")
+                first_iteration = False
+
+                for thresholds in thresholds_matrix:
+
+                    print(f"Now running classification on {pred_name}", end='')
+                    if pred_type == "Predictions":
+                        print()
+                        thresholds = None
                     else:
-                        print(" on no thresholds.")
-                print("-" * (len(dataset_name) + 60))
+                        if thresholds:
+                            print(f" on thresholds:")
+                            for i,target_val in enumerate(self.__target_values):
+                                try:
+                                    print(f"\tTarget Value:{target_val}: Prediction weight: {thresholds[i]}")
 
-                self.classification_metrics(X,
+                                except IndexError:
+                                    raise IndexError("Thresholds must of the same length as the target values!")
+                        else:
+                            print(" on no thresholds.")
+
+                    if display_visuals:
+                        try:
+                            print(f"\nShape of the data is {X.shape}")
+                        except AttributeError:
+                            pass
+
+                    self.classification_metrics(X,
+                                                y,
+                                                pred_name=pred_name,
+                                                dataset_name=dataset_name,
+                                                thresholds=thresholds,
+                                                ignore_metrics=ignore_metrics,
+                                                custom_metrics_dict=custom_metrics_dict,
+                                                average_scoring=average_scoring,
+                                                display_visuals=display_visuals)
+
+                    self.plot_confusion_matrix(X,
+                                               y,
+                                               pred_name=pred_name,
+                                               dataset_name=dataset_name,
+                                               thresholds=thresholds,
+                                               normalize=True,
+                                               display_visuals=display_visuals)
+
+                    self.plot_confusion_matrix(X,
+                                               y,
+                                               pred_name=pred_name,
+                                               dataset_name=dataset_name,
+                                               thresholds=thresholds,
+                                               normalize=False,
+                                               display_visuals=display_visuals)
+
+                    if pred_type == "Probabilities":
+                        self.plot_precision_recall_curve(X,
+                                                         y,
+                                                         pred_name=pred_name,
+                                                         dataset_name=dataset_name,
+                                                         thresholds=thresholds,
+                                                         display_visuals=display_visuals)
+                        self.plot_roc_curve(X,
                                             y,
                                             pred_name=pred_name,
                                             dataset_name=dataset_name,
                                             thresholds=thresholds,
-                                            ignore_metrics=ignore_metrics,
-                                            custom_metrics_dict=custom_metrics_dict,
-                                            average_scoring=average_scoring,
                                             display_visuals=display_visuals)
 
-                self.plot_confusion_matrix(X,
-                                           y,
-                                           pred_name=pred_name,
-                                           dataset_name=dataset_name,
-                                           thresholds=thresholds,
-                                           figsize=figsize,
-                                           normalize=True,
-                                           display_visuals=display_visuals)
+                        if self.__binary_classifcation:
 
-                self.plot_confusion_matrix(X,
-                                           y,
-                                           pred_name=pred_name,
-                                           dataset_name=dataset_name,
-                                           thresholds=thresholds,
-                                           figsize=figsize,
-                                           normalize=False,
-                                           display_visuals=display_visuals)
+                            self.plot_lift_curve(X,
+                                                 y,
+                                                 pred_name=pred_name,
+                                                 dataset_name=dataset_name,
+                                                 thresholds=thresholds,
+                                                 display_visuals=display_visuals)
 
-                if pred_type == "Probabilities":
-                    self.plot_precision_recall_curve(X,
-                                                     y,
-                                                     pred_name=pred_name,
-                                                     dataset_name=dataset_name,
-                                                     figsize=figsize,
-                                                     thresholds=thresholds,
-                                                     display_visuals=display_visuals)
-                    self.plot_roc_curve(X,
-                                        y,
-                                        pred_name=pred_name,
-                                        dataset_name=dataset_name,
-                                        figsize=figsize,
-                                        thresholds=thresholds,
-                                        display_visuals=display_visuals)
+                            self.plot_ks_statistic(X,
+                                                   y,
+                                                   pred_name=pred_name,
+                                                   dataset_name=dataset_name,
+                                                   thresholds=thresholds,
+                                                   display_visuals=display_visuals)
 
-                    if self.__binary_classifcation:
+                            self.plot_cumulative_gain(X,
+                                                      y,
+                                                      pred_name=pred_name,
+                                                      dataset_name=dataset_name,
+                                                      thresholds=thresholds,
+                                                      display_visuals=display_visuals)
 
-                        self.plot_lift_curve(X,
-                                             y,
-                                             pred_name=pred_name,
-                                             dataset_name=dataset_name,
-                                             figsize=figsize,
-                                             thresholds=thresholds,
-                                             display_visuals=display_visuals)
+                    if classification_error_analysis:
+                        self.classification_error_analysis(X,
+                                                           y,
+                                                           pred_name,
+                                                           dataset_name,
+                                                           thresholds=thresholds,
+                                                           display_visuals=False,
+                                                           save_file=True,
+                                                           aggerate_target=True,
+                                                           display_print=False,
+                                                           suppress_runtime_errors=True,
+                                                           aggregate_target_feature=True,
+                                                           selected_features=None,
+                                                           extra_tables=True,
+                                                           statistical_analysis_on_aggregates=True)
 
-                        self.plot_ks_statistic(X,
-                                               y,
-                                               pred_name=pred_name,
-                                               dataset_name=dataset_name,
-                                               figsize=figsize,
-                                               thresholds=thresholds,
-                                               display_visuals=display_visuals)
+                    if classification_correct_analysis:
+                        self.classification_correct_analysis(X,
+                                                             y,
+                                                             pred_name,
+                                                             dataset_name,
+                                                             thresholds=thresholds,
+                                                             display_visuals=False,
+                                                             save_file=True,
+                                                             aggerate_target=True,
+                                                             display_print=False,
+                                                             suppress_runtime_errors=True,
+                                                             aggregate_target_feature=True,
+                                                             selected_features=None,
+                                                             extra_tables=True,
+                                                             statistical_analysis_on_aggregates=True)
 
-                        self.plot_cumulative_gain(X,
-                                                  y,
-                                                  pred_name=pred_name,
-                                                  dataset_name=dataset_name,
-                                                  figsize=figsize,
-                                                  thresholds=thresholds,
-                                                  display_visuals=display_visuals)
-
-                # if self.__df_features:
-                #     self.classification_error_analysis(X,
-                #                                        y,
-                #                                        pred_name=pred_name,
-                #                                        dataset_name=dataset_name,
-                #                                        thresholds=thresholds,
-                #                                        display_analysis_graphs=display_analysis_graphs)
-
-                print("-" * (len(dataset_name) + 60))
-                if pred_type == "Predictions":
-                    break
+                    print("-" * (len(dataset_name) + 60) + "\n")
+                    if pred_type == "Predictions":
+                        break
+        finally:
+            self.__called_from_perform = False
 
     def plot_ks_statistic(self,
                           X,
@@ -349,7 +439,7 @@ class ClassificationAnalysis(FileOutput):
                           save_file=True,
                           title=None,
                           ax=None,
-                          figsize=None,
+                          figsize=GRAPH_DEFAULTS.FIGSIZE,
                           title_fontsize='large',
                           text_fontsize='medium'):
 
@@ -403,9 +493,12 @@ class ClassificationAnalysis(FileOutput):
                                         title_fontsize=title_fontsize,
                                         text_fontsize=text_fontsize)
         if save_file:
-            create_plt_png(self.folder_path,
-                           sub_dir,
-                           convert_to_filename(filename))
+            self.save_plot(filename=filename,
+                           sub_dir=sub_dir)
+
+            if not self.__called_from_perform:
+                self.generate_matrix_meta_data(X,
+                                               dataset_name + "/_Extras")
 
         if display_visuals:
             plt.show()
@@ -475,9 +568,11 @@ class ClassificationAnalysis(FileOutput):
                                text_fontsize=text_fontsize)
 
         if save_file:
-            create_plt_png(self.folder_path,
-                           sub_dir,
-                           convert_to_filename(filename))
+            self.save_plot(filename=filename,
+                           sub_dir=sub_dir)
+            if not self.__called_from_perform:
+                self.generate_matrix_meta_data(X,
+                                               dataset_name + "/_Extras")
 
         if display_visuals:
             plt.show()
@@ -547,9 +642,12 @@ class ClassificationAnalysis(FileOutput):
                                            text_fontsize=text_fontsize)
 
         if save_file:
-            create_plt_png(self.folder_path,
-                           sub_dir,
-                           convert_to_filename(filename))
+            self.save_plot(filename=filename,
+                           sub_dir=sub_dir)
+
+            if not self.__called_from_perform:
+                self.generate_matrix_meta_data(X,
+                                               dataset_name + "/_Extras")
 
         if display_visuals:
             plt.show()
@@ -625,9 +723,12 @@ class ClassificationAnalysis(FileOutput):
                                             text_fontsize=text_fontsize)
 
         if save_file:
-            create_plt_png(self.folder_path,
-                           sub_dir,
-                           convert_to_filename(filename))
+            self.save_plot(filename=filename,
+                           sub_dir=sub_dir)
+
+            if not self.__called_from_perform:
+                self.generate_matrix_meta_data(X,
+                                               dataset_name + "/_Extras")
 
         if display_visuals:
             plt.show()
@@ -699,9 +800,12 @@ class ClassificationAnalysis(FileOutput):
                                       text_fontsize=text_fontsize)
 
         if save_file:
-            create_plt_png(self.folder_path,
-                           sub_dir,
-                           convert_to_filename(filename))
+            self.save_plot(filename=filename,
+                           sub_dir=sub_dir)
+
+            if not self.__called_from_perform:
+                self.generate_matrix_meta_data(X,
+                                               dataset_name + "/_Extras")
 
         if display_visuals:
             plt.show()
@@ -781,16 +885,14 @@ class ClassificationAnalysis(FileOutput):
              cmap=cmap,
              title_fontsize=title_fontsize,
              text_fontsize=text_fontsize)
-
-        bottom, top = ax.get_ylim()
-        ax.set_ylim(bottom + 0.5, top - 0.5)
-
         warnings.filterwarnings('default')
 
         if save_file:
-            create_plt_png(self.folder_path,
-                           sub_dir,
-                           convert_to_filename(filename))
+            self.save_plot(filename=filename,
+                           sub_dir=sub_dir)
+            if not self.__called_from_perform:
+                self.generate_matrix_meta_data(X,
+                                               dataset_name + "/_Extras")
 
         if display_visuals:
             plt.show()
@@ -896,7 +998,7 @@ class ClassificationAnalysis(FileOutput):
 
         # Evaluate model on metrics
         evaluation_report = dict()
-        for metric_name in metric_functions:
+        for metric_name in metric_functions.keys():
             for average_score in average_scoring:
 
                 model_predictions = self.__get_model_prediction(pred_name,
@@ -908,10 +1010,12 @@ class ClassificationAnalysis(FileOutput):
                                                       y_pred=model_predictions,
                                                       average=average_score)
                 except TypeError:
-                    evaluation_report[metric_name] = metric_functions[
-                        metric_name](y,
-                                     model_predictions)
-                    break
+
+                    if metric_name not in evaluation_report.keys():
+                        evaluation_report[metric_name] = metric_functions[
+                            metric_name](y,
+                                         model_predictions)
+                    continue
 
         warnings.filterwarnings('default')
 
@@ -928,9 +1032,10 @@ class ClassificationAnalysis(FileOutput):
                                          index=list(evaluation_report.keys()))
 
         if display_visuals:
-            display(evaluation_report)
-        else:
-            print(evaluation_report)
+            if self.__notebook_mode:
+                display(evaluation_report)
+            else:
+                print(evaluation_report)
 
         if save_file:
             df_to_image(evaluation_report,
@@ -941,6 +1046,172 @@ class ClassificationAnalysis(FileOutput):
                         show_index=True,
                         format_float_pos=4)
 
+            if not self.__called_from_perform:
+                self.generate_matrix_meta_data(X,
+                                               dataset_name + "/_Extras")
+
+
+    def classification_correct_analysis(self,
+                                        X,
+                                        y,
+                                        pred_name,
+                                        dataset_name,
+                                        thresholds=None,
+                                        display_visuals=True,
+                                        save_file=True,
+                                        aggerate_target=False,
+                                        display_print=True,
+                                        suppress_runtime_errors=True,
+                                        aggregate_target_feature=True,
+                                        selected_features=None,
+                                        extra_tables=True,
+                                        statistical_analysis_on_aggregates=True):
+        """
+        Desc:
+            Compares the actual target value to the predicted value and performs
+            analysis of all the data.
+
+        Args:
+            X: np.matrix or lists of lists
+                Feature matrix.
+
+            y: collection object
+                Target data vector.
+
+            pred_name: str
+                The name of the prediction function in questioned
+                stored in 'self.__pred_funcs_dict'
+
+            dataset_name: str
+                The dataset's name; this will create a sub-directory in which your
+                generated graph will be inner-nested in.
+
+            feature_order: collection object
+                Features names in proper order to re-create the pandas dataframe.
+
+            thresholds:
+                If the model outputs a probability list/numpy array then we apply
+                thresholds to the ouput of the model.
+                For classification only; will not affect the direct output of
+                the probabilities.
+
+            display_visuals: bool
+                Boolean value to whether or not to display visualizations.
+
+            display_print: bool
+                Determines whether or not to print function's embedded print
+                statements.
+
+            save_file: bool
+                Boolean value to whether or not to save the file.
+
+            dataframe_snapshot: bool
+                Boolean value to determine whether or not generate and compare a
+                snapshot of the dataframe in the dataset's directory structure.
+                Helps ensure that data generated in that directory is correctly
+                associated to a dataframe.
+
+            suppress_runtime_errors: bool
+                If set to true; when generating any graphs will suppress any runtime
+                errors so the program can keep running.
+
+            extra_tables: bool
+                When handling two types of features if set to true this will
+                    generate any extra tables that might be helpful.
+                    Note -
+                        These graphics may create duplicates if you already applied
+                        an aggregation in 'perform_analysis'
+
+            aggregate_target_feature: bool
+                Aggregate the data of the target feature if the data is
+                non-continuous data.
+
+                Note
+                    In the future I will have this also working with continuous
+                    data.
+
+            selected_features: collection object of features
+                Will only focus on these selected feature's and will ignore
+                the other given features.
+
+            statistical_analysis_on_aggregates: bool
+                If set to true then the function 'statistical_analysis_on_aggregates'
+                will run; which aggregates the data of the target feature either
+                by discrete values or by binning/labeling continuous data.
+        """
+
+        sub_dir = self.__create_sub_dir_with_thresholds(pred_name,
+                                                        dataset_name,
+                                                        thresholds)
+
+        model_predictions = self.__get_model_prediction(pred_name,
+                                                        X,
+                                                        thresholds=thresholds)
+
+        if sum(model_predictions != y) == len(y):
+            print("Your model predicted everything correctly for this dataset! No correct analysis needed!")
+            print("Also sorry for your model...zero correct? Dam...")
+        else:
+            print("\n\n" + "*" * 10 +
+                  "Generating graphs for when the model predicted correctly" +
+                  "*" * 10 + "\n")
+
+            # Generate error dataframe
+            correct_df = pd.DataFrame.from_records(X[model_predictions == y])
+            correct_df.columns = self.__feature_order
+            correct_df[self.__target_feature] = y[model_predictions == y]
+
+            # Directory path
+            create_dir_structure(self.folder_path,
+                                 sub_dir + "/Correctly Predicted Data/All Correct Data")
+            output_path = f"{self.folder_path}/{sub_dir}/Correctly Predicted Data"
+
+            # Create feature analysis
+            feature_analysis = FeatureAnalysis(self.__df_features,
+                                               overwrite_full_path=output_path + "/All Correct Data")
+            feature_analysis.perform_analysis(correct_df,
+                                              dataset_name=dataset_name,
+                                              target_features=[self.__target_feature],
+                                              save_file=save_file,
+                                              selected_features=selected_features,
+                                              suppress_runtime_errors=suppress_runtime_errors,
+                                              display_print=display_print,
+                                              display_visuals=display_visuals,
+                                              dataframe_snapshot=False,
+                                              aggregate_target_feature=aggregate_target_feature,
+                                              extra_tables=extra_tables,
+                                              statistical_analysis_on_aggregates=statistical_analysis_on_aggregates)
+
+            # Aggregate target by predicted and actual
+            if aggerate_target:
+                targets = set(y)
+                for pred_target in targets:
+                    if pred_target != pred_target:
+                        create_dir_structure(output_path,
+                                             f"/Actual and Predicted:{pred_target}")
+
+                        # Create predicted vs actual dataframe
+                        tmp_df = copy.deepcopy(correct_df[correct_df[
+                                                              self.__target_feature] == pred_target])
+
+                        if tmp_df.shape[0]:
+                            # Create feature analysis directory structure with given graphics
+                            feature_analysis = FeatureAnalysis(
+                                self.__df_features,
+                                overwrite_full_path=f"/Actual and Predicted:{pred_target}")
+                            feature_analysis.perform_analysis(tmp_df,
+                                                              dataset_name=dataset_name,
+                                                              target_features=[
+                                                                  self.__target_feature],
+                                                              save_file=save_file,
+                                                              selected_features=selected_features,
+                                                              suppress_runtime_errors=suppress_runtime_errors,
+                                                              display_print=display_print,
+                                                              display_visuals=display_visuals,
+                                                              dataframe_snapshot=False,
+                                                              extra_tables=extra_tables,
+                                                              statistical_analysis_on_aggregates=statistical_analysis_on_aggregates)
+
     def classification_error_analysis(self,
                                       X,
                                       y,
@@ -949,22 +1220,35 @@ class ClassificationAnalysis(FileOutput):
                                       thresholds=None,
                                       display_visuals=True,
                                       save_file=True,
-                                      display_analysis_graphs=False):
+                                      aggerate_target=False,
+                                      display_print=True,
+                                      suppress_runtime_errors=True,
+                                      aggregate_target_feature=True,
+                                      selected_features=None,
+                                      extra_tables=True,
+                                      statistical_analysis_on_aggregates=True):
         """
+        Desc:
+            Compares the actual target value to the predicted value and performs
+            analysis of all the data.
+
         Args:
-            X:
+            X: np.matrix or lists of lists
                 Feature matrix.
 
-            y:
+            y: collection object
                 Target data vector.
 
-            pred_name:
+            pred_name: str
                 The name of the prediction function in questioned
                 stored in 'self.__pred_funcs_dict'
 
-            dataset_name:
+            dataset_name: str
                 The dataset's name; this will create a sub-directory in which your
                 generated graph will be inner-nested in.
+
+            feature_order: collection object
+                Features names in proper order to re-create the pandas dataframe.
 
             thresholds:
                 If the model outputs a probability list/numpy array then we apply
@@ -972,58 +1256,129 @@ class ClassificationAnalysis(FileOutput):
                 For classification only; will not affect the direct output of
                 the probabilities.
 
-            save_file:
-                Determines whether or not to save the generated document.
+            display_visuals: bool
+                Boolean value to whether or not to display visualizations.
 
-            display_analysis_graphs:
-                Controls visual display of graph generation.
+            display_print: bool
+                Determines whether or not to print function's embedded print
+                statements.
+
+            save_file: bool
+                Boolean value to whether or not to save the file.
+
+            dataframe_snapshot: bool
+                Boolean value to determine whether or not generate and compare a
+                snapshot of the dataframe in the dataset's directory structure.
+                Helps ensure that data generated in that directory is correctly
+                associated to a dataframe.
+
+            suppress_runtime_errors: bool
+                If set to true; when generating any graphs will suppress any runtime
+                errors so the program can keep running.
+
+            extra_tables: bool
+                When handling two types of features if set to true this will
+                    generate any extra tables that might be helpful.
+                    Note -
+                        These graphics may create duplicates if you already applied
+                        an aggregation in 'perform_analysis'
+
+            aggregate_target_feature: bool
+                Aggregate the data of the target feature if the data is
+                non-continuous data.
+
+                Note
+                    In the future I will have this also working with continuous
+                    data.
+
+            selected_features: collection object of features
+                Will only focus on these selected feature's and will ignore
+                the other given features.
+
+            statistical_analysis_on_aggregates: bool
+                If set to true then the function 'statistical_analysis_on_aggregates'
+                will run; which aggregates the data of the target feature either
+                by discrete values or by binning/labeling continuous data.
         """
-        pass
-        # sub_dir = self.__create_sub_dir_with_thresholds(pred_name,
-        #                                                 dataset_name,
-        #                                                 thresholds)
-        #
-        # model_predictions = self.__get_model_prediction(pred_name,
-        #                                                 X,
-        #                                                 thresholds=thresholds)
-        #
-        # if sum(model_predictions == y):
-        #     if display_analysis_graphs:
-        #         print("\n\n" + "*" * 10 +
-        #               "Correctly predicted data_analysis"
-        #               + "*" * 10 + "\n")
-        #     else:
-        #         print("\n\n" + "*" * 10 +
-        #               "Generating graphs for model's correctly predicted..." +
-        #               "*" * 10 + "\n")
-        #         FeatureAnalysis(pd.DataFrame(X[model_predictions == y],
-        #                                   columns=self.__df_features.all_features()),
-        #                      self.__df_features,
-        #                      overwrite_full_path=self.folder_path +
-        #                                          sub_dir + "/Correctly Predicted Data/",
-        #                      notebook_mode=display_analysis_graphs)
-        # else:
-        #     print("Your model predicted nothing correctly...dam that sucks")
-        #
-        # if sum(model_predictions != y):
-        #     if display_analysis_graphs:
-        #         print("\n\n" + "*" * 10 +
-        #               "Incorrectly predicted data_analysis"
-        #               + "*" * 10 + "\n")
-        #     else:
-        #         print("\n\n" + "*" * 10 +
-        #               "Generating graphs for model's incorrectly predicted..." +
-        #               "*" * 10 + "\n")
-        #
-        #     DataAnalysis(pd.DataFrame(X[model_predictions != y],
-        #                               columns=self.__df_features.all_features()),
-        #                  self.__df_features,
-        #                  overwrite_full_path=self.folder_path +
-        #                                      sub_dir + "/Incorrectly Predicted Data/",
-        #                  notebook_mode=display_analysis_graphs)
-        # else:
-        #     print(
-        #         "\n\nYour model predicted everything correctly...there is something very wrong here...")
+
+        sub_dir = self.__create_sub_dir_with_thresholds(pred_name,
+                                                        dataset_name,
+                                                        thresholds)
+
+        model_predictions = self.__get_model_prediction(pred_name,
+                                                        X,
+                                                        thresholds=thresholds)
+
+        if sum(model_predictions == y) == len(y):
+            print("Your model predicted everything correctly for this dataset! No error analysis needed!")
+        else:
+            print("\n\n" + "*" * 10 +
+                  "Generating graphs for when the model predicted incorrectly" +
+                  "*" * 10 + "\n")
+
+            # Generate error dataframe
+            error_df = pd.DataFrame.from_records(X[model_predictions != y])
+            error_df.columns = self.__feature_order
+            error_df[self.__target_feature] = y[model_predictions != y]
+
+            # Directory path
+            create_dir_structure(self.folder_path,
+                                 sub_dir + "/Incorrectly Predicted Data/All Incorrect Data")
+            output_path = f"{self.folder_path}/{sub_dir}/Incorrectly Predicted Data"
+
+            # Create feature analysis
+            feature_analysis = FeatureAnalysis(self.__df_features,
+                                               overwrite_full_path=output_path + "/All Incorrect Data")
+            feature_analysis.perform_analysis(error_df,
+                                              dataset_name=dataset_name,
+                                              target_features=[self.__target_feature],
+                                              save_file=save_file,
+                                              selected_features=selected_features,
+                                              suppress_runtime_errors=suppress_runtime_errors,
+                                              display_print=display_print,
+                                              display_visuals=display_visuals,
+                                              dataframe_snapshot=False,
+                                              aggregate_target_feature=aggregate_target_feature,
+                                              extra_tables=extra_tables,
+                                              statistical_analysis_on_aggregates=statistical_analysis_on_aggregates)
+
+            # Aggregate target by predicted and actual
+            if aggerate_target:
+                targets = set(y)
+                prediction_feature = self.__target_feature + "_MODEL_PREDICTIONS_"
+                error_df[prediction_feature] = model_predictions[model_predictions != y]
+                for actual_target in targets:
+                    for pred_target in targets:
+                        if pred_target != actual_target:
+                            create_dir_structure(output_path,
+                                                 f"/Predicted:{pred_target} Actual: {actual_target}")
+
+                            # Create predicted vs actual dataframe
+                            tmp_df = copy.deepcopy(error_df[error_df[
+                                                                self.__target_feature] == actual_target][
+                                                       error_df[
+                                                           prediction_feature] == pred_target])
+
+                            tmp_df.drop(columns=[prediction_feature],
+                                        inplace=True)
+                            if tmp_df.shape[0]:
+                                # Create feature analysis directory structure with given graphics
+                                feature_analysis = FeatureAnalysis(
+                                    self.__df_features,
+                                    overwrite_full_path=f"{output_path}/Predicted:{pred_target} Actual: {actual_target}")
+                                feature_analysis.perform_analysis(tmp_df,
+                                                                  dataset_name=dataset_name,
+                                                                  target_features=[
+                                                                      self.__target_feature],
+                                                                  save_file=save_file,
+                                                                  selected_features=selected_features,
+                                                                  suppress_runtime_errors=suppress_runtime_errors,
+                                                                  display_print=display_print,
+                                                                  display_visuals=display_visuals,
+                                                                  dataframe_snapshot=False,
+                                                                  extra_tables=extra_tables,
+                                                                  statistical_analysis_on_aggregates=statistical_analysis_on_aggregates)
+
 
     def classification_report(self,
                               X,
@@ -1081,9 +1436,10 @@ class ClassificationAnalysis(FileOutput):
 
         # ---
         if display_visuals:
-            display(report_df)
-        else:
-            print(report_df)
+            if self.__notebook_mode:
+                display(report_df)
+            else:
+                print(report_df)
 
         if save_file:
             # Output dataframe as png
@@ -1094,6 +1450,51 @@ class ClassificationAnalysis(FileOutput):
                         col_width=20,
                         show_index=True,
                         format_float_pos=4)
+
+            if not self.__called_from_perform:
+                self.generate_matrix_meta_data(X,
+                                               dataset_name + "/_Extras")
+
+    def graph_model_importances(self,
+                                feature_order,
+                                feature_importances,
+                                display_visuals=True):
+
+        feature_importances, feature_order = zip(
+            *sorted(zip(feature_importances, feature_order), reverse=True))
+        feature_order = list(feature_order)
+
+        plt.figure(figsize=(20, 10))
+
+        palette = "PuBu"
+
+        # Color ranking
+        rank_list = np.argsort(-np.array(feature_importances)).argsort()
+        pal = sns.color_palette(palette, len(feature_importances))
+        palette = np.array(pal[::-1])[rank_list]
+
+        plt.clf()
+
+        plt.title("Feature Importances")
+
+        ax = sns.barplot(x=feature_importances,
+                         y=feature_order,
+                         palette=palette,
+                         order=feature_order)
+
+        self.save_plot("Feature Importances",
+                       "_Extras")
+
+        pickle_object_to_file(dict(zip(feature_order, feature_importances)),
+                              self.folder_path + "/_Extras",
+                              "Feature Importances")
+
+        if self.__notebook_mode and display_visuals:
+            plt.show()
+
+        plt.close("all")
+
+
 
     def __get_model_prediction(self,
                                pred_name,
@@ -1191,6 +1592,7 @@ class ClassificationAnalysis(FileOutput):
             return model_output
         else:
             raise ProbasNotPossible
+
 
     def __create_sub_dir_with_thresholds(self,
                                          pred_name,

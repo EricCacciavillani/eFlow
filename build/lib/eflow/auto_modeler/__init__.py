@@ -1,1 +1,1 @@
-from .cluster_master import ClusterMaster
+from .cluster_master import AutoCluster

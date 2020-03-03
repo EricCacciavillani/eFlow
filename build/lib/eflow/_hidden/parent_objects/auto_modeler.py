@@ -17,7 +17,7 @@ __license__ = "MIT"
 __maintainer__ = "EricCacciavillani"
 __email__ = "eric.cacciavillani@gmail.com"
 
-class DataAnalysis(FileOutput):
+class AutoModeler(FileOutput):
     """
         All objects in data_analysis folder of eflow are related to this object.
     """
@@ -44,16 +44,9 @@ class DataAnalysis(FileOutput):
 
 
     def save_plot(self,
-                  df,
-                  df_features,
-                  filename="Unknown filename",
                   sub_dir="",
-                  dataframe_snapshot=True,
-                  suppress_runtime_errors=True,
-                  compare_shape=True,
-                  compare_feature_names=True,
-                  compare_random_values=True,
-                  meta_data=True):
+                  filename="Unknown filename",
+                  suppress_runtime_errors=True):
         """
         Desc:
             Checks the passed data to see if a plot can be saved; raises
@@ -73,27 +66,6 @@ class DataAnalysis(FileOutput):
             sub_dir: string
                 Specify the sub directory to append to the pre-defined folder path.
 
-            dataframe_snapshot: bool
-                Boolean value to determine whether or not generate and compare a
-                snapshot of the dataframe in the dataset's directory structure.
-                Helps ensure that data generated in that directory is correctly
-                associated to a dataframe.
-
-            compare_shape: bool
-                When comparing and creating the dataframe snapshot of the data's
-                shape.
-
-            compare_feature_names: bool
-                When comparing and creating the dataframe snapshot of the data's
-                column names.
-
-            compare_random_values: bool
-                When comparing and creating the dataframe snapshot of the data
-                sudo random values.
-
-            meta_data:bool
-                If set to true then it will generate meta data on the dataframe.
-
             suppress_runtime_errors: bool
                 If set to true; when generating any graphs will suppress any runtime
                 errors so the program can keep running.
@@ -104,34 +76,17 @@ class DataAnalysis(FileOutput):
                 raise TypeError(
                     f"Expected param 'sub_dir' to be type string! Was found to be {type(sub_dir)}")
 
-            # Check if dataframe matches saved snapshot; Creates file if needed
-            if dataframe_snapshot:
-                df_snapshot = DataFrameSnapshot(compare_shape=compare_shape,
-                                                compare_feature_names=compare_feature_names,
-                                                compare_random_values=compare_random_values)
-                df_snapshot.check_create_snapshot(df,
-                                                  df_features,
-                                                  directory_path=self.folder_path,
-                                                  sub_dir=f"{sub_dir}/_Extras")
-
             # Create the png to save
             create_plt_png(self.folder_path,
                            sub_dir,
                            convert_to_filename(filename))
-
-
-            if meta_data:
-                generate_meta_data(df,
-                                   self.folder_path,
-                                   f"{sub_dir}" + "/_Extras")
-
 
         # Always raise snapshot error
         except SnapshotMismatchError as e:
             raise e
 
         except Exception as e:
-            plt.close()
+            plt.close("all")
             if suppress_runtime_errors:
                 warnings.warn(
                     f"An error occured when trying to save the plot:\n{str(e)}",
@@ -141,18 +96,11 @@ class DataAnalysis(FileOutput):
 
     def save_table_as_plot(self,
                            df,
-                           df_features,
-                           table,
-                           filename="Unknown filename",
                            sub_dir="",
-                           dataframe_snapshot=True,
+                           filename="Unknown filename",
                            suppress_runtime_errors=True,
-                           compare_shape=True,
-                           compare_feature_names=True,
-                           compare_random_values=True,
                            show_index=False,
-                           format_float_pos=2,
-                           meta_data=True):
+                           format_float_pos=2):
         """
         Desc:
             Checks the passed data to see if a table can be saved as a plot;
@@ -160,7 +108,13 @@ class DataAnalysis(FileOutput):
 
         Args:
             df: pd.Dataframe
-                Pandas DataFrame object of all data.\
+                Pandas DataFrame object of all data.
+
+            sub_dir:
+                Directory to generate on top of the already made directory (self.folder_path).
+
+            overwrite_full_path:
+                A pre defined directory that already exists.
 
             df_features: DataFrameTypes from eflow
                 DataFrameTypes object.
@@ -175,27 +129,9 @@ class DataAnalysis(FileOutput):
             sub_dir: string
                 Specify the sub directory to append to the pre-defined folder path.
 
-            dataframe_snapshot: bool
-                Boolean value to determine whether or not generate and compare a
-                snapshot of the dataframe in the dataset's directory structure.
-                Helps ensure that data generated in that directory is correctly
-                associated to a dataframe.
-
             suppress_runtime_errors: bool
                 If set to true; when generating any graphs will suppress any runtime
                 errors so the program can keep running.
-
-            compare_shape: bool
-                When comparing and creating the dataframe snapshot of the data's
-                shape.
-
-            compare_feature_names: bool
-                When comparing and creating the dataframe snapshot of the data's
-                column names.
-
-            compare_random_values: bool
-                When comparing and creating the dataframe snapshot of the data
-                sudo random values.
 
             meta_data:bool
                 If set to true then it will generate meta data on the dataframe.
@@ -209,22 +145,8 @@ class DataAnalysis(FileOutput):
                 raise TypeError(
                     f"Expected param 'sub_dir' to be type string! Was found to be {type(sub_dir)}")
 
-            # Create new snapshot of given data or compare to saved snapshot
-            if dataframe_snapshot:
-                df_snapshot = DataFrameSnapshot(compare_shape=compare_shape,
-                                                compare_feature_names=compare_feature_names,
-                                                compare_random_values=compare_random_values)
-                df_snapshot.check_create_snapshot(df,
-                                                  df_features,
-                                                  directory_path=self.folder_path,
-                                                  sub_dir=f"{sub_dir}/_Extras")
-            if meta_data:
-                generate_meta_data(df,
-                                   self.folder_path,
-                                   f"{sub_dir}" + "/_Extras")
-
             # Convert dataframe to plot
-            df_to_image(table,
+            df_to_image(df,
                         self.folder_path,
                         sub_dir,
                         convert_to_filename(filename),
@@ -236,7 +158,7 @@ class DataAnalysis(FileOutput):
             raise e
 
         except Exception as e:
-            plt.close()
+            plt.close("all")
             if suppress_runtime_errors:
                 warnings.warn(
                     f"An error occured when trying to save the table as a plot:\n{str(e)}",

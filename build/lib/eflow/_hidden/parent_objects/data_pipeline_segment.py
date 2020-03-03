@@ -24,13 +24,14 @@ class DataPipelineSegment(FileOutput):
     """
     def __init__(self,
                  object_type,
-                 segment_id=None):
+                 segment_id=None,
+                 create_file=True):
         """
         Args:
-            object_type:
+            object_type: string
                 The child type of all object's that inherited DataPipelineSegment
 
-            segment_id:
+            segment_id: string
                  If init as a string instead of None; the object will attempt
                  to find the json file in the provided directory.
         Note:
@@ -44,6 +45,10 @@ class DataPipelineSegment(FileOutput):
             raise UnsatisfiedRequirments(
                 "Segment id must be a string or set to 'None'!")
 
+        if segment_id and not create_file:
+            raise PipelineSegmentError("Parameter conflict: segment_id is referring "
+                                       "to a saved file but create_file is set to False.")
+
         # File extension removal
         if isinstance(segment_id,str):
             segment_id = segment_id.split(".")[0]
@@ -51,6 +56,9 @@ class DataPipelineSegment(FileOutput):
 
         # Pushes the functions info based on order they are called
         self.__function_pipe = deque()
+
+        self.__create_file = create_file
+        self.__lock_interaction = False
 
         # Attempt to get json file into object's attributes.
         if self.__segment_id:
@@ -66,8 +74,11 @@ class DataPipelineSegment(FileOutput):
             performed on a given pandas dataframe.
 
         Args:
-            df:
+            df: pd.Dataframe
                 Pandas Dataframe
+
+            df_features: DataFrameTypes from eflow
+                DataFrameTypes object.
         """
         for function_name, params_dict in self.__function_pipe:
 
@@ -184,6 +195,20 @@ class DataPipelineSegment(FileOutput):
     #     else:
     #         return generated_code
 
+    def reset_segment_file(self):
+        # File/Folder error checks
+        if not os.path.exists(self.folder_path):
+            raise PipelineSegmentError(
+                "Couldn't find the pipeline segment's folder when trying to configure this object with the provided json file.")
+        if not os.path.exists(
+                self.folder_path + copy.deepcopy(self.__json_file_name)):
+            raise PipelineSegmentError(
+                f"Couldn't find the pipeline segment's file named '{self.__json_file_name}' in the pipeline's directory when trying to configure this object with the provided json file.")
+
+        dict_to_json_file({},
+                          self.folder_path,
+                          self.file_name)
+
     @property
     def file_path(self):
         """
@@ -194,6 +219,9 @@ class DataPipelineSegment(FileOutput):
         if len(self.__function_pipe) == 0:
             raise PipelineSegmentError("The pipeline segment has not performed any actions yet."
                                        " Please perform some methods with this object.")
+        elif not self.__create_file:
+            raise PipelineSegmentError("This pipeline segment does not have saved "
+                                       "file and thus can not have a file path.")
         else:
             return self.folder_path + copy.deepcopy(self.__json_file_name)
 
@@ -207,6 +235,9 @@ class DataPipelineSegment(FileOutput):
         if len(self.__function_pipe) == 0:
             raise PipelineSegmentError("The pipeline segment has not performed any actions yet."
                                        " Please perform some methods with this object.")
+        elif not self.__create_file:
+            raise PipelineSegmentError("This pipeline segment does not have saved "
+                                       "file and thus can not have a file path.")
         else:
             return copy.deepcopy(self.__json_file_name)
 
@@ -217,48 +248,22 @@ class DataPipelineSegment(FileOutput):
                                   param,
                                   param_val):
 
-        for que_function_name, que_params_dict in self.__function_pipe.iteritems():
-            print(que_function_name)
+        raise ValueError("This function hasn't been completed yet!")
 
+        if self.__lock_interaction:
+            raise PipelineSegmentError("This pipeline has be locked down and "
+                                       "will prevent futher changes to the generated flat file.")
 
+        for delete_key in {"self", "df", "df_features", "_add_to_que",
+                           "params_dict"}:
+            if delete_key in params_dict.keys():
+                del params_dict[delete_key]
 
-        # Generate new json file name with proper file/folder output attributes
-        if len(self.__function_pipe) == 1 and not self.__json_file_name:
-            FileOutput.__init__(self,
-                                f'_Extras/Pipeline Structure/Data Pipeline Segments/{self.__object_type}')
-            all_json_files = get_all_files_from_path(self.folder_path,
-                                                     ".json")
-            while True:
-                random_file_name = create_hex_decimal_string().upper()
-                if random_file_name not in all_json_files:
-                    break
-
-            self.__segment_id = random_file_name
-            self.__json_file_name = random_file_name + ".json"
-
-        # Update json file
-        self.__create_json_pipeline_segment_file()
-
-
-    def __add_function_to_que(self,
-                              function_name,
-                              params_dict):
-        """
-        Desc:
-            Adds the function info the function que. If the segment has no
-            json file name then generate one for it the given directory.
-
-        Args:
-            function_name:
-                Functions name
-
-            params_dict:
-                Parameter's name to their associated values.
-
-        Note:
-            This function should only ever be called by children of
-            this object.
-        """
+        for k, v in {k: v for k, v in params_dict.items()}.items():
+            if k not in parameters:
+                del params_dict[k]
+            elif isinstance(v, set):
+                params_dict[k] = list(v)
 
         self.__function_pipe.append((function_name,
                                      params_dict))
@@ -278,7 +283,67 @@ class DataPipelineSegment(FileOutput):
             self.__json_file_name = random_file_name + ".json"
 
         # Update json file
-        self.__create_json_pipeline_segment_file()
+        if self.__create_file:
+            self.__create_json_pipeline_segment_file()
+
+
+    def __add_function_to_que(self,
+                              function_name,
+                              parameters,
+                              params_dict):
+        """
+        Desc:
+            Adds the function info the function que. If the segment has no
+            json file name then generate one for it the given directory.
+
+        Args:
+            function_name: string
+                Functions name
+
+            params_dict: dict
+                Parameter's name to their associated values.
+
+        Note:
+            This function should only ever be called by children of
+            this object.
+        """
+        if self.__lock_interaction:
+            raise PipelineSegmentError("This pipeline has be locked down and "
+                                       "will prevent futher changes to the generated flat file.")
+
+
+        for delete_key in {"self", "df", "df_features", "_add_to_que",
+                    "params_dict"}:
+            if delete_key in params_dict.keys():
+                del params_dict[delete_key]
+
+
+        for k,v in {k:v for k,v in params_dict.items()}.items():
+            if k not in parameters:
+                del params_dict[k]
+            elif isinstance(v,set):
+                params_dict[k] = list(v)
+
+        self.__function_pipe.append((function_name,
+                                     params_dict))
+
+        # Generate new json file name with proper file/folder output attributes
+        if len(self.__function_pipe) == 1 and not self.__json_file_name:
+            FileOutput.__init__(self,
+                                f'_Extras/Pipeline Structure/Data Pipeline Segments/{self.__object_type}')
+            all_json_files = get_all_files_from_path(self.folder_path,
+                                                     ".json")
+            while True:
+                random_file_name = create_hex_decimal_string().upper()
+                if random_file_name not in all_json_files:
+                    break
+
+            self.__segment_id = random_file_name
+            self.__json_file_name = random_file_name + ".json"
+
+        # Update json file
+        if self.__create_file:
+            self.__create_json_pipeline_segment_file()
 
     def __create_json_pipeline_segment_file(self):
         """
@@ -309,8 +374,8 @@ class DataPipelineSegment(FileOutput):
 
         # Generate pipeline segment file
         dict_to_json_file(json_dict,
-                                   self.folder_path,
-                                   self.__json_file_name)
+                          self.folder_path,
+                          self.__json_file_name)
 
     def __configure_pipeline_segment_with_existing_file(self):
         """

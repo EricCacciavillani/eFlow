@@ -7,23 +7,27 @@ __license__ = "MIT"
 __maintainer__ = "EricCacciavillani"
 __email__ = "eric.cacciavillani@gmail.com"
 
-def convert_to_filename(filename):
+def convert_to_filename(filename,
+                        remove_file_extension=True):
     """
     Desc:
         Attempts to make the filename string valid.
 
     Args:
-        filename:
+        filename: string
            String of a potential filename.
+
+        remove_file_extension: bool
+            Removes everything after the first found value of "." found in the
+            string if set to true.
 
     Returns:
         A string that is valid for saving.
     """
-
-    filename = filename.split(".")[0]
+    if remove_file_extension:
+        filename = filename.split(".")[0]
     return "".join(x for x in str(
-        filename) if x.isalnum() or x == "_" or x == "("
-            or x == ")" or x == " " or x == "-")
+        filename) if (x.isalnum() or x.isascii()) and x != ":")
 
 
 def correct_directory_path(directory_path):

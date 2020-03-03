@@ -7,6 +7,7 @@ __email__ = "eric.cacciavillani@gmail.com"
 
 
 def enum(**enums):
-    """Allows for constant like variables.
+    """
+        Allows for constant like variables.
     """
     return type('Enum', (), enums)

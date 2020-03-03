@@ -1,7 +1,7 @@
 from eflow.utils.sys_utils import dict_to_json_file,json_file_to_dict
 from eflow.utils.language_processing_utils import get_synonyms
 from eflow._hidden.custom_exceptions import UnsatisfiedRequirments
-
+from eflow._hidden.constants import BOOL_STRINGS
 
 import copy
 
@@ -35,29 +35,26 @@ class DataFrameTypes:
                  notebook_mode=False):
         """
         Args:
-            df:
+            df: pd.DataFrame
                 Pandas dataframe object.
 
-            target_feature:
+            target_feature: string
                 If the project is using a supervised learning approach we can
                 specify the target column. (Note: Not required)
 
-            ignore_nulls:
+            ignore_nulls: bool
                 If set to true than a temporary dataframe is created with each
                 feature removes it's nan values to assert what data type the series
                 object would be without nans existing inside it.
 
-            fix_numeric_features:
+            fix_numeric_features: bool
                 Will attempt to convert all numeric features to the most proper
                 numerical types.
 
-            fix_string_features:
+            fix_string_features: bool
                 Will attempt to convert all string features to ALL proper types.
 
-            categorical_value_dict:
-                Any pre-defined category to string value relationships.
-
-            notebook_mode:
+            notebook_mode: bool
                 Boolean value to determine if any notebook functions can be used here.
         """
 
@@ -79,6 +76,12 @@ class DataFrameTypes:
         self.__datetime_features = set(
             df.select_dtypes(include=["datetime"]).columns)
 
+        null_features = df.isnull().sum()
+        null_features[null_features == df.shape[0]].index.to_list()
+        self.__null_only_features = set(null_features[null_features == df.shape[0]].index.to_list())
+
+        del null_features
+
         # Target feature for machine learning projects
         self.__target_feature = None
 
@@ -92,6 +95,11 @@ class DataFrameTypes:
         # Feature values representation
         self.__feature_value_representation = dict()
 
+        # Dummy encoded feature dictionaries
+        self.__dummy_encoded_features = dict()
+
+        # Feature's labels and bins
+        self.__feature_labels_bins_dict = dict()
 
         # Data type assertions without nulls
         if ignore_nulls and df.isnull().values.any():
@@ -106,13 +114,14 @@ class DataFrameTypes:
 
         # Error checking; flag error; don't disrupt runtime
         features_not_captured = set(df.columns)
-        self.__all_columns = (self.__float_features | self.__integer_features) | \
-                             self.__string_features | \
-                             self.__bool_features | \
-                             self.__datetime_features | \
-                             self.__categorical_features
+        all_features = (self.__float_features | self.__integer_features) | \
+                        self.__string_features | \
+                        self.__bool_features | \
+                        self.__datetime_features | \
+                        self.__categorical_features | \
+                        self.__null_only_features
 
-        for col_feature in self.__all_columns:
+        for col_feature in all_features:
             features_not_captured.remove(col_feature)
 
         if features_not_captured:
@@ -129,13 +138,13 @@ class DataFrameTypes:
 
     # --- Getters ---
     def numerical_features(self,
-                               exclude_target=False):
+                           exclude_target=False):
         """
         Desc:
             Gets all numerical features chosen by the object.
 
         Args:
-            exclude_target:
+            exclude_target: bool
                 If the target feature is an numerical (int/float/bool); then it will be ignored
                 when passing back the set.
 
@@ -157,20 +166,20 @@ class DataFrameTypes:
             return tmp_set
 
     def non_numerical_features(self,
-                                   exclude_target=False):
+                               exclude_target=False):
         """
         Desc:
             Gets all non-numerical features chosen by the object.
 
         Args:
-            exclude_target:
+            exclude_target: bool
                 If the target feature is an numerical (int/float/bool); then it will be ignored
                 when passing back the set.
 
         Returns:
             Returns a set of all non numerical features chosen by the object.
         """
-        tmp_set = self.__all_columns ^ self.numerical_features()
+        tmp_set = self.all_features() ^ self.numerical_features()
         if exclude_target:
 
             # Target feature never init
@@ -185,13 +194,13 @@ class DataFrameTypes:
             return tmp_set
 
     def continuous_numerical_features(self,
-                                          exclude_target=False):
+                                      exclude_target=False):
         """
         Desc:
             Gets all numerical features that are continuous (int/float).
 
         Args:
-            exclude_target:
+            exclude_target: bool
                 If the target feature is an numerical (int/float); then it will be ignored
                 when passing back the set.
 
@@ -212,14 +221,14 @@ class DataFrameTypes:
         else:
             return tmp_set
 
-    def get_non_continuous_numerical_features(self,
-                                              exclude_target=False):
+    def non_continuous_numerical_features(self,
+                                          exclude_target=False):
         """
         Desc:
             Gets all numerical features that are not continuous (bool)
 
         Args:
-            exclude_target:
+            exclude_target: bool
                 If the target feature is a bool; then it will be ignored
                 when passing back the set.
 
@@ -241,13 +250,13 @@ class DataFrameTypes:
             return tmp_set
 
     def continuous_features(self,
-                                exclude_target=False):
+                            exclude_target=False):
         """
         Desc:
             Gets all numerical features chosen by the object.
 
         Args:
-            exclude_target:
+            exclude_target: bool
                 If the target feature is an numerical (int/float/time); then it will be ignored
                 when passing back the set.
 
@@ -269,20 +278,20 @@ class DataFrameTypes:
             return tmp_set
 
     def non_continuous_features(self,
-                                    exclude_target=False):
+                                exclude_target=False):
         """
         Desc:
             Gets all numerical features chosen by the object.
 
         Args:
-            exclude_target:
+            exclude_target: bool
                 If the target feature is an numerical (int/float/time); then it will be ignored
                 when passing back the set.
 
         Returns:
             Returns a set of all numerical features chosen by the object.
         """
-        tmp_set = self.__all_columns ^ self.continuous_features()
+        tmp_set = self.all_features() ^ self.continuous_features()
         if exclude_target:
 
             # Target feature never init
@@ -297,13 +306,13 @@ class DataFrameTypes:
             return tmp_set
 
     def integer_features(self,
-                             exclude_target=False):
+                         exclude_target=False):
         """
         Desc:
             All integer features chosen by df_features.
 
         Args:
-            exclude_target:
+            exclude_target: bool
                 If the target feature is an integer; then it will be ignored
                 when passing back the set.
 
@@ -332,7 +341,7 @@ class DataFrameTypes:
             All float features chosen by df_features.
 
         Args:
-            exclude_target:
+            exclude_target: bool
                 If the target feature is an float; then it will be ignored
                 when passing back the set.
 
@@ -355,13 +364,13 @@ class DataFrameTypes:
             return copy.deepcopy(self.__float_features)
 
     def categorical_features(self,
-                                 exclude_target=False):
+                             exclude_target=False):
         """
         Desc:
             All categorical features chosen by df_features.
 
         Args:
-            exclude_target:
+            exclude_target: bool
                 If the target feature is an categorical; then it will be ignored
                 when passing back the set.
 
@@ -384,13 +393,13 @@ class DataFrameTypes:
             return copy.deepcopy(self.__categorical_features)
 
     def string_features(self,
-                            exclude_target=False):
+                        exclude_target=False):
         """
         Desc:
             All string features chosen by df_features.
 
         Args:
-            exclude_target:
+            exclude_target: bool
                 If the target feature is an string; then it will be ignored
                 when passing back the set.
 
@@ -413,14 +422,14 @@ class DataFrameTypes:
             return copy.deepcopy(self.__string_features)
 
     def bool_features(self,
-                          exclude_target=False):
+                      exclude_target=False):
 
         """
         Desc:
             All bool features chosen by df_features.
 
         Args:
-            exclude_target:
+            exclude_target: bool
                 If the target feature is an bool; then it will be ignored
                 when passing back the set.
 
@@ -443,13 +452,13 @@ class DataFrameTypes:
             return copy.deepcopy(self.__bool_features)
 
     def datetime_features(self,
-                              exclude_target=False):
+                          exclude_target=False):
         """
         Desc:
             All datetime features chosen by df_features.
 
         Args:
-            exclude_target:
+            exclude_target: bool
                 If the target feature is an datetime; then it will be ignored
                 when passing back the set.
 
@@ -471,22 +480,13 @@ class DataFrameTypes:
         else:
             return copy.deepcopy(self.__datetime_features)
 
-    def all_features(self,
-                         exclude_target=False):
-        """
-        Desc:
-            Returns all features found in the dataset.
 
-        Args:
-            exclude_target:
-                If the target feature is an datetime; then it will be ignored
-                when passing back the set.
-        Returns:
-            Returns all found features.
-        """
+    def null_only_features(self,
+                           exclude_target=False):
+
 
         if exclude_target:
-            tmp_set = copy.deepcopy(self.__all_columns)
+            tmp_set = copy.deepcopy(self.__null_only_features)
 
             # Target feature never init
             if not self.__target_feature:
@@ -498,7 +498,43 @@ class DataFrameTypes:
 
             return tmp_set
         else:
-            return copy.deepcopy(self.__all_columns)
+            return copy.deepcopy(self.__null_only_features)
+
+    def all_features(self,
+                     exclude_target=False):
+        """
+        Desc:
+            Returns all features found in the dataset.
+
+        Args:
+            exclude_target: bool
+                If the target feature is an datetime; then it will be ignored
+                when passing back the set.
+        Returns:
+            Returns all found features.
+        """
+
+        all_features = (self.__float_features | self.__integer_features) | \
+                        self.__string_features | \
+                        self.__bool_features | \
+                        self.__datetime_features | \
+                        self.__categorical_features | \
+                        self.__null_only_features
+
+        if exclude_target:
+            tmp_set = copy.deepcopy(all_features)
+
+            # Target feature never init
+            if not self.__target_feature:
+                raise KeyError("Target feature was never initialized")
+
+            # Check if target exist in set
+            if self.__target_feature in tmp_set:
+                tmp_set.remove(self.__target_feature)
+
+            return tmp_set
+        else:
+            return copy.deepcopy(all_features)
 
 
     def get_feature_type(self,
@@ -508,7 +544,7 @@ class DataFrameTypes:
             Return's a feature's type as a string
 
         Args:
-            feature_name:
+            feature_name: str
                 The given's feature's name.
 
         Returns:
@@ -532,6 +568,9 @@ class DataFrameTypes:
 
         elif feature_name in self.__datetime_features:
             return "datetime"
+
+        elif feature_name in self.__null_only_features:
+            return "null only"
 
         else:
             raise KeyError(f"Feature '{feature_name}' can't be found in the set!")
@@ -574,7 +613,7 @@ class DataFrameTypes:
             Get's the color values for that given feature.
 
         Args:
-            feature_name:
+            feature_name: str
                 The given feature name of the
 
         Returns:
@@ -597,6 +636,36 @@ class DataFrameTypes:
         """
         return copy.deepcopy(self.__feature_value_color_dict)
 
+    def get_feature_binning(self,
+                            feature_name):
+        """
+       Desc:
+           Get's the feature's bin and labels for that given feature.
+
+       Args:
+           feature_name: str
+               The given feature name of the feature
+
+       Returns:
+           Returns the bin and labels for the given feature; returns None if
+           the feature name is not saved in the feature value color dict.
+       """
+
+        if feature_name in self.__feature_labels_bins_dict:
+            return copy.deepcopy(self.__feature_labels_bins_dict[feature_name])
+        else:
+            return None
+
+    def get_all_feature_binning(self):
+        """
+        Desc:
+           Get's the entire dict of the feature's bins and labels.
+
+        Returns:
+            Returns a copy of the labels and bins for the given feature.
+        """
+        return copy.deepcopy(self.__feature_labels_bins_dict)
+
     def get_feature_value_representation(self):
         """
         Desc:
@@ -607,7 +676,14 @@ class DataFrameTypes:
         """
         return copy.deepcopy(self.__feature_value_representation)
 
-    # --- Setters ---
+    def get_dummy_encoded_features(self):
+        """
+        Desc:
+            Get's all dummy encoded relationships.
+        """
+        return copy.deepcopy(self.__dummy_encoded_features)
+
+    # --- Setters and Appending ---
     def set_target_feature(self,
                            feature_name):
         """
@@ -728,6 +804,152 @@ class DataFrameTypes:
             self.__datetime_features.add(name)
 
 
+    def set_feature_to_null_only_features(self,
+                                          feature_name):
+        """
+        Desc:
+            Moves feature to only null series data feature set.
+
+        Args:
+            feature_name:
+                Feature name or a list of feature names to move to given set.
+        """
+        if isinstance(feature_name, str):
+            feature_name = [feature_name]
+
+        for name in feature_name:
+            self.remove_feature(name)
+            self.__null_only_features.add(name)
+
+    def set_feature_binning(self,
+                            feature_name,
+                            bins,
+                            labels):
+
+        if not isinstance(labels,list):
+            labels = list(labels)
+
+        if not isinstance(bins,list):
+            bins = list(bins)
+
+        self.__feature_labels_bins_dict[feature_name] = dict()
+        self.__feature_labels_bins_dict[feature_name]["bins"] = bins
+        self.__feature_labels_bins_dict[feature_name]["labels"] = labels
+
+
+    def add_new_bool_feature(self,
+                             feature_name):
+        """
+        Desc:
+            Adds a new feature/feature(s) to the feature set bool
+
+        Args:
+            feature_name: str
+                Name of the new feature
+        """
+
+        if isinstance(feature_name,str):
+            feature_name = [feature_name]
+
+        for name in feature_name:
+            self.__bool_features.add(name)
+
+    def add_new_string_feature(self,
+                               feature_name):
+        """
+        Desc:
+            Adds a new feature/feature(s) to the feature set string
+
+        Args:
+            feature_name: str
+                Name of the new feature
+        """
+        if isinstance(feature_name, str):
+            feature_name = [feature_name]
+
+        for name in feature_name:
+            self.__string_features.add(name)
+
+    def add_new_integer_feature(self,
+                                feature_name):
+        """
+        Desc:
+            Adds a new feature/feature(s) to the feature set integer
+
+        Args:
+            feature_name: str
+                Name of the new feature
+        """
+        if isinstance(feature_name, str):
+            feature_name = [feature_name]
+
+        for name in feature_name:
+            self.__integer_features.add(name)
+
+    def add_new_float_feature(self,
+                              feature_name):
+        """
+        Desc:
+            Adds a new feature/feature(s) to the feature set float
+
+        Args:
+            feature_name: str
+                Name of the new feature
+        """
+        if isinstance(feature_name, str):
+            feature_name = [feature_name]
+
+        for name in feature_name:
+            self.__float_features.add(name)
+
+    def add_new_categorical_feature(self,
+                                    feature_name):
+        """
+        Desc:
+            Adds a new feature/feature(s) to the feature set categorical
+
+        Args:
+            feature_name: str
+                Name of the new feature
+        """
+        if isinstance(feature_name, str):
+            feature_name = [feature_name]
+
+        for name in feature_name:
+            self.__categorical_features.add(name)
+
+    def add_new_null_only_feature(self,
+                                  feature_name):
+        """
+        Desc:
+            Adds a new feature/feature(s) to the feature set null only features
+
+        Args:
+            feature_name: str
+                Name of the new feature
+        """
+        if isinstance(feature_name, str):
+            feature_name = [feature_name]
+
+        for name in feature_name:
+            self.__null_only_features.add(name)
+
+    def add_new_datetime_feature(self,
+                                  feature_name):
+        """
+        Desc:
+            Adds a new feature/feature(s) to the feature set datetime
+
+        Args:
+            feature_name: str
+                Name of the new feature
+        """
+        if isinstance(feature_name, str):
+            feature_name = [feature_name]
+
+        for name in feature_name:
+            self.__datetime_features.add(name)
+
     def set_feature_colors(self,
                            feature_value_color_dict):
         """
@@ -744,9 +966,9 @@ class DataFrameTypes:
         # -----
         for feature_name, color_dict in feature_value_color_dict.items():
 
-            if feature_name not in self.__all_columns:
-                raise UnsatisfiedRequirments("The feature name '{feature_name}' "
-                                             + f"was not found in any of the past"
+            if feature_name not in self.all_features():
+                raise UnsatisfiedRequirments(f"The feature name '{feature_name}' "
+                                             + "was not found in any of the past"
                                              " feature type sets!")
 
             if isinstance(feature_name,str):
@@ -787,12 +1009,96 @@ class DataFrameTypes:
             if feature_name not in self.__string_features:
                 raise UnsatisfiedRequirments(f"Feature value assertions must be of type string.")
 
-            if feature_name not in self.__all_columns:
+            if feature_name not in self.all_features():
                 raise UnsatisfiedRequirments(f"'{feature_name}' doesn't exist in any features.")
 
         self.__feature_value_representation = copy.deepcopy(feature_value_representation)
 
+    def set_feature_to_dummy_encoded(self,
+                                     feature_name,
+                                     dummy_encoded_list):
+        self.__dummy_encoded_features[feature_name] = dummy_encoded_list
+
+        for bool_feature in dummy_encoded_list:
+            self.__bool_features.add(bool_feature)
+
     # --- Functions ---
+    def feature_types_dict(self):
+        feature_types = dict()
+
+        # -----
+        for feature_name in self.__string_features:
+            feature_types[feature_name] = "string"
+
+        for feature_name in self.__bool_features:
+            feature_types[feature_name] = "bool"
+
+        for feature_name in self.__integer_features:
+            feature_types[feature_name] = "integer"
+
+        for feature_name in self.__float_features:
+            feature_types[feature_name] = "float"
+
+        for feature_name in self.__datetime_features:
+            feature_types[feature_name] = "datetime"
+
+        for feature_name in self.__categorical_features:
+            feature_types[feature_name] = "categorical"
+
+        for feature_name in self.__null_only_features:
+            feature_types[feature_name] = "null_only"
+
+        return feature_types
+
+    def feature_types_dataframe(self):
+        features = list()
+        feature_types = list()
+
+        # -----
+        for feature_name in self.__string_features:
+            features.append(feature_name)
+            feature_types.append("string")
+
+        for feature_name in self.__bool_features:
+            features.append(feature_name)
+            feature_types.append("bool")
+
+        for feature_name in self.__integer_features:
+            features.append(feature_name)
+            feature_types.append("integer")
+
+        for feature_name in self.__float_features:
+            features.append(feature_name)
+            feature_types.append("float")
+
+        for feature_name in self.__datetime_features:
+            features.append(feature_name)
+            feature_types.append("datetime")
+
+        for feature_name in self.__categorical_features:
+            features.append(feature_name)
+            feature_types.append("category")
+
+        for feature_name in self.__null_only_features:
+            features.append(feature_name)
+            feature_types.append("null only")
+
+        dtypes_df = pd.DataFrame({'Data Types': feature_types})
+        dtypes_df.index = features
+        dtypes_df.index.name = "Features"
+
+        return dtypes_df
+
+
+    def remove_feature_from_dummy_encoded(self,
+                                          feature_name):
+
+        for bool_feature in self.__dummy_encoded_features[feature_name]:
+            self.remove_feature(bool_feature)
+
+        del self.__dummy_encoded_features[feature_name]
+
+
     def remove_feature(self,
                        feature_name):
         """
@@ -836,6 +1142,12 @@ class DataFrameTypes:
 
             try:
                 self.__bool_features.remove(feature_name)
+                break
+            except KeyError:
+                pass
+
+            try:
+                self.__null_only_features.remove(feature_name)
                 break
             except KeyError:
                 pass
@@ -895,44 +1207,19 @@ class DataFrameTypes:
                 print("Float Features: {0}\n".format(
                     self.__float_features))
 
-            print("---------" * 10)
             if self.__target_feature:
+                print("---------" * 10)
                 print("Target Feature: {0}\n".format(
                     self.__target_feature))
 
+            if self.__null_only_features:
+                print("---------" * 10)
+                print("Null Only Feature: {0}\n".format(
+                    self.__null_only_features))
+
         # Create dataframe object based on the feature sets.
         else:
-            features = list()
-            feature_types = list()
-
-            # -----
-            for feature_name in self.__string_features:
-                features.append(feature_name)
-                feature_types.append("string")
-
-            for feature_name in self.__bool_features:
-                features.append(feature_name)
-                feature_types.append("bool")
-
-            for feature_name in self.__integer_features:
-                features.append(feature_name)
-                feature_types.append("integer")
-
-            for feature_name in self.__float_features:
-                features.append(feature_name)
-                feature_types.append("float")
-
-            for feature_name in self.__datetime_features:
-                features.append(feature_name)
-                feature_types.append("datetime")
-
-            for feature_name in self.__categorical_features:
-                features.append(feature_name)
-                feature_types.append("category")
-
-            dtypes_df = pd.DataFrame({'Data Types': feature_types})
-            dtypes_df.index = features
-            dtypes_df.index.name = "Features"
+            dtypes_df = self.feature_types_dataframe()
 
             if notebook_mode:
                 display(dtypes_df)
@@ -942,7 +1229,7 @@ class DataFrameTypes:
     def fix_numeric_features(self,
                              df,
                              notebook_mode=False,
-                             display_results=True):
+                             display_results=False):
         """
         Desc:
             Attempts to move numerical features to the correct types by
@@ -1183,6 +1470,7 @@ class DataFrameTypes:
                 if not len(user_input):
                     print(f"Ignoring feature '{feature_name}")
 
+                # -----
                 elif user_input[0] == "s":
                     type_conflict_dict[feature_name] = "string"
 
@@ -1191,8 +1479,8 @@ class DataFrameTypes:
                     if float_flag:
                         type_conflict_dict[feature_name] = "float"
                     else:
-                        numeric_values = pd.to_numeric(numeric_values,
-                                                       errors="coerce")
+                        numeric_values = set(pd.to_numeric(numeric_values,
+                                                       errors="coerce").dropna())
                         if self.__bool_check(numeric_values):
                             type_conflict_dict[feature_name] = "bool"
 
@@ -1265,7 +1553,7 @@ class DataFrameTypes:
             inside it.
 
         Args:
-            df:
+            df: pd.DataFrame
                 Pandas Dataframe object.
         """
         nan_features = [feature for feature, nan_found in
@@ -1313,10 +1601,10 @@ class DataFrameTypes:
             and the targeted feature.
 
         Args:
-            directory_path:
+            directory_path: string
                 Absolute directory path.
 
-            filename:
+            filename: string
                 File's given name
         """
         type_features = dict()
@@ -1358,6 +1646,8 @@ class DataFrameTypes:
 
         type_features["target"] = self.__target_feature
 
+        type_features["feature_labels_bins"] = self.__feature_labels_bins_dict
+
         type_features["feature_values_colors"] = self.__feature_value_color_dict
 
         type_features["feature_value_representation"] = self.__feature_value_representation
@@ -1366,8 +1656,8 @@ class DataFrameTypes:
         type_features["label_decoder"] = self.__label_decoder
 
         dict_to_json_file(type_features,
-                                   directory_path,
-                                   filename)
+                          directory_path,
+                          filename)
 
     def init_on_json_file(self,
                           filepath):
@@ -1385,9 +1675,6 @@ class DataFrameTypes:
         type_features = json_file_to_dict(filepath)
 
         # Reset all sets and target
-        self.__all_columns = set()
-
-        # -----
         self.__bool_features = set()
         self.__string_features = set()
         self.__categorical_features = set()
@@ -1451,18 +1738,15 @@ class DataFrameTypes:
             elif type == "label_encoder":
                 self.__label_encoder = obj
 
+            elif type == "feature_labels_bins":
+                self.__feature_labels_bins_dict = obj
+
             else:
                 raise ValueError(f"Unknown type {type} was found!")
 
-        self.__all_columns = (self.__float_features | self.__integer_features) | \
-                              self.__string_features | \
-                              self.__bool_features | \
-                              self.__datetime_features | \
-                              self.__categorical_features
-
         # Convert any values that are supposed to numeric back to numeric in colors
         for feature_name,value_color_dict in tmp_feature_value_color_dict.items():
-            if feature_name not in self.__all_columns:
+            if feature_name not in self.all_features():
                 raise ValueError(f"Unknown feature '{feature_name}' found in color dict for features!")
             else:
                 tmp_value_color_dict = copy.deepcopy(value_color_dict)
@@ -1491,10 +1775,10 @@ class DataFrameTypes:
             Create's encoder dict for strings and categories.
 
         Args:
-            df:
+            df: pd.DataFrame
                 Pandas dataframe.
 
-            categorical_value_dict:
+            categorical_value_dict: dict
                 Relationship between category and string label.
 
         Note:
@@ -1591,7 +1875,7 @@ class DataFrameTypes:
             the numeric values passed to it.
 
         Args:
-            feature_values:
+            feature_values: collection
                 Distinct values of the given feature.
 
         Returns:
@@ -1611,21 +1895,18 @@ class DataFrameTypes:
 
     def __bool_string_values_check(self,
                                    feature_values):
+        """
+        Desc:
+            Checks if a collection of strings can be considered a bool feature
+            based on the amount of strings and the values of those strings.
 
-        defined_true_strings = {"y",
-                                "yes",
-                                "okay",
-                                "approve",
-                                "approved",
-                                "accepted",
-                                "alright"}
+        Args:
+            feature_values: collection
+                Collection object of strings.
 
-        defined_false_strings = {"n",
-                                 "no",
-                                 "denined",
-                                 "deny",
-                                 "refuse",
-                                 "abnegate"}
+        Returns:
+            Returns true or false if the values can be considered a bool.
+        """
 
         if len(feature_values) > 2:
             return False
@@ -1635,29 +1916,54 @@ class DataFrameTypes:
 
         for val in feature_values:
 
+            if not isinstance(val,str):
+                continue
+
+            val = val.lower()
+
+            # Determine if val is true
             if not found_true_value:
-                if val in defined_true_strings:
+
+                # Check if the string already exist in the defined set
+                if val in BOOL_STRINGS.TRUE_STRINGS:
                     found_true_value = True
                     continue
                 else:
-                    for true_string in defined_true_strings:
+                    # Attempt to find synonyms of the defined words to compare to
+                    # the iterable string
+                    for true_string in BOOL_STRINGS.TRUE_STRINGS:
+
+                        if len(true_string) < 2:
+                            continue
+
                         for syn in get_synonyms(true_string):
                             if syn == val:
                                 found_true_value = True
                                 continue
 
+            # -----
             if not found_false_value:
-                if val in defined_false_strings:
+
+                # -----
+                if val in BOOL_STRINGS.FALSE_STRINGS:
                     found_false_value = True
                     continue
                 else:
-                    for false_string in defined_false_strings:
+                    # -----
+                    for false_string in BOOL_STRINGS.FALSE_STRINGS:
+
+                        if len(false_string) < 2:
+                            continue
+
                         for syn in get_synonyms(false_string):
                             if syn == val:
                                 found_false_value = True
                                 continue
 
-        return found_true_value and found_false_value
+        if len(feature_values) == 2:
+            return found_true_value and found_false_value
+        else:
+            return found_true_value or found_false_value
 
     def __categorical_check(self,
                             feature_values):
@@ -1672,11 +1978,17 @@ class DataFrameTypes:
         Returns:
             Returns true or false if the values can be categorical.
         """
-        # Categorical check
-        if sum(feature_values) == sum(range(1, len(feature_values) + 1)):
-            return True
-        else:
+
+        feature_values = copy.deepcopy(set(feature_values))
+
+        min_val = min(feature_values)
+        max_val = max(feature_values)
+
+        if sum(feature_values) != ((min_val + max_val) / 2) * len(
+                set(feature_values)):
             return False
+        else:
+            return True
 
     def __numeric_check(self,
                         feature_values):
@@ -1693,10 +2005,17 @@ class DataFrameTypes:
             Boolean values return as such:
                 numerical_check, float_check, int_check, categorical_check
         """
+
+        if not len(feature_values):
+            return False, False, False, False
+
+
         # -----
         float_check = False
         categorical_total_sum = 0
         categorical_check = True
+
+        feature_values = copy.deepcopy(set(feature_values))
 
         # Iterate through all values
         for val in feature_values:
@@ -1709,18 +2028,54 @@ class DataFrameTypes:
             except ValueError:
                 return False, False, False, False
 
-            # Check if float
-            str_val = str(val)
-            tokens = str_val.split(".")
-            if len(tokens) > 1 and int(tokens[1]) > 0:
-                float_check = True
-                categorical_check = False
-            else:
-                categorical_total_sum += val
-                continue
+            if categorical_check:
+                # Check if float
+                str_val = str(val)
+                tokens = str_val.split(".")
+                if len(tokens) > 1 and int(tokens[1]) > 0:
+                    float_check = True
+                    categorical_check = False
+                else:
+                    categorical_total_sum += val
+                    continue
 
         # Check if categorical
-        if categorical_total_sum != sum(range(1, len(feature_values) + 1)):
-            categorical_check = False
+        if categorical_check:
+
+            min_val = min(feature_values)
+            max_val = max(feature_values)
+
+            if categorical_total_sum != ((min_val + max_val)/2) * len(feature_values):
+                categorical_check = False
 
         return True, float_check, not float_check, categorical_check
+
+
+    def __eq__(self,
+               other):
+
+        if isinstance(other,DataFrameTypes):
+
+            if self.feature_types_dict() != other.feature_types_dict():
+                return False
+
+            elif self.get_label_encoder() != other.get_label_encoder():
+                return False
+
+            elif self.get_label_decoder() != other.get_label_decoder():
+                return False
+
+            elif self.get_all_feature_colors() != other.get_all_feature_colors():
+                return False
+
+            elif self.get_all_feature_binning() != other.get_all_feature_binning():
+                return False
+
+            elif self.target_feature() != other.target_feature():
+                return False
+
+            else:
+                return True
+
+        else:
+            return False

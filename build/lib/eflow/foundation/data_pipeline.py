@@ -30,6 +30,7 @@ class DataPipeline(FileOutput):
     """
     def __init__(self,
                  pipeline_name,
+                 df,
                  df_features=None,
                  pipeline_modify_id=None,
                  remove_past_contents=False):
@@ -109,6 +110,12 @@ class DataPipeline(FileOutput):
                 print("Now configuring object with proper pipeline segments...")
                 self.__configure_pipeline_with_existing_file()
 
+        for removal_feature in set(df.columns) ^ set(
+                df_features.all_features()):
+            print(f"Removing the feature: \"{removal_feature}\"")
+            df.drop(columns=removal_feature,
+                    inplace=True)
+
     @property
     def file_path(self):
         """
@@ -143,7 +150,6 @@ class DataPipeline(FileOutput):
         else:
             return copy.deepcopy(self.__df_features)
 
-
     def add(self,
             segment_name,
             pipeline_segment_obj):
@@ -159,7 +165,7 @@ class DataPipeline(FileOutput):
             update it's related json object.
         """
 
-        pipeline_segment_obj = copy.deepcopy(pipeline_segment_obj)
+        # pipeline_segment_obj = copy.deepcopy(pipeline_segment_obj)
 
         # Type check
         if not isinstance(pipeline_segment_obj,
@@ -171,8 +177,12 @@ class DataPipeline(FileOutput):
         if segment_name in self.__pipeline_segment_names:
             raise PipelineError(f"The '{segment_name}' pipeline segment is already in this pipeline. Please choose a different segment name.")
 
-        # Check if the pipeline segment has already been used
-        segment_path_id = pipeline_segment_obj.relative_folder_path + pipeline_segment_obj.file_name
+        try:
+            # Check if the pipeline segment has already been used
+            segment_path_id = pipeline_segment_obj.relative_folder_path + pipeline_segment_obj.file_name
+        except AttributeError:
+            raise UnsatisfiedRequirments("The given pipeline segment didn't perform any functions.")
+
         if segment_path_id in self.__pipeline_segment_path_id:
             raise PipelineError("The segment has been already found "
                                 "in this pipeline Segment path id: " +
@@ -205,9 +215,42 @@ class DataPipeline(FileOutput):
                                               segment_path_id,
                                               pipeline_segment_obj))
 
+        # Lock down the object to prevent users from continuing to interact with it after adding it to the pipeline
+        pipeline_segment_obj._DataPipelineSegment__lock_interaction = True
+
         # Update/Create the json file
         self.__create_json_pipeline_file()
 
+    def perform_pipeline(self,
+                         df,
+                         df_features=None):
+        """
+        Args:
+            df:
+                Pandas Dataframe object to be transformed by the pipeline.
+
+        Returns/Desc:
+            Applies a Pandas Dataframe object to all functions on all segments
+            in the pipeline.
+        """
+
+        if df_features is None:
+            df_features = self.__df_features
+
+        if self.__df_features is None:
+            raise PipelineError("Default type holder somehow is equal to none for "
+                                "this pipeline structure.")
+
+
+        for removal_feature in set(df.columns) ^ set(
+                df_features.all_features()):
+            print(f"Removing the feature: \"{removal_feature}\"")
+            df.drop(columns=removal_feature,
+                    inplace=True)
+
+        for _, _, pipeline_segment in self.__pipeline_segment_deque:
+            pipeline_segment.perform_segment(df,
+                                             df_features)
 
     def __create_json_pipeline_file(self):
         """
@@ -293,30 +336,6 @@ class DataPipeline(FileOutput):
             self.__pipeline_segment_deque.append((segment_name,
                                                   segment_path_id,
                                                   pipeline_segment_obj))
-
-    def perform_pipeline(self,
-                         df,
-                         df_features=None):
-        """
-        Args:
-            df:
-                Pandas Dataframe object to be transformed by the pipeline.
-
-        Returns/Desc:
-            Applies a Pandas Dataframe object to all functions on all segments
-            in the pipeline.
-        """
-
-        if df_features is None:
-            df_features = self.__df_features
-
-        if self.__df_features is None:
-            raise PipelineError("Default type holder somehow is equal to none for "
-                                "this pipeline structure.")
-
-        for _, _, pipeline_segment in self.__pipeline_segment_deque:
-            pipeline_segment.perform_segment(df,
-                                             df_features)
 
     # def generate_code(self,
     #                   generate_file=True,

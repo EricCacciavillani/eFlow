@@ -45,14 +45,14 @@ class DataFrameSnapshot:
                  compare_random_values=True):
         """
         Args:
-            compare_shape:
+            compare_shape: bool
                 Determines whether or not to create/compare the dataframe's shape for the snapshot
 
-            compare_feature_names:
+            compare_feature_names: bool
                 Determines whether or not to create/compare the dataframe's the feature names for the snapshot
 
 
-            compare_random_values:
+            compare_random_values: bool
                 Determines whether or not to create/compare the dataframe's 10 'random'
                 values found on each feature. As long as the same dataframe is passed the random values should be the same.
                 Note:
@@ -82,20 +82,19 @@ class DataFrameSnapshot:
             file.
 
         Args:
-            df:
+            df: pd.Dataframe
                 Pandas dataframe object.
 
-            directory_path:
+            directory_path: string
                 Output path of the dataset's.
 
-            sub_dir:
+            sub_dir: string
                 If set to True than it will visualize the given data.
 
         Raises:
             Will raise a Mismatch error if the json file didn't match upp with the
             passed dataframe snapshot; causing the program to stop in runtime.
         """
-
         if not isinstance(df, pd.DataFrame):
             raise TypeError(f"'df' must be a pandas datafram object not a {type(df)}")
 
@@ -125,6 +124,7 @@ class DataFrameSnapshot:
                                              f' the passed dataframe shape {list_shape}.'
                             break
 
+                    # Ensure feature names match up
                     if self.__compare_feature_names:
 
                         snapshot_features = set(data["feature_names"])
@@ -155,7 +155,7 @@ class DataFrameSnapshot:
                             if extra_features or missing_features:
                                 break
 
-
+                    # Ensure sudo random numbers are chosen again
                     if self.__compare_random_values:
                         compared_data = self.__create_random_values_dict(df,
                                                                          df_features)
@@ -173,6 +173,8 @@ class DataFrameSnapshot:
 
                     # Break main loop
                     break
+
+                # Error found; raise it
                 if mismatch_error is not None:
                     raise SnapshotMismatchError(f"DataFrameSnapshot has raised an error because {mismatch_error}." +
                                                 "\nThis error invoked because the directory structure saved a json file "
@@ -198,10 +200,10 @@ class DataFrameSnapshot:
             a number between 1 and 10.
 
         Args:
-            feature_name:
+            feature_name: string
                 The given feature's string name.
 
-            hash_type:
+            hash_type: int (1-10)
                 Numeric value to determine which.
 
         Returns:
@@ -252,10 +254,10 @@ class DataFrameSnapshot:
             generated.
 
         Args:
-            df:
+            df: pd.Dataframe
                 Pandas dataframe object
 
-            df_features:
+            df_features: DataFrameTypes from eflow
                 DataFrameTypes object; organizes feature types into groups.
 
         Returns:
@@ -323,7 +325,7 @@ class DataFrameSnapshot:
             the arguments when the object was first inited.
 
         Args:
-            df:
+            df: pd.Dataframe
                 Pandas dataframe object
 
         Returns:
@@ -358,10 +360,10 @@ class DataFrameSnapshot:
             Creates a json file based on the dataframe's generated snapshot dict.
 
         Args:
-            df:
+            df: pd.Dataframe
                 Pandas Dataframe object
 
-            output_folder_path:
+            output_folder_path: string
                 Output path the json object will move to.
         """
         output_folder_path = correct_directory_path(output_folder_path)

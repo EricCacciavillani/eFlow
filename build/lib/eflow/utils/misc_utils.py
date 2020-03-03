@@ -1,5 +1,7 @@
 # General/Misc somethings that don't quite fit it the other utils
 import itertools
+import inspect
+from eflow.utils.sys_utils import write_object_text_to_file
 
 __author__ = "Eric Cacciavillani"
 __copyright__ = "Copyright 2019, eFlow"
@@ -7,6 +9,18 @@ __credits__ = ["Eric Cacciavillani"]
 __license__ = "MIT"
 __maintainer__ = "EricCacciavillani"
 __email__ = "eric.cacciavillani@gmail.com"
+
+
+def get_parameters(f):
+    """
+    Desc:
+        Get a the parameters of a given function definition
+
+    Returns:
+        Gives back the function's set of parameters
+    """
+    return set(inspect.getfullargspec(f)[0])
+
 
 def string_condtional(given_val,
                       full_condtional):
@@ -26,6 +40,12 @@ def string_condtional(given_val,
     Note:
         Currently only handles and conditionals (no 'or' statements yet)
     """
+
+    try:
+        given_val = float(given_val)
+    except Exception as _:
+        return False
+
     condtional_returns = []
     operators = [i for i in full_condtional.split(" ")
                  if i == "or" or i == "and"]
