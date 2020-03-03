@@ -1,0 +1,16 @@
+jupyterlab
+numpy
+pandas
+missingno
+matplotlib
+seaborn
+sklearn
+kneed
+Pillow
+tqdm
+python-dateutil
+scikit-plot
+scipy
+ipywidgets
+ipython_blocking
+nltk
