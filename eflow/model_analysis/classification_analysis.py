@@ -21,6 +21,7 @@ import copy
 import pandas as pd
 from IPython.display import display
 import matplotlib.pyplot as plt
+import seaborn as sns
 
 __author__ = "Eric Cacciavillani"
 __copyright__ = "Copyright 2019, eFlow"
@@ -110,6 +111,8 @@ class ClassificationAnalysis(ModelAnalysis):
         if self.__target_feature in self.__feature_order:
             self.__feature_order.remove(self.__target_feature)
 
+        del feature_order
+        del target_feature
 
         self.__model = copy.deepcopy(model)
 
@@ -179,6 +182,18 @@ class ClassificationAnalysis(ModelAnalysis):
                     self.__pred_funcs_types[pred_name] = "Predictions"
         else:
             raise RequiresPredictionMethods("This object requires you to pass the prediction methods in a dict with the name of the method as the key.")
+
+
+        try:
+            feature_importances = model.feature_importances_
+
+            self.graph_model_importances(copy.deepcopy(self.__feature_order),
+                                         feature_importances,
+                                         display_visuals=False)
+
+        except AttributeError:
+            pass
+
 
     def get_predictions_names(self):
         return self.__pred_funcs_dict.keys()
@@ -290,8 +305,6 @@ class ClassificationAnalysis(ModelAnalysis):
                 first_iteration = False
 
                 for thresholds in thresholds_matrix:
-
-                    print(thresholds_matrix)
 
                     print(f"Now running classification on {pred_name}", end='')
                     if pred_type == "Predictions":
@@ -1442,6 +1455,46 @@ class ClassificationAnalysis(ModelAnalysis):
                 self.generate_matrix_meta_data(X,
                                                dataset_name + "/_Extras")
 
+    def graph_model_importances(self,
+                                feature_order,
+                                feature_importances,
+                                display_visuals=True):
+
+        feature_importances, feature_order = zip(
+            *sorted(zip(feature_importances, feature_order), reverse=True))
+        feature_order = list(feature_order)
+
+        plt.figure(figsize=(20, 10))
+
+        palette = "PuBu"
+
+        # Color ranking
+        rank_list = np.argsort(-np.array(feature_importances)).argsort()
+        pal = sns.color_palette(palette, len(feature_importances))
+        palette = np.array(pal[::-1])[rank_list]
+
+        plt.clf()
+
+        plt.title("Feature Importances")
+
+        ax = sns.barplot(x=feature_importances,
+                         y=feature_order,
+                         palette=palette,
+                         order=feature_order)
+
+        self.save_plot("Feature Importances",
+                       "_Extras")
+
+        pickle_object_to_file(dict(zip(feature_order, feature_importances)),
+                              self.folder_path + "/_Extras",
+                              "Feature Importances")
+
+        if self.__notebook_mode and display_visuals:
+            plt.show()
+
+        plt.close("all")
+
+
 
     def __get_model_prediction(self,
                                pred_name,
@@ -1539,6 +1592,7 @@ class ClassificationAnalysis(ModelAnalysis):
             return model_output
         else:
             raise ProbasNotPossible
+
 
     def __create_sub_dir_with_thresholds(self,
                                          pred_name,

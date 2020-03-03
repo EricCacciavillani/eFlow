@@ -164,17 +164,25 @@ def pickle_object_to_file(obj,
         filename: string
              Pickle file's name.
     """
-    directory_path = correct_directory_path(directory_path)
-    check_if_directory_exists(directory_path)
+    try:
+        directory_path = correct_directory_path(directory_path)
+        check_if_directory_exists(directory_path)
 
-    # Ensures no file extensions in filename
-    filename = convert_to_filename(filename,
-                                   remove_file_extension=remove_file_extension)
-    file_dir = f'{directory_path}{filename}.pkl'
-    list_pickle = open(file_dir, 'wb')
-    pickle.dump(obj,
-                list_pickle)
-    list_pickle.close()
+        # Ensures no file extensions in filename
+        filename = convert_to_filename(filename,
+                                       remove_file_extension=remove_file_extension)
+        file_dir = f'{directory_path}{filename}.pkl'
+        list_pickle = open(file_dir, 'wb')
+        pickle.dump(obj,
+                    list_pickle)
+    finally:
+        list_pickle.close()
+
+    return file_dir
+
+def load_pickle_object(file_path):
+    with open(file_path, 'rb') as handle:
+        return pickle.load(handle)
 
 def dict_to_json_file(dict_obj,
                       directory_path,

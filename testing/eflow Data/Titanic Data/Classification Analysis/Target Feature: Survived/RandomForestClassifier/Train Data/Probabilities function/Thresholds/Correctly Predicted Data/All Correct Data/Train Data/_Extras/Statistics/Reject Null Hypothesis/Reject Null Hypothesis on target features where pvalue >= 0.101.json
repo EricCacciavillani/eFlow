@@ -1,0 +1,240 @@
+{
+  "Survived": {
+    "0 -> 1": {
+      "Embarked_Queenstown": {
+        "Kolmogorov-Smirnov statistic": {
+          "P-Value": 0.9999999968891939,
+          "Statistic": 0.02035693463755911
+        }
+      }
+    },
+    "0 -> All": {
+      "Age": {
+        "Kolmogorov-Smirnov statistic": {
+          "P-Value": 0.6729224923299555,
+          "Statistic": 0.04841865613311721
+        }
+      },
+      "SibSp": {
+        "Kolmogorov-Smirnov statistic": {
+          "P-Value": 0.8130124390540191,
+          "Statistic": 0.04250140324924329
+        }
+      },
+      "Parch": {
+        "Kolmogorov-Smirnov statistic": {
+          "P-Value": 0.3642861273348159,
+          "Statistic": 0.06195804415907338
+        }
+      },
+      "Pclass_1": {
+        "Kolmogorov-Smirnov statistic": {
+          "P-Value": 0.12398489993085682,
+          "Statistic": 0.07957341223003846
+        }
+      },
+      "Pclass_2": {
+        "Kolmogorov-Smirnov statistic": {
+          "P-Value": 0.7142428819542489,
+          "Statistic": 0.04673475704116373
+        }
+      },
+      "Embarked_Cherbourg": {
+        "Kolmogorov-Smirnov statistic": {
+          "P-Value": 0.6574003206084191,
+          "Statistic": 0.04904815112076337
+        }
+      },
+      "Embarked_Queenstown": {
+        "Kolmogorov-Smirnov statistic": {
+          "P-Value": 1.0,
+          "Statistic": 0.0065939599955935355
+        }
+      },
+      "Embarked_Southampton": {
+        "Kolmogorov-Smirnov statistic": {
+          "P-Value": 0.4983685099855132,
+          "Statistic": 0.055642111116356904
+        }
+      }
+    },
+    "1 -> All": {
+      "Age": {
+        "Kolmogorov-Smirnov statistic": {
+          "P-Value": 0.1296967811093358,
+          "Statistic": 0.10105986948714579
+        }
+      },
+      "SibSp": {
+        "Kolmogorov-Smirnov statistic": {
+          "P-Value": 0.24071962270306013,
+          "Statistic": 0.08870932422371129
+        }
+      },
+      "Pclass_2": {
+        "Kolmogorov-Smirnov statistic": {
+          "P-Value": 0.1559772965309394,
+          "Statistic": 0.09754521963824289
+        }
+      },
+      "Embarked_Cherbourg": {
+        "Kolmogorov-Smirnov statistic": {
+          "P-Value": 0.12087530412019742,
+          "Statistic": 0.10237375728112819
+        }
+      },
+      "Embarked_Queenstown": {
+        "Kolmogorov-Smirnov statistic": {
+          "P-Value": 1.0,
+          "Statistic": 0.013762974641965577
+        }
+      }
+    },
+    "P-Values": {
+      "Age": {
+        "Kolmogorov-Smirnov statistic": {
+          "All pvalues": [
+            0.1296967811093358,
+            0.6729224923299555
+          ],
+          "Pvalues Summary": {
+            "count": 2.0,
+            "mean": 0.40130963671964565,
+            "std": 0.38411858411898536,
+            "min": 0.1296967811093358,
+            "25%": 0.26550320891449075,
+            "50%": 0.40130963671964565,
+            "75%": 0.5371160645248007,
+            "max": 0.6729224923299555,
+            "var": 0.14754708666557403
+          }
+        }
+      },
+      "SibSp": {
+        "Kolmogorov-Smirnov statistic": {
+          "All pvalues": [
+            0.24071962270306013,
+            0.8130124390540191
+          ],
+          "Pvalues Summary": {
+            "count": 2.0,
+            "mean": 0.5268660308785396,
+            "std": 0.40467213126611057,
+            "min": 0.24071962270306013,
+            "25%": 0.38379282679079985,
+            "50%": 0.5268660308785396,
+            "75%": 0.6699392349662794,
+            "max": 0.8130124390540191,
+            "var": 0.1637595338234562
+          }
+        }
+      },
+      "Parch": {
+        "Kolmogorov-Smirnov statistic": {
+          "All pvalues": [
+            0.3642861273348159
+          ],
+          "Pvalues Summary": {}
+        }
+      },
+      "Fare": {
+        "Kolmogorov-Smirnov statistic": {
+          "All pvalues": [],
+          "Pvalues Summary": {}
+        }
+      },
+      "Pclass_1": {
+        "Kolmogorov-Smirnov statistic": {
+          "All pvalues": [
+            0.12398489993085682
+          ],
+          "Pvalues Summary": {}
+        }
+      },
+      "Pclass_2": {
+        "Kolmogorov-Smirnov statistic": {
+          "All pvalues": [
+            0.1559772965309394,
+            0.7142428819542489
+          ],
+          "Pvalues Summary": {
+            "count": 2.0,
+            "mean": 0.43511008924259414,
+            "std": 0.3947533811559,
+            "min": 0.1559772965309394,
+            "25%": 0.29554369288676674,
+            "50%": 0.43511008924259414,
+            "75%": 0.5746764855984215,
+            "max": 0.7142428819542489,
+            "var": 0.15583023193401524
+          }
+        }
+      },
+      "Pclass_3": {
+        "Kolmogorov-Smirnov statistic": {
+          "All pvalues": [],
+          "Pvalues Summary": {}
+        }
+      },
+      "Embarked_Cherbourg": {
+        "Kolmogorov-Smirnov statistic": {
+          "All pvalues": [
+            0.12087530412019742,
+            0.6574003206084191
+          ],
+          "Pvalues Summary": {
+            "count": 2.0,
+            "mean": 0.3891378123643083,
+            "std": 0.37938047743504577,
+            "min": 0.12087530412019742,
+            "25%": 0.2550065582422528,
+            "50%": 0.3891378123643083,
+            "75%": 0.5232690664863637,
+            "max": 0.6574003206084191,
+            "var": 0.14392954665884328
+          }
+        }
+      },
+      "Embarked_Queenstown": {
+        "Kolmogorov-Smirnov statistic": {
+          "All pvalues": [
+            0.9999999968891939,
+            1.0,
+            1.0
+          ],
+          "Pvalues Summary": {
+            "count": 3.0,
+            "mean": 0.9999999989630647,
+            "std": 1.7960247145175748e-09,
+            "min": 0.9999999968891939,
+            "25%": 0.999999998444597,
+            "50%": 1.0,
+            "75%": 1.0,
+            "max": 1.0,
+            "var": 3.225704775157936e-18
+          }
+        }
+      },
+      "Embarked_Southampton": {
+        "Kolmogorov-Smirnov statistic": {
+          "All pvalues": [
+            0.4983685099855132
+          ],
+          "Pvalues Summary": {}
+        }
+      },
+      "Sex_female": {
+        "Kolmogorov-Smirnov statistic": {
+          "All pvalues": [],
+          "Pvalues Summary": {}
+        }
+      },
+      "Sex_male": {
+        "Kolmogorov-Smirnov statistic": {
+          "All pvalues": [],
+          "Pvalues Summary": {}
+        }
+      }
+    }
+  }
+}

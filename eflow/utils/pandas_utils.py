@@ -276,6 +276,11 @@ def generate_entropy_table(df,
     entropy_table.sort_values(by=["Entropy"],
                               ascending=True,
                               inplace=True)
+
+    create_dir_structure(output_folder_path,
+                         sub_dir)
+
+
     pickle_object_to_file(entropy_table,
                           output_folder_path + sub_dir,
                           file_name)

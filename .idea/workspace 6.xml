@@ -1,0 +1,422 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="176f923e-01b7-4494-a9b9-f3ac221a54d0" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="CoverageDataManager">
+    <SUITE FILE_PATH="coverage/eFlow$dataframe_snapshot.coverage" NAME="dataframe_snapshot Coverage Results" MODIFIED="1569440910365" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/eflow/_hidden/objects" />
+    <SUITE FILE_PATH="coverage/eFlow$cluster_master.coverage" NAME="cluster_master Coverage Results" MODIFIED="1581531457825" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/eflow/auto_modeler" />
+    <SUITE FILE_PATH="coverage/eFlow$sys_utils.coverage" NAME="sys_utils Coverage Results" MODIFIED="1569435156328" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/eflow/utils" />
+    <SUITE FILE_PATH="coverage/eFlow$feature_analysis.coverage" NAME="feature_analysis Coverage Results" MODIFIED="1581042885229" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/eflow/data_analysis" />
+  </component>
+  <component name="FileEditorManager">
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/eflow/auto_modeler/cluster_master.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="450">
+              <caret line="285" column="38" selection-start-line="285" selection-start-column="8" selection-end-line="285" selection-end-column="38" />
+              <folding>
+                <element signature="e#1#53#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/eflow/model_analysis/classification_analysis.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="64">
+              <caret line="1456" column="31" selection-start-line="1456" selection-start-column="8" selection-end-line="1456" selection-end-column="31" />
+              <folding>
+                <element signature="e#0#35#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/eflow/utils/sys_utils.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="6">
+              <caret line="122" column="38" selection-start-line="122" selection-start-column="30" selection-end-line="122" selection-end-column="38" />
+              <folding>
+                <element signature="e#0#86#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/eflow/utils/math_utils.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="660">
+              <caret line="46" column="22" selection-start-line="46" selection-start-column="4" selection-end-line="46" selection-end-column="22" />
+              <folding>
+                <element signature="e#0#23#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/eflow/utils/pandas_utils.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-949">
+              <caret line="224" column="40" selection-start-line="224" selection-start-column="20" selection-end-line="224" selection-end-column="40" />
+              <folding>
+                <element signature="e#0#61#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/eflow/data_pipeline_segments/feature_data_cleaner.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="10680">
+              <caret line="716" column="57" selection-start-line="716" selection-start-column="57" selection-end-line="716" selection-end-column="57" />
+              <folding>
+                <element signature="e#0#64#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/eflow/data_pipeline_segments/data_encoder.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="4605">
+              <caret line="315" column="20" selection-start-line="315" selection-start-column="8" selection-end-line="315" selection-end-column="20" />
+              <folding>
+                <element signature="e#0#60#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/eflow/utils/misc_utils.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="165">
+              <caret line="13" column="18" selection-start-line="13" selection-start-column="4" selection-end-line="13" selection-end-column="18" />
+              <folding>
+                <element signature="e#66#82#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/eflow/utils/multi_threading.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="285">
+              <caret line="19" column="18" selection-start-line="19" selection-start-column="18" selection-end-line="19" selection-end-column="18" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/eflow/utils/modeling_utils.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="292">
+              <caret line="48" column="30" selection-start-line="48" selection-start-column="24" selection-end-line="48" selection-end-column="30" />
+              <folding>
+                <element signature="e#0#48#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
+  </component>
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectView">
+    <navigator proportions="" version="1">
+      <foldersAlwaysOnTop value="true" />
+    </navigator>
+    <panes>
+      <pane id="Scope" />
+      <pane id="ProjectPane">
+        <subPane>
+          <expand>
+            <path>
+              <item name="eFlow" type="b2602c69:ProjectViewProjectNode" />
+              <item name="eFlow" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="eFlow" type="b2602c69:ProjectViewProjectNode" />
+              <item name="eFlow" type="462c0819:PsiDirectoryNode" />
+              <item name="Backlogged Code" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="eFlow" type="b2602c69:ProjectViewProjectNode" />
+              <item name="eFlow" type="462c0819:PsiDirectoryNode" />
+              <item name="eflow" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="eFlow" type="b2602c69:ProjectViewProjectNode" />
+              <item name="eFlow" type="462c0819:PsiDirectoryNode" />
+              <item name="eflow" type="462c0819:PsiDirectoryNode" />
+              <item name="_hidden" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="eFlow" type="b2602c69:ProjectViewProjectNode" />
+              <item name="eFlow" type="462c0819:PsiDirectoryNode" />
+              <item name="eflow" type="462c0819:PsiDirectoryNode" />
+              <item name="_hidden" type="462c0819:PsiDirectoryNode" />
+              <item name="general_objects" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="eFlow" type="b2602c69:ProjectViewProjectNode" />
+              <item name="eFlow" type="462c0819:PsiDirectoryNode" />
+              <item name="eflow" type="462c0819:PsiDirectoryNode" />
+              <item name="_hidden" type="462c0819:PsiDirectoryNode" />
+              <item name="parent_objects" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="eFlow" type="b2602c69:ProjectViewProjectNode" />
+              <item name="eFlow" type="462c0819:PsiDirectoryNode" />
+              <item name="eflow" type="462c0819:PsiDirectoryNode" />
+              <item name="_hidden" type="462c0819:PsiDirectoryNode" />
+              <item name="widgets" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="eFlow" type="b2602c69:ProjectViewProjectNode" />
+              <item name="eFlow" type="462c0819:PsiDirectoryNode" />
+              <item name="eflow" type="462c0819:PsiDirectoryNode" />
+              <item name="auto_modeler" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="eFlow" type="b2602c69:ProjectViewProjectNode" />
+              <item name="eFlow" type="462c0819:PsiDirectoryNode" />
+              <item name="eflow" type="462c0819:PsiDirectoryNode" />
+              <item name="data_analysis" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="eFlow" type="b2602c69:ProjectViewProjectNode" />
+              <item name="eFlow" type="462c0819:PsiDirectoryNode" />
+              <item name="eflow" type="462c0819:PsiDirectoryNode" />
+              <item name="data_pipeline_segments" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="eFlow" type="b2602c69:ProjectViewProjectNode" />
+              <item name="eFlow" type="462c0819:PsiDirectoryNode" />
+              <item name="eflow" type="462c0819:PsiDirectoryNode" />
+              <item name="foundation" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="eFlow" type="b2602c69:ProjectViewProjectNode" />
+              <item name="eFlow" type="462c0819:PsiDirectoryNode" />
+              <item name="eflow" type="462c0819:PsiDirectoryNode" />
+              <item name="model_analysis" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="eFlow" type="b2602c69:ProjectViewProjectNode" />
+              <item name="eFlow" type="462c0819:PsiDirectoryNode" />
+              <item name="eflow" type="462c0819:PsiDirectoryNode" />
+              <item name="utils" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="eFlow" type="b2602c69:ProjectViewProjectNode" />
+              <item name="eFlow" type="462c0819:PsiDirectoryNode" />
+              <item name="eflow" type="462c0819:PsiDirectoryNode" />
+              <item name="widgets" type="462c0819:PsiDirectoryNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
+    </panes>
+  </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="178261e3-0830-4d8e-91ef-8172f5216aca" name="Default Changelist" comment="" />
+      <created>1569352017357</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1569352017357</updated>
+      <workItem from="1569352018806" duration="26703000" />
+      <workItem from="1569597870180" duration="2000" />
+      <workItem from="1569601136916" duration="15000" />
+      <workItem from="1569601155024" duration="494000" />
+      <workItem from="1569602415329" duration="10000" />
+      <workItem from="1569603545222" duration="384000" />
+      <workItem from="1569856023072" duration="326000" />
+      <workItem from="1569872527063" duration="3490000" />
+      <workItem from="1569939584979" duration="92000" />
+      <workItem from="1569949465324" duration="15949000" />
+      <workItem from="1570045569413" duration="10000" />
+      <workItem from="1570387803559" duration="18448000" />
+      <workItem from="1570545205929" duration="552000" />
+      <workItem from="1570556368213" duration="8057000" />
+      <workItem from="1570572157242" duration="160000" />
+      <workItem from="1570631214554" duration="493000" />
+      <workItem from="1570656062215" duration="19989000" />
+      <workItem from="1570851358250" duration="509000" />
+      <workItem from="1570852256892" duration="328000" />
+      <workItem from="1570854234913" duration="14966000" />
+      <workItem from="1571058432229" duration="162000" />
+      <workItem from="1571080294254" duration="85000" />
+      <workItem from="1571081188605" duration="21000" />
+      <workItem from="1571145721974" duration="26506000" />
+      <workItem from="1571185516456" duration="98000" />
+      <workItem from="1571185736035" duration="9572000" />
+      <workItem from="1571250292545" duration="213000" />
+      <workItem from="1571251181908" duration="2598000" />
+      <workItem from="1571258284319" duration="3255000" />
+      <workItem from="1571279922584" duration="16994000" />
+      <workItem from="1571332608548" duration="4000" />
+      <workItem from="1571340704433" duration="5434000" />
+      <workItem from="1571436868722" duration="345000" />
+      <workItem from="1571440255398" duration="39919000" />
+      <workItem from="1572010704662" duration="1944000" />
+      <workItem from="1572020199833" duration="12024000" />
+      <workItem from="1572146080302" duration="295000" />
+      <workItem from="1572269885903" duration="36695000" />
+      <workItem from="1572616074028" duration="26048000" />
+      <workItem from="1572727601786" duration="9917000" />
+      <workItem from="1572829648273" duration="329000" />
+      <workItem from="1572876086736" duration="20597000" />
+      <workItem from="1573140991177" duration="22936000" />
+      <workItem from="1573246269071" duration="720000" />
+      <workItem from="1573248357114" duration="7413000" />
+      <workItem from="1573420874196" duration="14325000" />
+      <workItem from="1573571264125" duration="121000" />
+      <workItem from="1573571585497" duration="194000" />
+      <workItem from="1573572147026" duration="21064000" />
+      <workItem from="1573830156390" duration="17732000" />
+      <workItem from="1574094489573" duration="4235000" />
+      <workItem from="1574172869539" duration="1358000" />
+      <workItem from="1574196436351" duration="141000" />
+      <workItem from="1574208380474" duration="1299000" />
+      <workItem from="1574259849814" duration="22112000" />
+      <workItem from="1574345577055" duration="166000" />
+      <workItem from="1574346673322" duration="1130000" />
+      <workItem from="1574351748113" duration="5976000" />
+      <workItem from="1574524239402" duration="4249000" />
+      <workItem from="1574700445241" duration="24147000" />
+      <workItem from="1574800645424" duration="421000" />
+      <workItem from="1575004907870" duration="24882000" />
+      <workItem from="1575327990219" duration="7000" />
+      <workItem from="1575389170186" duration="1752000" />
+      <workItem from="1575572491134" duration="505000" />
+      <workItem from="1575655763374" duration="3815000" />
+      <workItem from="1575909627779" duration="3628000" />
+      <workItem from="1575917230747" duration="7407000" />
+      <workItem from="1575988657326" duration="2202000" />
+      <workItem from="1576078362671" duration="43755000" />
+      <workItem from="1576507290916" duration="54144000" />
+      <workItem from="1577730742153" duration="3085000" />
+      <workItem from="1577764408996" duration="19618000" />
+      <workItem from="1578003257758" duration="19967000" />
+      <workItem from="1578339383996" duration="978000" />
+      <workItem from="1578677815769" duration="13516000" />
+      <workItem from="1578951865823" duration="5294000" />
+      <workItem from="1579035079994" duration="13407000" />
+      <workItem from="1579277143713" duration="189000" />
+      <workItem from="1579284773377" duration="3003000" />
+      <workItem from="1579535889420" duration="366000" />
+      <workItem from="1580408809771" duration="593000" />
+      <workItem from="1580486544973" duration="3941000" />
+      <workItem from="1580500103749" duration="11698000" />
+      <workItem from="1580764372752" duration="583000" />
+      <workItem from="1580768196049" duration="6000" />
+      <workItem from="1580914551770" duration="7121000" />
+      <workItem from="1581002020674" duration="18008000" />
+      <workItem from="1581033982039" duration="19286000" />
+      <workItem from="1581195030990" duration="10950000" />
+      <workItem from="1581271022478" duration="3615000" />
+      <workItem from="1581866481337" duration="22788000" />
+      <workItem from="1582233119277" duration="11000" />
+      <workItem from="1582240277392" duration="1494000" />
+      <workItem from="1582243599807" duration="8159000" />
+      <workItem from="1582324402749" duration="15900000" />
+      <workItem from="1582640380645" duration="1428000" />
+      <workItem from="1582666595975" duration="2185000" />
+      <workItem from="1582822647674" duration="5156000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TimeTrackingManager">
+    <option name="totallyTimeSpent" value="2000" />
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="0" y="0" width="1680" height="1050" extended-state="0" />
+    <layout>
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.2808303" />
+      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
+      <window_info id="Favorites" order="2" side_tool="true" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.32673267" />
+      <window_info anchor="bottom" id="Run" order="2" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="bottom" id="TODO" order="6" />
+      <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Version Control" order="8" />
+      <window_info anchor="bottom" id="Database Changes" order="9" />
+      <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" />
+      <window_info anchor="bottom" id="Concurrent Activities Diagram" order="11" weight="0.32834226" />
+      <window_info anchor="bottom" id="Terminal" order="12" />
+      <window_info anchor="bottom" id="Python Console" order="13" />
+      <window_info anchor="bottom" id="Thumbnails" order="14" weight="0.32959184" />
+      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="right" id="R Graphics" order="3" />
+      <window_info anchor="right" id="SciView" order="4" />
+      <window_info anchor="right" id="R Packages" order="5" />
+      <window_info anchor="right" id="Database" order="6" />
+    </layout>
+    <layout-to-restore>
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.29818955" />
+      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
+      <window_info id="Favorites" order="2" side_tool="true" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.32673267" />
+      <window_info anchor="bottom" id="Run" order="2" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="bottom" id="TODO" order="6" />
+      <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Version Control" order="8" />
+      <window_info anchor="bottom" id="Database Changes" order="9" />
+      <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" />
+      <window_info anchor="bottom" id="Concurrent Activities Diagram" order="11" weight="0.32834226" />
+      <window_info anchor="bottom" id="Terminal" order="12" />
+      <window_info anchor="bottom" id="Python Console" order="13" />
+      <window_info anchor="bottom" id="Thumbnails" order="14" weight="0.32959184" />
+      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="right" id="R Graphics" order="3" />
+      <window_info anchor="right" id="SciView" order="4" />
+      <window_info anchor="right" id="R Packages" order="5" />
+      <window_info anchor="right" id="Database" order="6" />
+    </layout-to-restore>
+  </component>
+</project>

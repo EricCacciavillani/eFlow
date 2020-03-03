@@ -738,7 +738,7 @@ class FeatureDataCleaner(DataPipelineSegment):
                                 zscore_val,
                                 _add_to_que=True):
 
-        z_score_return = stats.zscore(((df[feature_name].dropna())))
+        z_score_return = 2
 
         print("After the zscore applied of {0} to -{0}".format(zscore_val))
 

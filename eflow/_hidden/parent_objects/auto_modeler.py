@@ -108,7 +108,13 @@ class AutoModeler(FileOutput):
 
         Args:
             df: pd.Dataframe
-                Pandas DataFrame object of all data.\
+                Pandas DataFrame object of all data.
+
+            sub_dir:
+                Directory to generate on top of the already made directory (self.folder_path).
+
+            overwrite_full_path:
+                A pre defined directory that already exists.
 
             df_features: DataFrameTypes from eflow
                 DataFrameTypes object.

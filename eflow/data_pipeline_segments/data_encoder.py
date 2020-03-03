@@ -316,7 +316,7 @@ class DataEncoder(DataPipelineSegment):
     def make_dummies(self,
                      df,
                      df_features,
-                     qualtative_features=[],
+                     qualitative_features=[],
                      _feature_values_dict=None,
                      _add_to_que=True):
         """
@@ -343,15 +343,15 @@ class DataEncoder(DataPipelineSegment):
                 to the pipeline segment.
         """
         # Convert to the correct types
-        if isinstance(qualtative_features,str):
-            qualtative_features = [qualtative_features]
+        if isinstance(qualitative_features,str):
+            qualtative_features = [qualitative_features]
 
         if not _feature_values_dict:
             _feature_values_dict = dict()
 
         pd.set_option('mode.chained_assignment', None)
 
-        for cat_feature in qualtative_features:
+        for cat_feature in qualitative_features:
 
             if cat_feature not in df_features.string_features() | df_features.categorical_features():
                 raise UnsatisfiedRequirments(f"No feature named '{cat_feature}' in categorical or string features.")
@@ -392,7 +392,7 @@ class DataEncoder(DataPipelineSegment):
     def revert_dummies(self,
                        df,
                        df_features,
-                       qualtative_features=[],
+                       qualitative_features=[],
                        _add_to_que=True):
         """
         Desc:
@@ -405,7 +405,7 @@ class DataEncoder(DataPipelineSegment):
             df_features: DataFrameTypes from eflow
                 DataFrameTypes object.
 
-            qualtative_features: collection of strings
+            qualitative_features: collection of strings
                 Feature names to convert the dummy features into original feature
                 data.
 
@@ -413,11 +413,16 @@ class DataEncoder(DataPipelineSegment):
                 Hidden variable to determine if the function should be pushed
                 to the pipeline segment.
         """
-        if isinstance(qualtative_features,str):
-            feature_name = [qualtative_features]
 
+        old_indexes = copy.deepcopy(df.index)
 
-        for feature_name in qualtative_features:
+        df.reset_index(inplace=True,
+                       drop=True)
+
+        if isinstance(qualitative_features,str):
+            feature_name = [qualitative_features]
+
+        for feature_name in qualitative_features:
             dummies_df = df[df_features.get_dummy_encoded_features()[feature_name]]
 
             # Create new series from dummy data
@@ -450,6 +455,7 @@ class DataEncoder(DataPipelineSegment):
             except ValueError:
                 df_features.add_new_string_feature(feature_name)
 
+        df.index = old_indexes
         if _add_to_que:
             params_dict = locals()
             parameters = get_parameters(self.revert_dummies)
