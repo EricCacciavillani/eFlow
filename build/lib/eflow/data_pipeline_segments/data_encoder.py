@@ -414,48 +414,41 @@ class DataEncoder(DataPipelineSegment):
                 to the pipeline segment.
         """
 
-        old_indexes = copy.deepcopy(df.index)
-
         df.reset_index(inplace=True,
                        drop=True)
 
-        if isinstance(qualitative_features,str):
+        if isinstance(qualitative_features, str):
             feature_name = [qualitative_features]
 
         for feature_name in qualitative_features:
-            dummies_df = df[df_features.get_dummy_encoded_features()[feature_name]]
+            dummies_df = df[
+                df_features.get_dummy_encoded_features()[feature_name]]
+            dummies_columns = dummies_df.columns.to_list()
 
-            # Create new series from dummy data
-            tmp = dummies_df[dummies_df == 1].stack().reset_index()
-            new_series = []
-            index_count = 0
-            for val in range(0, df.shape[0]):
-                if val not in set(tmp["level_0"]):
-                    new_series.append(np.nan)
-                else:
-                    new_series.append(tmp["level_1"][index_count])
-                    index_count += 1
+            tmp_df = dummies_df[dummies_df == 1].stack().reset_index()
+            del dummies_df
 
-            # -----
-            new_series = pd.Series(new_series).str.replace(feature_name + "_", "")
-            df[feature_name] = new_series
+            df[feature_name] = np.full([len(df)], np.nan)
+            df[feature_name].iloc[tmp_df["level_0"]] = tmp_df[
+                "level_1"].values.tolist()
 
             # Remove dummy features
-            df.drop(columns=dummies_df.columns.to_list(),
+            df.drop(columns=dummies_columns,
                     inplace=True)
+
+            df[feature_name] = df[feature_name].str[len(feature_name) + 1:]
 
             # Remove dummy encoded relationship
             df_features.remove_feature_from_dummy_encoded(feature_name)
 
             # Add feature back to original set in df_features
             try:
-                pd.to_numeric(new_series.dropna())
+                pd.to_numeric(df[feature_name].dropna())
                 df_features.add_new_categorical_feature(feature_name)
 
             except ValueError:
                 df_features.add_new_string_feature(feature_name)
 
-        df.index = old_indexes
         if _add_to_que:
             params_dict = locals()
             parameters = get_parameters(self.revert_dummies)

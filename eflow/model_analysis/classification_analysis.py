@@ -5,6 +5,7 @@ from eflow._hidden.parent_objects import ModelAnalysis
 from eflow._hidden.custom_exceptions import RequiresPredictionMethods, ProbasNotPossible, \
     UnsatisfiedRequirments
 from eflow.data_analysis import FeatureAnalysis
+from eflow.data_pipeline_segments import DataEncoder
 
 from eflow._hidden.constants import GRAPH_DEFAULTS
 
@@ -170,7 +171,10 @@ class ClassificationAnalysis(ModelAnalysis):
         # Find the 'type' of each prediction. Probabilities or Predictions
         if self.__pred_funcs_dict:
             for pred_name, pred_func in self.__pred_funcs_dict.items():
-                model_output = pred_func(self.__sample_data)[0]
+                try:
+                    model_output = pred_func(self.__sample_data)[0]
+                except Exception as e:
+                    model_output = pred_func(np.array(self.__sample_data))[0]
 
                 # Confidence / Probability (Continuous output)
                 if isinstance(model_output, list) or isinstance(model_output,
@@ -492,6 +496,10 @@ class ClassificationAnalysis(ModelAnalysis):
                                         figsize=figsize,
                                         title_fontsize=title_fontsize,
                                         text_fontsize=text_fontsize)
+        legend = plt.legend(frameon=1)
+        frame = legend.get_frame()
+        frame.set_facecolor('white')
+        frame.set_edgecolor('white')
         if save_file:
             self.save_plot(filename=filename,
                            sub_dir=sub_dir)
@@ -567,6 +575,12 @@ class ClassificationAnalysis(ModelAnalysis):
                                title_fontsize=title_fontsize,
                                text_fontsize=text_fontsize)
 
+        legend = plt.legend(frameon=1)
+        frame = legend.get_frame()
+        frame.set_facecolor('white')
+        frame.set_edgecolor('white')
+
+
         if save_file:
             self.save_plot(filename=filename,
                            sub_dir=sub_dir)
@@ -640,6 +654,12 @@ class ClassificationAnalysis(ModelAnalysis):
                                            figsize=figsize,
                                            title_fontsize=title_fontsize,
                                            text_fontsize=text_fontsize)
+
+        legend = plt.legend(frameon=1)
+        frame = legend.get_frame()
+        frame.set_facecolor('white')
+        frame.set_edgecolor('white')
+
 
         if save_file:
             self.save_plot(filename=filename,
@@ -722,6 +742,11 @@ class ClassificationAnalysis(ModelAnalysis):
                                             title_fontsize=title_fontsize,
                                             text_fontsize=text_fontsize)
 
+        legend = plt.legend(frameon=1)
+        frame = legend.get_frame()
+        frame.set_facecolor('white')
+        frame.set_edgecolor('white')
+
         if save_file:
             self.save_plot(filename=filename,
                            sub_dir=sub_dir)
@@ -798,6 +823,12 @@ class ClassificationAnalysis(ModelAnalysis):
                                       figsize=figsize,
                                       title_fontsize=title_fontsize,
                                       text_fontsize=text_fontsize)
+
+
+        legend = plt.legend(frameon=1)
+        frame = legend.get_frame()
+        frame.set_facecolor('white')
+        frame.set_edgecolor('white')
 
         if save_file:
             self.save_plot(filename=filename,
@@ -1166,8 +1197,24 @@ class ClassificationAnalysis(ModelAnalysis):
                                  sub_dir + "/Correctly Predicted Data/All Correct Data")
             output_path = f"{self.folder_path}/{sub_dir}/Correctly Predicted Data"
 
+            tmp_df_features = copy.deepcopy(self.__df_features)
+
+            data_encoder = DataEncoder(create_file=False)
+
+            data_encoder.revert_dummies(correct_df,
+                                        tmp_df_features,
+                                        qualitative_features=list(self.__df_features.get_dummy_encoded_features().keys()))
+
+            data_encoder.decode_data(correct_df,
+                                     tmp_df_features,
+                                     apply_value_representation=False)
+
+            data_encoder.apply_value_representation(correct_df,
+                                                    tmp_df_features)
+            del data_encoder
+
             # Create feature analysis
-            feature_analysis = FeatureAnalysis(self.__df_features,
+            feature_analysis = FeatureAnalysis(tmp_df_features,
                                                overwrite_full_path=output_path + "/All Correct Data")
             feature_analysis.perform_analysis(correct_df,
                                               dataset_name=dataset_name,
@@ -1197,7 +1244,7 @@ class ClassificationAnalysis(ModelAnalysis):
                         if tmp_df.shape[0]:
                             # Create feature analysis directory structure with given graphics
                             feature_analysis = FeatureAnalysis(
-                                self.__df_features,
+                                tmp_df_features,
                                 overwrite_full_path=f"/Actual and Predicted:{pred_target}")
                             feature_analysis.perform_analysis(tmp_df,
                                                               dataset_name=dataset_name,
@@ -1320,14 +1367,32 @@ class ClassificationAnalysis(ModelAnalysis):
             error_df = pd.DataFrame.from_records(X[model_predictions != y])
             error_df.columns = self.__feature_order
             error_df[self.__target_feature] = y[model_predictions != y]
+            error_df.reset_index(drop=True,
+                                 inplace=True)
 
             # Directory path
             create_dir_structure(self.folder_path,
                                  sub_dir + "/Incorrectly Predicted Data/All Incorrect Data")
             output_path = f"{self.folder_path}/{sub_dir}/Incorrectly Predicted Data"
 
+            tmp_df_features = copy.deepcopy(self.__df_features)
+
+            data_encoder = DataEncoder(create_file=False)
+
+            data_encoder.revert_dummies(error_df,
+                                        tmp_df_features,
+                                        qualitative_features=list(self.__df_features.get_dummy_encoded_features().keys()))
+
+            data_encoder.decode_data(error_df,
+                                     tmp_df_features,
+                                     apply_value_representation=False)
+
+            data_encoder.apply_value_representation(error_df,
+                                                    tmp_df_features)
+            del data_encoder
+
             # Create feature analysis
-            feature_analysis = FeatureAnalysis(self.__df_features,
+            feature_analysis = FeatureAnalysis(tmp_df_features,
                                                overwrite_full_path=output_path + "/All Incorrect Data")
             feature_analysis.perform_analysis(error_df,
                                               dataset_name=dataset_name,
@@ -1363,9 +1428,8 @@ class ClassificationAnalysis(ModelAnalysis):
                                         inplace=True)
                             if tmp_df.shape[0]:
                                 # Create feature analysis directory structure with given graphics
-                                feature_analysis = FeatureAnalysis(
-                                    self.__df_features,
-                                    overwrite_full_path=f"{output_path}/Predicted:{pred_target} Actual: {actual_target}")
+                                feature_analysis = FeatureAnalysis(tmp_df_features,
+                                                                   overwrite_full_path=f"{output_path}/Predicted:{pred_target} Actual: {actual_target}")
                                 feature_analysis.perform_analysis(tmp_df,
                                                                   dataset_name=dataset_name,
                                                                   target_features=[

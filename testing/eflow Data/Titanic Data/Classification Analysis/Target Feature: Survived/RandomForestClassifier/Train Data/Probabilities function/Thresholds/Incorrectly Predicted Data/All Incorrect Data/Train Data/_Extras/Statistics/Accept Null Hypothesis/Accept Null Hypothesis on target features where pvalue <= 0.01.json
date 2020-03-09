@@ -7,13 +7,7 @@
           "Statistic": 0.42268656716417913
         }
       },
-      "Sex_female": {
-        "Kolmogorov-Smirnov statistic": {
-          "P-Value": 0.0,
-          "Statistic": 0.9253731343283582
-        }
-      },
-      "Sex_male": {
+      "Sex": {
         "Kolmogorov-Smirnov statistic": {
           "P-Value": 0.0,
           "Statistic": 0.9253731343283582
@@ -21,13 +15,7 @@
       }
     },
     "0 -> All": {
-      "Sex_female": {
-        "Kolmogorov-Smirnov statistic": {
-          "P-Value": 3.5178604473884434e-09,
-          "Statistic": 0.6739130434782609
-        }
-      },
-      "Sex_male": {
+      "Sex": {
         "Kolmogorov-Smirnov statistic": {
           "P-Value": 3.5178604473884434e-09,
           "Statistic": 0.6739130434782609
@@ -62,62 +50,19 @@
           "Pvalues Summary": {}
         }
       },
-      "Pclass_1": {
+      "Pclass": {
         "Kolmogorov-Smirnov statistic": {
           "All pvalues": [],
           "Pvalues Summary": {}
         }
       },
-      "Pclass_2": {
+      "Embarked": {
         "Kolmogorov-Smirnov statistic": {
           "All pvalues": [],
           "Pvalues Summary": {}
         }
       },
-      "Pclass_3": {
-        "Kolmogorov-Smirnov statistic": {
-          "All pvalues": [],
-          "Pvalues Summary": {}
-        }
-      },
-      "Embarked_Cherbourg": {
-        "Kolmogorov-Smirnov statistic": {
-          "All pvalues": [],
-          "Pvalues Summary": {}
-        }
-      },
-      "Embarked_Queenstown": {
-        "Kolmogorov-Smirnov statistic": {
-          "All pvalues": [],
-          "Pvalues Summary": {}
-        }
-      },
-      "Embarked_Southampton": {
-        "Kolmogorov-Smirnov statistic": {
-          "All pvalues": [],
-          "Pvalues Summary": {}
-        }
-      },
-      "Sex_female": {
-        "Kolmogorov-Smirnov statistic": {
-          "All pvalues": [
-            0.0,
-            3.5178604473884434e-09
-          ],
-          "Pvalues Summary": {
-            "count": 2.0,
-            "mean": 1.7589302236942217e-09,
-            "std": 2.4875029776163103e-09,
-            "min": 0.0,
-            "25%": 8.794651118471108e-10,
-            "50%": 1.7589302236942217e-09,
-            "75%": 2.6383953355413325e-09,
-            "max": 3.5178604473884434e-09,
-            "var": 6.1876710636500095e-18
-          }
-        }
-      },
-      "Sex_male": {
+      "Sex": {
         "Kolmogorov-Smirnov statistic": {
           "All pvalues": [
             0.0,

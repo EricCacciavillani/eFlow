@@ -818,13 +818,10 @@ class FeatureAnalysis(DataAnalysis):
             if self.__notebook_mode and display_visuals:
                 plt.show()
 
-            plt.close('all')
-
         except SnapshotMismatchError as e:
             raise e
 
         except Exception as e:
-            plt.close('all')
 
             if suppress_runtime_errors:
                 warnings.warn(
@@ -833,6 +830,8 @@ class FeatureAnalysis(DataAnalysis):
             else:
                 raise e
 
+        finally:
+            plt.close('all')
 
     def plot_violin_graph(self,
                           df,
@@ -1051,13 +1050,10 @@ class FeatureAnalysis(DataAnalysis):
             if self.__notebook_mode and display_visuals:
                 plt.show()
 
-            plt.close('all')
-
         except SnapshotMismatchError as e:
             raise e
 
         except Exception as e:
-            plt.close('all')
             warnings.filterwarnings("default")
 
             if suppress_runtime_errors:
@@ -1068,6 +1064,7 @@ class FeatureAnalysis(DataAnalysis):
                 raise e
 
         finally:
+            plt.close('all')
             warnings.filterwarnings("default")
 
     def plot_count_graph(self,
@@ -1250,20 +1247,18 @@ class FeatureAnalysis(DataAnalysis):
             if self.__notebook_mode and display_visuals:
                 plt.show()
 
-            plt.close('all')
-
         except SnapshotMismatchError as e:
             raise e
 
         except Exception as e:
-            plt.close('all')
-
             if suppress_runtime_errors:
                 warnings.warn(
                     f"Plot count graph raised an error on feature '{feature_name}':\n{str(e)}",
                     RuntimeWarning)
             else:
                 raise e
+        finally:
+            plt.close('all')
 
     def plot_pie_graph(self,
                        df,
@@ -1430,13 +1425,10 @@ class FeatureAnalysis(DataAnalysis):
             if self.__notebook_mode and display_visuals:
                 plt.show()
 
-            plt.close('all')
-
         except SnapshotMismatchError as e:
             raise e
 
         except Exception as e:
-            plt.close('all')
 
             if suppress_runtime_errors:
                 warnings.warn(
@@ -1444,6 +1436,8 @@ class FeatureAnalysis(DataAnalysis):
                     RuntimeWarning)
             else:
                 raise e
+        finally:
+            plt.close('all')
 
     def plot_ridge_graph(self,
                          df,
@@ -1655,9 +1649,10 @@ class FeatureAnalysis(DataAnalysis):
             g.set_titles("")
             g.set(yticks=[])
             g.despine(bottom=True, left=True)
-            g.fig.set_size_inches(10, 10, forward=True)
+
+            g.fig.set_size_inches(figsize[0], figsize[1], forward=True)
+
             g.fig.suptitle(f'{feature_name} by {other_feature_name}')
-            plt.figure(figsize=figsize)
 
             warnings.filterwarnings("default")
 
@@ -1675,6 +1670,9 @@ class FeatureAnalysis(DataAnalysis):
                 if self.__called_from_perform:
                     dataframe_snapshot = False
 
+                if self.__notebook_mode and display_visuals:
+                    plt.show()
+
                 self.save_plot(df=df,
                                df_features=self.__df_features,
                                filename=filename,
@@ -1683,17 +1681,10 @@ class FeatureAnalysis(DataAnalysis):
                                suppress_runtime_errors=suppress_runtime_errors,
                                meta_data=not self.__called_from_perform)
 
-            if self.__notebook_mode and display_visuals:
-                plt.show()
-
-            plt.close('all')
-
-
         except SnapshotMismatchError as e:
             raise e
 
         except Exception as e:
-            plt.close('all')
             warnings.filterwarnings("default")
 
             if suppress_runtime_errors:
@@ -1703,6 +1694,7 @@ class FeatureAnalysis(DataAnalysis):
             else:
                 raise e
         finally:
+            plt.close('all')
             warnings.filterwarnings("default")
 
     def plot_multi_bar_graph(self,
@@ -1856,13 +1848,10 @@ class FeatureAnalysis(DataAnalysis):
             if self.__notebook_mode and display_visuals:
                 plt.show()
 
-            plt.close('all')
-
         except SnapshotMismatchError as e:
             raise e
 
         except Exception as e:
-            plt.close('all')
 
             if suppress_runtime_errors:
                 warnings.warn(
@@ -1870,6 +1859,8 @@ class FeatureAnalysis(DataAnalysis):
                     RuntimeWarning)
             else:
                 raise e
+        finally:
+            plt.close('all')
 
     def statistical_analysis_on_aggregates(self,
                                            df,
@@ -2402,13 +2393,10 @@ class FeatureAnalysis(DataAnalysis):
             if self.__notebook_mode and display_visuals:
                 plt.show()
 
-            plt.close('all')
-
         except SnapshotMismatchError as e:
             raise e
 
         except Exception as e:
-            plt.close('all')
             warnings.filterwarnings("default")
 
             if suppress_runtime_errors:
@@ -2419,6 +2407,7 @@ class FeatureAnalysis(DataAnalysis):
                 raise e
 
         finally:
+            plt.close('all')
             warnings.filterwarnings("default")
 
 
@@ -2542,7 +2531,6 @@ class FeatureAnalysis(DataAnalysis):
             raise e
 
         except Exception as e:
-            plt.close('all')
 
             if suppress_runtime_errors:
                 warnings.warn(
@@ -2550,6 +2538,9 @@ class FeatureAnalysis(DataAnalysis):
                     RuntimeWarning)
             else:
                 raise e
+        finally:
+            plt.close('all')
+
 
     def descr_table(self,
                     df,
@@ -2665,7 +2656,6 @@ class FeatureAnalysis(DataAnalysis):
             raise e
 
         except Exception as e:
-            plt.close('all')
 
             if suppress_runtime_errors:
                 warnings.warn(
@@ -2673,6 +2663,9 @@ class FeatureAnalysis(DataAnalysis):
                     RuntimeWarning)
             else:
                 raise e
+
+        finally:
+            plt.close('all')
 
     def group_by_feature_value_count_table(self,
                                            df,
@@ -2800,7 +2793,6 @@ class FeatureAnalysis(DataAnalysis):
             raise e
 
         except Exception as e:
-            plt.close('all')
 
             if suppress_runtime_errors:
                 warnings.warn(
@@ -2808,6 +2800,9 @@ class FeatureAnalysis(DataAnalysis):
                     RuntimeWarning)
             else:
                 raise e
+
+        finally:
+            plt.close('all')
 
 
     def __get_feature_colors(self,
