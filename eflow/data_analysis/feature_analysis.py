@@ -4,7 +4,7 @@ from eflow.utils.pandas_utils import descr_table,value_counts_table
 from eflow._hidden.custom_exceptions import UnsatisfiedRequirments, SnapshotMismatchError
 from eflow._hidden.constants import GRAPH_DEFAULTS
 from eflow._hidden.parent_objects import DataAnalysis
-from eflow.utils.pandas_utils import check_if_feature_exists, generate_meta_data, generate_entropy_table
+from eflow.utils.pandas_utils import check_if_feature_exists, generate_meta_data, generate_entropy_table, feature_correlation_table, average_feature_correlation_table
 from eflow.utils.sys_utils import dict_to_json_file, pickle_object_to_file, create_dir_structure
 
 import warnings
@@ -81,6 +81,7 @@ class FeatureAnalysis(DataAnalysis):
                          save_file=True,
                          dataframe_snapshot=True,
                          suppress_runtime_errors=True,
+                         figsize=GRAPH_DEFAULTS.FIGSIZE,
                          aggregate_target_feature=True,
                          selected_features=None,
                          extra_tables=True,
@@ -185,6 +186,55 @@ class FeatureAnalysis(DataAnalysis):
                                    self.folder_path,
                                    f"{dataset_name}" + "/_Extras/Statistics")
 
+            corr_df = feature_correlation_table(df)
+            self.save_table_as_plot(df=df,
+                                    table=corr_df,
+                                    show_index=True,
+                                    format_float_pos=7,
+                                    df_features=self.__df_features,
+                                    filename="Correlation Table",
+                                    sub_dir=f"{dataset_name}" + "/_Extras/Statistics",
+                                    dataframe_snapshot=False,
+                                    suppress_runtime_errors=suppress_runtime_errors,
+                                    meta_data=False)
+
+
+            corr_df = average_feature_correlation_table(df)
+            self.save_table_as_plot(df=df,
+                                    table=corr_df,
+                                    show_index=True,
+                                    format_float_pos=7,
+                                    df_features=self.__df_features,
+                                    filename="Average Correlation Table",
+                                    sub_dir=f"{dataset_name}" + "/_Extras/Statistics",
+                                    dataframe_snapshot=False,
+                                    suppress_runtime_errors=suppress_runtime_errors,
+                                    meta_data=False)
+
+            # Init color ranking fo plot
+            # Ref: http://tinyurl.com/ydgjtmty
+            plt.figure(figsize=(13, 10))
+            pal = sns.color_palette("GnBu_d", len(corr_df["Average Correlations"]))
+            rank = np.array(corr_df["Average Correlations"]).argsort().argsort()
+            ax = sns.barplot(y=corr_df.index.tolist(), x=corr_df["Average Correlations"],
+                             palette=np.array(pal[::-1])[rank])
+            plt.xticks(rotation=0, fontsize=15)
+            plt.yticks(fontsize=15)
+            plt.xlabel("Features", fontsize=20, labelpad=20)
+            plt.ylabel("Correlation Average", fontsize=20, labelpad=20)
+            plt.title("Average Feature Correlation", fontsize=15)
+            self.save_plot(df=df,
+                           df_features=self.__df_features,
+                           filename="Average Correlation Rank Graph",
+                           sub_dir=f"{dataset_name}" + "/_Extras/Statistics",
+                           dataframe_snapshot=False,
+                           suppress_runtime_errors=suppress_runtime_errors,
+                           meta_data=False)
+
+            plt.close("all")
+
+            del corr_df
+
             # Set to true to represent the function call was made with perform
             self.__called_from_perform = True
 
@@ -219,6 +269,7 @@ class FeatureAnalysis(DataAnalysis):
                                         save_file=save_file,
                                         dataframe_snapshot=dataframe_snapshot,
                                         suppress_runtime_errors=suppress_runtime_errors,
+                                        figsize=figsize,
                                         display_print=display_print,
                                         extra_tables=extra_tables)
 
@@ -271,6 +322,7 @@ class FeatureAnalysis(DataAnalysis):
                                                             save_file=save_file,
                                                             dataframe_snapshot=dataframe_snapshot,
                                                             suppress_runtime_errors=suppress_runtime_errors,
+                                                            figsize=figsize,
                                                             display_print=display_print,
                                                             sub_dir=f"{dataset_name}/{target_feature}/Where {target_feature} = {repr_target_feature_val}/{f_name}",
                                                             extra_tables=False)
@@ -305,6 +357,7 @@ class FeatureAnalysis(DataAnalysis):
                         save_file=True,
                         dataframe_snapshot=True,
                         suppress_runtime_errors=True,
+                        figsize=GRAPH_DEFAULTS.FIGSIZE,
                         extra_tables=True):
         """
         Desc:
@@ -413,6 +466,7 @@ class FeatureAnalysis(DataAnalysis):
                                     pallete=colors,
                                     dataframe_snapshot=dataframe_snapshot,
                                     suppress_runtime_errors=suppress_runtime_errors,
+                                    figsize=figsize,
                                     display_print=display_print)
 
             # Count plot without colors
@@ -437,6 +491,7 @@ class FeatureAnalysis(DataAnalysis):
                                       palette=colors,
                                       dataframe_snapshot=dataframe_snapshot,
                                       suppress_runtime_errors=suppress_runtime_errors,
+                                      figsize=figsize,
                                       display_print=display_print)
 
             # Generate value counts table
@@ -462,6 +517,7 @@ class FeatureAnalysis(DataAnalysis):
                                      save_file=save_file,
                                      dataframe_snapshot=dataframe_snapshot,
                                      suppress_runtime_errors=suppress_runtime_errors,
+                                     figsize=figsize,
                                      display_print=display_print)
 
             # Create description table
@@ -514,6 +570,7 @@ class FeatureAnalysis(DataAnalysis):
                                        palette=colors,
                                        dataframe_snapshot=dataframe_snapshot,
                                        suppress_runtime_errors=suppress_runtime_errors,
+                                       figsize=figsize,
                                        display_print=display_print)
 
                 # Generate ridge graph
@@ -527,6 +584,7 @@ class FeatureAnalysis(DataAnalysis):
                                       dataframe_snapshot=dataframe_snapshot,
                                       palette=colors,
                                       suppress_runtime_errors=suppress_runtime_errors,
+                                      figsize=figsize,
                                       display_print=display_print)
 
                 # Generate tables based on the aggregation of the non-numerical feature
@@ -609,6 +667,7 @@ class FeatureAnalysis(DataAnalysis):
                                           save_file=save_file,
                                           dataframe_snapshot=dataframe_snapshot,
                                           suppress_runtime_errors=suppress_runtime_errors,
+                                          figsize=figsize,
                                           display_print=display_print,
                                           stacked=False)
 
@@ -621,6 +680,7 @@ class FeatureAnalysis(DataAnalysis):
                                           save_file=save_file,
                                           dataframe_snapshot=dataframe_snapshot,
                                           suppress_runtime_errors=suppress_runtime_errors,
+                                          figsize=figsize,
                                           display_print=display_print,
                                           stacked=True)
 
@@ -638,6 +698,7 @@ class FeatureAnalysis(DataAnalysis):
                                           dataframe_snapshot=dataframe_snapshot,
                                           color=colors,
                                           suppress_runtime_errors=suppress_runtime_errors,
+                                          figsize=figsize,
                                           display_print=display_print)
 
                 # Generate jointplot graph with kde
@@ -651,6 +712,7 @@ class FeatureAnalysis(DataAnalysis):
                                           dataframe_snapshot=dataframe_snapshot,
                                           color=colors,
                                           suppress_runtime_errors=suppress_runtime_errors,
+                                          figsize=figsize,
                                           display_print=display_print,
                                           kind="kde")
         if display_print:

@@ -1,21 +1,21 @@
 {
   "bool": [
+    "Sex_female",
+    "Embarked_Queenstown",
     "Pclass_3",
     "Embarked_Southampton",
-    "Pclass_1",
-    "Sex_male",
-    "Pclass_2",
-    "Embarked_Queenstown",
     "Embarked_Cherbourg",
-    "Sex_female"
+    "Pclass_2",
+    "Pclass_1",
+    "Sex_male"
   ],
   "integer": [
-    "Parch",
-    "SibSp"
+    "SibSp",
+    "Parch"
   ],
   "categorical": [
-    "Fare",
-    "Age"
+    "Age",
+    "Fare"
   ],
   "target": "Survived",
   "feature_labels_bins": {
@@ -109,11 +109,6 @@
     }
   },
   "label_encoder": {
-    "Pclass": {
-      "1st Class": 1,
-      "2nd Class": 2,
-      "3rd Class": 3
-    },
     "Sex": {
       "female": 0,
       "male": 1
@@ -132,14 +127,14 @@
       "C": 0,
       "Q": 1,
       "S": 2
+    },
+    "Pclass": {
+      "1st Class": 1,
+      "2nd Class": 2,
+      "3rd Class": 3
     }
   },
   "label_decoder": {
-    "Pclass": {
-      "1": "1st Class",
-      "2": "2nd Class",
-      "3": "3rd Class"
-    },
     "Sex": {
       "0": "female",
       "1": "male"
@@ -158,6 +153,11 @@
       "0": "C",
       "1": "Q",
       "2": "S"
+    },
+    "Pclass": {
+      "1": "1st Class",
+      "2": "2nd Class",
+      "3": "3rd Class"
     }
   }
 }

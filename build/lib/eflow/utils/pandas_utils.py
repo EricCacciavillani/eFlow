@@ -42,7 +42,7 @@ def df_to_image(df,
     df = copy.deepcopy(df)
 
     if format_float_pos and format_float_pos >= 1:
-        float_format = '{:,.' + str(2) + 'f}'
+        float_format = '{:,.' + str(format_float_pos) + 'f}'
         for col_feature in set(df.select_dtypes(include=["float"]).columns):
             df[col_feature] = df[col_feature].map(float_format.format)
 
@@ -84,6 +84,69 @@ def df_to_image(df,
         plt.show()
 
     plt.close("all")
+
+
+def average_feature_correlation_table(df):
+    """
+    Desc:
+        Creates a correlation table of the feature's relationship base on the
+        average correlation with other features.
+
+    Args:
+        df: pd.Dataframe
+            Pandas dataframe
+
+    Returns:
+        A dataframe that shows the average correlations between each feature.
+    """
+
+    corr_metrics = df.corr()
+    for index, feature_index in enumerate(corr_metrics.index.tolist()):
+        corr_metrics.loc[feature_index][index] = np.nan
+
+    corr_feature_means = dict()
+    for feature_name in corr_metrics.columns:
+        corr_feature_means[feature_name] = corr_metrics[
+            feature_name].dropna().mean()
+
+    corr_feature_means = pd.DataFrame.from_dict(corr_feature_means,
+                                                orient='index',
+                                                columns=["Average Correlations"])
+    corr_feature_means.index.name = "Features"
+
+    return corr_feature_means
+
+
+def feature_correlation_table(df):
+    """
+    Desc:
+        Creates a correlation table of each feature's relationship with one
+        another.
+
+    Args:
+        df: pd.Dataframe
+            Pandas dataframe
+
+    Returns:
+        A dataframe that shows the correlations between each feature.
+    """
+    feature_corr_dict = dict()
+    df_corr = df.corr()
+
+    remaining_features = df_corr.columns.tolist()
+    for main_feature in df_corr.columns:
+        for sub_feature in remaining_features:
+            if main_feature != sub_feature:
+                feature_corr_dict[f"{main_feature} to {sub_feature}"] = \
+                df_corr[main_feature].loc[sub_feature]
+        remaining_features.remove(main_feature)
+
+    df_corr = pd.DataFrame.from_dict(feature_corr_dict,
+                                     orient='index',
+                                     columns=["Correlations"])
+    df_corr.index.name = "Features"
+
+    return df_corr
 
 
 def check_if_feature_exists(df,
@@ -165,6 +228,8 @@ def missing_values_table(df):
     mis_val_table_ren_columns = mis_val_table_ren_columns[
         mis_val_table_ren_columns.iloc[:, 1] != 0].sort_values(
         '% of Total Values', ascending=False).round(1)
+
+    mis_val_table_ren_columns.index.name = "Features"
 
     return mis_val_table_ren_columns
 
@@ -272,6 +337,8 @@ def generate_entropy_table(df,
 
     entropy_table = pd.DataFrame.from_dict(entropy_dict,
                                            orient='index').rename(columns={0: "Entropy"})
+
+    entropy_table.index.name = "Features"
 
     entropy_table.sort_values(by=["Entropy"],
                               ascending=True,

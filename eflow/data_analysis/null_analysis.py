@@ -976,6 +976,7 @@ class NullAnalysis(DataAnalysis):
                 self.save_table_as_plot(df=df,
                                         df_features=self.__df_features,
                                         filename=filename,
+                                        show_index=True,
                                         sub_dir=sub_dir,
                                         dataframe_snapshot=dataframe_snapshot,
                                         suppress_runtime_errors=suppress_runtime_errors,

@@ -152,6 +152,12 @@ class ClassificationAnalysis(ModelAnalysis):
                                   self.folder_path + "_Extras",
                                   "_Classes")
 
+        # Save feature order
+        write_object_text_to_file(self.__feature_order,
+                                  self.folder_path + "_Extras",
+                                  "_Feature_Order")
+
+
         # Save features and or df_features object
         df_features.create_json_file_representation(self.folder_path + "_Extras",
                                                     "df_features.json")

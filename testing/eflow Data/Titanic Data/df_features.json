@@ -3,14 +3,14 @@
     "Survived"
   ],
   "string": [
-    "Sex",
     "Cabin",
-    "Embarked",
-    "Pclass"
+    "Pclass",
+    "Sex",
+    "Embarked"
   ],
   "integer": [
-    "SibSp",
-    "Parch"
+    "Parch",
+    "SibSp"
   ],
   "float": [
     "Fare",
@@ -108,10 +108,6 @@
     }
   },
   "label_encoder": {
-    "Sex": {
-      "female": 0,
-      "male": 1
-    },
     "Cabin": {
       "A": 0,
       "B": 1,
@@ -122,22 +118,22 @@
       "G": 6,
       "T": 7
     },
-    "Embarked": {
-      "C": 0,
-      "Q": 1,
-      "S": 2
-    },
     "Pclass": {
       "1st Class": 1,
       "2nd Class": 2,
       "3rd Class": 3
+    },
+    "Sex": {
+      "female": 0,
+      "male": 1
+    },
+    "Embarked": {
+      "C": 0,
+      "Q": 1,
+      "S": 2
     }
   },
   "label_decoder": {
-    "Sex": {
-      "0": "female",
-      "1": "male"
-    },
     "Cabin": {
       "0": "A",
       "1": "B",
@@ -148,15 +144,19 @@
       "6": "G",
       "7": "T"
     },
-    "Embarked": {
-      "0": "C",
-      "1": "Q",
-      "2": "S"
-    },
     "Pclass": {
       "1": "1st Class",
       "2": "2nd Class",
       "3": "3rd Class"
+    },
+    "Sex": {
+      "0": "female",
+      "1": "male"
+    },
+    "Embarked": {
+      "0": "C",
+      "1": "Q",
+      "2": "S"
     }
   }
 }
