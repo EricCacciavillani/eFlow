@@ -1394,7 +1394,7 @@ class DataFrameTypes:
                         datetime_count += count
                         datetime_found = True
 
-                    except ValueError:
+                    except Exception as e:
                         pass
 
                     if not datetime_found:

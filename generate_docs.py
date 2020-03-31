@@ -1,7 +1,6 @@
 # Import libs
 import os
 
-return getmarkdown(mod)
 
 # Taken from utils.sys_utils
 def get_all_directories_from_path(directory_path):
@@ -50,11 +49,11 @@ def get_all_files_from_path(directory_path,
 
 # Get the current working directory
 current_work_dir = os.getcwd()
-project_dir = current_work_dir[:current_work_dir.rfind('/')] + "/eflow/"
-
+project_dir = current_work_dir  + "/eflow/"
+print(project_dir)
 # Get all directories from project
 all_dirs = get_all_directories_from_path(project_dir)
-
+print(all_dirs)
 for dir_name in all_dirs:
 
     # Ignore any hidden files
@@ -68,30 +67,52 @@ for dir_name in all_dirs:
     dir_files = get_all_files_from_path(project_dir + dir_name,
                                         "py")
     print(dir_files)
+    i = 0
     for file_name in dir_files:
 
         print(file_name)
-        # Ignore hidden file
+        # Ignore hidden files
         if file_name[0] == "_":
             continue
 
-        def_start = False
         with open(f'{project_dir}{dir_name}/{file_name}') as fp:
+
+            function_def = ""
             line = fp.readline()
             while line:
+                if ("def " in line and "def _" not in line):
+                    def_start = True
+                    function_def += line.split("def ")[1].replace("(self,","(").strip()
+                    while line:
+                        line = fp.readline()
+                        
+                        if "):" in line:
+                            def_start = False
+                            break
+                        else:
+                            line = line.strip()
+                            function_def += line
+                    function_def += ")"
+                    break
+                line = fp.readline()
+            
+            print(function_def)
+            function_doc = ""
+            doc_found = False
+            while line:
+                print(line)
+                if "\"\"\"" in line:
+                    doc_found != doc_found
+                elif doc_found:
+                    function_doc += line
+
                 line = fp.readline()
 
-                if line == "":
-
-
-                # Create template
-                if "# def " in line or "#def ":
-                    continue
-
-                if ("def " in line and "def _" not in line) or def_start:
-                    def_start = True
-                    if "):" in line:
-                        def_start = False
-                    print(line)
-        break
+            print(function_doc)
+                
+#        print(function_def)
+        if i == 2:
+            break
+        else:
+            i += 1
     break

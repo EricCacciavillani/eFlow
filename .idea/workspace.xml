@@ -10,81 +10,13 @@
   <component name="ChangeListManager">
     <list default="true" id="178261e3-0830-4d8e-91ef-8172f5216aca" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/lib/eflow/model_analysis/classification_analysis.py" beforeDir="false" afterPath="$PROJECT_DIR$/build/lib/eflow/model_analysis/classification_analysis.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/eflow-0.1.96-py3-none-any.whl" beforeDir="false" afterPath="$PROJECT_DIR$/dist/eflow-0.1.96-py3-none-any.whl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/lib/eflow/foundation/data_frame_types.py" beforeDir="false" afterPath="$PROJECT_DIR$/build/lib/eflow/foundation/data_frame_types.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/eflow-0.1.98-py3-none-any.whl" beforeDir="false" afterPath="$PROJECT_DIR$/dist/eflow-0.1.98-py3-none-any.whl" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/eflow.egg-info/PKG-INFO" beforeDir="false" afterPath="$PROJECT_DIR$/eflow.egg-info/PKG-INFO" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/eflow/data_analysis/feature_analysis.py" beforeDir="false" afterPath="$PROJECT_DIR$/eflow/data_analysis/feature_analysis.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/eflow/data_analysis/null_analysis.py" beforeDir="false" afterPath="$PROJECT_DIR$/eflow/data_analysis/null_analysis.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/eflow/utils/pandas_utils.py" beforeDir="false" afterPath="$PROJECT_DIR$/eflow/utils/pandas_utils.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/eflow/foundation/data_frame_types.py" beforeDir="false" afterPath="$PROJECT_DIR$/eflow/foundation/data_frame_types.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/generate_docs.py" beforeDir="false" afterPath="$PROJECT_DIR$/generate_docs.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/setup.py" beforeDir="false" afterPath="$PROJECT_DIR$/setup.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/.ipynb_checkpoints/1.) Inspect data-checkpoint.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/testing/.ipynb_checkpoints/1.) Inspect data-checkpoint.ipynb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/.ipynb_checkpoints/Expansion_Theory_Exper-checkpoint.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/testing/.ipynb_checkpoints/Expansion_Theory_Exper-checkpoint.ipynb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/1.) Inspect data.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/testing/1.) Inspect data.ipynb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/Expansion_Theory_Exper.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/testing/Expansion_Theory_Exper.ipynb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Feature Analysis/Full Titanic Data/Sex/Where Sex = female/Cabin/Cabin Value Counts Table.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Feature Analysis/Full Titanic Data/Sex/Where Sex = female/Cabin/Cabin Value Counts Table.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Feature Analysis/Full Titanic Data/Survived/Where Survived = False/Cabin/Count plot graph on Cabin with count color ranking.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Feature Analysis/Full Titanic Data/Survived/Where Survived = False/Cabin/Count plot graph on Cabin with count color ranking.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Feature Analysis/Full Titanic Data/Survived/Where Survived = True/Cabin/Cabin Value Counts Table.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Feature Analysis/Full Titanic Data/Survived/Where Survived = True/Cabin/Cabin Value Counts Table.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Feature Analysis/Full Titanic Data/_Extras/Meta Data/Dataframe Types Table.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Feature Analysis/Full Titanic Data/_Extras/Meta Data/Dataframe Types Table.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Feature Analysis/Full Titanic Data/_Extras/Meta Data/Missing Data Table.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Feature Analysis/Full Titanic Data/_Extras/Meta Data/Missing Data Table.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Feature Analysis/Full Titanic Data/_Extras/Statistics/Entropy Table.pkl" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Feature Analysis/Full Titanic Data/_Extras/Statistics/Entropy Table.pkl" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Feature Analysis/Full Titanic Data/_Extras/Statistics/Entropy Table.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Feature Analysis/Full Titanic Data/_Extras/Statistics/Entropy Table.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Missing Data/Full Titanic Data/Tables/_Extras/Meta Data/Dataframe Shape Table 2.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Missing Data/Full Titanic Data/Tables/_Extras/Meta Data/Dataframe Shape Text 2.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Missing Data/Full Titanic Data/Tables/_Extras/Meta Data/Dataframe Types Table 2.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Before Cleaning/Missing Data/Full Titanic Data/Tables/_Extras/Meta Data/Missing Data Table 2.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Exansion Auto Clustering/Clustering/Target=0/Data Pipeline/First Scaler.pkl" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Exansion Auto Clustering/Clustering/Target=0/Data Pipeline/First Scaler.pkl" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Exansion Auto Clustering/Clustering/Target=0/Data Pipeline/PCA.pkl" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Exansion Auto Clustering/Clustering/Target=0/Data Pipeline/PCA.pkl" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Exansion Auto Clustering/Clustering/Target=0/Models/K-Means/All possible K-Means Elbow's.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Exansion Auto Clustering/Clustering/Target=0/Models/K-Means/All possible K-Means Elbow's.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Exansion Auto Clustering/Clustering/Target=0/Models/K-Means/Best of all K-Means Elbows.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Exansion Auto Clustering/Clustering/Target=0/Models/K-Means/Best of all K-Means Elbows.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Exansion Auto Clustering/Clustering/Target=0/Models/K-Means/Center Elbow Count.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Exansion Auto Clustering/Clustering/Target=0/Models/K-Means/Center Elbow Count.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Exansion Auto Clustering/Clustering/Target=0/Models/K-Means/Clusters=4/Center points.pkl" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Exansion Auto Clustering/Clustering/Target=0/Models/K-Means/Clusters=4/Center points.pkl" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Exansion Auto Clustering/Clustering/Target=0/Models/K-Means/Clusters=4/K-Means_Clusters=4.pkl" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Exansion Auto Clustering/Clustering/Target=0/Models/K-Means/Clusters=4/K-Means_Clusters=4.pkl" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Exansion Auto Clustering/Clustering/Target=0/Models/K-Means/Clusters=5/Center points.pkl" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Exansion Auto Clustering/Clustering/Target=0/Models/K-Means/Clusters=5/Center points.pkl" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Exansion Auto Clustering/Clustering/Target=0/Models/K-Means/Clusters=5/K-Means_Clusters=5.pkl" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Exansion Auto Clustering/Clustering/Target=0/Models/K-Means/Clusters=5/K-Means_Clusters=5.pkl" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Exansion Auto Clustering/Clustering/Target=0/Models/K-Means/Clusters=6/Center points.pkl" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Exansion Auto Clustering/Clustering/Target=0/Models/K-Means/Clusters=6/Center points.pkl" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Exansion Auto Clustering/Clustering/Target=0/Models/K-Means/Clusters=6/K-Means_Clusters=6.pkl" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Exansion Auto Clustering/Clustering/Target=0/Models/K-Means/Clusters=6/K-Means_Clusters=6.pkl" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Exansion Auto Clustering/Clustering/Target=0/Models/K-Means/Proximity Elbow Count.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Exansion Auto Clustering/Clustering/Target=0/Models/K-Means/Proximity Elbow Count.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Exansion Auto Clustering/Clustering/Target=1/Data Pipeline/First Scaler.pkl" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Exansion Auto Clustering/Clustering/Target=1/Data Pipeline/First Scaler.pkl" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Exansion Auto Clustering/Clustering/Target=1/Data Pipeline/PCA.pkl" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Exansion Auto Clustering/Clustering/Target=1/Data Pipeline/PCA.pkl" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Exansion Auto Clustering/Clustering/Target=1/Models/K-Means/All possible K-Means Elbow's.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Exansion Auto Clustering/Clustering/Target=1/Models/K-Means/All possible K-Means Elbow's.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Exansion Auto Clustering/Clustering/Target=1/Models/K-Means/Best of all K-Means Elbows.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Exansion Auto Clustering/Clustering/Target=1/Models/K-Means/Best of all K-Means Elbows.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Exansion Auto Clustering/Clustering/Target=1/Models/K-Means/Center Elbow Count.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Exansion Auto Clustering/Clustering/Target=1/Models/K-Means/Center Elbow Count.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Exansion Auto Clustering/Clustering/Target=1/Models/K-Means/Clusters=5/Center points.pkl" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Exansion Auto Clustering/Clustering/Target=1/Models/K-Means/Clusters=5/Center points.pkl" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Exansion Auto Clustering/Clustering/Target=1/Models/K-Means/Clusters=5/K-Means_Clusters=5.pkl" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Exansion Auto Clustering/Clustering/Target=1/Models/K-Means/Clusters=5/K-Means_Clusters=5.pkl" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Exansion Auto Clustering/Clustering/Target=1/Models/K-Means/Clusters=6/Center points.pkl" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Exansion Auto Clustering/Clustering/Target=1/Models/K-Means/Clusters=6/Center points.pkl" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Exansion Auto Clustering/Clustering/Target=1/Models/K-Means/Clusters=6/K-Means_Clusters=6.pkl" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Exansion Auto Clustering/Clustering/Target=1/Models/K-Means/Clusters=6/K-Means_Clusters=6.pkl" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Exansion Auto Clustering/Clustering/Target=1/Models/K-Means/Clusters=7/Center points.pkl" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Exansion Auto Clustering/Clustering/Target=1/Models/K-Means/Clusters=7/Center points.pkl" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Exansion Auto Clustering/Clustering/Target=1/Models/K-Means/Clusters=7/K-Means_Clusters=7.pkl" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Exansion Auto Clustering/Clustering/Target=1/Models/K-Means/Clusters=7/K-Means_Clusters=7.pkl" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Exansion Auto Clustering/Clustering/Target=1/Models/K-Means/Proximity Elbow Count.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Exansion Auto Clustering/Clustering/Target=1/Models/K-Means/Proximity Elbow Count.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Exansion Auto Clustering/Clustering/Target=1/_Extras/All suggested clusters.pkl" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Exansion Auto Clustering/Clustering/Target=1/_Extras/All suggested clusters.pkl" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Exansion Auto Clustering/Clustering/Target=1/_Extras/All suggested clusters.txt" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Exansion Auto Clustering/Clustering/Target=1/_Extras/All suggested clusters.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Exansion Auto Clustering/Clustering/Target=1/_Extras/Average of suggested clusters.txt" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Exansion Auto Clustering/Clustering/Target=1/_Extras/Average of suggested clusters.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Exansion Auto Clustering/Clustering/Target=1/_Extras/K-Means suggested clusters.txt" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Exansion Auto Clustering/Clustering/Target=1/_Extras/K-Means suggested clusters.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Exansion Auto Clustering/Modeling for DT/Actual results/Target Feature: Survived/DecisionTreeClassifier/DecisionTreeClassifier.pkl" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Exansion Auto Clustering/Modeling for DT/Actual results/Target Feature: Survived/DecisionTreeClassifier/DecisionTreeClassifier.pkl" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Exansion Auto Clustering/Modeling for DT/Actual results/Target Feature: Survived/DecisionTreeClassifier/_Extras/Feature Importances.pkl" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Exansion Auto Clustering/Modeling for DT/Actual results/Target Feature: Survived/DecisionTreeClassifier/_Extras/Feature Importances.pkl" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Exansion Auto Clustering/Modeling for DT/Actual results/Target Feature: Survived/DecisionTreeClassifier/_Extras/Feature Importances.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Exansion Auto Clustering/Modeling for DT/Actual results/Target Feature: Survived/DecisionTreeClassifier/_Extras/Feature Importances.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Exansion Auto Clustering/Modeling for DT/Actual results/Target Feature: Survived/DecisionTreeClassifier/_Extras/_Classes.txt" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Exansion Auto Clustering/Modeling for DT/Actual results/Target Feature: Survived/DecisionTreeClassifier/_Extras/_Classes.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Exansion Auto Clustering/Modeling for DT/Actual results/Target Feature: Survived/DecisionTreeClassifier/_Extras/df_features.json" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Exansion Auto Clustering/Modeling for DT/Actual results/Target Feature: Survived/DecisionTreeClassifier/_Extras/df_features.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Exansion Auto Clustering/Modeling for DT/Target Feature: Survived/DecisionTreeClassifier/DecisionTreeClassifier.pkl" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Exansion Auto Clustering/Modeling for DT/Target Feature: Survived/DecisionTreeClassifier/DecisionTreeClassifier.pkl" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Exansion Auto Clustering/Modeling for DT/Target Feature: Survived/DecisionTreeClassifier/Test Data/Predict function/Confusion Matrix Test Data on DecisionTreeClassifier Normalized False.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Exansion Auto Clustering/Modeling for DT/Target Feature: Survived/DecisionTreeClassifier/Test Data/Predict function/Confusion Matrix Test Data on DecisionTreeClassifier Normalized False.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Exansion Auto Clustering/Modeling for DT/Target Feature: Survived/DecisionTreeClassifier/Test Data/Predict function/Confusion Matrix Test Data on DecisionTreeClassifier Normalized True.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Exansion Auto Clustering/Modeling for DT/Target Feature: Survived/DecisionTreeClassifier/Test Data/Predict function/Confusion Matrix Test Data on DecisionTreeClassifier Normalized True.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Exansion Auto Clustering/Modeling for DT/Target Feature: Survived/DecisionTreeClassifier/Test Data/Predict function/Metric Evaluation on Test Data on DecisionTreeClassifier.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Exansion Auto Clustering/Modeling for DT/Target Feature: Survived/DecisionTreeClassifier/Test Data/Predict function/Metric Evaluation on Test Data on DecisionTreeClassifier.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Exansion Auto Clustering/Modeling for DT/Target Feature: Survived/DecisionTreeClassifier/Test Data/Probabilities function/No Thresholds/Confusion Matrix Test Data on DecisionTreeClassifier Normalized False.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Exansion Auto Clustering/Modeling for DT/Target Feature: Survived/DecisionTreeClassifier/Test Data/Probabilities function/No Thresholds/Confusion Matrix Test Data on DecisionTreeClassifier Normalized False.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Exansion Auto Clustering/Modeling for DT/Target Feature: Survived/DecisionTreeClassifier/Test Data/Probabilities function/No Thresholds/Confusion Matrix Test Data on DecisionTreeClassifier Normalized True.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Exansion Auto Clustering/Modeling for DT/Target Feature: Survived/DecisionTreeClassifier/Test Data/Probabilities function/No Thresholds/Confusion Matrix Test Data on DecisionTreeClassifier Normalized True.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Exansion Auto Clustering/Modeling for DT/Target Feature: Survived/DecisionTreeClassifier/Test Data/Probabilities function/No Thresholds/Metric Evaluation on Test Data on DecisionTreeClassifier.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Exansion Auto Clustering/Modeling for DT/Target Feature: Survived/DecisionTreeClassifier/Test Data/Probabilities function/No Thresholds/Metric Evaluation on Test Data on DecisionTreeClassifier.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Exansion Auto Clustering/Modeling for DT/Target Feature: Survived/DecisionTreeClassifier/Test Data/Probabilities function/No Thresholds/Precision Recall on Test Data on DecisionTreeClassifier.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Exansion Auto Clustering/Modeling for DT/Target Feature: Survived/DecisionTreeClassifier/Test Data/Probabilities function/No Thresholds/Precision Recall on Test Data on DecisionTreeClassifier.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Exansion Auto Clustering/Modeling for DT/Target Feature: Survived/DecisionTreeClassifier/Test Data/Probabilities function/No Thresholds/Roc Curve on Test Data on DecisionTreeClassifier.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Exansion Auto Clustering/Modeling for DT/Target Feature: Survived/DecisionTreeClassifier/Test Data/Probabilities function/No Thresholds/Roc Curve on Test Data on DecisionTreeClassifier.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Exansion Auto Clustering/Modeling for DT/Target Feature: Survived/DecisionTreeClassifier/Train Data/Predict function/Confusion Matrix Train Data on DecisionTreeClassifier Normalized False.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Exansion Auto Clustering/Modeling for DT/Target Feature: Survived/DecisionTreeClassifier/Train Data/Predict function/Confusion Matrix Train Data on DecisionTreeClassifier Normalized False.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Exansion Auto Clustering/Modeling for DT/Target Feature: Survived/DecisionTreeClassifier/Train Data/Predict function/Confusion Matrix Train Data on DecisionTreeClassifier Normalized True.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Exansion Auto Clustering/Modeling for DT/Target Feature: Survived/DecisionTreeClassifier/Train Data/Predict function/Confusion Matrix Train Data on DecisionTreeClassifier Normalized True.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Exansion Auto Clustering/Modeling for DT/Target Feature: Survived/DecisionTreeClassifier/Train Data/Probabilities function/No Thresholds/Confusion Matrix Train Data on DecisionTreeClassifier Normalized False.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Exansion Auto Clustering/Modeling for DT/Target Feature: Survived/DecisionTreeClassifier/Train Data/Probabilities function/No Thresholds/Confusion Matrix Train Data on DecisionTreeClassifier Normalized False.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Exansion Auto Clustering/Modeling for DT/Target Feature: Survived/DecisionTreeClassifier/Train Data/Probabilities function/No Thresholds/Confusion Matrix Train Data on DecisionTreeClassifier Normalized True.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Exansion Auto Clustering/Modeling for DT/Target Feature: Survived/DecisionTreeClassifier/Train Data/Probabilities function/No Thresholds/Confusion Matrix Train Data on DecisionTreeClassifier Normalized True.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Exansion Auto Clustering/Modeling for DT/Target Feature: Survived/DecisionTreeClassifier/Train Data/Probabilities function/No Thresholds/Precision Recall on Train Data on DecisionTreeClassifier.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Exansion Auto Clustering/Modeling for DT/Target Feature: Survived/DecisionTreeClassifier/Train Data/Probabilities function/No Thresholds/Precision Recall on Train Data on DecisionTreeClassifier.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Exansion Auto Clustering/Modeling for DT/Target Feature: Survived/DecisionTreeClassifier/Train Data/Probabilities function/No Thresholds/Roc Curve on Train Data on DecisionTreeClassifier.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Exansion Auto Clustering/Modeling for DT/Target Feature: Survived/DecisionTreeClassifier/Train Data/Probabilities function/No Thresholds/Roc Curve on Train Data on DecisionTreeClassifier.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Exansion Auto Clustering/Modeling for DT/Target Feature: Survived/DecisionTreeClassifier/_Extras/Feature Importances.pkl" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Exansion Auto Clustering/Modeling for DT/Target Feature: Survived/DecisionTreeClassifier/_Extras/Feature Importances.pkl" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Exansion Auto Clustering/Modeling for DT/Target Feature: Survived/DecisionTreeClassifier/_Extras/Feature Importances.png" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Exansion Auto Clustering/Modeling for DT/Target Feature: Survived/DecisionTreeClassifier/_Extras/Feature Importances.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Exansion Auto Clustering/Modeling for DT/Target Feature: Survived/DecisionTreeClassifier/_Extras/_Classes.txt" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Exansion Auto Clustering/Modeling for DT/Target Feature: Survived/DecisionTreeClassifier/_Extras/_Classes.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Exansion Auto Clustering/Modeling for DT/Target Feature: Survived/DecisionTreeClassifier/_Extras/df_features.json" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/Exansion Auto Clustering/Modeling for DT/Target Feature: Survived/DecisionTreeClassifier/_Extras/df_features.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/df_features.json" beforeDir="false" afterPath="$PROJECT_DIR$/testing/eflow Data/Titanic Data/df_features.json" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -101,18 +33,9 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/eflow/auto_modeler/cluster_master.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="195">
-              <caret line="13" column="48" selection-start-line="13" selection-start-column="34" selection-end-line="13" selection-end-column="48" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/eflow/utils/eflow_utils.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="287">
+            <state relative-caret-position="315">
               <caret line="29" column="26" selection-start-line="29" selection-start-column="26" selection-end-line="29" selection-end-column="26" />
               <folding>
                 <element signature="e#0#43#0" expanded="true" />
@@ -124,7 +47,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/eflow/utils/pandas_utils.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-41">
+            <state relative-caret-position="1695">
               <caret line="123" column="8" selection-start-line="123" selection-start-column="8" selection-end-line="123" selection-end-column="8" />
               <folding>
                 <element signature="e#0#61#0" expanded="true" />
@@ -166,7 +89,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/eflow/data_analysis/null_analysis.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="583">
+            <state relative-caret-position="14370">
               <caret line="970" column="53" selection-start-line="970" selection-start-column="47" selection-end-line="970" selection-end-column="53" />
               <folding>
                 <element signature="e#0#50#0" expanded="true" />
@@ -178,8 +101,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/eflow/data_analysis/feature_analysis.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="282">
-              <caret line="714" column="58" selection-start-line="714" selection-start-column="58" selection-end-line="714" selection-end-column="58" />
+            <state relative-caret-position="-4885">
+              <caret line="35" selection-start-line="35" selection-end-line="35" />
               <folding>
                 <element signature="e#0#51#0" expanded="true" />
               </folding>
@@ -188,9 +111,21 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/eflow/foundation/data_frame_types.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="6630">
+              <caret line="453" column="8" selection-start-line="453" selection-start-column="4" selection-end-line="453" selection-end-column="8" />
+              <folding>
+                <element signature="e#0#69#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/eflow/_hidden/parent_objects/data_analysis.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="576">
+            <state relative-caret-position="3240">
               <caret line="226" column="23" selection-start-line="226" selection-start-column="12" selection-end-line="226" selection-end-column="23" />
               <folding>
                 <element signature="e#0#51#0" expanded="true" />
@@ -219,11 +154,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>get+a</find>
-      <find>get_all_files_from_path</find>
-      <find>__cluster_models</find>
-      <find>load_pickle_object</find>
-      <find>self.__cluster_models</find>
       <find>__cluster_models_paths</find>
       <find>pickle</find>
       <find>eval</find>
@@ -249,6 +179,11 @@
       <find>save_table_as_plot</find>
       <find>data_types_table</find>
       <find>save_plot</find>
+      <find>parser.parse</find>
+      <find>from_dict</find>
+      <find>analyze_feature</find>
+      <find>datetime</find>
+      <find>def</find>
     </findStrings>
     <replaceStrings>
       <replace>create_dir_structure</replace>
@@ -328,7 +263,6 @@
         <option value="$PROJECT_DIR$/eflow/_hidden/widgets/feature_data_cleaning_widget.py" />
         <option value="$PROJECT_DIR$/eflow/_hidden/widgets/string_cleaning_widget.py" />
         <option value="$PROJECT_DIR$/eflow/data_pipeline_segments/feature_data_cleaner.py" />
-        <option value="$PROJECT_DIR$/eflow/foundation/data_frame_types.py" />
         <option value="$PROJECT_DIR$/eflow/utils/image_processing_utils.py" />
         <option value="$PROJECT_DIR$/eflow/model_analysis/regression_analysis.py" />
         <option value="$PROJECT_DIR$/eflow/auto_modeler/__init__.py" />
@@ -342,6 +276,7 @@
         <option value="$PROJECT_DIR$/eflow/_hidden/parent_objects/data_analysis.py" />
         <option value="$PROJECT_DIR$/eflow/data_analysis/null_analysis.py" />
         <option value="$PROJECT_DIR$/eflow/utils/pandas_utils.py" />
+        <option value="$PROJECT_DIR$/eflow/foundation/data_frame_types.py" />
         <option value="$PROJECT_DIR$/eflow/data_analysis/feature_analysis.py" />
       </list>
     </option>
@@ -349,8 +284,8 @@
   <component name="ProjectFrameBounds" extendedState="6">
     <option name="x" value="50" />
     <option name="y" value="23" />
-    <option name="width" value="1870" />
-    <option name="height" value="1057" />
+    <option name="width" value="1630" />
+    <option name="height" value="1027" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
@@ -358,7 +293,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -369,39 +303,7 @@
             <path>
               <item name="eFlow" type="b2602c69:ProjectViewProjectNode" />
               <item name="eFlow" type="462c0819:PsiDirectoryNode" />
-              <item name="Backlogged Code" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="eFlow" type="b2602c69:ProjectViewProjectNode" />
-              <item name="eFlow" type="462c0819:PsiDirectoryNode" />
               <item name="eflow" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="eFlow" type="b2602c69:ProjectViewProjectNode" />
-              <item name="eFlow" type="462c0819:PsiDirectoryNode" />
-              <item name="eflow" type="462c0819:PsiDirectoryNode" />
-              <item name="_hidden" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="eFlow" type="b2602c69:ProjectViewProjectNode" />
-              <item name="eFlow" type="462c0819:PsiDirectoryNode" />
-              <item name="eflow" type="462c0819:PsiDirectoryNode" />
-              <item name="_hidden" type="462c0819:PsiDirectoryNode" />
-              <item name="general_objects" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="eFlow" type="b2602c69:ProjectViewProjectNode" />
-              <item name="eFlow" type="462c0819:PsiDirectoryNode" />
-              <item name="eflow" type="462c0819:PsiDirectoryNode" />
-              <item name="_hidden" type="462c0819:PsiDirectoryNode" />
-              <item name="parent_objects" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="eFlow" type="b2602c69:ProjectViewProjectNode" />
-              <item name="eFlow" type="462c0819:PsiDirectoryNode" />
-              <item name="eflow" type="462c0819:PsiDirectoryNode" />
-              <item name="_hidden" type="462c0819:PsiDirectoryNode" />
-              <item name="widgets" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="eFlow" type="b2602c69:ProjectViewProjectNode" />
@@ -443,6 +345,7 @@
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -687,18 +590,20 @@
       <workItem from="1583583305429" duration="933000" />
       <workItem from="1583760589327" duration="2584000" />
       <workItem from="1583935536897" duration="551000" />
-      <workItem from="1583946997252" duration="4662000" />
+      <workItem from="1583946997252" duration="4761000" />
+      <workItem from="1584902741743" duration="1816000" />
+      <workItem from="1585200232338" duration="5000" />
+      <workItem from="1585667780075" duration="2561000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="830178000" />
+    <option name="totallyTimeSpent" value="834659000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="47" y="23" width="1633" height="1027" extended-state="6" />
-    <editor active="true" />
+    <frame x="50" y="23" width="1630" height="1027" extended-state="6" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.4406034" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.5239295" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -1076,12 +981,29 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/eflow/foundation/data_frame_types.py">
+    <entry file="file://$PROJECT_DIR$/eflow/auto_modeler/cluster_master.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="13335">
-          <caret line="900" selection-start-line="900" selection-end-line="900" />
+        <state relative-caret-position="195">
+          <caret line="13" column="48" selection-start-line="13" selection-start-column="34" selection-end-line="13" selection-end-column="48" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/eflow/utils/eflow_utils.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="315">
+          <caret line="29" column="26" selection-start-line="29" selection-start-column="26" selection-end-line="29" selection-end-column="26" />
           <folding>
-            <element signature="e#0#69#0" expanded="true" />
+            <element signature="e#0#43#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/eflow/utils/pandas_utils.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1695">
+          <caret line="123" column="8" selection-start-line="123" selection-start-column="8" selection-end-line="123" selection-end-column="8" />
+          <folding>
+            <element signature="e#0#61#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1110,43 +1032,9 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/eflow/_hidden/constants.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="210">
-          <caret line="14" column="29" selection-start-line="14" selection-end-line="14" selection-end-column="29" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/eflow/auto_modeler/cluster_master.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="195">
-          <caret line="13" column="48" selection-start-line="13" selection-start-column="34" selection-end-line="13" selection-end-column="48" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/eflow/utils/eflow_utils.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="287">
-          <caret line="29" column="26" selection-start-line="29" selection-start-column="26" selection-end-line="29" selection-end-column="26" />
-          <folding>
-            <element signature="e#0#43#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/eflow/_hidden/parent_objects/data_analysis.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="576">
-          <caret line="226" column="23" selection-start-line="226" selection-start-column="12" selection-end-line="226" selection-end-column="23" />
-          <folding>
-            <element signature="e#0#51#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/eflow/data_analysis/null_analysis.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="583">
+        <state relative-caret-position="14370">
           <caret line="970" column="53" selection-start-line="970" selection-start-column="47" selection-end-line="970" selection-end-column="53" />
           <folding>
             <element signature="e#0#50#0" expanded="true" />
@@ -1154,20 +1042,37 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/eflow/utils/pandas_utils.py">
+    <entry file="file://$PROJECT_DIR$/eflow/foundation/data_frame_types.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-41">
-          <caret line="123" column="8" selection-start-line="123" selection-start-column="8" selection-end-line="123" selection-end-column="8" />
+        <state relative-caret-position="6630">
+          <caret line="453" column="8" selection-start-line="453" selection-start-column="4" selection-end-line="453" selection-end-column="8" />
           <folding>
-            <element signature="e#0#61#0" expanded="true" />
+            <element signature="e#0#69#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/eflow/_hidden/parent_objects/data_analysis.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="3240">
+          <caret line="226" column="23" selection-start-line="226" selection-start-column="12" selection-end-line="226" selection-end-column="23" />
+          <folding>
+            <element signature="e#0#51#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/eflow/_hidden/constants.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="210">
+          <caret line="14" column="29" selection-start-line="14" selection-end-line="14" selection-end-column="29" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/eflow/data_analysis/feature_analysis.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="282">
-          <caret line="714" column="58" selection-start-line="714" selection-start-column="58" selection-end-line="714" selection-end-column="58" />
+        <state relative-caret-position="-4885">
+          <caret line="35" selection-start-line="35" selection-end-line="35" />
           <folding>
             <element signature="e#0#51#0" expanded="true" />
           </folding>

@@ -261,6 +261,10 @@ class FeatureAnalysis(DataAnalysis):
                    if feature_name in self.__df_features.null_only_features():
                        continue
 
+                   # Ignore datetime features
+                   if feature_name in self.__df_features.datetime_features():
+                       continue
+
                    self.analyze_feature(df,
                                         feature_name,
                                         dataset_name,
