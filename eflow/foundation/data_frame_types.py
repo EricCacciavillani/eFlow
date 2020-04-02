@@ -140,7 +140,7 @@ class DataFrameTypes:
     def numerical_features(self,
                            exclude_target=False):
         """
-        Desc:
+
             Gets all numerical features chosen by the object.
 
         Args:
@@ -168,7 +168,7 @@ class DataFrameTypes:
     def non_numerical_features(self,
                                exclude_target=False):
         """
-        Desc:
+
             Gets all non-numerical features chosen by the object.
 
         Args:
@@ -196,7 +196,7 @@ class DataFrameTypes:
     def continuous_numerical_features(self,
                                       exclude_target=False):
         """
-        Desc:
+
             Gets all numerical features that are continuous (int/float).
 
         Args:
@@ -224,7 +224,7 @@ class DataFrameTypes:
     def non_continuous_numerical_features(self,
                                           exclude_target=False):
         """
-        Desc:
+
             Gets all numerical features that are not continuous (bool)
 
         Args:
@@ -252,7 +252,7 @@ class DataFrameTypes:
     def continuous_features(self,
                             exclude_target=False):
         """
-        Desc:
+
             Gets all numerical features chosen by the object.
 
         Args:
@@ -280,7 +280,7 @@ class DataFrameTypes:
     def non_continuous_features(self,
                                 exclude_target=False):
         """
-        Desc:
+
             Gets all numerical features chosen by the object.
 
         Args:
@@ -308,7 +308,7 @@ class DataFrameTypes:
     def integer_features(self,
                          exclude_target=False):
         """
-        Desc:
+
             All integer features chosen by df_features.
 
         Args:
@@ -337,7 +337,7 @@ class DataFrameTypes:
     def float_features(self,
                            exclude_target=False):
         """
-        Desc:
+
             All float features chosen by df_features.
 
         Args:
@@ -366,7 +366,7 @@ class DataFrameTypes:
     def categorical_features(self,
                              exclude_target=False):
         """
-        Desc:
+
             All categorical features chosen by df_features.
 
         Args:
@@ -395,7 +395,7 @@ class DataFrameTypes:
     def string_features(self,
                         exclude_target=False):
         """
-        Desc:
+
             All string features chosen by df_features.
 
         Args:
@@ -425,7 +425,7 @@ class DataFrameTypes:
                       exclude_target=False):
 
         """
-        Desc:
+
             All bool features chosen by df_features.
 
         Args:
@@ -454,7 +454,7 @@ class DataFrameTypes:
     def datetime_features(self,
                           exclude_target=False):
         """
-        Desc:
+
             All datetime features chosen by df_features.
 
         Args:
@@ -503,7 +503,7 @@ class DataFrameTypes:
     def all_features(self,
                      exclude_target=False):
         """
-        Desc:
+
             Returns all features found in the dataset.
 
         Args:
@@ -540,7 +540,7 @@ class DataFrameTypes:
     def get_feature_type(self,
                          feature_name):
         """
-        Desc:
+
             Return's a feature's type as a string
 
         Args:
@@ -577,7 +577,7 @@ class DataFrameTypes:
 
     def target_feature(self):
         """
-        Desc:
+
             Gets the target feature.
 
         Returns:
@@ -588,7 +588,7 @@ class DataFrameTypes:
 
     def get_label_decoder(self):
         """
-        Desc:
+
             Gets the dict encoder for category to string relationship.
 
         Returns:
@@ -598,7 +598,7 @@ class DataFrameTypes:
 
     def get_label_encoder(self):
         """
-        Desc:
+
             Gets the dict encoder for string to category relationship.
 
         Returns:
@@ -609,7 +609,7 @@ class DataFrameTypes:
     def get_feature_colors(self,
                            feature_name):
         """
-        Desc:
+
             Get's the color values for that given feature.
 
         Args:
@@ -628,7 +628,7 @@ class DataFrameTypes:
 
     def get_all_feature_colors(self):
         """
-        Desc:
+
            Get's the entire dict of the feature's value colors.
 
         Returns:
@@ -639,7 +639,7 @@ class DataFrameTypes:
     def get_feature_binning(self,
                             feature_name):
         """
-       Desc:
+
            Get's the feature's bin and labels for that given feature.
 
        Args:
@@ -658,7 +658,7 @@ class DataFrameTypes:
 
     def get_all_feature_binning(self):
         """
-        Desc:
+
            Get's the entire dict of the feature's bins and labels.
 
         Returns:
@@ -668,7 +668,7 @@ class DataFrameTypes:
 
     def get_feature_value_representation(self):
         """
-        Desc:
+
             Get's the entire dict of the feature's value colors.
 
         Returns:
@@ -678,7 +678,7 @@ class DataFrameTypes:
 
     def get_dummy_encoded_features(self):
         """
-        Desc:
+
             Get's all dummy encoded relationships.
         """
         return copy.deepcopy(self.__dummy_encoded_features)
@@ -687,7 +687,7 @@ class DataFrameTypes:
     def set_target_feature(self,
                            feature_name):
         """
-        Desc:
+
             Sets the value.
 
         Args:
@@ -700,7 +700,7 @@ class DataFrameTypes:
     def set_feature_to_bool(self,
                             feature_name):
         """
-        Desc:
+
             Moves feature to bool set.
 
         Args:
@@ -718,7 +718,7 @@ class DataFrameTypes:
     def set_feature_to_integer(self,
                                feature_name):
         """
-        Desc:
+
             Moves feature to integer set.
 
         Args:
@@ -735,7 +735,7 @@ class DataFrameTypes:
     def set_feature_to_float(self,
                              feature_name):
         """
-        Desc:
+
             Moves feature to float set.
 
         Args:
@@ -752,7 +752,7 @@ class DataFrameTypes:
     def set_feature_to_string(self,
                               feature_name):
         """
-        Desc:
+
             Moves feature to string set.
 
         Args:
@@ -770,7 +770,7 @@ class DataFrameTypes:
     def set_feature_to_categorical(self,
                                    feature_name):
         """
-        Desc:
+
             Moves feature to categorical set.
 
         Args:
@@ -788,7 +788,7 @@ class DataFrameTypes:
     def set_feature_to_datetime(self,
                                 feature_name):
         """
-        Desc:
+
             Moves feature to datetime set.
 
         Args:
@@ -807,7 +807,7 @@ class DataFrameTypes:
     def set_feature_to_null_only_features(self,
                                           feature_name):
         """
-        Desc:
+
             Moves feature to only null series data feature set.
 
         Args:
@@ -840,7 +840,7 @@ class DataFrameTypes:
     def add_new_bool_feature(self,
                              feature_name):
         """
-        Desc:
+
             Adds a new feature/feature(s) to the feature set bool
 
         Args:
@@ -857,7 +857,7 @@ class DataFrameTypes:
     def add_new_string_feature(self,
                                feature_name):
         """
-        Desc:
+
             Adds a new feature/feature(s) to the feature set string
 
         Args:
@@ -873,7 +873,7 @@ class DataFrameTypes:
     def add_new_integer_feature(self,
                                 feature_name):
         """
-        Desc:
+
             Adds a new feature/feature(s) to the feature set integer
 
         Args:
@@ -889,7 +889,7 @@ class DataFrameTypes:
     def add_new_float_feature(self,
                               feature_name):
         """
-        Desc:
+
             Adds a new feature/feature(s) to the feature set float
 
         Args:
@@ -905,7 +905,7 @@ class DataFrameTypes:
     def add_new_categorical_feature(self,
                                     feature_name):
         """
-        Desc:
+
             Adds a new feature/feature(s) to the feature set categorical
 
         Args:
@@ -921,7 +921,7 @@ class DataFrameTypes:
     def add_new_null_only_feature(self,
                                   feature_name):
         """
-        Desc:
+
             Adds a new feature/feature(s) to the feature set null only features
 
         Args:
@@ -937,7 +937,7 @@ class DataFrameTypes:
     def add_new_datetime_feature(self,
                                   feature_name):
         """
-        Desc:
+
             Adds a new feature/feature(s) to the feature set datetime
 
         Args:
@@ -953,7 +953,7 @@ class DataFrameTypes:
     def set_feature_colors(self,
                            feature_value_color_dict):
         """
-        Desc:
+
             Passing in a dictionary of feature names to value to hex color to
             save to this object. Error checks the dict for proper values.
 
@@ -1102,7 +1102,7 @@ class DataFrameTypes:
     def remove_feature(self,
                        feature_name):
         """
-        Desc:
+
             Removes a feature from one of the feature sets.
 
         Args:
@@ -1158,7 +1158,7 @@ class DataFrameTypes:
                          display_dataframes=False,
                          notebook_mode=False):
         """
-        Desc:
+
             Display's the feature sets info.
 
         Args:
@@ -1231,7 +1231,7 @@ class DataFrameTypes:
                              notebook_mode=False,
                              display_results=False):
         """
-        Desc:
+
             Attempts to move numerical features to the correct types by
             following the given priority que:
                 1. Bool
@@ -1325,7 +1325,7 @@ class DataFrameTypes:
                             df,
                             notebook_mode=False):
         """
-        Desc:
+
             Iterates through all string features and moves features to given types.
             May ask user question if it detects any conflicting string/numeric
             types.
@@ -1548,7 +1548,7 @@ class DataFrameTypes:
     def fix_nan_features(self,
                          df):
         """
-        Desc:
+
             Attempts to get the data type of the feature if there were no nans
             inside it.
 
@@ -1596,7 +1596,7 @@ class DataFrameTypes:
                                         directory_path,
                                         filename):
         """
-        Desc:
+
             Creates a json representation of the current objects feature sets
             and the targeted feature.
 
@@ -1662,7 +1662,7 @@ class DataFrameTypes:
     def init_on_json_file(self,
                           filepath):
         """
-        Desc:
+
             Initialize object based on a json file.
 
         Args:
@@ -1771,7 +1771,7 @@ class DataFrameTypes:
                                  df,
                                  categorical_value_dict=dict()):
         """
-        Desc:
+
             Create's encoder dict for strings and categories.
 
         Args:
@@ -1870,7 +1870,7 @@ class DataFrameTypes:
     def __bool_check(self,
                      feature_values):
         """
-        Desc:
+
             Determines if the feature type of this column is a boolean based on
             the numeric values passed to it.
 
@@ -1896,7 +1896,7 @@ class DataFrameTypes:
     def __bool_string_values_check(self,
                                    feature_values):
         """
-        Desc:
+
             Checks if a collection of strings can be considered a bool feature
             based on the amount of strings and the values of those strings.
 
@@ -1968,7 +1968,7 @@ class DataFrameTypes:
     def __categorical_check(self,
                             feature_values):
         """
-        Desc:
+
             Check to see if the feature's value can be consider a category.
 
         Args:
@@ -1993,7 +1993,7 @@ class DataFrameTypes:
     def __numeric_check(self,
                         feature_values):
         """
-        Desc:
+
             Checks if the features can be a numerical value and other numerical
             types like floats, ints, and categories.
 

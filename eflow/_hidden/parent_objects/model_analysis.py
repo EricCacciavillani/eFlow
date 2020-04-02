@@ -46,7 +46,7 @@ class ModelAnalysis(FileOutput):
                   filename="Unknown filename",
                   sub_dir=""):
         """
-        Desc:
+
             Checks the passed data to see if a plot can be saved; raises
             an error if it can't.
 
@@ -77,7 +77,7 @@ class ModelAnalysis(FileOutput):
                            sub_dir="",
                            show_index=False):
         """
-        Desc:
+
             Checks the passed data to see if a table can be saved as a plot;
             raises an error if it can't.
 
@@ -114,7 +114,7 @@ class ModelAnalysis(FileOutput):
                                   X,
                                   sub_dir):
         """
-        Desc:
+
             Generates files/graphics in the proper directory for the matrix.
 
         Args:

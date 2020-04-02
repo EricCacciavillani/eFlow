@@ -1,0 +1,950 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>eflow.data_pipeline_segments.feature_data_cleaner &mdash; eflow  documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../../../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+        <script src="../../../_static/jquery.js"></script>
+        <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/doctools.js"></script>
+        <script src="../../../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../../../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../../index.html" class="icon icon-home"> eflow
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../_autosummary/eflow.data_analysis.feature_analysis.html">eflow.data_analysis.feature_analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../_autosummary/eflow.data_analysis.null_analysis.html">eflow.data_analysis.null_analysis</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../_autosummary/eflow.data_pipeline_segments.data_encoder.html">eflow.data_pipeline_segments.data_encoder</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../_autosummary/eflow.data_pipeline_segments.feature_data_cleaner.html">eflow.data_pipeline_segments.feature_data_cleaner</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../_autosummary/eflow.data_pipeline_segments.feature_transformer.html">eflow.data_pipeline_segments.feature_transformer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../_autosummary/eflow.data_pipeline_segments.string_cleaner.html">eflow.data_pipeline_segments.string_cleaner</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../_autosummary/eflow.data_pipeline_segments.type_fixer.html">eflow.data_pipeline_segments.type_fixer</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../_autosummary/eflow.foundation.data_frame_types.html">eflow.foundation.data_frame_types</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../_autosummary/eflow.foundation.data_pipeline.html">eflow.foundation.data_pipeline</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../_autosummary/eflow.model_analysis.classification_analysis.html">eflow.model_analysis.classification_analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../_autosummary/eflow.model_analysis.regression_analysis.html">eflow.model_analysis.regression_analysis</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">eflow</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../../index.html">Module code</a> &raquo;</li>
+        
+      <li>eflow.data_pipeline_segments.feature_data_cleaner</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for eflow.data_pipeline_segments.feature_data_cleaner</h1><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">eflow._hidden.widgets.feature_data_cleaning_widget</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">eflow._hidden.parent_objects.data_pipeline_segment</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">eflow.foundation</span> <span class="kn">import</span> <span class="n">DataFrameTypes</span>
+<span class="kn">from</span> <span class="nn">eflow.utils.pandas_utils</span> <span class="kn">import</span> <span class="n">check_if_feature_exists</span>
+<span class="kn">from</span> <span class="nn">eflow.utils.misc_utils</span> <span class="kn">import</span> <span class="n">get_parameters</span>
+
+<span class="n">__author__</span> <span class="o">=</span> <span class="s2">&quot;Eric Cacciavillani&quot;</span>
+<span class="n">__copyright__</span> <span class="o">=</span> <span class="s2">&quot;Copyright 2019, eFlow&quot;</span>
+<span class="n">__credits__</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Eric Cacciavillani&quot;</span><span class="p">]</span>
+<span class="n">__license__</span> <span class="o">=</span> <span class="s2">&quot;MIT&quot;</span>
+<span class="n">__maintainer__</span> <span class="o">=</span> <span class="s2">&quot;EricCacciavillani&quot;</span>
+<span class="n">__email__</span> <span class="o">=</span> <span class="s2">&quot;eric.cacciavillani@gmail.com&quot;</span>
+
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">scipy</span> <span class="kn">import</span> <span class="n">stats</span>
+<span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">deque</span>
+
+
+<div class="viewcode-block" id="FeatureDataCleaner"><a class="viewcode-back" href="../../../_autosummary/eflow.data_pipeline_segments.feature_data_cleaner.html#eflow.data_pipeline_segments.feature_data_cleaner.FeatureDataCleaner">[docs]</a><span class="k">class</span> <span class="nc">FeatureDataCleaner</span><span class="p">(</span><span class="n">DataPipelineSegment</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Designed for a multipurpose data cleaner.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+                 <span class="n">segment_id</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                 <span class="n">create_file</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Args:</span>
+<span class="sd">            segment_id: str</span>
+<span class="sd">                Reference id to past segments of this object.</span>
+
+<span class="sd">        Note/Caveats:</span>
+<span class="sd">            When creating any public function that will be part of the pipeline&#39;s</span>
+<span class="sd">            structure it is important to follow this given template. Also,</span>
+<span class="sd">            try not to use _add_to_que. Can ruin the entire purpose of this</span>
+<span class="sd">            project.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">DataPipelineSegment</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+                                     <span class="n">object_type</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="p">,</span>
+                                     <span class="n">segment_id</span><span class="o">=</span><span class="n">segment_id</span><span class="p">,</span>
+                                     <span class="n">create_file</span><span class="o">=</span><span class="n">create_file</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">__test_cleaning_methods</span> <span class="o">=</span> <span class="kc">False</span>
+
+        <span class="c1"># self.__requires_nan_removal = df.isnull().values.any()</span>
+        <span class="c1">#</span>
+        <span class="c1"># # Throw error here</span>
+        <span class="c1"># if df is None:</span>
+        <span class="c1">#     return</span>
+
+        <span class="c1"># --- Setting up widget options</span>
+
+        <span class="c1"># Dummy line to show in the menu for cleaner viewing</span>
+        <span class="c1"># self.__data_cleaning_options[&quot;TYPE&quot;][</span>
+        <span class="c1">#     &quot;---------------------&quot; + (&quot; &quot; * space_counters.pop())] = \</span>
+        <span class="c1">#     self.__ignore_feature</span>
+
+        <span class="c1"># Set up numerical cleaning options</span>
+        <span class="n">space_counters</span> <span class="o">=</span> <span class="p">{</span><span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">50</span><span class="p">)}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__data_cleaning_options</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__data_cleaning_options</span><span class="p">[</span><span class="s2">&quot;Number&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">__data_cleaning_options</span><span class="p">[</span><span class="s2">&quot;Number&quot;</span><span class="p">][</span><span class="s2">&quot;Ignore feature&quot;</span><span class="p">]</span> <span class="o">=</span> \
+            <span class="bp">self</span><span class="o">.</span><span class="n">ignore_feature</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__data_cleaning_options</span><span class="p">[</span><span class="s2">&quot;Number&quot;</span><span class="p">][</span><span class="s2">&quot;Drop feature&quot;</span><span class="p">]</span> <span class="o">=</span> \
+            <span class="bp">self</span><span class="o">.</span><span class="n">drop_feature</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__data_cleaning_options</span><span class="p">[</span><span class="s2">&quot;Number&quot;</span><span class="p">][</span><span class="s2">&quot;Remove all nans&quot;</span><span class="p">]</span> <span class="o">=</span> \
+            <span class="bp">self</span><span class="o">.</span><span class="n">remove_nans</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">__data_cleaning_options</span><span class="p">[</span><span class="s2">&quot;Number&quot;</span><span class="p">][</span>
+            <span class="s2">&quot;---------------------&quot;</span> <span class="o">+</span> <span class="p">(</span><span class="s2">&quot; &quot;</span> <span class="o">*</span> <span class="n">space_counters</span><span class="o">.</span><span class="n">pop</span><span class="p">())]</span> <span class="o">=</span> \
+            <span class="bp">self</span><span class="o">.</span><span class="n">ignore_feature</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">__data_cleaning_options</span><span class="p">[</span><span class="s2">&quot;Number&quot;</span><span class="p">][</span>
+            <span class="s2">&quot;Fill nan with min value of distribution&quot;</span><span class="p">]</span> <span class="o">=</span> \
+            <span class="bp">self</span><span class="o">.</span><span class="n">fill_nan_by_distribution</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__data_cleaning_options</span><span class="p">[</span><span class="s2">&quot;Number&quot;</span><span class="p">][</span>
+            <span class="s2">&quot;Fill nan with x% value of distribution&quot;</span><span class="p">]</span> <span class="o">=</span> \
+            <span class="bp">self</span><span class="o">.</span><span class="n">fill_nan_by_distribution</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__data_cleaning_options</span><span class="p">[</span><span class="s2">&quot;Number&quot;</span><span class="p">][</span>
+            <span class="s2">&quot;Fill nan with median value of distribution&quot;</span><span class="p">]</span> <span class="o">=</span> \
+            <span class="bp">self</span><span class="o">.</span><span class="n">fill_nan_by_distribution</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__data_cleaning_options</span><span class="p">[</span><span class="s2">&quot;Number&quot;</span><span class="p">][</span>
+            <span class="s2">&quot;Fill nan with max value of distribution&quot;</span><span class="p">]</span> <span class="o">=</span> \
+            <span class="bp">self</span><span class="o">.</span><span class="n">fill_nan_by_distribution</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__data_cleaning_options</span><span class="p">[</span><span class="s2">&quot;Number&quot;</span><span class="p">][</span>
+            <span class="s2">&quot;---------------------&quot;</span> <span class="o">+</span> <span class="p">(</span><span class="s2">&quot; &quot;</span> <span class="o">*</span> <span class="n">space_counters</span><span class="o">.</span><span class="n">pop</span><span class="p">())]</span> <span class="o">=</span> \
+            <span class="bp">self</span><span class="o">.</span><span class="n">ignore_feature</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">__data_cleaning_options</span><span class="p">[</span><span class="s2">&quot;Number&quot;</span><span class="p">][</span>
+            <span class="s2">&quot;Fill nan with average value of distribution&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">fill_nan_by_average</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__data_cleaning_options</span><span class="p">[</span><span class="s2">&quot;Number&quot;</span><span class="p">][</span>
+            <span class="s2">&quot;Fill nan with mode of distribution&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">fill_nan_by_mode</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__data_cleaning_options</span><span class="p">[</span><span class="s2">&quot;Number&quot;</span><span class="p">][</span>
+            <span class="s2">&quot;Fill null with specfic value&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">fill_nan_with_specfic_value</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__data_cleaning_options</span><span class="p">[</span><span class="s2">&quot;Number&quot;</span><span class="p">][</span>
+            <span class="s2">&quot;---------------------&quot;</span> <span class="o">+</span> <span class="p">(</span><span class="s2">&quot; &quot;</span> <span class="o">*</span> <span class="n">space_counters</span><span class="o">.</span><span class="n">pop</span><span class="p">())]</span> <span class="o">=</span> \
+            <span class="bp">self</span><span class="o">.</span><span class="n">ignore_feature</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">__data_cleaning_options</span><span class="p">[</span><span class="s2">&quot;Number&quot;</span><span class="p">][</span>
+            <span class="s2">&quot;Fill with least common count of distribution&quot;</span><span class="p">]</span> <span class="o">=</span> \
+            <span class="bp">self</span><span class="o">.</span><span class="n">fill_nan_by_occurance_percentaile</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__data_cleaning_options</span><span class="p">[</span><span class="s2">&quot;Number&quot;</span><span class="p">][</span>
+            <span class="s2">&quot;Fill with most common count of distribution&quot;</span><span class="p">]</span> <span class="o">=</span> \
+            <span class="bp">self</span><span class="o">.</span><span class="n">fill_nan_by_occurance_percentaile</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__data_cleaning_options</span><span class="p">[</span><span class="s2">&quot;Number&quot;</span><span class="p">][</span>
+            <span class="s2">&quot;Fill with x</span><span class="si">% c</span><span class="s2">ount distribution&quot;</span><span class="p">]</span> <span class="o">=</span> \
+            <span class="bp">self</span><span class="o">.</span><span class="n">fill_nan_by_occurance_percentaile</span>
+
+        <span class="c1"># Set up category cleaning options</span>
+        <span class="n">space_counters</span> <span class="o">=</span> <span class="p">{</span><span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">50</span><span class="p">)}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__data_cleaning_options</span><span class="p">[</span><span class="s2">&quot;Category&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__data_cleaning_options</span><span class="p">[</span><span class="s2">&quot;Category&quot;</span><span class="p">][</span><span class="s2">&quot;Ignore feature&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ignore_feature</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__data_cleaning_options</span><span class="p">[</span><span class="s2">&quot;Category&quot;</span><span class="p">][</span><span class="s2">&quot;Drop feature&quot;</span><span class="p">]</span> <span class="o">=</span> \
+            <span class="bp">self</span><span class="o">.</span><span class="n">drop_feature</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__data_cleaning_options</span><span class="p">[</span><span class="s2">&quot;Category&quot;</span><span class="p">][</span><span class="s2">&quot;Remove all nans&quot;</span><span class="p">]</span> <span class="o">=</span> \
+            <span class="bp">self</span><span class="o">.</span><span class="n">remove_nans</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">__data_cleaning_options</span><span class="p">[</span><span class="s2">&quot;Category&quot;</span><span class="p">][</span>
+            <span class="s2">&quot;---------------------&quot;</span> <span class="o">+</span> <span class="p">(</span><span class="s2">&quot; &quot;</span> <span class="o">*</span> <span class="n">space_counters</span><span class="o">.</span><span class="n">pop</span><span class="p">())]</span> <span class="o">=</span> \
+            <span class="bp">self</span><span class="o">.</span><span class="n">ignore_feature</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__data_cleaning_options</span><span class="p">[</span><span class="s2">&quot;Category&quot;</span><span class="p">][</span>
+            <span class="s2">&quot;Fill null with specfic value&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">fill_nan_with_specfic_value</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__data_cleaning_options</span><span class="p">[</span><span class="s2">&quot;Category&quot;</span><span class="p">][</span>
+            <span class="s2">&quot;---------------------&quot;</span> <span class="o">+</span> <span class="p">(</span><span class="s2">&quot; &quot;</span> <span class="o">*</span> <span class="n">space_counters</span><span class="o">.</span><span class="n">pop</span><span class="p">())]</span> <span class="o">=</span> \
+            <span class="bp">self</span><span class="o">.</span><span class="n">ignore_feature</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">__data_cleaning_options</span><span class="p">[</span><span class="s2">&quot;Category&quot;</span><span class="p">][</span>
+            <span class="s2">&quot;Fill nan with mode of distribution&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">fill_nan_by_mode</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__data_cleaning_options</span><span class="p">[</span><span class="s2">&quot;Category&quot;</span><span class="p">][</span>
+            <span class="s2">&quot;Fill with least common count of distribution&quot;</span><span class="p">]</span> <span class="o">=</span> \
+            <span class="bp">self</span><span class="o">.</span><span class="n">fill_nan_by_occurance_percentaile</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__data_cleaning_options</span><span class="p">[</span><span class="s2">&quot;Category&quot;</span><span class="p">][</span>
+            <span class="s2">&quot;Fill with most common count of distribution&quot;</span><span class="p">]</span> <span class="o">=</span> \
+            <span class="bp">self</span><span class="o">.</span><span class="n">fill_nan_by_occurance_percentaile</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__data_cleaning_options</span><span class="p">[</span><span class="s2">&quot;Category&quot;</span><span class="p">][</span>
+            <span class="s2">&quot;Fill with x</span><span class="si">% c</span><span class="s2">ount distribution&quot;</span><span class="p">]</span> <span class="o">=</span> \
+            <span class="bp">self</span><span class="o">.</span><span class="n">fill_nan_by_occurance_percentaile</span>
+
+
+        <span class="c1"># Set up boolean cleaning options</span>
+        <span class="n">space_counters</span> <span class="o">=</span> <span class="p">{</span><span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">50</span><span class="p">)}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__data_cleaning_options</span><span class="p">[</span><span class="s2">&quot;Bool&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__data_cleaning_options</span><span class="p">[</span><span class="s2">&quot;Bool&quot;</span><span class="p">][</span>
+            <span class="s2">&quot;Ignore feature&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ignore_feature</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__data_cleaning_options</span><span class="p">[</span><span class="s2">&quot;Bool&quot;</span><span class="p">][</span><span class="s2">&quot;Drop feature&quot;</span><span class="p">]</span> <span class="o">=</span> \
+            <span class="bp">self</span><span class="o">.</span><span class="n">drop_feature</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__data_cleaning_options</span><span class="p">[</span><span class="s2">&quot;Bool&quot;</span><span class="p">][</span><span class="s2">&quot;Remove all nans&quot;</span><span class="p">]</span> <span class="o">=</span> \
+            <span class="bp">self</span><span class="o">.</span><span class="n">remove_nans</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">__data_cleaning_options</span><span class="p">[</span><span class="s2">&quot;Bool&quot;</span><span class="p">][</span>
+            <span class="s2">&quot;---------------------&quot;</span> <span class="o">+</span> <span class="p">(</span><span class="s2">&quot; &quot;</span> <span class="o">*</span> <span class="n">space_counters</span><span class="o">.</span><span class="n">pop</span><span class="p">())]</span> <span class="o">=</span> \
+            <span class="bp">self</span><span class="o">.</span><span class="n">ignore_feature</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">__data_cleaning_options</span><span class="p">[</span><span class="s2">&quot;Bool&quot;</span><span class="p">][</span><span class="s2">&quot;Make nan Assertions&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">make_nan_assertions</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">__data_cleaning_options</span><span class="p">[</span><span class="s2">&quot;Bool&quot;</span><span class="p">][</span>
+            <span class="s2">&quot;Fill null with specfic bool value&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">fill_nan_with_specfic_value</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">__data_cleaning_options</span><span class="p">[</span><span class="s2">&quot;Bool&quot;</span><span class="p">][</span>
+            <span class="s2">&quot;Fill with least common count of distribution&quot;</span><span class="p">]</span> <span class="o">=</span> \
+            <span class="bp">self</span><span class="o">.</span><span class="n">fill_nan_by_occurance_percentaile</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__data_cleaning_options</span><span class="p">[</span><span class="s2">&quot;Bool&quot;</span><span class="p">][</span>
+            <span class="s2">&quot;Fill with most common count of distribution&quot;</span><span class="p">]</span> <span class="o">=</span> \
+            <span class="bp">self</span><span class="o">.</span><span class="n">fill_nan_by_occurance_percentaile</span>
+
+        <span class="c1"># Set up boolean cleaning options</span>
+        <span class="n">space_counters</span> <span class="o">=</span> <span class="p">{</span><span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">50</span><span class="p">)}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__data_cleaning_options</span><span class="p">[</span><span class="s2">&quot;Date&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__data_cleaning_options</span><span class="p">[</span><span class="s2">&quot;Date&quot;</span><span class="p">][</span>
+            <span class="s2">&quot;Ignore feature&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ignore_feature</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__data_cleaning_options</span><span class="p">[</span><span class="s2">&quot;Date&quot;</span><span class="p">][</span><span class="s2">&quot;Drop feature&quot;</span><span class="p">]</span> <span class="o">=</span> \
+            <span class="bp">self</span><span class="o">.</span><span class="n">drop_feature</span>
+
+        <span class="c1"># Error case on data types</span>
+        <span class="n">space_counters</span> <span class="o">=</span> <span class="p">{</span><span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">50</span><span class="p">)}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__data_cleaning_options</span><span class="p">[</span><span class="s2">&quot;Unknown&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__data_cleaning_options</span><span class="p">[</span><span class="s2">&quot;Unknown&quot;</span><span class="p">][</span>
+            <span class="s2">&quot;ERROR UNKNOWN FEATURE TYPE FOUND&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ignore_feature</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__data_cleaning_options</span><span class="p">[</span><span class="s2">&quot;Unknown&quot;</span><span class="p">][</span>
+            <span class="s2">&quot;Ignore feature&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ignore_feature</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__data_cleaning_options</span><span class="p">[</span><span class="s2">&quot;Unknown&quot;</span><span class="p">][</span><span class="s2">&quot;Drop feature&quot;</span><span class="p">]</span> <span class="o">=</span> \
+            <span class="bp">self</span><span class="o">.</span><span class="n">ignore_feature</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__data_cleaning_options</span><span class="p">[</span><span class="s2">&quot;Unknown&quot;</span><span class="p">][</span><span class="s2">&quot;Remove all nans&quot;</span><span class="p">]</span> <span class="o">=</span> \
+            <span class="bp">self</span><span class="o">.</span><span class="n">remove_nans</span>
+
+        <span class="c1"># Written conditionals for functions requiring input fields</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__require_input</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;Fill null with specfic value&quot;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
+                                <span class="s2">&quot;Fill null with specfic bool value&quot;</span><span class="p">:</span> <span class="s1">&#39;x == 1 or x == 0&#39;</span><span class="p">,</span>
+                                <span class="s2">&quot;Fill nan with x% value of distribution&quot;</span><span class="p">:</span>
+                                    <span class="s1">&#39;x &gt;= 0 and x &lt;=100&#39;</span><span class="p">,</span>
+                                <span class="s2">&quot;Fill with random existing values&quot;</span><span class="p">:</span> <span class="s1">&#39;x &gt; 0&#39;</span><span class="p">,</span>
+                                <span class="s2">&quot;Fill with x</span><span class="si">% c</span><span class="s2">ount distribution&quot;</span><span class="p">:</span>
+                                    <span class="s1">&#39;x &gt;= 0 and x &lt;=100&#39;</span><span class="p">}</span>
+
+        <span class="c1"># ---</span>
+        <span class="c1"># self.__notebook_mode = notebook_mode</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__ui_widget</span> <span class="o">=</span> <span class="n">DataCleaningWidget</span><span class="p">(</span>
+            <span class="n">require_input</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">__require_input</span><span class="p">,</span>
+            <span class="n">data_cleaning_options</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">__data_cleaning_options</span><span class="p">)</span>
+
+
+    <span class="k">def</span> <span class="nf">get_user_inputs</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__ui_widget</span><span class="o">.</span><span class="n">get_user_inputs</span><span class="p">()</span>
+
+<div class="viewcode-block" id="FeatureDataCleaner.run_widget"><a class="viewcode-back" href="../../../_autosummary/eflow.data_pipeline_segments.feature_data_cleaner.html#eflow.data_pipeline_segments.feature_data_cleaner.FeatureDataCleaner.run_widget">[docs]</a>    <span class="k">def</span> <span class="nf">run_widget</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+                   <span class="n">df</span><span class="p">,</span>
+                   <span class="n">df_features</span><span class="p">,</span>
+                   <span class="n">nan_feature_names</span><span class="o">=</span><span class="p">[]):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        df:</span>
+<span class="sd">            A pandas dataframe object</span>
+
+<span class="sd">        df_features:</span>
+<span class="sd">            DataFrameTypes object; organizes feature types into groups.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Returns a UI widget to create a JSON file for cleaning.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="c1"># Throw Error here</span>
+        <span class="k">if</span> <span class="n">df</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">nan_feature_names</span><span class="p">:</span>
+            <span class="n">nan_feature_names</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="p">[</span><span class="n">df</span><span class="o">.</span><span class="n">isna</span><span class="p">()</span><span class="o">.</span><span class="n">any</span><span class="p">()]</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">__ui_widget</span><span class="o">.</span><span class="n">run_widget</span><span class="p">(</span><span class="n">nan_feature_names</span><span class="p">,</span>
+                                    <span class="n">df_features</span><span class="p">)</span></div>
+
+    <span class="k">def</span> <span class="nf">perform_saved_widget_input</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+                                   <span class="n">df</span><span class="p">,</span>
+                                   <span class="n">df_features</span><span class="p">,</span>
+                                   <span class="n">suppress_runtime_errors</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                                   <span class="n">reset_segment_file</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+
+        <span class="k">try</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">bool_value</span> <span class="ow">in</span> <span class="p">[</span><span class="kc">True</span><span class="p">,</span><span class="kc">False</span><span class="p">]:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">__test_cleaning_methods</span> <span class="o">=</span> <span class="n">bool_value</span>
+
+                <span class="n">selected_options</span><span class="p">,</span> \
+                <span class="n">feature_input_holder</span><span class="p">,</span> \
+                <span class="n">feature_zscore_holder</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__ui_widget</span><span class="o">.</span><span class="n">get_user_inputs</span><span class="p">()</span>
+
+                <span class="k">for</span> <span class="n">feature_name</span><span class="p">,</span> <span class="n">function_option</span> <span class="ow">in</span> <span class="n">selected_options</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+
+                    <span class="k">for</span> <span class="n">dtype</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;Number&quot;</span><span class="p">,</span><span class="s2">&quot;Bool&quot;</span><span class="p">,</span><span class="s2">&quot;Category&quot;</span><span class="p">,</span> <span class="s2">&quot;Date&quot;</span><span class="p">]:</span>
+
+                        <span class="k">if</span> <span class="n">function_option</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">__data_cleaning_options</span><span class="p">[</span><span class="n">dtype</span><span class="p">]:</span>
+
+                            <span class="n">saved_function</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__data_cleaning_options</span><span class="p">[</span><span class="n">dtype</span><span class="p">][</span><span class="n">function_option</span><span class="p">]</span>
+                            <span class="n">exec_str</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;saved_function(df,df_features,feature_name,&quot;</span>
+
+                            <span class="k">if</span> <span class="n">feature_name</span> <span class="ow">in</span> <span class="n">feature_input_holder</span> <span class="ow">and</span> \
+                                    <span class="n">feature_input_holder</span><span class="p">[</span><span class="n">feature_name</span><span class="p">]:</span>
+                                    <span class="k">try</span><span class="p">:</span>
+                                        <span class="nb">int</span><span class="p">(</span><span class="n">feature_input_holder</span><span class="p">[</span><span class="n">feature_name</span><span class="p">])</span>
+                                        <span class="n">exec_str</span> <span class="o">+=</span> <span class="n">feature_input_holder</span><span class="p">[</span>
+                                                        <span class="n">feature_name</span><span class="p">]</span> <span class="o">+</span> <span class="s2">&quot;,&quot;</span>
+                                    <span class="k">except</span><span class="p">:</span>
+                                        <span class="n">exec_str</span> <span class="o">+=</span> <span class="s2">&quot;</span><span class="se">\&quot;</span><span class="s2">&quot;</span> <span class="o">+</span> <span class="n">feature_input_holder</span><span class="p">[</span><span class="n">feature_name</span><span class="p">]</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\&quot;</span><span class="s2">,&quot;</span>
+
+                            <span class="k">if</span> <span class="n">function_option</span> <span class="o">==</span> <span class="s2">&quot;Fill nan with min value of distribution&quot;</span> <span class="ow">or</span> <span class="n">function_option</span> <span class="o">==</span> <span class="s2">&quot;Fill with least common count of distribution&quot;</span><span class="p">:</span>
+                                <span class="n">exec_str</span> <span class="o">+=</span> <span class="s2">&quot;0,&quot;</span>
+                            <span class="k">elif</span> <span class="n">function_option</span> <span class="o">==</span> <span class="s2">&quot;Fill nan with median value of distribution&quot;</span><span class="p">:</span>
+                                <span class="n">exec_str</span> <span class="o">+=</span> <span class="s2">&quot;50,&quot;</span>
+                            <span class="k">elif</span> <span class="n">function_option</span> <span class="o">==</span> <span class="s2">&quot;Fill nan with max value of distribution&quot;</span> <span class="ow">or</span> <span class="n">function_option</span> <span class="o">==</span> <span class="s2">&quot;Fill with most common count of distribution&quot;</span><span class="p">:</span>
+                                <span class="n">exec_str</span> <span class="o">+=</span> <span class="s2">&quot;100,&quot;</span>
+
+                            <span class="k">if</span> <span class="n">feature_name</span> <span class="ow">in</span> <span class="n">feature_zscore_holder</span> <span class="ow">and</span> \
+                                    <span class="n">feature_zscore_holder</span><span class="p">[</span><span class="n">feature_name</span><span class="p">]:</span>
+                                <span class="n">exec_str</span> <span class="o">+=</span> <span class="n">feature_zscore_holder</span><span class="p">[</span><span class="n">feature_name</span><span class="p">]</span> <span class="o">+</span> <span class="s2">&quot;,&quot;</span>
+
+                            <span class="n">exec_str</span> <span class="o">+=</span> <span class="s2">&quot;)&quot;</span>
+
+                            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">__test_cleaning_methods</span><span class="p">:</span>
+                                <span class="n">defined_function_string</span> <span class="o">=</span> <span class="n">exec_str</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;saved_function&quot;</span><span class="p">,</span>
+                                                                           <span class="n">saved_function</span><span class="o">.</span><span class="vm">__name__</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;feature_name&quot;</span><span class="p">,</span>
+                                                                                                            <span class="sa">f</span><span class="s2">&quot;</span><span class="se">\&quot;</span><span class="si">{feature_name}</span><span class="se">\&quot;</span><span class="s2">&quot;</span><span class="p">)</span>
+                                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;***&quot;</span> <span class="o">*</span> <span class="mi">10</span><span class="p">)</span>
+                                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Testing function&quot;</span><span class="p">)</span>
+                                <span class="nb">print</span><span class="p">(</span><span class="n">defined_function_string</span><span class="p">)</span>
+                            <span class="c1"># print(exec_str)</span>
+                            <span class="k">try</span><span class="p">:</span>
+                                <span class="n">exec</span><span class="p">(</span><span class="n">exec_str</span><span class="p">)</span>
+
+                                <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">__test_cleaning_methods</span><span class="p">:</span>
+                                    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;PASSED TEST!&quot;</span><span class="p">)</span>
+                                    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;***&quot;</span> <span class="o">*</span> <span class="mi">10</span><span class="p">)</span>
+                                <span class="nb">print</span><span class="p">()</span>
+                            <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+
+                                <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">__test_cleaning_methods</span><span class="p">:</span>
+                                    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;FAILED TEST!&quot;</span><span class="p">)</span>
+                                    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;***&quot;</span> <span class="o">*</span> <span class="mi">10</span><span class="p">)</span>
+                                <span class="bp">self</span><span class="o">.</span><span class="n">__test_cleaning_methods</span> <span class="o">=</span> <span class="kc">False</span>
+                                <span class="k">if</span> <span class="n">reset_segment_file</span><span class="p">:</span>
+                                    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Exception hit when trying to perform all &quot;</span>
+                                          <span class="s2">&quot;cleaning functions. &quot;</span>
+                                          <span class="s2">&quot;Resetting json object for feature data cleaner segment!&quot;</span><span class="p">)</span>
+                                    <span class="bp">self</span><span class="o">.</span><span class="n">reset_segment_file</span><span class="p">()</span>
+                                <span class="k">raise</span> <span class="n">e</span>
+                            <span class="k">break</span>
+        <span class="k">finally</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__test_cleaning_methods</span> <span class="o">=</span> <span class="kc">False</span>
+
+    <span class="c1"># --- Cleaning options</span>
+<div class="viewcode-block" id="FeatureDataCleaner.make_nan_assertions"><a class="viewcode-back" href="../../../_autosummary/eflow.data_pipeline_segments.feature_data_cleaner.html#eflow.data_pipeline_segments.feature_data_cleaner.FeatureDataCleaner.make_nan_assertions">[docs]</a>    <span class="k">def</span> <span class="nf">make_nan_assertions</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+                            <span class="n">df</span><span class="p">,</span>
+                            <span class="n">df_features</span><span class="p">,</span>
+                            <span class="n">feature_name</span><span class="p">,</span>
+                            <span class="n">_add_to_que</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">            Make nan assertions for boolean features.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            df: pd.Dataframe</span>
+<span class="sd">                Pandas Dataframe</span>
+
+<span class="sd">            df_features: DataFrameType from eflow</span>
+<span class="sd">                Organizes feature types into groups.</span>
+
+<span class="sd">            feature_name: string</span>
+<span class="sd">                Name of the feature in the datatframe</span>
+
+<span class="sd">            _add_to_que: bool</span>
+<span class="sd">                Pushes the function to pipeline segment parent if set to &#39;True&#39;.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">check_if_feature_exists</span><span class="p">(</span><span class="n">df</span><span class="p">,</span>
+                                <span class="n">feature_name</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">feature_name</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">df_features</span><span class="o">.</span><span class="n">all_features</span><span class="p">():</span>
+            <span class="k">raise</span> <span class="ne">KeyError</span><span class="p">(</span>
+                <span class="sa">f</span><span class="s2">&quot;The feature </span><span class="se">\&#39;</span><span class="si">{feature_name}</span><span class="se">\&#39;</span><span class="s2"> was not found in the dataframe!&quot;</span>
+                <span class="o">+</span> <span class="s2">&quot; Please select a valid feature from the df_features.&quot;</span><span class="p">)</span>
+
+
+        <span class="k">if</span> <span class="n">feature_name</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">df_features</span><span class="o">.</span><span class="n">bool_features</span><span class="p">():</span>
+            <span class="k">raise</span> <span class="n">UnsatisfiedRequirments</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{feature_name}</span><span class="s2"> must be a bool feature.&quot;</span><span class="p">)</span>
+
+        <span class="n">unique_series</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">feature_name</span><span class="p">]</span><span class="o">.</span><span class="n">dropna</span><span class="p">()</span><span class="o">.</span><span class="n">unique</span><span class="p">()</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
+
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">unique_series</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span> <span class="ow">and</span> <span class="p">(</span>
+                <span class="n">unique_series</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span> <span class="ow">or</span> <span class="n">unique_series</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">):</span>
+            <span class="n">replace_value</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">unique_series</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span>
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">fill_nan_with_specfic_value</span><span class="p">(</span><span class="n">df</span><span class="p">,</span>
+                                             <span class="n">df_features</span><span class="p">,</span>
+                                             <span class="n">feature_name</span><span class="o">=</span><span class="n">feature_name</span><span class="p">,</span>
+                                             <span class="n">replace_value</span><span class="o">=</span><span class="n">replace_value</span><span class="p">,</span>
+                                             <span class="n">_add_to_que</span><span class="o">=</span><span class="n">_add_to_que</span><span class="p">)</span>
+
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">UnsatisfiedRequirments</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Boolean assertions can&#39;t be made with this given feature </span><span class="si">{feature_name}</span><span class="s2">.&quot;</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="FeatureDataCleaner.ignore_feature"><a class="viewcode-back" href="../../../_autosummary/eflow.data_pipeline_segments.feature_data_cleaner.html#eflow.data_pipeline_segments.feature_data_cleaner.FeatureDataCleaner.ignore_feature">[docs]</a>    <span class="k">def</span> <span class="nf">ignore_feature</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+                       <span class="n">df</span><span class="p">,</span>
+                       <span class="n">df_features</span><span class="p">,</span>
+                       <span class="n">feature_name</span><span class="p">,</span>
+                       <span class="n">_add_to_que</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">            Ignore the given feature.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            df: pd.Dataframe</span>
+<span class="sd">                Pandas Dataframe</span>
+
+<span class="sd">            df_features: DataFrameType from eflow</span>
+<span class="sd">                Organizes feature types into groups.</span>
+
+<span class="sd">            feature_name: string</span>
+<span class="sd">                Name of the feature in the datatframe</span>
+
+<span class="sd">            _add_to_que: bool</span>
+<span class="sd">                Pushes the function to pipeline segment parent if set to &#39;True&#39;.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">check_if_feature_exists</span><span class="p">(</span><span class="n">df</span><span class="p">,</span>
+                                <span class="n">feature_name</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">feature_name</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">df_features</span><span class="o">.</span><span class="n">all_features</span><span class="p">():</span>
+            <span class="k">raise</span> <span class="ne">KeyError</span><span class="p">(</span>
+                <span class="sa">f</span><span class="s2">&quot;The feature </span><span class="se">\&#39;</span><span class="si">{feature_name}</span><span class="se">\&#39;</span><span class="s2"> was not found in the dataframe!&quot;</span>
+                <span class="o">+</span> <span class="s2">&quot; Please select a valid feature from the df_features.&quot;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">__test_cleaning_methods</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Ignore feature: &quot;</span><span class="p">,</span> <span class="n">feature_name</span><span class="p">)</span>
+
+            <span class="k">if</span> <span class="n">_add_to_que</span><span class="p">:</span>
+                <span class="n">params_dict</span> <span class="o">=</span> <span class="nb">locals</span><span class="p">()</span>
+                <span class="n">parameters</span> <span class="o">=</span> <span class="n">get_parameters</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">drop_feature</span><span class="p">)</span>
+
+                <span class="bp">self</span><span class="o">.</span><span class="n">_DataPipelineSegment__add_function_to_que</span><span class="p">(</span><span class="s2">&quot;ignore_feature&quot;</span><span class="p">,</span>
+                                                               <span class="n">parameters</span><span class="p">,</span>
+                                                               <span class="n">params_dict</span><span class="p">)</span></div>
+
+            <span class="c1"># Remove any unwanted arguments in params_dict</span>
+            <span class="c1"># if _add_to_que:</span>
+            <span class="c1">#     params_dict = locals()</span>
+            <span class="c1">#     parameters = get_parameters(self.ignore_feature)</span>
+            <span class="c1">#</span>
+            <span class="c1">#     self._DataPipelineSegmentfunction_name(&quot;ignore_feature&quot;,</span>
+            <span class="c1">#                                            parameters,</span>
+            <span class="c1">#                                            params_dict)</span>
+
+
+<div class="viewcode-block" id="FeatureDataCleaner.drop_feature"><a class="viewcode-back" href="../../../_autosummary/eflow.data_pipeline_segments.feature_data_cleaner.html#eflow.data_pipeline_segments.feature_data_cleaner.FeatureDataCleaner.drop_feature">[docs]</a>    <span class="k">def</span> <span class="nf">drop_feature</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+                     <span class="n">df</span><span class="p">,</span>
+                     <span class="n">df_features</span><span class="p">,</span>
+                     <span class="n">feature_name</span><span class="p">,</span>
+                     <span class="n">_add_to_que</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">            Drop a feature in the dataframe.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            df: pd.Dataframe</span>
+<span class="sd">                Pandas Dataframe</span>
+
+<span class="sd">            df_features: DataFrameType from eflow</span>
+<span class="sd">                Organizes feature types into groups.</span>
+
+<span class="sd">            feature_name: string</span>
+<span class="sd">                Name of the feature in the datatframe</span>
+
+<span class="sd">            _add_to_que: bool</span>
+<span class="sd">                Pushes the function to pipeline segment parent if set to &#39;True&#39;.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">check_if_feature_exists</span><span class="p">(</span><span class="n">df</span><span class="p">,</span>
+                                <span class="n">feature_name</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">feature_name</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">df_features</span><span class="o">.</span><span class="n">all_features</span><span class="p">():</span>
+            <span class="k">raise</span> <span class="ne">KeyError</span><span class="p">(</span>
+                <span class="sa">f</span><span class="s2">&quot;The feature </span><span class="se">\&#39;</span><span class="si">{feature_name}</span><span class="se">\&#39;</span><span class="s2"> was not found in the dataframe!&quot;</span>
+                <span class="o">+</span> <span class="s2">&quot; Please select a valid feature from the df_features.&quot;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">__test_cleaning_methods</span><span class="p">:</span>
+
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Droping Feature: &quot;</span><span class="p">,</span> <span class="n">feature_name</span><span class="p">)</span>
+
+            <span class="n">df</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="n">feature_name</span><span class="p">,</span>
+                    <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+            <span class="n">df</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">drop</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                           <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+            <span class="n">df_features</span><span class="o">.</span><span class="n">remove_feature</span><span class="p">(</span><span class="n">feature_name</span><span class="p">)</span>
+
+            <span class="k">if</span> <span class="n">_add_to_que</span><span class="p">:</span>
+                <span class="n">params_dict</span> <span class="o">=</span> <span class="nb">locals</span><span class="p">()</span>
+                <span class="n">parameters</span> <span class="o">=</span> <span class="n">get_parameters</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">drop_feature</span><span class="p">)</span>
+
+                <span class="bp">self</span><span class="o">.</span><span class="n">_DataPipelineSegment__add_function_to_que</span><span class="p">(</span><span class="s2">&quot;drop_feature&quot;</span><span class="p">,</span>
+                                                               <span class="n">parameters</span><span class="p">,</span>
+                                                               <span class="n">params_dict</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="FeatureDataCleaner.remove_nans"><a class="viewcode-back" href="../../../_autosummary/eflow.data_pipeline_segments.feature_data_cleaner.html#eflow.data_pipeline_segments.feature_data_cleaner.FeatureDataCleaner.remove_nans">[docs]</a>    <span class="k">def</span> <span class="nf">remove_nans</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+                    <span class="n">df</span><span class="p">,</span>
+                    <span class="n">df_features</span><span class="p">,</span>
+                    <span class="n">feature_name</span><span class="p">,</span>
+                    <span class="n">_add_to_que</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">            Remove rows of data based on the given feature.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            df: pd.Dataframe</span>
+<span class="sd">                Pandas Dataframe</span>
+
+<span class="sd">            df_features: DataFrameType from eflow</span>
+<span class="sd">                Organizes feature types into groups.</span>
+
+<span class="sd">            feature_name: string</span>
+<span class="sd">                Name of the feature in the datatframe</span>
+
+<span class="sd">            _add_to_que: bool</span>
+<span class="sd">                Pushes the function to pipeline segment parent if set to &#39;True&#39;.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">check_if_feature_exists</span><span class="p">(</span><span class="n">df</span><span class="p">,</span>
+                                <span class="n">feature_name</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">feature_name</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">df_features</span><span class="o">.</span><span class="n">all_features</span><span class="p">():</span>
+            <span class="k">raise</span> <span class="ne">KeyError</span><span class="p">(</span>
+                <span class="sa">f</span><span class="s2">&quot;The feature </span><span class="se">\&#39;</span><span class="si">{feature_name}</span><span class="se">\&#39;</span><span class="s2"> was not found in the dataframe!&quot;</span>
+                <span class="o">+</span> <span class="s2">&quot; Please select a valid feature from the df_features.&quot;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">__test_cleaning_methods</span><span class="p">:</span>
+
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Remove data from rows where the feature </span><span class="si">{feature_name}</span><span class="s2"> is equal to nan&quot;</span><span class="p">)</span>
+
+            <span class="n">df</span><span class="p">[</span><span class="n">feature_name</span><span class="p">]</span><span class="o">.</span><span class="n">dropna</span><span class="p">(</span><span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+            <span class="n">df</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">drop</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                           <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+            <span class="n">df_features</span><span class="o">.</span><span class="n">remove_feature</span><span class="p">(</span><span class="n">feature_name</span><span class="p">)</span>
+
+            <span class="k">if</span> <span class="n">_add_to_que</span><span class="p">:</span>
+
+                <span class="c1"># Remove any unwanted arguments in params_dict</span>
+                <span class="n">params_dict</span> <span class="o">=</span> <span class="nb">locals</span><span class="p">()</span>
+                <span class="n">parameters</span> <span class="o">=</span> <span class="n">get_parameters</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">remove_nans</span><span class="p">)</span>
+
+                <span class="bp">self</span><span class="o">.</span><span class="n">_DataPipelineSegment__add_function_to_que</span><span class="p">(</span><span class="s2">&quot;remove_nans&quot;</span><span class="p">,</span>
+                                                               <span class="n">parameters</span><span class="p">,</span>
+                                                               <span class="n">params_dict</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="FeatureDataCleaner.fill_nan_by_distribution"><a class="viewcode-back" href="../../../_autosummary/eflow.data_pipeline_segments.feature_data_cleaner.html#eflow.data_pipeline_segments.feature_data_cleaner.FeatureDataCleaner.fill_nan_by_distribution">[docs]</a>    <span class="k">def</span> <span class="nf">fill_nan_by_distribution</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+                                 <span class="n">df</span><span class="p">,</span>
+                                 <span class="n">df_features</span><span class="p">,</span>
+                                 <span class="n">feature_name</span><span class="p">,</span>
+                                 <span class="n">percentile</span><span class="p">,</span>
+                                 <span class="n">z_score</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                                 <span class="n">_add_to_que</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">            Fill nan by the distribution of data.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            df: pd.Dataframe</span>
+<span class="sd">                Pandas Dataframe</span>
+
+<span class="sd">            df_features: DataFrameType from eflow</span>
+<span class="sd">                Organizes feature types into groups.</span>
+
+<span class="sd">            feature_name: string</span>
+<span class="sd">                Name of the feature in the datatframe</span>
+
+<span class="sd">            percentile: float or int</span>
+
+<span class="sd">            z_score:</span>
+
+<span class="sd">            _add_to_que: bool</span>
+<span class="sd">                Pushes the function to pipeline segment parent if set to &#39;True&#39;.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">check_if_feature_exists</span><span class="p">(</span><span class="n">df</span><span class="p">,</span>
+                                <span class="n">feature_name</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">feature_name</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">df_features</span><span class="o">.</span><span class="n">all_features</span><span class="p">():</span>
+            <span class="k">raise</span> <span class="ne">KeyError</span><span class="p">(</span>
+                <span class="sa">f</span><span class="s2">&quot;The feature </span><span class="se">\&#39;</span><span class="si">{feature_name}</span><span class="se">\&#39;</span><span class="s2"> was not found in the dataframe!&quot;</span>
+                <span class="o">+</span> <span class="s2">&quot; Please select a valid feature from the df_features.&quot;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">feature_name</span> <span class="ow">in</span> <span class="n">df_features</span><span class="o">.</span><span class="n">continuous_numerical_features</span><span class="p">():</span>
+            <span class="n">series_obj</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">feature_name</span><span class="p">]</span><span class="o">.</span><span class="n">sort_values</span><span class="p">()</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">series_obj</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">sort_values</span><span class="p">([</span><span class="n">feature_name</span><span class="p">],</span>
+                                        <span class="n">ascending</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="n">feature_name</span><span class="p">)</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="s2">&quot;inf&quot;</span><span class="p">))[</span><span class="n">feature_name</span><span class="p">]</span>
+
+        <span class="k">if</span> <span class="n">z_score</span><span class="p">:</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">z_score</span><span class="p">,</span> <span class="nb">float</span><span class="p">)</span> <span class="ow">or</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">z_score</span><span class="p">,</span> <span class="nb">int</span><span class="p">):</span>
+                <span class="n">series_obj</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__zcore_remove_outliers</span><span class="p">(</span><span class="n">series_obj</span><span class="o">.</span><span class="n">to_frame</span><span class="p">(),</span>
+                                                          <span class="n">feature_name</span><span class="p">,</span>
+                                                          <span class="n">z_score</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Z-Score must be at numerical value.&quot;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">series_obj</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">feature_name</span><span class="p">]</span><span class="o">.</span><span class="n">dropna</span><span class="p">()</span>
+
+        <span class="n">replace_value</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">percentile</span><span class="p">(</span><span class="n">series_obj</span><span class="p">,</span> <span class="n">percentile</span><span class="p">)</span>
+
+        <span class="c1"># Remove any unwanted arguments in params_dict</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">__test_cleaning_methods</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Fill nan on distribution; </span><span class="si">{percentile}% o</span><span class="s2">f </span><span class="si">{feature_name}</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">fill_nan_with_specfic_value</span><span class="p">(</span><span class="n">df</span><span class="p">,</span>
+                                             <span class="n">df_features</span><span class="p">,</span>
+                                             <span class="n">feature_name</span><span class="o">=</span><span class="n">feature_name</span><span class="p">,</span>
+                                             <span class="n">replace_value</span><span class="o">=</span><span class="n">replace_value</span><span class="p">,</span>
+                                             <span class="n">_add_to_que</span><span class="o">=</span><span class="n">_add_to_que</span><span class="p">)</span></div>
+
+    <span class="k">def</span> <span class="nf">fill_nan_by_average</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+                            <span class="n">df</span><span class="p">,</span>
+                            <span class="n">df_features</span><span class="p">,</span>
+                            <span class="n">feature_name</span><span class="p">,</span>
+                            <span class="n">z_score</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                            <span class="n">_add_to_que</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+
+        <span class="n">check_if_feature_exists</span><span class="p">(</span><span class="n">df</span><span class="p">,</span>
+                                <span class="n">feature_name</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">feature_name</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">df_features</span><span class="o">.</span><span class="n">all_features</span><span class="p">():</span>
+            <span class="k">raise</span> <span class="ne">KeyError</span><span class="p">(</span>
+                <span class="sa">f</span><span class="s2">&quot;The feature </span><span class="se">\&#39;</span><span class="si">{feature_name}</span><span class="se">\&#39;</span><span class="s2"> was not found in the dataframe!&quot;</span>
+                <span class="o">+</span> <span class="s2">&quot; Please select a valid feature from the df_features.&quot;</span><span class="p">)</span>
+
+        <span class="n">params_dict</span> <span class="o">=</span> <span class="nb">locals</span><span class="p">()</span>
+
+        <span class="c1"># Remove any unwanted arguments in params_dict</span>
+        <span class="k">if</span> <span class="n">_add_to_que</span><span class="p">:</span>
+            <span class="n">params_dict</span> <span class="o">=</span> <span class="nb">locals</span><span class="p">()</span>
+            <span class="k">for</span> <span class="n">arg</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;self&quot;</span><span class="p">,</span> <span class="s2">&quot;df&quot;</span><span class="p">,</span> <span class="s2">&quot;df_features&quot;</span><span class="p">,</span> <span class="s2">&quot;_add_to_que&quot;</span><span class="p">,</span>
+                        <span class="s2">&quot;params_dict&quot;</span><span class="p">]:</span>
+                <span class="k">del</span> <span class="n">params_dict</span><span class="p">[</span><span class="n">arg</span><span class="p">]</span>
+
+        <span class="k">if</span> <span class="n">feature_name</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">df_features</span><span class="o">.</span><span class="n">continuous_numerical_features</span><span class="p">():</span>
+            <span class="k">raise</span> <span class="n">UnsatisfiedRequirments</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{feature_name}</span><span class="s2"> must be a saved as float or integer in df_features&quot;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">z_score</span><span class="p">:</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">z_score</span><span class="p">,</span><span class="nb">float</span><span class="p">)</span> <span class="ow">or</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">z_score</span><span class="p">,</span><span class="nb">int</span><span class="p">):</span>
+                <span class="n">series_obj</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__zcore_remove_outliers</span><span class="p">(</span><span class="n">df</span><span class="p">,</span>
+                                                          <span class="n">feature_name</span><span class="p">,</span>
+                                                          <span class="n">z_score</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Z-Score must be at numerical value.&quot;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">series_obj</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">feature_name</span><span class="p">]</span><span class="o">.</span><span class="n">dropna</span><span class="p">()</span>
+
+        <span class="n">replace_value</span> <span class="o">=</span> <span class="n">series_obj</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">__test_cleaning_methods</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Fill nan based on the average of the distribution.&quot;</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">fill_nan_with_specfic_value</span><span class="p">(</span><span class="n">df</span><span class="p">,</span>
+                                             <span class="n">df_features</span><span class="p">,</span>
+                                             <span class="n">feature_name</span><span class="o">=</span><span class="n">feature_name</span><span class="p">,</span>
+                                             <span class="n">replace_value</span><span class="o">=</span><span class="n">replace_value</span><span class="p">,</span>
+                                             <span class="n">_add_to_que</span><span class="o">=</span><span class="n">_add_to_que</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">fill_nan_by_mode</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+                         <span class="n">df</span><span class="p">,</span>
+                         <span class="n">df_features</span><span class="p">,</span>
+                         <span class="n">feature_name</span><span class="p">,</span>
+                         <span class="n">z_score</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                         <span class="n">_add_to_que</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+
+        <span class="n">check_if_feature_exists</span><span class="p">(</span><span class="n">df</span><span class="p">,</span>
+                                <span class="n">feature_name</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">feature_name</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">df_features</span><span class="o">.</span><span class="n">all_features</span><span class="p">():</span>
+            <span class="k">raise</span> <span class="ne">KeyError</span><span class="p">(</span>
+                <span class="sa">f</span><span class="s2">&quot;The feature </span><span class="se">\&#39;</span><span class="si">{feature_name}</span><span class="se">\&#39;</span><span class="s2"> was not found in the dataframe!&quot;</span>
+                <span class="o">+</span> <span class="s2">&quot; Please select a valid feature from the df_features.&quot;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">z_score</span><span class="p">:</span>
+            <span class="n">series_obj</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__zcore_remove_outliers</span><span class="p">(</span><span class="n">df</span><span class="p">,</span>
+                                                      <span class="n">feature_name</span><span class="p">,</span>
+                                                      <span class="n">z_score</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">series_obj</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">feature_name</span><span class="p">]</span><span class="o">.</span><span class="n">dropna</span><span class="p">()</span>
+
+        <span class="n">mode_series</span> <span class="o">=</span> <span class="n">series_obj</span><span class="o">.</span><span class="n">mode</span><span class="p">()</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">len</span><span class="p">(</span><span class="n">mode_series</span><span class="p">):</span>
+            <span class="k">pass</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">replace_value</span> <span class="o">=</span> <span class="n">mode_series</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">__test_cleaning_methods</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Fill nan by mode&quot;</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">fill_nan_with_specfic_value</span><span class="p">(</span><span class="n">df</span><span class="p">,</span>
+                                             <span class="n">df_features</span><span class="p">,</span>
+                                             <span class="n">feature_name</span><span class="o">=</span><span class="n">feature_name</span><span class="p">,</span>
+                                             <span class="n">replace_value</span><span class="o">=</span><span class="n">replace_value</span><span class="p">,</span>
+                                             <span class="n">_add_to_que</span><span class="o">=</span><span class="n">_add_to_que</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">fill_nan_with_specfic_value</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+                                    <span class="n">df</span><span class="p">,</span>
+                                    <span class="n">df_features</span><span class="p">,</span>
+                                    <span class="n">feature_name</span><span class="p">,</span>
+                                    <span class="n">replace_value</span><span class="p">,</span>
+                                    <span class="n">_add_to_que</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+
+        <span class="n">check_if_feature_exists</span><span class="p">(</span><span class="n">df</span><span class="p">,</span>
+                                <span class="n">feature_name</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">feature_name</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">df_features</span><span class="o">.</span><span class="n">all_features</span><span class="p">():</span>
+            <span class="k">raise</span> <span class="ne">KeyError</span><span class="p">(</span>
+                <span class="sa">f</span><span class="s2">&quot;The feature </span><span class="se">\&#39;</span><span class="si">{feature_name}</span><span class="se">\&#39;</span><span class="s2"> was not found in the dataframe!&quot;</span>
+                <span class="o">+</span> <span class="s2">&quot; Please select a valid feature from the df_features.&quot;</span><span class="p">)</span>
+
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">replace_value</span> <span class="o">=</span> <span class="n">replace_value</span><span class="o">.</span><span class="n">item</span><span class="p">()</span>
+        <span class="k">except</span> <span class="ne">AttributeError</span><span class="p">:</span>
+            <span class="k">pass</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">__test_cleaning_methods</span><span class="p">:</span>
+            <span class="n">df</span><span class="p">[</span><span class="n">feature_name</span><span class="p">]</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="n">replace_value</span><span class="p">,</span>
+                                    <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+            <span class="k">if</span> <span class="n">_add_to_que</span><span class="p">:</span>
+                <span class="n">params_dict</span> <span class="o">=</span> <span class="nb">locals</span><span class="p">()</span>
+                <span class="n">parameters</span> <span class="o">=</span> <span class="n">get_parameters</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">fill_nan_with_specfic_value</span><span class="p">)</span>
+
+                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Replace nan with </span><span class="si">{0}</span><span class="s2"> on feature: </span><span class="si">{1}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">replace_value</span><span class="p">,</span>
+                                                                    <span class="n">feature_name</span><span class="p">))</span>
+
+                <span class="bp">self</span><span class="o">.</span><span class="n">_DataPipelineSegment__add_function_to_que</span><span class="p">(</span><span class="s2">&quot;fill_nan_with_specfic_value&quot;</span><span class="p">,</span>
+                                                               <span class="n">parameters</span><span class="p">,</span>
+                                                               <span class="n">params_dict</span><span class="p">)</span>
+
+
+    <span class="k">def</span> <span class="nf">fill_nan_by_occurance_percentaile</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+                                          <span class="n">df</span><span class="p">,</span>
+                                          <span class="n">df_features</span><span class="p">,</span>
+                                          <span class="n">feature_name</span><span class="p">,</span>
+                                          <span class="n">percentaile</span><span class="p">,</span>
+                                          <span class="n">z_score</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                                          <span class="n">_add_to_que</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+        <span class="n">check_if_feature_exists</span><span class="p">(</span><span class="n">df</span><span class="p">,</span>
+                                <span class="n">feature_name</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">feature_name</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">df_features</span><span class="o">.</span><span class="n">all_features</span><span class="p">():</span>
+            <span class="k">raise</span> <span class="ne">KeyError</span><span class="p">(</span>
+                <span class="sa">f</span><span class="s2">&quot;The feature </span><span class="se">\&#39;</span><span class="si">{feature_name}</span><span class="se">\&#39;</span><span class="s2"> was not found in the dataframe!&quot;</span>
+                <span class="o">+</span> <span class="s2">&quot; Please select a valid feature from the df_features.&quot;</span><span class="p">)</span>
+
+        <span class="c1"># Remove any unwanted arguments in params_dict</span>
+        <span class="k">if</span> <span class="n">_add_to_que</span><span class="p">:</span>
+            <span class="n">params_dict</span> <span class="o">=</span> <span class="nb">locals</span><span class="p">()</span>
+            <span class="k">for</span> <span class="n">arg</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;self&quot;</span><span class="p">,</span> <span class="s2">&quot;df&quot;</span><span class="p">,</span> <span class="s2">&quot;df_features&quot;</span><span class="p">,</span> <span class="s2">&quot;_add_to_que&quot;</span><span class="p">,</span>
+                        <span class="s2">&quot;params_dict&quot;</span><span class="p">]:</span>
+                <span class="k">try</span><span class="p">:</span>
+                    <span class="k">del</span> <span class="n">params_dict</span><span class="p">[</span><span class="n">arg</span><span class="p">]</span>
+                <span class="k">except</span> <span class="ne">KeyError</span><span class="p">:</span>
+                    <span class="k">pass</span>
+
+        <span class="k">if</span> <span class="n">z_score</span><span class="p">:</span>
+            <span class="n">series_obj</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__zcore_remove_outliers</span><span class="p">(</span><span class="n">df</span><span class="p">,</span>
+                                                      <span class="n">feature_name</span><span class="p">,</span>
+                                                      <span class="n">z_score</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">series_obj</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">feature_name</span><span class="p">]</span><span class="o">.</span><span class="n">dropna</span><span class="p">()</span>
+
+        <span class="n">array</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">series_obj</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span> <span class="o">/</span> <span class="n">df</span><span class="o">.</span><span class="n">dropna</span><span class="p">()</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+        <span class="n">idx</span> <span class="o">=</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">array</span> <span class="o">-</span> <span class="p">(</span><span class="n">percentaile</span> <span class="o">/</span> <span class="mi">100</span><span class="p">)))</span><span class="o">.</span><span class="n">argmin</span><span class="p">()</span>
+        <span class="n">replace_value</span> <span class="o">=</span> <span class="n">series_obj</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span><span class="o">.</span><span class="n">keys</span><span class="p">()[</span><span class="n">idx</span><span class="p">]</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">__test_cleaning_methods</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Fill nan by occurance percentaile.&quot;</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">fill_nan_with_specfic_value</span><span class="p">(</span><span class="n">df</span><span class="p">,</span>
+                                             <span class="n">df_features</span><span class="p">,</span>
+                                             <span class="n">feature_name</span><span class="o">=</span><span class="n">feature_name</span><span class="p">,</span>
+                                             <span class="n">replace_value</span><span class="o">=</span><span class="n">replace_value</span><span class="p">,</span>
+                                             <span class="n">_add_to_que</span><span class="o">=</span><span class="n">_add_to_que</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">__zcore_remove_outliers</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+                                <span class="n">df</span><span class="p">,</span>
+                                <span class="n">feature_name</span><span class="p">,</span>
+                                <span class="n">zscore_val</span><span class="p">,</span>
+                                <span class="n">_add_to_que</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+
+        <span class="n">z_score_return</span> <span class="o">=</span> <span class="mi">2</span>
+
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;After the zscore applied of </span><span class="si">{0}</span><span class="s2"> to -</span><span class="si">{0}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">zscore_val</span><span class="p">))</span>
+
+        <span class="k">return</span> <span class="n">df</span><span class="p">[</span><span class="n">feature_name</span><span class="p">]</span><span class="o">.</span><span class="n">dropna</span><span class="p">()[</span>
+            <span class="p">(</span><span class="n">z_score_return</span> <span class="o">&gt;=</span> <span class="p">(</span><span class="n">zscore_val</span> <span class="o">*</span> <span class="o">-</span><span class="mi">1</span><span class="p">))</span> <span class="o">&amp;</span> <span class="p">(</span>
+                    <span class="n">z_score_return</span> <span class="o">&lt;=</span> <span class="n">zscore_val</span><span class="p">)]</span></div>
+
+
+</pre></div>
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2020, Eric Cacciavillani
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

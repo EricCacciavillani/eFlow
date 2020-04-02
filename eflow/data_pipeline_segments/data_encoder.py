@@ -45,7 +45,7 @@ class DataEncoder(DataPipelineSegment):
                     apply_value_representation=True,
                     _add_to_que=True):
         """
-        Desc:
+
             Encode the data into numerical values for machine learning processes.
 
         Args:
@@ -111,7 +111,7 @@ class DataEncoder(DataPipelineSegment):
                     apply_value_representation=True,
                     _add_to_que=True):
         """
-        Desc:
+
             Decode the data into non-numerical values for more descriptive analysis.
 
         Args:
@@ -204,7 +204,7 @@ class DataEncoder(DataPipelineSegment):
                                    df_features,
                                    _add_to_que=True):
         """
-        Desc:
+
             Translate features into most understandable/best representation
 
         Args:
@@ -242,7 +242,7 @@ class DataEncoder(DataPipelineSegment):
                                     df_features,
                                     _add_to_que=True):
         """
-        Desc:
+
             Translate features back into worst representation
 
         Args:
@@ -283,7 +283,7 @@ class DataEncoder(DataPipelineSegment):
                          df_features,
                          _add_to_que=True):
         """
-        Desc:
+
             Convert all string bools to numeric bool value
         Args:
             df: pd.Dataframe
@@ -320,7 +320,7 @@ class DataEncoder(DataPipelineSegment):
                      _feature_values_dict=None,
                      _add_to_que=True):
         """
-        Desc:
+
             Create dummies features of based on qualtative feature data and removes
             the original feature.
 
@@ -395,7 +395,7 @@ class DataEncoder(DataPipelineSegment):
                        qualitative_features=[],
                        _add_to_que=True):
         """
-        Desc:
+
             Convert dummies features back to the original feature.
 
         Args:
@@ -460,7 +460,7 @@ class DataEncoder(DataPipelineSegment):
     def __bool_string_values_check(self,
                                    feature_values):
         """
-        Desc:
+
             Checks if a collection of strings can be considered a bool feature
             based on the amount of strings and the values of those strings.
 

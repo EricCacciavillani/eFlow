@@ -1,0 +1,770 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>eflow.model_analysis.classification_analysis &mdash; eflow  documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="eflow.model_analysis.regression_analysis" href="eflow.model_analysis.regression_analysis.html" />
+    <link rel="prev" title="eflow.foundation.data_pipeline" href="eflow.foundation.data_pipeline.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> eflow
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="eflow.data_analysis.feature_analysis.html">eflow.data_analysis.feature_analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="eflow.data_analysis.null_analysis.html">eflow.data_analysis.null_analysis</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="eflow.data_pipeline_segments.data_encoder.html">eflow.data_pipeline_segments.data_encoder</a></li>
+<li class="toctree-l1"><a class="reference internal" href="eflow.data_pipeline_segments.feature_data_cleaner.html">eflow.data_pipeline_segments.feature_data_cleaner</a></li>
+<li class="toctree-l1"><a class="reference internal" href="eflow.data_pipeline_segments.feature_transformer.html">eflow.data_pipeline_segments.feature_transformer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="eflow.data_pipeline_segments.string_cleaner.html">eflow.data_pipeline_segments.string_cleaner</a></li>
+<li class="toctree-l1"><a class="reference internal" href="eflow.data_pipeline_segments.type_fixer.html">eflow.data_pipeline_segments.type_fixer</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="eflow.foundation.data_frame_types.html">eflow.foundation.data_frame_types</a></li>
+<li class="toctree-l1"><a class="reference internal" href="eflow.foundation.data_pipeline.html">eflow.foundation.data_pipeline</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">eflow.model_analysis.classification_analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="eflow.model_analysis.regression_analysis.html">eflow.model_analysis.regression_analysis</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">eflow</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+      <li>eflow.model_analysis.classification_analysis</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/_autosummary/eflow.model_analysis.classification_analysis.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="module-eflow.model_analysis.classification_analysis">
+<span id="eflow-model-analysis-classification-analysis"></span><h1>eflow.model_analysis.classification_analysis<a class="headerlink" href="#module-eflow.model_analysis.classification_analysis" title="Permalink to this headline">¶</a></h1>
+<p class="rubric">Classes</p>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#eflow.model_analysis.classification_analysis.ClassificationAnalysis" title="eflow.model_analysis.classification_analysis.ClassificationAnalysis"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ClassificationAnalysis</span></code></a>(dataset_name, model, …)</p></td>
+<td><p>Analyzes a classification model’s result’s based on the prediction function(s) passed to it.</p></td>
+</tr>
+</tbody>
+</table>
+<dl class="class">
+<dt id="eflow.model_analysis.classification_analysis.ClassificationAnalysis">
+<em class="property">class </em><code class="sig-name descname">ClassificationAnalysis</code><span class="sig-paren">(</span><em class="sig-param">dataset_name</em>, <em class="sig-param">model</em>, <em class="sig-param">model_name</em>, <em class="sig-param">feature_order</em>, <em class="sig-param">target_feature</em>, <em class="sig-param">pred_funcs_dict</em>, <em class="sig-param">df_features</em>, <em class="sig-param">sample_data</em>, <em class="sig-param">project_sub_dir='Classification Analysis'</em>, <em class="sig-param">overwrite_full_path=None</em>, <em class="sig-param">target_classes=None</em>, <em class="sig-param">save_model=True</em>, <em class="sig-param">notebook_mode=False</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/eflow/model_analysis/classification_analysis.html#ClassificationAnalysis"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#eflow.model_analysis.classification_analysis.ClassificationAnalysis" title="Permalink to this definition">¶</a></dt>
+<dd><p>Analyzes a classification model’s result’s based on the prediction
+function(s) passed to it. Creates graphs and tables to be saved in directory
+structure.</p>
+<dl class="method">
+<dt id="eflow.model_analysis.classification_analysis.ClassificationAnalysis.classification_correct_analysis">
+<code class="sig-name descname">classification_correct_analysis</code><span class="sig-paren">(</span><em class="sig-param">X</em>, <em class="sig-param">y</em>, <em class="sig-param">pred_name</em>, <em class="sig-param">dataset_name</em>, <em class="sig-param">thresholds=None</em>, <em class="sig-param">display_visuals=True</em>, <em class="sig-param">save_file=True</em>, <em class="sig-param">aggerate_target=False</em>, <em class="sig-param">display_print=True</em>, <em class="sig-param">suppress_runtime_errors=True</em>, <em class="sig-param">aggregate_target_feature=True</em>, <em class="sig-param">selected_features=None</em>, <em class="sig-param">extra_tables=True</em>, <em class="sig-param">statistical_analysis_on_aggregates=True</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/eflow/model_analysis/classification_analysis.html#ClassificationAnalysis.classification_correct_analysis"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#eflow.model_analysis.classification_analysis.ClassificationAnalysis.classification_correct_analysis" title="Permalink to this definition">¶</a></dt>
+<dd><blockquote>
+<div><p>Compares the actual target value to the predicted value and performs
+analysis of all the data.</p>
+</div></blockquote>
+<dl>
+<dt>Args:</dt><dd><dl>
+<dt>X: np.matrix or lists of lists</dt><dd><p>Feature matrix.</p>
+</dd>
+<dt>y: collection object</dt><dd><p>Target data vector.</p>
+</dd>
+<dt>pred_name: str</dt><dd><p>The name of the prediction function in questioned
+stored in ‘self.__pred_funcs_dict’</p>
+</dd>
+<dt>dataset_name: str</dt><dd><p>The dataset’s name; this will create a sub-directory in which your
+generated graph will be inner-nested in.</p>
+</dd>
+<dt>feature_order: collection object</dt><dd><p>Features names in proper order to re-create the pandas dataframe.</p>
+</dd>
+<dt>thresholds:</dt><dd><p>If the model outputs a probability list/numpy array then we apply
+thresholds to the ouput of the model.
+For classification only; will not affect the direct output of
+the probabilities.</p>
+</dd>
+<dt>display_visuals: bool</dt><dd><p>Boolean value to whether or not to display visualizations.</p>
+</dd>
+<dt>display_print: bool</dt><dd><p>Determines whether or not to print function’s embedded print
+statements.</p>
+</dd>
+<dt>save_file: bool</dt><dd><p>Boolean value to whether or not to save the file.</p>
+</dd>
+<dt>dataframe_snapshot: bool</dt><dd><p>Boolean value to determine whether or not generate and compare a
+snapshot of the dataframe in the dataset’s directory structure.
+Helps ensure that data generated in that directory is correctly
+associated to a dataframe.</p>
+</dd>
+<dt>suppress_runtime_errors: bool</dt><dd><p>If set to true; when generating any graphs will suppress any runtime
+errors so the program can keep running.</p>
+</dd>
+<dt>extra_tables: bool</dt><dd><dl>
+<dt>When handling two types of features if set to true this will</dt><dd><p>generate any extra tables that might be helpful.
+Note -</p>
+<blockquote>
+<div><p>These graphics may create duplicates if you already applied
+an aggregation in ‘perform_analysis’</p>
+</div></blockquote>
+</dd>
+</dl>
+</dd>
+<dt>aggregate_target_feature: bool</dt><dd><p>Aggregate the data of the target feature if the data is
+non-continuous data.</p>
+<dl class="simple">
+<dt>Note</dt><dd><p>In the future I will have this also working with continuous
+data.</p>
+</dd>
+</dl>
+</dd>
+<dt>selected_features: collection object of features</dt><dd><p>Will only focus on these selected feature’s and will ignore
+the other given features.</p>
+</dd>
+<dt>statistical_analysis_on_aggregates: bool</dt><dd><p>If set to true then the function ‘statistical_analysis_on_aggregates’
+will run; which aggregates the data of the target feature either
+by discrete values or by binning/labeling continuous data.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="eflow.model_analysis.classification_analysis.ClassificationAnalysis.classification_error_analysis">
+<code class="sig-name descname">classification_error_analysis</code><span class="sig-paren">(</span><em class="sig-param">X</em>, <em class="sig-param">y</em>, <em class="sig-param">pred_name</em>, <em class="sig-param">dataset_name</em>, <em class="sig-param">thresholds=None</em>, <em class="sig-param">display_visuals=True</em>, <em class="sig-param">save_file=True</em>, <em class="sig-param">aggerate_target=False</em>, <em class="sig-param">display_print=True</em>, <em class="sig-param">suppress_runtime_errors=True</em>, <em class="sig-param">aggregate_target_feature=True</em>, <em class="sig-param">selected_features=None</em>, <em class="sig-param">extra_tables=True</em>, <em class="sig-param">statistical_analysis_on_aggregates=True</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/eflow/model_analysis/classification_analysis.html#ClassificationAnalysis.classification_error_analysis"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#eflow.model_analysis.classification_analysis.ClassificationAnalysis.classification_error_analysis" title="Permalink to this definition">¶</a></dt>
+<dd><blockquote>
+<div><p>Compares the actual target value to the predicted value and performs
+analysis of all the data.</p>
+</div></blockquote>
+<dl>
+<dt>Args:</dt><dd><dl>
+<dt>X: np.matrix or lists of lists</dt><dd><p>Feature matrix.</p>
+</dd>
+<dt>y: collection object</dt><dd><p>Target data vector.</p>
+</dd>
+<dt>pred_name: str</dt><dd><p>The name of the prediction function in questioned
+stored in ‘self.__pred_funcs_dict’</p>
+</dd>
+<dt>dataset_name: str</dt><dd><p>The dataset’s name; this will create a sub-directory in which your
+generated graph will be inner-nested in.</p>
+</dd>
+<dt>feature_order: collection object</dt><dd><p>Features names in proper order to re-create the pandas dataframe.</p>
+</dd>
+<dt>thresholds:</dt><dd><p>If the model outputs a probability list/numpy array then we apply
+thresholds to the ouput of the model.
+For classification only; will not affect the direct output of
+the probabilities.</p>
+</dd>
+<dt>display_visuals: bool</dt><dd><p>Boolean value to whether or not to display visualizations.</p>
+</dd>
+<dt>display_print: bool</dt><dd><p>Determines whether or not to print function’s embedded print
+statements.</p>
+</dd>
+<dt>save_file: bool</dt><dd><p>Boolean value to whether or not to save the file.</p>
+</dd>
+<dt>dataframe_snapshot: bool</dt><dd><p>Boolean value to determine whether or not generate and compare a
+snapshot of the dataframe in the dataset’s directory structure.
+Helps ensure that data generated in that directory is correctly
+associated to a dataframe.</p>
+</dd>
+<dt>suppress_runtime_errors: bool</dt><dd><p>If set to true; when generating any graphs will suppress any runtime
+errors so the program can keep running.</p>
+</dd>
+<dt>extra_tables: bool</dt><dd><dl>
+<dt>When handling two types of features if set to true this will</dt><dd><p>generate any extra tables that might be helpful.
+Note -</p>
+<blockquote>
+<div><p>These graphics may create duplicates if you already applied
+an aggregation in ‘perform_analysis’</p>
+</div></blockquote>
+</dd>
+</dl>
+</dd>
+<dt>aggregate_target_feature: bool</dt><dd><p>Aggregate the data of the target feature if the data is
+non-continuous data.</p>
+<dl class="simple">
+<dt>Note</dt><dd><p>In the future I will have this also working with continuous
+data.</p>
+</dd>
+</dl>
+</dd>
+<dt>selected_features: collection object of features</dt><dd><p>Will only focus on these selected feature’s and will ignore
+the other given features.</p>
+</dd>
+<dt>statistical_analysis_on_aggregates: bool</dt><dd><p>If set to true then the function ‘statistical_analysis_on_aggregates’
+will run; which aggregates the data of the target feature either
+by discrete values or by binning/labeling continuous data.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="eflow.model_analysis.classification_analysis.ClassificationAnalysis.classification_metrics">
+<code class="sig-name descname">classification_metrics</code><span class="sig-paren">(</span><em class="sig-param">X, y, pred_name, dataset_name, thresholds=None, display_visuals=True, save_file=True, title='', custom_metrics_dict={}, ignore_metrics=[], average_scoring=['micro', 'macro', 'weighted']</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/eflow/model_analysis/classification_analysis.html#ClassificationAnalysis.classification_metrics"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#eflow.model_analysis.classification_analysis.ClassificationAnalysis.classification_metrics" title="Permalink to this definition">¶</a></dt>
+<dd><blockquote>
+<div><p>Creates a dataframe based on the prediction metrics
+of the feature matrix and target vector.</p>
+</div></blockquote>
+<dl>
+<dt>Args:</dt><dd><dl>
+<dt>X:</dt><dd><p>Feature matrix.</p>
+</dd>
+<dt>y:</dt><dd><p>Target data vector.</p>
+</dd>
+<dt>pred_name:</dt><dd><p>The name of the prediction function in questioned stored
+in ‘self.__pred_funcs_dict’</p>
+</dd>
+<dt>dataset_name:</dt><dd><p>The dataset’s name; this will create a sub-directory in which your
+generated graph will be inner-nested in.</p>
+</dd>
+<dt>thresholds:</dt><dd><p>If the model outputs a probability list/numpy array then we apply
+thresholds to the ouput of the model.
+For classification only; will not affect the direct output of
+the probabilities.</p>
+</dd>
+<dt>display_visuals:</dt><dd><p>Display tables.</p>
+</dd>
+<dt>save_file:</dt><dd><p>Determines whether or not to save the generated document.</p>
+</dd>
+<dt>title:</dt><dd><p>Adds to the column ‘Metric Score’.</p>
+</dd>
+<dt>custom_metrics_dict:</dt><dd><p>Pass the name of metric(s) and the function definition(s) in a
+dictionary.</p>
+</dd>
+<dt>ignore_metrics:</dt><dd><p>Specify the default metrics to not apply to the classification
+data_analysis.</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Precision</p></li>
+<li><p>MCC</p></li>
+<li><p>Recall</p></li>
+<li><p>F1-Score</p></li>
+<li><p>Accuracy</p></li>
+</ul>
+</div></blockquote>
+</dd>
+<dt>average_scoring:</dt><dd><dl class="simple">
+<dt>Determines the type of averaging performed on the data.</dt><dd><ul class="simple">
+<li><p>micro</p></li>
+<li><p>macro</p></li>
+<li><p>weighted</p></li>
+</ul>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd>
+<dt>Returns:</dt><dd><p>Return a dataframe object of the metrics value.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="eflow.model_analysis.classification_analysis.ClassificationAnalysis.classification_report">
+<code class="sig-name descname">classification_report</code><span class="sig-paren">(</span><em class="sig-param">X</em>, <em class="sig-param">y</em>, <em class="sig-param">pred_name</em>, <em class="sig-param">dataset_name</em>, <em class="sig-param">thresholds=None</em>, <em class="sig-param">display_visuals=True</em>, <em class="sig-param">save_file=True</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/eflow/model_analysis/classification_analysis.html#ClassificationAnalysis.classification_report"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#eflow.model_analysis.classification_analysis.ClassificationAnalysis.classification_report" title="Permalink to this definition">¶</a></dt>
+<dd><blockquote>
+<div><p>Creates a report of all target’s metric evaluations
+based on the model’s prediction output from the classification report
+from the sklearn.</p>
+</div></blockquote>
+<dl>
+<dt>Args:</dt><dd><dl>
+<dt>X:</dt><dd><blockquote>
+<div><p>Feature matrix.</p>
+</div></blockquote>
+<dl class="simple">
+<dt>y:</dt><dd><p>Target data vector.</p>
+</dd>
+</dl>
+</dd>
+<dt>pred_name:</dt><dd><p>The name of the prediction function in questioned
+stored in ‘self.__pred_funcs_dict’</p>
+</dd>
+<dt>dataset_name:</dt><dd><p>The dataset’s name; this will create a sub-directory in which your
+generated graph will be inner-nested in.</p>
+</dd>
+<dt>thresholds:</dt><dd><p>If the model outputs a probability list/numpy array then we apply
+thresholds to the ouput of the model.
+For classification only; will not affect the direct output of
+the probabilities.</p>
+</dd>
+<dt>display_visuals:</dt><dd><p>Visualize graph if needed.</p>
+</dd>
+<dt>save_file:</dt><dd><p>Boolean value to whether or not to save the file.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="eflow.model_analysis.classification_analysis.ClassificationAnalysis.perform_analysis">
+<code class="sig-name descname">perform_analysis</code><span class="sig-paren">(</span><em class="sig-param">X, y, dataset_name, thresholds_matrix=None, classification_error_analysis=False, classification_correct_analysis=False, ignore_metrics=[], custom_metrics_dict={}, average_scoring=['micro', 'macro', 'weighted'], display_visuals=True</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/eflow/model_analysis/classification_analysis.html#ClassificationAnalysis.perform_analysis"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#eflow.model_analysis.classification_analysis.ClassificationAnalysis.perform_analysis" title="Permalink to this definition">¶</a></dt>
+<dd><blockquote>
+<div><p>Runs all available analysis functions on the models predicted data.</p>
+</div></blockquote>
+<dl>
+<dt>Args:</dt><dd><dl>
+<dt>X:</dt><dd><p>Feature matrix.</p>
+</dd>
+<dt>y:</dt><dd><p>Target data vector.</p>
+</dd>
+<dt>dataset_name:</dt><dd><p>The dataset’s name; this will create a sub-directory in which your
+generated graph will be inner-nested in.</p>
+</dd>
+<dt>thresholds_matrix:</dt><dd><p>List of list/matrix of thresholds.</p>
+<p>If the model outputs a probability list/numpy array then we apply
+thresholds to the ouput of the model.
+For classification only; will not affect the direct output of
+the probabilities.</p>
+</dd>
+<dt>classification_error_analysis: bool</dt><dd><p>Perform feature analysis on data that was incorrectly predicted.</p>
+</dd>
+<dt>classification_correct_analysis: bool</dt><dd><p>Perform feature analysis on data that was correctly predicted.</p>
+</dd>
+<dt>figsize:</dt><dd><p>All plot’s dimension’s.</p>
+</dd>
+<dt>ignore_metrics:</dt><dd><p>Specify the default metrics to not apply to the classification
+data_analysis.</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Precision</p></li>
+<li><p>MCC</p></li>
+<li><p>Recall</p></li>
+<li><p>F1-Score</p></li>
+<li><p>Accuracy</p></li>
+</ul>
+</div></blockquote>
+</dd>
+<dt>custom_metrics_dict:</dt><dd><p>Pass the name of metric(s) with the function definition(s) in a
+dictionary.</p>
+</dd>
+<dt>average_scoring:</dt><dd><p>Determines the type of averaging performed on the data.</p>
+</dd>
+<dt>display_visuals:</dt><dd><p>Controls visual display of error error data_analysis if it is able to run.</p>
+</dd>
+</dl>
+</dd>
+<dt>Returns:</dt><dd><p>Performs all classification functionality with the provided feature
+data and target data.</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>plot_precision_recall_curve</p></li>
+<li><p>classification_evaluation</p></li>
+<li><p>plot_confusion_matrix</p></li>
+</ul>
+</div></blockquote>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="eflow.model_analysis.classification_analysis.ClassificationAnalysis.plot_confusion_matrix">
+<code class="sig-name descname">plot_confusion_matrix</code><span class="sig-paren">(</span><em class="sig-param">X</em>, <em class="sig-param">y</em>, <em class="sig-param">pred_name</em>, <em class="sig-param">dataset_name</em>, <em class="sig-param">thresholds=None</em>, <em class="sig-param">display_visuals=True</em>, <em class="sig-param">save_file=True</em>, <em class="sig-param">title=None</em>, <em class="sig-param">normalize=False</em>, <em class="sig-param">hide_zeros=False</em>, <em class="sig-param">hide_counts=False</em>, <em class="sig-param">x_tick_rotation=0</em>, <em class="sig-param">ax=None</em>, <em class="sig-param">figsize=(13</em>, <em class="sig-param">10)</em>, <em class="sig-param">cmap='Blues'</em>, <em class="sig-param">title_fontsize='large'</em>, <em class="sig-param">text_fontsize='medium'</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/eflow/model_analysis/classification_analysis.html#ClassificationAnalysis.plot_confusion_matrix"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#eflow.model_analysis.classification_analysis.ClassificationAnalysis.plot_confusion_matrix" title="Permalink to this definition">¶</a></dt>
+<dd><blockquote>
+<div><p>From scikit-plot documentation
+Link: <a class="reference external" href="http://tinyurl.com/y3ym5pyc">http://tinyurl.com/y3ym5pyc</a>
+Creates a confusion matrix plot based on the models predictions.</p>
+</div></blockquote>
+<dl>
+<dt>Args:</dt><dd><dl>
+<dt>X:</dt><dd><blockquote>
+<div><p>Feature matrix.</p>
+</div></blockquote>
+<dl class="simple">
+<dt>y:</dt><dd><p>Target data vector.</p>
+</dd>
+</dl>
+</dd>
+<dt>pred_name:</dt><dd><p>The name of the prediction function in questioned
+stored in ‘self.__pred_funcs_dict’</p>
+</dd>
+<dt>dataset_name:</dt><dd><p>The dataset’s name; this will create a sub-directory in which your
+generated graph will be inner-nested in.</p>
+</dd>
+<dt>thresholds:</dt><dd><p>If the model outputs a probability list/numpy array then we apply
+thresholds to the ouput of the model.
+For classification only; will not affect the direct output of
+the probabilities.</p>
+</dd>
+<dt>display_visuals:</dt><dd><p>Visualize graph if needed.</p>
+</dd>
+<dt>save_file:</dt><dd><p>Boolean value to whether or not to save the file.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="eflow.model_analysis.classification_analysis.ClassificationAnalysis.plot_cumulative_gain">
+<code class="sig-name descname">plot_cumulative_gain</code><span class="sig-paren">(</span><em class="sig-param">X</em>, <em class="sig-param">y</em>, <em class="sig-param">pred_name</em>, <em class="sig-param">dataset_name</em>, <em class="sig-param">thresholds=None</em>, <em class="sig-param">display_visuals=True</em>, <em class="sig-param">save_file=True</em>, <em class="sig-param">title=None</em>, <em class="sig-param">ax=None</em>, <em class="sig-param">figsize=(13</em>, <em class="sig-param">10)</em>, <em class="sig-param">title_fontsize='large'</em>, <em class="sig-param">text_fontsize='medium'</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/eflow/model_analysis/classification_analysis.html#ClassificationAnalysis.plot_cumulative_gain"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#eflow.model_analysis.classification_analysis.ClassificationAnalysis.plot_cumulative_gain" title="Permalink to this definition">¶</a></dt>
+<dd><blockquote>
+<div><p>From scikit-plot documentation
+Link: <a class="reference external" href="http://tinyurl.com/y3ym5pyc">http://tinyurl.com/y3ym5pyc</a>
+Plots calibration curves for a set of classifier probability estimates.</p>
+</div></blockquote>
+<dl>
+<dt>Args:</dt><dd><dl>
+<dt>X:</dt><dd><blockquote>
+<div><p>Feature matrix.</p>
+</div></blockquote>
+<dl class="simple">
+<dt>y:</dt><dd><p>Target data vector.</p>
+</dd>
+</dl>
+</dd>
+<dt>pred_name:</dt><dd><p>The name of the prediction function in questioned
+stored in ‘self.__pred_funcs_dict’</p>
+</dd>
+<dt>dataset_name:</dt><dd><p>The dataset’s name; this will create a sub-directory in which your
+generated graph will be inner-nested in.</p>
+</dd>
+<dt>thresholds:</dt><dd><p>If the model outputs a probability list/numpy array then we apply
+thresholds to the ouput of the model.
+For classification only; will not affect the direct output of
+the probabilities.</p>
+</dd>
+<dt>display_visuals:</dt><dd><p>Visualize graph if needed.</p>
+</dd>
+<dt>save_file:</dt><dd><p>Boolean value to whether or not to save the file.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="eflow.model_analysis.classification_analysis.ClassificationAnalysis.plot_ks_statistic">
+<code class="sig-name descname">plot_ks_statistic</code><span class="sig-paren">(</span><em class="sig-param">X</em>, <em class="sig-param">y</em>, <em class="sig-param">pred_name</em>, <em class="sig-param">dataset_name</em>, <em class="sig-param">thresholds=None</em>, <em class="sig-param">display_visuals=True</em>, <em class="sig-param">save_file=True</em>, <em class="sig-param">title=None</em>, <em class="sig-param">ax=None</em>, <em class="sig-param">figsize=(13</em>, <em class="sig-param">10)</em>, <em class="sig-param">title_fontsize='large'</em>, <em class="sig-param">text_fontsize='medium'</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/eflow/model_analysis/classification_analysis.html#ClassificationAnalysis.plot_ks_statistic"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#eflow.model_analysis.classification_analysis.ClassificationAnalysis.plot_ks_statistic" title="Permalink to this definition">¶</a></dt>
+<dd><blockquote>
+<div><p>From scikit-plot documentation
+Link: <a class="reference external" href="http://tinyurl.com/y3ym5pyc">http://tinyurl.com/y3ym5pyc</a>
+Generates the KS Statistic plot from labels and scores/probabilities.</p>
+</div></blockquote>
+<dl>
+<dt>Args:</dt><dd><dl>
+<dt>X:</dt><dd><blockquote>
+<div><p>Feature matrix.</p>
+</div></blockquote>
+<dl class="simple">
+<dt>y:</dt><dd><p>Target data vector.</p>
+</dd>
+</dl>
+</dd>
+<dt>pred_name:</dt><dd><p>The name of the prediction function in questioned
+stored in ‘self.__pred_funcs_dict’</p>
+</dd>
+<dt>dataset_name:</dt><dd><p>The dataset’s name; this will create a sub-directory in which your
+generated graph will be inner-nested in.</p>
+</dd>
+<dt>thresholds:</dt><dd><p>If the model outputs a probability list/numpy array then we apply
+thresholds to the ouput of the model.
+For classification only; will not affect the direct output of
+the probabilities.</p>
+</dd>
+<dt>display_visuals:</dt><dd><p>Visualize graph if needed.</p>
+</dd>
+<dt>save_file:</dt><dd><p>Boolean value to whether or not to save the file.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="eflow.model_analysis.classification_analysis.ClassificationAnalysis.plot_lift_curve">
+<code class="sig-name descname">plot_lift_curve</code><span class="sig-paren">(</span><em class="sig-param">X</em>, <em class="sig-param">y</em>, <em class="sig-param">pred_name</em>, <em class="sig-param">dataset_name</em>, <em class="sig-param">thresholds=None</em>, <em class="sig-param">display_visuals=True</em>, <em class="sig-param">save_file=True</em>, <em class="sig-param">title=None</em>, <em class="sig-param">ax=None</em>, <em class="sig-param">figsize=(13</em>, <em class="sig-param">10)</em>, <em class="sig-param">title_fontsize='large'</em>, <em class="sig-param">text_fontsize='medium'</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/eflow/model_analysis/classification_analysis.html#ClassificationAnalysis.plot_lift_curve"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#eflow.model_analysis.classification_analysis.ClassificationAnalysis.plot_lift_curve" title="Permalink to this definition">¶</a></dt>
+<dd><blockquote>
+<div><p>From scikit-plot documentation
+Link: <a class="reference external" href="http://tinyurl.com/y3ym5pyc">http://tinyurl.com/y3ym5pyc</a>
+The lift curve is used to determine the effectiveness of a binary classifier.
+A detailed explanation can be found at <a class="reference external" href="http://tinyurl.com/csegj9">http://tinyurl.com/csegj9</a>.
+The implementation here works only for binary classification.</p>
+</div></blockquote>
+<dl>
+<dt>Args:</dt><dd><dl>
+<dt>X:</dt><dd><blockquote>
+<div><p>Feature matrix.</p>
+</div></blockquote>
+<dl class="simple">
+<dt>y:</dt><dd><p>Target data vector.</p>
+</dd>
+</dl>
+</dd>
+<dt>pred_name:</dt><dd><p>The name of the prediction function in questioned
+stored in ‘self.__pred_funcs_dict’</p>
+</dd>
+<dt>dataset_name:</dt><dd><p>The dataset’s name; this will create a sub-directory in which your
+generated graph will be inner-nested in.</p>
+</dd>
+<dt>thresholds:</dt><dd><p>If the model outputs a probability list/numpy array then we apply
+thresholds to the ouput of the model.
+For classification only; will not affect the direct output of
+the probabilities.</p>
+</dd>
+<dt>display_visuals:</dt><dd><p>Visualize graph if needed.</p>
+</dd>
+<dt>save_file:</dt><dd><p>Boolean value to whether or not to save the file.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="eflow.model_analysis.classification_analysis.ClassificationAnalysis.plot_precision_recall_curve">
+<code class="sig-name descname">plot_precision_recall_curve</code><span class="sig-paren">(</span><em class="sig-param">X</em>, <em class="sig-param">y</em>, <em class="sig-param">pred_name</em>, <em class="sig-param">dataset_name</em>, <em class="sig-param">thresholds=None</em>, <em class="sig-param">display_visuals=True</em>, <em class="sig-param">save_file=True</em>, <em class="sig-param">title=None</em>, <em class="sig-param">plot_micro=True</em>, <em class="sig-param">classes_to_plot=None</em>, <em class="sig-param">ax=None</em>, <em class="sig-param">figsize=(13</em>, <em class="sig-param">10)</em>, <em class="sig-param">cmap='nipy_spectral'</em>, <em class="sig-param">title_fontsize='large'</em>, <em class="sig-param">text_fontsize='medium'</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/eflow/model_analysis/classification_analysis.html#ClassificationAnalysis.plot_precision_recall_curve"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#eflow.model_analysis.classification_analysis.ClassificationAnalysis.plot_precision_recall_curve" title="Permalink to this definition">¶</a></dt>
+<dd><blockquote>
+<div><p>From scikit-plot documentation
+Link: <a class="reference external" href="http://tinyurl.com/y3ym5pyc">http://tinyurl.com/y3ym5pyc</a>
+Plots precision recall curve plot based on the models predictions.</p>
+</div></blockquote>
+<dl>
+<dt>Args:</dt><dd><dl>
+<dt>X:</dt><dd><blockquote>
+<div><p>Feature matrix.</p>
+</div></blockquote>
+<dl class="simple">
+<dt>y:</dt><dd><p>Target data vector.</p>
+</dd>
+</dl>
+</dd>
+<dt>pred_name:</dt><dd><p>The name of the prediction function in questioned
+stored in ‘self.__pred_funcs_dict’</p>
+</dd>
+<dt>dataset_name:</dt><dd><p>The dataset’s name; this will create a sub-directory in which your
+generated graph will be inner-nested in.</p>
+</dd>
+<dt>thresholds:</dt><dd><p>If the model outputs a probability list/numpy array then we apply
+thresholds to the ouput of the model.
+For classification only; will not affect the direct output of
+the probabilities.</p>
+</dd>
+<dt>display_visuals:</dt><dd><p>Visualize graph if needed.</p>
+</dd>
+<dt>save_file:</dt><dd><p>Boolean value to whether or not to save the file.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="eflow.model_analysis.classification_analysis.ClassificationAnalysis.plot_roc_curve">
+<code class="sig-name descname">plot_roc_curve</code><span class="sig-paren">(</span><em class="sig-param">X</em>, <em class="sig-param">y</em>, <em class="sig-param">pred_name</em>, <em class="sig-param">dataset_name</em>, <em class="sig-param">thresholds=None</em>, <em class="sig-param">display_visuals=True</em>, <em class="sig-param">save_file=True</em>, <em class="sig-param">title=None</em>, <em class="sig-param">ax=None</em>, <em class="sig-param">figsize=(13</em>, <em class="sig-param">10)</em>, <em class="sig-param">title_fontsize='large'</em>, <em class="sig-param">text_fontsize='medium'</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/eflow/model_analysis/classification_analysis.html#ClassificationAnalysis.plot_roc_curve"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#eflow.model_analysis.classification_analysis.ClassificationAnalysis.plot_roc_curve" title="Permalink to this definition">¶</a></dt>
+<dd><blockquote>
+<div><p>From scikit-plot documentation
+Link: <a class="reference external" href="http://tinyurl.com/y3ym5pyc">http://tinyurl.com/y3ym5pyc</a>
+Creates ROC curves from labels and predicted probabilities.</p>
+</div></blockquote>
+<dl>
+<dt>Args:</dt><dd><blockquote>
+<div><dl class="simple">
+<dt>X:</dt><dd><p>Feature matrix.</p>
+</dd>
+<dt>y:</dt><dd><p>Target data vector.</p>
+</dd>
+</dl>
+</div></blockquote>
+<dl class="simple">
+<dt>pred_name:</dt><dd><p>The name of the prediction function in questioned
+stored in ‘self.__pred_funcs_dict’</p>
+</dd>
+<dt>dataset_name:</dt><dd><p>The dataset’s name; this will create a sub-directory in which your
+generated graph will be inner-nested in.</p>
+</dd>
+<dt>thresholds:</dt><dd><p>If the model outputs a probability list/numpy array then we apply
+thresholds to the ouput of the model.
+For classification only; will not affect the direct output of
+the probabilities.</p>
+</dd>
+<dt>display_visuals:</dt><dd><p>Visualize graph if needed.</p>
+</dd>
+<dt>save_file:</dt><dd><p>Boolean value to whether or not to save the file.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="eflow.model_analysis.regression_analysis.html" class="btn btn-neutral float-right" title="eflow.model_analysis.regression_analysis" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="eflow.foundation.data_pipeline.html" class="btn btn-neutral float-left" title="eflow.foundation.data_pipeline" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2020, Eric Cacciavillani
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

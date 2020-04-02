@@ -48,7 +48,7 @@ class AutoModeler(FileOutput):
                   filename="Unknown filename",
                   suppress_runtime_errors=True):
         """
-        Desc:
+
             Checks the passed data to see if a plot can be saved; raises
             an error if it can't.
 
@@ -102,7 +102,7 @@ class AutoModeler(FileOutput):
                            show_index=False,
                            format_float_pos=2):
         """
-        Desc:
+
             Checks the passed data to see if a table can be saved as a plot;
             raises an error if it can't.
 

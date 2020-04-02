@@ -1,0 +1,595 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>eflow.foundation.data_pipeline &mdash; eflow  documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../../../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+        <script src="../../../_static/jquery.js"></script>
+        <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/doctools.js"></script>
+        <script src="../../../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../../../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../../index.html" class="icon icon-home"> eflow
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../_autosummary/eflow.data_analysis.feature_analysis.html">eflow.data_analysis.feature_analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../_autosummary/eflow.data_analysis.null_analysis.html">eflow.data_analysis.null_analysis</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../_autosummary/eflow.data_pipeline_segments.data_encoder.html">eflow.data_pipeline_segments.data_encoder</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../_autosummary/eflow.data_pipeline_segments.feature_data_cleaner.html">eflow.data_pipeline_segments.feature_data_cleaner</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../_autosummary/eflow.data_pipeline_segments.feature_transformer.html">eflow.data_pipeline_segments.feature_transformer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../_autosummary/eflow.data_pipeline_segments.string_cleaner.html">eflow.data_pipeline_segments.string_cleaner</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../_autosummary/eflow.data_pipeline_segments.type_fixer.html">eflow.data_pipeline_segments.type_fixer</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../_autosummary/eflow.foundation.data_frame_types.html">eflow.foundation.data_frame_types</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../_autosummary/eflow.foundation.data_pipeline.html">eflow.foundation.data_pipeline</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../_autosummary/eflow.model_analysis.classification_analysis.html">eflow.model_analysis.classification_analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../_autosummary/eflow.model_analysis.regression_analysis.html">eflow.model_analysis.regression_analysis</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">eflow</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../../index.html">Module code</a> &raquo;</li>
+        
+      <li>eflow.foundation.data_pipeline</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for eflow.foundation.data_pipeline</h1><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">eflow._hidden.parent_objects</span> <span class="kn">import</span> <span class="n">FileOutput</span>
+<span class="kn">from</span> <span class="nn">eflow._hidden.parent_objects</span> <span class="kn">import</span> <span class="n">DataPipelineSegment</span>
+<span class="kn">from</span> <span class="nn">eflow._hidden.custom_exceptions</span> <span class="kn">import</span> <span class="n">UnsatisfiedRequirments</span><span class="p">,</span> <span class="n">PipelineError</span>
+<span class="kn">from</span> <span class="nn">eflow._hidden.constants</span> <span class="kn">import</span> <span class="n">SYS_CONSTANTS</span>
+<span class="kn">from</span> <span class="nn">eflow.utils.string_utils</span> <span class="kn">import</span> <span class="n">create_hex_decimal_string</span><span class="p">,</span><span class="n">correct_directory_path</span>
+<span class="kn">from</span> <span class="nn">eflow.utils.sys_utils</span> <span class="kn">import</span> <span class="n">dict_to_json_file</span><span class="p">,</span> <span class="n">create_dir_structure</span><span class="p">,</span> <span class="n">json_file_to_dict</span>
+<span class="kn">from</span> <span class="nn">eflow.utils.eflow_utils</span> <span class="kn">import</span> <span class="n">move_folder_to_eflow_garbage</span>
+<span class="kn">from</span> <span class="nn">eflow.data_pipeline_segments</span> <span class="kn">import</span> <span class="o">*</span>
+
+<span class="kn">from</span> <span class="nn">eflow.foundation</span> <span class="kn">import</span> <span class="n">DataFrameTypes</span>
+
+<span class="kn">import</span> <span class="nn">copy</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">deque</span>
+
+<span class="n">__author__</span> <span class="o">=</span> <span class="s2">&quot;Eric Cacciavillani&quot;</span>
+<span class="n">__copyright__</span> <span class="o">=</span> <span class="s2">&quot;Copyright 2019, eFlow&quot;</span>
+<span class="n">__credits__</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Eric Cacciavillani&quot;</span><span class="p">]</span>
+<span class="n">__license__</span> <span class="o">=</span> <span class="s2">&quot;MIT&quot;</span>
+<span class="n">__maintainer__</span> <span class="o">=</span> <span class="s2">&quot;EricCacciavillani&quot;</span>
+<span class="n">__email__</span> <span class="o">=</span> <span class="s2">&quot;eric.cacciavillani@gmail.com&quot;</span>
+
+
+<div class="viewcode-block" id="DataPipeline"><a class="viewcode-back" href="../../../_autosummary/eflow.foundation.data_pipeline.html#eflow.foundation.data_pipeline.DataPipeline">[docs]</a><span class="k">class</span> <span class="nc">DataPipeline</span><span class="p">(</span><span class="n">FileOutput</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Houses all pipeline segments. Able to load these segments in with</span>
+<span class="sd">        a pipeline json file and/or modify id. You can add more pipeline</span>
+<span class="sd">        segments if needed which will modify the pipeline&#39;s json file. Allows</span>
+<span class="sd">        a pandas dataframe to be processed by &#39;perform_pipeline&#39;.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+                 <span class="n">pipeline_name</span><span class="p">,</span>
+                 <span class="n">df</span><span class="p">,</span>
+                 <span class="n">df_features</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                 <span class="n">pipeline_modify_id</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                 <span class="n">remove_past_contents</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Args:</span>
+<span class="sd">            pipeline_name (str):</span>
+<span class="sd">                Points to/generates a folder based on the pipeline&#39;s name.</span>
+
+<span class="sd">            pipeline_modify_id (str,NoneType):</span>
+<span class="sd">                If set to &#39;None&#39; then will point the &#39;root&#39; or the main template</span>
+<span class="sd">                of the pipeline.</span>
+
+<span class="sd">            remove_past_contents:</span>
+<span class="sd">                If an already existing folder exists for this then move to</span>
+<span class="sd">                eflow&#39;s personal garbage.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># Set up directory structure</span>
+        <span class="n">dir_path_to_pipeline</span> <span class="o">=</span> <span class="n">correct_directory_path</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;{os.getcwd()}/</span><span class="si">{SYS_CONSTANTS.PARENT_OUTPUT_FOLDER_NAME}</span><span class="s2">/_Extras/Pipeline Structure/Data Pipeline/</span><span class="si">{pipeline_name}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="n">configure_existing_file</span> <span class="o">=</span> <span class="kc">False</span>
+
+        <span class="c1"># Get json proper file name</span>
+        <span class="k">if</span> <span class="n">pipeline_modify_id</span><span class="p">:</span>
+            <span class="n">json_file</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;{pipeline_modify_id.split(&#39;.&#39;)[0]}.json&quot;</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">json_file</span> <span class="o">=</span> <span class="s2">&quot;root_pipeline.json&quot;</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">__df_features</span> <span class="o">=</span> <span class="kc">None</span>
+
+        <span class="c1"># Check if folder/file exist for the pipeline</span>
+        <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">dir_path_to_pipeline</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">dir_path_to_pipeline</span> <span class="o">+</span> <span class="n">json_file</span><span class="p">):</span>
+                <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;The file &#39;</span><span class="si">{json_file}</span><span class="s2">&#39; exist!&quot;</span><span class="p">)</span>
+                <span class="n">FileOutput</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+                                    <span class="sa">f</span><span class="s1">&#39;_Extras/Pipeline Structure/Data Pipeline/</span><span class="si">{pipeline_name}</span><span class="s1">&#39;</span><span class="p">)</span>
+                <span class="n">configure_existing_file</span> <span class="o">=</span> <span class="kc">True</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="n">PipelineError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;The file &#39;</span><span class="si">{json_file}</span><span class="s2">&#39; does not exist!&quot;</span><span class="p">)</span>
+
+            <span class="c1"># Create/Load in df_features to given object.</span>
+            <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">dir_path_to_pipeline</span> <span class="o">+</span> <span class="s2">&quot;df_features.json&quot;</span><span class="p">):</span>
+                <span class="n">df_features</span> <span class="o">=</span> <span class="n">DataFrameTypes</span><span class="p">(</span><span class="kc">None</span><span class="p">)</span>
+                <span class="n">df_features</span><span class="o">.</span><span class="n">init_on_json_file</span><span class="p">(</span><span class="n">dir_path_to_pipeline</span> <span class="o">+</span> <span class="s2">&quot;df_features.json&quot;</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">df_features</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                    <span class="k">raise</span> <span class="n">PipelineError</span><span class="p">(</span><span class="s2">&quot;When initializing a data pipeline structure &quot;</span>
+                                        <span class="s2">&quot;you must pass a DataFrameTypes object with &quot;</span>
+                                        <span class="s2">&quot;the correctly defined types!&quot;</span><span class="p">)</span>
+
+                <span class="c1"># Create file representation</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">df_features</span><span class="o">.</span><span class="n">create_json_file_representation</span><span class="p">(</span><span class="n">dir_path_to_pipeline</span><span class="p">,</span>
+                                                                <span class="s2">&quot;df_features&quot;</span><span class="p">)</span>
+
+        <span class="c1"># -----</span>
+        <span class="k">if</span> <span class="n">df_features</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">PipelineError</span><span class="p">(</span><span class="s2">&quot;When initializing a data pipeline structure &quot;</span>
+                                <span class="s2">&quot;you must pass a DataFrameTypes object with &quot;</span>
+                                <span class="s2">&quot;the correctly defined types!&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__df_features</span> <span class="o">=</span> <span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="n">df_features</span><span class="p">)</span>
+
+        <span class="c1"># Check if root file exist or if pipeline modify id</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__pipeline_name</span> <span class="o">=</span> <span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="n">pipeline_name</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__pipeline_segment_deque</span> <span class="o">=</span> <span class="n">deque</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__pipeline_segment_names</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__pipeline_segment_path_id</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__pipeline_modify_id</span> <span class="o">=</span> <span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="n">pipeline_modify_id</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">__json_file_name</span> <span class="o">=</span> <span class="n">json_file</span>
+
+        <span class="c1"># Json file does exist; init DataPipeline object correctly</span>
+        <span class="k">if</span> <span class="n">configure_existing_file</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">remove_past_contents</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Moving past contents to eFlow&#39;s garbage.&quot;</span><span class="p">)</span>
+                <span class="n">move_folder_to_eflow_garbage</span><span class="p">(</span><span class="n">dir_path_to_pipeline</span><span class="p">,</span>
+                                             <span class="s2">&quot;Data Pipelines&quot;</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Now configuring object with proper pipeline segments...&quot;</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">__configure_pipeline_with_existing_file</span><span class="p">()</span>
+
+        <span class="k">for</span> <span class="n">removal_feature</span> <span class="ow">in</span> <span class="nb">set</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="p">)</span> <span class="o">^</span> <span class="nb">set</span><span class="p">(</span>
+                <span class="n">df_features</span><span class="o">.</span><span class="n">all_features</span><span class="p">()):</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Removing the feature: </span><span class="se">\&quot;</span><span class="si">{removal_feature}</span><span class="se">\&quot;</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="n">df</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="n">removal_feature</span><span class="p">,</span>
+                    <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">file_path</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns:</span>
+<span class="sd">            File path with file name.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__pipeline_segment_deque</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">PipelineError</span><span class="p">(</span>
+                <span class="s2">&quot;The pipeline has not added any segments yet.&quot;</span>
+                <span class="s2">&quot; Please add segments to this object.&quot;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">folder_path</span> <span class="o">+</span> <span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__json_file_name</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">file_name</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns:</span>
+<span class="sd">            File name with extension.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__pipeline_segment_deque</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">PipelineError</span><span class="p">(</span>
+                <span class="s2">&quot;The pipeline has not added any segments yet.&quot;</span>
+                <span class="s2">&quot; Please add segments to this object.&quot;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__json_file_name</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">get_df_features</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__pipeline_segment_deque</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">PipelineError</span><span class="p">(</span>
+                <span class="s2">&quot;The pipeline has not added any segments yet.&quot;</span>
+                <span class="s2">&quot; Please add segments to this object.&quot;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__df_features</span><span class="p">)</span>
+
+<div class="viewcode-block" id="DataPipeline.add"><a class="viewcode-back" href="../../../_autosummary/eflow.foundation.data_pipeline.html#eflow.foundation.data_pipeline.DataPipeline.add">[docs]</a>    <span class="k">def</span> <span class="nf">add</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+            <span class="n">segment_name</span><span class="p">,</span>
+            <span class="n">pipeline_segment_obj</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        segment_name (str):</span>
+<span class="sd">            A aliased name to refer to this segment.</span>
+
+<span class="sd">        pipeline_segment_obj (child of DataPipelineSegment):</span>
+<span class="sd">            A child object of type DataPipelineSegment.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Attempts to add a pipeline segment object to the objects que and</span>
+<span class="sd">            update it&#39;s related json object.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="c1"># pipeline_segment_obj = copy.deepcopy(pipeline_segment_obj)</span>
+
+        <span class="c1"># Type check</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">pipeline_segment_obj</span><span class="p">,</span>
+                          <span class="n">DataPipelineSegment</span><span class="p">):</span>
+
+            <span class="k">raise</span> <span class="n">UnsatisfiedRequirments</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Expected a &#39;DataPipelineSegment&#39; object; received &#39;{type(pipeline_segment_obj)}&#39;&quot;</span><span class="p">)</span>
+
+        <span class="c1"># Check if alias has already been used</span>
+        <span class="k">if</span> <span class="n">segment_name</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">__pipeline_segment_names</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">PipelineError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;The &#39;</span><span class="si">{segment_name}</span><span class="s2">&#39; pipeline segment is already in this pipeline. Please choose a different segment name.&quot;</span><span class="p">)</span>
+
+        <span class="k">try</span><span class="p">:</span>
+            <span class="c1"># Check if the pipeline segment has already been used</span>
+            <span class="n">segment_path_id</span> <span class="o">=</span> <span class="n">pipeline_segment_obj</span><span class="o">.</span><span class="n">relative_folder_path</span> <span class="o">+</span> <span class="n">pipeline_segment_obj</span><span class="o">.</span><span class="n">file_name</span>
+        <span class="k">except</span> <span class="ne">AttributeError</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">UnsatisfiedRequirments</span><span class="p">(</span><span class="s2">&quot;The given pipeline segment didn&#39;t perform any functions.&quot;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">segment_path_id</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">__pipeline_segment_path_id</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">PipelineError</span><span class="p">(</span><span class="s2">&quot;The segment has been already found &quot;</span>
+                                <span class="s2">&quot;in this pipeline Segment path id: &quot;</span> <span class="o">+</span>
+                                <span class="sa">f</span><span class="s2">&quot;&#39;</span><span class="si">{segment_path_id}</span><span class="s2">.&#39;</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">+</span>
+                                <span class="s2">&quot;This can be done by:&quot;</span>
+                                <span class="s2">&quot;</span><span class="se">\n\t</span><span class="s2">*Creating a completely new segment object &quot;</span>
+                                <span class="s2">&quot;and adding it to the pipeline with the &#39;add&#39;&quot;</span>
+                                <span class="s2">&quot; method.&quot;</span>
+                                <span class="s2">&quot;</span><span class="se">\n\t</span><span class="s2">*Refer to a different segment path id&quot;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="c1"># Que has yet to have data pushed; set up output directory for new data</span>
+            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__pipeline_segment_deque</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="n">FileOutput</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+                                    <span class="sa">f</span><span class="s1">&#39;_Extras/Pipeline Structure/Data Pipeline/</span><span class="si">{self.__pipeline_name}</span><span class="s1">&#39;</span><span class="p">)</span>
+
+                <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">folder_path</span> <span class="o">+</span> <span class="s2">&quot;df_features.json&quot;</span><span class="p">):</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">__df_features</span><span class="o">.</span><span class="n">init_on_json_file</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">folder_path</span> <span class="o">+</span> <span class="s2">&quot;df_features.json&quot;</span><span class="p">)</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">__df_features</span><span class="o">.</span><span class="n">create_json_file_representation</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">folder_path</span><span class="p">,</span>
+                                                                       <span class="s2">&quot;df_features.json&quot;</span><span class="p">)</span>
+
+
+
+        <span class="c1"># Update data types for error checking</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__pipeline_segment_names</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">segment_name</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__pipeline_segment_path_id</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">segment_path_id</span><span class="p">)</span>
+
+        <span class="c1"># Main component of the project</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__pipeline_segment_deque</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">segment_name</span><span class="p">,</span>
+                                              <span class="n">segment_path_id</span><span class="p">,</span>
+                                              <span class="n">pipeline_segment_obj</span><span class="p">))</span>
+
+        <span class="c1"># Lock down the object to prevent users from continuing to interact with it after adding it to the pipeline</span>
+        <span class="n">pipeline_segment_obj</span><span class="o">.</span><span class="n">_DataPipelineSegment__lock_interaction</span> <span class="o">=</span> <span class="kc">True</span>
+
+        <span class="c1"># Update/Create the json file</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__create_json_pipeline_file</span><span class="p">()</span></div>
+
+<div class="viewcode-block" id="DataPipeline.perform_pipeline"><a class="viewcode-back" href="../../../_autosummary/eflow.foundation.data_pipeline.html#eflow.foundation.data_pipeline.DataPipeline.perform_pipeline">[docs]</a>    <span class="k">def</span> <span class="nf">perform_pipeline</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+                         <span class="n">df</span><span class="p">,</span>
+                         <span class="n">df_features</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Args:</span>
+<span class="sd">            df:</span>
+<span class="sd">                Pandas Dataframe object to be transformed by the pipeline.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Applies a Pandas Dataframe object to all functions on all segments</span>
+<span class="sd">            in the pipeline.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">if</span> <span class="n">df_features</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">df_features</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__df_features</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">__df_features</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">PipelineError</span><span class="p">(</span><span class="s2">&quot;Default type holder somehow is equal to none for &quot;</span>
+                                <span class="s2">&quot;this pipeline structure.&quot;</span><span class="p">)</span>
+
+
+        <span class="k">for</span> <span class="n">removal_feature</span> <span class="ow">in</span> <span class="nb">set</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="p">)</span> <span class="o">^</span> <span class="nb">set</span><span class="p">(</span>
+                <span class="n">df_features</span><span class="o">.</span><span class="n">all_features</span><span class="p">()):</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Removing the feature: </span><span class="se">\&quot;</span><span class="si">{removal_feature}</span><span class="se">\&quot;</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="n">df</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="n">removal_feature</span><span class="p">,</span>
+                    <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+        <span class="k">for</span> <span class="n">_</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">pipeline_segment</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">__pipeline_segment_deque</span><span class="p">:</span>
+            <span class="n">pipeline_segment</span><span class="o">.</span><span class="n">perform_segment</span><span class="p">(</span><span class="n">df</span><span class="p">,</span>
+                                             <span class="n">df_features</span><span class="p">)</span></div>
+
+    <span class="k">def</span> <span class="nf">__create_json_pipeline_file</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns:</span>
+<span class="sd">            Creates a dict based on the given contents of the variable</span>
+<span class="sd">            &#39;self.__pipeline_segment_deque&#39; to convert to a json file.</span>
+<span class="sd">            This file will later be used to instruct our object to execute</span>
+<span class="sd">            specific code.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="c1"># -------------</span>
+        <span class="n">json_dict</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
+        <span class="n">segment_order</span> <span class="o">=</span> <span class="mi">1</span>
+
+        <span class="n">json_dict</span><span class="p">[</span><span class="s2">&quot;Pipeline Name&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__pipeline_name</span>
+        <span class="n">json_dict</span><span class="p">[</span><span class="s2">&quot;Pipeline Segment Order&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">segment_name</span><span class="p">,</span> <span class="n">segment_path_id</span><span class="p">,</span> <span class="n">pipeline_segment_obj</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">__pipeline_segment_deque</span><span class="p">:</span>
+            <span class="n">json_dict</span><span class="p">[</span><span class="s2">&quot;Pipeline Segment Order&quot;</span><span class="p">][</span><span class="n">segment_order</span><span class="p">]</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
+            <span class="n">json_dict</span><span class="p">[</span><span class="s2">&quot;Pipeline Segment Order&quot;</span><span class="p">][</span><span class="n">segment_order</span><span class="p">][</span><span class="s2">&quot;Pipeline Segment Path&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">segment_path_id</span>
+            <span class="n">json_dict</span><span class="p">[</span><span class="s2">&quot;Pipeline Segment Order&quot;</span><span class="p">][</span><span class="n">segment_order</span><span class="p">][</span><span class="s2">&quot;Pipeline Segment Type&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pipeline_segment_obj</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span>
+            <span class="n">json_dict</span><span class="p">[</span><span class="s2">&quot;Pipeline Segment Order&quot;</span><span class="p">][</span><span class="n">segment_order</span><span class="p">][</span><span class="s2">&quot;Pipeline Segment Name&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">segment_name</span>
+            <span class="n">json_dict</span><span class="p">[</span><span class="s2">&quot;Pipeline Segment Order&quot;</span><span class="p">][</span><span class="n">segment_order</span><span class="p">][</span><span class="s2">&quot;Pipeline Segment ID&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">segment_path_id</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;/&quot;</span><span class="p">)[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;.&quot;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+
+            <span class="n">segment_order</span> <span class="o">+=</span> <span class="mi">1</span>
+
+        <span class="n">json_dict</span><span class="p">[</span><span class="s2">&quot;Pipeline Segment Count&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">segment_order</span> <span class="o">-</span> <span class="mi">1</span>
+
+        <span class="c1"># Create a folder for all non-root json files.</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">__pipeline_modify_id</span><span class="p">:</span>
+            <span class="n">create_dir_structure</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">folder_path</span><span class="p">,</span>
+                                       <span class="s2">&quot;/Modified Pipelines&quot;</span><span class="p">)</span>
+            <span class="n">dict_to_json_file</span><span class="p">(</span><span class="n">json_dict</span><span class="p">,</span>
+                                       <span class="bp">self</span><span class="o">.</span><span class="n">folder_path</span> <span class="o">+</span> <span class="s2">&quot;/Modified Pipelines&quot;</span><span class="p">,</span>
+                                       <span class="bp">self</span><span class="o">.</span><span class="n">__json_file_name</span><span class="p">)</span>
+        <span class="c1"># Root json files only</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">dict_to_json_file</span><span class="p">(</span><span class="n">json_dict</span><span class="p">,</span>
+                                       <span class="bp">self</span><span class="o">.</span><span class="n">folder_path</span><span class="p">,</span>
+                                       <span class="bp">self</span><span class="o">.</span><span class="n">__json_file_name</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">__configure_pipeline_with_existing_file</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns:</span>
+<span class="sd">            Changes the objects variables based on the provided json file.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="c1"># Error check paths</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">folder_path</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="n">PipelineError</span><span class="p">(</span><span class="s2">&quot;Couldn&#39;t find the pipeline&#39;s folder when trying to configure this object with the provided json file.&quot;</span><span class="p">)</span>
+
+        <span class="c1"># ------</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">folder_path</span> <span class="o">+</span> <span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__json_file_name</span><span class="p">)):</span>
+            <span class="k">raise</span> <span class="n">PipelineError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Couldn&#39;t find the pipeline&#39;s file named &#39;</span><span class="si">{self.file_name}</span><span class="s2">&#39; in the pipeline&#39;s directory when trying to configure this object with the provided json file.&quot;</span><span class="p">)</span>
+
+        <span class="c1"># Reset variables</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__pipeline_segment_deque</span> <span class="o">=</span> <span class="n">deque</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__pipeline_segment_names</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__pipeline_segment_path_id</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+
+        <span class="n">json_dict</span> <span class="o">=</span> <span class="n">json_file_to_dict</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">folder_path</span> <span class="o">+</span> <span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__json_file_name</span><span class="p">))</span>
+
+        <span class="c1"># Iterate through dict to init variables properly</span>
+        <span class="k">for</span> <span class="n">segment_order</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">json_dict</span><span class="p">[</span><span class="s2">&quot;Pipeline Segment Count&quot;</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
+            <span class="n">segment_type</span> <span class="o">=</span> <span class="n">json_dict</span><span class="p">[</span><span class="s2">&quot;Pipeline Segment Order&quot;</span><span class="p">][</span><span class="nb">str</span><span class="p">(</span><span class="n">segment_order</span><span class="p">)][</span><span class="s2">&quot;Pipeline Segment Type&quot;</span><span class="p">]</span>
+            <span class="n">segment_name</span> <span class="o">=</span> \
+            <span class="n">json_dict</span><span class="p">[</span><span class="s2">&quot;Pipeline Segment Order&quot;</span><span class="p">][</span><span class="nb">str</span><span class="p">(</span><span class="n">segment_order</span><span class="p">)][</span>
+                <span class="s2">&quot;Pipeline Segment Name&quot;</span><span class="p">]</span>
+            <span class="n">segment_path_id</span> <span class="o">=</span> \
+            <span class="n">json_dict</span><span class="p">[</span><span class="s2">&quot;Pipeline Segment Order&quot;</span><span class="p">][</span><span class="nb">str</span><span class="p">(</span><span class="n">segment_order</span><span class="p">)][</span>
+                <span class="s2">&quot;Pipeline Segment Path&quot;</span><span class="p">]</span>
+            <span class="n">segment_id</span> <span class="o">=</span> <span class="n">json_dict</span><span class="p">[</span><span class="s2">&quot;Pipeline Segment Order&quot;</span><span class="p">][</span><span class="nb">str</span><span class="p">(</span><span class="n">segment_order</span><span class="p">)][</span><span class="s2">&quot;Pipeline Segment ID&quot;</span><span class="p">]</span>
+
+            <span class="n">pipeline_segment_obj</span> <span class="o">=</span> <span class="kc">None</span>
+
+            <span class="n">pipeline_segment_obj</span> <span class="o">=</span> <span class="nb">eval</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{segment_type}</span><span class="s2">(</span><span class="se">\&quot;</span><span class="si">{segment_id}</span><span class="se">\&quot;</span><span class="s2">)</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">pipeline_segment_obj</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="n">PipelineError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;An unknown error has occurred with finding the correct pipeline segment for &#39;</span><span class="si">{segment_type}</span><span class="s2">&#39; segment!&quot;</span><span class="p">)</span>
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">__pipeline_segment_names</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">segment_name</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__pipeline_segment_path_id</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">segment_path_id</span><span class="p">)</span>
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">__pipeline_segment_deque</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">segment_name</span><span class="p">,</span>
+                                                  <span class="n">segment_path_id</span><span class="p">,</span>
+                                                  <span class="n">pipeline_segment_obj</span><span class="p">))</span></div>
+
+    <span class="c1"># def generate_code(self,</span>
+    <span class="c1">#                   generate_file=True,</span>
+    <span class="c1">#                   add_libs=True):</span>
+    <span class="c1">#     &quot;&quot;&quot;</span>
+    <span class="c1">#     generate_file (bool):</span>
+    <span class="c1">#         Determines whether or not to generate a python file</span>
+    <span class="c1">#     add_libs:</span>
+    <span class="c1">#</span>
+    <span class="c1">#     Returns:</span>
+    <span class="c1">#         Applies</span>
+    <span class="c1">#     &quot;&quot;&quot;</span>
+    <span class="c1">#     if len(self.__pipeline_segment_deque) == 0:</span>
+    <span class="c1">#         raise PipelineError(&quot;Pipeline needs a segment to generate code.&quot;)</span>
+    <span class="c1">#</span>
+    <span class="c1">#     generated_code = []</span>
+    <span class="c1">#</span>
+    <span class="c1">#     if add_libs:</span>
+    <span class="c1">#         libs_code = list()</span>
+    <span class="c1">#         libs_code.append(&quot;from eflow.utils.math_utils import *&quot;)</span>
+    <span class="c1">#         libs_code.append(&quot;from eflow.utils.image_processing_utils import *&quot;)</span>
+    <span class="c1">#         libs_code.append(&quot;from eflow.utils.pandas_utils import *&quot;)</span>
+    <span class="c1">#         libs_code.append(&quot;from eflow.utils.modeling_utils import *&quot;)</span>
+    <span class="c1">#         libs_code.append(&quot;from eflow.utils.string_utils import *&quot;)</span>
+    <span class="c1">#         libs_code.append(&quot;from eflow.utils.misc_utils import *&quot;)</span>
+    <span class="c1">#         libs_code.append(&quot;from eflow.utils.sys_utils import *&quot;)</span>
+    <span class="c1">#         libs_code.append(&quot;&quot;)</span>
+    <span class="c1">#         generated_code.append(libs_code)</span>
+    <span class="c1">#</span>
+    <span class="c1">#</span>
+    <span class="c1">#     for segment_name, segment_path_id, pipeline_segment in self.__pipeline_segment_deque:</span>
+    <span class="c1">#         tmp_list = pipeline_segment.generate_code(generate_file=False,</span>
+    <span class="c1">#                                                   add_libs=False)</span>
+    <span class="c1">#         tmp_list.insert(0, f&#39;# Segment Name:    {segment_name}&#39;)</span>
+    <span class="c1">#         tmp_list.insert(0, f&#39;# Segment Path ID: {segment_path_id}&#39;)</span>
+    <span class="c1">#</span>
+    <span class="c1">#         generated_code.append(tmp_list)</span>
+    <span class="c1">#</span>
+    <span class="c1">#     create_dir_structure(self.folder_path,</span>
+    <span class="c1">#                                &quot;Generated code&quot;)</span>
+    <span class="c1">#</span>
+    <span class="c1">#     if generate_file:</span>
+    <span class="c1">#         python_file_name = self.__json_file_name.split(&quot;.&quot;)[0] + &quot;.py&quot;</span>
+    <span class="c1">#         with open(self.folder_path +</span>
+    <span class="c1">#                   f&#39;Generated code/{python_file_name}&#39;,</span>
+    <span class="c1">#                   &#39;w&#39;) as filehandle:</span>
+    <span class="c1">#             for segment_code in generated_code:</span>
+    <span class="c1">#                 for listitem in segment_code:</span>
+    <span class="c1">#                     filehandle.write(&#39;%s\n&#39; % listitem)</span>
+    <span class="c1">#         print(</span>
+    <span class="c1">#             f&quot;Generated a python file named/at: {self.folder_path}Generated code/{python_file_name}&quot;)</span>
+    <span class="c1">#     else:</span>
+    <span class="c1">#         return generated_code</span>
+    <span class="c1">#</span>
+</pre></div>
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2020, Eric Cacciavillani
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

@@ -222,7 +222,7 @@ class ClassificationAnalysis(ModelAnalysis):
                                           "weighted"],
                          display_visuals=True):
         """
-        Desc:
+
             Runs all available analysis functions on the models predicted data.
 
         Args:
@@ -454,7 +454,7 @@ class ClassificationAnalysis(ModelAnalysis):
                           text_fontsize='medium'):
 
         """
-        Desc:
+
             From scikit-plot documentation
             Link: http://tinyurl.com/y3ym5pyc
             Generates the KS Statistic plot from labels and scores/probabilities.
@@ -533,7 +533,7 @@ class ClassificationAnalysis(ModelAnalysis):
                        text_fontsize='medium'):
 
         """
-        Desc:
+
             From scikit-plot documentation
             Link: http://tinyurl.com/y3ym5pyc
             Creates ROC curves from labels and predicted probabilities.
@@ -613,7 +613,7 @@ class ClassificationAnalysis(ModelAnalysis):
                              text_fontsize='medium'):
 
         """
-        Desc:
+
             From scikit-plot documentation
             Link: http://tinyurl.com/y3ym5pyc
             Plots calibration curves for a set of classifier probability estimates.
@@ -696,7 +696,7 @@ class ClassificationAnalysis(ModelAnalysis):
                                     title_fontsize='large',
                                     text_fontsize='medium'):
         """
-        Desc:
+
             From scikit-plot documentation
             Link: http://tinyurl.com/y3ym5pyc
             Plots precision recall curve plot based on the models predictions.
@@ -779,7 +779,7 @@ class ClassificationAnalysis(ModelAnalysis):
                         title_fontsize='large',
                         text_fontsize='medium'):
         """
-        Desc:
+
             From scikit-plot documentation
             Link: http://tinyurl.com/y3ym5pyc
             The lift curve is used to determine the effectiveness of a binary classifier.
@@ -867,7 +867,7 @@ class ClassificationAnalysis(ModelAnalysis):
                               title_fontsize='large',
                               text_fontsize='medium'):
         """
-        Desc:
+
             From scikit-plot documentation
             Link: http://tinyurl.com/y3ym5pyc
             Creates a confusion matrix plot based on the models predictions.
@@ -950,7 +950,7 @@ class ClassificationAnalysis(ModelAnalysis):
                                                 "macro",
                                                 "weighted"]):
         """
-        Desc:
+
             Creates a dataframe based on the prediction metrics
             of the feature matrix and target vector.
 
@@ -1104,7 +1104,7 @@ class ClassificationAnalysis(ModelAnalysis):
                                         extra_tables=True,
                                         statistical_analysis_on_aggregates=True):
         """
-        Desc:
+
             Compares the actual target value to the predicted value and performs
             analysis of all the data.
 
@@ -1281,7 +1281,7 @@ class ClassificationAnalysis(ModelAnalysis):
                                       extra_tables=True,
                                       statistical_analysis_on_aggregates=True):
         """
-        Desc:
+
             Compares the actual target value to the predicted value and performs
             analysis of all the data.
 
@@ -1459,7 +1459,7 @@ class ClassificationAnalysis(ModelAnalysis):
                               display_visuals=True,
                               save_file=True):
         """
-        Desc:
+
             Creates a report of all target's metric evaluations
             based on the model's prediction output from the classification report
             from the sklearn.
@@ -1571,7 +1571,7 @@ class ClassificationAnalysis(ModelAnalysis):
                                X,
                                thresholds=None):
         """
-        Desc:
+
             Finds the model's predicted labels.
 
         Args:
@@ -1635,7 +1635,7 @@ class ClassificationAnalysis(ModelAnalysis):
                            pred_name,
                            X):
         """
-        Desc:
+
             Attempts to get the probabilities from the prediction function.
 
         Args:
@@ -1669,7 +1669,7 @@ class ClassificationAnalysis(ModelAnalysis):
                                          dataset_name,
                                          thresholds):
         """
-        Desc:
+
             Iterates through directory structure looking at each text file
             containing a string representation of the given threshold;
             keeps comparing the passed value of 'thresholds' to the text file.
@@ -1739,7 +1739,7 @@ class ClassificationAnalysis(ModelAnalysis):
                                                  directory_path,
                                                  thresholds):
         """
-        Desc:
+
             Compare the thresholds object to a threshold text file found in
             the directory; returns true if the file exists and the object's
             value matches up.

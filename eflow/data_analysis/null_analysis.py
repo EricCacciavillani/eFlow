@@ -79,7 +79,7 @@ class NullAnalysis(DataAnalysis):
                          display_print=True,
                          null_features_only=False):
         """
-        Desc:
+
             Perform all public methods of the NullAnalysis object.
             Except for feature_analysis_of_null_data.
 
@@ -207,7 +207,7 @@ class NullAnalysis(DataAnalysis):
                                       statistical_analysis_on_aggregates=True,
                                       nan_features=[]):
         """
-        Desc:
+
             Performs all public methods that generate visualizations/insights
             that feature analysis uses on an aggregation of null data in a
             feature.
@@ -894,7 +894,7 @@ class NullAnalysis(DataAnalysis):
                              suppress_runtime_errors=True,
                              display_print=True):
         """
-        Desc:
+
             Creates/Saves a Pandas DataFrame object giving the percentage of
             the null data for the original DataFrame columns.
 
@@ -1024,7 +1024,7 @@ class NullAnalysis(DataAnalysis):
     def __sort_features_by_nulls(self,
                                  df):
         """
-        Desc:
+
             Sorts a dataframe by data containing the most nulls to least nulls.
 
         Args:

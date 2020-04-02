@@ -12,7 +12,7 @@ from eflow.utils.language_processing_utils import get_synonyms
 def move_folder_to_eflow_garbage(directory_path,
                                  create_sub_dir=None):
     """
-    Desc:
+
         Renames and moves contents to a folder labeled 'Garbage' for the user/system
         to later handle.
 
@@ -48,7 +48,7 @@ def move_folder_to_eflow_garbage(directory_path,
 
 def get_type_holder_from_pipeline(pipeline_name):
     """
-    Desc:
+
         Returns a type holder object from a specfied pipeline directory name.
 
     Args:
@@ -69,7 +69,7 @@ def create_color_dict_for_features(df,
                                    df_features,
                                    value_limit=50):
     """
-    Desc:
+
         Attempts to give a color to each value based on the feature name and
         the feature value. This should be used as a template for the user to insert
         their own hex values.
@@ -215,7 +215,7 @@ def create_color_dict_for_features(df,
 
 def remove_unconnected_pipeline_segments():
     """
-    Desc:
+
         Removes all pipeline segments that aren't connected to a pipeline structure.
     """
 

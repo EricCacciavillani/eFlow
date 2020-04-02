@@ -1,0 +1,998 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>eflow.foundation.data_frame_types &mdash; eflow  documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="eflow.foundation.data_pipeline" href="eflow.foundation.data_pipeline.html" />
+    <link rel="prev" title="eflow.data_pipeline_segments.type_fixer" href="eflow.data_pipeline_segments.type_fixer.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> eflow
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="eflow.data_analysis.feature_analysis.html">eflow.data_analysis.feature_analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="eflow.data_analysis.null_analysis.html">eflow.data_analysis.null_analysis</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="eflow.data_pipeline_segments.data_encoder.html">eflow.data_pipeline_segments.data_encoder</a></li>
+<li class="toctree-l1"><a class="reference internal" href="eflow.data_pipeline_segments.feature_data_cleaner.html">eflow.data_pipeline_segments.feature_data_cleaner</a></li>
+<li class="toctree-l1"><a class="reference internal" href="eflow.data_pipeline_segments.feature_transformer.html">eflow.data_pipeline_segments.feature_transformer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="eflow.data_pipeline_segments.string_cleaner.html">eflow.data_pipeline_segments.string_cleaner</a></li>
+<li class="toctree-l1"><a class="reference internal" href="eflow.data_pipeline_segments.type_fixer.html">eflow.data_pipeline_segments.type_fixer</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">eflow.foundation.data_frame_types</a></li>
+<li class="toctree-l1"><a class="reference internal" href="eflow.foundation.data_pipeline.html">eflow.foundation.data_pipeline</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="eflow.model_analysis.classification_analysis.html">eflow.model_analysis.classification_analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="eflow.model_analysis.regression_analysis.html">eflow.model_analysis.regression_analysis</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">eflow</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+      <li>eflow.foundation.data_frame_types</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/_autosummary/eflow.foundation.data_frame_types.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="module-eflow.foundation.data_frame_types">
+<span id="eflow-foundation-data-frame-types"></span><h1>eflow.foundation.data_frame_types<a class="headerlink" href="#module-eflow.foundation.data_frame_types" title="Permalink to this headline">¶</a></h1>
+<p class="rubric">Classes</p>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#eflow.foundation.data_frame_types.DataFrameTypes" title="eflow.foundation.data_frame_types.DataFrameTypes"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DataFrameTypes</span></code></a>([df, target_feature, …])</p></td>
+<td><p>Separates the features based off of dtypes to better keep track of feature types and helps make type assertions.</p></td>
+</tr>
+</tbody>
+</table>
+<dl class="class">
+<dt id="eflow.foundation.data_frame_types.DataFrameTypes">
+<em class="property">class </em><code class="sig-name descname">DataFrameTypes</code><span class="sig-paren">(</span><em class="sig-param">df=None</em>, <em class="sig-param">target_feature=None</em>, <em class="sig-param">ignore_nulls=False</em>, <em class="sig-param">fix_numeric_features=False</em>, <em class="sig-param">fix_string_features=False</em>, <em class="sig-param">notebook_mode=False</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/eflow/foundation/data_frame_types.html#DataFrameTypes"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#eflow.foundation.data_frame_types.DataFrameTypes" title="Permalink to this definition">¶</a></dt>
+<dd><p>Separates the features based off of dtypes to better keep track of
+feature types and helps make type assertions.</p>
+<dl class="method">
+<dt id="eflow.foundation.data_frame_types.DataFrameTypes.add_new_bool_feature">
+<code class="sig-name descname">add_new_bool_feature</code><span class="sig-paren">(</span><em class="sig-param">feature_name</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/eflow/foundation/data_frame_types.html#DataFrameTypes.add_new_bool_feature"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#eflow.foundation.data_frame_types.DataFrameTypes.add_new_bool_feature" title="Permalink to this definition">¶</a></dt>
+<dd><blockquote>
+<div><p>Adds a new feature/feature(s) to the feature set bool</p>
+</div></blockquote>
+<dl class="simple">
+<dt>Args:</dt><dd><dl class="simple">
+<dt>feature_name: str</dt><dd><p>Name of the new feature</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="eflow.foundation.data_frame_types.DataFrameTypes.add_new_categorical_feature">
+<code class="sig-name descname">add_new_categorical_feature</code><span class="sig-paren">(</span><em class="sig-param">feature_name</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/eflow/foundation/data_frame_types.html#DataFrameTypes.add_new_categorical_feature"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#eflow.foundation.data_frame_types.DataFrameTypes.add_new_categorical_feature" title="Permalink to this definition">¶</a></dt>
+<dd><blockquote>
+<div><p>Adds a new feature/feature(s) to the feature set categorical</p>
+</div></blockquote>
+<dl class="simple">
+<dt>Args:</dt><dd><dl class="simple">
+<dt>feature_name: str</dt><dd><p>Name of the new feature</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="eflow.foundation.data_frame_types.DataFrameTypes.add_new_datetime_feature">
+<code class="sig-name descname">add_new_datetime_feature</code><span class="sig-paren">(</span><em class="sig-param">feature_name</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/eflow/foundation/data_frame_types.html#DataFrameTypes.add_new_datetime_feature"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#eflow.foundation.data_frame_types.DataFrameTypes.add_new_datetime_feature" title="Permalink to this definition">¶</a></dt>
+<dd><blockquote>
+<div><p>Adds a new feature/feature(s) to the feature set datetime</p>
+</div></blockquote>
+<dl class="simple">
+<dt>Args:</dt><dd><dl class="simple">
+<dt>feature_name: str</dt><dd><p>Name of the new feature</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="eflow.foundation.data_frame_types.DataFrameTypes.add_new_float_feature">
+<code class="sig-name descname">add_new_float_feature</code><span class="sig-paren">(</span><em class="sig-param">feature_name</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/eflow/foundation/data_frame_types.html#DataFrameTypes.add_new_float_feature"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#eflow.foundation.data_frame_types.DataFrameTypes.add_new_float_feature" title="Permalink to this definition">¶</a></dt>
+<dd><blockquote>
+<div><p>Adds a new feature/feature(s) to the feature set float</p>
+</div></blockquote>
+<dl class="simple">
+<dt>Args:</dt><dd><dl class="simple">
+<dt>feature_name: str</dt><dd><p>Name of the new feature</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="eflow.foundation.data_frame_types.DataFrameTypes.add_new_integer_feature">
+<code class="sig-name descname">add_new_integer_feature</code><span class="sig-paren">(</span><em class="sig-param">feature_name</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/eflow/foundation/data_frame_types.html#DataFrameTypes.add_new_integer_feature"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#eflow.foundation.data_frame_types.DataFrameTypes.add_new_integer_feature" title="Permalink to this definition">¶</a></dt>
+<dd><blockquote>
+<div><p>Adds a new feature/feature(s) to the feature set integer</p>
+</div></blockquote>
+<dl class="simple">
+<dt>Args:</dt><dd><dl class="simple">
+<dt>feature_name: str</dt><dd><p>Name of the new feature</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="eflow.foundation.data_frame_types.DataFrameTypes.add_new_null_only_feature">
+<code class="sig-name descname">add_new_null_only_feature</code><span class="sig-paren">(</span><em class="sig-param">feature_name</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/eflow/foundation/data_frame_types.html#DataFrameTypes.add_new_null_only_feature"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#eflow.foundation.data_frame_types.DataFrameTypes.add_new_null_only_feature" title="Permalink to this definition">¶</a></dt>
+<dd><blockquote>
+<div><p>Adds a new feature/feature(s) to the feature set null only features</p>
+</div></blockquote>
+<dl class="simple">
+<dt>Args:</dt><dd><dl class="simple">
+<dt>feature_name: str</dt><dd><p>Name of the new feature</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="eflow.foundation.data_frame_types.DataFrameTypes.add_new_string_feature">
+<code class="sig-name descname">add_new_string_feature</code><span class="sig-paren">(</span><em class="sig-param">feature_name</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/eflow/foundation/data_frame_types.html#DataFrameTypes.add_new_string_feature"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#eflow.foundation.data_frame_types.DataFrameTypes.add_new_string_feature" title="Permalink to this definition">¶</a></dt>
+<dd><blockquote>
+<div><p>Adds a new feature/feature(s) to the feature set string</p>
+</div></blockquote>
+<dl class="simple">
+<dt>Args:</dt><dd><dl class="simple">
+<dt>feature_name: str</dt><dd><p>Name of the new feature</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="eflow.foundation.data_frame_types.DataFrameTypes.all_features">
+<code class="sig-name descname">all_features</code><span class="sig-paren">(</span><em class="sig-param">exclude_target=False</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/eflow/foundation/data_frame_types.html#DataFrameTypes.all_features"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#eflow.foundation.data_frame_types.DataFrameTypes.all_features" title="Permalink to this definition">¶</a></dt>
+<dd><blockquote>
+<div><p>Returns all features found in the dataset.</p>
+</div></blockquote>
+<dl class="simple">
+<dt>Args:</dt><dd><dl class="simple">
+<dt>exclude_target: bool</dt><dd><p>If the target feature is an datetime; then it will be ignored
+when passing back the set.</p>
+</dd>
+</dl>
+</dd>
+<dt>Returns:</dt><dd><p>Returns all found features.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="eflow.foundation.data_frame_types.DataFrameTypes.bool_features">
+<code class="sig-name descname">bool_features</code><span class="sig-paren">(</span><em class="sig-param">exclude_target=False</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/eflow/foundation/data_frame_types.html#DataFrameTypes.bool_features"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#eflow.foundation.data_frame_types.DataFrameTypes.bool_features" title="Permalink to this definition">¶</a></dt>
+<dd><blockquote>
+<div><p>All bool features chosen by df_features.</p>
+</div></blockquote>
+<dl class="simple">
+<dt>Args:</dt><dd><dl class="simple">
+<dt>exclude_target: bool</dt><dd><p>If the target feature is an bool; then it will be ignored
+when passing back the set.</p>
+</dd>
+</dl>
+</dd>
+<dt>Returns:</dt><dd><p>Returns a set of all bool features chosen by the object.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="eflow.foundation.data_frame_types.DataFrameTypes.categorical_features">
+<code class="sig-name descname">categorical_features</code><span class="sig-paren">(</span><em class="sig-param">exclude_target=False</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/eflow/foundation/data_frame_types.html#DataFrameTypes.categorical_features"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#eflow.foundation.data_frame_types.DataFrameTypes.categorical_features" title="Permalink to this definition">¶</a></dt>
+<dd><blockquote>
+<div><p>All categorical features chosen by df_features.</p>
+</div></blockquote>
+<dl class="simple">
+<dt>Args:</dt><dd><dl class="simple">
+<dt>exclude_target: bool</dt><dd><p>If the target feature is an categorical; then it will be ignored
+when passing back the set.</p>
+</dd>
+</dl>
+</dd>
+<dt>Returns:</dt><dd><p>Returns a set of all categorical features chosen by the object.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="eflow.foundation.data_frame_types.DataFrameTypes.continuous_features">
+<code class="sig-name descname">continuous_features</code><span class="sig-paren">(</span><em class="sig-param">exclude_target=False</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/eflow/foundation/data_frame_types.html#DataFrameTypes.continuous_features"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#eflow.foundation.data_frame_types.DataFrameTypes.continuous_features" title="Permalink to this definition">¶</a></dt>
+<dd><blockquote>
+<div><p>Gets all numerical features chosen by the object.</p>
+</div></blockquote>
+<dl class="simple">
+<dt>Args:</dt><dd><dl class="simple">
+<dt>exclude_target: bool</dt><dd><p>If the target feature is an numerical (int/float/time); then it will be ignored
+when passing back the set.</p>
+</dd>
+</dl>
+</dd>
+<dt>Returns:</dt><dd><p>Returns a set of all numerical features chosen by the object.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="eflow.foundation.data_frame_types.DataFrameTypes.continuous_numerical_features">
+<code class="sig-name descname">continuous_numerical_features</code><span class="sig-paren">(</span><em class="sig-param">exclude_target=False</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/eflow/foundation/data_frame_types.html#DataFrameTypes.continuous_numerical_features"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#eflow.foundation.data_frame_types.DataFrameTypes.continuous_numerical_features" title="Permalink to this definition">¶</a></dt>
+<dd><blockquote>
+<div><p>Gets all numerical features that are continuous (int/float).</p>
+</div></blockquote>
+<dl class="simple">
+<dt>Args:</dt><dd><dl class="simple">
+<dt>exclude_target: bool</dt><dd><p>If the target feature is an numerical (int/float); then it will be ignored
+when passing back the set.</p>
+</dd>
+</dl>
+</dd>
+<dt>Returns:</dt><dd><p>Returns a set of all numerical features chosen by the object.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="eflow.foundation.data_frame_types.DataFrameTypes.create_json_file_representation">
+<code class="sig-name descname">create_json_file_representation</code><span class="sig-paren">(</span><em class="sig-param">directory_path</em>, <em class="sig-param">filename</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/eflow/foundation/data_frame_types.html#DataFrameTypes.create_json_file_representation"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#eflow.foundation.data_frame_types.DataFrameTypes.create_json_file_representation" title="Permalink to this definition">¶</a></dt>
+<dd><blockquote>
+<div><p>Creates a json representation of the current objects feature sets
+and the targeted feature.</p>
+</div></blockquote>
+<dl class="simple">
+<dt>Args:</dt><dd><dl class="simple">
+<dt>directory_path: string</dt><dd><p>Absolute directory path.</p>
+</dd>
+<dt>filename: string</dt><dd><p>File’s given name</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="eflow.foundation.data_frame_types.DataFrameTypes.datetime_features">
+<code class="sig-name descname">datetime_features</code><span class="sig-paren">(</span><em class="sig-param">exclude_target=False</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/eflow/foundation/data_frame_types.html#DataFrameTypes.datetime_features"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#eflow.foundation.data_frame_types.DataFrameTypes.datetime_features" title="Permalink to this definition">¶</a></dt>
+<dd><blockquote>
+<div><p>All datetime features chosen by df_features.</p>
+</div></blockquote>
+<dl class="simple">
+<dt>Args:</dt><dd><dl class="simple">
+<dt>exclude_target: bool</dt><dd><p>If the target feature is an datetime; then it will be ignored
+when passing back the set.</p>
+</dd>
+</dl>
+</dd>
+<dt>Returns:</dt><dd><p>Returns a set of all datetime features chosen by the object.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="eflow.foundation.data_frame_types.DataFrameTypes.display_features">
+<code class="sig-name descname">display_features</code><span class="sig-paren">(</span><em class="sig-param">display_dataframes=False</em>, <em class="sig-param">notebook_mode=False</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/eflow/foundation/data_frame_types.html#DataFrameTypes.display_features"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#eflow.foundation.data_frame_types.DataFrameTypes.display_features" title="Permalink to this definition">¶</a></dt>
+<dd><blockquote>
+<div><p>Display’s the feature sets info.</p>
+</div></blockquote>
+<dl class="simple">
+<dt>Args:</dt><dd><dl class="simple">
+<dt>display_dataframes:</dt><dd><p>Creates a dataframe object to display feature information.</p>
+</dd>
+<dt>notebook_mode:</dt><dd><p>Determines if the dataframe can be displayed in a notebook</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="eflow.foundation.data_frame_types.DataFrameTypes.fix_nan_features">
+<code class="sig-name descname">fix_nan_features</code><span class="sig-paren">(</span><em class="sig-param">df</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/eflow/foundation/data_frame_types.html#DataFrameTypes.fix_nan_features"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#eflow.foundation.data_frame_types.DataFrameTypes.fix_nan_features" title="Permalink to this definition">¶</a></dt>
+<dd><blockquote>
+<div><p>Attempts to get the data type of the feature if there were no nans
+inside it.</p>
+</div></blockquote>
+<dl class="simple">
+<dt>Args:</dt><dd><dl class="simple">
+<dt>df: pd.DataFrame</dt><dd><p>Pandas Dataframe object.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="eflow.foundation.data_frame_types.DataFrameTypes.fix_numeric_features">
+<code class="sig-name descname">fix_numeric_features</code><span class="sig-paren">(</span><em class="sig-param">df</em>, <em class="sig-param">notebook_mode=False</em>, <em class="sig-param">display_results=False</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/eflow/foundation/data_frame_types.html#DataFrameTypes.fix_numeric_features"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#eflow.foundation.data_frame_types.DataFrameTypes.fix_numeric_features" title="Permalink to this definition">¶</a></dt>
+<dd><blockquote>
+<div><p>Attempts to move numerical features to the correct types by
+following the given priority que:</p>
+<blockquote>
+<div><ol class="arabic simple">
+<li><p>Bool</p></li>
+<li><p>Categorical</p></li>
+<li><p>Float</p></li>
+<li><p>Int</p></li>
+<li><p>Do nothing</p></li>
+</ol>
+</div></blockquote>
+</div></blockquote>
+<dl class="simple">
+<dt>Args:</dt><dd><dl class="simple">
+<dt>df: pd.Dataframe</dt><dd><p>Pandas Dataframe object to update to correct types.</p>
+</dd>
+<dt>notebook_mode: bool</dt><dd><p>Boolean value to determine if any notebook functions can be used here.</p>
+</dd>
+<dt>display_results: bool</dt><dd><p>Display the table in priority order with flags.</p>
+</dd>
+</dl>
+</dd>
+<dt>Note -</dt><dd><p>This will not actually update the given dataframe. This object is
+a abstract representation of the dataframe.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="eflow.foundation.data_frame_types.DataFrameTypes.fix_string_features">
+<code class="sig-name descname">fix_string_features</code><span class="sig-paren">(</span><em class="sig-param">df</em>, <em class="sig-param">notebook_mode=False</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/eflow/foundation/data_frame_types.html#DataFrameTypes.fix_string_features"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#eflow.foundation.data_frame_types.DataFrameTypes.fix_string_features" title="Permalink to this definition">¶</a></dt>
+<dd><blockquote>
+<div><p>Iterates through all string features and moves features to given types.
+May ask user question if it detects any conflicting string/numeric
+types.</p>
+</div></blockquote>
+<dl class="simple">
+<dt>Args:</dt><dd><dl class="simple">
+<dt>df: pd.Dataframe</dt><dd><p>Pandas dataframe object.</p>
+</dd>
+<dt>notebook_mode: bool</dt><dd><p>Will use the ‘clear_output’ notebook function if in notebook
+mode.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="eflow.foundation.data_frame_types.DataFrameTypes.float_features">
+<code class="sig-name descname">float_features</code><span class="sig-paren">(</span><em class="sig-param">exclude_target=False</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/eflow/foundation/data_frame_types.html#DataFrameTypes.float_features"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#eflow.foundation.data_frame_types.DataFrameTypes.float_features" title="Permalink to this definition">¶</a></dt>
+<dd><blockquote>
+<div><p>All float features chosen by df_features.</p>
+</div></blockquote>
+<dl class="simple">
+<dt>Args:</dt><dd><dl class="simple">
+<dt>exclude_target: bool</dt><dd><p>If the target feature is an float; then it will be ignored
+when passing back the set.</p>
+</dd>
+</dl>
+</dd>
+<dt>Returns:</dt><dd><p>Returns a set of all float features chosen by the object.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="eflow.foundation.data_frame_types.DataFrameTypes.get_all_feature_binning">
+<code class="sig-name descname">get_all_feature_binning</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/eflow/foundation/data_frame_types.html#DataFrameTypes.get_all_feature_binning"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#eflow.foundation.data_frame_types.DataFrameTypes.get_all_feature_binning" title="Permalink to this definition">¶</a></dt>
+<dd><blockquote>
+<div><p>Get’s the entire dict of the feature’s bins and labels.</p>
+</div></blockquote>
+<dl class="simple">
+<dt>Returns:</dt><dd><p>Returns a copy of the labels and bins for the given feature.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="eflow.foundation.data_frame_types.DataFrameTypes.get_all_feature_colors">
+<code class="sig-name descname">get_all_feature_colors</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/eflow/foundation/data_frame_types.html#DataFrameTypes.get_all_feature_colors"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#eflow.foundation.data_frame_types.DataFrameTypes.get_all_feature_colors" title="Permalink to this definition">¶</a></dt>
+<dd><blockquote>
+<div><p>Get’s the entire dict of the feature’s value colors.</p>
+</div></blockquote>
+<dl class="simple">
+<dt>Returns:</dt><dd><p>Returns a copy of feature’s value colors.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="eflow.foundation.data_frame_types.DataFrameTypes.get_dummy_encoded_features">
+<code class="sig-name descname">get_dummy_encoded_features</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/eflow/foundation/data_frame_types.html#DataFrameTypes.get_dummy_encoded_features"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#eflow.foundation.data_frame_types.DataFrameTypes.get_dummy_encoded_features" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get’s all dummy encoded relationships.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="eflow.foundation.data_frame_types.DataFrameTypes.get_feature_binning">
+<code class="sig-name descname">get_feature_binning</code><span class="sig-paren">(</span><em class="sig-param">feature_name</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/eflow/foundation/data_frame_types.html#DataFrameTypes.get_feature_binning"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#eflow.foundation.data_frame_types.DataFrameTypes.get_feature_binning" title="Permalink to this definition">¶</a></dt>
+<dd><blockquote>
+<div><p>Get’s the feature’s bin and labels for that given feature.</p>
+</div></blockquote>
+<dl class="simple">
+<dt>Args:</dt><dd><dl class="simple">
+<dt>feature_name: str</dt><dd><p>The given feature name of the feature</p>
+</dd>
+</dl>
+</dd>
+<dt>Returns:</dt><dd><p>Returns the bin and labels for the given feature; returns None if
+the feature name is not saved in the feature value color dict.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="eflow.foundation.data_frame_types.DataFrameTypes.get_feature_colors">
+<code class="sig-name descname">get_feature_colors</code><span class="sig-paren">(</span><em class="sig-param">feature_name</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/eflow/foundation/data_frame_types.html#DataFrameTypes.get_feature_colors"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#eflow.foundation.data_frame_types.DataFrameTypes.get_feature_colors" title="Permalink to this definition">¶</a></dt>
+<dd><blockquote>
+<div><p>Get’s the color values for that given feature.</p>
+</div></blockquote>
+<dl class="simple">
+<dt>Args:</dt><dd><dl class="simple">
+<dt>feature_name: str</dt><dd><p>The given feature name of the</p>
+</dd>
+</dl>
+</dd>
+<dt>Returns:</dt><dd><p>Returns the value’s color and dictionary; returns None if the feature name
+is not saved in the feature value color dict.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="eflow.foundation.data_frame_types.DataFrameTypes.get_feature_type">
+<code class="sig-name descname">get_feature_type</code><span class="sig-paren">(</span><em class="sig-param">feature_name</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/eflow/foundation/data_frame_types.html#DataFrameTypes.get_feature_type"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#eflow.foundation.data_frame_types.DataFrameTypes.get_feature_type" title="Permalink to this definition">¶</a></dt>
+<dd><blockquote>
+<div><p>Return’s a feature’s type as a string</p>
+</div></blockquote>
+<dl class="simple">
+<dt>Args:</dt><dd><dl class="simple">
+<dt>feature_name: str</dt><dd><p>The given’s feature’s name.</p>
+</dd>
+</dl>
+</dd>
+<dt>Returns:</dt><dd><p>Return’s a feature’s type as a string</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="eflow.foundation.data_frame_types.DataFrameTypes.get_feature_value_representation">
+<code class="sig-name descname">get_feature_value_representation</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/eflow/foundation/data_frame_types.html#DataFrameTypes.get_feature_value_representation"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#eflow.foundation.data_frame_types.DataFrameTypes.get_feature_value_representation" title="Permalink to this definition">¶</a></dt>
+<dd><blockquote>
+<div><p>Get’s the entire dict of the feature’s value colors.</p>
+</div></blockquote>
+<dl class="simple">
+<dt>Returns:</dt><dd><p>Returns a copy of feature’s value colors.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="eflow.foundation.data_frame_types.DataFrameTypes.get_label_decoder">
+<code class="sig-name descname">get_label_decoder</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/eflow/foundation/data_frame_types.html#DataFrameTypes.get_label_decoder"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#eflow.foundation.data_frame_types.DataFrameTypes.get_label_decoder" title="Permalink to this definition">¶</a></dt>
+<dd><blockquote>
+<div><p>Gets the dict encoder for category to string relationship.</p>
+</div></blockquote>
+<dl class="simple">
+<dt>Returns:</dt><dd><p>Returns the encoder dict object.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="eflow.foundation.data_frame_types.DataFrameTypes.get_label_encoder">
+<code class="sig-name descname">get_label_encoder</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/eflow/foundation/data_frame_types.html#DataFrameTypes.get_label_encoder"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#eflow.foundation.data_frame_types.DataFrameTypes.get_label_encoder" title="Permalink to this definition">¶</a></dt>
+<dd><blockquote>
+<div><p>Gets the dict encoder for string to category relationship.</p>
+</div></blockquote>
+<dl class="simple">
+<dt>Returns:</dt><dd><p>Returns the encoder dict object.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="eflow.foundation.data_frame_types.DataFrameTypes.init_on_json_file">
+<code class="sig-name descname">init_on_json_file</code><span class="sig-paren">(</span><em class="sig-param">filepath</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/eflow/foundation/data_frame_types.html#DataFrameTypes.init_on_json_file"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#eflow.foundation.data_frame_types.DataFrameTypes.init_on_json_file" title="Permalink to this definition">¶</a></dt>
+<dd><blockquote>
+<div><p>Initialize object based on a json file.</p>
+</div></blockquote>
+<dl class="simple">
+<dt>Args:</dt><dd><dl class="simple">
+<dt>filepath:</dt><dd><p>Absolute path to the given file.</p>
+</dd>
+</dl>
+</dd>
+<dt>Note:</dt><dd><p>Structure must be the given type to the list of associated features.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="eflow.foundation.data_frame_types.DataFrameTypes.integer_features">
+<code class="sig-name descname">integer_features</code><span class="sig-paren">(</span><em class="sig-param">exclude_target=False</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/eflow/foundation/data_frame_types.html#DataFrameTypes.integer_features"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#eflow.foundation.data_frame_types.DataFrameTypes.integer_features" title="Permalink to this definition">¶</a></dt>
+<dd><blockquote>
+<div><p>All integer features chosen by df_features.</p>
+</div></blockquote>
+<dl class="simple">
+<dt>Args:</dt><dd><dl class="simple">
+<dt>exclude_target: bool</dt><dd><p>If the target feature is an integer; then it will be ignored
+when passing back the set.</p>
+</dd>
+</dl>
+</dd>
+<dt>Returns:</dt><dd><p>Returns a set of all integer features chosen by the object.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="eflow.foundation.data_frame_types.DataFrameTypes.non_continuous_features">
+<code class="sig-name descname">non_continuous_features</code><span class="sig-paren">(</span><em class="sig-param">exclude_target=False</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/eflow/foundation/data_frame_types.html#DataFrameTypes.non_continuous_features"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#eflow.foundation.data_frame_types.DataFrameTypes.non_continuous_features" title="Permalink to this definition">¶</a></dt>
+<dd><blockquote>
+<div><p>Gets all numerical features chosen by the object.</p>
+</div></blockquote>
+<dl class="simple">
+<dt>Args:</dt><dd><dl class="simple">
+<dt>exclude_target: bool</dt><dd><p>If the target feature is an numerical (int/float/time); then it will be ignored
+when passing back the set.</p>
+</dd>
+</dl>
+</dd>
+<dt>Returns:</dt><dd><p>Returns a set of all numerical features chosen by the object.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="eflow.foundation.data_frame_types.DataFrameTypes.non_continuous_numerical_features">
+<code class="sig-name descname">non_continuous_numerical_features</code><span class="sig-paren">(</span><em class="sig-param">exclude_target=False</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/eflow/foundation/data_frame_types.html#DataFrameTypes.non_continuous_numerical_features"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#eflow.foundation.data_frame_types.DataFrameTypes.non_continuous_numerical_features" title="Permalink to this definition">¶</a></dt>
+<dd><blockquote>
+<div><p>Gets all numerical features that are not continuous (bool)</p>
+</div></blockquote>
+<dl class="simple">
+<dt>Args:</dt><dd><dl class="simple">
+<dt>exclude_target: bool</dt><dd><p>If the target feature is a bool; then it will be ignored
+when passing back the set.</p>
+</dd>
+</dl>
+</dd>
+<dt>Returns:</dt><dd><p>Returns a set of all numerical features chosen by the object.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="eflow.foundation.data_frame_types.DataFrameTypes.non_numerical_features">
+<code class="sig-name descname">non_numerical_features</code><span class="sig-paren">(</span><em class="sig-param">exclude_target=False</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/eflow/foundation/data_frame_types.html#DataFrameTypes.non_numerical_features"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#eflow.foundation.data_frame_types.DataFrameTypes.non_numerical_features" title="Permalink to this definition">¶</a></dt>
+<dd><blockquote>
+<div><p>Gets all non-numerical features chosen by the object.</p>
+</div></blockquote>
+<dl class="simple">
+<dt>Args:</dt><dd><dl class="simple">
+<dt>exclude_target: bool</dt><dd><p>If the target feature is an numerical (int/float/bool); then it will be ignored
+when passing back the set.</p>
+</dd>
+</dl>
+</dd>
+<dt>Returns:</dt><dd><p>Returns a set of all non numerical features chosen by the object.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="eflow.foundation.data_frame_types.DataFrameTypes.numerical_features">
+<code class="sig-name descname">numerical_features</code><span class="sig-paren">(</span><em class="sig-param">exclude_target=False</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/eflow/foundation/data_frame_types.html#DataFrameTypes.numerical_features"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#eflow.foundation.data_frame_types.DataFrameTypes.numerical_features" title="Permalink to this definition">¶</a></dt>
+<dd><blockquote>
+<div><p>Gets all numerical features chosen by the object.</p>
+</div></blockquote>
+<dl class="simple">
+<dt>Args:</dt><dd><dl class="simple">
+<dt>exclude_target: bool</dt><dd><p>If the target feature is an numerical (int/float/bool); then it will be ignored
+when passing back the set.</p>
+</dd>
+</dl>
+</dd>
+<dt>Returns:</dt><dd><p>Returns a set of all numerical features chosen by the object.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="eflow.foundation.data_frame_types.DataFrameTypes.remove_feature">
+<code class="sig-name descname">remove_feature</code><span class="sig-paren">(</span><em class="sig-param">feature_name</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/eflow/foundation/data_frame_types.html#DataFrameTypes.remove_feature"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#eflow.foundation.data_frame_types.DataFrameTypes.remove_feature" title="Permalink to this definition">¶</a></dt>
+<dd><blockquote>
+<div><p>Removes a feature from one of the feature sets.</p>
+</div></blockquote>
+<dl class="simple">
+<dt>Args:</dt><dd><dl class="simple">
+<dt>feature_name:</dt><dd><p>The given feature name to remove.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="eflow.foundation.data_frame_types.DataFrameTypes.set_encoder_for_features">
+<code class="sig-name descname">set_encoder_for_features</code><span class="sig-paren">(</span><em class="sig-param">df</em>, <em class="sig-param">categorical_value_dict={}</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/eflow/foundation/data_frame_types.html#DataFrameTypes.set_encoder_for_features"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#eflow.foundation.data_frame_types.DataFrameTypes.set_encoder_for_features" title="Permalink to this definition">¶</a></dt>
+<dd><blockquote>
+<div><p>Create’s encoder dict for strings and categories.</p>
+</div></blockquote>
+<dl class="simple">
+<dt>Args:</dt><dd><dl class="simple">
+<dt>df: pd.DataFrame</dt><dd><p>Pandas dataframe.</p>
+</dd>
+<dt>categorical_value_dict: dict</dt><dd><p>Relationship between category and string label.</p>
+</dd>
+</dl>
+</dd>
+<dt>Note:</dt><dd><p>Can handle a feature that have categories and strings in same series.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="eflow.foundation.data_frame_types.DataFrameTypes.set_feature_colors">
+<code class="sig-name descname">set_feature_colors</code><span class="sig-paren">(</span><em class="sig-param">feature_value_color_dict</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/eflow/foundation/data_frame_types.html#DataFrameTypes.set_feature_colors"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#eflow.foundation.data_frame_types.DataFrameTypes.set_feature_colors" title="Permalink to this definition">¶</a></dt>
+<dd><blockquote>
+<div><p>Passing in a dictionary of feature names to value to hex color to
+save to this object. Error checks the dict for proper values.</p>
+</div></blockquote>
+<dl class="simple">
+<dt>Args:</dt><dd><dl class="simple">
+<dt>feature_value_color_dict:</dt><dd><p>Dictionary of feature names to value to hex color.
+Ex: feature_value_color_dict[“Sex”][“Male”] = “#ffffff”</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="eflow.foundation.data_frame_types.DataFrameTypes.set_feature_to_bool">
+<code class="sig-name descname">set_feature_to_bool</code><span class="sig-paren">(</span><em class="sig-param">feature_name</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/eflow/foundation/data_frame_types.html#DataFrameTypes.set_feature_to_bool"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#eflow.foundation.data_frame_types.DataFrameTypes.set_feature_to_bool" title="Permalink to this definition">¶</a></dt>
+<dd><blockquote>
+<div><p>Moves feature to bool set.</p>
+</div></blockquote>
+<dl class="simple">
+<dt>Args:</dt><dd><dl class="simple">
+<dt>feature_name:</dt><dd><p>Feature name or a list of feature names to move to given set.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="eflow.foundation.data_frame_types.DataFrameTypes.set_feature_to_categorical">
+<code class="sig-name descname">set_feature_to_categorical</code><span class="sig-paren">(</span><em class="sig-param">feature_name</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/eflow/foundation/data_frame_types.html#DataFrameTypes.set_feature_to_categorical"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#eflow.foundation.data_frame_types.DataFrameTypes.set_feature_to_categorical" title="Permalink to this definition">¶</a></dt>
+<dd><blockquote>
+<div><p>Moves feature to categorical set.</p>
+</div></blockquote>
+<dl class="simple">
+<dt>Args:</dt><dd><dl class="simple">
+<dt>feature_name:</dt><dd><p>Feature name or a list of feature names to move to given set.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="eflow.foundation.data_frame_types.DataFrameTypes.set_feature_to_datetime">
+<code class="sig-name descname">set_feature_to_datetime</code><span class="sig-paren">(</span><em class="sig-param">feature_name</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/eflow/foundation/data_frame_types.html#DataFrameTypes.set_feature_to_datetime"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#eflow.foundation.data_frame_types.DataFrameTypes.set_feature_to_datetime" title="Permalink to this definition">¶</a></dt>
+<dd><blockquote>
+<div><p>Moves feature to datetime set.</p>
+</div></blockquote>
+<dl class="simple">
+<dt>Args:</dt><dd><dl class="simple">
+<dt>feature_name:</dt><dd><p>Feature name or a list of feature names to move to given set.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="eflow.foundation.data_frame_types.DataFrameTypes.set_feature_to_float">
+<code class="sig-name descname">set_feature_to_float</code><span class="sig-paren">(</span><em class="sig-param">feature_name</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/eflow/foundation/data_frame_types.html#DataFrameTypes.set_feature_to_float"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#eflow.foundation.data_frame_types.DataFrameTypes.set_feature_to_float" title="Permalink to this definition">¶</a></dt>
+<dd><blockquote>
+<div><p>Moves feature to float set.</p>
+</div></blockquote>
+<dl class="simple">
+<dt>Args:</dt><dd><dl class="simple">
+<dt>feature_name:</dt><dd><p>Feature name or a list of feature names to move to given set.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="eflow.foundation.data_frame_types.DataFrameTypes.set_feature_to_integer">
+<code class="sig-name descname">set_feature_to_integer</code><span class="sig-paren">(</span><em class="sig-param">feature_name</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/eflow/foundation/data_frame_types.html#DataFrameTypes.set_feature_to_integer"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#eflow.foundation.data_frame_types.DataFrameTypes.set_feature_to_integer" title="Permalink to this definition">¶</a></dt>
+<dd><blockquote>
+<div><p>Moves feature to integer set.</p>
+</div></blockquote>
+<dl class="simple">
+<dt>Args:</dt><dd><dl class="simple">
+<dt>feature_name:</dt><dd><p>Feature name or a list of feature names to move to given set.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="eflow.foundation.data_frame_types.DataFrameTypes.set_feature_to_null_only_features">
+<code class="sig-name descname">set_feature_to_null_only_features</code><span class="sig-paren">(</span><em class="sig-param">feature_name</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/eflow/foundation/data_frame_types.html#DataFrameTypes.set_feature_to_null_only_features"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#eflow.foundation.data_frame_types.DataFrameTypes.set_feature_to_null_only_features" title="Permalink to this definition">¶</a></dt>
+<dd><blockquote>
+<div><p>Moves feature to only null series data feature set.</p>
+</div></blockquote>
+<dl class="simple">
+<dt>Args:</dt><dd><dl class="simple">
+<dt>feature_name:</dt><dd><p>Feature name or a list of feature names to move to given set.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="eflow.foundation.data_frame_types.DataFrameTypes.set_feature_to_string">
+<code class="sig-name descname">set_feature_to_string</code><span class="sig-paren">(</span><em class="sig-param">feature_name</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/eflow/foundation/data_frame_types.html#DataFrameTypes.set_feature_to_string"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#eflow.foundation.data_frame_types.DataFrameTypes.set_feature_to_string" title="Permalink to this definition">¶</a></dt>
+<dd><blockquote>
+<div><p>Moves feature to string set.</p>
+</div></blockquote>
+<dl class="simple">
+<dt>Args:</dt><dd><dl class="simple">
+<dt>feature_name:</dt><dd><p>Feature name or a list of feature names to move to given set.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="eflow.foundation.data_frame_types.DataFrameTypes.set_target_feature">
+<code class="sig-name descname">set_target_feature</code><span class="sig-paren">(</span><em class="sig-param">feature_name</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/eflow/foundation/data_frame_types.html#DataFrameTypes.set_target_feature"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#eflow.foundation.data_frame_types.DataFrameTypes.set_target_feature" title="Permalink to this definition">¶</a></dt>
+<dd><blockquote>
+<div><p>Sets the value.</p>
+</div></blockquote>
+<dl class="simple">
+<dt>Args:</dt><dd><dl class="simple">
+<dt>feature_name:</dt><dd><p>Set the target feature.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="eflow.foundation.data_frame_types.DataFrameTypes.string_features">
+<code class="sig-name descname">string_features</code><span class="sig-paren">(</span><em class="sig-param">exclude_target=False</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/eflow/foundation/data_frame_types.html#DataFrameTypes.string_features"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#eflow.foundation.data_frame_types.DataFrameTypes.string_features" title="Permalink to this definition">¶</a></dt>
+<dd><blockquote>
+<div><p>All string features chosen by df_features.</p>
+</div></blockquote>
+<dl class="simple">
+<dt>Args:</dt><dd><dl class="simple">
+<dt>exclude_target: bool</dt><dd><p>If the target feature is an string; then it will be ignored
+when passing back the set.</p>
+</dd>
+</dl>
+</dd>
+<dt>Returns:</dt><dd><p>Returns a set of all string features chosen by the object.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="eflow.foundation.data_frame_types.DataFrameTypes.target_feature">
+<code class="sig-name descname">target_feature</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/eflow/foundation/data_frame_types.html#DataFrameTypes.target_feature"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#eflow.foundation.data_frame_types.DataFrameTypes.target_feature" title="Permalink to this definition">¶</a></dt>
+<dd><blockquote>
+<div><p>Gets the target feature.</p>
+</div></blockquote>
+<dl class="simple">
+<dt>Returns:</dt><dd><p>Returns the target feature.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="eflow.foundation.data_pipeline.html" class="btn btn-neutral float-right" title="eflow.foundation.data_pipeline" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="eflow.data_pipeline_segments.type_fixer.html" class="btn btn-neutral float-left" title="eflow.data_pipeline_segments.type_fixer" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2020, Eric Cacciavillani
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

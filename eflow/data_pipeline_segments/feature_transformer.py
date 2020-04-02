@@ -62,7 +62,7 @@ class FeatureTransformer(DataPipelineSegment):
                         feature_names,
                         _add_to_que=True):
         """
-        Desc:
+
             Removes unwanted features from the dataframe and saves them to the
             pipeline segment structure if _add_to_que is set to True.
 

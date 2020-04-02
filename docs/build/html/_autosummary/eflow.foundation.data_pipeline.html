@@ -1,0 +1,286 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>eflow.foundation.data_pipeline &mdash; eflow  documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="eflow.model_analysis.classification_analysis" href="eflow.model_analysis.classification_analysis.html" />
+    <link rel="prev" title="eflow.foundation.data_frame_types" href="eflow.foundation.data_frame_types.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> eflow
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="eflow.data_analysis.feature_analysis.html">eflow.data_analysis.feature_analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="eflow.data_analysis.null_analysis.html">eflow.data_analysis.null_analysis</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="eflow.data_pipeline_segments.data_encoder.html">eflow.data_pipeline_segments.data_encoder</a></li>
+<li class="toctree-l1"><a class="reference internal" href="eflow.data_pipeline_segments.feature_data_cleaner.html">eflow.data_pipeline_segments.feature_data_cleaner</a></li>
+<li class="toctree-l1"><a class="reference internal" href="eflow.data_pipeline_segments.feature_transformer.html">eflow.data_pipeline_segments.feature_transformer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="eflow.data_pipeline_segments.string_cleaner.html">eflow.data_pipeline_segments.string_cleaner</a></li>
+<li class="toctree-l1"><a class="reference internal" href="eflow.data_pipeline_segments.type_fixer.html">eflow.data_pipeline_segments.type_fixer</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="eflow.foundation.data_frame_types.html">eflow.foundation.data_frame_types</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">eflow.foundation.data_pipeline</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="eflow.model_analysis.classification_analysis.html">eflow.model_analysis.classification_analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="eflow.model_analysis.regression_analysis.html">eflow.model_analysis.regression_analysis</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">eflow</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+      <li>eflow.foundation.data_pipeline</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/_autosummary/eflow.foundation.data_pipeline.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="module-eflow.foundation.data_pipeline">
+<span id="eflow-foundation-data-pipeline"></span><h1>eflow.foundation.data_pipeline<a class="headerlink" href="#module-eflow.foundation.data_pipeline" title="Permalink to this headline">¶</a></h1>
+<p class="rubric">Classes</p>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#eflow.foundation.data_pipeline.DataPipeline" title="eflow.foundation.data_pipeline.DataPipeline"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DataPipeline</span></code></a>(pipeline_name, df[, …])</p></td>
+<td><p>Houses all pipeline segments.</p></td>
+</tr>
+</tbody>
+</table>
+<dl class="class">
+<dt id="eflow.foundation.data_pipeline.DataPipeline">
+<em class="property">class </em><code class="sig-name descname">DataPipeline</code><span class="sig-paren">(</span><em class="sig-param">pipeline_name</em>, <em class="sig-param">df</em>, <em class="sig-param">df_features=None</em>, <em class="sig-param">pipeline_modify_id=None</em>, <em class="sig-param">remove_past_contents=False</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/eflow/foundation/data_pipeline.html#DataPipeline"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#eflow.foundation.data_pipeline.DataPipeline" title="Permalink to this definition">¶</a></dt>
+<dd><p>Houses all pipeline segments. Able to load these segments in with
+a pipeline json file and/or modify id. You can add more pipeline
+segments if needed which will modify the pipeline’s json file. Allows
+a pandas dataframe to be processed by ‘perform_pipeline’.</p>
+<dl class="method">
+<dt id="eflow.foundation.data_pipeline.DataPipeline.add">
+<code class="sig-name descname">add</code><span class="sig-paren">(</span><em class="sig-param">segment_name</em>, <em class="sig-param">pipeline_segment_obj</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/eflow/foundation/data_pipeline.html#DataPipeline.add"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#eflow.foundation.data_pipeline.DataPipeline.add" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="simple">
+<dt>segment_name (str):</dt><dd><p>A aliased name to refer to this segment.</p>
+</dd>
+<dt>pipeline_segment_obj (child of DataPipelineSegment):</dt><dd><p>A child object of type DataPipelineSegment.</p>
+</dd>
+<dt>Returns:</dt><dd><p>Attempts to add a pipeline segment object to the objects que and
+update it’s related json object.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="eflow.foundation.data_pipeline.DataPipeline.file_name">
+<em class="property">property </em><code class="sig-name descname">file_name</code><a class="headerlink" href="#eflow.foundation.data_pipeline.DataPipeline.file_name" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="simple">
+<dt>Returns:</dt><dd><p>File name with extension.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="eflow.foundation.data_pipeline.DataPipeline.file_path">
+<em class="property">property </em><code class="sig-name descname">file_path</code><a class="headerlink" href="#eflow.foundation.data_pipeline.DataPipeline.file_path" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="simple">
+<dt>Returns:</dt><dd><p>File path with file name.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="eflow.foundation.data_pipeline.DataPipeline.perform_pipeline">
+<code class="sig-name descname">perform_pipeline</code><span class="sig-paren">(</span><em class="sig-param">df</em>, <em class="sig-param">df_features=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/eflow/foundation/data_pipeline.html#DataPipeline.perform_pipeline"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#eflow.foundation.data_pipeline.DataPipeline.perform_pipeline" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="simple">
+<dt>Args:</dt><dd><dl class="simple">
+<dt>df:</dt><dd><p>Pandas Dataframe object to be transformed by the pipeline.</p>
+</dd>
+</dl>
+</dd>
+<dt>Returns:</dt><dd><p>Applies a Pandas Dataframe object to all functions on all segments
+in the pipeline.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="eflow.model_analysis.classification_analysis.html" class="btn btn-neutral float-right" title="eflow.model_analysis.classification_analysis" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="eflow.foundation.data_frame_types.html" class="btn btn-neutral float-left" title="eflow.foundation.data_frame_types" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2020, Eric Cacciavillani
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

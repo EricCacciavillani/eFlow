@@ -55,7 +55,7 @@ class DataAnalysis(FileOutput):
                   compare_random_values=True,
                   meta_data=True):
         """
-        Desc:
+
             Checks the passed data to see if a plot can be saved; raises
             an error if it can't.
 
@@ -154,7 +154,7 @@ class DataAnalysis(FileOutput):
                            format_float_pos=2,
                            meta_data=True):
         """
-        Desc:
+
             Checks the passed data to see if a table can be saved as a plot;
             raises an error if it can't.
 

@@ -119,7 +119,7 @@ class DataPipeline(FileOutput):
     @property
     def file_path(self):
         """
-        Returns/Desc:
+        Returns:
             File path with file name.
         """
         if len(self.__pipeline_segment_deque) == 0:
@@ -132,7 +132,7 @@ class DataPipeline(FileOutput):
     @property
     def file_name(self):
         """
-        Returns/Desc:
+        Returns:
             File name with extension.
         """
         if len(self.__pipeline_segment_deque) == 0:
@@ -160,7 +160,7 @@ class DataPipeline(FileOutput):
         pipeline_segment_obj (child of DataPipelineSegment):
             A child object of type DataPipelineSegment.
 
-        Returns/Desc:
+        Returns:
             Attempts to add a pipeline segment object to the objects que and
             update it's related json object.
         """
@@ -229,7 +229,7 @@ class DataPipeline(FileOutput):
             df:
                 Pandas Dataframe object to be transformed by the pipeline.
 
-        Returns/Desc:
+        Returns:
             Applies a Pandas Dataframe object to all functions on all segments
             in the pipeline.
         """
@@ -254,7 +254,7 @@ class DataPipeline(FileOutput):
 
     def __create_json_pipeline_file(self):
         """
-        Returns/Desc:
+        Returns:
             Creates a dict based on the given contents of the variable
             'self.__pipeline_segment_deque' to convert to a json file.
             This file will later be used to instruct our object to execute
@@ -293,7 +293,7 @@ class DataPipeline(FileOutput):
 
     def __configure_pipeline_with_existing_file(self):
         """
-        Returns/Desc:
+        Returns:
             Changes the objects variables based on the provided json file.
         """
 
@@ -345,7 +345,7 @@ class DataPipeline(FileOutput):
     #         Determines whether or not to generate a python file
     #     add_libs:
     #
-    #     Returns/Desc:
+    #     Returns:
     #         Applies
     #     """
     #     if len(self.__pipeline_segment_deque) == 0:

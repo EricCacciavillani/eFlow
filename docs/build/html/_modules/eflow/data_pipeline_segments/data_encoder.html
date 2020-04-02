@@ -1,0 +1,738 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>eflow.data_pipeline_segments.data_encoder &mdash; eflow  documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../../../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+        <script src="../../../_static/jquery.js"></script>
+        <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/doctools.js"></script>
+        <script src="../../../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../../../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../../index.html" class="icon icon-home"> eflow
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../_autosummary/eflow.data_analysis.feature_analysis.html">eflow.data_analysis.feature_analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../_autosummary/eflow.data_analysis.null_analysis.html">eflow.data_analysis.null_analysis</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../_autosummary/eflow.data_pipeline_segments.data_encoder.html">eflow.data_pipeline_segments.data_encoder</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../_autosummary/eflow.data_pipeline_segments.feature_data_cleaner.html">eflow.data_pipeline_segments.feature_data_cleaner</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../_autosummary/eflow.data_pipeline_segments.feature_transformer.html">eflow.data_pipeline_segments.feature_transformer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../_autosummary/eflow.data_pipeline_segments.string_cleaner.html">eflow.data_pipeline_segments.string_cleaner</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../_autosummary/eflow.data_pipeline_segments.type_fixer.html">eflow.data_pipeline_segments.type_fixer</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../_autosummary/eflow.foundation.data_frame_types.html">eflow.foundation.data_frame_types</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../_autosummary/eflow.foundation.data_pipeline.html">eflow.foundation.data_pipeline</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../_autosummary/eflow.model_analysis.classification_analysis.html">eflow.model_analysis.classification_analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../_autosummary/eflow.model_analysis.regression_analysis.html">eflow.model_analysis.regression_analysis</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">eflow</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../../index.html">Module code</a> &raquo;</li>
+        
+      <li>eflow.data_pipeline_segments.data_encoder</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for eflow.data_pipeline_segments.data_encoder</h1><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">eflow._hidden.parent_objects</span> <span class="kn">import</span> <span class="n">DataPipelineSegment</span>
+<span class="kn">from</span> <span class="nn">eflow._hidden.constants</span> <span class="kn">import</span> <span class="n">BOOL_STRINGS</span>
+<span class="kn">from</span> <span class="nn">eflow._hidden.custom_exceptions</span> <span class="kn">import</span> <span class="n">UnsatisfiedRequirments</span>
+<span class="kn">from</span> <span class="nn">eflow.utils.language_processing_utils</span> <span class="kn">import</span> <span class="n">get_synonyms</span>
+<span class="kn">from</span> <span class="nn">eflow.utils.misc_utils</span> <span class="kn">import</span> <span class="n">get_parameters</span>
+
+<span class="kn">import</span> <span class="nn">copy</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="n">__author__</span> <span class="o">=</span> <span class="s2">&quot;Eric Cacciavillani&quot;</span>
+<span class="n">__copyright__</span> <span class="o">=</span> <span class="s2">&quot;Copyright 2019, eFlow&quot;</span>
+<span class="n">__credits__</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Eric Cacciavillani&quot;</span><span class="p">]</span>
+<span class="n">__license__</span> <span class="o">=</span> <span class="s2">&quot;MIT&quot;</span>
+<span class="n">__maintainer__</span> <span class="o">=</span> <span class="s2">&quot;EricCacciavillani&quot;</span>
+<span class="n">__email__</span> <span class="o">=</span> <span class="s2">&quot;eric.cacciavillani@gmail.com&quot;</span>
+
+<div class="viewcode-block" id="DataEncoder"><a class="viewcode-back" href="../../../_autosummary/eflow.data_pipeline_segments.data_encoder.html#eflow.data_pipeline_segments.data_encoder.DataEncoder">[docs]</a><span class="k">class</span> <span class="nc">DataEncoder</span><span class="p">(</span><span class="n">DataPipelineSegment</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Attempts to convert features to the correct types. Will update the</span>
+<span class="sd">        dataframe and df_features.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+                 <span class="n">segment_id</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                 <span class="n">create_file</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Args:</span>
+<span class="sd">            segment_id:</span>
+<span class="sd">                Reference id to past segments of this object.</span>
+
+<span class="sd">        Note/Caveats:</span>
+<span class="sd">            When creating any public function that will be part of the pipeline&#39;s</span>
+<span class="sd">            structure it is important to follow this given template. Also,</span>
+<span class="sd">            try not to use _add_to_que. Can ruin the entire purpose of this</span>
+<span class="sd">            project.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">DataPipelineSegment</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+                                     <span class="n">object_type</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="p">,</span>
+                                     <span class="n">segment_id</span><span class="o">=</span><span class="n">segment_id</span><span class="p">,</span>
+                                     <span class="n">create_file</span><span class="o">=</span><span class="n">create_file</span><span class="p">)</span>
+
+<div class="viewcode-block" id="DataEncoder.encode_data"><a class="viewcode-back" href="../../../_autosummary/eflow.data_pipeline_segments.data_encoder.html#eflow.data_pipeline_segments.data_encoder.DataEncoder.encode_data">[docs]</a>    <span class="k">def</span> <span class="nf">encode_data</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+                    <span class="n">df</span><span class="p">,</span>
+                    <span class="n">df_features</span><span class="p">,</span>
+                    <span class="n">apply_value_representation</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                    <span class="n">_add_to_que</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">            Encode the data into numerical values for machine learning processes.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            df: pd.Dataframe</span>
+<span class="sd">                Pandas dataframe.</span>
+
+<span class="sd">            df_features: DataFrameTypes from eflow</span>
+<span class="sd">                DataFrameTypes object.</span>
+
+<span class="sd">            apply_value_representation: bool</span>
+<span class="sd">                Translate features into most understandable/best representation/</span>
+
+<span class="sd">            _add_to_que: bool</span>
+<span class="sd">                Hidden variable to determine if the function should be pushed</span>
+<span class="sd">                to the pipeline segment.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="c1"># Apply value representation to feature values</span>
+        <span class="k">if</span> <span class="n">apply_value_representation</span><span class="p">:</span>
+            <span class="n">feature_value_represention</span> <span class="o">=</span> <span class="n">df_features</span><span class="o">.</span><span class="n">get_feature_value_representation</span><span class="p">()</span>
+
+            <span class="c1"># Inverse dict</span>
+            <span class="n">tmp_dict</span> <span class="o">=</span> <span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="n">feature_value_represention</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">feature_name</span> <span class="ow">in</span> <span class="n">feature_value_represention</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+                <span class="n">tmp_dict</span><span class="p">[</span><span class="n">feature_name</span><span class="p">]</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
+                <span class="k">for</span> <span class="n">val</span><span class="p">,</span> <span class="n">reprs</span> <span class="ow">in</span> <span class="n">feature_value_represention</span><span class="p">[</span><span class="n">feature_name</span><span class="p">]</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+                    <span class="n">tmp_dict</span><span class="p">[</span><span class="n">feature_name</span><span class="p">][</span><span class="n">reprs</span><span class="p">]</span> <span class="o">=</span> <span class="n">val</span>
+
+            <span class="n">feature_value_represention</span> <span class="o">=</span> <span class="n">tmp_dict</span>
+
+            <span class="k">for</span> <span class="n">feature_name</span> <span class="ow">in</span> <span class="n">feature_value_represention</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+                <span class="k">if</span> <span class="n">feature_name</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="p">:</span>
+                    <span class="k">continue</span>
+
+                <span class="k">if</span> <span class="n">df</span><span class="p">[</span><span class="n">feature_name</span><span class="p">]</span><span class="o">.</span><span class="n">dtype</span> <span class="o">==</span> <span class="s2">&quot;O&quot;</span><span class="p">:</span>
+                    <span class="n">df</span><span class="p">[</span><span class="n">feature_name</span><span class="p">]</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span>
+                        <span class="n">feature_value_represention</span><span class="p">[</span><span class="n">feature_name</span><span class="p">],</span>
+                        <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+        <span class="c1"># Decode data from categorical values to proper strings.</span>
+        <span class="n">encoder_dict</span> <span class="o">=</span> <span class="n">df_features</span><span class="o">.</span><span class="n">get_label_encoder</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">feature_name</span> <span class="ow">in</span> <span class="n">encoder_dict</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+
+            <span class="k">if</span> <span class="n">feature_name</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="p">:</span>
+                <span class="k">continue</span>
+
+            <span class="k">if</span> <span class="n">df</span><span class="p">[</span><span class="n">feature_name</span><span class="p">]</span><span class="o">.</span><span class="n">dtype</span> <span class="o">==</span> <span class="s2">&quot;O&quot;</span><span class="p">:</span>
+                <span class="n">df</span><span class="p">[</span><span class="n">feature_name</span><span class="p">]</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="n">encoder_dict</span><span class="p">[</span><span class="n">feature_name</span><span class="p">],</span>
+                                         <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+                <span class="n">df_features</span><span class="o">.</span><span class="n">set_feature_to_categorical</span><span class="p">(</span><span class="n">feature_name</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">_add_to_que</span><span class="p">:</span>
+            <span class="n">params_dict</span> <span class="o">=</span> <span class="nb">locals</span><span class="p">()</span>
+            <span class="n">parameters</span> <span class="o">=</span> <span class="n">get_parameters</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">encode_data</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_DataPipelineSegment__add_function_to_que</span><span class="p">(</span><span class="s2">&quot;encode_data&quot;</span><span class="p">,</span>
+                                                           <span class="n">parameters</span><span class="p">,</span>
+                                                           <span class="n">params_dict</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="DataEncoder.decode_data"><a class="viewcode-back" href="../../../_autosummary/eflow.data_pipeline_segments.data_encoder.html#eflow.data_pipeline_segments.data_encoder.DataEncoder.decode_data">[docs]</a>    <span class="k">def</span> <span class="nf">decode_data</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+                    <span class="n">df</span><span class="p">,</span>
+                    <span class="n">df_features</span><span class="p">,</span>
+                    <span class="n">apply_value_representation</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                    <span class="n">_add_to_que</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">            Decode the data into non-numerical values for more descriptive analysis.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            df: pd.Dataframe</span>
+<span class="sd">                Pandas dataframe.</span>
+
+<span class="sd">            df_features: DataFrameTypes from eflow</span>
+<span class="sd">                DataFrameTypes object.</span>
+
+<span class="sd">            apply_value_representation: bool</span>
+<span class="sd">                Translate features into most understandable/best representation/</span>
+
+<span class="sd">            _add_to_que: bool</span>
+<span class="sd">                Hidden variable to determine if the function should be pushed</span>
+<span class="sd">                to the pipeline segment.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># Decode data from categorical values to proper strings.</span>
+        <span class="n">decoder_dict</span> <span class="o">=</span> <span class="n">df_features</span><span class="o">.</span><span class="n">get_label_decoder</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">feature_name</span> <span class="ow">in</span> <span class="n">decoder_dict</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+
+            <span class="k">if</span> <span class="n">feature_name</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="p">:</span>
+                <span class="k">continue</span>
+
+            <span class="k">if</span> <span class="n">df</span><span class="p">[</span><span class="n">feature_name</span><span class="p">]</span><span class="o">.</span><span class="n">dtype</span> <span class="o">!=</span> <span class="s2">&quot;O&quot;</span><span class="p">:</span>
+                <span class="n">df</span><span class="p">[</span><span class="n">feature_name</span><span class="p">]</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="n">decoder_dict</span><span class="p">[</span><span class="n">feature_name</span><span class="p">],</span>
+                                         <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+        <span class="c1"># Apply value representation to feature values</span>
+        <span class="k">if</span> <span class="n">apply_value_representation</span><span class="p">:</span>
+            <span class="n">feature_value_represention</span> <span class="o">=</span> <span class="n">df_features</span><span class="o">.</span><span class="n">get_feature_value_representation</span><span class="p">()</span>
+            <span class="c1"># Replace values by each corresponding feature value related dict</span>
+            <span class="k">for</span> <span class="n">feature_name</span> <span class="ow">in</span> <span class="n">feature_value_represention</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+                <span class="k">if</span> <span class="n">feature_name</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="p">:</span>
+                    <span class="k">continue</span>
+
+                <span class="k">if</span> <span class="n">df</span><span class="p">[</span><span class="n">feature_name</span><span class="p">]</span><span class="o">.</span><span class="n">dtype</span> <span class="o">==</span> <span class="s2">&quot;O&quot;</span><span class="p">:</span>
+                    <span class="n">df</span><span class="p">[</span><span class="n">feature_name</span><span class="p">]</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="n">feature_value_represention</span><span class="p">[</span><span class="n">feature_name</span><span class="p">],</span>
+                                             <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+                <span class="n">df_features</span><span class="o">.</span><span class="n">set_feature_to_string</span><span class="p">(</span><span class="n">feature_name</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">_add_to_que</span><span class="p">:</span>
+            <span class="n">params_dict</span> <span class="o">=</span> <span class="nb">locals</span><span class="p">()</span>
+            <span class="n">parameters</span> <span class="o">=</span> <span class="n">get_parameters</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">decode_data</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_DataPipelineSegment__add_function_to_que</span><span class="p">(</span><span class="s2">&quot;decode_data&quot;</span><span class="p">,</span>
+                                                           <span class="n">parameters</span><span class="p">,</span>
+                                                           <span class="n">params_dict</span><span class="p">)</span></div>
+
+    <span class="k">def</span> <span class="nf">apply_binning</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+                      <span class="n">df</span><span class="p">,</span>
+                      <span class="n">df_features</span><span class="p">,</span>
+                      <span class="n">binable_features</span><span class="o">=</span><span class="p">[],</span>
+                      <span class="n">_add_to_que</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+
+        <span class="c1"># Remove any unwanted arguments in params_dict</span>
+        <span class="n">params_dict</span> <span class="o">=</span> <span class="nb">locals</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">arg</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;self&quot;</span><span class="p">,</span> <span class="s2">&quot;df&quot;</span><span class="p">,</span> <span class="s2">&quot;df_features&quot;</span><span class="p">,</span> <span class="s2">&quot;_add_to_que&quot;</span><span class="p">,</span>
+                    <span class="s2">&quot;params_dict&quot;</span><span class="p">]:</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="k">del</span> <span class="n">params_dict</span><span class="p">[</span><span class="n">arg</span><span class="p">]</span>
+            <span class="k">except</span> <span class="ne">KeyError</span><span class="p">:</span>
+                <span class="k">pass</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">binable_features</span><span class="p">:</span>
+            <span class="n">binable_features</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">columns</span>
+
+        <span class="c1"># Apply binning</span>
+        <span class="k">for</span> <span class="n">feature_name</span> <span class="ow">in</span> <span class="n">binable_features</span><span class="p">:</span>
+            <span class="n">bin_labels_dict</span> <span class="o">=</span> <span class="n">df_features</span><span class="o">.</span><span class="n">get_feature_binning</span><span class="p">(</span><span class="n">feature_name</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">bin_labels_dict</span><span class="p">:</span>
+                <span class="c1"># Convert to category data</span>
+                <span class="n">df</span><span class="p">[</span><span class="n">feature_name</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_numeric</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="n">feature_name</span><span class="p">]</span><span class="o">.</span><span class="n">dropna</span><span class="p">(),</span>
+                                                 <span class="n">errors</span><span class="o">=</span><span class="s1">&#39;coerce&#39;</span><span class="p">)</span>
+                <span class="n">df</span><span class="p">[</span><span class="n">feature_name</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">cut</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="n">feature_name</span><span class="p">],</span>
+                                          <span class="n">bins</span><span class="o">=</span><span class="n">bin_labels_dict</span><span class="p">[</span><span class="s2">&quot;bins&quot;</span><span class="p">],</span>
+                                          <span class="n">labels</span><span class="o">=</span><span class="n">bin_labels_dict</span><span class="p">[</span><span class="s2">&quot;labels&quot;</span><span class="p">])</span>
+
+                <span class="c1"># Feature set to categorical</span>
+                <span class="n">df_features</span><span class="o">.</span><span class="n">set_feature_to_categorical</span><span class="p">(</span><span class="n">feature_name</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">_add_to_que</span><span class="p">:</span>
+            <span class="n">params_dict</span> <span class="o">=</span> <span class="nb">locals</span><span class="p">()</span>
+            <span class="n">parameters</span> <span class="o">=</span> <span class="n">get_parameters</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">decode_data</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_DataPipelineSegment__add_function_to_que</span><span class="p">(</span><span class="s2">&quot;apply_binning&quot;</span><span class="p">,</span>
+                                                           <span class="n">parameters</span><span class="p">,</span>
+                                                           <span class="n">params_dict</span><span class="p">)</span>
+
+<div class="viewcode-block" id="DataEncoder.apply_value_representation"><a class="viewcode-back" href="../../../_autosummary/eflow.data_pipeline_segments.data_encoder.html#eflow.data_pipeline_segments.data_encoder.DataEncoder.apply_value_representation">[docs]</a>    <span class="k">def</span> <span class="nf">apply_value_representation</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+                                   <span class="n">df</span><span class="p">,</span>
+                                   <span class="n">df_features</span><span class="p">,</span>
+                                   <span class="n">_add_to_que</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">            Translate features into most understandable/best representation</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            df: pd.Dataframe</span>
+<span class="sd">                Pandas dataframe.</span>
+
+<span class="sd">            df_features: DataFrameTypes from eflow</span>
+<span class="sd">                DataFrameTypes object.</span>
+
+<span class="sd">            _add_to_que: bool</span>
+<span class="sd">                Hidden variable to determine if the function should be pushed</span>
+<span class="sd">                to the pipeline segment.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">feature_value_represention</span> <span class="o">=</span> <span class="n">df_features</span><span class="o">.</span><span class="n">get_feature_value_representation</span><span class="p">()</span>
+
+        <span class="c1"># Replace values by each corresponding feature value related dict</span>
+        <span class="k">for</span> <span class="n">feature_name</span> <span class="ow">in</span> <span class="n">feature_value_represention</span><span class="p">:</span>
+
+            <span class="k">if</span> <span class="n">feature_name</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">KeyError</span><span class="p">(</span>
+                    <span class="sa">f</span><span class="s2">&quot;Dataframe doesn&#39;t have feature name &#39;</span><span class="si">{feature_name}</span><span class="s2">&#39;.&quot;</span><span class="p">)</span>
+
+            <span class="n">df</span><span class="p">[</span><span class="n">feature_name</span><span class="p">]</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="n">feature_value_represention</span><span class="p">[</span><span class="n">feature_name</span><span class="p">],</span>
+                                     <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">_add_to_que</span><span class="p">:</span>
+            <span class="n">params_dict</span> <span class="o">=</span> <span class="nb">locals</span><span class="p">()</span>
+            <span class="n">parameters</span> <span class="o">=</span> <span class="n">get_parameters</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">decode_data</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_DataPipelineSegment__add_function_to_que</span><span class="p">(</span><span class="s2">&quot;apply_value_representation&quot;</span><span class="p">,</span>
+                                                           <span class="n">parameters</span><span class="p">,</span>
+                                                           <span class="n">params_dict</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="DataEncoder.revert_value_representation"><a class="viewcode-back" href="../../../_autosummary/eflow.data_pipeline_segments.data_encoder.html#eflow.data_pipeline_segments.data_encoder.DataEncoder.revert_value_representation">[docs]</a>    <span class="k">def</span> <span class="nf">revert_value_representation</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+                                    <span class="n">df</span><span class="p">,</span>
+                                    <span class="n">df_features</span><span class="p">,</span>
+                                    <span class="n">_add_to_que</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">            Translate features back into worst representation</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            df: pd.Dataframe</span>
+<span class="sd">                Pandas dataframe.</span>
+
+<span class="sd">            df_features: DataFrameTypes from eflow</span>
+<span class="sd">                DataFrameTypes object.</span>
+
+<span class="sd">            _add_to_que: bool</span>
+<span class="sd">                Hidden variable to determine if the function should be pushed</span>
+<span class="sd">                to the pipeline segment.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">feature_value_represention</span> <span class="o">=</span> <span class="n">df_features</span><span class="o">.</span><span class="n">get_feature_value_representation</span><span class="p">()</span>
+
+        <span class="c1"># Replace values by each corresponding feature value related dict</span>
+        <span class="k">for</span> <span class="n">feature_name</span> <span class="ow">in</span> <span class="n">feature_value_represention</span><span class="p">:</span>
+
+            <span class="k">if</span> <span class="n">feature_name</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">KeyError</span><span class="p">(</span>
+                    <span class="sa">f</span><span class="s2">&quot;Dataframe doesn&#39;t have feature name &#39;</span><span class="si">{feature_name}</span><span class="s2">&#39;.&quot;</span><span class="p">)</span>
+
+
+            <span class="n">df</span><span class="p">[</span><span class="n">feature_name</span><span class="p">]</span><span class="o">.</span><span class="n">replace</span><span class="p">({</span><span class="n">v</span><span class="p">:</span> <span class="n">k</span>
+                                      <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">feature_value_represention</span><span class="p">[</span>
+                                          <span class="n">feature_name</span><span class="p">]</span><span class="o">.</span><span class="n">items</span><span class="p">()},</span>
+                                     <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">_add_to_que</span><span class="p">:</span>
+            <span class="n">params_dict</span> <span class="o">=</span> <span class="nb">locals</span><span class="p">()</span>
+            <span class="n">parameters</span> <span class="o">=</span> <span class="n">get_parameters</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">revert_value_representation</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_DataPipelineSegment__add_function_to_que</span><span class="p">(</span><span class="s2">&quot;revert_value_representation&quot;</span><span class="p">,</span>
+                                                           <span class="n">parameters</span><span class="p">,</span>
+                                                           <span class="n">params_dict</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="DataEncoder.make_values_bool"><a class="viewcode-back" href="../../../_autosummary/eflow.data_pipeline_segments.data_encoder.html#eflow.data_pipeline_segments.data_encoder.DataEncoder.make_values_bool">[docs]</a>    <span class="k">def</span> <span class="nf">make_values_bool</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+                         <span class="n">df</span><span class="p">,</span>
+                         <span class="n">df_features</span><span class="p">,</span>
+                         <span class="n">_add_to_que</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">            Convert all string bools to numeric bool value</span>
+<span class="sd">        Args:</span>
+<span class="sd">            df: pd.Dataframe</span>
+<span class="sd">                Pandas dataframe.</span>
+
+<span class="sd">            df_features: DataFrameTypes from eflow</span>
+<span class="sd">                DataFrameTypes object.</span>
+
+<span class="sd">            _add_to_que: bool</span>
+<span class="sd">                Hidden variable to determine if the function should be pushed</span>
+<span class="sd">                to the pipeline segment.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">for</span> <span class="n">bool_feature</span> <span class="ow">in</span> <span class="n">df_features</span><span class="o">.</span><span class="n">bool_features</span><span class="p">():</span>
+            <span class="k">if</span> <span class="n">df</span><span class="p">[</span><span class="n">bool_feature</span><span class="p">]</span><span class="o">.</span><span class="n">dtype</span> <span class="o">==</span> <span class="s2">&quot;O&quot;</span><span class="p">:</span>
+                <span class="n">bool_check</span><span class="p">,</span><span class="n">true_val</span><span class="p">,</span><span class="n">false_val</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__bool_string_values_check</span><span class="p">(</span>
+                    <span class="n">df</span><span class="p">[</span><span class="n">bool_feature</span><span class="p">]</span><span class="o">.</span><span class="n">dropna</span><span class="p">()</span><span class="o">.</span><span class="n">unique</span><span class="p">())</span>
+
+                <span class="c1"># Replace bool string values with bools</span>
+                <span class="k">if</span> <span class="n">bool_check</span><span class="p">:</span>
+                    <span class="n">df</span><span class="p">[</span><span class="n">bool_feature</span><span class="p">]</span><span class="o">.</span><span class="n">replace</span><span class="p">({</span><span class="n">true_val</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span>
+                                              <span class="n">false_val</span><span class="p">:</span><span class="mi">0</span><span class="p">},</span>
+                                             <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">_add_to_que</span><span class="p">:</span>
+            <span class="n">params_dict</span> <span class="o">=</span> <span class="nb">locals</span><span class="p">()</span>
+            <span class="n">parameters</span> <span class="o">=</span> <span class="n">get_parameters</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">make_values_bool</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_DataPipelineSegment__add_function_to_que</span><span class="p">(</span><span class="s2">&quot;make_values_bool&quot;</span><span class="p">,</span>
+                                                           <span class="n">parameters</span><span class="p">,</span>
+                                                           <span class="n">params_dict</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="DataEncoder.make_dummies"><a class="viewcode-back" href="../../../_autosummary/eflow.data_pipeline_segments.data_encoder.html#eflow.data_pipeline_segments.data_encoder.DataEncoder.make_dummies">[docs]</a>    <span class="k">def</span> <span class="nf">make_dummies</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+                     <span class="n">df</span><span class="p">,</span>
+                     <span class="n">df_features</span><span class="p">,</span>
+                     <span class="n">qualitative_features</span><span class="o">=</span><span class="p">[],</span>
+                     <span class="n">_feature_values_dict</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                     <span class="n">_add_to_que</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">            Create dummies features of based on qualtative feature data and removes</span>
+<span class="sd">            the original feature.</span>
+
+<span class="sd">            Note</span>
+<span class="sd">                _feature_values_dict does not need to be init. Used for backend</span>
+<span class="sd">                resource.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            df: pd.Dataframe</span>
+<span class="sd">                Pandas dataframe.</span>
+
+<span class="sd">            df_features: DataFrameTypes from eflow</span>
+<span class="sd">                DataFrameTypes object.</span>
+
+<span class="sd">            qualtative_features: collection of strings</span>
+<span class="sd">                Feature names to convert the feature data into dummy features.</span>
+
+<span class="sd">            _add_to_que: bool</span>
+<span class="sd">                Hidden variable to determine if the function should be pushed</span>
+<span class="sd">                to the pipeline segment.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># Convert to the correct types</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">qualitative_features</span><span class="p">,</span><span class="nb">str</span><span class="p">):</span>
+            <span class="n">qualtative_features</span> <span class="o">=</span> <span class="p">[</span><span class="n">qualitative_features</span><span class="p">]</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">_feature_values_dict</span><span class="p">:</span>
+            <span class="n">_feature_values_dict</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
+
+        <span class="n">pd</span><span class="o">.</span><span class="n">set_option</span><span class="p">(</span><span class="s1">&#39;mode.chained_assignment&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+
+        <span class="k">for</span> <span class="n">cat_feature</span> <span class="ow">in</span> <span class="n">qualitative_features</span><span class="p">:</span>
+
+            <span class="k">if</span> <span class="n">cat_feature</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">df_features</span><span class="o">.</span><span class="n">string_features</span><span class="p">()</span> <span class="o">|</span> <span class="n">df_features</span><span class="o">.</span><span class="n">categorical_features</span><span class="p">():</span>
+                <span class="k">raise</span> <span class="n">UnsatisfiedRequirments</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;No feature named &#39;</span><span class="si">{cat_feature}</span><span class="s2">&#39; in categorical or string features.&quot;</span><span class="p">)</span>
+
+            <span class="k">if</span> <span class="n">cat_feature</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">_feature_values_dict</span><span class="p">:</span>
+                <span class="n">_feature_values_dict</span><span class="p">[</span><span class="n">cat_feature</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">cat_feature</span><span class="p">]</span><span class="o">.</span><span class="n">dropna</span><span class="p">()</span><span class="o">.</span><span class="n">unique</span><span class="p">()</span>
+                <span class="n">_feature_values_dict</span><span class="p">[</span><span class="n">cat_feature</span><span class="p">]</span><span class="o">.</span><span class="n">sort</span><span class="p">()</span>
+                <span class="n">_feature_values_dict</span><span class="p">[</span><span class="n">cat_feature</span><span class="p">]</span> <span class="o">=</span> <span class="n">_feature_values_dict</span><span class="p">[</span><span class="n">cat_feature</span><span class="p">]</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
+
+            <span class="n">dummy_features</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="k">for</span> <span class="n">feature_value</span> <span class="ow">in</span>  <span class="n">_feature_values_dict</span><span class="p">[</span><span class="n">cat_feature</span><span class="p">]:</span>
+                <span class="n">new_feature</span> <span class="o">=</span> <span class="n">cat_feature</span> <span class="o">+</span> <span class="sa">f</span><span class="s2">&quot;_</span><span class="si">{feature_value}</span><span class="s2">&quot;</span>
+                <span class="n">bool_array</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">cat_feature</span><span class="p">]</span> <span class="o">==</span> <span class="n">feature_value</span>
+                <span class="n">df</span><span class="p">[</span><span class="n">new_feature</span><span class="p">]</span> <span class="o">=</span> <span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="n">bool_array</span><span class="p">)</span>
+                <span class="n">dummy_features</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">new_feature</span><span class="p">)</span>
+
+            <span class="c1"># # Make dummies and remove original feature</span>
+            <span class="c1"># dummies_df = pd.get_dummies(_feature_values_dict[cat_feature],</span>
+            <span class="c1">#                             prefix=cat_feature)</span>
+
+            <span class="n">df</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="n">cat_feature</span><span class="p">],</span>
+                    <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+            <span class="n">df_features</span><span class="o">.</span><span class="n">remove_feature</span><span class="p">(</span><span class="n">cat_feature</span><span class="p">)</span>
+            <span class="n">df_features</span><span class="o">.</span><span class="n">set_feature_to_dummy_encoded</span><span class="p">(</span><span class="n">cat_feature</span><span class="p">,</span>
+                                                     <span class="n">dummy_features</span><span class="p">)</span>
+
+            <span class="c1"># # Apply to dataframe</span>
+            <span class="c1"># for feature_name in dummies_df.columns:</span>
+            <span class="c1">#     df[feature_name] = dummies_df[feature_name]</span>
+
+        <span class="k">if</span> <span class="n">_add_to_que</span><span class="p">:</span>
+            <span class="n">params_dict</span> <span class="o">=</span> <span class="nb">locals</span><span class="p">()</span>
+            <span class="n">parameters</span> <span class="o">=</span> <span class="n">get_parameters</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">make_dummies</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_DataPipelineSegment__add_function_to_que</span><span class="p">(</span><span class="s2">&quot;make_dummies&quot;</span><span class="p">,</span>
+                                                           <span class="n">parameters</span><span class="p">,</span>
+                                                           <span class="n">params_dict</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="DataEncoder.revert_dummies"><a class="viewcode-back" href="../../../_autosummary/eflow.data_pipeline_segments.data_encoder.html#eflow.data_pipeline_segments.data_encoder.DataEncoder.revert_dummies">[docs]</a>    <span class="k">def</span> <span class="nf">revert_dummies</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+                       <span class="n">df</span><span class="p">,</span>
+                       <span class="n">df_features</span><span class="p">,</span>
+                       <span class="n">qualitative_features</span><span class="o">=</span><span class="p">[],</span>
+                       <span class="n">_add_to_que</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">            Convert dummies features back to the original feature.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            df: pd.Dataframe</span>
+<span class="sd">                Pandas dataframe.</span>
+
+<span class="sd">            df_features: DataFrameTypes from eflow</span>
+<span class="sd">                DataFrameTypes object.</span>
+
+<span class="sd">            qualitative_features: collection of strings</span>
+<span class="sd">                Feature names to convert the dummy features into original feature</span>
+<span class="sd">                data.</span>
+
+<span class="sd">            _add_to_que: bool</span>
+<span class="sd">                Hidden variable to determine if the function should be pushed</span>
+<span class="sd">                to the pipeline segment.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">df</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                       <span class="n">drop</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">qualitative_features</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+            <span class="n">feature_name</span> <span class="o">=</span> <span class="p">[</span><span class="n">qualitative_features</span><span class="p">]</span>
+
+        <span class="k">for</span> <span class="n">feature_name</span> <span class="ow">in</span> <span class="n">qualitative_features</span><span class="p">:</span>
+            <span class="n">dummies_df</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span>
+                <span class="n">df_features</span><span class="o">.</span><span class="n">get_dummy_encoded_features</span><span class="p">()[</span><span class="n">feature_name</span><span class="p">]]</span>
+            <span class="n">dummies_columns</span> <span class="o">=</span> <span class="n">dummies_df</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">to_list</span><span class="p">()</span>
+
+            <span class="n">tmp_df</span> <span class="o">=</span> <span class="n">dummies_df</span><span class="p">[</span><span class="n">dummies_df</span> <span class="o">==</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">stack</span><span class="p">()</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span>
+            <span class="k">del</span> <span class="n">dummies_df</span>
+
+            <span class="n">df</span><span class="p">[</span><span class="n">feature_name</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">full</span><span class="p">([</span><span class="nb">len</span><span class="p">(</span><span class="n">df</span><span class="p">)],</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">)</span>
+            <span class="n">df</span><span class="p">[</span><span class="n">feature_name</span><span class="p">]</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">tmp_df</span><span class="p">[</span><span class="s2">&quot;level_0&quot;</span><span class="p">]]</span> <span class="o">=</span> <span class="n">tmp_df</span><span class="p">[</span>
+                <span class="s2">&quot;level_1&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
+
+            <span class="c1"># Remove dummy features</span>
+            <span class="n">df</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="n">dummies_columns</span><span class="p">,</span>
+                    <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+            <span class="n">df</span><span class="p">[</span><span class="n">feature_name</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">feature_name</span><span class="p">]</span><span class="o">.</span><span class="n">str</span><span class="p">[</span><span class="nb">len</span><span class="p">(</span><span class="n">feature_name</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">:]</span>
+
+            <span class="c1"># Remove dummy encoded relationship</span>
+            <span class="n">df_features</span><span class="o">.</span><span class="n">remove_feature_from_dummy_encoded</span><span class="p">(</span><span class="n">feature_name</span><span class="p">)</span>
+
+            <span class="c1"># Add feature back to original set in df_features</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">pd</span><span class="o">.</span><span class="n">to_numeric</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="n">feature_name</span><span class="p">]</span><span class="o">.</span><span class="n">dropna</span><span class="p">())</span>
+                <span class="n">df_features</span><span class="o">.</span><span class="n">add_new_categorical_feature</span><span class="p">(</span><span class="n">feature_name</span><span class="p">)</span>
+
+            <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
+                <span class="n">df_features</span><span class="o">.</span><span class="n">add_new_string_feature</span><span class="p">(</span><span class="n">feature_name</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">_add_to_que</span><span class="p">:</span>
+            <span class="n">params_dict</span> <span class="o">=</span> <span class="nb">locals</span><span class="p">()</span>
+            <span class="n">parameters</span> <span class="o">=</span> <span class="n">get_parameters</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">revert_dummies</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_DataPipelineSegment__add_function_to_que</span><span class="p">(</span><span class="s2">&quot;revert_dummies&quot;</span><span class="p">,</span>
+                                                           <span class="n">parameters</span><span class="p">,</span>
+                                                           <span class="n">params_dict</span><span class="p">)</span></div>
+
+
+    <span class="k">def</span> <span class="nf">__bool_string_values_check</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+                                   <span class="n">feature_values</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">            Checks if a collection of strings can be considered a bool feature</span>
+<span class="sd">            based on the amount of strings and the values of those strings.</span>
+
+<span class="sd">            Note -</span>
+<span class="sd">                Modified from data frame types</span>
+<span class="sd">        Args:</span>
+<span class="sd">            feature_values: collection</span>
+<span class="sd">                Collection of strings to apply natural language process to</span>
+<span class="sd">                determine if the series data is boolean or not.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Returns true or false if the values can be considered a bool and</span>
+<span class="sd">            the true and false values found.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">feature_values</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">2</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span>
+
+        <span class="n">found_true_value</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="n">found_false_value</span> <span class="o">=</span> <span class="kc">None</span>
+
+        <span class="k">for</span> <span class="n">val</span> <span class="ow">in</span> <span class="n">feature_values</span><span class="p">:</span>
+
+            <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">val</span><span class="p">,</span><span class="nb">str</span><span class="p">):</span>
+                <span class="k">continue</span>
+
+            <span class="n">org_val</span> <span class="o">=</span> <span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="n">val</span><span class="p">)</span>
+            <span class="n">val</span> <span class="o">=</span> <span class="n">val</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+
+            <span class="c1"># Determine if val is true</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">found_true_value</span><span class="p">:</span>
+
+                <span class="c1"># Check if the string already exist in the defined set</span>
+                <span class="k">if</span> <span class="n">val</span> <span class="ow">in</span> <span class="n">BOOL_STRINGS</span><span class="o">.</span><span class="n">TRUE_STRINGS</span><span class="p">:</span>
+                    <span class="n">found_true_value</span> <span class="o">=</span> <span class="n">org_val</span>
+                    <span class="k">continue</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="c1"># Attempt to find synonyms of the defined words to compare to</span>
+                    <span class="c1"># the iterable string</span>
+                    <span class="k">for</span> <span class="n">true_string</span> <span class="ow">in</span> <span class="n">BOOL_STRINGS</span><span class="o">.</span><span class="n">TRUE_STRINGS</span><span class="p">:</span>
+
+                        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">true_string</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">2</span><span class="p">:</span>
+                            <span class="k">continue</span>
+
+                        <span class="k">for</span> <span class="n">syn</span> <span class="ow">in</span> <span class="n">get_synonyms</span><span class="p">(</span><span class="n">true_string</span><span class="p">):</span>
+                            <span class="k">if</span> <span class="n">syn</span> <span class="o">==</span> <span class="n">val</span><span class="p">:</span>
+                                <span class="n">found_true_value</span> <span class="o">=</span> <span class="n">org_val</span>
+                                <span class="k">continue</span>
+
+            <span class="c1"># -----</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">found_false_value</span><span class="p">:</span>
+
+                <span class="c1"># -----</span>
+                <span class="k">if</span> <span class="n">val</span> <span class="ow">in</span> <span class="n">BOOL_STRINGS</span><span class="o">.</span><span class="n">FALSE_STRINGS</span><span class="p">:</span>
+                    <span class="n">found_false_value</span> <span class="o">=</span> <span class="n">org_val</span>
+                    <span class="k">continue</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="c1"># -----</span>
+                    <span class="k">for</span> <span class="n">false_string</span> <span class="ow">in</span> <span class="n">BOOL_STRINGS</span><span class="o">.</span><span class="n">FALSE_STRINGS</span><span class="p">:</span>
+
+                        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">false_string</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">2</span><span class="p">:</span>
+                            <span class="k">continue</span>
+
+                        <span class="k">for</span> <span class="n">syn</span> <span class="ow">in</span> <span class="n">get_synonyms</span><span class="p">(</span><span class="n">false_string</span><span class="p">):</span>
+                            <span class="k">if</span> <span class="n">syn</span> <span class="o">==</span> <span class="n">val</span><span class="p">:</span>
+                                <span class="n">found_false_value</span> <span class="o">=</span> <span class="n">org_val</span>
+                                <span class="k">continue</span>
+
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">feature_values</span><span class="p">)</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
+            <span class="k">return</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">found_true_value</span><span class="p">,</span><span class="nb">str</span><span class="p">)</span> <span class="ow">and</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">found_false_value</span><span class="p">,</span><span class="nb">str</span><span class="p">),</span> <span class="n">found_true_value</span><span class="p">,</span> <span class="n">found_false_value</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">found_true_value</span><span class="p">,</span><span class="nb">str</span><span class="p">)</span> <span class="ow">or</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">found_false_value</span><span class="p">,</span><span class="nb">str</span><span class="p">),</span> <span class="n">found_true_value</span><span class="p">,</span> <span class="n">found_false_value</span></div>
+</pre></div>
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2020, Eric Cacciavillani
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

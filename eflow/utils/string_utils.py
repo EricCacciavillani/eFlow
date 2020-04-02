@@ -10,7 +10,7 @@ __email__ = "eric.cacciavillani@gmail.com"
 def convert_to_filename(filename,
                         remove_file_extension=True):
     """
-    Desc:
+
         Attempts to make the filename string valid.
 
     Args:
@@ -32,7 +32,7 @@ def convert_to_filename(filename,
 
 def correct_directory_path(directory_path):
     """
-    Desc:
+
         Attempts to convert the directory path to a proper one by removing
         any double slashes next to one another.
 
@@ -60,7 +60,7 @@ def correct_directory_path(directory_path):
 
 def create_hex_decimal_string(string_len=10):
     """
-    Desc:
+
         Creates a string of a random Hexadecimal value.
 
     Args:

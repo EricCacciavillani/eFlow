@@ -164,7 +164,7 @@ class AutoCluster(AutoModeler):
     # --- Getters/Setters
     def get_scaled_data(self):
         """
-        Desc:
+
             Gets the stored data
 
         Returns:
@@ -175,7 +175,7 @@ class AutoCluster(AutoModeler):
 
     def get_all_cluster_models(self):
         """
-        Desc:
+
             Gets the model names and model instances in dictionary form.
 
         Return:
@@ -185,7 +185,7 @@ class AutoCluster(AutoModeler):
 
     def delete_stored_data(self):
         """
-        Desc:
+
             Removes the matrix data in order to save RAM when running
             analysis on the actual data.
         """
@@ -197,7 +197,7 @@ class AutoCluster(AutoModeler):
                                           display_print=True,
                                           display_visuals=True):
         """
-        Desc:
+
             Displays hierarchical cluster graphs with provided methods.
 
         Args:

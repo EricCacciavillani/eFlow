@@ -88,7 +88,7 @@ def df_to_image(df,
 
 def average_feature_correlation_table(df):
     """
-    Desc:
+
         Creates a correlation table of the feature's relationship base on the
         average correlation with other features.
 
@@ -119,7 +119,7 @@ def average_feature_correlation_table(df):
 
 def feature_correlation_table(df):
     """
-    Desc:
+
         Creates a correlation table of each feature's relationship with one
         another.
 
@@ -152,7 +152,7 @@ def feature_correlation_table(df):
 def check_if_feature_exists(df,
                             feature_name):
     """
-    Desc:
+
         Checks if feature exists in the dataframe.
 
     Args:
@@ -174,7 +174,7 @@ def check_if_feature_exists(df,
 def data_types_table(df,
                      sort_by_type=True):
     """
-    Desc:
+
         Creates a pandas dataframe based on the features and their types of the
         given/passed dataframe.
 
@@ -207,7 +207,7 @@ def data_types_table(df,
 
 def missing_values_table(df):
     """
-    Desc:
+
         Creates a pandas dataframe based on the missing data inside the
         given/passed dataframe
 
@@ -238,7 +238,7 @@ def generate_meta_data(df,
                        output_folder_path,
                        sub_dir):
     """
-    Desc:
+
         Creates files representing the shape and feature types of the dataframe.
 
     Args:
@@ -303,7 +303,7 @@ def generate_entropy_table(df,
                            sub_dir,
                            file_name="Entropy Table"):
     """
-    Desc:
+
         Calculate the entropy of each non-continous numerical feature in a pandas
         dataframe object and store in a pandas dataframe object in the proper
         directory structure.
@@ -365,7 +365,7 @@ def auto_binning(df,
                  feature_name,
                  bins=5):
     """
-    Desc:
+
         Takes a pandas series object and assigns generalized labels and binning
         dimensions.
 
@@ -449,7 +449,7 @@ def auto_binning(df,
 def value_counts_table(df,
                        feature_name):
     """
-    Desc:
+
         Creates a value counts dataframe.
 
     Args:
@@ -483,7 +483,7 @@ def descr_table(df,
                 feature_name,
                 to_numeric=False):
     """
-    Desc:
+
         Creates numerical description of a feature of a dataframe.
 
     Args:
@@ -496,7 +496,7 @@ def descr_table(df,
         to_numeric: bool
             Converts the pandas series to all numeric.
 
-    Returns/Descr:
+    Returns:
         Returns back a Dataframe object of a numerical feature's summary.
     """
 
@@ -517,7 +517,7 @@ def descr_table(df,
 
 def suggest_removal_features(df):
     """
-    Desc:
+
         Will find features that appear to be almost index like with their
         feature values.
     Args:

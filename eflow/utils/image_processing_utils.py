@@ -21,7 +21,7 @@ def create_plt_png(directory_path,
                    sharpness=1.7):
 
     """
-    Desc:
+
         Saves the plt based image in the correct directory.
 
     Args:
@@ -63,7 +63,7 @@ def adjust_brightness(input_image_path,
                       output_image_path,
                       factor=1.7):
     """
-    Desc:
+
         Adjust brightness of a saved image and save them to a give image path
         with filename.
 
@@ -88,7 +88,7 @@ def adjust_contrast(input_image_path,
                     output_image_path,
                     factor=1.7):
     """
-    Desc:
+
         Adjust contrast of a saved image and save them to a give image path
         with filename.
 
@@ -112,7 +112,7 @@ def adjust_sharpness(input_image_path,
                      output_image_path,
                      factor=1.7):
     """
-    Desc:
+
         Adjust sharpness of a saved image and save them to a give image path
         with filename.
 

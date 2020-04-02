@@ -1,0 +1,862 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>eflow.model_analysis.regression_analysis &mdash; eflow  documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../../../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+        <script src="../../../_static/jquery.js"></script>
+        <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/doctools.js"></script>
+        <script src="../../../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../../../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../../index.html" class="icon icon-home"> eflow
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../_autosummary/eflow.data_analysis.feature_analysis.html">eflow.data_analysis.feature_analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../_autosummary/eflow.data_analysis.null_analysis.html">eflow.data_analysis.null_analysis</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../_autosummary/eflow.data_pipeline_segments.data_encoder.html">eflow.data_pipeline_segments.data_encoder</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../_autosummary/eflow.data_pipeline_segments.feature_data_cleaner.html">eflow.data_pipeline_segments.feature_data_cleaner</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../_autosummary/eflow.data_pipeline_segments.feature_transformer.html">eflow.data_pipeline_segments.feature_transformer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../_autosummary/eflow.data_pipeline_segments.string_cleaner.html">eflow.data_pipeline_segments.string_cleaner</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../_autosummary/eflow.data_pipeline_segments.type_fixer.html">eflow.data_pipeline_segments.type_fixer</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../_autosummary/eflow.foundation.data_frame_types.html">eflow.foundation.data_frame_types</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../_autosummary/eflow.foundation.data_pipeline.html">eflow.foundation.data_pipeline</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../_autosummary/eflow.model_analysis.classification_analysis.html">eflow.model_analysis.classification_analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../_autosummary/eflow.model_analysis.regression_analysis.html">eflow.model_analysis.regression_analysis</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">eflow</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../../index.html">Module code</a> &raquo;</li>
+        
+      <li>eflow.model_analysis.regression_analysis</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for eflow.model_analysis.regression_analysis</h1><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">eflow.utils.sys_utils</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">eflow.utils.pandas_utils</span> <span class="kn">import</span> <span class="n">df_to_image</span>
+<span class="kn">from</span> <span class="nn">eflow.utils.image_processing_utils</span> <span class="kn">import</span> <span class="n">create_plt_png</span>
+<span class="kn">from</span> <span class="nn">eflow._hidden.parent_objects</span> <span class="kn">import</span> <span class="n">ModelAnalysis</span>
+<span class="kn">from</span> <span class="nn">eflow._hidden.custom_exceptions</span> <span class="kn">import</span> <span class="n">RequiresPredictionMethods</span><span class="p">,</span> <span class="n">ProbasNotPossible</span><span class="p">,</span> \
+    <span class="n">UnsatisfiedRequirments</span>
+<span class="kn">from</span> <span class="nn">eflow.data_analysis</span> <span class="kn">import</span> <span class="n">FeatureAnalysis</span>
+
+<span class="kn">from</span> <span class="nn">eflow._hidden.constants</span> <span class="kn">import</span> <span class="n">GRAPH_DEFAULTS</span>
+
+<span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">max_error</span>
+<span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">explained_variance_score</span>
+<span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">mean_absolute_error</span>
+<span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">mean_squared_error</span>
+<span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">mean_squared_log_error</span>
+<span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">median_absolute_error</span>
+<span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">r2_score</span>
+
+<span class="kn">import</span> <span class="nn">scikitplot</span> <span class="k">as</span> <span class="nn">skplt</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">warnings</span>
+<span class="kn">import</span> <span class="nn">copy</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">from</span> <span class="nn">IPython.display</span> <span class="kn">import</span> <span class="n">display</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+
+<span class="n">__author__</span> <span class="o">=</span> <span class="s2">&quot;Eric Cacciavillani&quot;</span>
+<span class="n">__copyright__</span> <span class="o">=</span> <span class="s2">&quot;Copyright 2019, eFlow&quot;</span>
+<span class="n">__credits__</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Eric Cacciavillani&quot;</span><span class="p">]</span>
+<span class="n">__license__</span> <span class="o">=</span> <span class="s2">&quot;MIT&quot;</span>
+<span class="n">__maintainer__</span> <span class="o">=</span> <span class="s2">&quot;EricCacciavillani&quot;</span>
+<span class="n">__email__</span> <span class="o">=</span> <span class="s2">&quot;eric.cacciavillani@gmail.com&quot;</span>
+
+<div class="viewcode-block" id="RegressionAnalysis"><a class="viewcode-back" href="../../../_autosummary/eflow.model_analysis.regression_analysis.html#eflow.model_analysis.regression_analysis.RegressionAnalysis">[docs]</a><span class="k">class</span> <span class="nc">RegressionAnalysis</span><span class="p">(</span><span class="n">ModelAnalysis</span><span class="p">):</span>
+
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Analyzes a classification model&#39;s result&#39;s based on the prediction</span>
+<span class="sd">        function(s) passed to it. Creates graphs and tables to be saved in directory</span>
+<span class="sd">        structure.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+                 <span class="n">dataset_name</span><span class="p">,</span>
+                 <span class="n">model</span><span class="p">,</span>
+                 <span class="n">model_name</span><span class="p">,</span>
+                 <span class="n">feature_order</span><span class="p">,</span>
+                 <span class="n">target_feature</span><span class="p">,</span>
+                 <span class="n">pred_funcs_dict</span><span class="p">,</span>
+                 <span class="n">df_features</span><span class="p">,</span>
+                 <span class="n">project_sub_dir</span><span class="o">=</span><span class="s2">&quot;Regression Analysis&quot;</span><span class="p">,</span>
+                 <span class="n">overwrite_full_path</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                 <span class="n">save_model</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                 <span class="n">notebook_mode</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Args:</span>
+<span class="sd">            dataset_name:</span>
+<span class="sd">                The dataset&#39;s name; this will create a sub-directory in which your</span>
+<span class="sd">                generated graph will be inner-nested in.</span>
+
+<span class="sd">            model:</span>
+<span class="sd">                A fitted supervised machine learning model.</span>
+
+<span class="sd">            model_name:</span>
+<span class="sd">                The name of the model in string form.</span>
+
+<span class="sd">            feature_order: collection object</span>
+<span class="sd">                Features names in proper order to re-create the pandas dataframe.</span>
+
+<span class="sd">            pred_funcs_dict:</span>
+<span class="sd">                A dict of the name of the function and the function defintion for the</span>
+<span class="sd">                model prediction methods.</span>
+<span class="sd">                (Can handle either a return of probabilities or a singile value.)</span>
+<span class="sd">                Init Example:</span>
+<span class="sd">                pred_funcs = dict()</span>
+<span class="sd">                pred_funcs[&quot;Predictions&quot;] = model.predict</span>
+<span class="sd">                pred_funcs[&quot;Probabilities&quot;] = model.probas</span>
+
+<span class="sd">            sample_data:</span>
+<span class="sd">                Given data to then pass into our prediction functions to get a</span>
+<span class="sd">                resultant to get the classification prediction &#39;type&#39;.</span>
+<span class="sd">                Can be a matrix or a vector.</span>
+
+<span class="sd">            project_sub_dir:</span>
+<span class="sd">                Creates a parent or &quot;project&quot; folder in which all sub-directories</span>
+<span class="sd">                will be inner nested.</span>
+
+<span class="sd">            overwrite_full_path:</span>
+<span class="sd">                Overwrites the path to the parent folder.</span>
+<span class="sd">            df_features:</span>
+<span class="sd">                DataFrameTypes object; organizes feature types into groups.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="c1"># Init parent object</span>
+        <span class="n">ModelAnalysis</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+                               <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{dataset_name}</span><span class="s1">/</span><span class="si">{project_sub_dir}</span><span class="s1">/Target Feature: </span><span class="si">{target_feature}</span><span class="s1">/</span><span class="si">{model_name}</span><span class="s1">&#39;</span><span class="p">,</span>
+                               <span class="n">overwrite_full_path</span><span class="p">)</span>
+
+        <span class="c1"># Init objects without pass by refrence</span>
+
+        <span class="c1"># Remove target feature from feature order when trying to recreate dataframe</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__target_feature</span> <span class="o">=</span> <span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="n">target_feature</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__feature_order</span> <span class="o">=</span> <span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="n">feature_order</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">__target_feature</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">__feature_order</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__feature_order</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__target_feature</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">__model</span> <span class="o">=</span> <span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="n">model</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">__model_name</span> <span class="o">=</span> <span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="n">model_name</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__pred_funcs_dict</span> <span class="o">=</span> <span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="n">pred_funcs_dict</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__df_features</span> <span class="o">=</span> <span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="n">df_features</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__notebook_mode</span> <span class="o">=</span> <span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="n">notebook_mode</span><span class="p">)</span>
+
+        <span class="c1"># Determines if the perform was called</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__called_from_perform</span> <span class="o">=</span> <span class="kc">False</span>
+
+        <span class="c1"># Attempt to save machine learning model</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">save_model</span><span class="p">:</span>
+                <span class="n">pickle_object_to_file</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__model</span><span class="p">,</span>
+                                      <span class="bp">self</span><span class="o">.</span><span class="n">folder_path</span><span class="p">,</span>
+                                      <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{self.__model_name}</span><span class="s1">&#39;</span><span class="p">)</span>
+        <span class="k">except</span><span class="p">:</span>
+            <span class="k">pass</span>
+        <span class="c1"># ---</span>
+        <span class="n">create_dir_structure</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">folder_path</span><span class="p">,</span>
+                             <span class="s2">&quot;_Extras&quot;</span><span class="p">)</span>
+
+        <span class="c1"># Save features and or df_features object</span>
+        <span class="n">df_features</span><span class="o">.</span><span class="n">create_json_file_representation</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">folder_path</span> <span class="o">+</span> <span class="s2">&quot;_Extras&quot;</span><span class="p">,</span>
+                                                    <span class="s2">&quot;df_features.json&quot;</span><span class="p">)</span>
+
+
+    <span class="k">def</span> <span class="nf">get_predictions_names</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__pred_funcs_dict</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span>
+
+<div class="viewcode-block" id="RegressionAnalysis.perform_analysis"><a class="viewcode-back" href="../../../_autosummary/eflow.model_analysis.regression_analysis.html#eflow.model_analysis.regression_analysis.RegressionAnalysis.perform_analysis">[docs]</a>    <span class="k">def</span> <span class="nf">perform_analysis</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+                         <span class="n">X</span><span class="p">,</span>
+                         <span class="n">y</span><span class="p">,</span>
+                         <span class="n">dataset_name</span><span class="p">,</span>
+                         <span class="n">regression_error_analysis</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+                         <span class="n">regression_correct_analysis</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+                         <span class="n">ignore_metrics</span><span class="o">=</span><span class="p">[],</span>
+                         <span class="n">custom_metrics_dict</span><span class="o">=</span><span class="nb">dict</span><span class="p">(),</span>
+                         <span class="n">display_visuals</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                         <span class="n">mse_score</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">            Runs all available analysis functions on the models predicted data.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            X:</span>
+<span class="sd">                Feature matrix.</span>
+
+<span class="sd">            y:</span>
+<span class="sd">                Target data vector.</span>
+
+<span class="sd">            dataset_name:</span>
+<span class="sd">                The dataset&#39;s name; this will create a sub-directory in which your</span>
+<span class="sd">                generated graph will be inner-nested in.</span>
+
+<span class="sd">            regression_error_analysis: bool</span>
+<span class="sd">                Perform feature analysis on data that was incorrectly predicted.</span>
+
+<span class="sd">            regression_correct_analysis: bool</span>
+<span class="sd">                Perform feature analysis on data that was correctly predicted.</span>
+
+<span class="sd">            ignore_metrics:</span>
+<span class="sd">                Specify the default metrics to not apply to the classification</span>
+<span class="sd">                data_analysis.</span>
+<span class="sd">                    *</span>
+<span class="sd">                    *</span>
+<span class="sd">                    *</span>
+<span class="sd">                    *</span>
+<span class="sd">                    *</span>
+
+<span class="sd">            custom_metrics_dict:</span>
+<span class="sd">                Pass the name of metric(s) with the function definition(s) in a</span>
+<span class="sd">                dictionary.</span>
+
+<span class="sd">            display_visuals:</span>
+<span class="sd">                Controls visual display of error error data_analysis if it is able to run.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Performs all classification functionality with the provided feature</span>
+<span class="sd">            data and target data.</span>
+<span class="sd">                * plot_precision_recall_curve</span>
+<span class="sd">                * classification_evaluation</span>
+<span class="sd">                * plot_confusion_matrix</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__called_from_perform</span> <span class="o">=</span> <span class="kc">True</span>
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">generate_matrix_meta_data</span><span class="p">(</span><span class="n">X</span><span class="p">,</span>
+                                           <span class="n">dataset_name</span> <span class="o">+</span> <span class="s2">&quot;/_Extras&quot;</span><span class="p">)</span>
+
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n\n</span><span class="s2">&quot;</span> <span class="o">+</span> <span class="s2">&quot;---&quot;</span> <span class="o">*</span> <span class="mi">10</span> <span class="o">+</span> <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{dataset_name}</span><span class="s1">&#39;</span> <span class="o">+</span> <span class="s2">&quot;---&quot;</span> <span class="o">*</span> <span class="mi">10</span><span class="p">)</span>
+
+
+
+            <span class="k">for</span> <span class="n">pred_name</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">__pred_funcs_dict</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+
+                <span class="bp">self</span><span class="o">.</span><span class="n">regression_metrics</span><span class="p">(</span><span class="n">X</span><span class="p">,</span>
+                                        <span class="n">y</span><span class="p">,</span>
+                                        <span class="n">pred_name</span><span class="p">,</span>
+                                        <span class="n">dataset_name</span><span class="p">,</span>
+                                        <span class="n">display_visuals</span><span class="o">=</span><span class="n">display_visuals</span><span class="p">,</span>
+                                        <span class="n">ignore_metrics</span><span class="o">=</span><span class="n">ignore_metrics</span><span class="p">,</span>
+                                        <span class="n">custom_metrics_dict</span><span class="o">=</span><span class="n">custom_metrics_dict</span><span class="p">)</span>
+
+                <span class="k">if</span> <span class="n">regression_error_analysis</span><span class="p">:</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">regression_error_analysis</span><span class="p">(</span><span class="n">X</span><span class="p">,</span>
+                                                   <span class="n">y</span><span class="p">,</span>
+                                                   <span class="n">pred_name</span><span class="p">,</span>
+                                                   <span class="n">dataset_name</span><span class="p">,</span>
+                                                   <span class="n">mse_score</span><span class="o">=</span><span class="n">mse_score</span><span class="p">,</span>
+                                                   <span class="n">display_print</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+                                                   <span class="n">display_visuals</span><span class="o">=</span><span class="n">display_visuals</span><span class="p">)</span>
+
+                <span class="k">if</span> <span class="n">regression_correct_analysis</span><span class="p">:</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">regression_correct_analysis</span><span class="p">(</span><span class="n">X</span><span class="p">,</span>
+                                                     <span class="n">y</span><span class="p">,</span>
+                                                     <span class="n">pred_name</span><span class="p">,</span>
+                                                     <span class="n">dataset_name</span><span class="p">,</span>
+                                                     <span class="n">mse_score</span><span class="o">=</span><span class="n">mse_score</span><span class="p">,</span>
+                                                     <span class="n">display_print</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+                                                     <span class="n">display_visuals</span><span class="o">=</span><span class="n">display_visuals</span><span class="p">,)</span>
+
+
+        <span class="k">finally</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__called_from_perform</span> <span class="o">=</span> <span class="kc">False</span></div>
+
+<div class="viewcode-block" id="RegressionAnalysis.regression_metrics"><a class="viewcode-back" href="../../../_autosummary/eflow.model_analysis.regression_analysis.html#eflow.model_analysis.regression_analysis.RegressionAnalysis.regression_metrics">[docs]</a>    <span class="k">def</span> <span class="nf">regression_metrics</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+                           <span class="n">X</span><span class="p">,</span>
+                           <span class="n">y</span><span class="p">,</span>
+                           <span class="n">pred_name</span><span class="p">,</span>
+                           <span class="n">dataset_name</span><span class="p">,</span>
+                           <span class="n">display_visuals</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                           <span class="n">save_file</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                           <span class="n">title</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span>
+                           <span class="n">custom_metrics_dict</span><span class="o">=</span><span class="nb">dict</span><span class="p">(),</span>
+                           <span class="n">ignore_metrics</span><span class="o">=</span><span class="p">[],</span>
+                           <span class="n">multioutput</span><span class="o">=</span><span class="p">[</span><span class="kc">None</span><span class="p">,</span>
+                                        <span class="s2">&quot;uniform_average&quot;</span><span class="p">,</span>
+                                        <span class="s2">&quot;variance_weighted&quot;</span><span class="p">]):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">            Creates a dataframe based on the prediction metrics</span>
+<span class="sd">            of the feature matrix and target vector.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            X:</span>
+<span class="sd">                Feature matrix.</span>
+
+<span class="sd">            y:</span>
+<span class="sd">                Target data vector.</span>
+
+<span class="sd">            pred_name:</span>
+<span class="sd">                The name of the prediction function in questioned stored</span>
+<span class="sd">                in &#39;self.__pred_funcs_dict&#39;</span>
+
+<span class="sd">            dataset_name:</span>
+<span class="sd">                The dataset&#39;s name; this will create a sub-directory in which your</span>
+<span class="sd">                generated graph will be inner-nested in.</span>
+
+<span class="sd">            thresholds:</span>
+<span class="sd">                If the model outputs a probability list/numpy array then we apply</span>
+<span class="sd">                thresholds to the ouput of the model.</span>
+<span class="sd">                For classification only; will not affect the direct output of</span>
+<span class="sd">                the probabilities.</span>
+
+<span class="sd">            display_visuals:</span>
+<span class="sd">                Display tables.</span>
+
+<span class="sd">            save_file:</span>
+<span class="sd">                Determines whether or not to save the generated document.</span>
+
+<span class="sd">            title:</span>
+<span class="sd">                Adds to the column &#39;Metric Score&#39;.</span>
+
+<span class="sd">            custom_metrics_dict:</span>
+<span class="sd">                Pass the name of metric(s) and the function definition(s) in a</span>
+<span class="sd">                dictionary.</span>
+
+<span class="sd">            ignore_metrics:</span>
+<span class="sd">                Specify the default metrics to not apply to the classification</span>
+<span class="sd">                data_analysis.</span>
+<span class="sd">                    * Precision</span>
+<span class="sd">                    * MCC</span>
+<span class="sd">                    * Recall</span>
+<span class="sd">                    * F1-Score</span>
+<span class="sd">                    * Accuracy</span>
+
+<span class="sd">            average_scoring:</span>
+<span class="sd">                Determines the type of averaging performed on the data.</span>
+<span class="sd">                    * micro</span>
+<span class="sd">                    * macro</span>
+<span class="sd">                    * weighted</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Return a dataframe object of the metrics value.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">filename</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;Metric Evaluation on </span><span class="si">{dataset_name}</span><span class="s1"> on </span><span class="si">{self.__model_name}</span><span class="s1">&#39;</span>
+        <span class="n">sub_dir</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{dataset_name}</span><span class="s1">/</span><span class="si">{pred_name}</span><span class="s1">&#39;</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">multioutput</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
+            <span class="n">multioutput</span> <span class="o">=</span> <span class="p">[</span><span class="n">multioutput</span><span class="p">]</span>
+
+
+        <span class="c1"># Default metric name&#39;s and their function</span>
+        <span class="n">metric_functions</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
+        <span class="n">metric_functions</span><span class="p">[</span><span class="s2">&quot;Explained Variance Score&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">explained_variance_score</span>
+        <span class="n">metric_functions</span><span class="p">[</span><span class="s2">&quot;Max Error&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">max_error</span>
+        <span class="n">metric_functions</span><span class="p">[</span><span class="s2">&quot;Mean Absolute Error&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">mean_absolute_error</span>
+        <span class="n">metric_functions</span><span class="p">[</span><span class="s2">&quot;Mean Squared Error&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">mean_squared_error</span>
+        <span class="n">metric_functions</span><span class="p">[</span><span class="s2">&quot;Mean Squared Log Error&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">mean_squared_log_error</span>
+        <span class="n">metric_functions</span><span class="p">[</span><span class="s2">&quot;Mean Squared Log Error&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">median_absolute_error</span>
+        <span class="n">metric_functions</span><span class="p">[</span><span class="s2">&quot;R2 Score&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">r2_score</span>
+        <span class="n">warnings</span><span class="o">.</span><span class="n">filterwarnings</span><span class="p">(</span><span class="s1">&#39;ignore&#39;</span><span class="p">)</span>
+
+        <span class="c1"># Ignore default metrics if needed</span>
+        <span class="k">for</span> <span class="n">remove_metric</span> <span class="ow">in</span> <span class="n">ignore_metrics</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">remove_metric</span> <span class="ow">in</span> <span class="n">metric_functions</span><span class="p">:</span>
+                <span class="k">del</span> <span class="n">metric_functions</span><span class="p">[</span><span class="n">remove_metric</span><span class="p">]</span>
+
+        <span class="c1"># Add in custom metrics</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">custom_metrics_dict</span><span class="o">.</span><span class="n">keys</span><span class="p">()):</span>
+            <span class="n">metric_functions</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">custom_metrics_dict</span><span class="p">)</span>
+
+        <span class="c1"># Evaluate model on metrics</span>
+        <span class="n">evaluation_report</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">metric_name</span> <span class="ow">in</span> <span class="n">metric_functions</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">multi</span> <span class="ow">in</span> <span class="n">multioutput</span><span class="p">:</span>
+
+                <span class="n">model_predictions</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__get_model_prediction</span><span class="p">(</span><span class="n">pred_name</span><span class="p">,</span>
+                                                                <span class="n">X</span><span class="p">)</span>
+
+                <span class="k">try</span><span class="p">:</span>
+                    <span class="k">if</span> <span class="n">multi</span><span class="p">:</span>
+                        <span class="n">evaluation_report</span><span class="p">[</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{metric_name}</span><span class="s1">(</span><span class="si">{multi}</span><span class="s1">)&#39;</span><span class="p">]</span> <span class="o">=</span> \
+                            <span class="n">metric_functions</span><span class="p">[</span><span class="n">metric_name</span><span class="p">](</span><span class="n">y_true</span><span class="o">=</span><span class="n">y</span><span class="p">,</span>
+                                                          <span class="n">y_pred</span><span class="o">=</span><span class="n">model_predictions</span><span class="p">,</span>
+                                                          <span class="n">multioutput</span><span class="o">=</span><span class="n">multi</span><span class="p">)</span>
+                    <span class="k">else</span><span class="p">:</span>
+                        <span class="k">if</span> <span class="n">metric_name</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">evaluation_report</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+                            <span class="n">evaluation_report</span><span class="p">[</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{metric_name}</span><span class="s1">&#39;</span><span class="p">]</span> <span class="o">=</span> \
+                                <span class="n">metric_functions</span><span class="p">[</span><span class="n">metric_name</span><span class="p">](</span><span class="n">y_true</span><span class="o">=</span><span class="n">y</span><span class="p">,</span>
+                                                              <span class="n">y_pred</span><span class="o">=</span><span class="n">model_predictions</span><span class="p">,</span>
+                                                              <span class="n">multioutput</span><span class="o">=</span><span class="n">multi</span><span class="p">)</span>
+
+                <span class="k">except</span> <span class="ne">TypeError</span><span class="p">:</span>
+                    <span class="k">if</span> <span class="n">metric_name</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">evaluation_report</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+                        <span class="n">evaluation_report</span><span class="p">[</span><span class="n">metric_name</span><span class="p">]</span> <span class="o">=</span> <span class="n">metric_functions</span><span class="p">[</span>
+                            <span class="n">metric_name</span><span class="p">](</span><span class="n">y</span><span class="p">,</span>
+                                         <span class="n">model_predictions</span><span class="p">)</span>
+
+
+        <span class="n">warnings</span><span class="o">.</span><span class="n">filterwarnings</span><span class="p">(</span><span class="s1">&#39;default&#39;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">title</span> <span class="ow">and</span> <span class="nb">len</span><span class="p">(</span><span class="n">title</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">index_name</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;Metric Scores (</span><span class="si">{title}</span><span class="s2">)&quot;</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">index_name</span> <span class="o">=</span> <span class="s2">&quot;Metric Scores&quot;</span>
+
+        <span class="c1"># ---</span>
+        <span class="n">evaluation_report</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="n">index_name</span><span class="p">:</span>
+                                              <span class="p">[</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{metric_score:.4f}</span><span class="s1">&#39;</span>
+                                               <span class="k">for</span> <span class="n">metric_score</span>
+                                               <span class="ow">in</span> <span class="n">evaluation_report</span><span class="o">.</span><span class="n">values</span><span class="p">()]},</span>
+                                         <span class="n">index</span><span class="o">=</span><span class="nb">list</span><span class="p">(</span><span class="n">evaluation_report</span><span class="o">.</span><span class="n">keys</span><span class="p">()))</span>
+
+        <span class="k">if</span> <span class="n">display_visuals</span><span class="p">:</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">__notebook_mode</span><span class="p">:</span>
+                <span class="n">display</span><span class="p">(</span><span class="n">evaluation_report</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="n">evaluation_report</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">save_file</span><span class="p">:</span>
+            <span class="n">df_to_image</span><span class="p">(</span><span class="n">evaluation_report</span><span class="p">,</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">folder_path</span><span class="p">,</span>
+                        <span class="n">sub_dir</span><span class="p">,</span>
+                        <span class="n">convert_to_filename</span><span class="p">(</span><span class="n">filename</span><span class="p">),</span>
+                        <span class="n">col_width</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span>
+                        <span class="n">show_index</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                        <span class="n">format_float_pos</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
+
+            <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">__called_from_perform</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">generate_matrix_meta_data</span><span class="p">(</span><span class="n">X</span><span class="p">,</span>
+                                               <span class="n">dataset_name</span> <span class="o">+</span> <span class="s2">&quot;/_Extras&quot;</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="RegressionAnalysis.regression_correct_analysis"><a class="viewcode-back" href="../../../_autosummary/eflow.model_analysis.regression_analysis.html#eflow.model_analysis.regression_analysis.RegressionAnalysis.regression_correct_analysis">[docs]</a>    <span class="k">def</span> <span class="nf">regression_correct_analysis</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+                                    <span class="n">X</span><span class="p">,</span>
+                                    <span class="n">y</span><span class="p">,</span>
+                                    <span class="n">pred_name</span><span class="p">,</span>
+                                    <span class="n">dataset_name</span><span class="p">,</span>
+                                    <span class="n">mse_score</span><span class="p">,</span>
+                                    <span class="n">display_visuals</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                                    <span class="n">save_file</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                                    <span class="n">display_print</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                                    <span class="n">suppress_runtime_errors</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                                    <span class="n">aggregate_target_feature</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                                    <span class="n">selected_features</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                                    <span class="n">extra_tables</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                                    <span class="n">statistical_analysis_on_aggregates</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">            Compares the actual target value to the predicted value and performs</span>
+<span class="sd">            analysis of all the data.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            X: np.matrix or lists of lists</span>
+<span class="sd">                Feature matrix.</span>
+
+<span class="sd">            y: collection object</span>
+<span class="sd">                Target data vector.</span>
+
+<span class="sd">            pred_name: str</span>
+<span class="sd">                The name of the prediction function in questioned</span>
+<span class="sd">                stored in &#39;self.__pred_funcs_dict&#39;</span>
+
+<span class="sd">            dataset_name: str</span>
+<span class="sd">                The dataset&#39;s name; this will create a sub-directory in which your</span>
+<span class="sd">                generated graph will be inner-nested in.</span>
+
+<span class="sd">            feature_order: collection object</span>
+<span class="sd">                Features names in proper order to re-create the pandas dataframe.</span>
+
+<span class="sd">            display_visuals: bool</span>
+<span class="sd">                Boolean value to whether or not to display visualizations.</span>
+
+<span class="sd">            display_print: bool</span>
+<span class="sd">                Determines whether or not to print function&#39;s embedded print</span>
+<span class="sd">                statements.</span>
+
+<span class="sd">            save_file: bool</span>
+<span class="sd">                Boolean value to whether or not to save the file.</span>
+
+<span class="sd">            dataframe_snapshot: bool</span>
+<span class="sd">                Boolean value to determine whether or not generate and compare a</span>
+<span class="sd">                snapshot of the dataframe in the dataset&#39;s directory structure.</span>
+<span class="sd">                Helps ensure that data generated in that directory is correctly</span>
+<span class="sd">                associated to a dataframe.</span>
+
+<span class="sd">            suppress_runtime_errors: bool</span>
+<span class="sd">                If set to true; when generating any graphs will suppress any runtime</span>
+<span class="sd">                errors so the program can keep running.</span>
+
+<span class="sd">            extra_tables: bool</span>
+<span class="sd">                When handling two types of features if set to true this will</span>
+<span class="sd">                    generate any extra tables that might be helpful.</span>
+<span class="sd">                    Note -</span>
+<span class="sd">                        These graphics may create duplicates if you already applied</span>
+<span class="sd">                        an aggregation in &#39;perform_analysis&#39;</span>
+
+<span class="sd">            aggregate_target_feature: bool</span>
+<span class="sd">                Aggregate the data of the target feature if the data is</span>
+<span class="sd">                non-continuous data.</span>
+
+<span class="sd">                Note</span>
+<span class="sd">                    In the future I will have this also working with continuous</span>
+<span class="sd">                    data.</span>
+
+<span class="sd">            selected_features: collection object of features</span>
+<span class="sd">                Will only focus on these selected feature&#39;s and will ignore</span>
+<span class="sd">                the other given features.</span>
+
+<span class="sd">            statistical_analysis_on_aggregates: bool</span>
+<span class="sd">                If set to true then the function &#39;statistical_analysis_on_aggregates&#39;</span>
+<span class="sd">                will run; which aggregates the data of the target feature either</span>
+<span class="sd">                by discrete values or by binning/labeling continuous data.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">model_predictions</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__get_model_prediction</span><span class="p">(</span><span class="n">pred_name</span><span class="p">,</span>
+                                                        <span class="n">X</span><span class="p">)</span>
+        <span class="n">sub_dir</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{dataset_name}</span><span class="s1">/</span><span class="si">{pred_name}</span><span class="s1">&#39;</span>
+
+        <span class="k">if</span> <span class="nb">sum</span><span class="p">(</span><span class="n">model_predictions</span> <span class="o">!=</span> <span class="n">y</span><span class="p">)</span> <span class="o">==</span> <span class="nb">len</span><span class="p">(</span><span class="n">y</span><span class="p">):</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Your model predicted everything correctly for this dataset! No correct analysis needed!&quot;</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Also sorry for your model...zero correct? Dam...&quot;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n\n</span><span class="s2">&quot;</span> <span class="o">+</span> <span class="s2">&quot;*&quot;</span> <span class="o">*</span> <span class="mi">10</span> <span class="o">+</span>
+                  <span class="s2">&quot;Generating graphs for when the model predicted correctly&quot;</span> <span class="o">+</span>
+                  <span class="s2">&quot;*&quot;</span> <span class="o">*</span> <span class="mi">10</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+
+            <span class="n">all_mse_scores</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">pred</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">model_predictions</span><span class="p">):</span>
+                <span class="n">all_mse_scores</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">mean_squared_error</span><span class="p">([</span><span class="n">pred</span><span class="p">],</span> <span class="p">[</span><span class="n">y</span><span class="p">[</span><span class="n">i</span><span class="p">]]))</span>
+
+            <span class="c1"># Generate error dataframe</span>
+            <span class="n">bool_list</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">all_mse_scores</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">mse_score</span>
+
+            <span class="n">correct_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="o">.</span><span class="n">from_records</span><span class="p">(</span><span class="n">X</span><span class="p">[</span><span class="n">bool_list</span><span class="p">])</span>
+            <span class="n">correct_df</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__feature_order</span>
+            <span class="n">correct_df</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">__target_feature</span><span class="p">]</span> <span class="o">=</span> <span class="n">y</span><span class="p">[</span><span class="n">bool_list</span><span class="p">]</span>
+
+            <span class="c1"># Directory path</span>
+            <span class="n">create_dir_structure</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">folder_path</span><span class="p">,</span>
+                                 <span class="n">sub_dir</span> <span class="o">+</span> <span class="sa">f</span><span class="s2">&quot;/MSE score less than </span><span class="si">{mse_score}</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="n">output_path</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{self.folder_path}</span><span class="s2">/</span><span class="si">{sub_dir}</span><span class="s2">/MSE score less than </span><span class="si">{mse_score}</span><span class="s2">&quot;</span>
+
+            <span class="c1"># Create feature analysis</span>
+            <span class="n">feature_analysis</span> <span class="o">=</span> <span class="n">FeatureAnalysis</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__df_features</span><span class="p">,</span>
+                                               <span class="n">overwrite_full_path</span><span class="o">=</span><span class="n">output_path</span><span class="p">)</span>
+            <span class="n">feature_analysis</span><span class="o">.</span><span class="n">perform_analysis</span><span class="p">(</span><span class="n">correct_df</span><span class="p">,</span>
+                                              <span class="n">dataset_name</span><span class="o">=</span><span class="n">dataset_name</span><span class="p">,</span>
+                                              <span class="n">target_features</span><span class="o">=</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">__target_feature</span><span class="p">],</span>
+                                              <span class="n">save_file</span><span class="o">=</span><span class="n">save_file</span><span class="p">,</span>
+                                              <span class="n">selected_features</span><span class="o">=</span><span class="n">selected_features</span><span class="p">,</span>
+                                              <span class="n">suppress_runtime_errors</span><span class="o">=</span><span class="n">suppress_runtime_errors</span><span class="p">,</span>
+                                              <span class="n">display_print</span><span class="o">=</span><span class="n">display_print</span><span class="p">,</span>
+                                              <span class="n">display_visuals</span><span class="o">=</span><span class="n">display_visuals</span><span class="p">,</span>
+                                              <span class="n">dataframe_snapshot</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+                                              <span class="n">aggregate_target_feature</span><span class="o">=</span><span class="n">aggregate_target_feature</span><span class="p">,</span>
+                                              <span class="n">extra_tables</span><span class="o">=</span><span class="n">extra_tables</span><span class="p">,</span>
+                                              <span class="n">statistical_analysis_on_aggregates</span><span class="o">=</span><span class="n">statistical_analysis_on_aggregates</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="RegressionAnalysis.regression_error_analysis"><a class="viewcode-back" href="../../../_autosummary/eflow.model_analysis.regression_analysis.html#eflow.model_analysis.regression_analysis.RegressionAnalysis.regression_error_analysis">[docs]</a>    <span class="k">def</span> <span class="nf">regression_error_analysis</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+                                  <span class="n">X</span><span class="p">,</span>
+                                  <span class="n">y</span><span class="p">,</span>
+                                  <span class="n">pred_name</span><span class="p">,</span>
+                                  <span class="n">dataset_name</span><span class="p">,</span>
+                                  <span class="n">mse_score</span><span class="p">,</span>
+                                  <span class="n">display_visuals</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                                  <span class="n">save_file</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                                  <span class="n">display_print</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                                  <span class="n">suppress_runtime_errors</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                                  <span class="n">aggregate_target_feature</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                                  <span class="n">selected_features</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                                  <span class="n">extra_tables</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                                  <span class="n">statistical_analysis_on_aggregates</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">            Compares the actual target value to the predicted value and performs</span>
+<span class="sd">            analysis of all the data.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            X: np.matrix or lists of lists</span>
+<span class="sd">                Feature matrix.</span>
+
+<span class="sd">            y: collection object</span>
+<span class="sd">                Target data vector.</span>
+
+<span class="sd">            pred_name: str</span>
+<span class="sd">                The name of the prediction function in questioned</span>
+<span class="sd">                stored in &#39;self.__pred_funcs_dict&#39;</span>
+
+<span class="sd">            dataset_name: str</span>
+<span class="sd">                The dataset&#39;s name; this will create a sub-directory in which your</span>
+<span class="sd">                generated graph will be inner-nested in.</span>
+
+<span class="sd">            feature_order: collection object</span>
+<span class="sd">                Features names in proper order to re-create the pandas dataframe.</span>
+
+<span class="sd">            thresholds:</span>
+<span class="sd">                If the model outputs a probability list/numpy array then we apply</span>
+<span class="sd">                thresholds to the ouput of the model.</span>
+<span class="sd">                For classification only; will not affect the direct output of</span>
+<span class="sd">                the probabilities.</span>
+
+<span class="sd">            display_visuals: bool</span>
+<span class="sd">                Boolean value to whether or not to display visualizations.</span>
+
+<span class="sd">            display_print: bool</span>
+<span class="sd">                Determines whether or not to print function&#39;s embedded print</span>
+<span class="sd">                statements.</span>
+
+<span class="sd">            save_file: bool</span>
+<span class="sd">                Boolean value to whether or not to save the file.</span>
+
+<span class="sd">            dataframe_snapshot: bool</span>
+<span class="sd">                Boolean value to determine whether or not generate and compare a</span>
+<span class="sd">                snapshot of the dataframe in the dataset&#39;s directory structure.</span>
+<span class="sd">                Helps ensure that data generated in that directory is correctly</span>
+<span class="sd">                associated to a dataframe.</span>
+
+<span class="sd">            suppress_runtime_errors: bool</span>
+<span class="sd">                If set to true; when generating any graphs will suppress any runtime</span>
+<span class="sd">                errors so the program can keep running.</span>
+
+<span class="sd">            extra_tables: bool</span>
+<span class="sd">                When handling two types of features if set to true this will</span>
+<span class="sd">                    generate any extra tables that might be helpful.</span>
+<span class="sd">                    Note -</span>
+<span class="sd">                        These graphics may create duplicates if you already applied</span>
+<span class="sd">                        an aggregation in &#39;perform_analysis&#39;</span>
+
+<span class="sd">            aggregate_target_feature: bool</span>
+<span class="sd">                Aggregate the data of the target feature if the data is</span>
+<span class="sd">                non-continuous data.</span>
+
+<span class="sd">                Note</span>
+<span class="sd">                    In the future I will have this also working with continuous</span>
+<span class="sd">                    data.</span>
+
+<span class="sd">            selected_features: collection object of features</span>
+<span class="sd">                Will only focus on these selected feature&#39;s and will ignore</span>
+<span class="sd">                the other given features.</span>
+
+<span class="sd">            statistical_analysis_on_aggregates: bool</span>
+<span class="sd">                If set to true then the function &#39;statistical_analysis_on_aggregates&#39;</span>
+<span class="sd">                will run; which aggregates the data of the target feature either</span>
+<span class="sd">                by discrete values or by binning/labeling continuous data.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="c1"># sub_dir = self.__create_sub_dir_with_thresholds(pred_name,</span>
+        <span class="c1">#                                                 dataset_name,</span>
+        <span class="c1">#                                                 thresholds)</span>
+
+        <span class="n">model_predictions</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__get_model_prediction</span><span class="p">(</span><span class="n">pred_name</span><span class="p">,</span>
+                                                        <span class="n">X</span><span class="p">)</span>
+        <span class="n">sub_dir</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{dataset_name}</span><span class="s1">/</span><span class="si">{pred_name}</span><span class="s1">&#39;</span>
+
+        <span class="k">if</span> <span class="nb">sum</span><span class="p">(</span><span class="n">model_predictions</span> <span class="o">==</span> <span class="n">y</span><span class="p">)</span> <span class="o">==</span> <span class="nb">len</span><span class="p">(</span><span class="n">y</span><span class="p">):</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Your model predicted everything correctly for this dataset! No error analysis needed!&quot;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n\n</span><span class="s2">&quot;</span> <span class="o">+</span> <span class="s2">&quot;*&quot;</span> <span class="o">*</span> <span class="mi">10</span> <span class="o">+</span>
+                  <span class="s2">&quot;Generating graphs for when the model predicted incorrectly&quot;</span> <span class="o">+</span>
+                  <span class="s2">&quot;*&quot;</span> <span class="o">*</span> <span class="mi">10</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+
+            <span class="n">all_mse_scores</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="k">for</span> <span class="n">i</span><span class="p">,</span><span class="n">pred</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">model_predictions</span><span class="p">):</span>
+                <span class="n">all_mse_scores</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">mean_squared_error</span><span class="p">([</span><span class="n">pred</span><span class="p">],[</span><span class="n">y</span><span class="p">[</span><span class="n">i</span><span class="p">]]))</span>
+
+            <span class="c1"># Generate error dataframe</span>
+            <span class="n">bool_list</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">all_mse_scores</span><span class="p">)</span> <span class="o">&gt;</span> <span class="n">mse_score</span>
+
+            <span class="n">error_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="o">.</span><span class="n">from_records</span><span class="p">(</span><span class="n">X</span><span class="p">[</span><span class="n">bool_list</span><span class="p">])</span>
+            <span class="n">error_df</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__feature_order</span>
+            <span class="n">error_df</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">__target_feature</span><span class="p">]</span> <span class="o">=</span> <span class="n">y</span><span class="p">[</span><span class="n">bool_list</span><span class="p">]</span>
+
+            <span class="c1"># Directory path</span>
+            <span class="n">create_dir_structure</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">folder_path</span><span class="p">,</span>
+                                 <span class="n">sub_dir</span> <span class="o">+</span> <span class="sa">f</span><span class="s2">&quot;/MSE score greater than </span><span class="si">{mse_score}</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="n">output_path</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{self.folder_path}</span><span class="s2">/</span><span class="si">{sub_dir}</span><span class="s2">/MSE score greater than </span><span class="si">{mse_score}</span><span class="s2">&quot;</span>
+
+            <span class="c1"># Create feature analysis</span>
+            <span class="n">feature_analysis</span> <span class="o">=</span> <span class="n">FeatureAnalysis</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__df_features</span><span class="p">,</span>
+                                               <span class="n">overwrite_full_path</span><span class="o">=</span><span class="n">output_path</span><span class="p">)</span>
+            <span class="n">feature_analysis</span><span class="o">.</span><span class="n">perform_analysis</span><span class="p">(</span><span class="n">error_df</span><span class="p">,</span>
+                                              <span class="n">dataset_name</span><span class="o">=</span><span class="n">dataset_name</span><span class="p">,</span>
+                                              <span class="n">target_features</span><span class="o">=</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">__target_feature</span><span class="p">],</span>
+                                              <span class="n">save_file</span><span class="o">=</span><span class="n">save_file</span><span class="p">,</span>
+                                              <span class="n">selected_features</span><span class="o">=</span><span class="n">selected_features</span><span class="p">,</span>
+                                              <span class="n">suppress_runtime_errors</span><span class="o">=</span><span class="n">suppress_runtime_errors</span><span class="p">,</span>
+                                              <span class="n">display_print</span><span class="o">=</span><span class="n">display_print</span><span class="p">,</span>
+                                              <span class="n">display_visuals</span><span class="o">=</span><span class="n">display_visuals</span><span class="p">,</span>
+                                              <span class="n">dataframe_snapshot</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+                                              <span class="n">aggregate_target_feature</span><span class="o">=</span><span class="n">aggregate_target_feature</span><span class="p">,</span>
+                                              <span class="n">extra_tables</span><span class="o">=</span><span class="n">extra_tables</span><span class="p">,</span>
+                                              <span class="n">statistical_analysis_on_aggregates</span><span class="o">=</span><span class="n">statistical_analysis_on_aggregates</span><span class="p">)</span></div>
+
+    <span class="k">def</span> <span class="nf">__get_model_prediction</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+                               <span class="n">pred_name</span><span class="p">,</span>
+                               <span class="n">X</span><span class="p">):</span>
+
+        <span class="k">if</span> <span class="n">pred_name</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">__pred_funcs_dict</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__pred_funcs_dict</span><span class="p">[</span><span class="n">pred_name</span><span class="p">](</span><span class="n">X</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">KeyError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;No prediction name found of </span><span class="si">{pred_name}</span><span class="s2">.&quot;</span><span class="p">)</span></div>
+</pre></div>
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2020, Eric Cacciavillani
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

@@ -1,0 +1,358 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>eflow.data_pipeline_segments.feature_data_cleaner &mdash; eflow  documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="eflow.data_pipeline_segments.feature_transformer" href="eflow.data_pipeline_segments.feature_transformer.html" />
+    <link rel="prev" title="eflow.data_pipeline_segments.data_encoder" href="eflow.data_pipeline_segments.data_encoder.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> eflow
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="eflow.data_analysis.feature_analysis.html">eflow.data_analysis.feature_analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="eflow.data_analysis.null_analysis.html">eflow.data_analysis.null_analysis</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="eflow.data_pipeline_segments.data_encoder.html">eflow.data_pipeline_segments.data_encoder</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">eflow.data_pipeline_segments.feature_data_cleaner</a></li>
+<li class="toctree-l1"><a class="reference internal" href="eflow.data_pipeline_segments.feature_transformer.html">eflow.data_pipeline_segments.feature_transformer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="eflow.data_pipeline_segments.string_cleaner.html">eflow.data_pipeline_segments.string_cleaner</a></li>
+<li class="toctree-l1"><a class="reference internal" href="eflow.data_pipeline_segments.type_fixer.html">eflow.data_pipeline_segments.type_fixer</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="eflow.foundation.data_frame_types.html">eflow.foundation.data_frame_types</a></li>
+<li class="toctree-l1"><a class="reference internal" href="eflow.foundation.data_pipeline.html">eflow.foundation.data_pipeline</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="eflow.model_analysis.classification_analysis.html">eflow.model_analysis.classification_analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="eflow.model_analysis.regression_analysis.html">eflow.model_analysis.regression_analysis</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">eflow</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+      <li>eflow.data_pipeline_segments.feature_data_cleaner</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/_autosummary/eflow.data_pipeline_segments.feature_data_cleaner.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="module-eflow.data_pipeline_segments.feature_data_cleaner">
+<span id="eflow-data-pipeline-segments-feature-data-cleaner"></span><h1>eflow.data_pipeline_segments.feature_data_cleaner<a class="headerlink" href="#module-eflow.data_pipeline_segments.feature_data_cleaner" title="Permalink to this headline">¶</a></h1>
+<p class="rubric">Classes</p>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#eflow.data_pipeline_segments.feature_data_cleaner.FeatureDataCleaner" title="eflow.data_pipeline_segments.feature_data_cleaner.FeatureDataCleaner"><code class="xref py py-obj docutils literal notranslate"><span class="pre">FeatureDataCleaner</span></code></a>([segment_id, create_file])</p></td>
+<td><p>Designed for a multipurpose data cleaner.</p></td>
+</tr>
+</tbody>
+</table>
+<dl class="class">
+<dt id="eflow.data_pipeline_segments.feature_data_cleaner.FeatureDataCleaner">
+<em class="property">class </em><code class="sig-name descname">FeatureDataCleaner</code><span class="sig-paren">(</span><em class="sig-param">segment_id=None</em>, <em class="sig-param">create_file=True</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/eflow/data_pipeline_segments/feature_data_cleaner.html#FeatureDataCleaner"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#eflow.data_pipeline_segments.feature_data_cleaner.FeatureDataCleaner" title="Permalink to this definition">¶</a></dt>
+<dd><p>Designed for a multipurpose data cleaner.</p>
+<dl class="method">
+<dt id="eflow.data_pipeline_segments.feature_data_cleaner.FeatureDataCleaner.drop_feature">
+<code class="sig-name descname">drop_feature</code><span class="sig-paren">(</span><em class="sig-param">df</em>, <em class="sig-param">df_features</em>, <em class="sig-param">feature_name</em>, <em class="sig-param">_add_to_que=True</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/eflow/data_pipeline_segments/feature_data_cleaner.html#FeatureDataCleaner.drop_feature"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#eflow.data_pipeline_segments.feature_data_cleaner.FeatureDataCleaner.drop_feature" title="Permalink to this definition">¶</a></dt>
+<dd><blockquote>
+<div><p>Drop a feature in the dataframe.</p>
+</div></blockquote>
+<dl class="simple">
+<dt>Args:</dt><dd><dl class="simple">
+<dt>df: pd.Dataframe</dt><dd><p>Pandas Dataframe</p>
+</dd>
+<dt>df_features: DataFrameType from eflow</dt><dd><p>Organizes feature types into groups.</p>
+</dd>
+<dt>feature_name: string</dt><dd><p>Name of the feature in the datatframe</p>
+</dd>
+<dt>_add_to_que: bool</dt><dd><p>Pushes the function to pipeline segment parent if set to ‘True’.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="eflow.data_pipeline_segments.feature_data_cleaner.FeatureDataCleaner.fill_nan_by_distribution">
+<code class="sig-name descname">fill_nan_by_distribution</code><span class="sig-paren">(</span><em class="sig-param">df</em>, <em class="sig-param">df_features</em>, <em class="sig-param">feature_name</em>, <em class="sig-param">percentile</em>, <em class="sig-param">z_score=None</em>, <em class="sig-param">_add_to_que=True</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/eflow/data_pipeline_segments/feature_data_cleaner.html#FeatureDataCleaner.fill_nan_by_distribution"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#eflow.data_pipeline_segments.feature_data_cleaner.FeatureDataCleaner.fill_nan_by_distribution" title="Permalink to this definition">¶</a></dt>
+<dd><blockquote>
+<div><p>Fill nan by the distribution of data.</p>
+</div></blockquote>
+<dl>
+<dt>Args:</dt><dd><dl class="simple">
+<dt>df: pd.Dataframe</dt><dd><p>Pandas Dataframe</p>
+</dd>
+<dt>df_features: DataFrameType from eflow</dt><dd><p>Organizes feature types into groups.</p>
+</dd>
+<dt>feature_name: string</dt><dd><p>Name of the feature in the datatframe</p>
+</dd>
+</dl>
+<p>percentile: float or int</p>
+<p>z_score:</p>
+<dl class="simple">
+<dt>_add_to_que: bool</dt><dd><p>Pushes the function to pipeline segment parent if set to ‘True’.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="eflow.data_pipeline_segments.feature_data_cleaner.FeatureDataCleaner.ignore_feature">
+<code class="sig-name descname">ignore_feature</code><span class="sig-paren">(</span><em class="sig-param">df</em>, <em class="sig-param">df_features</em>, <em class="sig-param">feature_name</em>, <em class="sig-param">_add_to_que=True</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/eflow/data_pipeline_segments/feature_data_cleaner.html#FeatureDataCleaner.ignore_feature"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#eflow.data_pipeline_segments.feature_data_cleaner.FeatureDataCleaner.ignore_feature" title="Permalink to this definition">¶</a></dt>
+<dd><blockquote>
+<div><p>Ignore the given feature.</p>
+</div></blockquote>
+<dl class="simple">
+<dt>Args:</dt><dd><dl class="simple">
+<dt>df: pd.Dataframe</dt><dd><p>Pandas Dataframe</p>
+</dd>
+<dt>df_features: DataFrameType from eflow</dt><dd><p>Organizes feature types into groups.</p>
+</dd>
+<dt>feature_name: string</dt><dd><p>Name of the feature in the datatframe</p>
+</dd>
+<dt>_add_to_que: bool</dt><dd><p>Pushes the function to pipeline segment parent if set to ‘True’.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="eflow.data_pipeline_segments.feature_data_cleaner.FeatureDataCleaner.make_nan_assertions">
+<code class="sig-name descname">make_nan_assertions</code><span class="sig-paren">(</span><em class="sig-param">df</em>, <em class="sig-param">df_features</em>, <em class="sig-param">feature_name</em>, <em class="sig-param">_add_to_que=True</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/eflow/data_pipeline_segments/feature_data_cleaner.html#FeatureDataCleaner.make_nan_assertions"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#eflow.data_pipeline_segments.feature_data_cleaner.FeatureDataCleaner.make_nan_assertions" title="Permalink to this definition">¶</a></dt>
+<dd><blockquote>
+<div><p>Make nan assertions for boolean features.</p>
+</div></blockquote>
+<dl class="simple">
+<dt>Args:</dt><dd><dl class="simple">
+<dt>df: pd.Dataframe</dt><dd><p>Pandas Dataframe</p>
+</dd>
+<dt>df_features: DataFrameType from eflow</dt><dd><p>Organizes feature types into groups.</p>
+</dd>
+<dt>feature_name: string</dt><dd><p>Name of the feature in the datatframe</p>
+</dd>
+<dt>_add_to_que: bool</dt><dd><p>Pushes the function to pipeline segment parent if set to ‘True’.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="eflow.data_pipeline_segments.feature_data_cleaner.FeatureDataCleaner.remove_nans">
+<code class="sig-name descname">remove_nans</code><span class="sig-paren">(</span><em class="sig-param">df</em>, <em class="sig-param">df_features</em>, <em class="sig-param">feature_name</em>, <em class="sig-param">_add_to_que=True</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/eflow/data_pipeline_segments/feature_data_cleaner.html#FeatureDataCleaner.remove_nans"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#eflow.data_pipeline_segments.feature_data_cleaner.FeatureDataCleaner.remove_nans" title="Permalink to this definition">¶</a></dt>
+<dd><blockquote>
+<div><p>Remove rows of data based on the given feature.</p>
+</div></blockquote>
+<dl class="simple">
+<dt>Args:</dt><dd><dl class="simple">
+<dt>df: pd.Dataframe</dt><dd><p>Pandas Dataframe</p>
+</dd>
+<dt>df_features: DataFrameType from eflow</dt><dd><p>Organizes feature types into groups.</p>
+</dd>
+<dt>feature_name: string</dt><dd><p>Name of the feature in the datatframe</p>
+</dd>
+<dt>_add_to_que: bool</dt><dd><p>Pushes the function to pipeline segment parent if set to ‘True’.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="eflow.data_pipeline_segments.feature_data_cleaner.FeatureDataCleaner.run_widget">
+<code class="sig-name descname">run_widget</code><span class="sig-paren">(</span><em class="sig-param">df</em>, <em class="sig-param">df_features</em>, <em class="sig-param">nan_feature_names=[]</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/eflow/data_pipeline_segments/feature_data_cleaner.html#FeatureDataCleaner.run_widget"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#eflow.data_pipeline_segments.feature_data_cleaner.FeatureDataCleaner.run_widget" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="simple">
+<dt>df:</dt><dd><p>A pandas dataframe object</p>
+</dd>
+<dt>df_features:</dt><dd><p>DataFrameTypes object; organizes feature types into groups.</p>
+</dd>
+<dt>Returns:</dt><dd><p>Returns a UI widget to create a JSON file for cleaning.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="eflow.data_pipeline_segments.feature_transformer.html" class="btn btn-neutral float-right" title="eflow.data_pipeline_segments.feature_transformer" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="eflow.data_pipeline_segments.data_encoder.html" class="btn btn-neutral float-left" title="eflow.data_pipeline_segments.data_encoder" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2020, Eric Cacciavillani
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

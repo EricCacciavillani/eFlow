@@ -48,7 +48,7 @@ def optimize_model_grid(model,
                         verbose=0,
                         n_jobs=1):
     """
-    Desc:
+
         Finds the best parameters for a model; returns the model and parameters.
 
     Args:

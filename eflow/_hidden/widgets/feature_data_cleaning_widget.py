@@ -67,7 +67,7 @@ class DataCleaningWidget():
                    nan_feature_names,
                    df_features):
         """
-        Desc:
+
             Spin up widget display for in jupyter UI.
 
         Args:
@@ -77,7 +77,7 @@ class DataCleaningWidget():
             df_features: DataFrameTypes
                 DataFrameTypes object; organizes feature types into groups.
 
-        Returns/Descr:
+        Returns:
             Returns a UI widget to create a JSON file for cleaning.
         """
         if not nan_feature_names:
@@ -180,7 +180,7 @@ class DataCleaningWidget():
     def __validate_save_input(self,
                               _):
         """
-        Returns/Descr:
+        Returns:
             Ensures the input field is within specified parameters defined
             by the 'require_input' dictionary.
         """
@@ -218,7 +218,7 @@ class DataCleaningWidget():
     def __validate_save_zscore(self,
                                _):
         """
-        Returns/Descr:
+        Returns:
             Validates the z-score widget and saves the value of the z-score
             with selected feature.
         """
@@ -308,7 +308,7 @@ class DataCleaningWidget():
     def __select_feature(self,
                          feature):
         """
-        Returns/Descr:
+        Returns:
             When a feature selection is chosen all the widgets are
             re-initialized.
         """
@@ -372,7 +372,7 @@ class DataCleaningWidget():
             col_feature_name:
                 Pandas column name.
 
-        Returns/Descr:
+        Returns:
             Returns back the data type of the feature that is created
         """
 

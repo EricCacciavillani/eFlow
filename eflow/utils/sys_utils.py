@@ -13,7 +13,7 @@ __email__ = "eric.cacciavillani@gmail.com"
 
 def check_if_directory_exists(directory_path):
     """
-    Desc:
+
         Checks if the given directory path exists. Raises an error if doesn't
 
     Args:
@@ -31,7 +31,7 @@ def check_if_directory_exists(directory_path):
 def create_unique_directory(directory_path,
                             folder_name):
     """
-    Desc:
+
         Creates a unique folder in the proper directory structure.
 
     Args:
@@ -48,7 +48,7 @@ def create_unique_directory(directory_path,
 def get_unique_directory_path(directory_path,
                               folder_name):
     """
-    Desc:
+
         Iterate through directory structure until a unique folder name can be
         found.
 
@@ -93,7 +93,7 @@ def get_unique_directory_path(directory_path,
 def create_dir_structure(directory_path,
                          create_sub_dir):
     """
-    Desc:
+
         Creates required directory structures inside the parent
         directory figures.
 
@@ -123,7 +123,7 @@ def write_object_text_to_file(obj,
                               filename,
                               remove_file_extension=True):
     """
-    Desc:
+
         Writes the object's string representation to a text file.
 
     Args:
@@ -151,7 +151,7 @@ def pickle_object_to_file(obj,
                           filename,
                           remove_file_extension=True):
     """
-    Desc:
+
         Writes the object to a pickle file.
 
     Args:
@@ -189,7 +189,7 @@ def dict_to_json_file(dict_obj,
                       filename,
                       remove_file_extension=True):
     """
-    Desc:
+
         Writes a dict to a json file.
 
     Args:
@@ -217,14 +217,14 @@ def dict_to_json_file(dict_obj,
 
 def json_file_to_dict(filepath):
     """
-    Desc:
+
         Returns back the dictionary from of a json file.
 
     Args:
         filepath: string
              Given path to the filename.
 
-    Returns/Desc:
+    Returns:
         Returns back the dictionary from of a json file.
     """
     json_file = open(filepath)
@@ -236,7 +236,7 @@ def json_file_to_dict(filepath):
 
 def get_all_directories_from_path(directory_path):
     """
-    Desc:
+
        Gets directories names with the provided path.
 
     Args:
@@ -260,7 +260,7 @@ def get_all_directories_from_path(directory_path):
 def get_all_files_from_path(directory_path,
                             file_extension=None):
     """
-    Desc:
+
         Gets all filenames with the provided path.
 
     Args:

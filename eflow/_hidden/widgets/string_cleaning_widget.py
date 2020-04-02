@@ -26,7 +26,7 @@ class StringCleaningWidget(JupyterWidget):
                    df,
                    df_features):
         """
-        Desc:
+
 
         Args:
             df: pd.Dataframe
@@ -35,7 +35,7 @@ class StringCleaningWidget(JupyterWidget):
             df_features: DataFrameType
                 DataFrameTypes object; organizes feature types into groups.
 
-        Returns/Descr:
+        Returns:
             Returns a UI widget to create a JSON file for cleaning.
         """
         self.__feature_option_dict = dict()
@@ -112,7 +112,7 @@ class StringCleaningWidget(JupyterWidget):
     def __validate_save_input_w(self,
                                 _):
         """
-        Returns/Descr:
+        Returns:
             Ensures the input field is within specified parameters defined
             by the 'require_input' dictionary.
         """
@@ -138,7 +138,7 @@ class StringCleaningWidget(JupyterWidget):
     def __select_feature(self,
                          feature):
         """
-        Returns/Descr:
+        Returns:
             When a feature selection is chosen all the widgets are
             re-initialized.
         """

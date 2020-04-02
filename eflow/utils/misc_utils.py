@@ -13,7 +13,7 @@ __email__ = "eric.cacciavillani@gmail.com"
 
 def get_parameters(f):
     """
-    Desc:
+
         Get a the parameters of a given function definition
 
     Returns:
@@ -25,7 +25,7 @@ def get_parameters(f):
 def string_condtional(given_val,
                       full_condtional):
     """
-    Desc:
+
         Returns back a boolean value of whether or not the conditional the
         given value passes the condition.
 

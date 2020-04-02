@@ -215,7 +215,7 @@ class FeatureDataCleaner(DataPipelineSegment):
         df_features:
             DataFrameTypes object; organizes feature types into groups.
 
-        Returns/Descr:
+        Returns:
             Returns a UI widget to create a JSON file for cleaning.
         """
 
@@ -312,7 +312,7 @@ class FeatureDataCleaner(DataPipelineSegment):
                             feature_name,
                             _add_to_que=True):
         """
-        Desc:
+
             Make nan assertions for boolean features.
 
         Args:
@@ -362,7 +362,6 @@ class FeatureDataCleaner(DataPipelineSegment):
                        feature_name,
                        _add_to_que=True):
         """
-        Desc:
             Ignore the given feature.
 
         Args:
@@ -413,7 +412,6 @@ class FeatureDataCleaner(DataPipelineSegment):
                      feature_name,
                      _add_to_que=True):
         """
-        Desc:
             Drop a feature in the dataframe.
 
         Args:
@@ -461,7 +459,7 @@ class FeatureDataCleaner(DataPipelineSegment):
                     feature_name,
                     _add_to_que=True):
         """
-        Desc:
+
             Remove rows of data based on the given feature.
 
         Args:
@@ -513,7 +511,7 @@ class FeatureDataCleaner(DataPipelineSegment):
                                  z_score=None,
                                  _add_to_que=True):
         """
-        Desc:
+
             Fill nan by the distribution of data.
 
         Args:

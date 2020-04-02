@@ -69,7 +69,7 @@ class DataPipelineSegment(FileOutput):
                         df,
                         df_features):
         """
-        Desc:
+
             Performs all functions that the child of the pipeline segment has
             performed on a given pandas dataframe.
 
@@ -102,7 +102,7 @@ class DataPipelineSegment(FileOutput):
     #                   generate_file=True,
     #                   add_libs=True):
     #     """
-    #     Desc:
+    #
     #         Attempts to parse the file of the child object of the pipline
     #         segment.
     #
@@ -212,7 +212,7 @@ class DataPipelineSegment(FileOutput):
     @property
     def file_path(self):
         """
-        Desc:
+
             Gets the absolute path to the json file.
         """
         # -----
@@ -228,7 +228,7 @@ class DataPipelineSegment(FileOutput):
     @property
     def file_name(self):
         """
-        Desc:
+
             Gets the file name of the json file.
         """
         # -----
@@ -292,7 +292,7 @@ class DataPipelineSegment(FileOutput):
                               parameters,
                               params_dict):
         """
-        Desc:
+
             Adds the function info the function que. If the segment has no
             json file name then generate one for it the given directory.
 
@@ -347,7 +347,7 @@ class DataPipelineSegment(FileOutput):
 
     def __create_json_pipeline_segment_file(self):
         """
-        Desc:
+
             Creates a json file that the segment relates to; this file's
             segment id can be used later used in the init to get all functions
             that object already used.
@@ -379,7 +379,7 @@ class DataPipelineSegment(FileOutput):
 
     def __configure_pipeline_segment_with_existing_file(self):
         """
-        Desc:
+
             Attempts to get a json file and then re_init the 'function_pipe'
             and the 'json_file_name'.
         """

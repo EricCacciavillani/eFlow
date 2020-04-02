@@ -9,7 +9,7 @@ def get_all_directories_from_path(directory_path):
     directory_path:
         Given path that already exists.
 
-    Returns/Desc:
+    Returns:
         Returns back a set a directories with the provided path.
     """
 
@@ -30,7 +30,7 @@ def get_all_files_from_path(directory_path,
     file_extension:
         Only return files that have a given extension.
 
-    Returns/Desc:
+    Returns:
         Returns back a set a filenames with the provided path.
     """
 

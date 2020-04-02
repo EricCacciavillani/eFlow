@@ -87,7 +87,7 @@ class FeatureAnalysis(DataAnalysis):
                          extra_tables=True,
                          statistical_analysis_on_aggregates=True):
         """
-        Desc:
+
             Performs all public methods that generate visualizations/insights
             about the data.
 
@@ -364,7 +364,6 @@ class FeatureAnalysis(DataAnalysis):
                         figsize=GRAPH_DEFAULTS.FIGSIZE,
                         extra_tables=True):
         """
-        Desc:
             Generate's all graphic's for that given feature and the relationship
             to the target feature.
 
@@ -743,7 +742,6 @@ class FeatureAnalysis(DataAnalysis):
                             fit=None,
                             fit_kws=None):
         """
-        Desc:
             Display a distance plot and save the graph in the correct directory.
 
         Args:
@@ -920,7 +918,6 @@ class FeatureAnalysis(DataAnalysis):
                           palette=None,
                           saturation=0.75):
         """
-        Desc:
             Display a violin plot and save the graph in the correct directory.
 
         Args:
@@ -1148,7 +1145,7 @@ class FeatureAnalysis(DataAnalysis):
                          flip_axis=False,
                          palette="PuBu"):
         """
-        Desc:
+
             Display a barplot with color ranking from a feature's value counts
             from the seaborn libary and save the graph in the correct directory
             structure.
@@ -1340,7 +1337,7 @@ class FeatureAnalysis(DataAnalysis):
                        figsize=GRAPH_DEFAULTS.FIGSIZE,
                        pallete=None):
         """
-        Desc:
+
             Display a pie graph and save the graph in the correct directory.
 
         Args:
@@ -1520,7 +1517,7 @@ class FeatureAnalysis(DataAnalysis):
                          figsize=GRAPH_DEFAULTS.FIGSIZE,
                          palette=None):
         """
-        Desc:
+
             Display a ridge plot and save the graph in the correct directory.
 
         Args:
@@ -1779,7 +1776,7 @@ class FeatureAnalysis(DataAnalysis):
                              colors=None,
                              stacked=False):
         """
-        Desc:
+
             Display a pie graph and save the graph in the correct directory.
 
         Args:
@@ -1934,7 +1931,7 @@ class FeatureAnalysis(DataAnalysis):
                                            dataset_name,
                                            dataframe_snapshot=True):
         """
-        Desc:
+
             Aggregates the data of the target feature either by discrete values
             or by binning/labeling continuous data.
 
@@ -2298,7 +2295,7 @@ class FeatureAnalysis(DataAnalysis):
                              ratio=5):
 
         """
-        Desc:
+
             Display a ridge plot and save the graph in the correct directory.
 
         Args:
@@ -2489,7 +2486,7 @@ class FeatureAnalysis(DataAnalysis):
                            dataframe_snapshot=True,
                            suppress_runtime_errors=True):
         """
-        Desc:
+
             Creates a value counts table of the features given data.
 
             Note
@@ -2533,7 +2530,7 @@ class FeatureAnalysis(DataAnalysis):
                 If set to true; when generating any graphs will suppress any runtime
                 errors so the program can keep running.
 
-        Desc:
+
             Creates/Saves a pandas dataframe of value counts of a dataframe.
 
             Note -
@@ -2620,7 +2617,7 @@ class FeatureAnalysis(DataAnalysis):
                     dataframe_snapshot=True,
                     suppress_runtime_errors=True):
         """
-        Desc:
+
             Creates/Saves a pandas dataframe of a feature's numerical data.
             Standard deviation, mean, Q1-Q5, median, variance, etc.
 
@@ -2746,7 +2743,7 @@ class FeatureAnalysis(DataAnalysis):
                                            dataframe_snapshot=True,
                                            suppress_runtime_errors=True):
         """
-        Desc:
+
             Creates/Saves a pandas dataframe of features and their found types
             in the dataframe.
 
@@ -2875,7 +2872,7 @@ class FeatureAnalysis(DataAnalysis):
                              df,
                              feature_name):
         """
-        Desc:
+
             Creates a dict object of all possible feature values with their
             associated colors.
 
@@ -2943,7 +2940,7 @@ class FeatureAnalysis(DataAnalysis):
                          sort_values,
                          other_list):
         """
-        Desc:
+
             Sort's two collections by the first collection passed in.
 
         Args:

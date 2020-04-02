@@ -145,7 +145,7 @@ class RegressionAnalysis(ModelAnalysis):
                          display_visuals=True,
                          mse_score=None):
         """
-        Desc:
+
             Runs all available analysis functions on the models predicted data.
 
         Args:
@@ -244,7 +244,7 @@ class RegressionAnalysis(ModelAnalysis):
                                         "uniform_average",
                                         "variance_weighted"]):
         """
-        Desc:
+
             Creates a dataframe based on the prediction metrics
             of the feature matrix and target vector.
 
@@ -404,7 +404,7 @@ class RegressionAnalysis(ModelAnalysis):
                                     extra_tables=True,
                                     statistical_analysis_on_aggregates=True):
         """
-        Desc:
+
             Compares the actual target value to the predicted value and performs
             analysis of all the data.
 
@@ -529,7 +529,7 @@ class RegressionAnalysis(ModelAnalysis):
                                   extra_tables=True,
                                   statistical_analysis_on_aggregates=True):
         """
-        Desc:
+
             Compares the actual target value to the predicted value and performs
             analysis of all the data.
 

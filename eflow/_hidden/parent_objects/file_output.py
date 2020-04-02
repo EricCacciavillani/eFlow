@@ -74,7 +74,7 @@ class FileOutput(object):
     @property
     def folder_path(self):
         """
-        Desc:
+
             Path to folder
         """
         return copy.deepcopy(self.__PROJECT.PATH_TO_OUTPUT_FOLDER)
@@ -82,7 +82,7 @@ class FileOutput(object):
     @property
     def relative_folder_path(self):
         """
-        Desc:
+
             Relative path to folder.
 
         Note:

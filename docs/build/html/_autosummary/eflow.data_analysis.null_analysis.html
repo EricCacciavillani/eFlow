@@ -1,0 +1,599 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>eflow.data_analysis.null_analysis &mdash; eflow  documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="eflow.data_pipeline_segments.data_encoder" href="eflow.data_pipeline_segments.data_encoder.html" />
+    <link rel="prev" title="eflow.data_analysis.feature_analysis" href="eflow.data_analysis.feature_analysis.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> eflow
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="eflow.data_analysis.feature_analysis.html">eflow.data_analysis.feature_analysis</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">eflow.data_analysis.null_analysis</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="eflow.data_pipeline_segments.data_encoder.html">eflow.data_pipeline_segments.data_encoder</a></li>
+<li class="toctree-l1"><a class="reference internal" href="eflow.data_pipeline_segments.feature_data_cleaner.html">eflow.data_pipeline_segments.feature_data_cleaner</a></li>
+<li class="toctree-l1"><a class="reference internal" href="eflow.data_pipeline_segments.feature_transformer.html">eflow.data_pipeline_segments.feature_transformer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="eflow.data_pipeline_segments.string_cleaner.html">eflow.data_pipeline_segments.string_cleaner</a></li>
+<li class="toctree-l1"><a class="reference internal" href="eflow.data_pipeline_segments.type_fixer.html">eflow.data_pipeline_segments.type_fixer</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="eflow.foundation.data_frame_types.html">eflow.foundation.data_frame_types</a></li>
+<li class="toctree-l1"><a class="reference internal" href="eflow.foundation.data_pipeline.html">eflow.foundation.data_pipeline</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="eflow.model_analysis.classification_analysis.html">eflow.model_analysis.classification_analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="eflow.model_analysis.regression_analysis.html">eflow.model_analysis.regression_analysis</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">eflow</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+      <li>eflow.data_analysis.null_analysis</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/_autosummary/eflow.data_analysis.null_analysis.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="module-eflow.data_analysis.null_analysis">
+<span id="eflow-data-analysis-null-analysis"></span><h1>eflow.data_analysis.null_analysis<a class="headerlink" href="#module-eflow.data_analysis.null_analysis" title="Permalink to this headline">¶</a></h1>
+<p class="rubric">Functions</p>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">display</span></code>(*objs[, include, exclude, metadata, …])</p></td>
+<td><p>Display a Python object in all frontends.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">generate_meta_data</span></code>(df, output_folder_path, …)</p></td>
+<td><p>Creates files representing the shape and feature types of the dataframe.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">missing_values_table</span></code>(df)</p></td>
+<td><p>Creates a pandas dataframe based on the missing data inside the</p></td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Classes</p>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">DataAnalysis</span></code>(project_name[, overwrite_full_path])</p></td>
+<td><p>All objects in data_analysis folder of eflow are related to this object.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">DataFrameSnapshot</span></code>([compare_shape, …])</p></td>
+<td><p>Attempts to get a “snapshot” of a dataframe by extracting varying data of the pandas dataframe object; then generates a file to later compare in a set directory.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">FeatureAnalysis</span></code>(df_features[, …])</p></td>
+<td><p>Analyzes the feature data of a pandas Dataframe object.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">GRAPH_DEFAULTS</span></code></p></td>
+<td><p>alias of <code class="xref py py-class docutils literal notranslate"><span class="pre">eflow._hidden.constants.Enum</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#eflow.data_analysis.null_analysis.NullAnalysis" title="eflow.data_analysis.null_analysis.NullAnalysis"><code class="xref py py-obj docutils literal notranslate"><span class="pre">NullAnalysis</span></code></a>(df_features[, project_sub_dir, …])</p></td>
+<td><p>Analyzes a pandas dataframe’s object for null data; creates visuals like graphs and tables.</p></td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Exceptions</p>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">SnapshotMismatchError</span></code>([error_message])</p></td>
+<td><p></p></td>
+</tr>
+</tbody>
+</table>
+<dl class="class">
+<dt id="eflow.data_analysis.null_analysis.NullAnalysis">
+<em class="property">class </em><code class="sig-name descname">NullAnalysis</code><span class="sig-paren">(</span><em class="sig-param">df_features</em>, <em class="sig-param">project_sub_dir=''</em>, <em class="sig-param">project_name='Missing Data'</em>, <em class="sig-param">overwrite_full_path=None</em>, <em class="sig-param">notebook_mode=False</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/eflow/data_analysis/null_analysis.html#NullAnalysis"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#eflow.data_analysis.null_analysis.NullAnalysis" title="Permalink to this definition">¶</a></dt>
+<dd><p>Analyzes a pandas dataframe’s object for null data; creates visuals
+like graphs and tables.</p>
+<dl class="method">
+<dt id="eflow.data_analysis.null_analysis.NullAnalysis.feature_analysis_of_null_data">
+<code class="sig-name descname">feature_analysis_of_null_data</code><span class="sig-paren">(</span><em class="sig-param">df</em>, <em class="sig-param">dataset_name</em>, <em class="sig-param">target_features=None</em>, <em class="sig-param">display_visuals=True</em>, <em class="sig-param">display_print=True</em>, <em class="sig-param">save_file=True</em>, <em class="sig-param">suppress_runtime_errors=True</em>, <em class="sig-param">aggregate_target_feature=True</em>, <em class="sig-param">selected_features=None</em>, <em class="sig-param">extra_tables=True</em>, <em class="sig-param">statistical_analysis_on_aggregates=True</em>, <em class="sig-param">nan_features=[]</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/eflow/data_analysis/null_analysis.html#NullAnalysis.feature_analysis_of_null_data"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#eflow.data_analysis.null_analysis.NullAnalysis.feature_analysis_of_null_data" title="Permalink to this definition">¶</a></dt>
+<dd><blockquote>
+<div><p>Performs all public methods that generate visualizations/insights
+that feature analysis uses on an aggregation of null data in a
+feature.</p>
+</div></blockquote>
+<dl>
+<dt>Note:</dt><dd><p>Pretty much my personal lazy button for running the entire object
+without specifying any method in particular.</p>
+</dd>
+<dt>Args:</dt><dd><dl>
+<dt>df: pd.Dataframe</dt><dd><p>Pandas dataframe object</p>
+</dd>
+<dt>dataset_name: string</dt><dd><p>The dataset’s name; this will create a sub-directory in which your
+generated graph will be inner-nested in.</p>
+</dd>
+<dt>target_features: collection of string or None</dt><dd><p>A feature name that both exists in the init df_features
+and the passed dataframe.</p>
+<dl class="simple">
+<dt>Note</dt><dd><p>If init to ‘None’ then df_features will try to extract out
+the target feature.</p>
+</dd>
+</dl>
+</dd>
+<dt>display_visuals: bool</dt><dd><p>Boolean value to whether or not to display visualizations.</p>
+</dd>
+<dt>display_print: bool</dt><dd><p>Determines whether or not to print function’s embedded print
+statements.</p>
+</dd>
+<dt>save_file: bool</dt><dd><p>Boolean value to whether or not to save the file.</p>
+</dd>
+<dt>suppress_runtime_errors: bool</dt><dd><p>If set to true; when generating any graphs will suppress any runtime
+errors so the program can keep running.</p>
+</dd>
+<dt>extra_tables: bool</dt><dd><dl>
+<dt>When handling two types of features if set to true this will</dt><dd><p>generate any extra tables that might be helpful.
+Note -</p>
+<blockquote>
+<div><p>These graphics may create duplicates if you already applied
+an aggregation in ‘perform_analysis’</p>
+</div></blockquote>
+</dd>
+</dl>
+</dd>
+<dt>statistical_analysis_on_aggregates: bool</dt><dd><p>If set to true then the function ‘statistical_analysis_on_aggregates’
+will run; which aggregates the data of the target feature either
+by discrete values or by binning/labeling continuous data.</p>
+</dd>
+<dt>aggregate_target_feature: bool</dt><dd><p>Aggregate the data of the target feature if the data is
+non-continuous data.</p>
+<dl class="simple">
+<dt>Note</dt><dd><p>In the future I will have this also working with continuous
+data.</p>
+</dd>
+</dl>
+</dd>
+<dt>selected_features: collection object of features</dt><dd><p>Will only focus on these selected feature’s and will ignore
+the other given features.</p>
+</dd>
+<dt>nan_features: collection of strings</dt><dd><p>Features names that must contain nan data to aggregate on.</p>
+</dd>
+</dl>
+</dd>
+<dt>Raises:</dt><dd><p>If an empty dataframe is passed to this function or if the same
+dataframe is passed to it raise error.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="eflow.data_analysis.null_analysis.NullAnalysis.missing_values_table">
+<code class="sig-name descname">missing_values_table</code><span class="sig-paren">(</span><em class="sig-param">df</em>, <em class="sig-param">dataset_name</em>, <em class="sig-param">display_visuals=True</em>, <em class="sig-param">filename=None</em>, <em class="sig-param">sub_dir=None</em>, <em class="sig-param">save_file=True</em>, <em class="sig-param">dataframe_snapshot=True</em>, <em class="sig-param">suppress_runtime_errors=True</em>, <em class="sig-param">display_print=True</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/eflow/data_analysis/null_analysis.html#NullAnalysis.missing_values_table"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#eflow.data_analysis.null_analysis.NullAnalysis.missing_values_table" title="Permalink to this definition">¶</a></dt>
+<dd><blockquote>
+<div><p>Creates/Saves a Pandas DataFrame object giving the percentage of
+the null data for the original DataFrame columns.</p>
+</div></blockquote>
+<dl class="simple">
+<dt>Args:</dt><dd><dl class="simple">
+<dt>df: pd.Dataframe</dt><dd><p>Pandas DataFrame object</p>
+</dd>
+<dt>dataset_name: string</dt><dd><p>The dataset’s name; this will create a sub-directory in which your
+generated graph will be inner-nested in.</p>
+</dd>
+<dt>display_visuals: bool</dt><dd><p>Boolean value to whether or not to display visualizations.</p>
+</dd>
+<dt>display_print: bool</dt><dd><p>Determines whether or not to print function’s embedded print
+statements.</p>
+</dd>
+<dt>filename: string</dt><dd><p>If set to ‘None’ will default to a pre-defined string;
+unless it is set to an actual filename.</p>
+</dd>
+<dt>save_file: bool</dt><dd><p>Boolean value to whether or not to save the file.</p>
+</dd>
+<dt>dataframe_snapshot: bool</dt><dd><p>Boolean value to determine whether or not generate and compare a
+snapshot of the dataframe in the dataset’s directory structure.
+Helps ensure that data generated in that directory is correctly
+associated to a dataframe.</p>
+</dd>
+<dt>suppress_runtime_errors: bool</dt><dd><p>If set to true; when generating any graphs will suppress any runtime
+errors so the program can keep running.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="eflow.data_analysis.null_analysis.NullAnalysis.perform_analysis">
+<code class="sig-name descname">perform_analysis</code><span class="sig-paren">(</span><em class="sig-param">df</em>, <em class="sig-param">dataset_name</em>, <em class="sig-param">display_visuals=True</em>, <em class="sig-param">save_file=True</em>, <em class="sig-param">dataframe_snapshot=True</em>, <em class="sig-param">suppress_runtime_errors=True</em>, <em class="sig-param">display_print=True</em>, <em class="sig-param">null_features_only=False</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/eflow/data_analysis/null_analysis.html#NullAnalysis.perform_analysis"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#eflow.data_analysis.null_analysis.NullAnalysis.perform_analysis" title="Permalink to this definition">¶</a></dt>
+<dd><blockquote>
+<div><p>Perform all public methods of the NullAnalysis object.
+Except for feature_analysis_of_null_data.</p>
+</div></blockquote>
+<dl class="simple">
+<dt>Args:</dt><dd><dl class="simple">
+<dt>df: pd.Dataframe</dt><dd><p>Pandas Dataframe object.</p>
+</dd>
+<dt>dataset_name: string</dt><dd><p>The dataset’s name; this will create a sub-directory in which your
+generated graph will be inner-nested in.</p>
+</dd>
+<dt>display_visuals: bool</dt><dd><p>Boolean value to whether or not to display visualizations.</p>
+</dd>
+<dt>display_print: bool</dt><dd><p>Determines whether or not to print function’s embedded print
+statements.</p>
+</dd>
+<dt>save_file: bool</dt><dd><p>Boolean value to whether or not to save the file.</p>
+</dd>
+<dt>dataframe_snapshot: bool</dt><dd><p>Boolean value to determine whether or not generate and compare a
+snapshot of the dataframe in the dataset’s directory structure.
+Helps ensure that data generated in that directory is correctly
+associated to a dataframe.</p>
+</dd>
+<dt>suppress_runtime_errors: bool</dt><dd><p>If set to true; when generating any graphs will suppress any runtime
+errors so the program can keep running.</p>
+</dd>
+<dt>null_features_only: bool</dt><dd><p>Dataframe will pass on null features for the visualizations</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="eflow.data_analysis.null_analysis.NullAnalysis.plot_null_bar_graph">
+<code class="sig-name descname">plot_null_bar_graph</code><span class="sig-paren">(</span><em class="sig-param">df</em>, <em class="sig-param">dataset_name</em>, <em class="sig-param">display_visuals=True</em>, <em class="sig-param">filename=None</em>, <em class="sig-param">sub_dir=None</em>, <em class="sig-param">save_file=True</em>, <em class="sig-param">dataframe_snapshot=True</em>, <em class="sig-param">suppress_runtime_errors=True</em>, <em class="sig-param">display_print=True</em>, <em class="sig-param">null_features_only=False</em>, <em class="sig-param">figsize=(24</em>, <em class="sig-param">10)</em>, <em class="sig-param">fontsize=16</em>, <em class="sig-param">labels=None</em>, <em class="sig-param">log=False</em>, <em class="sig-param">color='#072F5F'</em>, <em class="sig-param">inline=False</em>, <em class="sig-param">filter=False</em>, <em class="sig-param">n=0</em>, <em class="sig-param">p=0</em>, <em class="sig-param">sort=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/eflow/data_analysis/null_analysis.html#NullAnalysis.plot_null_bar_graph"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#eflow.data_analysis.null_analysis.NullAnalysis.plot_null_bar_graph" title="Permalink to this definition">¶</a></dt>
+<dd><dl>
+<dt>Desc (Taken from missingno):</dt><dd><p>A bar graph visualization of the nullity of the given DataFrame then
+pushes the image to output folder.</p>
+</dd>
+<dt>Args:</dt><dd><dl class="simple">
+<dt>df: pd.Dataframe</dt><dd><p>Pandas dataframe object</p>
+</dd>
+<dt>dataset_name: string</dt><dd><p>The dataset’s name; this will create a sub-directory in which your
+generated graph will be inner-nested in.</p>
+</dd>
+<dt>display_visuals: bool</dt><dd><p>Boolean value to whether or not to display visualizations.</p>
+</dd>
+<dt>display_print: bool</dt><dd><p>Determines whether or not to print function’s embedded print
+statements.</p>
+</dd>
+<dt>filename: string</dt><dd><p>If set to ‘None’ will default to a pre-defined string;
+unless it is set to an actual filename.</p>
+</dd>
+<dt>save_file: bool</dt><dd><p>Boolean value to whether or not to save the file.</p>
+</dd>
+<dt>dataframe_snapshot: bool</dt><dd><p>Boolean value to determine whether or not generate and compare a
+snapshot of the dataframe in the dataset’s directory structure.
+Helps ensure that data generated in that directory is correctly
+associated to a dataframe.</p>
+</dd>
+<dt>suppress_runtime_errors: bool</dt><dd><p>If set to true; when generating any graphs will suppress any runtime
+errors so the program can keep running.</p>
+</dd>
+<dt>null_features_only: bool</dt><dd><p>Dataframe will pass on null features for the visualizations</p>
+</dd>
+</dl>
+<p>Please read the offical documentation for more about the parameters:
+Link - <a class="reference external" href="https://github.com/ResidentMario/missingno">https://github.com/ResidentMario/missingno</a></p>
+<dl class="simple">
+<dt>Note -</dt><dd><p>Changed the default color of the bar graph because I thought it
+was ugly.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="eflow.data_analysis.null_analysis.NullAnalysis.plot_null_dendrogram_graph">
+<code class="sig-name descname">plot_null_dendrogram_graph</code><span class="sig-paren">(</span><em class="sig-param">df</em>, <em class="sig-param">dataset_name</em>, <em class="sig-param">display_visuals=True</em>, <em class="sig-param">filename=None</em>, <em class="sig-param">sub_dir=None</em>, <em class="sig-param">save_file=True</em>, <em class="sig-param">dataframe_snapshot=True</em>, <em class="sig-param">suppress_runtime_errors=True</em>, <em class="sig-param">display_print=True</em>, <em class="sig-param">null_features_only=False</em>, <em class="sig-param">method='average'</em>, <em class="sig-param">filter=None</em>, <em class="sig-param">n=0</em>, <em class="sig-param">p=0</em>, <em class="sig-param">orientation=None</em>, <em class="sig-param">figsize=(24</em>, <em class="sig-param">10)</em>, <em class="sig-param">fontsize=16</em>, <em class="sig-param">inline=False</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/eflow/data_analysis/null_analysis.html#NullAnalysis.plot_null_dendrogram_graph"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#eflow.data_analysis.null_analysis.NullAnalysis.plot_null_dendrogram_graph" title="Permalink to this definition">¶</a></dt>
+<dd><dl>
+<dt>Desc (Taken from missingno):</dt><dd><p>Fits a <cite>scipy</cite> hierarchical clustering algorithm to the given
+DataFrame’s variables and visualizes the results as
+a <cite>scipy</cite> dendrogram.</p>
+</dd>
+<dt>Args:</dt><dd><dl class="simple">
+<dt>df:</dt><dd><p>Pandas dataframe object</p>
+</dd>
+<dt>dataset_name: string</dt><dd><p>The dataset’s name; this will create a sub-directory in which your
+generated graph will be inner-nested in.</p>
+</dd>
+<dt>display_visuals: bool</dt><dd><p>Boolean value to whether or not to display visualizations.</p>
+</dd>
+<dt>display_print: bool</dt><dd><p>Determines whether or not to print function’s embedded print
+statements.</p>
+</dd>
+<dt>filename: string</dt><dd><p>If set to ‘None’ will default to a pre-defined string;
+unless it is set to an actual filename.</p>
+</dd>
+<dt>save_file: bool</dt><dd><p>Boolean value to whether or not to save the file.</p>
+</dd>
+<dt>dataframe_snapshot: bool</dt><dd><p>Boolean value to determine whether or not generate and compare a
+snapshot of the dataframe in the dataset’s directory structure.
+Helps ensure that data generated in that directory is correctly
+associated to a dataframe.</p>
+</dd>
+<dt>suppress_runtime_errors: bool</dt><dd><p>If set to true; when generating any graphs will suppress any runtime
+errors so the program can keep running.</p>
+</dd>
+<dt>null_features_only: bool</dt><dd><p>Dataframe will pass on only null features for the visualizations</p>
+</dd>
+</dl>
+<p>Please read the offical documentation for more about the parameters:
+Link: <a class="reference external" href="https://github.com/ResidentMario/missingno">https://github.com/ResidentMario/missingno</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="eflow.data_analysis.null_analysis.NullAnalysis.plot_null_heatmap_graph">
+<code class="sig-name descname">plot_null_heatmap_graph</code><span class="sig-paren">(</span><em class="sig-param">df</em>, <em class="sig-param">dataset_name</em>, <em class="sig-param">display_visuals=True</em>, <em class="sig-param">filename=None</em>, <em class="sig-param">sub_dir=None</em>, <em class="sig-param">save_file=True</em>, <em class="sig-param">dataframe_snapshot=True</em>, <em class="sig-param">suppress_runtime_errors=True</em>, <em class="sig-param">display_print=True</em>, <em class="sig-param">inline=False</em>, <em class="sig-param">filter=None</em>, <em class="sig-param">n=0</em>, <em class="sig-param">p=0</em>, <em class="sig-param">sort=None</em>, <em class="sig-param">figsize=(24</em>, <em class="sig-param">10)</em>, <em class="sig-param">fontsize=16</em>, <em class="sig-param">labels=True</em>, <em class="sig-param">cmap='RdBu'</em>, <em class="sig-param">vmin=-1</em>, <em class="sig-param">vmax=1</em>, <em class="sig-param">cbar=True</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/eflow/data_analysis/null_analysis.html#NullAnalysis.plot_null_heatmap_graph"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#eflow.data_analysis.null_analysis.NullAnalysis.plot_null_heatmap_graph" title="Permalink to this definition">¶</a></dt>
+<dd><dl>
+<dt>Desc (Taken from missingno):</dt><dd><p>Presents a <cite>seaborn</cite> heatmap visualization of nullity correlation
+in the given DataFrame.</p>
+</dd>
+<dt>Args:</dt><dd><dl class="simple">
+<dt>df: pd.Dataframe</dt><dd><p>Pandas dataframe object</p>
+</dd>
+<dt>dataset_name: string</dt><dd><p>The dataset’s name; this will create a sub-directory in which your
+generated graph will be inner-nested in.</p>
+</dd>
+<dt>display_visuals: bool</dt><dd><p>Boolean value to whether or not to display visualizations.</p>
+</dd>
+<dt>display_print: bool</dt><dd><p>Determines whether or not to print function’s embedded print
+statements.</p>
+</dd>
+<dt>filename: string</dt><dd><p>If set to ‘None’ will default to a pre-defined string;
+unless it is set to an actual filename.</p>
+</dd>
+<dt>save_file: bool</dt><dd><p>Boolean value to whether or not to save the file.</p>
+</dd>
+<dt>dataframe_snapshot: bool</dt><dd><p>Boolean value to determine whether or not generate and compare a
+snapshot of the dataframe in the dataset’s directory structure.
+Helps ensure that data generated in that directory is correctly
+associated to a dataframe.</p>
+</dd>
+<dt>suppress_runtime_errors: bool</dt><dd><p>If set to true; when generating any graphs will suppress any runtime
+errors so the program can keep running.</p>
+</dd>
+</dl>
+<p>Please read the offical documentation for more about the parameters:
+Link: <a class="reference external" href="https://github.com/ResidentMario/missingno">https://github.com/ResidentMario/missingno</a></p>
+<dl class="simple">
+<dt>Note:</dt><dd><p>Changed the default color of the bar graph because I thought it
+was ugly.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="eflow.data_analysis.null_analysis.NullAnalysis.plot_null_matrix_graph">
+<code class="sig-name descname">plot_null_matrix_graph</code><span class="sig-paren">(</span><em class="sig-param">df</em>, <em class="sig-param">dataset_name</em>, <em class="sig-param">display_visuals=True</em>, <em class="sig-param">display_print=True</em>, <em class="sig-param">filename=None</em>, <em class="sig-param">sub_dir=None</em>, <em class="sig-param">save_file=True</em>, <em class="sig-param">dataframe_snapshot=True</em>, <em class="sig-param">suppress_runtime_errors=True</em>, <em class="sig-param">null_features_only=False</em>, <em class="sig-param">filter=None</em>, <em class="sig-param">n=0</em>, <em class="sig-param">p=0</em>, <em class="sig-param">sort=None</em>, <em class="sig-param">figsize=(24</em>, <em class="sig-param">10)</em>, <em class="sig-param">width_ratios=(15</em>, <em class="sig-param">1)</em>, <em class="sig-param">color=(0.027</em>, <em class="sig-param">0.184</em>, <em class="sig-param">0.373)</em>, <em class="sig-param">fontsize=16</em>, <em class="sig-param">labels=None</em>, <em class="sig-param">sparkline=True</em>, <em class="sig-param">inline=False</em>, <em class="sig-param">freq=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/eflow/data_analysis/null_analysis.html#NullAnalysis.plot_null_matrix_graph"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#eflow.data_analysis.null_analysis.NullAnalysis.plot_null_matrix_graph" title="Permalink to this definition">¶</a></dt>
+<dd><dl>
+<dt>Desc (Taken from missingno):</dt><dd><p>A matrix visualization of the nullity of the given DataFrame then
+pushes the image to output folder.</p>
+</dd>
+<dt>Args:</dt><dd><dl class="simple">
+<dt>df: pd.Dataframe</dt><dd><p>Pandas dataframe object</p>
+</dd>
+<dt>dataset_name: string</dt><dd><p>The dataset’s name; this will create a sub-directory in which your
+generated graph will be inner-nested in.</p>
+</dd>
+<dt>display_visuals: bool</dt><dd><p>Boolean value to whether or not to display visualizations.</p>
+</dd>
+<dt>display_print: bool</dt><dd><p>Determines whether or not to print function’s embedded print
+statements.</p>
+</dd>
+<dt>save_file: bool</dt><dd><p>Boolean value to whether or not to save the file.</p>
+</dd>
+<dt>filename: string</dt><dd><p>If set to ‘None’ will default to a pre-defined string;
+unless it is set to an actual filename.</p>
+</dd>
+<dt>sub_dir: string</dt><dd><p>Specify the sub directory to append to the pre-defined folder path.</p>
+</dd>
+<dt>dataframe_snapshot: bool</dt><dd><p>Boolean value to determine whether or not generate and compare a
+snapshot of the dataframe in the dataset’s directory structure.
+Helps ensure that data generated in that directory is correctly
+associated to a dataframe.</p>
+</dd>
+<dt>suppress_runtime_errors: bool</dt><dd><p>If set to true; when generating any graphs will suppress any runtime
+errors so the program can keep running.</p>
+</dd>
+<dt>null_features_only: bool</dt><dd><p>Dataframe will pass on null features for the visualizations</p>
+</dd>
+</dl>
+<p>Please read the offical documentation at for more about the parameters:
+Link: <a class="reference external" href="https://github.com/ResidentMario/missingno">https://github.com/ResidentMario/missingno</a></p>
+<dl class="simple">
+<dt>Note:</dt><dd><p>Changed the default color of the bar graph because I thought it
+was ugly.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="eflow.data_pipeline_segments.data_encoder.html" class="btn btn-neutral float-right" title="eflow.data_pipeline_segments.data_encoder" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="eflow.data_analysis.feature_analysis.html" class="btn btn-neutral float-left" title="eflow.data_analysis.feature_analysis" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2020, Eric Cacciavillani
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

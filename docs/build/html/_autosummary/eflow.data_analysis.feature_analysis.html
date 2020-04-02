@@ -1,0 +1,1041 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>eflow.data_analysis.feature_analysis &mdash; eflow  documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="eflow.data_analysis.null_analysis" href="eflow.data_analysis.null_analysis.html" />
+    <link rel="prev" title="Welcome to eflow’s documentation!" href="../index.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> eflow
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">eflow.data_analysis.feature_analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="eflow.data_analysis.null_analysis.html">eflow.data_analysis.null_analysis</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="eflow.data_pipeline_segments.data_encoder.html">eflow.data_pipeline_segments.data_encoder</a></li>
+<li class="toctree-l1"><a class="reference internal" href="eflow.data_pipeline_segments.feature_data_cleaner.html">eflow.data_pipeline_segments.feature_data_cleaner</a></li>
+<li class="toctree-l1"><a class="reference internal" href="eflow.data_pipeline_segments.feature_transformer.html">eflow.data_pipeline_segments.feature_transformer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="eflow.data_pipeline_segments.string_cleaner.html">eflow.data_pipeline_segments.string_cleaner</a></li>
+<li class="toctree-l1"><a class="reference internal" href="eflow.data_pipeline_segments.type_fixer.html">eflow.data_pipeline_segments.type_fixer</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="eflow.foundation.data_frame_types.html">eflow.foundation.data_frame_types</a></li>
+<li class="toctree-l1"><a class="reference internal" href="eflow.foundation.data_pipeline.html">eflow.foundation.data_pipeline</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="eflow.model_analysis.classification_analysis.html">eflow.model_analysis.classification_analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="eflow.model_analysis.regression_analysis.html">eflow.model_analysis.regression_analysis</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">eflow</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+      <li>eflow.data_analysis.feature_analysis</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/_autosummary/eflow.data_analysis.feature_analysis.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="module-eflow.data_analysis.feature_analysis">
+<span id="eflow-data-analysis-feature-analysis"></span><h1>eflow.data_analysis.feature_analysis<a class="headerlink" href="#module-eflow.data_analysis.feature_analysis" title="Permalink to this headline">¶</a></h1>
+<p class="rubric">Functions</p>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">auto_binning</span></code>(df, df_features, feature_name)</p></td>
+<td><p>Takes a pandas series object and assigns generalized labels and binning</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">average_feature_correlation_table</span></code>(df)</p></td>
+<td><p>Creates a correlation table of the feature’s relationship base on the</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">check_if_feature_exists</span></code>(df, feature_name)</p></td>
+<td><p>Checks if feature exists in the dataframe.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">create_dir_structure</span></code>(directory_path, …)</p></td>
+<td><p>Creates required directory structures inside the parent</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">descr_table</span></code>(df, feature_name[, to_numeric])</p></td>
+<td><p>Creates numerical description of a feature of a dataframe.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">dict_to_json_file</span></code>(dict_obj, directory_path, …)</p></td>
+<td><p>Writes a dict to a json file.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">display</span></code>(*objs[, include, exclude, metadata, …])</p></td>
+<td><p>Display a Python object in all frontends.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">feature_correlation_table</span></code>(df)</p></td>
+<td><p>Creates a correlation table of each feature’s relationship with one</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">generate_entropy_table</span></code>(df, df_features, …)</p></td>
+<td><p>Calculate the entropy of each non-continous numerical feature in a pandas</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">generate_meta_data</span></code>(df, output_folder_path, …)</p></td>
+<td><p>Creates files representing the shape and feature types of the dataframe.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">pickle_object_to_file</span></code>(obj, directory_path, …)</p></td>
+<td><p>Writes the object to a pickle file.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">value_counts_table</span></code>(df, feature_name)</p></td>
+<td><p>Creates a value counts dataframe.</p></td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Classes</p>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">DataAnalysis</span></code>(project_name[, overwrite_full_path])</p></td>
+<td><p>All objects in data_analysis folder of eflow are related to this object.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">DataFrameSnapshot</span></code>([compare_shape, …])</p></td>
+<td><p>Attempts to get a “snapshot” of a dataframe by extracting varying data of the pandas dataframe object; then generates a file to later compare in a set directory.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#eflow.data_analysis.feature_analysis.FeatureAnalysis" title="eflow.data_analysis.feature_analysis.FeatureAnalysis"><code class="xref py py-obj docutils literal notranslate"><span class="pre">FeatureAnalysis</span></code></a>(df_features[, …])</p></td>
+<td><p>Analyzes the feature data of a pandas Dataframe object.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">FileOutput</span></code>(project_name[, overwrite_full_path])</p></td>
+<td><p>Ensures a folder is part of eflow’s main output stream and creates a sub directory based on the arg project_name.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">GRAPH_DEFAULTS</span></code></p></td>
+<td><p>alias of <code class="xref py py-class docutils literal notranslate"><span class="pre">eflow._hidden.constants.Enum</span></code></p></td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Exceptions</p>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">SnapshotMismatchError</span></code>([error_message])</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">UnsatisfiedRequirments</span></code>([error_message])</p></td>
+<td><p></p></td>
+</tr>
+</tbody>
+</table>
+<dl class="class">
+<dt id="eflow.data_analysis.feature_analysis.FeatureAnalysis">
+<em class="property">class </em><code class="sig-name descname">FeatureAnalysis</code><span class="sig-paren">(</span><em class="sig-param">df_features</em>, <em class="sig-param">project_sub_dir=''</em>, <em class="sig-param">project_name='Feature Analysis'</em>, <em class="sig-param">overwrite_full_path=None</em>, <em class="sig-param">notebook_mode=False</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/eflow/data_analysis/feature_analysis.html#FeatureAnalysis"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#eflow.data_analysis.feature_analysis.FeatureAnalysis" title="Permalink to this definition">¶</a></dt>
+<dd><p>Analyzes the feature data of a pandas Dataframe object.
+(Ignores null data for displaying data and creates 2d graphics with 2 features.
+In the future I might add 3d graphics with 3 features.)</p>
+<dl class="method">
+<dt id="eflow.data_analysis.feature_analysis.FeatureAnalysis.analyze_feature">
+<code class="sig-name descname">analyze_feature</code><span class="sig-paren">(</span><em class="sig-param">df</em>, <em class="sig-param">feature_name</em>, <em class="sig-param">dataset_name</em>, <em class="sig-param">target_feature=None</em>, <em class="sig-param">display_visuals=True</em>, <em class="sig-param">display_print=True</em>, <em class="sig-param">sub_dir=None</em>, <em class="sig-param">save_file=True</em>, <em class="sig-param">dataframe_snapshot=True</em>, <em class="sig-param">suppress_runtime_errors=True</em>, <em class="sig-param">figsize=(13</em>, <em class="sig-param">10)</em>, <em class="sig-param">extra_tables=True</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/eflow/data_analysis/feature_analysis.html#FeatureAnalysis.analyze_feature"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#eflow.data_analysis.feature_analysis.FeatureAnalysis.analyze_feature" title="Permalink to this definition">¶</a></dt>
+<dd><blockquote>
+<div><p>Generate’s all graphic’s for that given feature and the relationship
+to the target feature.</p>
+</div></blockquote>
+<dl>
+<dt>Args:</dt><dd><dl>
+<dt>df: pd.Dataframe</dt><dd><p>Pandas DataFrame object</p>
+</dd>
+<dt>feature_name: string</dt><dd><p>Specified feature column name.</p>
+</dd>
+<dt>dataset_name: string</dt><dd><p>The dataset’s name; this will create a sub-directory in which your
+generated graph will be inner-nested in.</p>
+</dd>
+<dt>target_feature: string</dt><dd><p>Will create graphics involving this feature with the main
+feature ‘feature_name’.</p>
+</dd>
+<dt>display_visuals: string</dt><dd><p>Boolean value to whether or not to display visualizations.</p>
+</dd>
+<dt>display_print: bool</dt><dd><p>Determines whether or not to print function’s embedded print
+statements.</p>
+</dd>
+<dt>sub_dir: string</dt><dd><p>Specify the sub directory to append to the pre-defined folder path.</p>
+</dd>
+<dt>save_file: bool</dt><dd><p>Saves file if set to True; doesn’t if set to False.</p>
+</dd>
+<dt>dataframe_snapshot: bool</dt><dd><p>Boolean value to determine whether or not generate and compare a
+snapshot of the dataframe in the dataset’s directory structure.
+Helps ensure that data generated in that directory is correctly
+associated to a dataframe.</p>
+</dd>
+<dt>suppress_runtime_errors: bool</dt><dd><p>If set to true; when generating any graphs will suppress any runtime
+errors so the program can keep running.</p>
+</dd>
+<dt>extra_tables: bool</dt><dd><p>When handling two types of features if set to true this will
+generate any extra tables that might be helpful.
+Note -</p>
+<blockquote>
+<div><p>These graphics may create duplicates if you already applied
+an aggregation in ‘perform_analysis’</p>
+</div></blockquote>
+</dd>
+</dl>
+</dd>
+<dt>Raises:</dt><dd><p>Raises error if the json file’s snapshot of the given dataframe doesn’t
+match the given dataframe.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="eflow.data_analysis.feature_analysis.FeatureAnalysis.descr_table">
+<code class="sig-name descname">descr_table</code><span class="sig-paren">(</span><em class="sig-param">df</em>, <em class="sig-param">feature_name</em>, <em class="sig-param">dataset_name</em>, <em class="sig-param">display_visuals=True</em>, <em class="sig-param">display_print=True</em>, <em class="sig-param">filename=None</em>, <em class="sig-param">sub_dir=None</em>, <em class="sig-param">save_file=True</em>, <em class="sig-param">dataframe_snapshot=True</em>, <em class="sig-param">suppress_runtime_errors=True</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/eflow/data_analysis/feature_analysis.html#FeatureAnalysis.descr_table"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#eflow.data_analysis.feature_analysis.FeatureAnalysis.descr_table" title="Permalink to this definition">¶</a></dt>
+<dd><blockquote>
+<div><p>Creates/Saves a pandas dataframe of a feature’s numerical data.
+Standard deviation, mean, Q1-Q5, median, variance, etc.</p>
+<dl class="simple">
+<dt>Note</dt><dd><p>Creates a png of the table.</p>
+</dd>
+</dl>
+</div></blockquote>
+<dl class="simple">
+<dt>Args:</dt><dd><dl class="simple">
+<dt>df: pd.Dataframe</dt><dd><p>Pandas DataFrame object</p>
+</dd>
+<dt>feature_name: string</dt><dd><p>Specified feature column name.</p>
+</dd>
+<dt>dataset_name: string</dt><dd><p>The dataset’s name; this will create a sub-directory in which your
+generated graph will be inner-nested in.</p>
+</dd>
+<dt>display_visuals: bool</dt><dd><p>Boolean value to whether or not to display visualizations.</p>
+</dd>
+<dt>display_print: bool</dt><dd><p>Determines whether or not to print function’s embedded print
+statements.</p>
+</dd>
+<dt>filename: string</dt><dd><p>If set to ‘None’ will default to a pre-defined string;
+unless it is set to an actual filename.</p>
+</dd>
+<dt>sub_dir: string</dt><dd><p>Specify the sub directory to append to the pre-defined folder path.</p>
+</dd>
+<dt>save_file: bool</dt><dd><p>Saves file if set to True; doesn’t if set to False.</p>
+</dd>
+<dt>dataframe_snapshot: bool</dt><dd><p>Boolean value to determine whether or not generate and compare a
+snapshot of the dataframe in the dataset’s directory structure.
+Helps ensure that data generated in that directory is correctly
+associated to a dataframe.</p>
+</dd>
+<dt>suppress_runtime_errors: bool</dt><dd><p>If set to true; when generating any graphs will suppress any runtime
+errors so the program can keep running.</p>
+</dd>
+</dl>
+</dd>
+<dt>Raises:</dt><dd><p>Raises error if the feature data is filled with only nulls or if
+the json file’s snapshot of the given dataframe doesn’t match the
+given dataframe.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="eflow.data_analysis.feature_analysis.FeatureAnalysis.group_by_feature_value_count_table">
+<code class="sig-name descname">group_by_feature_value_count_table</code><span class="sig-paren">(</span><em class="sig-param">df</em>, <em class="sig-param">feature_name</em>, <em class="sig-param">dataset_name</em>, <em class="sig-param">other_feature_name</em>, <em class="sig-param">display_visuals=True</em>, <em class="sig-param">display_print=True</em>, <em class="sig-param">filename=None</em>, <em class="sig-param">sub_dir=None</em>, <em class="sig-param">save_file=True</em>, <em class="sig-param">dataframe_snapshot=True</em>, <em class="sig-param">suppress_runtime_errors=True</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/eflow/data_analysis/feature_analysis.html#FeatureAnalysis.group_by_feature_value_count_table"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#eflow.data_analysis.feature_analysis.FeatureAnalysis.group_by_feature_value_count_table" title="Permalink to this definition">¶</a></dt>
+<dd><blockquote>
+<div><p>Creates/Saves a pandas dataframe of features and their found types
+in the dataframe.</p>
+<dl class="simple">
+<dt>Note</dt><dd><p>Creates a png of the table.</p>
+</dd>
+</dl>
+</div></blockquote>
+<dl class="simple">
+<dt>Args:</dt><dd><dl class="simple">
+<dt>df: pd.Dataframe</dt><dd><p>Pandas DataFrame object</p>
+</dd>
+<dt>feature_name: string</dt><dd><p>Specified feature column name.</p>
+</dd>
+<dt>dataset_name: string</dt><dd><p>The dataset’s name; this will create a sub-directory in which your
+generated graph will be inner-nested in.</p>
+</dd>
+<dt>other_feature_name: string</dt><dd><p>Feature to compare to.</p>
+</dd>
+<dt>display_visuals: bool</dt><dd><p>Boolean value to whether or not to display visualizations.</p>
+</dd>
+<dt>display_print: bool</dt><dd><p>Determines whether or not to print function’s embedded print
+statements.</p>
+</dd>
+<dt>filename: string</dt><dd><p>If set to ‘None’ will default to a pre-defined string;
+unless it is set to an actual filename.</p>
+</dd>
+<dt>sub_dir: string</dt><dd><p>Specify the sub directory to append to the pre-defined folder path.</p>
+</dd>
+<dt>save_file: bool</dt><dd><p>Saves file if set to True; doesn’t if set to False.</p>
+</dd>
+<dt>dataframe_snapshot: bool</dt><dd><p>Boolean value to determine whether or not generate and compare a
+snapshot of the dataframe in the dataset’s directory structure.
+Helps ensure that data generated in that directory is correctly
+associated to a dataframe.</p>
+</dd>
+<dt>suppress_runtime_errors: bool</dt><dd><p>If set to true; when generating any graphs will suppress any runtime
+errors so the program can keep running.</p>
+</dd>
+</dl>
+</dd>
+<dt>Raises:</dt><dd><p>Raises error if the feature data is filled with only nulls or if
+the json file’s snapshot of the given dataframe doesn’t match the
+given dataframe.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="eflow.data_analysis.feature_analysis.FeatureAnalysis.perform_analysis">
+<code class="sig-name descname">perform_analysis</code><span class="sig-paren">(</span><em class="sig-param">df</em>, <em class="sig-param">dataset_name</em>, <em class="sig-param">target_features=None</em>, <em class="sig-param">display_visuals=True</em>, <em class="sig-param">display_print=True</em>, <em class="sig-param">save_file=True</em>, <em class="sig-param">dataframe_snapshot=True</em>, <em class="sig-param">suppress_runtime_errors=True</em>, <em class="sig-param">figsize=(13</em>, <em class="sig-param">10)</em>, <em class="sig-param">aggregate_target_feature=True</em>, <em class="sig-param">selected_features=None</em>, <em class="sig-param">extra_tables=True</em>, <em class="sig-param">statistical_analysis_on_aggregates=True</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/eflow/data_analysis/feature_analysis.html#FeatureAnalysis.perform_analysis"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#eflow.data_analysis.feature_analysis.FeatureAnalysis.perform_analysis" title="Permalink to this definition">¶</a></dt>
+<dd><blockquote>
+<div><p>Performs all public methods that generate visualizations/insights
+about the data.</p>
+</div></blockquote>
+<dl>
+<dt>Note:</dt><dd><p>Pretty much my personal lazy button for running the entire object
+without specifying any method in particular.</p>
+</dd>
+<dt>Args:</dt><dd><dl>
+<dt>df: pd.Dataframe</dt><dd><p>Pandas dataframe object</p>
+</dd>
+<dt>dataset_name: string</dt><dd><p>The dataset’s name; this will create a sub-directory in which your
+generated graph will be inner-nested in.</p>
+</dd>
+<dt>target_features: collection of strings or None</dt><dd><p>A feature name that both exists in the init df_features
+and the passed dataframe.</p>
+<dl class="simple">
+<dt>Note</dt><dd><p>If init to ‘None’ then df_features will try to extract out
+the target feature.</p>
+</dd>
+</dl>
+</dd>
+<dt>display_visuals: bool</dt><dd><p>Boolean value to whether or not to display visualizations.</p>
+</dd>
+<dt>display_print: bool</dt><dd><p>Determines whether or not to print function’s embedded print
+statements.</p>
+</dd>
+<dt>save_file: bool</dt><dd><p>Boolean value to whether or not to save the file.</p>
+</dd>
+<dt>dataframe_snapshot: bool</dt><dd><p>Boolean value to determine whether or not generate and compare a
+snapshot of the dataframe in the dataset’s directory structure.
+Helps ensure that data generated in that directory is correctly
+associated to a dataframe.</p>
+</dd>
+<dt>suppress_runtime_errors: bool</dt><dd><p>If set to true; when generating any graphs will suppress any runtime
+errors so the program can keep running.</p>
+</dd>
+<dt>extra_tables: bool</dt><dd><dl>
+<dt>When handling two types of features if set to true this will</dt><dd><p>generate any extra tables that might be helpful.
+Note -</p>
+<blockquote>
+<div><p>These graphics may create duplicates if you already applied
+an aggregation in ‘perform_analysis’</p>
+</div></blockquote>
+</dd>
+</dl>
+</dd>
+<dt>aggregate_target_feature: bool</dt><dd><p>Aggregate the data of the target feature if the data is
+non-continuous data.</p>
+<dl class="simple">
+<dt>Note</dt><dd><p>In the future I will have this also working with continuous
+data.</p>
+</dd>
+</dl>
+</dd>
+<dt>selected_features: collection object of features</dt><dd><p>Will only focus on these selected feature’s and will ignore
+the other given features.</p>
+</dd>
+<dt>statistical_analysis_on_aggregates: bool</dt><dd><p>If set to true then the function ‘statistical_analysis_on_aggregates’
+will run; which aggregates the data of the target feature either
+by discrete values or by binning/labeling continuous data.</p>
+</dd>
+</dl>
+</dd>
+<dt>Raises:</dt><dd><p>If an empty dataframe is passed to this function or if the same
+dataframe is passed to it raise error.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="eflow.data_analysis.feature_analysis.FeatureAnalysis.plot_count_graph">
+<code class="sig-name descname">plot_count_graph</code><span class="sig-paren">(</span><em class="sig-param">df</em>, <em class="sig-param">feature_name</em>, <em class="sig-param">dataset_name</em>, <em class="sig-param">display_visuals=True</em>, <em class="sig-param">display_print=True</em>, <em class="sig-param">filename=None</em>, <em class="sig-param">sub_dir=None</em>, <em class="sig-param">save_file=True</em>, <em class="sig-param">dataframe_snapshot=True</em>, <em class="sig-param">suppress_runtime_errors=True</em>, <em class="sig-param">figsize=(13</em>, <em class="sig-param">10)</em>, <em class="sig-param">flip_axis=False</em>, <em class="sig-param">palette='PuBu'</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/eflow/data_analysis/feature_analysis.html#FeatureAnalysis.plot_count_graph"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#eflow.data_analysis.feature_analysis.FeatureAnalysis.plot_count_graph" title="Permalink to this definition">¶</a></dt>
+<dd><blockquote>
+<div><p>Display a barplot with color ranking from a feature’s value counts
+from the seaborn libary and save the graph in the correct directory
+structure.</p>
+</div></blockquote>
+<dl>
+<dt>Args:</dt><dd><dl class="simple">
+<dt>df: pd.Dataframe</dt><dd><p>Pandas dataframe object.</p>
+</dd>
+<dt>feature_name: string</dt><dd><p>Specified feature column name.</p>
+</dd>
+<dt>dataset_name: string</dt><dd><p>The dataset’s name; this will create a sub-directory in which your
+generated graph will be inner-nested in.</p>
+</dd>
+<dt>display_visuals: bool</dt><dd><p>Boolean value to whether or not to display visualizations.</p>
+</dd>
+<dt>display_print: bool</dt><dd><p>Determines whether or not to print function’s embedded print
+statements.</p>
+</dd>
+<dt>filename: string</dt><dd><p>Name to give the file.</p>
+</dd>
+<dt>sub_dir: string</dt><dd><p>Specify the sub directory to append to the pre-defined folder path.</p>
+</dd>
+<dt>save_file: bool</dt><dd><p>Boolean value to whether or not to save the file.</p>
+</dd>
+<dt>dataframe_snapshot: bool</dt><dd><p>Boolean value to determine whether or not generate and compare a
+snapshot of the dataframe in the dataset’s directory structure.
+Helps ensure that data generated in that directory is correctly
+associated to a dataframe.</p>
+</dd>
+<dt>suppress_runtime_errors: bool</dt><dd><p>If set to true; when generating any graphs will suppress any runtime
+errors so the program can keep running.</p>
+</dd>
+<dt>display_print: bool</dt><dd><p>Determines whether or not to print function’s embedded print
+statements.</p>
+</dd>
+<dt>figsize: tuple</dt><dd><p>Size for the given plot.</p>
+</dd>
+<dt>flip_axis: bool</dt><dd><p>Flip the axis the ploting axis from x to y if set to ‘True’.</p>
+</dd>
+<dt>palette: dict or string</dt><dd><p>String representation of color pallete for ranking from seaborn’s pallete.</p>
+</dd>
+</dl>
+<p>Credit to seaborn’s author:
+Michael Waskom
+Git username: mwaskom
+Link: <a class="reference external" href="http://tinyurl.com/y4pzrgcf">http://tinyurl.com/y4pzrgcf</a></p>
+</dd>
+<dt>Raises:</dt><dd><p>Raises error if the feature data is filled with only nulls or if
+the json file’s snapshot of the given dataframe doesn’t match the
+given dataframe.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="eflow.data_analysis.feature_analysis.FeatureAnalysis.plot_distance_graph">
+<code class="sig-name descname">plot_distance_graph</code><span class="sig-paren">(</span><em class="sig-param">df</em>, <em class="sig-param">feature_name</em>, <em class="sig-param">dataset_name</em>, <em class="sig-param">display_visuals=True</em>, <em class="sig-param">display_print=True</em>, <em class="sig-param">filename=None</em>, <em class="sig-param">sub_dir=None</em>, <em class="sig-param">save_file=True</em>, <em class="sig-param">dataframe_snapshot=True</em>, <em class="sig-param">suppress_runtime_errors=True</em>, <em class="sig-param">figsize=(13</em>, <em class="sig-param">10)</em>, <em class="sig-param">bins=None</em>, <em class="sig-param">norm_hist=True</em>, <em class="sig-param">hist=True</em>, <em class="sig-param">kde=True</em>, <em class="sig-param">colors=None</em>, <em class="sig-param">fit=None</em>, <em class="sig-param">fit_kws=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/eflow/data_analysis/feature_analysis.html#FeatureAnalysis.plot_distance_graph"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#eflow.data_analysis.feature_analysis.FeatureAnalysis.plot_distance_graph" title="Permalink to this definition">¶</a></dt>
+<dd><blockquote>
+<div><p>Display a distance plot and save the graph in the correct directory.</p>
+</div></blockquote>
+<dl>
+<dt>Args:</dt><dd><dl class="simple">
+<dt>df: pd.Dataframe</dt><dd><p>Pandas dataframe object</p>
+</dd>
+<dt>feature_name: string</dt><dd><p>Specified feature column name.</p>
+</dd>
+<dt>dataset_name: string</dt><dd><p>The dataset’s name; this will create a sub-directory in which your
+generated graph will be inner-nested in.</p>
+</dd>
+<dt>display_visuals: bool</dt><dd><p>Boolean value to whether or not to display visualizations.</p>
+</dd>
+<dt>display_print: bool</dt><dd><p>Determines whether or not to print function’s embedded print
+statements.</p>
+</dd>
+<dt>filename: string</dt><dd><p>Name to give the file.</p>
+</dd>
+<dt>sub_dir: string</dt><dd><p>Specify the sub directory to append to the pre-defined folder path.</p>
+</dd>
+<dt>save_file: bool</dt><dd><p>Boolean value to whether or not to save the file.</p>
+</dd>
+<dt>dataframe_snapshot: bool</dt><dd><p>Boolean value to determine whether or not generate and compare a
+snapshot of the dataframe in the dataset’s directory structure.
+Helps ensure that data generated in that directory is correctly
+associated to a dataframe.</p>
+</dd>
+<dt>suppress_runtime_errors: bool</dt><dd><p>If set to true; when generating any graphs will suppress any runtime
+errors so the program can keep running.</p>
+</dd>
+<dt>figsize: tuple</dt><dd><p>The given size of the plot.</p>
+</dd>
+<dt>bins: int</dt><dd><p>Specification of hist bins, or None to use Freedman-Diaconis rule.</p>
+</dd>
+<dt>norm_hist: bool</dt><dd><p>If True, the histogram height shows a density rather than a count. This is implied if a KDE or fitted density is plotted.</p>
+</dd>
+<dt>hist: bool</dt><dd><p>Whether to plot a (normed) histogram.</p>
+</dd>
+<dt>kde: bool</dt><dd><p>Whether to plot a gaussian kernel density estimate.</p>
+</dd>
+<dt>colors<span class="classifier">matplotlib color</span></dt><dd><p>Color to plot everything but the fitted curve in.</p>
+</dd>
+<dt>fit: functional method</dt><dd><p>An object with fit method, returning a tuple that can be passed
+to a pdf method a positional arguments following an grid of
+values to evaluate the pdf on.</p>
+</dd>
+<dt>fit_kws<span class="classifier">dictionaries, optional</span></dt><dd><p>Keyword arguments for underlying plotting functions.</p>
+</dd>
+</dl>
+<p>Credit to seaborn’s author:
+Michael Waskom
+Git username: mwaskom
+Doc Link: <a class="reference external" href="http://tinyurl.com/ycco2hok">http://tinyurl.com/ycco2hok</a></p>
+</dd>
+<dt>Raises:</dt><dd><p>Raises error if the feature data is filled with only nulls or if
+the json file’s snapshot of the given dataframe doesn’t match the
+given dataframe.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="eflow.data_analysis.feature_analysis.FeatureAnalysis.plot_jointplot_graph">
+<code class="sig-name descname">plot_jointplot_graph</code><span class="sig-paren">(</span><em class="sig-param">df</em>, <em class="sig-param">feature_name</em>, <em class="sig-param">dataset_name</em>, <em class="sig-param">other_feature_name</em>, <em class="sig-param">display_visuals=True</em>, <em class="sig-param">display_print=True</em>, <em class="sig-param">filename=None</em>, <em class="sig-param">sub_dir=None</em>, <em class="sig-param">save_file=True</em>, <em class="sig-param">dataframe_snapshot=True</em>, <em class="sig-param">suppress_runtime_errors=True</em>, <em class="sig-param">figsize=(13</em>, <em class="sig-param">10)</em>, <em class="sig-param">color=None</em>, <em class="sig-param">kind='scatter and kde'</em>, <em class="sig-param">ratio=5</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/eflow/data_analysis/feature_analysis.html#FeatureAnalysis.plot_jointplot_graph"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#eflow.data_analysis.feature_analysis.FeatureAnalysis.plot_jointplot_graph" title="Permalink to this definition">¶</a></dt>
+<dd><blockquote>
+<div><p>Display a ridge plot and save the graph in the correct directory.</p>
+</div></blockquote>
+<dl>
+<dt>Args:</dt><dd><dl class="simple">
+<dt>df: pd.Dataframe</dt><dd><p>Pandas DataFrame object.</p>
+</dd>
+<dt>feature_name: string</dt><dd><p>Specified feature column name.</p>
+</dd>
+<dt>dataset_name: string</dt><dd><p>The dataset’s name; this will create a sub-directory in which your
+generated graph will be inner-nested in.</p>
+</dd>
+<dt>other_feature_name: string</dt><dd><p>Feature to compare to.</p>
+</dd>
+<dt>display_visuals: bool</dt><dd><p>Boolean value to whether or not to display visualizations.</p>
+</dd>
+<dt>display_print: bool</dt><dd><p>Determines whether or not to print function’s embedded print
+statements.</p>
+</dd>
+<dt>filename: string</dt><dd><p>If set to ‘None’ will default to a pre-defined string;
+unless it is set to an actual filename.</p>
+</dd>
+<dt>sub_dir: string</dt><dd><p>Specify the sub directory to append to the pre-defined folder path.</p>
+</dd>
+<dt>save_file: bool</dt><dd><p>Boolean value to whether or not to save the file.</p>
+</dd>
+<dt>dataframe_snapshot: bool</dt><dd><p>Boolean value to determine whether or not generate and compare a
+snapshot of the dataframe in the dataset’s directory structure.
+Helps ensure that data generated in that directory is correctly
+associated to a dataframe.</p>
+</dd>
+<dt>suppress_runtime_errors: bool</dt><dd><p>If set to true; when generating any graphs will suppress any runtime
+errors so the program can keep running.</p>
+</dd>
+<dt>display_print: bool</dt><dd><p>Determines whether or not to print function’s embedded print
+statements.</p>
+</dd>
+<dt>figsize: tuple</dt><dd><p>Tuple object to represent the plot/image’s size. Because joinplot
+only accepts a single value for the figure; we just pull the
+greatest of the two values.</p>
+</dd>
+<dt>color: string</dt><dd><p>Seaborn/maplotlib color/hex color for representing the graph</p>
+</dd>
+<dt>kind: string (scatter,reg,resid,kde,hex,scatter and kde)</dt><dd><p>Kind of plot to draw.</p>
+</dd>
+<dt>ratio:</dt><dd><p>Ratio of joint axes height to marginal axes height.
+(Determines distplot like plots dimensions.)</p>
+</dd>
+</dl>
+<p>Credit to seaborn’s author:
+Michael Waskom
+Git username: mwaskom
+Link: <a class="reference external" href="http://tinyurl.com/v9pxsoy">http://tinyurl.com/v9pxsoy</a></p>
+</dd>
+<dt>Raises:</dt><dd><p>Raises error if the feature data is filled with only nulls or if
+the json file’s snapshot of the given dataframe doesn’t match the
+given dataframe.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="eflow.data_analysis.feature_analysis.FeatureAnalysis.plot_multi_bar_graph">
+<code class="sig-name descname">plot_multi_bar_graph</code><span class="sig-paren">(</span><em class="sig-param">df</em>, <em class="sig-param">feature_name</em>, <em class="sig-param">dataset_name</em>, <em class="sig-param">other_feature_name</em>, <em class="sig-param">display_visuals=True</em>, <em class="sig-param">display_print=True</em>, <em class="sig-param">filename=None</em>, <em class="sig-param">sub_dir=None</em>, <em class="sig-param">save_file=True</em>, <em class="sig-param">dataframe_snapshot=True</em>, <em class="sig-param">suppress_runtime_errors=True</em>, <em class="sig-param">figsize=(13</em>, <em class="sig-param">10)</em>, <em class="sig-param">colors=None</em>, <em class="sig-param">stacked=False</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/eflow/data_analysis/feature_analysis.html#FeatureAnalysis.plot_multi_bar_graph"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#eflow.data_analysis.feature_analysis.FeatureAnalysis.plot_multi_bar_graph" title="Permalink to this definition">¶</a></dt>
+<dd><blockquote>
+<div><p>Display a pie graph and save the graph in the correct directory.</p>
+</div></blockquote>
+<dl class="simple">
+<dt>Args:</dt><dd><dl class="simple">
+<dt>df:</dt><dd><p>Pandas DataFrame object.</p>
+</dd>
+<dt>feature_name:</dt><dd><p>Specified feature column name.</p>
+</dd>
+<dt>dataset_name:</dt><dd><p>The dataset’s name; this will create a sub-directory in which your
+generated graph will be inner-nested in.</p>
+</dd>
+<dt>display_visuals:</dt><dd><p>Boolean value to whether or not to display visualizations.</p>
+</dd>
+<dt>display_print: bool</dt><dd><p>Determines whether or not to print function’s embedded print
+statements.</p>
+</dd>
+<dt>filename:</dt><dd><p>If set to ‘None’ will default to a pre-defined string;
+unless it is set to an actual filename.</p>
+</dd>
+<dt>sub_dir:</dt><dd><p>Specify the sub directory to append to the pre-defined folder path.</p>
+</dd>
+<dt>save_file:</dt><dd><p>Boolean value to whether or not to save the file.</p>
+</dd>
+<dt>dataframe_snapshot:</dt><dd><p>Boolean value to determine whether or not generate and compare a
+snapshot of the dataframe in the dataset’s directory structure.
+Helps ensure that data generated in that directory is correctly
+associated to a dataframe.</p>
+</dd>
+<dt>suppress_runtime_errors: bool</dt><dd><p>If set to true; when generating any graphs will suppress any runtime
+errors so the program can keep running.</p>
+</dd>
+<dt>figsize: tuple</dt><dd><p>Size of the plot.</p>
+</dd>
+<dt>colors: dict or string</dt><dd><p>Dictionary of all feature values to hex color values.</p>
+</dd>
+<dt>stacked: bool</dt><dd><p>Determines if the multi bar graph should be stacked or not.</p>
+</dd>
+</dl>
+</dd>
+<dt>Raises:</dt><dd><p>Raises error if the feature data is filled with only nulls or if
+the json file’s snapshot of the given dataframe doesn’t match the
+given dataframe.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="eflow.data_analysis.feature_analysis.FeatureAnalysis.plot_pie_graph">
+<code class="sig-name descname">plot_pie_graph</code><span class="sig-paren">(</span><em class="sig-param">df</em>, <em class="sig-param">feature_name</em>, <em class="sig-param">dataset_name</em>, <em class="sig-param">display_visuals=True</em>, <em class="sig-param">display_print=True</em>, <em class="sig-param">filename=None</em>, <em class="sig-param">sub_dir=None</em>, <em class="sig-param">save_file=True</em>, <em class="sig-param">dataframe_snapshot=True</em>, <em class="sig-param">suppress_runtime_errors=True</em>, <em class="sig-param">figsize=(13</em>, <em class="sig-param">10)</em>, <em class="sig-param">pallete=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/eflow/data_analysis/feature_analysis.html#FeatureAnalysis.plot_pie_graph"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#eflow.data_analysis.feature_analysis.FeatureAnalysis.plot_pie_graph" title="Permalink to this definition">¶</a></dt>
+<dd><blockquote>
+<div><p>Display a pie graph and save the graph in the correct directory.</p>
+</div></blockquote>
+<dl class="simple">
+<dt>Args:</dt><dd><dl class="simple">
+<dt>df:</dt><dd><p>Pandas DataFrame object.</p>
+</dd>
+<dt>feature_name:</dt><dd><p>Specified feature column name.</p>
+</dd>
+<dt>dataset_name:</dt><dd><p>The dataset’s name; this will create a sub-directory in which your
+generated graph will be inner-nested in.</p>
+</dd>
+<dt>display_visuals:</dt><dd><p>Boolean value to whether or not to display visualizations.</p>
+</dd>
+<dt>display_print: bool</dt><dd><p>Determines whether or not to print function’s embedded print
+statements.</p>
+</dd>
+<dt>filename:</dt><dd><p>If set to ‘None’ will default to a pre-defined string;
+unless it is set to an actual filename.</p>
+</dd>
+<dt>sub_dir:</dt><dd><p>Specify the sub directory to append to the pre-defined folder path.</p>
+</dd>
+<dt>save_file:</dt><dd><p>Boolean value to whether or not to save the file.</p>
+</dd>
+<dt>dataframe_snapshot:</dt><dd><p>Boolean value to determine whether or not generate and compare a
+snapshot of the dataframe in the dataset’s directory structure.
+Helps ensure that data generated in that directory is correctly
+associated to a dataframe.</p>
+</dd>
+<dt>suppress_runtime_errors: bool</dt><dd><p>If set to true; when generating any graphs will suppress any runtime
+errors so the program can keep running.</p>
+</dd>
+<dt>figsize: tuple</dt><dd><p>Size of the plot.</p>
+</dd>
+<dt>pallete: dict or string</dt><dd><p>Dictionary of all feature values to hex color values.</p>
+</dd>
+</dl>
+</dd>
+<dt>Raises:</dt><dd><p>Raises error if the feature data is filled with only nulls or if
+the json file’s snapshot of the given dataframe doesn’t match the
+given dataframe.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="eflow.data_analysis.feature_analysis.FeatureAnalysis.plot_ridge_graph">
+<code class="sig-name descname">plot_ridge_graph</code><span class="sig-paren">(</span><em class="sig-param">df</em>, <em class="sig-param">feature_name</em>, <em class="sig-param">dataset_name</em>, <em class="sig-param">other_feature_name</em>, <em class="sig-param">display_visuals=True</em>, <em class="sig-param">display_print=True</em>, <em class="sig-param">filename=None</em>, <em class="sig-param">sub_dir=None</em>, <em class="sig-param">save_file=True</em>, <em class="sig-param">dataframe_snapshot=True</em>, <em class="sig-param">suppress_runtime_errors=True</em>, <em class="sig-param">figsize=(13</em>, <em class="sig-param">10)</em>, <em class="sig-param">palette=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/eflow/data_analysis/feature_analysis.html#FeatureAnalysis.plot_ridge_graph"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#eflow.data_analysis.feature_analysis.FeatureAnalysis.plot_ridge_graph" title="Permalink to this definition">¶</a></dt>
+<dd><blockquote>
+<div><p>Display a ridge plot and save the graph in the correct directory.</p>
+</div></blockquote>
+<dl class="simple">
+<dt>Args:</dt><dd><dl class="simple">
+<dt>df: pd.Dataframe</dt><dd><p>Pandas DataFrame object.</p>
+</dd>
+<dt>feature_name: string</dt><dd><p>Specified feature column name.</p>
+</dd>
+<dt>dataset_name: string</dt><dd><p>The dataset’s name; this will create a sub-directory in which your
+generated graph will be inner-nested in.</p>
+</dd>
+<dt>other_feature_name: string</dt><dd><p>Feature to compare to.</p>
+</dd>
+<dt>display_visuals: bool</dt><dd><p>Boolean value to whether or not to display visualizations.</p>
+</dd>
+<dt>display_print: bool</dt><dd><p>Determines whether or not to print function’s embedded print
+statements.</p>
+</dd>
+<dt>filename: string</dt><dd><p>If set to ‘None’ will default to a pre-defined string;
+unless it is set to an actual filename.</p>
+</dd>
+<dt>sub_dir: string</dt><dd><p>Specify the sub directory to append to the pre-defined folder path.</p>
+</dd>
+<dt>save_file: bool</dt><dd><p>Boolean value to whether or not to save the file.</p>
+</dd>
+<dt>dataframe_snapshot: bool</dt><dd><p>Boolean value to determine whether or not generate and compare a
+snapshot of the dataframe in the dataset’s directory structure.
+Helps ensure that data generated in that directory is correctly
+associated to a dataframe.</p>
+</dd>
+<dt>suppress_runtime_errors: bool</dt><dd><p>If set to true; when generating any graphs will suppress any runtime
+errors so the program can keep running.</p>
+</dd>
+<dt>display_print: bool</dt><dd><p>Determines whether or not to print function’s embedded print
+statements.</p>
+</dd>
+<dt>figsize: tuple</dt><dd><p>Tuple object to represent the plot/image’s size.</p>
+</dd>
+<dt>palette: dict or string</dt><dd><p>Dictionary of all feature values to hex color values.</p>
+</dd>
+</dl>
+</dd>
+<dt>Note -</dt><dd><p>A large part of this was taken from: <a class="reference external" href="http://tinyurl.com/tuou2cn">http://tinyurl.com/tuou2cn</a></p>
+</dd>
+<dt>Raises:</dt><dd><p>Raises error if the feature data is filled with only nulls or if
+the json file’s snapshot of the given dataframe doesn’t match the
+given dataframe.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="eflow.data_analysis.feature_analysis.FeatureAnalysis.plot_violin_graph">
+<code class="sig-name descname">plot_violin_graph</code><span class="sig-paren">(</span><em class="sig-param">df</em>, <em class="sig-param">feature_name</em>, <em class="sig-param">dataset_name</em>, <em class="sig-param">other_feature_name</em>, <em class="sig-param">display_visuals=True</em>, <em class="sig-param">display_print=True</em>, <em class="sig-param">filename=None</em>, <em class="sig-param">sub_dir=None</em>, <em class="sig-param">save_file=True</em>, <em class="sig-param">dataframe_snapshot=True</em>, <em class="sig-param">suppress_runtime_errors=True</em>, <em class="sig-param">figsize=(13</em>, <em class="sig-param">10)</em>, <em class="sig-param">order=None</em>, <em class="sig-param">cut=2</em>, <em class="sig-param">scale='area'</em>, <em class="sig-param">gridsize=100</em>, <em class="sig-param">width=0.8</em>, <em class="sig-param">palette=None</em>, <em class="sig-param">saturation=0.75</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/eflow/data_analysis/feature_analysis.html#FeatureAnalysis.plot_violin_graph"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#eflow.data_analysis.feature_analysis.FeatureAnalysis.plot_violin_graph" title="Permalink to this definition">¶</a></dt>
+<dd><blockquote>
+<div><p>Display a violin plot and save the graph in the correct directory.</p>
+</div></blockquote>
+<dl>
+<dt>Args:</dt><dd><dl class="simple">
+<dt>df: pd.Dataframe</dt><dd><p>Pandas dataframe object</p>
+</dd>
+<dt>feature_name: string</dt><dd><p>Specified feature column name to compare to y.</p>
+</dd>
+<dt>dataset_name: string</dt><dd><p>The dataset’s name; this will create a sub-directory in which your
+generated graph will be inner-nested in.</p>
+</dd>
+<dt>other_feature_name: string</dt><dd><p>Specified feature column name to compare to x.</p>
+</dd>
+<dt>display_visuals: bool</dt><dd><p>Boolean value to whether or not to display visualizations.</p>
+</dd>
+<dt>filename: string</dt><dd><p>Name to give the file.</p>
+</dd>
+<dt>sub_dir: string</dt><dd><p>Specify the sub directory to append to the pre-defined folder path.</p>
+</dd>
+<dt>save_file: bool</dt><dd><p>Boolean value to whether or not to save the file.</p>
+</dd>
+<dt>dataframe_snapshot: bool</dt><dd><p>Boolean value to determine whether or not generate and compare a
+snapshot of the dataframe in the dataset’s directory structure.
+Helps ensure that data generated in that directory is correctly
+associated to a dataframe.</p>
+</dd>
+<dt>suppress_runtime_errors: bool</dt><dd><p>If set to true; when generating any graphs will suppress any runtime
+errors so the program can keep running.</p>
+</dd>
+<dt>display_print: bool</dt><dd><p>Determines whether or not to print function’s embedded print
+statements.</p>
+</dd>
+<dt>figsize: tuple</dt><dd><p>Size of the given plot.</p>
+</dd>
+<dt>order: lists of strings</dt><dd><p>Order to plot the categorical levels in, otherwise the levels
+are inferred from the data objects.</p>
+</dd>
+<dt>cut: float</dt><dd><p>Distance, in units of bandwidth size, to extend the density
+past the extreme datapoints. Set to 0 to limit the violin range
+within the range of the observed data.
+(i.e., to have the same effect as trim=True in ggplot.)</p>
+</dd>
+<dt>scale: string</dt><dd><p>{area, count, width}
+The method used to scale the width of each violin. If area,
+each violin will have the same area. If count, the width of the
+violins will be scaled by the number of observations in that
+bin. If width, each violin will have the same width.</p>
+</dd>
+<dt>gridsize: int</dt><dd><p>Number of points in the discrete grid used to compute the kernel density estimate.</p>
+</dd>
+<dt>width: float</dt><dd><p>Width of a full element when not using hue nesting, or width of
+all the elements for one level of the major grouping variable.</p>
+</dd>
+<dt>palette: dict or string</dt><dd><p>Colors to use for the different levels of the hue variable.
+Should be something that can be interpreted by color_palette(),
+or a dictionary mapping hue levels to matplotlib colors.</p>
+</dd>
+<dt>saturation: float</dt><dd><p>Proportion of the original saturation to draw colors at. Large
+patches often look better with slightly desaturated colors, but
+set this to 1 if you want the plot colors to perfectly match
+the input color spec.</p>
+</dd>
+</dl>
+<p>Credit to seaborn’s author:
+Michael Waskom
+Git username: mwaskom
+Doc link: <a class="reference external" href="http://tinyurl.com/y3hxxzgv">http://tinyurl.com/y3hxxzgv</a></p>
+</dd>
+<dt>Raises:</dt><dd><p>Raises error if the feature data is filled with only nulls or if
+the json file’s snapshot of the given dataframe doesn’t match the
+given dataframe.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="eflow.data_analysis.feature_analysis.FeatureAnalysis.statistical_analysis_on_aggregates">
+<code class="sig-name descname">statistical_analysis_on_aggregates</code><span class="sig-paren">(</span><em class="sig-param">df</em>, <em class="sig-param">target_features</em>, <em class="sig-param">dataset_name</em>, <em class="sig-param">dataframe_snapshot=True</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/eflow/data_analysis/feature_analysis.html#FeatureAnalysis.statistical_analysis_on_aggregates"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#eflow.data_analysis.feature_analysis.FeatureAnalysis.statistical_analysis_on_aggregates" title="Permalink to this definition">¶</a></dt>
+<dd><blockquote>
+<div><p>Aggregates the data of the target feature either by discrete values
+or by binning/labeling continuous data.</p>
+</div></blockquote>
+<dl class="simple">
+<dt>Args:</dt><dd><dl class="simple">
+<dt>df: pd.Dataframe</dt><dd><p>Pandas DataFrame object.</p>
+</dd>
+<dt>target_features: list of string</dt><dd><p>Specified target features.</p>
+</dd>
+<dt>dataset_name: string</dt><dd><p>The dataset’s name; this will create a sub-directory in which your
+generated graph will be inner-nested in.</p>
+</dd>
+<dt>dataframe_snapshot: bool</dt><dd><p>Boolean value to determine whether or not generate and compare a
+snapshot of the dataframe in the dataset’s directory structure.
+Helps ensure that data generated in that directory is correctly
+associated to a dataframe.</p>
+</dd>
+</dl>
+</dd>
+<dt>Note:</dt><dd><p>This function has a lot going on and it’s infancy so I am going to
+purposely not give it suppress_runtime_errors so people will find
+problems with it and report it to me.</p>
+</dd>
+<dt>Raises:</dt><dd><p>Raises error if the feature data is filled with only nulls or if
+the json file’s snapshot of the given dataframe doesn’t match the
+given dataframe.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="eflow.data_analysis.feature_analysis.FeatureAnalysis.value_counts_table">
+<code class="sig-name descname">value_counts_table</code><span class="sig-paren">(</span><em class="sig-param">df</em>, <em class="sig-param">feature_name</em>, <em class="sig-param">dataset_name</em>, <em class="sig-param">display_visuals=True</em>, <em class="sig-param">display_print=True</em>, <em class="sig-param">filename=None</em>, <em class="sig-param">sub_dir=None</em>, <em class="sig-param">save_file=True</em>, <em class="sig-param">dataframe_snapshot=True</em>, <em class="sig-param">suppress_runtime_errors=True</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/eflow/data_analysis/feature_analysis.html#FeatureAnalysis.value_counts_table"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#eflow.data_analysis.feature_analysis.FeatureAnalysis.value_counts_table" title="Permalink to this definition">¶</a></dt>
+<dd><blockquote>
+<div><p>Creates a value counts table of the features given data.</p>
+<dl class="simple">
+<dt>Note</dt><dd><p>Creates a png of the table.</p>
+</dd>
+</dl>
+</div></blockquote>
+<dl>
+<dt>Args:</dt><dd><dl class="simple">
+<dt>df: pd.Dataframe</dt><dd><p>Pandas DataFrame object</p>
+</dd>
+<dt>feature_name: string</dt><dd><p>Specified feature column name.</p>
+</dd>
+<dt>dataset_name: string</dt><dd><p>The dataset’s name; this will create a sub-directory in which your
+generated graph will be inner-nested in.</p>
+</dd>
+<dt>display_visuals: bool</dt><dd><p>Boolean value to whether or not to display visualizations.</p>
+</dd>
+<dt>display_print: bool</dt><dd><p>Determines whether or not to print function’s embedded print
+statements.</p>
+</dd>
+<dt>filename: string</dt><dd><p>If set to ‘None’ will default to a pre-defined string;
+unless it is set to an actual filename.</p>
+</dd>
+<dt>sub_dir: string</dt><dd><p>Specify the sub directory to append to the pre-defined folder path.</p>
+</dd>
+<dt>save_file: bool</dt><dd><p>Saves file if set to True; doesn’t if set to False.</p>
+</dd>
+<dt>dataframe_snapshot: bool</dt><dd><p>Boolean value to determine whether or not generate and compare a
+snapshot of the dataframe in the dataset’s directory structure.
+Helps ensure that data generated in that directory is correctly
+associated to a dataframe.</p>
+</dd>
+<dt>suppress_runtime_errors: bool</dt><dd><p>If set to true; when generating any graphs will suppress any runtime
+errors so the program can keep running.</p>
+</dd>
+</dl>
+<p>Creates/Saves a pandas dataframe of value counts of a dataframe.</p>
+<dl class="simple">
+<dt>Note -</dt><dd><p>Creates a png of the table.</p>
+</dd>
+</dl>
+</dd>
+<dt>Raises:</dt><dd><p>Raises error if the feature data is filled with only nulls or if
+the json file’s snapshot of the given dataframe doesn’t match the
+given dataframe.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="eflow.data_analysis.null_analysis.html" class="btn btn-neutral float-right" title="eflow.data_analysis.null_analysis" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="../index.html" class="btn btn-neutral float-left" title="Welcome to eflow’s documentation!" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2020, Eric Cacciavillani
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

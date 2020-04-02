@@ -77,7 +77,7 @@ class DataFrameSnapshot:
                               directory_path,
                               sub_dir):
         """
-        Desc:
+
             Compares the passed pandas dataframe object to pre defined json
             file.
 
@@ -195,7 +195,7 @@ class DataFrameSnapshot:
                                            feature_name,
                                            hash_type):
         """
-        Desc:
+
             Create a sudo random integer based off the name of the feature and
             a number between 1 and 10.
 
@@ -248,7 +248,7 @@ class DataFrameSnapshot:
                                     df,
                                     df_features):
         """
-        Desc:
+
             Creates a dict of 10 random values for each value based on the
             feature's name and the count of the random values already
             generated.
@@ -320,7 +320,7 @@ class DataFrameSnapshot:
     def __generate_dataframe_snapshot_dict(self,
                                            df):
         """
-        Desc:
+
             Creates a dict representing a snapshot of the dataframe based on
             the arguments when the object was first inited.
 
@@ -356,7 +356,7 @@ class DataFrameSnapshot:
                                               df,
                                               output_folder_path):
         """
-        Desc:
+
             Creates a json file based on the dataframe's generated snapshot dict.
 
         Args:

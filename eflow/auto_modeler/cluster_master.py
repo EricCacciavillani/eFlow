@@ -245,7 +245,7 @@ class AutoCluster(AutoModeler):
     # --- Getters/Setters
     def get_scaled_data(self):
         """
-        Desc:
+
             Get a copy of the stored data
 
         Returns:
@@ -255,7 +255,7 @@ class AutoCluster(AutoModeler):
 
     def get_all_cluster_models(self):
         """
-        Desc:
+
             Gets the model names and model instances in dictionary form.
 
         Return:
@@ -276,7 +276,6 @@ class AutoCluster(AutoModeler):
 
     def delete_scaled_data(self):
         """
-        Desc:
             Removes the matrix data in order to save RAM when running
             analysis on the actual data.
         """
@@ -286,7 +285,6 @@ class AutoCluster(AutoModeler):
     def apply_clustering_data_pipeline(self,
                                        data):
         """
-        Desc:
             Apply the scaler, dimension reduction transformation, matrix shrink
             and second scaler to the data.
 
@@ -309,7 +307,6 @@ class AutoCluster(AutoModeler):
     def get_model(self,
                   model_name):
         """
-        Desc:
             Get the model object from the stored dirctories based on the model
             name.
 
@@ -330,7 +327,6 @@ class AutoCluster(AutoModeler):
                                           display_print=True,
                                           display_visuals=True):
         """
-        Desc:
             Displays hierarchical cluster graphs with provided methods.
 
         Args:
@@ -553,7 +549,7 @@ class AutoCluster(AutoModeler):
                             max_k_value=15,
                             display_visuals=True):
         """
-        Desc:
+
             Create multiple sequences of defined clusters and their related
             inertia values to find the most agreed
 
@@ -613,7 +609,7 @@ class AutoCluster(AutoModeler):
                                     n_cluster_list,
                                     linkage_methods=None):
         """
-        Desc:
+
             Create multiple agglomerative models based on a list of
             'n_clusters' values and defined linkage methods.
         """
@@ -656,7 +652,7 @@ class AutoCluster(AutoModeler):
                             qualitative_features=[],
                             zscore=None):
         """
-        Desc:
+
             Loop through all models and evaluate the given model with
             'evaluate_model'. Read 'evaluate_model' to learn more.
 
@@ -695,7 +691,7 @@ class AutoCluster(AutoModeler):
                        extra_tables=True,
                        statistical_analysis_on_aggregates=True):
         """
-        Desc:
+
             The main purpose of 'evaluate_model' is to display/save tables/plots
             accoiated with describing the model's 'findings' for each cluster.
 
@@ -905,7 +901,7 @@ class AutoCluster(AutoModeler):
                                  df_features,
                                  sub_dir):
         """
-        Desc:
+
             Generate a cluster profile based on the clustered data. A cluster
             profile gets the mean of a numerical series data and the mode of
             a non-numerical one.
@@ -948,7 +944,7 @@ class AutoCluster(AutoModeler):
                                  sub_dir,
                                  filename):
         """
-        Desc:
+
             Creates a dataframe to quickly analyze a matrix of data by mean and
             standard deviation.
 
@@ -997,7 +993,7 @@ class AutoCluster(AutoModeler):
     def __visualize_pca_variance(self,
                                  data):
         """
-        Desc:
+
             Visualize PCA matrix feature importance.
 
         Args:
@@ -1051,7 +1047,7 @@ class AutoCluster(AutoModeler):
                            max_k_value,
                            display_visuals):
         """
-        Desc:
+
             Fit's multiple cluster models and calculates each model's intertia
             value. Because the clustering is subjective; finding the 'elbow' of
             the elbow determines the 'best' model. That job is passed on to
@@ -1132,7 +1128,7 @@ class AutoCluster(AutoModeler):
     def __get_centers(self,
                       model):
         """
-        Desc:
+
             Get's/creates the center point of each cluster.
         Args:
             model: pyclustering
@@ -1165,7 +1161,7 @@ class AutoCluster(AutoModeler):
                                     initial_centers,
                                     k_val):
         """
-        Desc:
+
             Generates simple clustering model's that only require the clustering
             amount.
 
@@ -1199,7 +1195,7 @@ class AutoCluster(AutoModeler):
                                         model_name,
                                         k_val):
         """
-        Desc:
+
             Generates multiple random starting center points.
 
         Args:
@@ -1227,7 +1223,7 @@ class AutoCluster(AutoModeler):
                                  inertias,
                                  display_visuals=True):
         """
-        Desc:
+
             Find the elbow of each sequence and then find the best matching
             elbow that all sequences agree upon.
 
@@ -1446,7 +1442,7 @@ class AutoCluster(AutoModeler):
 
     def __save_update_best_model_clusters(self):
         """
-        Desc:
+
             Generates a directory structure for saving the suggested cluster
             amounts.
         """
@@ -1478,7 +1474,7 @@ class AutoCluster(AutoModeler):
     def __get_unique_random_indexes(self,
                                     k_val):
         """
-        Desc:
+
             Helper function for pyclustering models that require list indexes
             to the scaled data.
 
@@ -1508,7 +1504,7 @@ class AutoCluster(AutoModeler):
     def __determine_curve(self,
                           intertia):
         """
-        Desc:
+
             When for finding the elbow of the graph it's important to understand
             if the curve of the intertia vector is convex or concaved
 
@@ -1558,7 +1554,7 @@ class AutoCluster(AutoModeler):
                                            sub_dir="",
                                            display_visuals=True):
         """
-        Desc:
+
             Darker colors have higher rankings (values)
 
         Args:
@@ -1612,7 +1608,7 @@ class AutoCluster(AutoModeler):
     def __get_color_name(self,
                          color):
         """
-        Desc:
+
             Simple helper function for a simple switch statement.
 
         Args:
@@ -1654,7 +1650,7 @@ class AutoCluster(AutoModeler):
                           center_points,
                           dp):
         """
-        Desc:
+
             Simple helper function to get the right cluster label. Cluster label
             is determined by how close the given data point is to the center
 

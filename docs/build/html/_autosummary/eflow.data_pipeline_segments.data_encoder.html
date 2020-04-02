@@ -1,0 +1,392 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>eflow.data_pipeline_segments.data_encoder &mdash; eflow  documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="eflow.data_pipeline_segments.feature_data_cleaner" href="eflow.data_pipeline_segments.feature_data_cleaner.html" />
+    <link rel="prev" title="eflow.data_analysis.null_analysis" href="eflow.data_analysis.null_analysis.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> eflow
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="eflow.data_analysis.feature_analysis.html">eflow.data_analysis.feature_analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="eflow.data_analysis.null_analysis.html">eflow.data_analysis.null_analysis</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">eflow.data_pipeline_segments.data_encoder</a></li>
+<li class="toctree-l1"><a class="reference internal" href="eflow.data_pipeline_segments.feature_data_cleaner.html">eflow.data_pipeline_segments.feature_data_cleaner</a></li>
+<li class="toctree-l1"><a class="reference internal" href="eflow.data_pipeline_segments.feature_transformer.html">eflow.data_pipeline_segments.feature_transformer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="eflow.data_pipeline_segments.string_cleaner.html">eflow.data_pipeline_segments.string_cleaner</a></li>
+<li class="toctree-l1"><a class="reference internal" href="eflow.data_pipeline_segments.type_fixer.html">eflow.data_pipeline_segments.type_fixer</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="eflow.foundation.data_frame_types.html">eflow.foundation.data_frame_types</a></li>
+<li class="toctree-l1"><a class="reference internal" href="eflow.foundation.data_pipeline.html">eflow.foundation.data_pipeline</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="eflow.model_analysis.classification_analysis.html">eflow.model_analysis.classification_analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="eflow.model_analysis.regression_analysis.html">eflow.model_analysis.regression_analysis</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">eflow</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+      <li>eflow.data_pipeline_segments.data_encoder</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/_autosummary/eflow.data_pipeline_segments.data_encoder.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="module-eflow.data_pipeline_segments.data_encoder">
+<span id="eflow-data-pipeline-segments-data-encoder"></span><h1>eflow.data_pipeline_segments.data_encoder<a class="headerlink" href="#module-eflow.data_pipeline_segments.data_encoder" title="Permalink to this headline">¶</a></h1>
+<p class="rubric">Classes</p>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#eflow.data_pipeline_segments.data_encoder.DataEncoder" title="eflow.data_pipeline_segments.data_encoder.DataEncoder"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DataEncoder</span></code></a>([segment_id, create_file])</p></td>
+<td><p>Attempts to convert features to the correct types.</p></td>
+</tr>
+</tbody>
+</table>
+<dl class="class">
+<dt id="eflow.data_pipeline_segments.data_encoder.DataEncoder">
+<em class="property">class </em><code class="sig-name descname">DataEncoder</code><span class="sig-paren">(</span><em class="sig-param">segment_id=None</em>, <em class="sig-param">create_file=True</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/eflow/data_pipeline_segments/data_encoder.html#DataEncoder"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#eflow.data_pipeline_segments.data_encoder.DataEncoder" title="Permalink to this definition">¶</a></dt>
+<dd><p>Attempts to convert features to the correct types. Will update the
+dataframe and df_features.</p>
+<dl class="method">
+<dt id="eflow.data_pipeline_segments.data_encoder.DataEncoder.apply_value_representation">
+<code class="sig-name descname">apply_value_representation</code><span class="sig-paren">(</span><em class="sig-param">df</em>, <em class="sig-param">df_features</em>, <em class="sig-param">_add_to_que=True</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/eflow/data_pipeline_segments/data_encoder.html#DataEncoder.apply_value_representation"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#eflow.data_pipeline_segments.data_encoder.DataEncoder.apply_value_representation" title="Permalink to this definition">¶</a></dt>
+<dd><blockquote>
+<div><p>Translate features into most understandable/best representation</p>
+</div></blockquote>
+<dl class="simple">
+<dt>Args:</dt><dd><dl class="simple">
+<dt>df: pd.Dataframe</dt><dd><p>Pandas dataframe.</p>
+</dd>
+<dt>df_features: DataFrameTypes from eflow</dt><dd><p>DataFrameTypes object.</p>
+</dd>
+<dt>_add_to_que: bool</dt><dd><p>Hidden variable to determine if the function should be pushed
+to the pipeline segment.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="eflow.data_pipeline_segments.data_encoder.DataEncoder.decode_data">
+<code class="sig-name descname">decode_data</code><span class="sig-paren">(</span><em class="sig-param">df</em>, <em class="sig-param">df_features</em>, <em class="sig-param">apply_value_representation=True</em>, <em class="sig-param">_add_to_que=True</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/eflow/data_pipeline_segments/data_encoder.html#DataEncoder.decode_data"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#eflow.data_pipeline_segments.data_encoder.DataEncoder.decode_data" title="Permalink to this definition">¶</a></dt>
+<dd><blockquote>
+<div><p>Decode the data into non-numerical values for more descriptive analysis.</p>
+</div></blockquote>
+<dl class="simple">
+<dt>Args:</dt><dd><dl class="simple">
+<dt>df: pd.Dataframe</dt><dd><p>Pandas dataframe.</p>
+</dd>
+<dt>df_features: DataFrameTypes from eflow</dt><dd><p>DataFrameTypes object.</p>
+</dd>
+<dt>apply_value_representation: bool</dt><dd><p>Translate features into most understandable/best representation/</p>
+</dd>
+<dt>_add_to_que: bool</dt><dd><p>Hidden variable to determine if the function should be pushed
+to the pipeline segment.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="eflow.data_pipeline_segments.data_encoder.DataEncoder.encode_data">
+<code class="sig-name descname">encode_data</code><span class="sig-paren">(</span><em class="sig-param">df</em>, <em class="sig-param">df_features</em>, <em class="sig-param">apply_value_representation=True</em>, <em class="sig-param">_add_to_que=True</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/eflow/data_pipeline_segments/data_encoder.html#DataEncoder.encode_data"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#eflow.data_pipeline_segments.data_encoder.DataEncoder.encode_data" title="Permalink to this definition">¶</a></dt>
+<dd><blockquote>
+<div><p>Encode the data into numerical values for machine learning processes.</p>
+</div></blockquote>
+<dl class="simple">
+<dt>Args:</dt><dd><dl class="simple">
+<dt>df: pd.Dataframe</dt><dd><p>Pandas dataframe.</p>
+</dd>
+<dt>df_features: DataFrameTypes from eflow</dt><dd><p>DataFrameTypes object.</p>
+</dd>
+<dt>apply_value_representation: bool</dt><dd><p>Translate features into most understandable/best representation/</p>
+</dd>
+<dt>_add_to_que: bool</dt><dd><p>Hidden variable to determine if the function should be pushed
+to the pipeline segment.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="eflow.data_pipeline_segments.data_encoder.DataEncoder.make_dummies">
+<code class="sig-name descname">make_dummies</code><span class="sig-paren">(</span><em class="sig-param">df</em>, <em class="sig-param">df_features</em>, <em class="sig-param">qualitative_features=[]</em>, <em class="sig-param">_feature_values_dict=None</em>, <em class="sig-param">_add_to_que=True</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/eflow/data_pipeline_segments/data_encoder.html#DataEncoder.make_dummies"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#eflow.data_pipeline_segments.data_encoder.DataEncoder.make_dummies" title="Permalink to this definition">¶</a></dt>
+<dd><blockquote>
+<div><p>Create dummies features of based on qualtative feature data and removes
+the original feature.</p>
+<dl class="simple">
+<dt>Note</dt><dd><p>_feature_values_dict does not need to be init. Used for backend
+resource.</p>
+</dd>
+</dl>
+</div></blockquote>
+<dl class="simple">
+<dt>Args:</dt><dd><dl class="simple">
+<dt>df: pd.Dataframe</dt><dd><p>Pandas dataframe.</p>
+</dd>
+<dt>df_features: DataFrameTypes from eflow</dt><dd><p>DataFrameTypes object.</p>
+</dd>
+<dt>qualtative_features: collection of strings</dt><dd><p>Feature names to convert the feature data into dummy features.</p>
+</dd>
+<dt>_add_to_que: bool</dt><dd><p>Hidden variable to determine if the function should be pushed
+to the pipeline segment.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="eflow.data_pipeline_segments.data_encoder.DataEncoder.make_values_bool">
+<code class="sig-name descname">make_values_bool</code><span class="sig-paren">(</span><em class="sig-param">df</em>, <em class="sig-param">df_features</em>, <em class="sig-param">_add_to_que=True</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/eflow/data_pipeline_segments/data_encoder.html#DataEncoder.make_values_bool"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#eflow.data_pipeline_segments.data_encoder.DataEncoder.make_values_bool" title="Permalink to this definition">¶</a></dt>
+<dd><blockquote>
+<div><p>Convert all string bools to numeric bool value</p>
+</div></blockquote>
+<dl class="simple">
+<dt>Args:</dt><dd><dl class="simple">
+<dt>df: pd.Dataframe</dt><dd><p>Pandas dataframe.</p>
+</dd>
+<dt>df_features: DataFrameTypes from eflow</dt><dd><p>DataFrameTypes object.</p>
+</dd>
+<dt>_add_to_que: bool</dt><dd><p>Hidden variable to determine if the function should be pushed
+to the pipeline segment.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="eflow.data_pipeline_segments.data_encoder.DataEncoder.revert_dummies">
+<code class="sig-name descname">revert_dummies</code><span class="sig-paren">(</span><em class="sig-param">df</em>, <em class="sig-param">df_features</em>, <em class="sig-param">qualitative_features=[]</em>, <em class="sig-param">_add_to_que=True</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/eflow/data_pipeline_segments/data_encoder.html#DataEncoder.revert_dummies"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#eflow.data_pipeline_segments.data_encoder.DataEncoder.revert_dummies" title="Permalink to this definition">¶</a></dt>
+<dd><blockquote>
+<div><p>Convert dummies features back to the original feature.</p>
+</div></blockquote>
+<dl class="simple">
+<dt>Args:</dt><dd><dl class="simple">
+<dt>df: pd.Dataframe</dt><dd><p>Pandas dataframe.</p>
+</dd>
+<dt>df_features: DataFrameTypes from eflow</dt><dd><p>DataFrameTypes object.</p>
+</dd>
+<dt>qualitative_features: collection of strings</dt><dd><p>Feature names to convert the dummy features into original feature
+data.</p>
+</dd>
+<dt>_add_to_que: bool</dt><dd><p>Hidden variable to determine if the function should be pushed
+to the pipeline segment.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="eflow.data_pipeline_segments.data_encoder.DataEncoder.revert_value_representation">
+<code class="sig-name descname">revert_value_representation</code><span class="sig-paren">(</span><em class="sig-param">df</em>, <em class="sig-param">df_features</em>, <em class="sig-param">_add_to_que=True</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/eflow/data_pipeline_segments/data_encoder.html#DataEncoder.revert_value_representation"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#eflow.data_pipeline_segments.data_encoder.DataEncoder.revert_value_representation" title="Permalink to this definition">¶</a></dt>
+<dd><blockquote>
+<div><p>Translate features back into worst representation</p>
+</div></blockquote>
+<dl class="simple">
+<dt>Args:</dt><dd><dl class="simple">
+<dt>df: pd.Dataframe</dt><dd><p>Pandas dataframe.</p>
+</dd>
+<dt>df_features: DataFrameTypes from eflow</dt><dd><p>DataFrameTypes object.</p>
+</dd>
+<dt>_add_to_que: bool</dt><dd><p>Hidden variable to determine if the function should be pushed
+to the pipeline segment.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="eflow.data_pipeline_segments.feature_data_cleaner.html" class="btn btn-neutral float-right" title="eflow.data_pipeline_segments.feature_data_cleaner" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="eflow.data_analysis.null_analysis.html" class="btn btn-neutral float-left" title="eflow.data_analysis.null_analysis" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2020, Eric Cacciavillani
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

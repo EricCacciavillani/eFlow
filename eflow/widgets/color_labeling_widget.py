@@ -36,7 +36,7 @@ class ColorLabelingWidget():
         df_features:
             DataFrameTypes object; organizes feature types into groups.
 
-        Returns/Descr:
+        Returns:
             Returns a UI widget to create a JSON file for cleaning.
         """
 
@@ -99,7 +99,7 @@ class ColorLabelingWidget():
     def __select_value(self,
                        **func_kwargs):
         """
-        Desc:
+
             Save colors to dictionary and save json file.
         """
 
@@ -115,7 +115,7 @@ class ColorLabelingWidget():
     def __select_color(self,
                        _):
         """
-        Desc:
+
             Select the color on color picker widget.
         """
 
@@ -125,7 +125,7 @@ class ColorLabelingWidget():
     def __select_feature(self,
                          _):
             """
-            Desc:
+
                 When a feature selection is chosen all the widgets are
                 re-initialized.
             """
