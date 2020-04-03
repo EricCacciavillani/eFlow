@@ -1,0 +1,1 @@
+obj = {'K-Medians': [5, 6, 7], 'K-Means': [5, 6, 7], 'Fuzzy C-Means': [5, 6, 7], 'Cure': [2, 3, 4], 'K-Medoids': [5, 6, 7], 'Somsc': [5, 6, 7]}

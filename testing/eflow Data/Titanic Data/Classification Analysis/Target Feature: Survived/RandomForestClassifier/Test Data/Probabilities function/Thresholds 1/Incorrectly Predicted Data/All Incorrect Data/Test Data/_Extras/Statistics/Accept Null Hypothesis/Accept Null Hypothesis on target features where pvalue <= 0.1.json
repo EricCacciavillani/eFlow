@@ -1,0 +1,78 @@
+{
+  "Survived": {
+    "0 -> 1": {
+      "Sex": {
+        "Kolmogorov-Smirnov statistic": {
+          "P-Value": 3.6443818407505546e-08,
+          "Statistic": 0.9354838709677419
+        }
+      }
+    },
+    "0 -> All": {
+      "Sex": {
+        "Kolmogorov-Smirnov statistic": {
+          "P-Value": 0.00016679233820993122,
+          "Statistic": 0.6904761904761905
+        }
+      }
+    },
+    "1 -> All": {},
+    "P-Values": {
+      "Age": {
+        "Kolmogorov-Smirnov statistic": {
+          "All pvalues": [],
+          "Pvalues Summary": {}
+        }
+      },
+      "SibSp": {
+        "Kolmogorov-Smirnov statistic": {
+          "All pvalues": [],
+          "Pvalues Summary": {}
+        }
+      },
+      "Parch": {
+        "Kolmogorov-Smirnov statistic": {
+          "All pvalues": [],
+          "Pvalues Summary": {}
+        }
+      },
+      "Fare": {
+        "Kolmogorov-Smirnov statistic": {
+          "All pvalues": [],
+          "Pvalues Summary": {}
+        }
+      },
+      "Pclass": {
+        "Kolmogorov-Smirnov statistic": {
+          "All pvalues": [],
+          "Pvalues Summary": {}
+        }
+      },
+      "Embarked": {
+        "Kolmogorov-Smirnov statistic": {
+          "All pvalues": [],
+          "Pvalues Summary": {}
+        }
+      },
+      "Sex": {
+        "Kolmogorov-Smirnov statistic": {
+          "All pvalues": [
+            3.6443818407505546e-08,
+            0.00016679233820993122
+          ],
+          "Pvalues Summary": {
+            "count": 2.0,
+            "mean": 8.341439101416936e-05,
+            "std": 0.00011791422372707419,
+            "min": 3.6443818407505546e-08,
+            "25%": 4.1725417416288435e-05,
+            "50%": 8.341439101416936e-05,
+            "75%": 0.0001251033646120503,
+            "max": 0.00016679233820993122,
+            "var": 1.3903764157158505e-08
+          }
+        }
+      }
+    }
+  }
+}

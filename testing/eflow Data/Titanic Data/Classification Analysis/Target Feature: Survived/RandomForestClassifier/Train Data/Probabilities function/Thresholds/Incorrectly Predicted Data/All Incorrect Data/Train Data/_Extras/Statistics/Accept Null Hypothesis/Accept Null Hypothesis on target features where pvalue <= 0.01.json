@@ -1,0 +1,86 @@
+{
+  "Survived": {
+    "0 -> 1": {
+      "Fare": {
+        "Kolmogorov-Smirnov statistic": {
+          "P-Value": 0.0017643746886559786,
+          "Statistic": 0.42268656716417913
+        }
+      },
+      "Sex": {
+        "Kolmogorov-Smirnov statistic": {
+          "P-Value": 0.0,
+          "Statistic": 0.9253731343283582
+        }
+      }
+    },
+    "0 -> All": {
+      "Sex": {
+        "Kolmogorov-Smirnov statistic": {
+          "P-Value": 3.5178604473884434e-09,
+          "Statistic": 0.6739130434782609
+        }
+      }
+    },
+    "1 -> All": {},
+    "P-Values": {
+      "Age": {
+        "Kolmogorov-Smirnov statistic": {
+          "All pvalues": [],
+          "Pvalues Summary": {}
+        }
+      },
+      "SibSp": {
+        "Kolmogorov-Smirnov statistic": {
+          "All pvalues": [],
+          "Pvalues Summary": {}
+        }
+      },
+      "Parch": {
+        "Kolmogorov-Smirnov statistic": {
+          "All pvalues": [],
+          "Pvalues Summary": {}
+        }
+      },
+      "Fare": {
+        "Kolmogorov-Smirnov statistic": {
+          "All pvalues": [
+            0.0017643746886559786
+          ],
+          "Pvalues Summary": {}
+        }
+      },
+      "Pclass": {
+        "Kolmogorov-Smirnov statistic": {
+          "All pvalues": [],
+          "Pvalues Summary": {}
+        }
+      },
+      "Embarked": {
+        "Kolmogorov-Smirnov statistic": {
+          "All pvalues": [],
+          "Pvalues Summary": {}
+        }
+      },
+      "Sex": {
+        "Kolmogorov-Smirnov statistic": {
+          "All pvalues": [
+            0.0,
+            3.5178604473884434e-09
+          ],
+          "Pvalues Summary": {
+            "count": 2.0,
+            "mean": 1.7589302236942217e-09,
+            "std": 2.4875029776163103e-09,
+            "min": 0.0,
+            "25%": 8.794651118471108e-10,
+            "50%": 1.7589302236942217e-09,
+            "75%": 2.6383953355413325e-09,
+            "max": 3.5178604473884434e-09,
+            "var": 6.1876710636500095e-18
+          }
+        }
+      }
+    }
+  }
+}
