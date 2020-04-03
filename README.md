@@ -3,6 +3,9 @@ I designed this project to help make my life easier for my data science projects
 
 This project was mainly designed for and in Jupyter-Lab. I don't know how well it works in Jupyter-Notebook.
 
+# Documentation
+Can be found by clicking on docs/build/html/index.html in eflow using sphinx.
+
 # Installation
 ```bash
 $ pip install eflow
