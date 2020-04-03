@@ -79,23 +79,22 @@
             
             
               <ul>
-<li class="toctree-l1"><a class="reference internal" href="../../../_autosummary/eflow.data_analysis.feature_analysis.html">eflow.data_analysis.feature_analysis</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../_autosummary/eflow.data_analysis.null_analysis.html">eflow.data_analysis.null_analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../_autosummary/eflow.auto_modeler.auto_cluster.html">AutoCluster</a></li>
 </ul>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../../../_autosummary/eflow.data_pipeline_segments.data_encoder.html">eflow.data_pipeline_segments.data_encoder</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../_autosummary/eflow.data_pipeline_segments.feature_data_cleaner.html">eflow.data_pipeline_segments.feature_data_cleaner</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../_autosummary/eflow.data_pipeline_segments.feature_transformer.html">eflow.data_pipeline_segments.feature_transformer</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../_autosummary/eflow.data_pipeline_segments.string_cleaner.html">eflow.data_pipeline_segments.string_cleaner</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../_autosummary/eflow.data_pipeline_segments.type_fixer.html">eflow.data_pipeline_segments.type_fixer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../_autosummary/eflow.data_analysis.feature_analysis.html">FeatureAnalysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../_autosummary/eflow.data_analysis.null_analysis.html">NullAnalysis</a></li>
 </ul>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../../../_autosummary/eflow.foundation.data_frame_types.html">eflow.foundation.data_frame_types</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../_autosummary/eflow.foundation.data_pipeline.html">eflow.foundation.data_pipeline</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../_autosummary/eflow.data_pipeline_segments.data_encoder.html">DataEncoder</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../_autosummary/eflow.data_pipeline_segments.feature_data_cleaner.html">FeatureDataCleaner</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../_autosummary/eflow.data_pipeline_segments.feature_transformer.html">FeatureTransformer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../_autosummary/eflow.data_pipeline_segments.string_cleaner.html">StringCleaner</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../_autosummary/eflow.data_pipeline_segments.type_fixer.html">TypeFixer</a></li>
 </ul>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../../../_autosummary/eflow.model_analysis.classification_analysis.html">eflow.model_analysis.classification_analysis</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../_autosummary/eflow.model_analysis.regression_analysis.html">eflow.model_analysis.regression_analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../_autosummary/eflow.model_analysis.classification_analysis.html">ClassificationAnalysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../_autosummary/eflow.model_analysis.regression_analysis.html">RegressionAnalysis</a></li>
 </ul>
 
             
@@ -178,7 +177,7 @@
 <span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">deque</span>
 
 
-<div class="viewcode-block" id="FeatureDataCleaner"><a class="viewcode-back" href="../../../_autosummary/eflow.data_pipeline_segments.feature_data_cleaner.html#eflow.data_pipeline_segments.feature_data_cleaner.FeatureDataCleaner">[docs]</a><span class="k">class</span> <span class="nc">FeatureDataCleaner</span><span class="p">(</span><span class="n">DataPipelineSegment</span><span class="p">):</span>
+<div class="viewcode-block" id="FeatureDataCleaner"><a class="viewcode-back" href="../../../_autosummary_old/eflow.data_pipeline_segments.feature_data_cleaner.html#eflow.data_pipeline_segments.feature_data_cleaner.FeatureDataCleaner">[docs]</a><span class="k">class</span> <span class="nc">FeatureDataCleaner</span><span class="p">(</span><span class="n">DataPipelineSegment</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Designed for a multipurpose data cleaner.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
@@ -365,7 +364,7 @@
     <span class="k">def</span> <span class="nf">get_user_inputs</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__ui_widget</span><span class="o">.</span><span class="n">get_user_inputs</span><span class="p">()</span>
 
-<div class="viewcode-block" id="FeatureDataCleaner.run_widget"><a class="viewcode-back" href="../../../_autosummary/eflow.data_pipeline_segments.feature_data_cleaner.html#eflow.data_pipeline_segments.feature_data_cleaner.FeatureDataCleaner.run_widget">[docs]</a>    <span class="k">def</span> <span class="nf">run_widget</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+<div class="viewcode-block" id="FeatureDataCleaner.run_widget"><a class="viewcode-back" href="../../../_autosummary_old/eflow.data_pipeline_segments.feature_data_cleaner.html#eflow.data_pipeline_segments.feature_data_cleaner.FeatureDataCleaner.run_widget">[docs]</a>    <span class="k">def</span> <span class="nf">run_widget</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
                    <span class="n">df</span><span class="p">,</span>
                    <span class="n">df_features</span><span class="p">,</span>
                    <span class="n">nan_feature_names</span><span class="o">=</span><span class="p">[]):</span>
@@ -467,7 +466,7 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">__test_cleaning_methods</span> <span class="o">=</span> <span class="kc">False</span>
 
     <span class="c1"># --- Cleaning options</span>
-<div class="viewcode-block" id="FeatureDataCleaner.make_nan_assertions"><a class="viewcode-back" href="../../../_autosummary/eflow.data_pipeline_segments.feature_data_cleaner.html#eflow.data_pipeline_segments.feature_data_cleaner.FeatureDataCleaner.make_nan_assertions">[docs]</a>    <span class="k">def</span> <span class="nf">make_nan_assertions</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+<div class="viewcode-block" id="FeatureDataCleaner.make_nan_assertions"><a class="viewcode-back" href="../../../_autosummary_old/eflow.data_pipeline_segments.feature_data_cleaner.html#eflow.data_pipeline_segments.feature_data_cleaner.FeatureDataCleaner.make_nan_assertions">[docs]</a>    <span class="k">def</span> <span class="nf">make_nan_assertions</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
                             <span class="n">df</span><span class="p">,</span>
                             <span class="n">df_features</span><span class="p">,</span>
                             <span class="n">feature_name</span><span class="p">,</span>
@@ -517,7 +516,7 @@
         <span class="k">else</span><span class="p">:</span>
             <span class="k">raise</span> <span class="n">UnsatisfiedRequirments</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Boolean assertions can&#39;t be made with this given feature </span><span class="si">{feature_name}</span><span class="s2">.&quot;</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="FeatureDataCleaner.ignore_feature"><a class="viewcode-back" href="../../../_autosummary/eflow.data_pipeline_segments.feature_data_cleaner.html#eflow.data_pipeline_segments.feature_data_cleaner.FeatureDataCleaner.ignore_feature">[docs]</a>    <span class="k">def</span> <span class="nf">ignore_feature</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+<div class="viewcode-block" id="FeatureDataCleaner.ignore_feature"><a class="viewcode-back" href="../../../_autosummary_old/eflow.data_pipeline_segments.feature_data_cleaner.html#eflow.data_pipeline_segments.feature_data_cleaner.FeatureDataCleaner.ignore_feature">[docs]</a>    <span class="k">def</span> <span class="nf">ignore_feature</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
                        <span class="n">df</span><span class="p">,</span>
                        <span class="n">df_features</span><span class="p">,</span>
                        <span class="n">feature_name</span><span class="p">,</span>
@@ -567,7 +566,7 @@
             <span class="c1">#                                            params_dict)</span>
 
 
-<div class="viewcode-block" id="FeatureDataCleaner.drop_feature"><a class="viewcode-back" href="../../../_autosummary/eflow.data_pipeline_segments.feature_data_cleaner.html#eflow.data_pipeline_segments.feature_data_cleaner.FeatureDataCleaner.drop_feature">[docs]</a>    <span class="k">def</span> <span class="nf">drop_feature</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+<div class="viewcode-block" id="FeatureDataCleaner.drop_feature"><a class="viewcode-back" href="../../../_autosummary_old/eflow.data_pipeline_segments.feature_data_cleaner.html#eflow.data_pipeline_segments.feature_data_cleaner.FeatureDataCleaner.drop_feature">[docs]</a>    <span class="k">def</span> <span class="nf">drop_feature</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
                      <span class="n">df</span><span class="p">,</span>
                      <span class="n">df_features</span><span class="p">,</span>
                      <span class="n">feature_name</span><span class="p">,</span>
@@ -614,7 +613,7 @@
                                                                <span class="n">parameters</span><span class="p">,</span>
                                                                <span class="n">params_dict</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="FeatureDataCleaner.remove_nans"><a class="viewcode-back" href="../../../_autosummary/eflow.data_pipeline_segments.feature_data_cleaner.html#eflow.data_pipeline_segments.feature_data_cleaner.FeatureDataCleaner.remove_nans">[docs]</a>    <span class="k">def</span> <span class="nf">remove_nans</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+<div class="viewcode-block" id="FeatureDataCleaner.remove_nans"><a class="viewcode-back" href="../../../_autosummary_old/eflow.data_pipeline_segments.feature_data_cleaner.html#eflow.data_pipeline_segments.feature_data_cleaner.FeatureDataCleaner.remove_nans">[docs]</a>    <span class="k">def</span> <span class="nf">remove_nans</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
                     <span class="n">df</span><span class="p">,</span>
                     <span class="n">df_features</span><span class="p">,</span>
                     <span class="n">feature_name</span><span class="p">,</span>
@@ -664,7 +663,7 @@
                                                                <span class="n">params_dict</span><span class="p">)</span></div>
 
 
-<div class="viewcode-block" id="FeatureDataCleaner.fill_nan_by_distribution"><a class="viewcode-back" href="../../../_autosummary/eflow.data_pipeline_segments.feature_data_cleaner.html#eflow.data_pipeline_segments.feature_data_cleaner.FeatureDataCleaner.fill_nan_by_distribution">[docs]</a>    <span class="k">def</span> <span class="nf">fill_nan_by_distribution</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+<div class="viewcode-block" id="FeatureDataCleaner.fill_nan_by_distribution"><a class="viewcode-back" href="../../../_autosummary_old/eflow.data_pipeline_segments.feature_data_cleaner.html#eflow.data_pipeline_segments.feature_data_cleaner.FeatureDataCleaner.fill_nan_by_distribution">[docs]</a>    <span class="k">def</span> <span class="nf">fill_nan_by_distribution</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
                                  <span class="n">df</span><span class="p">,</span>
                                  <span class="n">df_features</span><span class="p">,</span>
                                  <span class="n">feature_name</span><span class="p">,</span>

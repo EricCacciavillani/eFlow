@@ -1,50 +1,5 @@
-eflow.data\_analysis.feature\_analysis
-======================================
+FeatureAnalysis
+=================================
+**from eflow.data\_analysis.feature\_analysis import FeatureAnalysis**
 
 .. automodule:: eflow.data_analysis.feature_analysis
-
-   
-   
-   .. rubric:: Functions
-
-   .. autosummary::
-   
-      auto_binning
-      average_feature_correlation_table
-      check_if_feature_exists
-      create_dir_structure
-      descr_table
-      dict_to_json_file
-      display
-      feature_correlation_table
-      generate_entropy_table
-      generate_meta_data
-      pickle_object_to_file
-      value_counts_table
-   
-   
-
-   
-   
-   .. rubric:: Classes
-
-   .. autosummary::
-   
-      DataAnalysis
-      DataFrameSnapshot
-      FeatureAnalysis
-      FileOutput
-      GRAPH_DEFAULTS
-   
-   
-
-   
-   
-   .. rubric:: Exceptions
-
-   .. autosummary::
-   
-      SnapshotMismatchError
-      UnsatisfiedRequirments
-   
-   

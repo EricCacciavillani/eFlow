@@ -79,23 +79,22 @@
             
             
               <ul>
-<li class="toctree-l1"><a class="reference internal" href="../../../_autosummary/eflow.data_analysis.feature_analysis.html">eflow.data_analysis.feature_analysis</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../_autosummary/eflow.data_analysis.null_analysis.html">eflow.data_analysis.null_analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../_autosummary/eflow.auto_modeler.auto_cluster.html">AutoCluster</a></li>
 </ul>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../../../_autosummary/eflow.data_pipeline_segments.data_encoder.html">eflow.data_pipeline_segments.data_encoder</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../_autosummary/eflow.data_pipeline_segments.feature_data_cleaner.html">eflow.data_pipeline_segments.feature_data_cleaner</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../_autosummary/eflow.data_pipeline_segments.feature_transformer.html">eflow.data_pipeline_segments.feature_transformer</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../_autosummary/eflow.data_pipeline_segments.string_cleaner.html">eflow.data_pipeline_segments.string_cleaner</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../_autosummary/eflow.data_pipeline_segments.type_fixer.html">eflow.data_pipeline_segments.type_fixer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../_autosummary/eflow.data_analysis.feature_analysis.html">FeatureAnalysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../_autosummary/eflow.data_analysis.null_analysis.html">NullAnalysis</a></li>
 </ul>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../../../_autosummary/eflow.foundation.data_frame_types.html">eflow.foundation.data_frame_types</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../_autosummary/eflow.foundation.data_pipeline.html">eflow.foundation.data_pipeline</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../_autosummary/eflow.data_pipeline_segments.data_encoder.html">DataEncoder</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../_autosummary/eflow.data_pipeline_segments.feature_data_cleaner.html">FeatureDataCleaner</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../_autosummary/eflow.data_pipeline_segments.feature_transformer.html">FeatureTransformer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../_autosummary/eflow.data_pipeline_segments.string_cleaner.html">StringCleaner</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../_autosummary/eflow.data_pipeline_segments.type_fixer.html">TypeFixer</a></li>
 </ul>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../../../_autosummary/eflow.model_analysis.classification_analysis.html">eflow.model_analysis.classification_analysis</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../_autosummary/eflow.model_analysis.regression_analysis.html">eflow.model_analysis.regression_analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../_autosummary/eflow.model_analysis.classification_analysis.html">ClassificationAnalysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../_autosummary/eflow.model_analysis.regression_analysis.html">RegressionAnalysis</a></li>
 </ul>
 
             
@@ -192,7 +191,7 @@
 <span class="n">__maintainer__</span> <span class="o">=</span> <span class="s2">&quot;EricCacciavillani&quot;</span>
 <span class="n">__email__</span> <span class="o">=</span> <span class="s2">&quot;eric.cacciavillani@gmail.com&quot;</span>
 
-<div class="viewcode-block" id="ClassificationAnalysis"><a class="viewcode-back" href="../../../_autosummary/eflow.model_analysis.classification_analysis.html#eflow.model_analysis.classification_analysis.ClassificationAnalysis">[docs]</a><span class="k">class</span> <span class="nc">ClassificationAnalysis</span><span class="p">(</span><span class="n">ModelAnalysis</span><span class="p">):</span>
+<div class="viewcode-block" id="ClassificationAnalysis"><a class="viewcode-back" href="../../../_autosummary_old/eflow.model_analysis.classification_analysis.html#eflow.model_analysis.classification_analysis.ClassificationAnalysis">[docs]</a><span class="k">class</span> <span class="nc">ClassificationAnalysis</span><span class="p">(</span><span class="n">ModelAnalysis</span><span class="p">):</span>
 
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Analyzes a classification model&#39;s result&#39;s based on the prediction</span>
@@ -369,7 +368,7 @@
     <span class="k">def</span> <span class="nf">get_predictions_names</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__pred_funcs_dict</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span>
 
-<div class="viewcode-block" id="ClassificationAnalysis.perform_analysis"><a class="viewcode-back" href="../../../_autosummary/eflow.model_analysis.classification_analysis.html#eflow.model_analysis.classification_analysis.ClassificationAnalysis.perform_analysis">[docs]</a>    <span class="k">def</span> <span class="nf">perform_analysis</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+<div class="viewcode-block" id="ClassificationAnalysis.perform_analysis"><a class="viewcode-back" href="../../../_autosummary_old/eflow.model_analysis.classification_analysis.html#eflow.model_analysis.classification_analysis.ClassificationAnalysis.perform_analysis">[docs]</a>    <span class="k">def</span> <span class="nf">perform_analysis</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
                          <span class="n">X</span><span class="p">,</span>
                          <span class="n">y</span><span class="p">,</span>
                          <span class="n">dataset_name</span><span class="p">,</span>
@@ -600,7 +599,7 @@
         <span class="k">finally</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">__called_from_perform</span> <span class="o">=</span> <span class="kc">False</span></div>
 
-<div class="viewcode-block" id="ClassificationAnalysis.plot_ks_statistic"><a class="viewcode-back" href="../../../_autosummary/eflow.model_analysis.classification_analysis.html#eflow.model_analysis.classification_analysis.ClassificationAnalysis.plot_ks_statistic">[docs]</a>    <span class="k">def</span> <span class="nf">plot_ks_statistic</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+<div class="viewcode-block" id="ClassificationAnalysis.plot_ks_statistic"><a class="viewcode-back" href="../../../_autosummary_old/eflow.model_analysis.classification_analysis.html#eflow.model_analysis.classification_analysis.ClassificationAnalysis.plot_ks_statistic">[docs]</a>    <span class="k">def</span> <span class="nf">plot_ks_statistic</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
                           <span class="n">X</span><span class="p">,</span>
                           <span class="n">y</span><span class="p">,</span>
                           <span class="n">pred_name</span><span class="p">,</span>
@@ -679,7 +678,7 @@
             <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
         <span class="n">plt</span><span class="o">.</span><span class="n">close</span><span class="p">()</span></div>
 
-<div class="viewcode-block" id="ClassificationAnalysis.plot_roc_curve"><a class="viewcode-back" href="../../../_autosummary/eflow.model_analysis.classification_analysis.html#eflow.model_analysis.classification_analysis.ClassificationAnalysis.plot_roc_curve">[docs]</a>    <span class="k">def</span> <span class="nf">plot_roc_curve</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+<div class="viewcode-block" id="ClassificationAnalysis.plot_roc_curve"><a class="viewcode-back" href="../../../_autosummary_old/eflow.model_analysis.classification_analysis.html#eflow.model_analysis.classification_analysis.ClassificationAnalysis.plot_roc_curve">[docs]</a>    <span class="k">def</span> <span class="nf">plot_roc_curve</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
                        <span class="n">X</span><span class="p">,</span>
                        <span class="n">y</span><span class="p">,</span>
                        <span class="n">pred_name</span><span class="p">,</span>
@@ -759,7 +758,7 @@
             <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
         <span class="n">plt</span><span class="o">.</span><span class="n">close</span><span class="p">()</span></div>
 
-<div class="viewcode-block" id="ClassificationAnalysis.plot_cumulative_gain"><a class="viewcode-back" href="../../../_autosummary/eflow.model_analysis.classification_analysis.html#eflow.model_analysis.classification_analysis.ClassificationAnalysis.plot_cumulative_gain">[docs]</a>    <span class="k">def</span> <span class="nf">plot_cumulative_gain</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+<div class="viewcode-block" id="ClassificationAnalysis.plot_cumulative_gain"><a class="viewcode-back" href="../../../_autosummary_old/eflow.model_analysis.classification_analysis.html#eflow.model_analysis.classification_analysis.ClassificationAnalysis.plot_cumulative_gain">[docs]</a>    <span class="k">def</span> <span class="nf">plot_cumulative_gain</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
                              <span class="n">X</span><span class="p">,</span>
                              <span class="n">y</span><span class="p">,</span>
                              <span class="n">pred_name</span><span class="p">,</span>
@@ -840,7 +839,7 @@
             <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
         <span class="n">plt</span><span class="o">.</span><span class="n">close</span><span class="p">()</span></div>
 
-<div class="viewcode-block" id="ClassificationAnalysis.plot_precision_recall_curve"><a class="viewcode-back" href="../../../_autosummary/eflow.model_analysis.classification_analysis.html#eflow.model_analysis.classification_analysis.ClassificationAnalysis.plot_precision_recall_curve">[docs]</a>    <span class="k">def</span> <span class="nf">plot_precision_recall_curve</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+<div class="viewcode-block" id="ClassificationAnalysis.plot_precision_recall_curve"><a class="viewcode-back" href="../../../_autosummary_old/eflow.model_analysis.classification_analysis.html#eflow.model_analysis.classification_analysis.ClassificationAnalysis.plot_precision_recall_curve">[docs]</a>    <span class="k">def</span> <span class="nf">plot_precision_recall_curve</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
                                     <span class="n">X</span><span class="p">,</span>
                                     <span class="n">y</span><span class="p">,</span>
                                     <span class="n">pred_name</span><span class="p">,</span>
@@ -926,7 +925,7 @@
             <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
         <span class="n">plt</span><span class="o">.</span><span class="n">close</span><span class="p">()</span></div>
 
-<div class="viewcode-block" id="ClassificationAnalysis.plot_lift_curve"><a class="viewcode-back" href="../../../_autosummary/eflow.model_analysis.classification_analysis.html#eflow.model_analysis.classification_analysis.ClassificationAnalysis.plot_lift_curve">[docs]</a>    <span class="k">def</span> <span class="nf">plot_lift_curve</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+<div class="viewcode-block" id="ClassificationAnalysis.plot_lift_curve"><a class="viewcode-back" href="../../../_autosummary_old/eflow.model_analysis.classification_analysis.html#eflow.model_analysis.classification_analysis.ClassificationAnalysis.plot_lift_curve">[docs]</a>    <span class="k">def</span> <span class="nf">plot_lift_curve</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
                         <span class="n">X</span><span class="p">,</span>
                         <span class="n">y</span><span class="p">,</span>
                         <span class="n">pred_name</span><span class="p">,</span>
@@ -1009,7 +1008,7 @@
             <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
         <span class="n">plt</span><span class="o">.</span><span class="n">close</span><span class="p">()</span></div>
 
-<div class="viewcode-block" id="ClassificationAnalysis.plot_confusion_matrix"><a class="viewcode-back" href="../../../_autosummary/eflow.model_analysis.classification_analysis.html#eflow.model_analysis.classification_analysis.ClassificationAnalysis.plot_confusion_matrix">[docs]</a>    <span class="k">def</span> <span class="nf">plot_confusion_matrix</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+<div class="viewcode-block" id="ClassificationAnalysis.plot_confusion_matrix"><a class="viewcode-back" href="../../../_autosummary_old/eflow.model_analysis.classification_analysis.html#eflow.model_analysis.classification_analysis.ClassificationAnalysis.plot_confusion_matrix">[docs]</a>    <span class="k">def</span> <span class="nf">plot_confusion_matrix</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
                               <span class="n">X</span><span class="p">,</span>
                               <span class="n">y</span><span class="p">,</span>
                               <span class="n">pred_name</span><span class="p">,</span>
@@ -1096,7 +1095,7 @@
             <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
         <span class="n">plt</span><span class="o">.</span><span class="n">close</span><span class="p">()</span></div>
 
-<div class="viewcode-block" id="ClassificationAnalysis.classification_metrics"><a class="viewcode-back" href="../../../_autosummary/eflow.model_analysis.classification_analysis.html#eflow.model_analysis.classification_analysis.ClassificationAnalysis.classification_metrics">[docs]</a>    <span class="k">def</span> <span class="nf">classification_metrics</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+<div class="viewcode-block" id="ClassificationAnalysis.classification_metrics"><a class="viewcode-back" href="../../../_autosummary_old/eflow.model_analysis.classification_analysis.html#eflow.model_analysis.classification_analysis.ClassificationAnalysis.classification_metrics">[docs]</a>    <span class="k">def</span> <span class="nf">classification_metrics</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
                                <span class="n">X</span><span class="p">,</span>
                                <span class="n">y</span><span class="p">,</span>
                                <span class="n">pred_name</span><span class="p">,</span>
@@ -1249,7 +1248,7 @@
                                                <span class="n">dataset_name</span> <span class="o">+</span> <span class="s2">&quot;/_Extras&quot;</span><span class="p">)</span></div>
 
 
-<div class="viewcode-block" id="ClassificationAnalysis.classification_correct_analysis"><a class="viewcode-back" href="../../../_autosummary/eflow.model_analysis.classification_analysis.html#eflow.model_analysis.classification_analysis.ClassificationAnalysis.classification_correct_analysis">[docs]</a>    <span class="k">def</span> <span class="nf">classification_correct_analysis</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+<div class="viewcode-block" id="ClassificationAnalysis.classification_correct_analysis"><a class="viewcode-back" href="../../../_autosummary_old/eflow.model_analysis.classification_analysis.html#eflow.model_analysis.classification_analysis.ClassificationAnalysis.classification_correct_analysis">[docs]</a>    <span class="k">def</span> <span class="nf">classification_correct_analysis</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
                                         <span class="n">X</span><span class="p">,</span>
                                         <span class="n">y</span><span class="p">,</span>
                                         <span class="n">pred_name</span><span class="p">,</span>
@@ -1426,7 +1425,7 @@
                                                               <span class="n">extra_tables</span><span class="o">=</span><span class="n">extra_tables</span><span class="p">,</span>
                                                               <span class="n">statistical_analysis_on_aggregates</span><span class="o">=</span><span class="n">statistical_analysis_on_aggregates</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="ClassificationAnalysis.classification_error_analysis"><a class="viewcode-back" href="../../../_autosummary/eflow.model_analysis.classification_analysis.html#eflow.model_analysis.classification_analysis.ClassificationAnalysis.classification_error_analysis">[docs]</a>    <span class="k">def</span> <span class="nf">classification_error_analysis</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+<div class="viewcode-block" id="ClassificationAnalysis.classification_error_analysis"><a class="viewcode-back" href="../../../_autosummary_old/eflow.model_analysis.classification_analysis.html#eflow.model_analysis.classification_analysis.ClassificationAnalysis.classification_error_analysis">[docs]</a>    <span class="k">def</span> <span class="nf">classification_error_analysis</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
                                       <span class="n">X</span><span class="p">,</span>
                                       <span class="n">y</span><span class="p">,</span>
                                       <span class="n">pred_name</span><span class="p">,</span>
@@ -1611,7 +1610,7 @@
                                                                   <span class="n">statistical_analysis_on_aggregates</span><span class="o">=</span><span class="n">statistical_analysis_on_aggregates</span><span class="p">)</span></div>
 
 
-<div class="viewcode-block" id="ClassificationAnalysis.classification_report"><a class="viewcode-back" href="../../../_autosummary/eflow.model_analysis.classification_analysis.html#eflow.model_analysis.classification_analysis.ClassificationAnalysis.classification_report">[docs]</a>    <span class="k">def</span> <span class="nf">classification_report</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+<div class="viewcode-block" id="ClassificationAnalysis.classification_report"><a class="viewcode-back" href="../../../_autosummary_old/eflow.model_analysis.classification_analysis.html#eflow.model_analysis.classification_analysis.ClassificationAnalysis.classification_report">[docs]</a>    <span class="k">def</span> <span class="nf">classification_report</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
                               <span class="n">X</span><span class="p">,</span>
                               <span class="n">y</span><span class="p">,</span>
                               <span class="n">pred_name</span><span class="p">,</span>

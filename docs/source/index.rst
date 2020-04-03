@@ -1,11 +1,11 @@
 Welcome to eflow's documentation!
 =================================
 
-.. autopackagesummary:: eflow.data_analysis
+.. autopackagesummary:: eflow.auto_modeler
     :toctree: _autosummary
 
-.. autopackagesummary:: eflow.auto_modeler.cluster_master
-   :toctree: _autosummary
+.. autopackagesummary:: eflow.data_analysis
+    :toctree: _autosummary
 
 .. autopackagesummary:: eflow.data_pipeline_segments
     :toctree: _autosummary

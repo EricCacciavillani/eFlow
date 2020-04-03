@@ -79,23 +79,22 @@
             
             
               <ul>
-<li class="toctree-l1"><a class="reference internal" href="../../../_autosummary/eflow.data_analysis.feature_analysis.html">eflow.data_analysis.feature_analysis</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../_autosummary/eflow.data_analysis.null_analysis.html">eflow.data_analysis.null_analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../_autosummary/eflow.auto_modeler.auto_cluster.html">AutoCluster</a></li>
 </ul>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../../../_autosummary/eflow.data_pipeline_segments.data_encoder.html">eflow.data_pipeline_segments.data_encoder</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../_autosummary/eflow.data_pipeline_segments.feature_data_cleaner.html">eflow.data_pipeline_segments.feature_data_cleaner</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../_autosummary/eflow.data_pipeline_segments.feature_transformer.html">eflow.data_pipeline_segments.feature_transformer</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../_autosummary/eflow.data_pipeline_segments.string_cleaner.html">eflow.data_pipeline_segments.string_cleaner</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../_autosummary/eflow.data_pipeline_segments.type_fixer.html">eflow.data_pipeline_segments.type_fixer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../_autosummary/eflow.data_analysis.feature_analysis.html">FeatureAnalysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../_autosummary/eflow.data_analysis.null_analysis.html">NullAnalysis</a></li>
 </ul>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../../../_autosummary/eflow.foundation.data_frame_types.html">eflow.foundation.data_frame_types</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../_autosummary/eflow.foundation.data_pipeline.html">eflow.foundation.data_pipeline</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../_autosummary/eflow.data_pipeline_segments.data_encoder.html">DataEncoder</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../_autosummary/eflow.data_pipeline_segments.feature_data_cleaner.html">FeatureDataCleaner</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../_autosummary/eflow.data_pipeline_segments.feature_transformer.html">FeatureTransformer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../_autosummary/eflow.data_pipeline_segments.string_cleaner.html">StringCleaner</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../_autosummary/eflow.data_pipeline_segments.type_fixer.html">TypeFixer</a></li>
 </ul>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../../../_autosummary/eflow.model_analysis.classification_analysis.html">eflow.model_analysis.classification_analysis</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../_autosummary/eflow.model_analysis.regression_analysis.html">eflow.model_analysis.regression_analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../_autosummary/eflow.model_analysis.classification_analysis.html">ClassificationAnalysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../_autosummary/eflow.model_analysis.regression_analysis.html">RegressionAnalysis</a></li>
 </ul>
 
             
@@ -194,7 +193,7 @@
 <span class="c1">#                                                         params_dict)</span>
 
 
-<div class="viewcode-block" id="FeatureTransformer"><a class="viewcode-back" href="../../../_autosummary/eflow.data_pipeline_segments.feature_transformer.html#eflow.data_pipeline_segments.feature_transformer.FeatureTransformer">[docs]</a><span class="k">class</span> <span class="nc">FeatureTransformer</span><span class="p">(</span><span class="n">DataPipelineSegment</span><span class="p">):</span>
+<div class="viewcode-block" id="FeatureTransformer"><a class="viewcode-back" href="../../../_autosummary_old/eflow.data_pipeline_segments.feature_transformer.html#eflow.data_pipeline_segments.feature_transformer.FeatureTransformer">[docs]</a><span class="k">class</span> <span class="nc">FeatureTransformer</span><span class="p">(</span><span class="n">DataPipelineSegment</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Combines, removes, scales, etc features of a pandas dataframe.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
@@ -217,7 +216,7 @@
                                      <span class="n">segment_id</span><span class="o">=</span><span class="n">segment_id</span><span class="p">,</span>
                                      <span class="n">create_file</span><span class="o">=</span><span class="n">create_file</span><span class="p">)</span>
 
-<div class="viewcode-block" id="FeatureTransformer.remove_features"><a class="viewcode-back" href="../../../_autosummary/eflow.data_pipeline_segments.feature_transformer.html#eflow.data_pipeline_segments.feature_transformer.FeatureTransformer.remove_features">[docs]</a>    <span class="k">def</span> <span class="nf">remove_features</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+<div class="viewcode-block" id="FeatureTransformer.remove_features"><a class="viewcode-back" href="../../../_autosummary_old/eflow.data_pipeline_segments.feature_transformer.html#eflow.data_pipeline_segments.feature_transformer.FeatureTransformer.remove_features">[docs]</a>    <span class="k">def</span> <span class="nf">remove_features</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
                         <span class="n">df</span><span class="p">,</span>
                         <span class="n">df_features</span><span class="p">,</span>
                         <span class="n">feature_names</span><span class="p">,</span>

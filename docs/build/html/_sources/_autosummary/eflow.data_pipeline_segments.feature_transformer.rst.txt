@@ -1,22 +1,5 @@
-eflow.data\_pipeline\_segments.feature\_transformer
-===================================================
+FeatureTransformer
+=================================
+**from eflow.data\_pipeline\_segments.feature\_transformer import FeatureTransformer**
 
 .. automodule:: eflow.data_pipeline_segments.feature_transformer
-
-   
-   
-   
-
-   
-   
-   .. rubric:: Classes
-
-   .. autosummary::
-   
-      FeatureTransformer
-   
-   
-
-   
-   
-   

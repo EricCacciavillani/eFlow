@@ -79,23 +79,22 @@
             
             
               <ul>
-<li class="toctree-l1"><a class="reference internal" href="../../../_autosummary/eflow.data_analysis.feature_analysis.html">eflow.data_analysis.feature_analysis</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../_autosummary/eflow.data_analysis.null_analysis.html">eflow.data_analysis.null_analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../_autosummary/eflow.auto_modeler.auto_cluster.html">AutoCluster</a></li>
 </ul>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../../../_autosummary/eflow.data_pipeline_segments.data_encoder.html">eflow.data_pipeline_segments.data_encoder</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../_autosummary/eflow.data_pipeline_segments.feature_data_cleaner.html">eflow.data_pipeline_segments.feature_data_cleaner</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../_autosummary/eflow.data_pipeline_segments.feature_transformer.html">eflow.data_pipeline_segments.feature_transformer</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../_autosummary/eflow.data_pipeline_segments.string_cleaner.html">eflow.data_pipeline_segments.string_cleaner</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../_autosummary/eflow.data_pipeline_segments.type_fixer.html">eflow.data_pipeline_segments.type_fixer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../_autosummary/eflow.data_analysis.feature_analysis.html">FeatureAnalysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../_autosummary/eflow.data_analysis.null_analysis.html">NullAnalysis</a></li>
 </ul>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../../../_autosummary/eflow.foundation.data_frame_types.html">eflow.foundation.data_frame_types</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../_autosummary/eflow.foundation.data_pipeline.html">eflow.foundation.data_pipeline</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../_autosummary/eflow.data_pipeline_segments.data_encoder.html">DataEncoder</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../_autosummary/eflow.data_pipeline_segments.feature_data_cleaner.html">FeatureDataCleaner</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../_autosummary/eflow.data_pipeline_segments.feature_transformer.html">FeatureTransformer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../_autosummary/eflow.data_pipeline_segments.string_cleaner.html">StringCleaner</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../_autosummary/eflow.data_pipeline_segments.type_fixer.html">TypeFixer</a></li>
 </ul>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../../../_autosummary/eflow.model_analysis.classification_analysis.html">eflow.model_analysis.classification_analysis</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../_autosummary/eflow.model_analysis.regression_analysis.html">eflow.model_analysis.regression_analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../_autosummary/eflow.model_analysis.classification_analysis.html">ClassificationAnalysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../_autosummary/eflow.model_analysis.regression_analysis.html">RegressionAnalysis</a></li>
 </ul>
 
             
@@ -187,7 +186,7 @@
 <span class="n">__email__</span> <span class="o">=</span> <span class="s2">&quot;eric.cacciavillani@gmail.com&quot;</span>
 
 
-<div class="viewcode-block" id="FeatureAnalysis"><a class="viewcode-back" href="../../../_autosummary/eflow.data_analysis.feature_analysis.html#eflow.data_analysis.feature_analysis.FeatureAnalysis">[docs]</a><span class="k">class</span> <span class="nc">FeatureAnalysis</span><span class="p">(</span><span class="n">DataAnalysis</span><span class="p">):</span>
+<div class="viewcode-block" id="FeatureAnalysis"><a class="viewcode-back" href="../../../_autosummary_old/eflow.data_analysis.feature_analysis.html#eflow.data_analysis.feature_analysis.FeatureAnalysis">[docs]</a><span class="k">class</span> <span class="nc">FeatureAnalysis</span><span class="p">(</span><span class="n">DataAnalysis</span><span class="p">):</span>
 
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Analyzes the feature data of a pandas Dataframe object.</span>
@@ -233,7 +232,7 @@
         <span class="c1"># the dataframe.</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">__called_from_perform</span> <span class="o">=</span> <span class="kc">False</span>
 
-<div class="viewcode-block" id="FeatureAnalysis.perform_analysis"><a class="viewcode-back" href="../../../_autosummary/eflow.data_analysis.feature_analysis.html#eflow.data_analysis.feature_analysis.FeatureAnalysis.perform_analysis">[docs]</a>    <span class="k">def</span> <span class="nf">perform_analysis</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+<div class="viewcode-block" id="FeatureAnalysis.perform_analysis"><a class="viewcode-back" href="../../../_autosummary_old/eflow.data_analysis.feature_analysis.html#eflow.data_analysis.feature_analysis.FeatureAnalysis.perform_analysis">[docs]</a>    <span class="k">def</span> <span class="nf">perform_analysis</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
                          <span class="n">df</span><span class="p">,</span>
                          <span class="n">dataset_name</span><span class="p">,</span>
                          <span class="n">target_features</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
@@ -511,7 +510,7 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">__called_from_perform</span> <span class="o">=</span> <span class="kc">False</span></div>
 
 
-<div class="viewcode-block" id="FeatureAnalysis.analyze_feature"><a class="viewcode-back" href="../../../_autosummary/eflow.data_analysis.feature_analysis.html#eflow.data_analysis.feature_analysis.FeatureAnalysis.analyze_feature">[docs]</a>    <span class="k">def</span> <span class="nf">analyze_feature</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+<div class="viewcode-block" id="FeatureAnalysis.analyze_feature"><a class="viewcode-back" href="../../../_autosummary_old/eflow.data_analysis.feature_analysis.html#eflow.data_analysis.feature_analysis.FeatureAnalysis.analyze_feature">[docs]</a>    <span class="k">def</span> <span class="nf">analyze_feature</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
                         <span class="n">df</span><span class="p">,</span>
                         <span class="n">feature_name</span><span class="p">,</span>
                         <span class="n">dataset_name</span><span class="p">,</span>
@@ -883,7 +882,7 @@
             <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n\n</span><span class="s2">&quot;</span><span class="p">)</span></div>
 
 
-<div class="viewcode-block" id="FeatureAnalysis.plot_distance_graph"><a class="viewcode-back" href="../../../_autosummary/eflow.data_analysis.feature_analysis.html#eflow.data_analysis.feature_analysis.FeatureAnalysis.plot_distance_graph">[docs]</a>    <span class="k">def</span> <span class="nf">plot_distance_graph</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+<div class="viewcode-block" id="FeatureAnalysis.plot_distance_graph"><a class="viewcode-back" href="../../../_autosummary_old/eflow.data_analysis.feature_analysis.html#eflow.data_analysis.feature_analysis.FeatureAnalysis.plot_distance_graph">[docs]</a>    <span class="k">def</span> <span class="nf">plot_distance_graph</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
                             <span class="n">df</span><span class="p">,</span>
                             <span class="n">feature_name</span><span class="p">,</span>
                             <span class="n">dataset_name</span><span class="p">,</span>
@@ -1058,7 +1057,7 @@
         <span class="k">finally</span><span class="p">:</span>
             <span class="n">plt</span><span class="o">.</span><span class="n">close</span><span class="p">(</span><span class="s1">&#39;all&#39;</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="FeatureAnalysis.plot_violin_graph"><a class="viewcode-back" href="../../../_autosummary/eflow.data_analysis.feature_analysis.html#eflow.data_analysis.feature_analysis.FeatureAnalysis.plot_violin_graph">[docs]</a>    <span class="k">def</span> <span class="nf">plot_violin_graph</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+<div class="viewcode-block" id="FeatureAnalysis.plot_violin_graph"><a class="viewcode-back" href="../../../_autosummary_old/eflow.data_analysis.feature_analysis.html#eflow.data_analysis.feature_analysis.FeatureAnalysis.plot_violin_graph">[docs]</a>    <span class="k">def</span> <span class="nf">plot_violin_graph</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
                           <span class="n">df</span><span class="p">,</span>
                           <span class="n">feature_name</span><span class="p">,</span>
                           <span class="n">dataset_name</span><span class="p">,</span>
@@ -1291,7 +1290,7 @@
             <span class="n">plt</span><span class="o">.</span><span class="n">close</span><span class="p">(</span><span class="s1">&#39;all&#39;</span><span class="p">)</span>
             <span class="n">warnings</span><span class="o">.</span><span class="n">filterwarnings</span><span class="p">(</span><span class="s2">&quot;default&quot;</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="FeatureAnalysis.plot_count_graph"><a class="viewcode-back" href="../../../_autosummary/eflow.data_analysis.feature_analysis.html#eflow.data_analysis.feature_analysis.FeatureAnalysis.plot_count_graph">[docs]</a>    <span class="k">def</span> <span class="nf">plot_count_graph</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+<div class="viewcode-block" id="FeatureAnalysis.plot_count_graph"><a class="viewcode-back" href="../../../_autosummary_old/eflow.data_analysis.feature_analysis.html#eflow.data_analysis.feature_analysis.FeatureAnalysis.plot_count_graph">[docs]</a>    <span class="k">def</span> <span class="nf">plot_count_graph</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
                          <span class="n">df</span><span class="p">,</span>
                          <span class="n">feature_name</span><span class="p">,</span>
                          <span class="n">dataset_name</span><span class="p">,</span>
@@ -1484,7 +1483,7 @@
         <span class="k">finally</span><span class="p">:</span>
             <span class="n">plt</span><span class="o">.</span><span class="n">close</span><span class="p">(</span><span class="s1">&#39;all&#39;</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="FeatureAnalysis.plot_pie_graph"><a class="viewcode-back" href="../../../_autosummary/eflow.data_analysis.feature_analysis.html#eflow.data_analysis.feature_analysis.FeatureAnalysis.plot_pie_graph">[docs]</a>    <span class="k">def</span> <span class="nf">plot_pie_graph</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+<div class="viewcode-block" id="FeatureAnalysis.plot_pie_graph"><a class="viewcode-back" href="../../../_autosummary_old/eflow.data_analysis.feature_analysis.html#eflow.data_analysis.feature_analysis.FeatureAnalysis.plot_pie_graph">[docs]</a>    <span class="k">def</span> <span class="nf">plot_pie_graph</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
                        <span class="n">df</span><span class="p">,</span>
                        <span class="n">feature_name</span><span class="p">,</span>
                        <span class="n">dataset_name</span><span class="p">,</span>
@@ -1663,7 +1662,7 @@
         <span class="k">finally</span><span class="p">:</span>
             <span class="n">plt</span><span class="o">.</span><span class="n">close</span><span class="p">(</span><span class="s1">&#39;all&#39;</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="FeatureAnalysis.plot_ridge_graph"><a class="viewcode-back" href="../../../_autosummary/eflow.data_analysis.feature_analysis.html#eflow.data_analysis.feature_analysis.FeatureAnalysis.plot_ridge_graph">[docs]</a>    <span class="k">def</span> <span class="nf">plot_ridge_graph</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+<div class="viewcode-block" id="FeatureAnalysis.plot_ridge_graph"><a class="viewcode-back" href="../../../_autosummary_old/eflow.data_analysis.feature_analysis.html#eflow.data_analysis.feature_analysis.FeatureAnalysis.plot_ridge_graph">[docs]</a>    <span class="k">def</span> <span class="nf">plot_ridge_graph</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
                          <span class="n">df</span><span class="p">,</span>
                          <span class="n">feature_name</span><span class="p">,</span>
                          <span class="n">dataset_name</span><span class="p">,</span>
@@ -1921,7 +1920,7 @@
             <span class="n">plt</span><span class="o">.</span><span class="n">close</span><span class="p">(</span><span class="s1">&#39;all&#39;</span><span class="p">)</span>
             <span class="n">warnings</span><span class="o">.</span><span class="n">filterwarnings</span><span class="p">(</span><span class="s2">&quot;default&quot;</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="FeatureAnalysis.plot_multi_bar_graph"><a class="viewcode-back" href="../../../_autosummary/eflow.data_analysis.feature_analysis.html#eflow.data_analysis.feature_analysis.FeatureAnalysis.plot_multi_bar_graph">[docs]</a>    <span class="k">def</span> <span class="nf">plot_multi_bar_graph</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+<div class="viewcode-block" id="FeatureAnalysis.plot_multi_bar_graph"><a class="viewcode-back" href="../../../_autosummary_old/eflow.data_analysis.feature_analysis.html#eflow.data_analysis.feature_analysis.FeatureAnalysis.plot_multi_bar_graph">[docs]</a>    <span class="k">def</span> <span class="nf">plot_multi_bar_graph</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
                              <span class="n">df</span><span class="p">,</span>
                              <span class="n">feature_name</span><span class="p">,</span>
                              <span class="n">dataset_name</span><span class="p">,</span>
@@ -2086,7 +2085,7 @@
         <span class="k">finally</span><span class="p">:</span>
             <span class="n">plt</span><span class="o">.</span><span class="n">close</span><span class="p">(</span><span class="s1">&#39;all&#39;</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="FeatureAnalysis.statistical_analysis_on_aggregates"><a class="viewcode-back" href="../../../_autosummary/eflow.data_analysis.feature_analysis.html#eflow.data_analysis.feature_analysis.FeatureAnalysis.statistical_analysis_on_aggregates">[docs]</a>    <span class="k">def</span> <span class="nf">statistical_analysis_on_aggregates</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+<div class="viewcode-block" id="FeatureAnalysis.statistical_analysis_on_aggregates"><a class="viewcode-back" href="../../../_autosummary_old/eflow.data_analysis.feature_analysis.html#eflow.data_analysis.feature_analysis.FeatureAnalysis.statistical_analysis_on_aggregates">[docs]</a>    <span class="k">def</span> <span class="nf">statistical_analysis_on_aggregates</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
                                            <span class="n">df</span><span class="p">,</span>
                                            <span class="n">target_features</span><span class="p">,</span>
                                            <span class="n">dataset_name</span><span class="p">,</span>
@@ -2438,7 +2437,7 @@
                                   <span class="sa">f</span><span class="s2">&quot;Reject Null Hypothesis on target features where pvalue &gt;= </span><span class="si">{accept_null_plvalue}</span><span class="s2">&quot;</span><span class="p">,</span>
                                   <span class="n">remove_file_extension</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="FeatureAnalysis.plot_jointplot_graph"><a class="viewcode-back" href="../../../_autosummary/eflow.data_analysis.feature_analysis.html#eflow.data_analysis.feature_analysis.FeatureAnalysis.plot_jointplot_graph">[docs]</a>    <span class="k">def</span> <span class="nf">plot_jointplot_graph</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+<div class="viewcode-block" id="FeatureAnalysis.plot_jointplot_graph"><a class="viewcode-back" href="../../../_autosummary_old/eflow.data_analysis.feature_analysis.html#eflow.data_analysis.feature_analysis.FeatureAnalysis.plot_jointplot_graph">[docs]</a>    <span class="k">def</span> <span class="nf">plot_jointplot_graph</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
                              <span class="n">df</span><span class="p">,</span>
                              <span class="n">feature_name</span><span class="p">,</span>
                              <span class="n">dataset_name</span><span class="p">,</span>
@@ -2635,7 +2634,7 @@
             <span class="n">warnings</span><span class="o">.</span><span class="n">filterwarnings</span><span class="p">(</span><span class="s2">&quot;default&quot;</span><span class="p">)</span></div>
 
 
-<div class="viewcode-block" id="FeatureAnalysis.value_counts_table"><a class="viewcode-back" href="../../../_autosummary/eflow.data_analysis.feature_analysis.html#eflow.data_analysis.feature_analysis.FeatureAnalysis.value_counts_table">[docs]</a>    <span class="k">def</span> <span class="nf">value_counts_table</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+<div class="viewcode-block" id="FeatureAnalysis.value_counts_table"><a class="viewcode-back" href="../../../_autosummary_old/eflow.data_analysis.feature_analysis.html#eflow.data_analysis.feature_analysis.FeatureAnalysis.value_counts_table">[docs]</a>    <span class="k">def</span> <span class="nf">value_counts_table</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
                            <span class="n">df</span><span class="p">,</span>
                            <span class="n">feature_name</span><span class="p">,</span>
                            <span class="n">dataset_name</span><span class="p">,</span>
@@ -2766,7 +2765,7 @@
             <span class="n">plt</span><span class="o">.</span><span class="n">close</span><span class="p">(</span><span class="s1">&#39;all&#39;</span><span class="p">)</span></div>
 
 
-<div class="viewcode-block" id="FeatureAnalysis.descr_table"><a class="viewcode-back" href="../../../_autosummary/eflow.data_analysis.feature_analysis.html#eflow.data_analysis.feature_analysis.FeatureAnalysis.descr_table">[docs]</a>    <span class="k">def</span> <span class="nf">descr_table</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+<div class="viewcode-block" id="FeatureAnalysis.descr_table"><a class="viewcode-back" href="../../../_autosummary_old/eflow.data_analysis.feature_analysis.html#eflow.data_analysis.feature_analysis.FeatureAnalysis.descr_table">[docs]</a>    <span class="k">def</span> <span class="nf">descr_table</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
                     <span class="n">df</span><span class="p">,</span>
                     <span class="n">feature_name</span><span class="p">,</span>
                     <span class="n">dataset_name</span><span class="p">,</span>
@@ -2891,7 +2890,7 @@
         <span class="k">finally</span><span class="p">:</span>
             <span class="n">plt</span><span class="o">.</span><span class="n">close</span><span class="p">(</span><span class="s1">&#39;all&#39;</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="FeatureAnalysis.group_by_feature_value_count_table"><a class="viewcode-back" href="../../../_autosummary/eflow.data_analysis.feature_analysis.html#eflow.data_analysis.feature_analysis.FeatureAnalysis.group_by_feature_value_count_table">[docs]</a>    <span class="k">def</span> <span class="nf">group_by_feature_value_count_table</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+<div class="viewcode-block" id="FeatureAnalysis.group_by_feature_value_count_table"><a class="viewcode-back" href="../../../_autosummary_old/eflow.data_analysis.feature_analysis.html#eflow.data_analysis.feature_analysis.FeatureAnalysis.group_by_feature_value_count_table">[docs]</a>    <span class="k">def</span> <span class="nf">group_by_feature_value_count_table</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
                                            <span class="n">df</span><span class="p">,</span>
                                            <span class="n">feature_name</span><span class="p">,</span>
                                            <span class="n">dataset_name</span><span class="p">,</span>

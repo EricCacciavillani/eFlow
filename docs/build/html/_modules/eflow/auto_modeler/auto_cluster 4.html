@@ -1,0 +1,1866 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>eflow.auto_modeler.auto_cluster &mdash; eflow  documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../../../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+        <script src="../../../_static/jquery.js"></script>
+        <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/doctools.js"></script>
+        <script src="../../../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../../../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../../index.html" class="icon icon-home"> eflow
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../_autosummary/eflow.auto_modeler.auto_cluster.html">eflow.auto_modeler.auto_cluster</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../_autosummary/eflow.data_analysis.feature_analysis.html">eflow.data_analysis.feature_analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../_autosummary/eflow.data_analysis.null_analysis.html">eflow.data_analysis.null_analysis</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../_autosummary/eflow.data_pipeline_segments.data_encoder.html">eflow.data_pipeline_segments.data_encoder</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../_autosummary/eflow.data_pipeline_segments.feature_data_cleaner.html">eflow.data_pipeline_segments.feature_data_cleaner</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../_autosummary/eflow.data_pipeline_segments.feature_transformer.html">eflow.data_pipeline_segments.feature_transformer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../_autosummary/eflow.data_pipeline_segments.string_cleaner.html">eflow.data_pipeline_segments.string_cleaner</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../_autosummary/eflow.data_pipeline_segments.type_fixer.html">eflow.data_pipeline_segments.type_fixer</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">eflow</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../../index.html">Module code</a> &raquo;</li>
+        
+      <li>eflow.auto_modeler.auto_cluster</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for eflow.auto_modeler.auto_cluster</h1><div class="highlight"><pre>
+<span></span>
+<span class="kn">from</span> <span class="nn">eflow._hidden.parent_objects</span> <span class="kn">import</span> <span class="n">AutoModeler</span>
+<span class="kn">from</span> <span class="nn">eflow._hidden.custom_exceptions</span> <span class="kn">import</span> <span class="n">UnsatisfiedRequirments</span>
+<span class="kn">from</span> <span class="nn">eflow.utils.sys_utils</span> <span class="kn">import</span> <span class="n">load_pickle_object</span><span class="p">,</span><span class="n">get_all_files_from_path</span><span class="p">,</span> <span class="n">get_all_directories_from_path</span><span class="p">,</span> <span class="n">pickle_object_to_file</span><span class="p">,</span> <span class="n">create_dir_structure</span><span class="p">,</span> <span class="n">write_object_text_to_file</span><span class="p">,</span> <span class="n">json_file_to_dict</span><span class="p">,</span> <span class="n">dict_to_json_file</span>
+<span class="kn">from</span> <span class="nn">eflow.utils.eflow_utils</span> <span class="kn">import</span> <span class="n">move_folder_to_eflow_garbage</span>
+<span class="kn">from</span> <span class="nn">eflow.utils.modeling_utils</span> <span class="kn">import</span> <span class="n">find_all_zscore_distances_from_target</span>
+<span class="kn">from</span> <span class="nn">eflow.utils.math_utils</span> <span class="kn">import</span> <span class="n">euclidean_distance</span>
+<span class="kn">from</span> <span class="nn">eflow.data_analysis.feature_analysis</span> <span class="kn">import</span> <span class="n">FeatureAnalysis</span>
+<span class="kn">from</span> <span class="nn">eflow.data_pipeline_segments</span> <span class="kn">import</span> <span class="n">DataEncoder</span>
+
+<span class="c1"># Getting Sklearn Models</span>
+<span class="kn">from</span> <span class="nn">sklearn.decomposition</span> <span class="kn">import</span> <span class="n">PCA</span>
+<span class="kn">from</span> <span class="nn">scipy.cluster.hierarchy</span> <span class="kn">import</span> <span class="n">linkage</span><span class="p">,</span> <span class="n">dendrogram</span><span class="p">,</span><span class="n">set_link_color_palette</span>
+<span class="kn">from</span> <span class="nn">sklearn.preprocessing</span> <span class="kn">import</span> <span class="n">StandardScaler</span>
+<span class="kn">from</span> <span class="nn">sklearn.cluster</span> <span class="kn">import</span> <span class="n">AgglomerativeClustering</span>
+<span class="kn">from</span> <span class="nn">sklearn.neighbors</span> <span class="kn">import</span> <span class="n">kneighbors_graph</span>
+
+<span class="c1"># Getting pyclustering</span>
+<span class="kn">from</span> <span class="nn">pyclustering.cluster.kmeans</span> <span class="kn">import</span> <span class="n">kmeans</span>
+<span class="kn">from</span> <span class="nn">pyclustering.cluster.kmedians</span> <span class="kn">import</span> <span class="n">kmedians</span>
+<span class="kn">from</span> <span class="nn">pyclustering.cluster.kmedoids</span> <span class="kn">import</span> <span class="n">kmedoids</span>
+<span class="kn">from</span> <span class="nn">pyclustering.cluster.ema</span> <span class="kn">import</span> <span class="n">ema</span>
+<span class="kn">from</span> <span class="nn">pyclustering.cluster.cure</span> <span class="kn">import</span> <span class="n">cure</span>
+<span class="kn">from</span> <span class="nn">pyclustering.cluster.fcm</span> <span class="kn">import</span> <span class="n">fcm</span>
+<span class="kn">from</span> <span class="nn">pyclustering.cluster.somsc</span> <span class="kn">import</span> <span class="n">somsc</span>
+<span class="kn">from</span> <span class="nn">pyclustering.cluster.center_initializer</span> <span class="kn">import</span> <span class="n">kmeans_plusplus_initializer</span><span class="p">,</span><span class="n">random_center_initializer</span>
+
+<span class="c1"># Visuals libs</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">matplotlib.patches</span> <span class="k">as</span> <span class="nn">mpatches</span>
+<span class="kn">import</span> <span class="nn">pylab</span> <span class="k">as</span> <span class="nn">pl</span>
+<span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
+<span class="kn">from</span> <span class="nn">IPython.display</span> <span class="kn">import</span> <span class="n">display</span><span class="p">,</span> <span class="n">HTML</span>
+
+<span class="c1"># Misc</span>
+<span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">Counter</span>
+<span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">zscore</span>
+<span class="kn">from</span> <span class="nn">kneed</span> <span class="kn">import</span> <span class="n">KneeLocator</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">six</span>
+<span class="kn">import</span> <span class="nn">random</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">copy</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">from</span> <span class="nn">tqdm</span> <span class="kn">import</span> <span class="n">tqdm</span>
+<span class="kn">import</span> <span class="nn">warnings</span>
+
+
+<span class="n">__author__</span> <span class="o">=</span> <span class="s2">&quot;Eric Cacciavillani&quot;</span>
+<span class="n">__copyright__</span> <span class="o">=</span> <span class="s2">&quot;Copyright 2019, eFlow&quot;</span>
+<span class="n">__credits__</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Eric Cacciavillani&quot;</span><span class="p">]</span>
+<span class="n">__license__</span> <span class="o">=</span> <span class="s2">&quot;MIT&quot;</span>
+<span class="n">__maintainer__</span> <span class="o">=</span> <span class="s2">&quot;EricCacciavillani&quot;</span>
+<span class="n">__email__</span> <span class="o">=</span> <span class="s2">&quot;eric.cacciavillani@gmail.com&quot;</span>
+
+
+<div class="viewcode-block" id="AutoCluster"><a class="viewcode-back" href="../../../_autosummary/eflow.auto_modeler.auto_cluster.html#eflow.auto_modeler.auto_cluster.AutoCluster">[docs]</a><span class="k">class</span> <span class="nc">AutoCluster</span><span class="p">(</span><span class="n">AutoModeler</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Analyzes the feature data of a pandas Dataframe object.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+                 <span class="n">df</span><span class="p">,</span>
+                 <span class="n">project_sub_dir</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span>
+                 <span class="n">project_name</span><span class="o">=</span><span class="s2">&quot;Auto Clustering&quot;</span><span class="p">,</span>
+                 <span class="n">overwrite_full_path</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                 <span class="n">notebook_mode</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+                 <span class="n">pca_perc</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Args:</span>
+<span class="sd">            df: pd.Dataframe</span>
+<span class="sd">                pd.Dataframe</span>
+
+<span class="sd">            project_sub_dir: string</span>
+<span class="sd">                Sub directory to write data.</span>
+
+<span class="sd">            project_name: string</span>
+<span class="sd">                Main project directory</span>
+
+<span class="sd">            overwrite_full_path: string</span>
+<span class="sd">                Overwrite full directory path to a given output folder</span>
+
+<span class="sd">            notebook_mode: bool</span>
+<span class="sd">                Display and show in notebook if set to true.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">AutoModeler</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+                             <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{project_sub_dir}</span><span class="s1">/</span><span class="si">{project_name}</span><span class="s1">&#39;</span><span class="p">,</span>
+                             <span class="n">overwrite_full_path</span><span class="p">)</span>
+
+
+        <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">folder_path</span> <span class="o">+</span> <span class="s2">&quot;_Extras&quot;</span><span class="p">):</span>
+            <span class="n">move_folder_to_eflow_garbage</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">folder_path</span><span class="o">+</span><span class="s2">&quot;_Extras&quot;</span><span class="p">,</span>
+                                         <span class="s2">&quot;Auto Clustering&quot;</span><span class="p">)</span>
+
+
+        <span class="c1"># Define model</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__cluster_models_paths</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">__notebook_mode</span> <span class="o">=</span> <span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="n">notebook_mode</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">__models_suggested_clusters</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">__pca</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__pca_perc</span> <span class="o">=</span> <span class="kc">None</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">__first_scaler</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__second_scaler</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__cutoff_index</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__pca_perc</span> <span class="o">=</span> <span class="n">pca_perc</span>
+
+        <span class="c1"># --- Apply pca ---</span>
+        <span class="k">if</span> <span class="n">pca_perc</span><span class="p">:</span>
+
+            <span class="c1"># Create scaler object</span>
+            <span class="n">scaler</span> <span class="o">=</span> <span class="n">StandardScaler</span><span class="p">()</span>
+            <span class="n">scaled</span> <span class="o">=</span> <span class="n">scaler</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">__first_scaler</span> <span class="o">=</span> <span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="n">scaler</span><span class="p">)</span>
+
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Inspecting scaled results!&quot;</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__inspect_feature_matrix</span><span class="p">(</span><span class="n">matrix</span><span class="o">=</span><span class="n">scaled</span><span class="p">,</span>
+                                          <span class="n">feature_names</span><span class="o">=</span><span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="p">,</span>
+                                          <span class="n">sub_dir</span><span class="o">=</span><span class="s2">&quot;PCA&quot;</span><span class="p">,</span>
+                                          <span class="n">filename</span><span class="o">=</span><span class="s2">&quot;Applied scaler results&quot;</span><span class="p">)</span>
+
+            <span class="n">pca</span><span class="p">,</span> <span class="n">scaled</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__visualize_pca_variance</span><span class="p">(</span><span class="n">scaled</span><span class="p">)</span>
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">__pca</span> <span class="o">=</span> <span class="n">pca</span>
+
+            <span class="c1"># Generate &quot;dummy&quot; feature names</span>
+            <span class="n">pca_feature_names</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;PCA_Feature_&quot;</span> <span class="o">+</span>
+                                 <span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span>
+                                                       <span class="nb">len</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)]</span>
+
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Inspecting applied scaler and pca results!&quot;</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__inspect_feature_matrix</span><span class="p">(</span><span class="n">matrix</span><span class="o">=</span><span class="n">scaled</span><span class="p">,</span>
+                                          <span class="n">feature_names</span><span class="o">=</span><span class="n">pca_feature_names</span><span class="p">,</span>
+                                          <span class="n">sub_dir</span><span class="o">=</span><span class="s2">&quot;PCA&quot;</span><span class="p">,</span>
+                                          <span class="n">filename</span><span class="o">=</span><span class="s2">&quot;Applied scaler and PCA results&quot;</span><span class="p">)</span>
+
+            <span class="k">if</span> <span class="n">pca_perc</span> <span class="o">&lt;</span> <span class="mf">1.0</span><span class="p">:</span>
+                <span class="c1"># Find cut off point on cumulative sum</span>
+                <span class="n">cutoff_index</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span>
+                    <span class="n">pca</span><span class="o">.</span><span class="n">explained_variance_ratio_</span><span class="o">.</span><span class="n">cumsum</span><span class="p">()</span> <span class="o">&gt;</span> <span class="n">pca_perc</span><span class="p">)[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">cutoff_index</span> <span class="o">=</span> <span class="n">scaled</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="mi">1</span>
+
+            <span class="nb">print</span><span class="p">(</span>
+                <span class="s2">&quot;After applying pca with a cutoff percentage </span><span class="si">{0}</span><span class="s2">%&quot;</span>
+                <span class="s2">&quot; for the cumulative index. Using features 1 to </span><span class="si">{1}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                    <span class="n">pca_perc</span><span class="p">,</span> <span class="n">cutoff_index</span> <span class="o">+</span> <span class="mi">1</span><span class="p">))</span>
+
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Old shape </span><span class="si">{0}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">scaled</span><span class="o">.</span><span class="n">shape</span><span class="p">))</span>
+
+            <span class="n">scaled</span> <span class="o">=</span> <span class="n">scaled</span><span class="p">[:,</span> <span class="p">:</span><span class="n">cutoff_index</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span>
+            <span class="n">pca_feature_names</span> <span class="o">=</span> <span class="n">pca_feature_names</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span> <span class="n">cutoff_index</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span>
+
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;New shape </span><span class="si">{0}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">scaled</span><span class="o">.</span><span class="n">shape</span><span class="p">))</span>
+
+            <span class="n">scaled</span> <span class="o">=</span> <span class="n">scaler</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">scaled</span><span class="p">)</span>
+
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Inspecting data after final scaler applied!&quot;</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__inspect_feature_matrix</span><span class="p">(</span><span class="n">matrix</span><span class="o">=</span><span class="n">scaled</span><span class="p">,</span>
+                                          <span class="n">feature_names</span><span class="o">=</span><span class="n">pca_feature_names</span><span class="p">,</span>
+                                          <span class="n">sub_dir</span><span class="o">=</span><span class="s2">&quot;PCA&quot;</span><span class="p">,</span>
+                                          <span class="n">filename</span><span class="o">=</span><span class="s2">&quot;Applied final sclaer to process.&quot;</span><span class="p">)</span>
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">__second_scaler</span> <span class="o">=</span> <span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="n">scaler</span><span class="p">)</span>
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">__scaled</span> <span class="o">=</span> <span class="n">scaled</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__cutoff_index</span> <span class="o">=</span> <span class="n">cutoff_index</span>
+
+        <span class="c1"># Assumed PCA has already been applied; pass as matrix</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__scaled</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">values</span>
+
+        <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">folder_path</span> <span class="o">+</span> <span class="s2">&quot;Models&quot;</span><span class="p">):</span>
+
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Found past models in directory structure! Attempting to re-initalize models...&quot;</span><span class="p">)</span>
+
+            <span class="n">cluster_directories</span> <span class="o">=</span> <span class="n">get_all_directories_from_path</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">folder_path</span> <span class="o">+</span> <span class="s2">&quot;Models&quot;</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">cluster_dir</span> <span class="ow">in</span> <span class="n">cluster_directories</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">cluster_dir</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">!=</span> <span class="s2">&quot;.&quot;</span><span class="p">:</span>
+                    <span class="k">for</span> <span class="nb">dir</span> <span class="ow">in</span> <span class="n">get_all_directories_from_path</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">folder_path</span> <span class="o">+</span> <span class="sa">f</span><span class="s2">&quot;Models/</span><span class="si">{cluster_dir}</span><span class="s2">&quot;</span><span class="p">):</span>
+                        <span class="k">if</span> <span class="nb">dir</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">!=</span> <span class="s2">&quot;.&quot;</span><span class="p">:</span>
+                            <span class="k">for</span> <span class="n">model_name</span> <span class="ow">in</span> <span class="n">get_all_files_from_path</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">folder_path</span> <span class="o">+</span> <span class="sa">f</span><span class="s2">&quot;Models/</span><span class="si">{cluster_dir}</span><span class="s2">/</span><span class="si">{dir}</span><span class="s2">&quot;</span><span class="p">,</span>
+                                                                      <span class="s2">&quot;.pkl&quot;</span><span class="p">):</span>
+
+                                <span class="n">model_path</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">folder_path</span> <span class="o">+</span> <span class="sa">f</span><span class="s2">&quot;Models/</span><span class="si">{cluster_dir}</span><span class="s2">/</span><span class="si">{dir}</span><span class="s2">/</span><span class="si">{model_name}</span><span class="s2">&quot;</span>
+
+                                <span class="k">try</span><span class="p">:</span>
+                                    <span class="n">obj</span> <span class="o">=</span> <span class="n">load_pickle_object</span><span class="p">(</span><span class="n">model_path</span><span class="p">)</span>
+
+                                    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span><span class="nb">list</span><span class="p">)</span> <span class="ow">or</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">):</span>
+                                        <span class="k">continue</span>
+                                    <span class="k">else</span><span class="p">:</span>
+                                        <span class="k">del</span> <span class="n">obj</span>
+
+                                    <span class="n">model_name</span> <span class="o">=</span> <span class="n">model_name</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;.&quot;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+
+                                    <span class="bp">self</span><span class="o">.</span><span class="n">__cluster_models_paths</span><span class="p">[</span>
+                                        <span class="n">model_name</span><span class="p">]</span> <span class="o">=</span> <span class="n">model_path</span>
+                                <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
+                                    <span class="k">pass</span>
+
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">__cluster_models_paths</span><span class="p">:</span>
+                <span class="k">for</span> <span class="n">model_name</span><span class="p">,</span> <span class="n">model_path</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">__cluster_models_paths</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+                    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{model_name}</span><span class="s2"> was found at </span><span class="si">{model_path}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+
+        <span class="c1"># Save objects to directory structure</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">__pca</span><span class="p">:</span>
+            <span class="n">pipeline_path</span> <span class="o">=</span> <span class="n">create_dir_structure</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">folder_path</span><span class="p">,</span>
+                                                 <span class="s2">&quot;Data Pipeline&quot;</span><span class="p">)</span>
+
+
+            <span class="c1"># Pickle data pipeline objects</span>
+            <span class="n">pickle_object_to_file</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__pca</span><span class="p">,</span>
+                                  <span class="n">pipeline_path</span><span class="p">,</span>
+                                  <span class="s2">&quot;PCA&quot;</span><span class="p">)</span>
+
+            <span class="n">pickle_object_to_file</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__first_scaler</span><span class="p">,</span>
+                                  <span class="n">pipeline_path</span><span class="p">,</span>
+                                  <span class="s2">&quot;First Scaler&quot;</span><span class="p">)</span>
+
+            <span class="n">pickle_object_to_file</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__second_scaler</span><span class="p">,</span>
+                                  <span class="n">pipeline_path</span><span class="p">,</span>
+                                  <span class="s2">&quot;First Scaler&quot;</span><span class="p">)</span>
+
+            <span class="n">pickle_object_to_file</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__pca_perc</span><span class="p">,</span>
+                                  <span class="n">pipeline_path</span><span class="p">,</span>
+                                  <span class="s2">&quot;PCA Percentage&quot;</span><span class="p">)</span>
+
+            <span class="c1"># Save Dimensions and Cutoff Index</span>
+            <span class="n">write_object_text_to_file</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__cutoff_index</span><span class="p">,</span>
+                                      <span class="n">pipeline_path</span><span class="p">,</span>
+                                      <span class="s2">&quot;Cutoff Index&quot;</span><span class="p">)</span>
+
+            <span class="n">write_object_text_to_file</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__cutoff_index</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span>
+                                      <span class="n">pipeline_path</span><span class="p">,</span>
+                                      <span class="s2">&quot;Dimensions&quot;</span><span class="p">)</span>
+
+
+
+    <span class="c1"># --- Getters/Setters</span>
+<div class="viewcode-block" id="AutoCluster.get_scaled_data"><a class="viewcode-back" href="../../../_autosummary/eflow.auto_modeler.auto_cluster.html#eflow.auto_modeler.auto_cluster.AutoCluster.get_scaled_data">[docs]</a>    <span class="k">def</span> <span class="nf">get_scaled_data</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">            Get a copy of the stored data</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Returns the stored data</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__scaled</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="AutoCluster.get_all_cluster_models"><a class="viewcode-back" href="../../../_autosummary/eflow.auto_modeler.auto_cluster.html#eflow.auto_modeler.auto_cluster.AutoCluster.get_all_cluster_models">[docs]</a>    <span class="k">def</span> <span class="nf">get_all_cluster_models</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">            Gets the model names and model instances in dictionary form.</span>
+
+<span class="sd">        Return:</span>
+<span class="sd">            Returns the model name to model instance dict</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">tmp_dict</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">model_name</span><span class="p">,</span> <span class="n">model_path</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">__cluster_models_paths</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+
+            <span class="k">try</span><span class="p">:</span>
+
+                <span class="n">model</span> <span class="o">=</span> <span class="n">load_pickle_object</span><span class="p">(</span><span class="n">model_path</span><span class="p">)</span>
+
+                <span class="n">tmp_dict</span><span class="p">[</span><span class="n">model_name</span><span class="p">]</span> <span class="o">=</span> <span class="n">model</span>
+            <span class="k">except</span> <span class="ne">EOFError</span><span class="p">:</span>
+                <span class="k">pass</span>
+
+        <span class="k">return</span> <span class="n">tmp_dict</span></div>
+
+<div class="viewcode-block" id="AutoCluster.delete_scaled_data"><a class="viewcode-back" href="../../../_autosummary/eflow.auto_modeler.auto_cluster.html#eflow.auto_modeler.auto_cluster.AutoCluster.delete_scaled_data">[docs]</a>    <span class="k">def</span> <span class="nf">delete_scaled_data</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">            Removes the matrix data in order to save RAM when running</span>
+<span class="sd">            analysis on the actual data.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">del</span> <span class="bp">self</span><span class="o">.</span><span class="n">__scaled</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__scaled</span> <span class="o">=</span> <span class="kc">None</span></div>
+
+<div class="viewcode-block" id="AutoCluster.apply_clustering_data_pipeline"><a class="viewcode-back" href="../../../_autosummary/eflow.auto_modeler.auto_cluster.html#eflow.auto_modeler.auto_cluster.AutoCluster.apply_clustering_data_pipeline">[docs]</a>    <span class="k">def</span> <span class="nf">apply_clustering_data_pipeline</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+                                       <span class="n">data</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">            Apply the scaler, dimension reduction transformation, matrix shrink</span>
+<span class="sd">            and second scaler to the data.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            data: np.matrix, list of lists, pd.DataFrame</span>
+<span class="sd">                Data that is similar in form and value structure to the data passed</span>
+<span class="sd">                on initialization.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Returns back data after transformations are applied.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__first_scaler</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__pca</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="n">data</span><span class="p">[:,</span> <span class="p">:</span><span class="bp">self</span><span class="o">.</span><span class="n">__cutoff_index</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__second_scaler</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">data</span></div>
+
+<div class="viewcode-block" id="AutoCluster.get_model"><a class="viewcode-back" href="../../../_autosummary/eflow.auto_modeler.auto_cluster.html#eflow.auto_modeler.auto_cluster.AutoCluster.get_model">[docs]</a>    <span class="k">def</span> <span class="nf">get_model</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+                  <span class="n">model_name</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">            Get the model object from the stored dirctories based on the model</span>
+<span class="sd">            name.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            model_name: str</span>
+<span class="sd">                Name of the model that references the saved model in</span>
+<span class="sd">                the provided directory.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Gives back the model object.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">return</span> <span class="n">load_pickle_object</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__cluster_models_paths</span><span class="p">[</span><span class="n">model_name</span><span class="p">])</span></div>
+
+
+<div class="viewcode-block" id="AutoCluster.visualize_hierarchical_clustering"><a class="viewcode-back" href="../../../_autosummary/eflow.auto_modeler.auto_cluster.html#eflow.auto_modeler.auto_cluster.AutoCluster.visualize_hierarchical_clustering">[docs]</a>    <span class="k">def</span> <span class="nf">visualize_hierarchical_clustering</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+                                          <span class="n">linkage_methods</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                                          <span class="n">display_print</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                                          <span class="n">display_visuals</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">            Displays hierarchical cluster graphs with provided methods.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            linkage_methods: list of strings</span>
+<span class="sd">                All methods applied to the linkage</span>
+
+<span class="sd">            display_print: bool</span>
+<span class="sd">                Display print outputs</span>
+
+<span class="sd">            display_visuals: bool</span>
+<span class="sd">                Display plot data if set to ture.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            All cluster counts found.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">best_clusters</span> <span class="o">=</span> <span class="p">[]</span>
+
+        <span class="c1"># ---</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">linkage_methods</span><span class="p">:</span>
+            <span class="n">linkage_methods</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;complete&quot;</span><span class="p">,</span>
+                               <span class="s2">&quot;single&quot;</span><span class="p">,</span>
+                               <span class="s2">&quot;weighted&quot;</span><span class="p">,</span>
+                               <span class="s2">&quot;ward&quot;</span><span class="p">,</span>
+                               <span class="s2">&quot;average&quot;</span><span class="p">,</span>
+                               <span class="s2">&quot;centroid&quot;</span><span class="p">,</span>
+                               <span class="s2">&quot;median&quot;</span><span class="p">]</span>
+
+        <span class="c1"># Apply methods to each dendrogram</span>
+        <span class="k">for</span> <span class="n">method</span> <span class="ow">in</span> <span class="n">linkage_methods</span><span class="p">:</span>
+
+            <span class="k">if</span> <span class="n">display_print</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Creating graphic for Hierarchical Clustering Method: </span><span class="si">{method}</span><span class="s2">...&quot;</span><span class="p">)</span>
+
+            <span class="c1"># Create mergings</span>
+            <span class="n">mergings</span> <span class="o">=</span> <span class="n">linkage</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__scaled</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="n">method</span><span class="p">)</span>
+
+             <span class="c1"># {&quot;Yellow&quot;:&quot;#d3d255&quot;,</span>
+             <span class="c1"># &quot;Magenta&quot;:&quot;#c82bc9&quot;,</span>
+             <span class="c1"># &quot;Black&quot;:&quot;#030303&quot;,</span>
+             <span class="c1"># &quot;Red&quot;:&quot;#ff403e&quot;,</span>
+             <span class="c1"># &quot;Green&quot;:&quot;#3f9f3f&quot;,</span>
+             <span class="c1"># &quot;Cyan&quot;:&quot;#0ec1c2&quot;,</span>
+             <span class="c1"># &quot;Brown&quot;: &quot;#775549&quot;,</span>
+             <span class="c1"># &quot;Silver&quot;: &quot;#C0C0C0&quot;,</span>
+             <span class="c1"># &quot;Blue&quot;:&quot;#24326f&quot;,</span>
+             <span class="c1"># &quot;Orange&quot;:&quot;#cc7722&quot;,</span>
+             <span class="c1"># &quot;Mauve&quot;:&quot;#9c7c8c&quot;}</span>
+
+            <span class="c1"># Set plot</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">7</span><span class="p">))</span>
+            <span class="n">set_link_color_palette</span><span class="p">(</span><span class="kc">None</span><span class="p">)</span>
+
+            <span class="c1"># Plot the dendrogram, using varieties as labels</span>
+            <span class="n">color_list</span> <span class="o">=</span> <span class="n">dendrogram</span><span class="p">(</span><span class="n">mergings</span><span class="p">,</span>
+                                    <span class="n">labels</span><span class="o">=</span><span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__scaled</span><span class="p">,))),</span>
+                                    <span class="n">leaf_rotation</span><span class="o">=</span><span class="mi">90</span><span class="p">,</span>
+                                    <span class="n">leaf_font_size</span><span class="o">=</span><span class="mi">3</span><span class="p">)[</span><span class="s2">&quot;color_list&quot;</span><span class="p">]</span>
+
+            <span class="n">method</span> <span class="o">=</span> <span class="n">method</span><span class="o">.</span><span class="n">capitalize</span><span class="p">()</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Hierarchical Clustering Method : </span><span class="se">\&#39;</span><span class="si">{method}</span><span class="se">\&#39;</span><span class="s2">&quot;</span><span class="p">)</span>
+
+            <span class="c1"># -----</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">save_plot</span><span class="p">(</span><span class="s2">&quot;Hierarchical Clustering&quot;</span><span class="p">,</span>
+                           <span class="sa">f</span><span class="s2">&quot;Hierarchical Clustering Method </span><span class="si">{method}</span><span class="s2"> without legend&quot;</span><span class="p">)</span>
+
+            <span class="k">del</span> <span class="n">mergings</span>
+
+
+            <span class="c1"># Create proper cluster names based on the color names</span>
+            <span class="n">color_cluster_count</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
+            <span class="n">last_color</span> <span class="o">=</span> <span class="kc">None</span>
+            <span class="n">known_colors</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+            <span class="n">color_cluster_order</span> <span class="o">=</span> <span class="nb">list</span><span class="p">()</span>
+            <span class="n">seq_len</span> <span class="o">=</span> <span class="mi">0</span>
+            <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span>
+
+            <span class="c1"># -----</span>
+            <span class="k">for</span> <span class="n">color</span> <span class="ow">in</span> <span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="n">color_list</span><span class="p">):</span>
+
+                <span class="c1"># Proper color name</span>
+                <span class="n">color</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__get_color_name</span><span class="p">(</span><span class="n">color</span><span class="p">)</span>
+
+                <span class="c1"># Name for old cluster color sequence found</span>
+                <span class="k">if</span> <span class="n">color</span> <span class="ow">in</span> <span class="n">known_colors</span><span class="p">:</span>
+                    <span class="n">color_list</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{color}</span><span class="s2"> cluster </span><span class="si">{color_cluster_count[color]}</span><span class="s2">&quot;</span>
+
+                <span class="c1"># Name for new cluster color sequence found</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">color_list</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{color}</span><span class="s2"> cluster 0&quot;</span>
+
+                <span class="c1"># Track unique cluster color order</span>
+                <span class="k">if</span> <span class="n">color_list</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">color_cluster_order</span><span class="p">:</span>
+                    <span class="n">color_cluster_order</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">color_list</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+
+                <span class="k">if</span> <span class="n">last_color</span><span class="p">:</span>
+                    <span class="c1"># Sequence of color has yet to be broken</span>
+                    <span class="k">if</span> <span class="n">last_color</span> <span class="o">==</span> <span class="n">color</span><span class="p">:</span>
+
+                        <span class="c1"># Only really need to check if the sequence has a length of 1</span>
+                        <span class="k">if</span> <span class="n">seq_len</span> <span class="o">&lt;=</span> <span class="mi">2</span><span class="p">:</span>
+                            <span class="n">seq_len</span> <span class="o">+=</span> <span class="mi">1</span>
+
+                    <span class="c1"># Sequence break</span>
+                    <span class="k">else</span><span class="p">:</span>
+
+                        <span class="c1"># Valid cluster found</span>
+                        <span class="k">if</span> <span class="n">seq_len</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+
+                            <span class="c1"># Track all known color names</span>
+                            <span class="k">if</span> <span class="n">last_color</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">known_colors</span><span class="p">:</span>
+                                <span class="n">known_colors</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">last_color</span><span class="p">)</span>
+
+                            <span class="c1"># If color is repeated; then make a new cluster count name</span>
+                            <span class="k">if</span> <span class="n">last_color</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">color_cluster_count</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+                                <span class="n">color_cluster_count</span><span class="p">[</span><span class="n">last_color</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+                            <span class="k">else</span><span class="p">:</span>
+                                <span class="n">color_cluster_count</span><span class="p">[</span><span class="n">last_color</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+
+                        <span class="c1"># Invalid color cluster found; apply needed changes</span>
+                        <span class="k">else</span><span class="p">:</span>
+                            <span class="n">color_list</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+                            <span class="n">i</span> <span class="o">-=</span> <span class="mi">1</span>
+
+                        <span class="n">seq_len</span> <span class="o">=</span> <span class="mi">0</span>
+
+                <span class="n">last_color</span> <span class="o">=</span> <span class="n">color</span>
+                <span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
+
+            <span class="c1"># Create legend for each cluster name and the amount of per sample</span>
+            <span class="n">counter_object</span> <span class="o">=</span> <span class="n">Counter</span><span class="p">(</span><span class="n">color_list</span><span class="p">)</span>
+            <span class="n">cluster_color_count</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
+            <span class="n">handles</span> <span class="o">=</span> <span class="p">[]</span>
+
+            <span class="c1"># Make sure the legend is in the same order the cluster appear in the dendrogram</span>
+            <span class="k">for</span> <span class="n">color_cluster_name</span> <span class="ow">in</span> <span class="n">color_cluster_order</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">color_cluster_name</span> <span class="ow">in</span> <span class="n">counter_object</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+                    <span class="n">cluster_color_count</span><span class="p">[</span><span class="n">color_cluster_name</span><span class="p">]</span> <span class="o">=</span> <span class="n">counter_object</span><span class="p">[</span><span class="n">color_cluster_name</span><span class="p">]</span>
+                    <span class="k">try</span><span class="p">:</span>
+                        <span class="n">handles</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">mpatches</span><span class="o">.</span><span class="n">Patch</span><span class="p">(</span>
+                            <span class="n">color</span><span class="o">=</span><span class="n">color_cluster_name</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot; cluster &quot;</span><span class="p">)[</span><span class="mi">0</span><span class="p">],</span>
+                            <span class="n">label</span><span class="o">=</span><span class="n">color_cluster_name</span> <span class="o">+</span> <span class="sa">f</span><span class="s2">&quot;: </span><span class="si">{counter_object[color_cluster_name]}</span><span class="s2"> samples&quot;</span><span class="p">))</span>
+
+                    <span class="k">except</span><span class="p">:</span>
+                        <span class="n">handles</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">mpatches</span><span class="o">.</span><span class="n">Patch</span><span class="p">(</span>
+                            <span class="n">color</span><span class="o">=</span><span class="s2">&quot;black&quot;</span><span class="p">,</span>
+                            <span class="n">label</span><span class="o">=</span><span class="n">color_cluster_name</span> <span class="o">+</span> <span class="sa">f</span><span class="s2">&quot;: </span><span class="si">{counter_object[color_cluster_name]}</span><span class="s2"> samples&quot;</span><span class="p">))</span>
+
+            <span class="c1"># Plot the legend and save the plot</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">handles</span><span class="o">=</span><span class="n">handles</span><span class="p">,</span>
+                       <span class="n">loc</span><span class="o">=</span><span class="s1">&#39;upper right&#39;</span><span class="p">,</span>
+                       <span class="n">bbox_to_anchor</span><span class="o">=</span><span class="p">(</span><span class="mf">1.32</span><span class="p">,</span> <span class="mf">1.01</span><span class="p">),</span>
+                       <span class="n">title</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;Clusters ({len(handles)})&quot;</span><span class="p">)</span>
+
+            <span class="n">best_clusters</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">handles</span><span class="p">))</span>
+            <span class="k">if</span> <span class="n">display_visuals</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">__notebook_mode</span><span class="p">:</span>
+                <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">save_plot</span><span class="p">(</span><span class="s2">&quot;Hierarchical Clustering&quot;</span><span class="p">,</span>
+                           <span class="sa">f</span><span class="s2">&quot;Hierarchical Clustering Method </span><span class="si">{method}</span><span class="s2"> with legend&quot;</span><span class="p">)</span>
+
+            <span class="n">plt</span><span class="o">.</span><span class="n">close</span><span class="p">(</span><span class="s1">&#39;all&#39;</span><span class="p">)</span>
+
+        <span class="c1"># Save results into _Extras folder</span>
+        <span class="n">best_clusters</span><span class="o">.</span><span class="n">sort</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__models_suggested_clusters</span><span class="p">[</span><span class="s2">&quot;Hierarchical Clustering&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">best_clusters</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__save_update_best_model_clusters</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">best_clusters</span></div>
+
+
+    <span class="c1"># def __visualize_clusters(self, model, output_path, model_name=&quot;&quot;):</span>
+    <span class="c1">#     &quot;&quot;&quot;</span>
+    <span class="c1">#         Creates visualization of clustering model on given data.</span>
+    <span class="c1">#     &quot;&quot;&quot;</span>
+    <span class="c1">#     markers = [&quot;+&quot;, &quot;*&quot;, &quot;X&quot;, &quot;o&quot;, &quot;v&quot;, &quot;P&quot;, &quot;H&quot;, &quot;4&quot;, &quot;p&quot;, &quot;D&quot;, &quot;s&quot;,</span>
+    <span class="c1">#                &quot;1&quot;, &quot;x&quot;, &quot;d&quot;, &quot;_&quot;]</span>
+    <span class="c1">#     colors = [&#39;b&#39;, &#39;g&#39;, &#39;r&#39;, &#39;c&#39;, &#39;m&#39;, &#39;y&#39;,</span>
+    <span class="c1">#               &#39;#007BA7&#39;, &#39;#ff69b4&#39;, &#39;#CD5C5C&#39;, &#39;#7eab19&#39;, &#39;#1a4572&#39;,</span>
+    <span class="c1">#               &#39;#2F4F4F&#39;, &#39;#4B0082&#39;, &#39;#d11141&#39;, &#39;#5b2504&#39;]</span>
+    <span class="c1">#</span>
+    <span class="c1">#     # Display ranking on color based on amount data points per cluster</span>
+    <span class="c1">#     unique, counts = np.unique(model.labels_, return_counts=True)</span>
+    <span class="c1">#     cluster_names = [&quot;Cluster:&quot; + str(cluster_label)</span>
+    <span class="c1">#                      for cluster_label in unique]</span>
+    <span class="c1">#     self.__display_rank_graph(feature_names=cluster_names,</span>
+    <span class="c1">#                               metric=counts,</span>
+    <span class="c1">#                               title=model_name,</span>
+    <span class="c1">#                               output_path=output_path,</span>
+    <span class="c1">#                               model_name=model_name,</span>
+    <span class="c1">#                               y_title=&quot;Clusters&quot;,</span>
+    <span class="c1">#                               x_title=&quot;Found per cluster&quot;)</span>
+    <span class="c1">#     pl.figure(figsize=(8, 7))</span>
+    <span class="c1">#</span>
+    <span class="c1">#     # Display clustered graph</span>
+    <span class="c1">#     cluster_array = list(range(0, len(cluster_names)))</span>
+    <span class="c1">#     scaled_cluster_label = np.hstack(</span>
+    <span class="c1">#         (self.__scaled, np.reshape(</span>
+    <span class="c1">#             model.labels_.astype(int), (self.__scaled.shape[0], 1))))</span>
+    <span class="c1">#     for i in range(0, scaled_cluster_label.shape[0]):</span>
+    <span class="c1">#         cluster_label = int(scaled_cluster_label[i][-1])</span>
+    <span class="c1">#         cluster_array[cluster_label] = pl.scatter(</span>
+    <span class="c1">#             scaled_cluster_label[i, 0], scaled_cluster_label[i, 1],</span>
+    <span class="c1">#             c=colors[cluster_label], marker=str(markers[cluster_label]))</span>
+    <span class="c1">#</span>
+    <span class="c1">#     pl.legend(cluster_array, cluster_names)</span>
+    <span class="c1">#     pl.title(model_name + &#39; visualized with data&#39;, fontsize=15)</span>
+    <span class="c1">#     self.__image_processing_utils(output_path,</span>
+    <span class="c1">#                           model_name + &quot;_Visualized_Cluster&quot;)</span>
+    <span class="c1">#     plt.show()</span>
+    <span class="c1">#     plt.close()</span>
+    <span class="c1">#     pl.close()</span>
+<div class="viewcode-block" id="AutoCluster.create_elbow_models"><a class="viewcode-back" href="../../../_autosummary/eflow.auto_modeler.auto_cluster.html#eflow.auto_modeler.auto_cluster.AutoCluster.create_elbow_models">[docs]</a>    <span class="k">def</span> <span class="nf">create_elbow_models</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+                            <span class="n">model_names</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;K-Means&quot;</span><span class="p">,</span>
+                                         <span class="s2">&quot;K-Medians&quot;</span><span class="p">,</span>
+                                         <span class="s2">&quot;K-Medoids&quot;</span><span class="p">,</span>
+                                         <span class="s2">&quot;Somsc&quot;</span><span class="p">,</span>
+                                         <span class="s2">&quot;Cure&quot;</span><span class="p">,</span>
+                                         <span class="s2">&quot;Fuzzy C-Means&quot;</span><span class="p">],</span>
+                            <span class="n">sequences</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>
+                            <span class="n">max_k_value</span><span class="o">=</span><span class="mi">15</span><span class="p">,</span>
+                            <span class="n">display_visuals</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">            Create multiple sequences of defined clusters and their related</span>
+<span class="sd">            inertia values to find the most agreed</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            model_names: list of strings</span>
+<span class="sd">                Defines which models should be created.</span>
+
+<span class="sd">            sequences: int</span>
+<span class="sd">                How many model sequences to create</span>
+
+<span class="sd">            max_k_value: int</span>
+<span class="sd">                Max clusters to create</span>
+
+<span class="sd">            display_visuals: bool</span>
+<span class="sd">                Display graphics and tables if set to True.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">model_names</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">model_names</span><span class="p">)</span>
+
+        <span class="c1"># Model names and their model instances</span>
+        <span class="n">names_model_dict</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;K-Means&quot;</span><span class="p">:</span><span class="n">kmeans</span><span class="p">,</span>
+                            <span class="s2">&quot;K-Medians&quot;</span><span class="p">:</span><span class="n">kmedians</span><span class="p">,</span>
+                            <span class="s2">&quot;K-Medoids&quot;</span><span class="p">:</span><span class="n">kmedoids</span><span class="p">,</span>
+                            <span class="s2">&quot;Somsc&quot;</span><span class="p">:</span><span class="n">somsc</span><span class="p">,</span>
+                            <span class="s2">&quot;Cure&quot;</span><span class="p">:</span><span class="n">cure</span><span class="p">,</span>
+                            <span class="s2">&quot;Fuzzy C-Means&quot;</span><span class="p">:</span> <span class="n">fcm</span><span class="p">}</span>
+
+        <span class="c1"># Iterate through passed model names</span>
+        <span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">model_names</span><span class="p">:</span>
+
+            <span class="k">if</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">names_model_dict</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+
+                <span class="c1"># Only requires 1 elbow sequence needed</span>
+                <span class="k">if</span> <span class="n">name</span> <span class="o">==</span> <span class="s2">&quot;Somsc&quot;</span> <span class="ow">or</span> <span class="n">name</span> <span class="o">==</span> <span class="s2">&quot;Cure&quot;</span><span class="p">:</span>
+                    <span class="n">best_clusters</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__create_elbow_seq</span><span class="p">(</span><span class="n">name</span><span class="p">,</span>
+                                                            <span class="n">names_model_dict</span><span class="p">[</span><span class="n">name</span><span class="p">],</span>
+                                                            <span class="n">sequences</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+                                                            <span class="n">max_k_value</span><span class="o">=</span><span class="n">max_k_value</span><span class="p">,</span>
+                                                            <span class="n">display_visuals</span><span class="o">=</span><span class="n">display_visuals</span><span class="p">)</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">best_clusters</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__create_elbow_seq</span><span class="p">(</span><span class="n">name</span><span class="p">,</span>
+                                                            <span class="n">names_model_dict</span><span class="p">[</span><span class="n">name</span><span class="p">],</span>
+                                                            <span class="n">sequences</span><span class="o">=</span><span class="n">sequences</span><span class="p">,</span>
+                                                            <span class="n">max_k_value</span><span class="o">=</span><span class="n">max_k_value</span><span class="p">,</span>
+                                                            <span class="n">display_visuals</span><span class="o">=</span><span class="n">display_visuals</span><span class="p">)</span>
+
+                <span class="c1"># Save cluster results in</span>
+                <span class="n">best_clusters</span><span class="o">.</span><span class="n">sort</span><span class="p">()</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">__models_suggested_clusters</span><span class="p">[</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="n">best_clusters</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">__save_update_best_model_clusters</span><span class="p">()</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="n">UnsatisfiedRequirments</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Unknown model name passed: </span><span class="se">\&quot;</span><span class="si">{name}</span><span class="se">\&quot;</span><span class="s2">&quot;</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">best_clusters</span></div>
+
+<div class="viewcode-block" id="AutoCluster.create_agglomerative_models"><a class="viewcode-back" href="../../../_autosummary/eflow.auto_modeler.auto_cluster.html#eflow.auto_modeler.auto_cluster.AutoCluster.create_agglomerative_models">[docs]</a>    <span class="k">def</span> <span class="nf">create_agglomerative_models</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+                                    <span class="n">n_cluster_list</span><span class="p">,</span>
+                                    <span class="n">linkage_methods</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">            Create multiple agglomerative models based on a list of</span>
+<span class="sd">            &#39;n_clusters&#39; values and defined linkage methods.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;This functionality has been clamped!...Hopefully someone get&#39;s this refrence&quot;</span><span class="p">)</span>
+        <span class="k">pass</span></div>
+        <span class="c1"># if isinstance(n_cluster_list, int):</span>
+        <span class="c1">#     n_cluster_list = [n_cluster_list]</span>
+        <span class="c1">#</span>
+        <span class="c1"># if not linkage_methods:</span>
+        <span class="c1">#     linkage_methods = [&quot;ward&quot;, &quot;complete&quot;, &quot;average&quot;, &quot;single&quot;]</span>
+        <span class="c1">#</span>
+        <span class="c1"># knn_graph = kneighbors_graph(</span>
+        <span class="c1">#     self.__scaled, len(</span>
+        <span class="c1">#         self.__scaled) - 1, include_self=False)</span>
+        <span class="c1">#</span>
+        <span class="c1"># for n_clusters in n_cluster_list:</span>
+        <span class="c1">#     for connectivity in (None, knn_graph):</span>
+        <span class="c1">#</span>
+        <span class="c1">#         for _, linkage in enumerate(linkage_methods):</span>
+        <span class="c1">#             model = AgglomerativeClustering(linkage=linkage,</span>
+        <span class="c1">#                                             connectivity=connectivity,</span>
+        <span class="c1">#                                             n_clusters=n_clusters)</span>
+        <span class="c1">#             model.fit(self.__scaled)</span>
+        <span class="c1">#             self.__cluster_models[</span>
+        <span class="c1">#                 &quot;AgglomerativeClustering_{0}_&quot;</span>
+        <span class="c1">#                 &quot;cluster{1}_Connectivity{2}&quot;.format(</span>
+        <span class="c1">#                     linkage,</span>
+        <span class="c1">#                     n_clusters, connectivity is not None)] = model</span>
+        <span class="c1">#</span>
+        <span class="c1">#             print(</span>
+        <span class="c1">#                 &quot;Successfully generate Agglomerative model with &quot;</span>
+        <span class="c1">#                 &quot;linkage {0} on n_clusters={1}&quot;.format(</span>
+        <span class="c1">#                     linkage, n_clusters))</span>
+
+        <span class="c1"># self.__models_suggested_clusters[&quot;Agglomerative models&quot;] =</span>
+
+<div class="viewcode-block" id="AutoCluster.evaluate_all_models"><a class="viewcode-back" href="../../../_autosummary/eflow.auto_modeler.auto_cluster.html#eflow.auto_modeler.auto_cluster.AutoCluster.evaluate_all_models">[docs]</a>    <span class="k">def</span> <span class="nf">evaluate_all_models</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+                            <span class="n">df</span><span class="p">,</span>
+                            <span class="n">df_features</span><span class="p">,</span>
+                            <span class="n">qualitative_features</span><span class="o">=</span><span class="p">[],</span>
+                            <span class="n">zscore</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">            Loop through all models and evaluate the given model with</span>
+<span class="sd">            &#39;evaluate_model&#39;. Read &#39;evaluate_model&#39; to learn more.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            df: pd.DataFrame</span>
+<span class="sd">                Pandas dataframe</span>
+
+<span class="sd">            df_features: DataFrameTypes object from eflow.</span>
+<span class="sd">                DataFrameTypes object; organizes feature types into groups.</span>
+
+<span class="sd">            zscore: float, int, None</span>
+<span class="sd">                Will find the distances between given the given clusters then</span>
+<span class="sd">                we apply data pipeline.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">for</span> <span class="n">model_name</span><span class="p">,</span> <span class="n">model_path</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">__cluster_models_paths</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">evaluate_model</span><span class="p">(</span><span class="n">model_name</span><span class="o">=</span><span class="n">model_name</span><span class="p">,</span>
+                                <span class="n">df</span><span class="o">=</span><span class="n">df</span><span class="p">,</span>
+                                <span class="n">df_features</span><span class="o">=</span><span class="n">df_features</span><span class="p">,</span>
+                                <span class="n">qualitative_features</span><span class="o">=</span><span class="n">qualitative_features</span><span class="p">,</span>
+                                <span class="n">zscore</span><span class="o">=</span><span class="n">zscore</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;------&quot;</span> <span class="o">*</span> <span class="mi">10</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="AutoCluster.evaluate_model"><a class="viewcode-back" href="../../../_autosummary/eflow.auto_modeler.auto_cluster.html#eflow.auto_modeler.auto_cluster.AutoCluster.evaluate_model">[docs]</a>    <span class="k">def</span> <span class="nf">evaluate_model</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+                       <span class="n">model_name</span><span class="p">,</span>
+                       <span class="n">df</span><span class="p">,</span>
+                       <span class="n">df_features</span><span class="p">,</span>
+                       <span class="n">qualitative_features</span><span class="o">=</span><span class="p">[],</span>
+                       <span class="n">zscore</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                       <span class="n">target_features</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                       <span class="n">display_visuals</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+                       <span class="n">display_print</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+                       <span class="n">suppress_runtime_errors</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                       <span class="n">aggregate_target_feature</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                       <span class="n">selected_features</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                       <span class="n">extra_tables</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                       <span class="n">statistical_analysis_on_aggregates</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">            The main purpose of &#39;evaluate_model&#39; is to display/save tables/plots</span>
+<span class="sd">            accoiated with describing the model&#39;s &#39;findings&#39; for each cluster.</span>
+
+<span class="sd">        Args:</span>
+
+<span class="sd">            model_name: str</span>
+<span class="sd">                The string key to give the dict</span>
+
+<span class="sd">            df: pd.Dataframe</span>
+<span class="sd">                Dataframe object</span>
+
+<span class="sd">            df_features: DataFrameTypes object from eflow.</span>
+<span class="sd">                DataFrameTypes object; organizes feature types into groups.</span>
+
+<span class="sd">            qualitative_features: list</span>
+<span class="sd">                Any features that are currently dummy encoded will be reversed</span>
+<span class="sd">                when doing feature analysis.</span>
+
+<span class="sd">            zscore: float, int, None, or list of ints/floats</span>
+<span class="sd">                After calculating each distance to the center point; a zscore</span>
+<span class="sd">                value for distance will be found. Setting this parameter defines</span>
+<span class="sd">                a cut off point where data exceeding a certain zscore will be</span>
+<span class="sd">                ignored when doing FeatureAnalysis</span>
+
+<span class="sd">            target_features: collection of strings or None</span>
+<span class="sd">                A feature name that both exists in the init df_features</span>
+<span class="sd">                and the passed dataframe.</span>
+
+<span class="sd">                Note</span>
+<span class="sd">                    If init to &#39;None&#39; then df_features will try to extract out</span>
+<span class="sd">                    the target feature.</span>
+
+<span class="sd">            display_visuals: bool</span>
+<span class="sd">                Boolean value to whether or not to display visualizations.</span>
+
+<span class="sd">            display_print: bool</span>
+<span class="sd">                Determines whether or not to print function&#39;s embedded print</span>
+<span class="sd">                statements.</span>
+
+<span class="sd">            suppress_runtime_errors: bool</span>
+<span class="sd">                If set to true; when generating any graphs will suppress any runtime</span>
+<span class="sd">                errors so the program can keep running.</span>
+
+<span class="sd">            extra_tables: bool</span>
+<span class="sd">                When handling two types of features if set to true this will</span>
+<span class="sd">                    generate any extra tables that might be helpful.</span>
+<span class="sd">                    Note -</span>
+<span class="sd">                        These graphics may create duplicates if you already applied</span>
+<span class="sd">                        an aggregation in &#39;perform_analysis&#39;</span>
+
+<span class="sd">            aggregate_target_feature: bool</span>
+<span class="sd">                Aggregate the data of the target feature if the data is</span>
+<span class="sd">                non-continuous data.</span>
+
+<span class="sd">                Note</span>
+<span class="sd">                    In the future I will have this also working with continuous</span>
+<span class="sd">                    data.</span>
+
+<span class="sd">            selected_features: collection object of features</span>
+<span class="sd">                Will only focus on these selected feature&#39;s and will ignore</span>
+<span class="sd">                the other given features.</span>
+
+<span class="sd">            statistical_analysis_on_aggregates: bool</span>
+<span class="sd">                If set to true then the function &#39;statistical_analysis_on_aggregates&#39;</span>
+<span class="sd">                will run; which aggregates the data of the target feature either</span>
+<span class="sd">                by discrete values or by binning/labeling continuous data.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="c1"># Get/Set model related data</span>
+        <span class="n">model</span> <span class="o">=</span> <span class="n">load_pickle_object</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__cluster_models_paths</span><span class="p">[</span><span class="n">model_name</span><span class="p">])</span>
+        <span class="n">model_path</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__cluster_models_paths</span><span class="p">[</span><span class="n">model_name</span><span class="p">]</span>
+        <span class="n">model_dir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">model_path</span><span class="p">)</span>
+        <span class="n">model_sub_dir</span> <span class="o">=</span> <span class="n">model_dir</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">folder_path</span><span class="p">,</span><span class="s2">&quot;&quot;</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+        <span class="n">center_points</span> <span class="o">=</span> <span class="n">load_pickle_object</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__cluster_models_paths</span><span class="p">[</span><span class="n">model_name</span><span class="p">])</span> <span class="o">+</span> <span class="s2">&quot;/Center points.pkl&quot;</span><span class="p">)</span>
+        <span class="n">cluster_labels</span> <span class="o">=</span> <span class="n">json_file_to_dict</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{model_dir}</span><span class="s2">/Cluster Labels.json&quot;</span><span class="p">)</span>
+
+        <span class="c1"># Store single instance of int/float/None in a list</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">zscore</span><span class="p">,</span><span class="nb">float</span><span class="p">)</span> <span class="ow">or</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">zscore</span><span class="p">,</span><span class="nb">type</span><span class="p">(</span><span class="kc">None</span><span class="p">))</span> <span class="ow">or</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">zscore</span><span class="p">,</span><span class="nb">int</span><span class="p">):</span>
+            <span class="n">zscore</span> <span class="o">=</span> <span class="p">[</span><span class="n">zscore</span><span class="p">]</span>
+
+        <span class="c1"># Iterate through all zscore values</span>
+        <span class="k">for</span> <span class="n">z_val</span> <span class="ow">in</span> <span class="n">zscore</span><span class="p">:</span>
+
+            <span class="n">cluster_labels_lengths</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
+
+            <span class="c1"># Handling all zscore values</span>
+            <span class="n">no_zscore</span> <span class="o">=</span> <span class="kc">False</span>
+
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">z_val</span><span class="p">:</span>
+                <span class="n">z_val</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="s2">&quot;inf&quot;</span><span class="p">)</span>
+                <span class="n">no_zscore</span> <span class="o">=</span> <span class="kc">True</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">z_val</span> <span class="o">=</span> <span class="nb">round</span><span class="p">(</span><span class="n">z_val</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Model Name: </span><span class="si">{model_name}</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Clusters: {len(model.get_clusters())}&quot;</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Distance Zscore: </span><span class="si">{z_val}</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">()</span>
+
+            <span class="k">for</span> <span class="n">i</span><span class="p">,</span><span class="n">cluster_indexes</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">get_clusters</span><span class="p">()):</span>
+
+                <span class="n">label</span> <span class="o">=</span> <span class="n">cluster_labels</span><span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">)]</span>
+
+                <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Feature Analysis on cluster </span><span class="si">{label}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+                <span class="c1"># Create cluster dataframe</span>
+                <span class="n">tmp_df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">cluster_indexes</span><span class="p">]</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">drop</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+                <span class="c1"># Find and apply zscore cut off point</span>
+                <span class="n">bool_array</span> <span class="o">=</span> <span class="n">find_all_zscore_distances_from_target</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">apply_clustering_data_pipeline</span><span class="p">(</span><span class="n">tmp_df</span><span class="o">.</span><span class="n">values</span><span class="p">),</span>
+                                                                   <span class="n">center_points</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+
+                <span class="n">bool_array</span> <span class="o">=</span> <span class="p">(</span><span class="n">bool_array</span> <span class="o">&gt;=</span> <span class="o">-</span><span class="n">z_val</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">bool_array</span> <span class="o">&lt;=</span> <span class="n">z_val</span><span class="p">)</span>
+
+                <span class="n">removed_dp_count</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">bool_array</span><span class="p">)</span> <span class="o">-</span> <span class="n">bool_array</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+                <span class="n">removed_dp_percentage</span> <span class="o">=</span> <span class="n">removed_dp_count</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">tmp_df</span><span class="p">)</span>
+
+                <span class="n">tmp_df</span> <span class="o">=</span> <span class="n">tmp_df</span><span class="p">[</span><span class="n">bool_array</span><span class="p">]</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">drop</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+                <span class="k">del</span> <span class="n">bool_array</span>
+
+                <span class="c1"># Decode and revert dummies data</span>
+                <span class="n">tmp_df_features</span> <span class="o">=</span> <span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="n">df_features</span><span class="p">)</span>
+
+                <span class="n">data_encoder</span> <span class="o">=</span> <span class="n">DataEncoder</span><span class="p">(</span><span class="n">create_file</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+                <span class="n">data_encoder</span><span class="o">.</span><span class="n">revert_dummies</span><span class="p">(</span><span class="n">tmp_df</span><span class="p">,</span>
+                                            <span class="n">tmp_df_features</span><span class="p">,</span>
+                                            <span class="n">qualitative_features</span><span class="o">=</span><span class="n">qualitative_features</span><span class="p">)</span>
+
+                <span class="n">data_encoder</span><span class="o">.</span><span class="n">decode_data</span><span class="p">(</span><span class="n">tmp_df</span><span class="p">,</span>
+                                         <span class="n">tmp_df_features</span><span class="p">,</span>
+                                         <span class="n">apply_value_representation</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+                <span class="n">data_encoder</span><span class="o">.</span><span class="n">apply_value_representation</span><span class="p">(</span><span class="n">tmp_df</span><span class="p">,</span>
+                                                        <span class="n">df_features</span><span class="p">)</span>
+                <span class="k">del</span> <span class="n">data_encoder</span>
+
+                <span class="n">cluster_labels_lengths</span><span class="p">[</span><span class="n">label</span><span class="p">]</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">tmp_df</span><span class="p">)</span>
+
+                <span class="c1"># Handle naming/managing the directory structure</span>
+                <span class="k">if</span> <span class="n">no_zscore</span><span class="p">:</span>
+                    <span class="n">create_dir_structure</span><span class="p">(</span><span class="n">directory_path</span><span class="o">=</span><span class="n">model_dir</span><span class="p">,</span>
+                                         <span class="n">create_sub_dir</span><span class="o">=</span><span class="s2">&quot;No Distance Zscore&quot;</span><span class="p">)</span>
+
+                    <span class="bp">self</span><span class="o">.</span><span class="n">__create_cluster_profile</span><span class="p">(</span><span class="n">tmp_df</span><span class="p">,</span>
+                                                  <span class="n">tmp_df_features</span><span class="p">,</span>
+                                                  <span class="n">sub_dir</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{model_sub_dir}</span><span class="s2">/No Distance Zscore/Cluster: </span><span class="si">{label}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+
+                    <span class="n">feature_analysis</span> <span class="o">=</span> <span class="n">FeatureAnalysis</span><span class="p">(</span><span class="n">tmp_df_features</span><span class="p">,</span>
+                                                       <span class="n">overwrite_full_path</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{model_dir}</span><span class="s2">/No Distance Zscore&quot;</span><span class="p">,</span>
+                                                       <span class="n">notebook_mode</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">__notebook_mode</span><span class="p">)</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">create_dir_structure</span><span class="p">(</span><span class="n">directory_path</span><span class="o">=</span><span class="n">model_dir</span><span class="p">,</span>
+                                         <span class="n">create_sub_dir</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;Distance Zscore = </span><span class="si">{z_val}</span><span class="s2">/Cluster: </span><span class="si">{label}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+                    <span class="bp">self</span><span class="o">.</span><span class="n">__create_cluster_profile</span><span class="p">(</span><span class="n">tmp_df</span><span class="p">,</span>
+                                                  <span class="n">tmp_df_features</span><span class="p">,</span>
+                                                  <span class="n">sub_dir</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{model_sub_dir}</span><span class="s2">/Distance Zscore = </span><span class="si">{z_val}</span><span class="s2">/Cluster: </span><span class="si">{label}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+
+                    <span class="n">feature_analysis</span> <span class="o">=</span> <span class="n">FeatureAnalysis</span><span class="p">(</span><span class="n">tmp_df_features</span><span class="p">,</span>
+                                                       <span class="n">overwrite_full_path</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{model_dir}</span><span class="s2">/Distance Zscore = </span><span class="si">{z_val}</span><span class="s2">&quot;</span><span class="p">,</span>
+                                                       <span class="n">notebook_mode</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">__notebook_mode</span><span class="p">)</span>
+
+                <span class="c1"># Analyze the cluster dataframe</span>
+                <span class="n">feature_analysis</span><span class="o">.</span><span class="n">perform_analysis</span><span class="p">(</span><span class="n">tmp_df</span><span class="p">,</span>
+                                                  <span class="n">dataset_name</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;Cluster: </span><span class="si">{label}</span><span class="s2">&quot;</span><span class="p">,</span>
+                                                  <span class="n">target_features</span><span class="o">=</span><span class="n">target_features</span><span class="p">,</span>
+                                                  <span class="n">display_visuals</span><span class="o">=</span><span class="n">display_visuals</span><span class="p">,</span>
+                                                  <span class="n">display_print</span><span class="o">=</span><span class="n">display_print</span><span class="p">,</span>
+                                                  <span class="n">dataframe_snapshot</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                                                  <span class="n">save_file</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                                                  <span class="n">suppress_runtime_errors</span><span class="o">=</span><span class="n">suppress_runtime_errors</span><span class="p">,</span>
+                                                  <span class="n">aggregate_target_feature</span><span class="o">=</span><span class="n">aggregate_target_feature</span><span class="p">,</span>
+                                                  <span class="n">selected_features</span><span class="o">=</span><span class="n">selected_features</span><span class="p">,</span>
+                                                  <span class="n">extra_tables</span><span class="o">=</span><span class="n">extra_tables</span><span class="p">,</span>
+                                                  <span class="n">statistical_analysis_on_aggregates</span><span class="o">=</span><span class="n">statistical_analysis_on_aggregates</span><span class="p">)</span>
+
+                <span class="c1"># Save removed data points</span>
+                <span class="n">write_object_text_to_file</span><span class="p">(</span><span class="n">removed_dp_count</span><span class="p">,</span>
+                                          <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{feature_analysis.folder_path}</span><span class="s2">/Cluster: </span><span class="si">{label}</span><span class="s2">&quot;</span><span class="p">,</span>
+                                          <span class="n">filename</span><span class="o">=</span><span class="s2">&quot;Removed dp count&quot;</span><span class="p">)</span>
+
+                <span class="n">write_object_text_to_file</span><span class="p">(</span><span class="n">removed_dp_percentage</span><span class="p">,</span>
+                                          <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{feature_analysis.folder_path}</span><span class="s2">/Cluster: </span><span class="si">{label}</span><span class="s2">&quot;</span><span class="p">,</span>
+                                          <span class="n">filename</span><span class="o">=</span><span class="s2">&quot;Removed dp percentage&quot;</span><span class="p">)</span>
+
+            <span class="k">if</span> <span class="n">no_zscore</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">__display_cluster_label_rank_graph</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">cluster_labels_lengths</span><span class="o">.</span><span class="n">keys</span><span class="p">()),</span>
+                                                        <span class="nb">list</span><span class="p">(</span><span class="n">cluster_labels_lengths</span><span class="o">.</span><span class="n">values</span><span class="p">()),</span>
+                                                        <span class="n">sub_dir</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{model_dir}</span><span class="s2">/No Distance Zscore&quot;</span><span class="p">,</span>
+                                                        <span class="n">display_visuals</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">__notebook_mode</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">__display_cluster_label_rank_graph</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">cluster_labels_lengths</span><span class="o">.</span><span class="n">keys</span><span class="p">()),</span>
+                                                        <span class="nb">list</span><span class="p">(</span><span class="n">cluster_labels_lengths</span><span class="o">.</span><span class="n">values</span><span class="p">()),</span>
+                                                        <span class="n">sub_dir</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{model_sub_dir}</span><span class="s2">/Distance Zscore = </span><span class="si">{z_val}</span><span class="s2">&quot;</span><span class="p">,</span>
+                                                        <span class="n">display_visuals</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">__notebook_mode</span><span class="p">)</span>
+
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;###&quot;</span> <span class="o">*</span> <span class="mi">4</span><span class="p">)</span></div>
+
+
+    <span class="k">def</span> <span class="nf">__create_cluster_profile</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+                                 <span class="n">df</span><span class="p">,</span>
+                                 <span class="n">df_features</span><span class="p">,</span>
+                                 <span class="n">sub_dir</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">            Generate a cluster profile based on the clustered data. A cluster</span>
+<span class="sd">            profile gets the mean of a numerical series data and the mode of</span>
+<span class="sd">            a non-numerical one.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            df: pd.DataFrame</span>
+<span class="sd">                Dataframe object</span>
+
+<span class="sd">            df_features: DataFrameTypes object from eflow.</span>
+<span class="sd">                DataFrameTypes object; organizes feature types into groups.</span>
+
+<span class="sd">            sub_dir: string</span>
+<span class="sd">                Sub directory to create when writing data.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">cluster_profile_dict</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
+
+        <span class="k">for</span> <span class="n">feature_name</span> <span class="ow">in</span> <span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="p">:</span>
+
+            <span class="k">if</span> <span class="n">feature_name</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">df_features</span><span class="o">.</span><span class="n">all_features</span><span class="p">():</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;No feature named </span><span class="si">{feature_name}</span><span class="s2"> was found in df_features.&quot;</span><span class="p">)</span>
+
+            <span class="k">if</span> <span class="n">feature_name</span> <span class="ow">in</span> <span class="n">df_features</span><span class="o">.</span><span class="n">continuous_numerical_features</span><span class="p">():</span>
+                <span class="n">cluster_profile_dict</span><span class="p">[</span><span class="n">feature_name</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">feature_name</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">cluster_profile_dict</span><span class="p">[</span><span class="n">feature_name</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;:&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">df</span><span class="p">[</span><span class="n">feature_name</span><span class="p">]</span><span class="o">.</span><span class="n">mode</span><span class="p">()])</span>
+                <span class="k">if</span> <span class="n">feature_name</span> <span class="ow">in</span> <span class="n">df_features</span><span class="o">.</span><span class="n">bool_features</span><span class="p">():</span>
+                    <span class="k">if</span> <span class="n">cluster_profile_dict</span><span class="p">[</span><span class="n">feature_name</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;1&quot;</span><span class="p">:</span>
+                        <span class="n">cluster_profile_dict</span><span class="p">[</span><span class="n">feature_name</span><span class="p">]</span> <span class="o">=</span> <span class="kc">True</span>
+                    <span class="k">elif</span> <span class="n">cluster_profile_dict</span><span class="p">[</span><span class="n">feature_name</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;0&quot;</span><span class="p">:</span>
+                        <span class="n">cluster_profile_dict</span><span class="p">[</span><span class="n">feature_name</span><span class="p">]</span> <span class="o">=</span> <span class="kc">False</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">save_table_as_plot</span><span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">cluster_profile_dict</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span><span class="o">.</span><span class="n">transpose</span><span class="p">(),</span>
+                                <span class="n">sub_dir</span><span class="o">=</span><span class="n">sub_dir</span><span class="p">,</span>
+                                <span class="n">filename</span><span class="o">=</span><span class="s2">&quot;Cluster Profile&quot;</span><span class="p">,</span>
+                                <span class="n">show_index</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">__inspect_feature_matrix</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+                                 <span class="n">matrix</span><span class="p">,</span>
+                                 <span class="n">feature_names</span><span class="p">,</span>
+                                 <span class="n">sub_dir</span><span class="p">,</span>
+                                 <span class="n">filename</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">            Creates a dataframe to quickly analyze a matrix of data by mean and</span>
+<span class="sd">            standard deviation.</span>
+
+<span class="sd">        Args:</span>
+
+<span class="sd">            matrix: list of lists, np.matrix, pd.DataFrame</span>
+<span class="sd">                Matrix data to convert to mean and</span>
+
+<span class="sd">            feature_names: list of strings</span>
+<span class="sd">                Each dimension&#39;s name.</span>
+
+<span class="sd">            sub_dir: string</span>
+<span class="sd">                Sub directory to create when writing data.</span>
+
+<span class="sd">            filename: string</span>
+<span class="sd">                Name of the file</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="c1"># Calculate mean and std for each dimension</span>
+        <span class="n">mean_matrix</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">matrix</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+        <span class="n">std_matrix</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">matrix</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+
+        <span class="c1"># Create relationship dict</span>
+        <span class="n">data_dict</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">index</span><span class="p">,</span> <span class="n">feature_name</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">feature_names</span><span class="p">):</span>
+            <span class="n">data_dict</span><span class="p">[</span><span class="n">feature_name</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">mean_matrix</span><span class="p">[</span><span class="n">index</span><span class="p">],</span>
+                                       <span class="n">std_matrix</span><span class="p">[</span><span class="n">index</span><span class="p">]]</span>
+
+        <span class="c1"># Convert to dataframe, display, and save to directory.</span>
+        <span class="n">tmp_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="o">.</span><span class="n">from_dict</span><span class="p">(</span><span class="n">data_dict</span><span class="p">,</span>
+                                        <span class="n">orient</span><span class="o">=</span><span class="s1">&#39;index&#39;</span><span class="p">,</span>
+                                        <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Mean&#39;</span><span class="p">,</span> <span class="s1">&#39;Standard Dev&#39;</span><span class="p">])</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">__notebook_mode</span><span class="p">:</span>
+            <span class="n">display</span><span class="p">(</span><span class="n">tmp_df</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="n">tmp_df</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">save_table_as_plot</span><span class="p">(</span><span class="n">tmp_df</span><span class="p">,</span>
+                                <span class="n">sub_dir</span><span class="o">=</span><span class="n">sub_dir</span><span class="p">,</span>
+                                <span class="n">filename</span><span class="o">=</span><span class="n">filename</span><span class="p">,</span>
+                                <span class="n">show_index</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                                <span class="n">format_float_pos</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+
+
+    <span class="k">def</span> <span class="nf">__visualize_pca_variance</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+                                 <span class="n">data</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">            Visualize PCA matrix feature importance.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            data: list of list, np.matrix,</span>
+<span class="sd">                Values to have pca applied too.</span>
+
+<span class="sd">        Credit to favorite teacher Narine Hall for making this function.</span>
+<span class="sd">        I wouldn&#39;t be the programmer I am today if it wasn&#39;t for her.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="c1"># Check for pca variance</span>
+        <span class="n">pca</span> <span class="o">=</span> <span class="n">PCA</span><span class="p">()</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="n">pca</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+
+        <span class="c1"># ----</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">pca</span><span class="o">.</span><span class="n">explained_variance_ratio_</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">),</span>
+                <span class="n">pca</span><span class="o">.</span><span class="n">explained_variance_ratio_</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">()</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Variance ratio&#39;</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;PCA feature&#39;</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">save_plot</span><span class="p">(</span><span class="s2">&quot;PCA&quot;</span><span class="p">,</span>
+                       <span class="s2">&quot;PCA Feature Variance Ratio&quot;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">__notebook_mode</span><span class="p">:</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">close</span><span class="p">(</span><span class="s2">&quot;all&quot;</span><span class="p">)</span>
+
+        <span class="c1"># ----</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">pca</span><span class="o">.</span><span class="n">explained_variance_ratio_</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">),</span>
+                <span class="n">pca</span><span class="o">.</span><span class="n">explained_variance_ratio_</span><span class="o">.</span><span class="n">cumsum</span><span class="p">())</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">()</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Cumulative sum of variances&#39;</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;PCA feature&#39;</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">save_plot</span><span class="p">(</span><span class="s2">&quot;PCA&quot;</span><span class="p">,</span>
+                       <span class="s2">&quot;PCA Cumulative Sum of Variances&quot;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">__notebook_mode</span><span class="p">:</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">close</span><span class="p">(</span><span class="s2">&quot;all&quot;</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">pca</span><span class="p">,</span> <span class="n">data</span>
+
+
+    <span class="k">def</span> <span class="nf">__create_elbow_seq</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+                           <span class="n">model_name</span><span class="p">,</span>
+                           <span class="n">model_instance</span><span class="p">,</span>
+                           <span class="n">sequences</span><span class="p">,</span>
+                           <span class="n">max_k_value</span><span class="p">,</span>
+                           <span class="n">display_visuals</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">            Fit&#39;s multiple cluster models and calculates each model&#39;s intertia</span>
+<span class="sd">            value. Because the clustering is subjective; finding the &#39;elbow&#39; of</span>
+<span class="sd">            the elbow determines the &#39;best&#39; model. That job is passed on to</span>
+<span class="sd">            &quot;__find_best_elbow_models&quot; to find the elbow of each sequence and</span>
+<span class="sd">            then the best matching elbow of all elbows.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            model_name: string</span>
+<span class="sd">                Model&#39;s name</span>
+
+<span class="sd">            model_instance: pyclustering model</span>
+<span class="sd">                Model&#39;s instance</span>
+
+<span class="sd">            sequences: int</span>
+<span class="sd">                How many model sequences to create</span>
+
+<span class="sd">            max_k_value: int</span>
+<span class="sd">                How long to create the model sequence</span>
+
+<span class="sd">            display_visuals: bool</span>
+<span class="sd">                Display the graphics</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Get&#39;s the best cluster amounts</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">max_k_value</span> <span class="o">+=</span> <span class="mi">1</span>
+
+        <span class="c1"># Matrix declarations</span>
+        <span class="n">k_models</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">inertias</span> <span class="o">=</span> <span class="p">[]</span>
+
+        <span class="k">for</span> <span class="n">elbow_seq_count</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">sequences</span><span class="p">):</span>
+            <span class="n">tmp_inertias</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="n">tmp_k_models</span> <span class="o">=</span> <span class="p">[]</span>
+
+            <span class="c1"># Set up progress bar</span>
+            <span class="k">if</span> <span class="n">display_visuals</span><span class="p">:</span>
+                <span class="n">pbar</span> <span class="o">=</span> <span class="n">tqdm</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">max_k_value</span><span class="p">),</span> <span class="n">desc</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{model_name}</span><span class="s2"> Elbow Seq Count {elbow_seq_count + 1}&quot;</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">pbar</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">max_k_value</span><span class="p">)</span>
+
+            <span class="c1"># Find random center points for clusters</span>
+            <span class="n">initial_centers</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__create_random_initial_centers</span><span class="p">(</span><span class="n">model_name</span><span class="p">,</span>
+                                                                   <span class="n">max_k_value</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">k_val</span> <span class="ow">in</span> <span class="n">pbar</span><span class="p">:</span>
+
+                <span class="k">if</span> <span class="n">display_visuals</span><span class="p">:</span>
+                    <span class="n">pbar</span><span class="o">.</span><span class="n">set_postfix</span><span class="p">(</span><span class="n">model_count</span><span class="o">=</span><span class="n">k_val</span><span class="p">,</span>
+                                     <span class="n">refresh</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+                <span class="n">model</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__create_pyclustering_model</span><span class="p">(</span><span class="n">model_name</span><span class="o">=</span><span class="n">model_name</span><span class="p">,</span>
+                                                         <span class="n">model_instance</span><span class="o">=</span><span class="n">model_instance</span><span class="p">,</span>
+                                                         <span class="n">initial_centers</span><span class="o">=</span><span class="n">initial_centers</span><span class="p">,</span>
+                                                         <span class="n">k_val</span><span class="o">=</span><span class="n">k_val</span><span class="p">)</span>
+
+                <span class="c1"># Run cluster analysis and obtain results.</span>
+                <span class="n">model</span><span class="o">.</span><span class="n">process</span><span class="p">()</span>
+                <span class="n">final_centers</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__get_centers</span><span class="p">(</span><span class="n">model</span><span class="p">))</span>
+                <span class="n">labels</span> <span class="o">=</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">__nearest_cluster</span><span class="p">(</span><span class="n">final_centers</span><span class="p">,</span> <span class="n">dp</span><span class="p">)</span>
+                          <span class="k">for</span> <span class="n">dp</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">__scaled</span><span class="p">]</span>
+
+                <span class="n">inertia</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(((</span><span class="n">final_centers</span><span class="p">[</span><span class="n">l</span><span class="p">]</span> <span class="o">-</span> <span class="n">x</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+                              <span class="k">for</span> <span class="n">x</span><span class="p">,</span> <span class="n">l</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__scaled</span><span class="p">,</span> <span class="n">labels</span><span class="p">))</span>
+
+                <span class="c1"># Append the inertia to the list of inertias</span>
+                <span class="n">tmp_inertias</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">inertia</span><span class="p">)</span>
+                <span class="n">tmp_k_models</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">model</span><span class="p">)</span>
+
+            <span class="n">k_models</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">tmp_k_models</span><span class="p">)</span>
+            <span class="n">inertias</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">tmp_inertias</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__find_best_elbow_models</span><span class="p">(</span><span class="n">model_name</span><span class="p">,</span>
+                                             <span class="n">k_models</span><span class="p">,</span>
+                                             <span class="n">inertias</span><span class="p">,</span>
+                                             <span class="n">display_visuals</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">__get_centers</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+                      <span class="n">model</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">            Get&#39;s/creates the center point of each cluster.</span>
+<span class="sd">        Args:</span>
+<span class="sd">            model: pyclustering</span>
+<span class="sd">                Clustering model instance.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            The center points of the clusters</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">model</span><span class="o">.</span><span class="n">get_centers</span><span class="p">()</span>
+        <span class="k">except</span> <span class="ne">AttributeError</span><span class="p">:</span>
+
+            <span class="n">center_points</span> <span class="o">=</span> <span class="p">[]</span>
+
+            <span class="k">for</span> <span class="n">cluster_indexes</span> <span class="ow">in</span> <span class="n">model</span><span class="o">.</span><span class="n">get_clusters</span><span class="p">():</span>
+                <span class="n">all_dps</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">matrix</span><span class="p">([</span><span class="bp">self</span><span class="o">.</span><span class="n">__scaled</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">cluster_indexes</span><span class="p">])</span>
+                <span class="n">center_dp</span> <span class="o">=</span> <span class="n">all_dps</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+
+                <span class="c1"># Grave Yard code: Use existing point rather than generating abstract average data point</span>
+                <span class="c1"># np.absolute(all_dps - center_dp).sum(1).argmin()</span>
+
+                <span class="n">center_points</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">center_dp</span><span class="o">.</span><span class="n">tolist</span><span class="p">()[</span><span class="mi">0</span><span class="p">]))</span>
+
+            <span class="k">return</span> <span class="n">center_points</span>
+
+
+    <span class="k">def</span> <span class="nf">__create_pyclustering_model</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+                                    <span class="n">model_name</span><span class="p">,</span>
+                                    <span class="n">model_instance</span><span class="p">,</span>
+                                    <span class="n">initial_centers</span><span class="p">,</span>
+                                    <span class="n">k_val</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">            Generates simple clustering model&#39;s that only require the clustering</span>
+<span class="sd">            amount.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            model_name: string</span>
+<span class="sd">                Name of the model</span>
+
+<span class="sd">            model_instance: pyclustering</span>
+<span class="sd">                Clustering model</span>
+
+<span class="sd">            initial_centers: list of list of floats</span>
+<span class="sd">                Center points of each cluster</span>
+
+<span class="sd">            k_val:</span>
+<span class="sd">                Value of how many cluster&#39;s that should be generated.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Returns a init instance of the needed pyclustering model.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+
+        <span class="k">if</span> <span class="n">model_name</span> <span class="o">==</span> <span class="s2">&quot;Somsc&quot;</span> <span class="ow">or</span> <span class="n">model_name</span> <span class="o">==</span> <span class="s2">&quot;Cure&quot;</span><span class="p">:</span>
+            <span class="n">model</span> <span class="o">=</span> <span class="n">model_instance</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__scaled</span><span class="p">,</span>
+                                   <span class="n">k_val</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">model</span> <span class="o">=</span> <span class="n">model_instance</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__scaled</span><span class="p">,</span>
+                                   <span class="n">initial_centers</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="n">k_val</span><span class="p">])</span>
+        <span class="k">return</span> <span class="n">model</span>
+
+    <span class="k">def</span> <span class="nf">__create_random_initial_centers</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+                                        <span class="n">model_name</span><span class="p">,</span>
+                                        <span class="n">k_val</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">            Generates multiple random starting center points.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            model_name: string</span>
+<span class="sd">                Name of the given model (some models have different requirements)</span>
+
+<span class="sd">            k_val: int</span>
+<span class="sd">                How many random center points/clusters need to be created.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">model_name</span> <span class="o">==</span> <span class="s2">&quot;Somsc&quot;</span> <span class="ow">or</span> <span class="n">model_name</span> <span class="o">==</span> <span class="s2">&quot;Cure&quot;</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">None</span>
+        <span class="k">elif</span> <span class="n">model_name</span> <span class="o">==</span> <span class="s2">&quot;K-Medoids&quot;</span><span class="p">:</span>
+            <span class="k">return</span> <span class="p">[</span><span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">__get_unique_random_indexes</span><span class="p">(</span><span class="n">k_val</span><span class="p">)]</span>
+
+        <span class="k">elif</span> <span class="n">model_name</span> <span class="o">==</span> <span class="s2">&quot;K-Means&quot;</span> <span class="ow">or</span> <span class="n">model_name</span> <span class="o">==</span> <span class="s2">&quot;Fuzzy C-means&quot;</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">kmeans_plusplus_initializer</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__scaled</span><span class="p">,</span>
+                                               <span class="n">k_val</span><span class="p">)</span><span class="o">.</span><span class="n">initialize</span><span class="p">()</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">random_center_initializer</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__scaled</span><span class="p">,</span>
+                                             <span class="n">k_val</span><span class="p">)</span><span class="o">.</span><span class="n">initialize</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">__find_best_elbow_models</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+                                 <span class="n">model_name</span><span class="p">,</span>
+                                 <span class="n">k_models</span><span class="p">,</span>
+                                 <span class="n">inertias</span><span class="p">,</span>
+                                 <span class="n">display_visuals</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">            Find the elbow of each sequence and then find the best matching</span>
+<span class="sd">            elbow that all sequences agree upon.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            model_name: string</span>
+<span class="sd">                Name of all model instance</span>
+
+<span class="sd">            k_models: list of list of pyclustering models</span>
+<span class="sd">                All pyclustering models</span>
+
+<span class="sd">            inertias: list of list of floats</span>
+<span class="sd">                All model&#39;s intertia&#39;s</span>
+
+<span class="sd">            display_visuals: bool</span>
+<span class="sd">                Determines if graphics should be displayed</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Returns back the best numbers of clusters.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">ks</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span>
+                   <span class="nb">len</span><span class="p">(</span><span class="n">inertias</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+
+        <span class="c1"># Set graphic info</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">13</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;All possible </span><span class="si">{model_name}</span><span class="s2"> Elbow&#39;s&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Number of clusters, k&#39;</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Inertia&#39;</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="n">ks</span><span class="p">)</span>
+
+        <span class="c1"># ----</span>
+        <span class="n">elbow_inertias_matrix</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="n">inertias_matrix</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="n">elbow_models</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">elbow_sections</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">center_elbow_count</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
+        <span class="n">proximity_elbow_count</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
+        <span class="n">elbow_cluster</span> <span class="o">=</span> <span class="kc">None</span>
+
+        <span class="c1"># Plot inertias against ks (y values against x values)</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">inertias</span><span class="p">)):</span>
+
+            <span class="c1"># Determine curve</span>
+            <span class="n">curve</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__determine_curve</span><span class="p">(</span><span class="n">inertias</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+
+            <span class="k">if</span> <span class="n">curve</span> <span class="o">==</span> <span class="s2">&quot;concave&quot;</span><span class="p">:</span>
+                <span class="n">online</span> <span class="o">=</span> <span class="kc">True</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">online</span> <span class="o">=</span> <span class="kc">False</span>
+
+            <span class="c1"># Find the best cluster model</span>
+            <span class="n">elbow_cluster</span> <span class="o">=</span> <span class="n">KneeLocator</span><span class="p">(</span><span class="n">ks</span><span class="p">,</span>
+                                        <span class="n">inertias</span><span class="p">[</span><span class="n">i</span><span class="p">],</span>
+                                        <span class="n">curve</span><span class="o">=</span><span class="s2">&quot;convex&quot;</span><span class="p">,</span>
+                                        <span class="n">online</span><span class="o">=</span><span class="n">online</span><span class="p">,</span>
+                                        <span class="n">direction</span><span class="o">=</span><span class="s1">&#39;decreasing&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">elbow</span>
+            <span class="c1"># print(f&quot;elbow_cluster:{elbow_cluster}&quot;)</span>
+
+            <span class="k">if</span> <span class="n">elbow_cluster</span> <span class="o">==</span> <span class="mi">1</span> <span class="ow">or</span> <span class="ow">not</span> <span class="n">elbow_cluster</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Elbow was either one or None for the elbow seq.&quot;</span><span class="p">)</span>
+                <span class="k">continue</span>
+
+            <span class="c1"># Plot sequence</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ks</span><span class="p">,</span>
+                     <span class="n">inertias</span><span class="p">[</span><span class="n">i</span><span class="p">],</span>
+                     <span class="s1">&#39;-o&#39;</span><span class="p">,</span>
+                     <span class="n">color</span><span class="o">=</span><span class="s1">&#39;#367588&#39;</span><span class="p">,</span>
+                     <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+
+            <span class="c1"># Count all center elbows found</span>
+            <span class="k">if</span> <span class="nb">str</span><span class="p">(</span><span class="n">elbow_cluster</span><span class="p">)</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">center_elbow_count</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+                <span class="n">center_elbow_count</span><span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">elbow_cluster</span><span class="p">)]</span> <span class="o">=</span> <span class="mi">1</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">center_elbow_count</span><span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">elbow_cluster</span><span class="p">)]</span> <span class="o">+=</span> <span class="mi">1</span>
+
+            <span class="c1"># Get elbow section (1 before center and 1 after center)</span>
+            <span class="k">for</span> <span class="n">k_val</span> <span class="ow">in</span> <span class="p">[</span><span class="n">elbow_cluster</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="n">elbow_cluster</span><span class="p">,</span> <span class="n">elbow_cluster</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]:</span>
+                <span class="n">elbow_sections</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="n">ks</span><span class="p">[</span><span class="n">k_val</span> <span class="o">-</span> <span class="mi">1</span><span class="p">],</span><span class="n">inertias</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">k_val</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]])</span>
+
+                <span class="k">if</span> <span class="nb">str</span><span class="p">(</span><span class="n">k_val</span><span class="p">)</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">proximity_elbow_count</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+                    <span class="n">proximity_elbow_count</span><span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">k_val</span><span class="p">)]</span> <span class="o">=</span> <span class="mi">1</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">proximity_elbow_count</span><span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">k_val</span><span class="p">)]</span> <span class="o">+=</span> <span class="mi">1</span>
+
+            <span class="c1"># Get inertia values</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">elbow_inertias_matrix</span><span class="p">,</span> <span class="nb">type</span><span class="p">(</span><span class="kc">None</span><span class="p">)):</span>
+                <span class="n">inertias_matrix</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">matrix</span><span class="p">([</span><span class="n">inertias</span><span class="p">[</span><span class="n">i</span><span class="p">]])</span>
+                <span class="n">elbow_inertias_matrix</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">matrix</span><span class="p">(</span><span class="n">inertias</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">elbow_cluster</span> <span class="o">-</span> <span class="mi">2</span><span class="p">:</span><span class="n">elbow_cluster</span> <span class="o">+</span> <span class="mi">1</span><span class="p">])</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">inertias_matrix</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">vstack</span><span class="p">([</span><span class="n">inertias_matrix</span><span class="p">,</span> <span class="n">inertias</span><span class="p">[</span><span class="n">i</span><span class="p">]])</span>
+
+                <span class="n">elbow_inertias_matrix</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">vstack</span><span class="p">(</span>
+                    <span class="p">[</span><span class="n">elbow_inertias_matrix</span><span class="p">,</span> <span class="n">inertias</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">elbow_cluster</span> <span class="o">-</span> <span class="mi">2</span><span class="p">:</span><span class="n">elbow_cluster</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]])</span>
+
+            <span class="n">elbow_models</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">k_models</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">elbow_cluster</span> <span class="o">-</span> <span class="mi">2</span><span class="p">:</span><span class="n">elbow_cluster</span> <span class="o">+</span> <span class="mi">1</span><span class="p">])</span>
+
+        <span class="c1"># Plot elbow sections</span>
+        <span class="k">for</span> <span class="n">elbow_s</span> <span class="ow">in</span> <span class="n">elbow_sections</span><span class="p">:</span>
+            <span class="n">k_val</span> <span class="o">=</span> <span class="n">elbow_s</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+            <span class="n">intertia</span> <span class="o">=</span> <span class="n">elbow_s</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">k_val</span><span class="p">,</span>
+                     <span class="n">intertia</span><span class="p">,</span>
+                     <span class="s1">&#39;r*&#39;</span><span class="p">,)</span>
+
+        <span class="k">del</span> <span class="n">inertias</span>
+        <span class="k">del</span> <span class="n">k_models</span>
+        <span class="k">del</span> <span class="n">elbow_cluster</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">save_plot</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Models/</span><span class="si">{model_name}</span><span class="s2">&quot;</span><span class="p">,</span>
+                       <span class="sa">f</span><span class="s2">&quot;All possible </span><span class="si">{model_name}</span><span class="s2"> Elbow&#39;s&quot;</span><span class="p">,)</span>
+
+        <span class="k">if</span> <span class="n">display_visuals</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">__notebook_mode</span><span class="p">:</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+        <span class="n">plt</span><span class="o">.</span><span class="n">close</span><span class="p">(</span><span class="s2">&quot;all&quot;</span><span class="p">)</span>
+
+        <span class="c1"># Get the counts of the center elbows</span>
+        <span class="n">center_elbow_count</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s2">&quot;Main Elbows&quot;</span><span class="p">:</span> <span class="nb">list</span><span class="p">(</span><span class="n">center_elbow_count</span><span class="o">.</span><span class="n">keys</span><span class="p">()),</span>
+                                           <span class="s2">&quot;Counts&quot;</span><span class="p">:</span> <span class="nb">list</span><span class="p">(</span><span class="n">center_elbow_count</span><span class="o">.</span><span class="n">values</span><span class="p">())})</span>
+        <span class="n">center_elbow_count</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">by</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Counts&#39;</span><span class="p">],</span>
+                                       <span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+                                       <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">save_table_as_plot</span><span class="p">(</span>
+            <span class="n">center_elbow_count</span><span class="p">,</span>
+            <span class="n">sub_dir</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;Models/</span><span class="si">{model_name}</span><span class="s2">&quot;</span><span class="p">,</span>
+            <span class="n">filename</span><span class="o">=</span><span class="s2">&quot;Center Elbow Count&quot;</span><span class="p">)</span>
+
+        <span class="c1"># Get the counts of the proximity elbows</span>
+        <span class="n">proximity_elbow_count</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s2">&quot;Proximity Elbow&quot;</span><span class="p">:</span> <span class="nb">list</span><span class="p">(</span><span class="n">proximity_elbow_count</span><span class="o">.</span><span class="n">keys</span><span class="p">()),</span>
+                                              <span class="s2">&quot;Counts&quot;</span><span class="p">:</span> <span class="nb">list</span><span class="p">(</span><span class="n">proximity_elbow_count</span><span class="o">.</span><span class="n">values</span><span class="p">())})</span>
+        <span class="n">proximity_elbow_count</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">by</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Counts&#39;</span><span class="p">],</span>
+                                          <span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+                                          <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">save_table_as_plot</span><span class="p">(</span>
+            <span class="n">proximity_elbow_count</span><span class="p">,</span>
+            <span class="n">sub_dir</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;Models/</span><span class="si">{model_name}</span><span class="s2">&quot;</span><span class="p">,</span>
+            <span class="n">filename</span><span class="o">=</span><span class="s2">&quot;Proximity Elbow Count&quot;</span><span class="p">)</span>
+
+        <span class="c1"># Set up graphic</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">13</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Best of all </span><span class="si">{model_name}</span><span class="s2"> Elbows&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Number of clusters, k&#39;</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Inertia&#39;</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="n">ks</span><span class="p">)</span>
+
+
+
+        <span class="c1"># Find the most agreed upon elbow section</span>
+        <span class="n">average_elbow_inertias</span> <span class="o">=</span> <span class="n">elbow_inertias_matrix</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+
+        <span class="n">elbow_vote</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">vector</span> <span class="ow">in</span> <span class="n">elbow_inertias_matrix</span><span class="p">:</span>
+            <span class="n">elbow_vote</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
+                <span class="n">np</span><span class="o">.</span><span class="n">absolute</span><span class="p">(</span><span class="n">vector</span> <span class="o">-</span> <span class="n">average_elbow_inertias</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">())</span>
+
+        <span class="n">best_elbow_index</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">elbow_vote</span><span class="p">)</span><span class="o">.</span><span class="n">argmin</span><span class="p">()</span>
+
+        <span class="nb">print</span><span class="p">(</span><span class="n">inertias_matrix</span><span class="p">[</span><span class="n">best_elbow_index</span><span class="p">]</span><span class="o">.</span><span class="n">tolist</span><span class="p">()[</span><span class="mi">0</span><span class="p">])</span>
+
+        <span class="c1"># Plot most agreed upon elbow section</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ks</span><span class="p">,</span>
+                 <span class="n">inertias_matrix</span><span class="p">[</span><span class="n">best_elbow_index</span><span class="p">]</span><span class="o">.</span><span class="n">tolist</span><span class="p">()[</span><span class="mi">0</span><span class="p">],</span>
+                 <span class="s1">&#39;-o&#39;</span><span class="p">,</span>
+                 <span class="n">color</span><span class="o">=</span><span class="s1">&#39;#367588&#39;</span><span class="p">)</span>
+
+        <span class="c1"># Save the best cluster models</span>
+        <span class="n">best_clusters</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">model</span> <span class="ow">in</span> <span class="n">elbow_models</span><span class="p">[</span><span class="n">best_elbow_index</span><span class="p">]:</span>
+            <span class="n">k_val</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">get_clusters</span><span class="p">())</span>
+
+            <span class="n">model_path</span> <span class="o">=</span> <span class="n">create_dir_structure</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">folder_path</span><span class="p">,</span>
+                                              <span class="sa">f</span><span class="s2">&quot;Models/</span><span class="si">{model_name}</span><span class="s2">/Clusters=</span><span class="si">{k_val}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+            <span class="c1"># Save model and meta data</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">file_path</span> <span class="o">=</span> <span class="n">pickle_object_to_file</span><span class="p">(</span><span class="n">model</span><span class="p">,</span>
+                                                  <span class="n">model_path</span><span class="p">,</span>
+                                                  <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{model_name}</span><span class="s2">_Clusters={str(k_val)}&quot;</span><span class="p">)</span>
+
+                <span class="n">pickle_object_to_file</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__get_centers</span><span class="p">(</span><span class="n">model</span><span class="p">),</span>
+                                      <span class="n">model_path</span><span class="p">,</span>
+                                      <span class="sa">f</span><span class="s2">&quot;Center points&quot;</span><span class="p">)</span>
+
+
+                <span class="n">dict_to_json_file</span><span class="p">({</span><span class="n">i</span><span class="p">:</span><span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">get_clusters</span><span class="p">()))},</span>
+                                  <span class="n">model_path</span><span class="p">,</span>
+                                  <span class="s2">&quot;Cluster Labels&quot;</span><span class="p">)</span>
+
+                <span class="bp">self</span><span class="o">.</span><span class="n">__cluster_models_paths</span><span class="p">[</span>
+                    <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{model_name}</span><span class="s2">_Clusters={str(k_val)}&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">file_path</span>
+
+            <span class="k">except</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Something went wrong when trying to save the model: </span><span class="si">{model_name}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+            <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ks</span><span class="p">[</span><span class="n">k_val</span> <span class="o">-</span> <span class="mi">1</span><span class="p">],</span>
+                     <span class="n">inertias_matrix</span><span class="p">[</span><span class="n">best_elbow_index</span><span class="p">]</span><span class="o">.</span><span class="n">tolist</span><span class="p">()[</span><span class="mi">0</span><span class="p">][</span><span class="n">k_val</span> <span class="o">-</span> <span class="mi">1</span><span class="p">],</span>
+                     <span class="s1">&#39;r*&#39;</span><span class="p">)</span>
+            <span class="n">best_clusters</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">k_val</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">save_plot</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Models/</span><span class="si">{model_name}</span><span class="s2">&quot;</span><span class="p">,</span>
+                       <span class="sa">f</span><span class="s2">&quot;Best of all </span><span class="si">{model_name}</span><span class="s2"> Elbows&quot;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">display_visuals</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">__notebook_mode</span><span class="p">:</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">close</span><span class="p">(</span><span class="s2">&quot;all&quot;</span><span class="p">)</span>
+
+        <span class="n">best_clusters</span><span class="o">.</span><span class="n">sort</span><span class="p">()</span>
+
+        <span class="k">if</span> <span class="n">display_visuals</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">__notebook_mode</span><span class="p">:</span>
+            <span class="n">display</span><span class="p">(</span><span class="n">proximity_elbow_count</span><span class="p">)</span>
+            <span class="n">display</span><span class="p">(</span><span class="n">center_elbow_count</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">best_clusters</span>
+
+    <span class="k">def</span> <span class="nf">__save_update_best_model_clusters</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">            Generates a directory structure for saving the suggested cluster</span>
+<span class="sd">            amounts.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">create_dir_structure</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">folder_path</span><span class="p">,</span>
+                             <span class="s2">&quot;_Extras&quot;</span><span class="p">)</span>
+
+        <span class="n">pickle_object_to_file</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__models_suggested_clusters</span><span class="p">,</span>
+                              <span class="bp">self</span><span class="o">.</span><span class="n">folder_path</span> <span class="o">+</span> <span class="s2">&quot;_Extras&quot;</span><span class="p">,</span>
+                              <span class="s2">&quot;All suggested clusters&quot;</span><span class="p">)</span>
+        <span class="n">write_object_text_to_file</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__models_suggested_clusters</span><span class="p">,</span>
+                                  <span class="bp">self</span><span class="o">.</span><span class="n">folder_path</span> <span class="o">+</span> <span class="s2">&quot;_Extras&quot;</span><span class="p">,</span>
+                                  <span class="s2">&quot;All suggested clusters&quot;</span><span class="p">)</span>
+
+        <span class="n">all_clusters</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">model_name</span><span class="p">,</span> <span class="n">best_clusters</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">__models_suggested_clusters</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="n">write_object_text_to_file</span><span class="p">(</span><span class="n">best_clusters</span><span class="p">,</span>
+                                      <span class="bp">self</span><span class="o">.</span><span class="n">folder_path</span> <span class="o">+</span> <span class="s2">&quot;_Extras&quot;</span><span class="p">,</span>
+                                      <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{model_name}</span><span class="s2"> suggested clusters&quot;</span><span class="p">)</span>
+
+            <span class="n">all_clusters</span> <span class="o">+=</span> <span class="n">best_clusters</span>
+
+
+        <span class="n">write_object_text_to_file</span><span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="nb">sum</span><span class="p">(</span><span class="n">all_clusters</span><span class="p">)</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">all_clusters</span><span class="p">)),</span>
+                                  <span class="bp">self</span><span class="o">.</span><span class="n">folder_path</span> <span class="o">+</span> <span class="s2">&quot;_Extras&quot;</span><span class="p">,</span>
+                                  <span class="s2">&quot;Average of suggested clusters&quot;</span><span class="p">)</span>
+
+
+    <span class="k">def</span> <span class="nf">__get_unique_random_indexes</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+                                    <span class="n">k_val</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">            Helper function for pyclustering models that require list indexes</span>
+<span class="sd">            to the scaled data.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            k_val: int</span>
+<span class="sd">                How many random center points or clusters are required.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Returns a list of randomly indexes.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__scaled</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">k_val</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Can&#39;t generate more random indexes/center points &quot;</span>
+                             <span class="s2">&quot;than avaliable.&quot;</span><span class="p">)</span>
+
+        <span class="n">random_indexes</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+        <span class="k">while</span> <span class="nb">len</span><span class="p">(</span><span class="n">random_indexes</span><span class="p">)</span> <span class="o">!=</span> <span class="n">k_val</span><span class="p">:</span>
+
+            <span class="n">index</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__scaled</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+
+            <span class="k">if</span> <span class="n">index</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">random_indexes</span><span class="p">:</span>
+                <span class="n">random_indexes</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">index</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">random_indexes</span>
+
+
+    <span class="k">def</span> <span class="nf">__determine_curve</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+                          <span class="n">intertia</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">            When for finding the elbow of the graph it&#39;s important to understand</span>
+<span class="sd">            if the curve of the intertia vector is convex or concaved</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            intertia: list of floats</span>
+<span class="sd">                Cluster models evaluated by calculating their intertia.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Returns a string that says either &quot;concave&quot; or &quot;convex&quot;. Returns</span>
+<span class="sd">            nothing if the intertia vector has a length less than 2.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="c1"># Can&#39;t determine concaved or convexed; return None</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">intertia</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">2</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">None</span>
+
+        <span class="c1"># Look at the vector in different lengths to determine the best shape</span>
+        <span class="n">convex_count</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="n">concave_count</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">intertia</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
+            <span class="n">x</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">intertia</span><span class="p">))</span>
+
+            <span class="n">warnings</span><span class="o">.</span><span class="n">filterwarnings</span><span class="p">(</span><span class="s2">&quot;ignore&quot;</span><span class="p">)</span>
+
+            <span class="c1"># Calculate shape</span>
+            <span class="n">poly</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">polyfit</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="n">i</span><span class="p">],</span>
+                              <span class="n">intertia</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="n">i</span><span class="p">],</span>
+                              <span class="mi">2</span><span class="p">)</span>
+            <span class="n">warnings</span><span class="o">.</span><span class="n">filterwarnings</span><span class="p">(</span><span class="s2">&quot;default&quot;</span><span class="p">)</span>
+
+            <span class="c1"># Derivative greater than 0 must be concaved</span>
+            <span class="k">if</span> <span class="n">poly</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="n">convex_count</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">concave_count</span> <span class="o">+=</span> <span class="mi">1</span>
+
+        <span class="c1"># Which shape was found more frequently within the vector.</span>
+        <span class="k">if</span> <span class="n">concave_count</span> <span class="o">&gt;=</span> <span class="n">convex_count</span><span class="p">:</span>
+            <span class="k">return</span> <span class="s2">&quot;concave&quot;</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="s2">&quot;convex&quot;</span>
+
+
+    <span class="k">def</span> <span class="nf">__display_cluster_label_rank_graph</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+                                           <span class="n">cluster_labels</span><span class="p">,</span>
+                                           <span class="n">counts</span><span class="p">,</span>
+                                           <span class="n">sub_dir</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span>
+                                           <span class="n">display_visuals</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">            Darker colors have higher rankings (values)</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            cluster_labels: list of strings</span>
+<span class="sd">                List of label names.</span>
+
+<span class="sd">            counts: list of ints</span>
+<span class="sd">                Counts for how many each cluster label had. Order must match</span>
+<span class="sd">                &#39;cluster_labels&#39;.</span>
+
+<span class="sd">            sub_dir: string</span>
+<span class="sd">                Directory to create and write data to.</span>
+
+<span class="sd">            display_visuals: bool</span>
+<span class="sd">                If set to True will display graphic</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">7</span><span class="p">))</span>
+
+        <span class="n">palette</span> <span class="o">=</span> <span class="s2">&quot;PuBu&quot;</span>
+
+        <span class="c1"># Color ranking</span>
+        <span class="n">rank_list</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argsort</span><span class="p">(</span><span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">counts</span><span class="p">))</span><span class="o">.</span><span class="n">argsort</span><span class="p">()</span>
+        <span class="n">pal</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">color_palette</span><span class="p">(</span><span class="n">palette</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">counts</span><span class="p">))</span>
+        <span class="n">palette</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">pal</span><span class="p">[::</span><span class="o">-</span><span class="mi">1</span><span class="p">])[</span><span class="n">rank_list</span><span class="p">]</span>
+
+        <span class="n">plt</span><span class="o">.</span><span class="n">clf</span><span class="p">()</span>
+
+        <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Cluster labels and data points count&quot;</span><span class="p">)</span>
+
+        <span class="n">ax</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">barplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">cluster_labels</span><span class="p">,</span>
+                         <span class="n">y</span><span class="o">=</span><span class="n">counts</span><span class="p">,</span>
+                         <span class="n">palette</span><span class="o">=</span><span class="n">palette</span><span class="p">,</span>
+                         <span class="n">order</span><span class="o">=</span><span class="n">cluster_labels</span><span class="p">)</span>
+
+        <span class="c1"># Labels for numerical count of each bar</span>
+        <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">ax</span><span class="o">.</span><span class="n">patches</span><span class="p">:</span>
+            <span class="n">height</span> <span class="o">=</span> <span class="n">p</span><span class="o">.</span><span class="n">get_height</span><span class="p">()</span>
+            <span class="n">ax</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="n">p</span><span class="o">.</span><span class="n">get_x</span><span class="p">()</span> <span class="o">+</span> <span class="n">p</span><span class="o">.</span><span class="n">get_width</span><span class="p">()</span> <span class="o">/</span> <span class="mf">2.</span><span class="p">,</span>
+                    <span class="n">height</span> <span class="o">+</span> <span class="mi">3</span><span class="p">,</span>
+                    <span class="s1">&#39;</span><span class="si">{:1}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">height</span><span class="p">),</span>
+                    <span class="n">ha</span><span class="o">=</span><span class="s2">&quot;center&quot;</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">save_plot</span><span class="p">(</span><span class="n">sub_dir</span><span class="p">,</span>
+                       <span class="s2">&quot;Cluster labels and data points count&quot;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">display_visuals</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">__notebook_mode</span><span class="p">:</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+        <span class="n">plt</span><span class="o">.</span><span class="n">close</span><span class="p">(</span><span class="s2">&quot;all&quot;</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">__get_color_name</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+                         <span class="n">color</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">            Simple helper function for a simple switch statement.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            color: char</span>
+<span class="sd">                Single character value representing a real color name.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            A full color name.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">if</span> <span class="n">color</span> <span class="o">==</span> <span class="s2">&quot;b&quot;</span><span class="p">:</span>
+            <span class="k">return</span> <span class="s2">&quot;Blue&quot;</span>
+
+        <span class="k">elif</span> <span class="n">color</span> <span class="o">==</span> <span class="s2">&quot;g&quot;</span><span class="p">:</span>
+            <span class="k">return</span> <span class="s2">&quot;Green&quot;</span>
+
+        <span class="k">elif</span> <span class="n">color</span> <span class="o">==</span> <span class="s2">&quot;r&quot;</span><span class="p">:</span>
+            <span class="k">return</span> <span class="s2">&quot;Red&quot;</span>
+
+        <span class="k">elif</span> <span class="n">color</span> <span class="o">==</span> <span class="s2">&quot;c&quot;</span><span class="p">:</span>
+            <span class="k">return</span> <span class="s2">&quot;Cyan&quot;</span>
+
+        <span class="k">elif</span> <span class="n">color</span> <span class="o">==</span> <span class="s2">&quot;m&quot;</span><span class="p">:</span>
+            <span class="k">return</span> <span class="s2">&quot;Magenta&quot;</span>
+
+        <span class="k">elif</span> <span class="n">color</span> <span class="o">==</span> <span class="s2">&quot;y&quot;</span><span class="p">:</span>
+            <span class="k">return</span> <span class="s2">&quot;Yellow&quot;</span>
+
+        <span class="k">elif</span> <span class="n">color</span> <span class="o">==</span> <span class="s2">&quot;k&quot;</span><span class="p">:</span>
+            <span class="k">return</span> <span class="s2">&quot;Black&quot;</span>
+
+        <span class="k">elif</span> <span class="n">color</span> <span class="o">==</span> <span class="s2">&quot;w&quot;</span><span class="p">:</span>
+            <span class="k">return</span> <span class="s2">&quot;White&quot;</span>
+
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">color</span>
+
+    <span class="k">def</span> <span class="nf">__nearest_cluster</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+                          <span class="n">center_points</span><span class="p">,</span>
+                          <span class="n">dp</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">            Simple helper function to get the right cluster label. Cluster label</span>
+<span class="sd">            is determined by how close the given data point is to the center</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            center_points: list of lists of floats (list of data points)</span>
+<span class="sd">                Cluster&#39;s center point.</span>
+
+<span class="sd">            dp: list of floats, (data point)</span>
+<span class="sd">                Data point</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">argmin</span><span class="p">([</span><span class="n">euclidean_distance</span><span class="p">(</span><span class="n">dp</span><span class="p">,</span> <span class="n">c</span><span class="p">)</span>
+                          <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">center_points</span><span class="p">])</span></div>
+
+
+
+</pre></div>
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2020, Eric Cacciavillani
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

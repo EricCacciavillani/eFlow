@@ -79,23 +79,22 @@
             
             
               <ul>
-<li class="toctree-l1"><a class="reference internal" href="../../../_autosummary/eflow.data_analysis.feature_analysis.html">eflow.data_analysis.feature_analysis</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../_autosummary/eflow.data_analysis.null_analysis.html">eflow.data_analysis.null_analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../_autosummary/eflow.auto_modeler.auto_cluster.html">AutoCluster</a></li>
 </ul>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../../../_autosummary/eflow.data_pipeline_segments.data_encoder.html">eflow.data_pipeline_segments.data_encoder</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../_autosummary/eflow.data_pipeline_segments.feature_data_cleaner.html">eflow.data_pipeline_segments.feature_data_cleaner</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../_autosummary/eflow.data_pipeline_segments.feature_transformer.html">eflow.data_pipeline_segments.feature_transformer</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../_autosummary/eflow.data_pipeline_segments.string_cleaner.html">eflow.data_pipeline_segments.string_cleaner</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../_autosummary/eflow.data_pipeline_segments.type_fixer.html">eflow.data_pipeline_segments.type_fixer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../_autosummary/eflow.data_analysis.feature_analysis.html">FeatureAnalysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../_autosummary/eflow.data_analysis.null_analysis.html">NullAnalysis</a></li>
 </ul>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../../../_autosummary/eflow.foundation.data_frame_types.html">eflow.foundation.data_frame_types</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../_autosummary/eflow.foundation.data_pipeline.html">eflow.foundation.data_pipeline</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../_autosummary/eflow.data_pipeline_segments.data_encoder.html">DataEncoder</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../_autosummary/eflow.data_pipeline_segments.feature_data_cleaner.html">FeatureDataCleaner</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../_autosummary/eflow.data_pipeline_segments.feature_transformer.html">FeatureTransformer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../_autosummary/eflow.data_pipeline_segments.string_cleaner.html">StringCleaner</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../_autosummary/eflow.data_pipeline_segments.type_fixer.html">TypeFixer</a></li>
 </ul>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../../../_autosummary/eflow.model_analysis.classification_analysis.html">eflow.model_analysis.classification_analysis</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../_autosummary/eflow.model_analysis.regression_analysis.html">eflow.model_analysis.regression_analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../_autosummary/eflow.model_analysis.classification_analysis.html">ClassificationAnalysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../_autosummary/eflow.model_analysis.regression_analysis.html">RegressionAnalysis</a></li>
 </ul>
 
             
@@ -176,7 +175,7 @@
 <span class="n">__maintainer__</span> <span class="o">=</span> <span class="s2">&quot;EricCacciavillani&quot;</span>
 <span class="n">__email__</span> <span class="o">=</span> <span class="s2">&quot;eric.cacciavillani@gmail.com&quot;</span>
 
-<div class="viewcode-block" id="DataEncoder"><a class="viewcode-back" href="../../../_autosummary/eflow.data_pipeline_segments.data_encoder.html#eflow.data_pipeline_segments.data_encoder.DataEncoder">[docs]</a><span class="k">class</span> <span class="nc">DataEncoder</span><span class="p">(</span><span class="n">DataPipelineSegment</span><span class="p">):</span>
+<div class="viewcode-block" id="DataEncoder"><a class="viewcode-back" href="../../../_autosummary_old/eflow.data_pipeline_segments.data_encoder.html#eflow.data_pipeline_segments.data_encoder.DataEncoder">[docs]</a><span class="k">class</span> <span class="nc">DataEncoder</span><span class="p">(</span><span class="n">DataPipelineSegment</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Attempts to convert features to the correct types. Will update the</span>
 <span class="sd">        dataframe and df_features.</span>
@@ -200,7 +199,7 @@
                                      <span class="n">segment_id</span><span class="o">=</span><span class="n">segment_id</span><span class="p">,</span>
                                      <span class="n">create_file</span><span class="o">=</span><span class="n">create_file</span><span class="p">)</span>
 
-<div class="viewcode-block" id="DataEncoder.encode_data"><a class="viewcode-back" href="../../../_autosummary/eflow.data_pipeline_segments.data_encoder.html#eflow.data_pipeline_segments.data_encoder.DataEncoder.encode_data">[docs]</a>    <span class="k">def</span> <span class="nf">encode_data</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+<div class="viewcode-block" id="DataEncoder.encode_data"><a class="viewcode-back" href="../../../_autosummary_old/eflow.data_pipeline_segments.data_encoder.html#eflow.data_pipeline_segments.data_encoder.DataEncoder.encode_data">[docs]</a>    <span class="k">def</span> <span class="nf">encode_data</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
                     <span class="n">df</span><span class="p">,</span>
                     <span class="n">df_features</span><span class="p">,</span>
                     <span class="n">apply_value_representation</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
@@ -266,7 +265,7 @@
                                                            <span class="n">parameters</span><span class="p">,</span>
                                                            <span class="n">params_dict</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="DataEncoder.decode_data"><a class="viewcode-back" href="../../../_autosummary/eflow.data_pipeline_segments.data_encoder.html#eflow.data_pipeline_segments.data_encoder.DataEncoder.decode_data">[docs]</a>    <span class="k">def</span> <span class="nf">decode_data</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+<div class="viewcode-block" id="DataEncoder.decode_data"><a class="viewcode-back" href="../../../_autosummary_old/eflow.data_pipeline_segments.data_encoder.html#eflow.data_pipeline_segments.data_encoder.DataEncoder.decode_data">[docs]</a>    <span class="k">def</span> <span class="nf">decode_data</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
                     <span class="n">df</span><span class="p">,</span>
                     <span class="n">df_features</span><span class="p">,</span>
                     <span class="n">apply_value_representation</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
@@ -360,7 +359,7 @@
                                                            <span class="n">parameters</span><span class="p">,</span>
                                                            <span class="n">params_dict</span><span class="p">)</span>
 
-<div class="viewcode-block" id="DataEncoder.apply_value_representation"><a class="viewcode-back" href="../../../_autosummary/eflow.data_pipeline_segments.data_encoder.html#eflow.data_pipeline_segments.data_encoder.DataEncoder.apply_value_representation">[docs]</a>    <span class="k">def</span> <span class="nf">apply_value_representation</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+<div class="viewcode-block" id="DataEncoder.apply_value_representation"><a class="viewcode-back" href="../../../_autosummary_old/eflow.data_pipeline_segments.data_encoder.html#eflow.data_pipeline_segments.data_encoder.DataEncoder.apply_value_representation">[docs]</a>    <span class="k">def</span> <span class="nf">apply_value_representation</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
                                    <span class="n">df</span><span class="p">,</span>
                                    <span class="n">df_features</span><span class="p">,</span>
                                    <span class="n">_add_to_que</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
@@ -398,7 +397,7 @@
                                                            <span class="n">parameters</span><span class="p">,</span>
                                                            <span class="n">params_dict</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="DataEncoder.revert_value_representation"><a class="viewcode-back" href="../../../_autosummary/eflow.data_pipeline_segments.data_encoder.html#eflow.data_pipeline_segments.data_encoder.DataEncoder.revert_value_representation">[docs]</a>    <span class="k">def</span> <span class="nf">revert_value_representation</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+<div class="viewcode-block" id="DataEncoder.revert_value_representation"><a class="viewcode-back" href="../../../_autosummary_old/eflow.data_pipeline_segments.data_encoder.html#eflow.data_pipeline_segments.data_encoder.DataEncoder.revert_value_representation">[docs]</a>    <span class="k">def</span> <span class="nf">revert_value_representation</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
                                     <span class="n">df</span><span class="p">,</span>
                                     <span class="n">df_features</span><span class="p">,</span>
                                     <span class="n">_add_to_que</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
@@ -439,7 +438,7 @@
                                                            <span class="n">parameters</span><span class="p">,</span>
                                                            <span class="n">params_dict</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="DataEncoder.make_values_bool"><a class="viewcode-back" href="../../../_autosummary/eflow.data_pipeline_segments.data_encoder.html#eflow.data_pipeline_segments.data_encoder.DataEncoder.make_values_bool">[docs]</a>    <span class="k">def</span> <span class="nf">make_values_bool</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+<div class="viewcode-block" id="DataEncoder.make_values_bool"><a class="viewcode-back" href="../../../_autosummary_old/eflow.data_pipeline_segments.data_encoder.html#eflow.data_pipeline_segments.data_encoder.DataEncoder.make_values_bool">[docs]</a>    <span class="k">def</span> <span class="nf">make_values_bool</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
                          <span class="n">df</span><span class="p">,</span>
                          <span class="n">df_features</span><span class="p">,</span>
                          <span class="n">_add_to_que</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
@@ -474,7 +473,7 @@
                                                            <span class="n">parameters</span><span class="p">,</span>
                                                            <span class="n">params_dict</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="DataEncoder.make_dummies"><a class="viewcode-back" href="../../../_autosummary/eflow.data_pipeline_segments.data_encoder.html#eflow.data_pipeline_segments.data_encoder.DataEncoder.make_dummies">[docs]</a>    <span class="k">def</span> <span class="nf">make_dummies</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+<div class="viewcode-block" id="DataEncoder.make_dummies"><a class="viewcode-back" href="../../../_autosummary_old/eflow.data_pipeline_segments.data_encoder.html#eflow.data_pipeline_segments.data_encoder.DataEncoder.make_dummies">[docs]</a>    <span class="k">def</span> <span class="nf">make_dummies</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
                      <span class="n">df</span><span class="p">,</span>
                      <span class="n">df_features</span><span class="p">,</span>
                      <span class="n">qualitative_features</span><span class="o">=</span><span class="p">[],</span>
@@ -550,7 +549,7 @@
                                                            <span class="n">parameters</span><span class="p">,</span>
                                                            <span class="n">params_dict</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="DataEncoder.revert_dummies"><a class="viewcode-back" href="../../../_autosummary/eflow.data_pipeline_segments.data_encoder.html#eflow.data_pipeline_segments.data_encoder.DataEncoder.revert_dummies">[docs]</a>    <span class="k">def</span> <span class="nf">revert_dummies</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+<div class="viewcode-block" id="DataEncoder.revert_dummies"><a class="viewcode-back" href="../../../_autosummary_old/eflow.data_pipeline_segments.data_encoder.html#eflow.data_pipeline_segments.data_encoder.DataEncoder.revert_dummies">[docs]</a>    <span class="k">def</span> <span class="nf">revert_dummies</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
                        <span class="n">df</span><span class="p">,</span>
                        <span class="n">df_features</span><span class="p">,</span>
                        <span class="n">qualitative_features</span><span class="o">=</span><span class="p">[],</span>

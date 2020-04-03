@@ -1,0 +1,433 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>AutoCluster &mdash; eflow  documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="FeatureAnalysis" href="eflow.data_analysis.feature_analysis.html" />
+    <link rel="prev" title="Welcome to eflow’s documentation!" href="../index.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> eflow
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">AutoCluster</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="eflow.data_analysis.feature_analysis.html">FeatureAnalysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="eflow.data_analysis.null_analysis.html">NullAnalysis</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="eflow.data_pipeline_segments.data_encoder.html">DataEncoder</a></li>
+<li class="toctree-l1"><a class="reference internal" href="eflow.data_pipeline_segments.feature_data_cleaner.html">FeatureDataCleaner</a></li>
+<li class="toctree-l1"><a class="reference internal" href="eflow.data_pipeline_segments.feature_transformer.html">FeatureTransformer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="eflow.data_pipeline_segments.string_cleaner.html">StringCleaner</a></li>
+<li class="toctree-l1"><a class="reference internal" href="eflow.data_pipeline_segments.type_fixer.html">TypeFixer</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="eflow.model_analysis.classification_analysis.html">ClassificationAnalysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="eflow.model_analysis.regression_analysis.html">RegressionAnalysis</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">eflow</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+      <li>AutoCluster</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/_autosummary/eflow.auto_modeler.auto_cluster.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="autocluster">
+<h1>AutoCluster<a class="headerlink" href="#autocluster" title="Permalink to this headline">¶</a></h1>
+<p><strong>from eflow.auto_modeler.auto_cluster import AutoCluster</strong></p>
+<span class="target" id="module-eflow.auto_modeler.auto_cluster"></span><dl class="class">
+<dt id="eflow.auto_modeler.auto_cluster.AutoCluster">
+<em class="property">class </em><code class="sig-name descname">AutoCluster</code><span class="sig-paren">(</span><em class="sig-param">df</em>, <em class="sig-param">project_sub_dir=''</em>, <em class="sig-param">project_name='Auto Clustering'</em>, <em class="sig-param">overwrite_full_path=None</em>, <em class="sig-param">notebook_mode=False</em>, <em class="sig-param">pca_perc=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/eflow/auto_modeler/auto_cluster.html#AutoCluster"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#eflow.auto_modeler.auto_cluster.AutoCluster" title="Permalink to this definition">¶</a></dt>
+<dd><p>Analyzes the feature data of a pandas Dataframe object.</p>
+<dl class="method">
+<dt id="eflow.auto_modeler.auto_cluster.AutoCluster.apply_clustering_data_pipeline">
+<code class="sig-name descname">apply_clustering_data_pipeline</code><span class="sig-paren">(</span><em class="sig-param">data</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/eflow/auto_modeler/auto_cluster.html#AutoCluster.apply_clustering_data_pipeline"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#eflow.auto_modeler.auto_cluster.AutoCluster.apply_clustering_data_pipeline" title="Permalink to this definition">¶</a></dt>
+<dd><blockquote>
+<div><p>Apply the scaler, dimension reduction transformation, matrix shrink
+and second scaler to the data.</p>
+</div></blockquote>
+<dl class="simple">
+<dt>Args:</dt><dd><dl class="simple">
+<dt>data: np.matrix, list of lists, pd.DataFrame</dt><dd><p>Data that is similar in form and value structure to the data passed
+on initialization.</p>
+</dd>
+</dl>
+</dd>
+<dt>Returns:</dt><dd><p>Returns back data after transformations are applied.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="eflow.auto_modeler.auto_cluster.AutoCluster.create_agglomerative_models">
+<code class="sig-name descname">create_agglomerative_models</code><span class="sig-paren">(</span><em class="sig-param">n_cluster_list</em>, <em class="sig-param">linkage_methods=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/eflow/auto_modeler/auto_cluster.html#AutoCluster.create_agglomerative_models"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#eflow.auto_modeler.auto_cluster.AutoCluster.create_agglomerative_models" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create multiple agglomerative models based on a list of
+‘n_clusters’ values and defined linkage methods.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="eflow.auto_modeler.auto_cluster.AutoCluster.create_elbow_models">
+<code class="sig-name descname">create_elbow_models</code><span class="sig-paren">(</span><em class="sig-param">model_names=['K-Means', 'K-Medians', 'K-Medoids', 'Somsc', 'Cure', 'Fuzzy C-Means'], sequences=3, max_k_value=15, display_visuals=True</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/eflow/auto_modeler/auto_cluster.html#AutoCluster.create_elbow_models"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#eflow.auto_modeler.auto_cluster.AutoCluster.create_elbow_models" title="Permalink to this definition">¶</a></dt>
+<dd><blockquote>
+<div><p>Create multiple sequences of defined clusters and their related
+inertia values to find the most agreed</p>
+</div></blockquote>
+<dl class="simple">
+<dt>Args:</dt><dd><dl class="simple">
+<dt>model_names: list of strings</dt><dd><p>Defines which models should be created.</p>
+</dd>
+<dt>sequences: int</dt><dd><p>How many model sequences to create</p>
+</dd>
+<dt>max_k_value: int</dt><dd><p>Max clusters to create</p>
+</dd>
+<dt>display_visuals: bool</dt><dd><p>Display graphics and tables if set to True.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="eflow.auto_modeler.auto_cluster.AutoCluster.delete_scaled_data">
+<code class="sig-name descname">delete_scaled_data</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/eflow/auto_modeler/auto_cluster.html#AutoCluster.delete_scaled_data"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#eflow.auto_modeler.auto_cluster.AutoCluster.delete_scaled_data" title="Permalink to this definition">¶</a></dt>
+<dd><p>Removes the matrix data in order to save RAM when running
+analysis on the actual data.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="eflow.auto_modeler.auto_cluster.AutoCluster.evaluate_all_models">
+<code class="sig-name descname">evaluate_all_models</code><span class="sig-paren">(</span><em class="sig-param">df</em>, <em class="sig-param">df_features</em>, <em class="sig-param">qualitative_features=[]</em>, <em class="sig-param">zscore=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/eflow/auto_modeler/auto_cluster.html#AutoCluster.evaluate_all_models"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#eflow.auto_modeler.auto_cluster.AutoCluster.evaluate_all_models" title="Permalink to this definition">¶</a></dt>
+<dd><blockquote>
+<div><p>Loop through all models and evaluate the given model with
+‘evaluate_model’. Read ‘evaluate_model’ to learn more.</p>
+</div></blockquote>
+<dl class="simple">
+<dt>Args:</dt><dd><dl class="simple">
+<dt>df: pd.DataFrame</dt><dd><p>Pandas dataframe</p>
+</dd>
+<dt>df_features: DataFrameTypes object from eflow.</dt><dd><p>DataFrameTypes object; organizes feature types into groups.</p>
+</dd>
+<dt>zscore: float, int, None</dt><dd><p>Will find the distances between given the given clusters then
+we apply data pipeline.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="eflow.auto_modeler.auto_cluster.AutoCluster.evaluate_model">
+<code class="sig-name descname">evaluate_model</code><span class="sig-paren">(</span><em class="sig-param">model_name</em>, <em class="sig-param">df</em>, <em class="sig-param">df_features</em>, <em class="sig-param">qualitative_features=[]</em>, <em class="sig-param">zscore=None</em>, <em class="sig-param">target_features=None</em>, <em class="sig-param">display_visuals=False</em>, <em class="sig-param">display_print=False</em>, <em class="sig-param">suppress_runtime_errors=True</em>, <em class="sig-param">aggregate_target_feature=True</em>, <em class="sig-param">selected_features=None</em>, <em class="sig-param">extra_tables=True</em>, <em class="sig-param">statistical_analysis_on_aggregates=True</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/eflow/auto_modeler/auto_cluster.html#AutoCluster.evaluate_model"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#eflow.auto_modeler.auto_cluster.AutoCluster.evaluate_model" title="Permalink to this definition">¶</a></dt>
+<dd><blockquote>
+<div><p>The main purpose of ‘evaluate_model’ is to display/save tables/plots
+accoiated with describing the model’s ‘findings’ for each cluster.</p>
+</div></blockquote>
+<p>Args:</p>
+<blockquote>
+<div><dl>
+<dt>model_name: str</dt><dd><p>The string key to give the dict</p>
+</dd>
+<dt>df: pd.Dataframe</dt><dd><p>Dataframe object</p>
+</dd>
+<dt>df_features: DataFrameTypes object from eflow.</dt><dd><p>DataFrameTypes object; organizes feature types into groups.</p>
+</dd>
+<dt>qualitative_features: list</dt><dd><p>Any features that are currently dummy encoded will be reversed
+when doing feature analysis.</p>
+</dd>
+<dt>zscore: float, int, None, or list of ints/floats</dt><dd><p>After calculating each distance to the center point; a zscore
+value for distance will be found. Setting this parameter defines
+a cut off point where data exceeding a certain zscore will be
+ignored when doing FeatureAnalysis</p>
+</dd>
+<dt>target_features: collection of strings or None</dt><dd><p>A feature name that both exists in the init df_features
+and the passed dataframe.</p>
+<dl class="simple">
+<dt>Note</dt><dd><p>If init to ‘None’ then df_features will try to extract out
+the target feature.</p>
+</dd>
+</dl>
+</dd>
+<dt>display_visuals: bool</dt><dd><p>Boolean value to whether or not to display visualizations.</p>
+</dd>
+<dt>display_print: bool</dt><dd><p>Determines whether or not to print function’s embedded print
+statements.</p>
+</dd>
+<dt>suppress_runtime_errors: bool</dt><dd><p>If set to true; when generating any graphs will suppress any runtime
+errors so the program can keep running.</p>
+</dd>
+<dt>extra_tables: bool</dt><dd><dl>
+<dt>When handling two types of features if set to true this will</dt><dd><p>generate any extra tables that might be helpful.
+Note -</p>
+<blockquote>
+<div><p>These graphics may create duplicates if you already applied
+an aggregation in ‘perform_analysis’</p>
+</div></blockquote>
+</dd>
+</dl>
+</dd>
+<dt>aggregate_target_feature: bool</dt><dd><p>Aggregate the data of the target feature if the data is
+non-continuous data.</p>
+<dl class="simple">
+<dt>Note</dt><dd><p>In the future I will have this also working with continuous
+data.</p>
+</dd>
+</dl>
+</dd>
+<dt>selected_features: collection object of features</dt><dd><p>Will only focus on these selected feature’s and will ignore
+the other given features.</p>
+</dd>
+<dt>statistical_analysis_on_aggregates: bool</dt><dd><p>If set to true then the function ‘statistical_analysis_on_aggregates’
+will run; which aggregates the data of the target feature either
+by discrete values or by binning/labeling continuous data.</p>
+</dd>
+</dl>
+</div></blockquote>
+</dd></dl>
+
+<dl class="method">
+<dt id="eflow.auto_modeler.auto_cluster.AutoCluster.get_all_cluster_models">
+<code class="sig-name descname">get_all_cluster_models</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/eflow/auto_modeler/auto_cluster.html#AutoCluster.get_all_cluster_models"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#eflow.auto_modeler.auto_cluster.AutoCluster.get_all_cluster_models" title="Permalink to this definition">¶</a></dt>
+<dd><blockquote>
+<div><p>Gets the model names and model instances in dictionary form.</p>
+</div></blockquote>
+<dl class="simple">
+<dt>Return:</dt><dd><p>Returns the model name to model instance dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="eflow.auto_modeler.auto_cluster.AutoCluster.get_model">
+<code class="sig-name descname">get_model</code><span class="sig-paren">(</span><em class="sig-param">model_name</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/eflow/auto_modeler/auto_cluster.html#AutoCluster.get_model"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#eflow.auto_modeler.auto_cluster.AutoCluster.get_model" title="Permalink to this definition">¶</a></dt>
+<dd><blockquote>
+<div><p>Get the model object from the stored dirctories based on the model
+name.</p>
+</div></blockquote>
+<dl class="simple">
+<dt>Args:</dt><dd><dl class="simple">
+<dt>model_name: str</dt><dd><p>Name of the model that references the saved model in
+the provided directory.</p>
+</dd>
+</dl>
+</dd>
+<dt>Returns:</dt><dd><p>Gives back the model object.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="eflow.auto_modeler.auto_cluster.AutoCluster.get_scaled_data">
+<code class="sig-name descname">get_scaled_data</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/eflow/auto_modeler/auto_cluster.html#AutoCluster.get_scaled_data"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#eflow.auto_modeler.auto_cluster.AutoCluster.get_scaled_data" title="Permalink to this definition">¶</a></dt>
+<dd><blockquote>
+<div><p>Get a copy of the stored data</p>
+</div></blockquote>
+<dl class="simple">
+<dt>Returns:</dt><dd><p>Returns the stored data</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="eflow.auto_modeler.auto_cluster.AutoCluster.visualize_hierarchical_clustering">
+<code class="sig-name descname">visualize_hierarchical_clustering</code><span class="sig-paren">(</span><em class="sig-param">linkage_methods=None</em>, <em class="sig-param">display_print=True</em>, <em class="sig-param">display_visuals=True</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/eflow/auto_modeler/auto_cluster.html#AutoCluster.visualize_hierarchical_clustering"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#eflow.auto_modeler.auto_cluster.AutoCluster.visualize_hierarchical_clustering" title="Permalink to this definition">¶</a></dt>
+<dd><blockquote>
+<div><p>Displays hierarchical cluster graphs with provided methods.</p>
+</div></blockquote>
+<dl class="simple">
+<dt>Args:</dt><dd><dl class="simple">
+<dt>linkage_methods: list of strings</dt><dd><p>All methods applied to the linkage</p>
+</dd>
+<dt>display_print: bool</dt><dd><p>Display print outputs</p>
+</dd>
+<dt>display_visuals: bool</dt><dd><p>Display plot data if set to ture.</p>
+</dd>
+</dl>
+</dd>
+<dt>Returns:</dt><dd><p>All cluster counts found.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="eflow.data_analysis.feature_analysis.html" class="btn btn-neutral float-right" title="FeatureAnalysis" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="../index.html" class="btn btn-neutral float-left" title="Welcome to eflow’s documentation!" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2020, Eric Cacciavillani
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

@@ -10,104 +10,85 @@
   <component name="ChangeListManager">
     <list default="true" id="178261e3-0830-4d8e-91ef-8172f5216aca" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.ipynb_checkpoints/generate_docs-checkpoint.py" beforeDir="false" afterPath="$PROJECT_DIR$/.ipynb_checkpoints/generate_docs-checkpoint.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backlogged Code/cluster_master_1.py" beforeDir="false" afterPath="$PROJECT_DIR$/Backlogged Code/cluster_master_1.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/lib/Backlogged Code/Global_Utils.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/lib/Backlogged Code/Multi_Threading_Functions.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/lib/Backlogged Code/MyEncoder.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/lib/Backlogged Code/SampleRemoval 2.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/lib/Backlogged Code/SampleRemoval.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/lib/Backlogged Code/__init__.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/lib/Backlogged Code/cluster_master.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/lib/Backlogged Code/cluster_master_1.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/lib/Backlogged Code/data_manipulation.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/lib/Backlogged Code/eval_model.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/lib/eflow/__init__.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/lib/eflow/_hidden/Backlogged Code/Global_Utils.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/lib/eflow/_hidden/Backlogged Code/MyEncoder.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/lib/eflow/_hidden/Backlogged Code/SampleRemoval 2.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/lib/eflow/_hidden/Backlogged Code/SampleRemoval.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/lib/eflow/_hidden/Backlogged Code/__init__.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/lib/eflow/_hidden/Backlogged Code/data_manipulation.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/lib/eflow/_hidden/__init__.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/lib/eflow/_hidden/constants.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/lib/eflow/_hidden/custom_exceptions.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/lib/eflow/_hidden/custom_warnings.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/lib/eflow/_hidden/general_objects/__init__.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/lib/eflow/_hidden/general_objects/dataframe_snapshot.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/lib/eflow/_hidden/general_objects/enum.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/lib/eflow/_hidden/parent_objects/__init__.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/lib/eflow/_hidden/parent_objects/auto_modeler.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/lib/eflow/_hidden/parent_objects/data_analysis.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/lib/eflow/_hidden/parent_objects/data_pipeline_segment.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/lib/eflow/_hidden/parent_objects/file_output.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/lib/eflow/_hidden/parent_objects/model_analysis.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/lib/eflow/_hidden/parent_objects/pipeline_jupyter_widget.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/lib/eflow/_hidden/utils/Multi_Threading_Functions.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/lib/eflow/_hidden/utils/__init__.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/lib/eflow/_hidden/widgets/DataCleaningWidget.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/lib/eflow/_hidden/widgets/__init__.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/lib/eflow/_hidden/widgets/feature_data_cleaning_widget.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/lib/eflow/_hidden/widgets/string_cleaning_widget.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/lib/eflow/auto_modeler/__init__.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/lib/eflow/auto_modeler/cluster_master.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/lib/eflow/data_analysis/__init__.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/lib/eflow/data_analysis/feature_analysis.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/lib/eflow/data_analysis/null_analysis.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/lib/eflow/data_pipeline_segments/__init__.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/lib/eflow/data_pipeline_segments/data_cleaner.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/lib/eflow/data_pipeline_segments/data_encoder.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/lib/eflow/data_pipeline_segments/feature_data_cleaner.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/lib/eflow/data_pipeline_segments/feature_transformer.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/lib/eflow/data_pipeline_segments/string_cleaner.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/lib/eflow/data_pipeline_segments/type_fixer.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/lib/eflow/foundation/__init__.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/lib/eflow/foundation/data_frame_types.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/lib/eflow/foundation/data_pipeline.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/lib/eflow/model_analysis/__init__.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/lib/eflow/model_analysis/classification_analysis.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/lib/eflow/model_analysis/regression_analysis.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/lib/eflow/utils/__init__.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/lib/eflow/utils/eflow_utils.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/lib/eflow/utils/image_processing_utils.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/lib/eflow/utils/language_processing_utils.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/lib/eflow/utils/math_utils.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/lib/eflow/utils/misc_utils.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/lib/eflow/utils/modeling_utils.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/lib/eflow/utils/multi_threading.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/lib/eflow/utils/pandas_utils.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/lib/eflow/utils/string_utils.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/lib/eflow/utils/sys_utils.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/lib/eflow/widgets/__init__.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/lib/eflow/widgets/color_labeling_widget.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/scripts-3.7/init_env" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/eflow/_hidden/general_objects/dataframe_snapshot.py" beforeDir="false" afterPath="$PROJECT_DIR$/eflow/_hidden/general_objects/dataframe_snapshot.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/eflow/_hidden/parent_objects/auto_modeler.py" beforeDir="false" afterPath="$PROJECT_DIR$/eflow/_hidden/parent_objects/auto_modeler.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/eflow/_hidden/parent_objects/data_analysis.py" beforeDir="false" afterPath="$PROJECT_DIR$/eflow/_hidden/parent_objects/data_analysis.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/eflow/_hidden/parent_objects/data_pipeline_segment.py" beforeDir="false" afterPath="$PROJECT_DIR$/eflow/_hidden/parent_objects/data_pipeline_segment.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/eflow/_hidden/parent_objects/file_output.py" beforeDir="false" afterPath="$PROJECT_DIR$/eflow/_hidden/parent_objects/file_output.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/eflow/_hidden/parent_objects/model_analysis.py" beforeDir="false" afterPath="$PROJECT_DIR$/eflow/_hidden/parent_objects/model_analysis.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/eflow/_hidden/widgets/feature_data_cleaning_widget.py" beforeDir="false" afterPath="$PROJECT_DIR$/eflow/_hidden/widgets/feature_data_cleaning_widget.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/eflow/_hidden/widgets/string_cleaning_widget.py" beforeDir="false" afterPath="$PROJECT_DIR$/eflow/_hidden/widgets/string_cleaning_widget.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/eflow/auto_modeler/cluster_master.py" beforeDir="false" afterPath="$PROJECT_DIR$/eflow/auto_modeler/cluster_master.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/eflow/data_analysis/feature_analysis.py" beforeDir="false" afterPath="$PROJECT_DIR$/eflow/data_analysis/feature_analysis.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/eflow/data_analysis/null_analysis.py" beforeDir="false" afterPath="$PROJECT_DIR$/eflow/data_analysis/null_analysis.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/eflow/data_pipeline_segments/data_encoder.py" beforeDir="false" afterPath="$PROJECT_DIR$/eflow/data_pipeline_segments/data_encoder.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/eflow/data_pipeline_segments/feature_data_cleaner.py" beforeDir="false" afterPath="$PROJECT_DIR$/eflow/data_pipeline_segments/feature_data_cleaner.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/eflow/data_pipeline_segments/feature_transformer.py" beforeDir="false" afterPath="$PROJECT_DIR$/eflow/data_pipeline_segments/feature_transformer.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/eflow/foundation/data_frame_types.py" beforeDir="false" afterPath="$PROJECT_DIR$/eflow/foundation/data_frame_types.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/eflow/foundation/data_pipeline.py" beforeDir="false" afterPath="$PROJECT_DIR$/eflow/foundation/data_pipeline.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/eflow/model_analysis/classification_analysis.py" beforeDir="false" afterPath="$PROJECT_DIR$/eflow/model_analysis/classification_analysis.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/eflow/model_analysis/regression_analysis.py" beforeDir="false" afterPath="$PROJECT_DIR$/eflow/model_analysis/regression_analysis.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/eflow/utils/eflow_utils.py" beforeDir="false" afterPath="$PROJECT_DIR$/eflow/utils/eflow_utils.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/eflow/utils/image_processing_utils.py" beforeDir="false" afterPath="$PROJECT_DIR$/eflow/utils/image_processing_utils.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/eflow/utils/misc_utils.py" beforeDir="false" afterPath="$PROJECT_DIR$/eflow/utils/misc_utils.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/eflow/utils/modeling_utils.py" beforeDir="false" afterPath="$PROJECT_DIR$/eflow/utils/modeling_utils.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/eflow/utils/pandas_utils.py" beforeDir="false" afterPath="$PROJECT_DIR$/eflow/utils/pandas_utils.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/eflow/utils/string_utils.py" beforeDir="false" afterPath="$PROJECT_DIR$/eflow/utils/string_utils.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/eflow/utils/sys_utils.py" beforeDir="false" afterPath="$PROJECT_DIR$/eflow/utils/sys_utils.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/eflow/widgets/color_labeling_widget.py" beforeDir="false" afterPath="$PROJECT_DIR$/eflow/widgets/color_labeling_widget.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/generate_docs.py" beforeDir="false" afterPath="$PROJECT_DIR$/generate_docs.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/build/doctrees/_autosummary/eflow.auto_modeler.cluster_master.doctree" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/build/doctrees/_autosummary/eflow.data_analysis.feature_analysis.doctree" beforeDir="false" afterPath="$PROJECT_DIR$/docs/build/doctrees/_autosummary/eflow.data_analysis.feature_analysis.doctree" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/build/doctrees/_autosummary/eflow.data_analysis.null_analysis.doctree" beforeDir="false" afterPath="$PROJECT_DIR$/docs/build/doctrees/_autosummary/eflow.data_analysis.null_analysis.doctree" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/build/doctrees/_autosummary/eflow.data_pipeline_segments.data_encoder.doctree" beforeDir="false" afterPath="$PROJECT_DIR$/docs/build/doctrees/_autosummary/eflow.data_pipeline_segments.data_encoder.doctree" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/build/doctrees/_autosummary/eflow.data_pipeline_segments.feature_data_cleaner.doctree" beforeDir="false" afterPath="$PROJECT_DIR$/docs/build/doctrees/_autosummary/eflow.data_pipeline_segments.feature_data_cleaner.doctree" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/build/doctrees/_autosummary/eflow.data_pipeline_segments.feature_transformer.doctree" beforeDir="false" afterPath="$PROJECT_DIR$/docs/build/doctrees/_autosummary/eflow.data_pipeline_segments.feature_transformer.doctree" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/build/doctrees/_autosummary/eflow.data_pipeline_segments.string_cleaner.doctree" beforeDir="false" afterPath="$PROJECT_DIR$/docs/build/doctrees/_autosummary/eflow.data_pipeline_segments.string_cleaner.doctree" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/build/doctrees/_autosummary/eflow.data_pipeline_segments.type_fixer.doctree" beforeDir="false" afterPath="$PROJECT_DIR$/docs/build/doctrees/_autosummary/eflow.data_pipeline_segments.type_fixer.doctree" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/build/doctrees/_autosummary/eflow.foundation.data_frame_types.doctree" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/build/doctrees/_autosummary/eflow.foundation.data_pipeline.doctree" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/build/doctrees/_autosummary/eflow.model_analysis.classification_analysis.doctree" beforeDir="false" afterPath="$PROJECT_DIR$/docs/build/doctrees/_autosummary/eflow.model_analysis.classification_analysis.doctree" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/build/doctrees/_autosummary/eflow.model_analysis.regression_analysis.doctree" beforeDir="false" afterPath="$PROJECT_DIR$/docs/build/doctrees/_autosummary/eflow.model_analysis.regression_analysis.doctree" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/build/doctrees/environment.pickle" beforeDir="false" afterPath="$PROJECT_DIR$/docs/build/doctrees/environment.pickle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/build/doctrees/index.doctree" beforeDir="false" afterPath="$PROJECT_DIR$/docs/build/doctrees/index.doctree" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/build/doctrees/index_1.doctree" beforeDir="false" afterPath="$PROJECT_DIR$/docs/build/doctrees/index_1.doctree" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/build/html/_autosummary/eflow.auto_modeler.cluster_master.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/build/html/_autosummary/eflow.data_analysis.feature_analysis.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/build/html/_autosummary/eflow.data_analysis.feature_analysis.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/build/html/_autosummary/eflow.data_analysis.null_analysis.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/build/html/_autosummary/eflow.data_analysis.null_analysis.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/build/html/_autosummary/eflow.data_pipeline_segments.data_encoder.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/build/html/_autosummary/eflow.data_pipeline_segments.data_encoder.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/build/html/_autosummary/eflow.data_pipeline_segments.feature_data_cleaner.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/build/html/_autosummary/eflow.data_pipeline_segments.feature_data_cleaner.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/build/html/_autosummary/eflow.data_pipeline_segments.feature_transformer.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/build/html/_autosummary/eflow.data_pipeline_segments.feature_transformer.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/build/html/_autosummary/eflow.data_pipeline_segments.string_cleaner.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/build/html/_autosummary/eflow.data_pipeline_segments.string_cleaner.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/build/html/_autosummary/eflow.data_pipeline_segments.type_fixer.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/build/html/_autosummary/eflow.data_pipeline_segments.type_fixer.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/build/html/_autosummary/eflow.foundation.data_frame_types.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/build/html/_autosummary/eflow.foundation.data_pipeline.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/build/html/_autosummary/eflow.model_analysis.classification_analysis.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/build/html/_autosummary/eflow.model_analysis.classification_analysis.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/build/html/_autosummary/eflow.model_analysis.regression_analysis.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/build/html/_autosummary/eflow.model_analysis.regression_analysis.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/build/html/_modules/eflow/auto_modeler/cluster_master.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/build/html/_modules/eflow/data_analysis/feature_analysis.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/build/html/_modules/eflow/data_analysis/feature_analysis.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/build/html/_modules/eflow/data_analysis/null_analysis.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/build/html/_modules/eflow/data_analysis/null_analysis.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/build/html/_modules/eflow/data_pipeline_segments/data_encoder.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/build/html/_modules/eflow/data_pipeline_segments/data_encoder.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/build/html/_modules/eflow/data_pipeline_segments/feature_data_cleaner.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/build/html/_modules/eflow/data_pipeline_segments/feature_data_cleaner.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/build/html/_modules/eflow/data_pipeline_segments/feature_transformer.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/build/html/_modules/eflow/data_pipeline_segments/feature_transformer.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/build/html/_modules/eflow/data_pipeline_segments/string_cleaner.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/build/html/_modules/eflow/data_pipeline_segments/string_cleaner.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/build/html/_modules/eflow/data_pipeline_segments/type_fixer.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/build/html/_modules/eflow/data_pipeline_segments/type_fixer.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/build/html/_modules/eflow/foundation/data_frame_types.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/build/html/_modules/eflow/foundation/data_pipeline.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/build/html/_modules/eflow/model_analysis/classification_analysis.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/build/html/_modules/eflow/model_analysis/classification_analysis.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/build/html/_modules/eflow/model_analysis/regression_analysis.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/build/html/_modules/eflow/model_analysis/regression_analysis.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/build/html/_modules/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/build/html/_modules/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/build/html/_sources/_autosummary/eflow.auto_modeler.cluster_master.rst.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/build/html/_sources/_autosummary/eflow.data_analysis.feature_analysis.rst.txt" beforeDir="false" afterPath="$PROJECT_DIR$/docs/build/html/_sources/_autosummary/eflow.data_analysis.feature_analysis.rst.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/build/html/_sources/_autosummary/eflow.data_analysis.null_analysis.rst.txt" beforeDir="false" afterPath="$PROJECT_DIR$/docs/build/html/_sources/_autosummary/eflow.data_analysis.null_analysis.rst.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/build/html/_sources/_autosummary/eflow.data_pipeline_segments.data_encoder.rst.txt" beforeDir="false" afterPath="$PROJECT_DIR$/docs/build/html/_sources/_autosummary/eflow.data_pipeline_segments.data_encoder.rst.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/build/html/_sources/_autosummary/eflow.data_pipeline_segments.feature_data_cleaner.rst.txt" beforeDir="false" afterPath="$PROJECT_DIR$/docs/build/html/_sources/_autosummary/eflow.data_pipeline_segments.feature_data_cleaner.rst.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/build/html/_sources/_autosummary/eflow.data_pipeline_segments.feature_transformer.rst.txt" beforeDir="false" afterPath="$PROJECT_DIR$/docs/build/html/_sources/_autosummary/eflow.data_pipeline_segments.feature_transformer.rst.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/build/html/_sources/_autosummary/eflow.data_pipeline_segments.string_cleaner.rst.txt" beforeDir="false" afterPath="$PROJECT_DIR$/docs/build/html/_sources/_autosummary/eflow.data_pipeline_segments.string_cleaner.rst.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/build/html/_sources/_autosummary/eflow.data_pipeline_segments.type_fixer.rst.txt" beforeDir="false" afterPath="$PROJECT_DIR$/docs/build/html/_sources/_autosummary/eflow.data_pipeline_segments.type_fixer.rst.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/build/html/_sources/_autosummary/eflow.foundation.data_frame_types.rst.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/build/html/_sources/_autosummary/eflow.foundation.data_pipeline.rst.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/build/html/_sources/_autosummary/eflow.model_analysis.classification_analysis.rst.txt" beforeDir="false" afterPath="$PROJECT_DIR$/docs/build/html/_sources/_autosummary/eflow.model_analysis.classification_analysis.rst.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/build/html/_sources/_autosummary/eflow.model_analysis.regression_analysis.rst.txt" beforeDir="false" afterPath="$PROJECT_DIR$/docs/build/html/_sources/_autosummary/eflow.model_analysis.regression_analysis.rst.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/build/html/_sources/index.rst.txt" beforeDir="false" afterPath="$PROJECT_DIR$/docs/build/html/_sources/index.rst.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/build/html/_static/alabaster.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/build/html/_static/custom.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/build/html/_static/graphviz.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/build/html/genindex.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/build/html/genindex.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/build/html/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/build/html/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/build/html/index_1.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/build/html/index_1.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/build/html/objects.inv" beforeDir="false" afterPath="$PROJECT_DIR$/docs/build/html/objects.inv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/build/html/py-modindex.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/build/html/py-modindex.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/build/html/search.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/build/html/search.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/build/html/searchindex.js" beforeDir="false" afterPath="$PROJECT_DIR$/docs/build/html/searchindex.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/source/_autosummary/eflow.auto_modeler.cluster_master.rst" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/source/_autosummary/eflow.data_analysis.feature_analysis.rst" beforeDir="false" afterPath="$PROJECT_DIR$/docs/source/_autosummary/eflow.data_analysis.feature_analysis.rst" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/source/_autosummary/eflow.data_analysis.null_analysis.rst" beforeDir="false" afterPath="$PROJECT_DIR$/docs/source/_autosummary/eflow.data_analysis.null_analysis.rst" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/source/_autosummary/eflow.data_pipeline_segments.data_encoder.rst" beforeDir="false" afterPath="$PROJECT_DIR$/docs/source/_autosummary/eflow.data_pipeline_segments.data_encoder.rst" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/source/_autosummary/eflow.data_pipeline_segments.feature_data_cleaner.rst" beforeDir="false" afterPath="$PROJECT_DIR$/docs/source/_autosummary/eflow.data_pipeline_segments.feature_data_cleaner.rst" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/source/_autosummary/eflow.data_pipeline_segments.feature_transformer.rst" beforeDir="false" afterPath="$PROJECT_DIR$/docs/source/_autosummary/eflow.data_pipeline_segments.feature_transformer.rst" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/source/_autosummary/eflow.data_pipeline_segments.string_cleaner.rst" beforeDir="false" afterPath="$PROJECT_DIR$/docs/source/_autosummary/eflow.data_pipeline_segments.string_cleaner.rst" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/source/_autosummary/eflow.data_pipeline_segments.type_fixer.rst" beforeDir="false" afterPath="$PROJECT_DIR$/docs/source/_autosummary/eflow.data_pipeline_segments.type_fixer.rst" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/source/_autosummary/eflow.foundation.data_frame_types.rst" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/source/_autosummary/eflow.foundation.data_pipeline.rst" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/source/_autosummary/eflow.model_analysis.classification_analysis.rst" beforeDir="false" afterPath="$PROJECT_DIR$/docs/source/_autosummary/eflow.model_analysis.classification_analysis.rst" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/source/_autosummary/eflow.model_analysis.regression_analysis.rst" beforeDir="false" afterPath="$PROJECT_DIR$/docs/source/_autosummary/eflow.model_analysis.regression_analysis.rst" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/source/_templates/layout.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/source/index.rst" beforeDir="false" afterPath="$PROJECT_DIR$/docs/source/index.rst" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/eflow/auto_modeler/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/eflow/auto_modeler/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/eflow/auto_modeler/cluster_master.py" beforeDir="false" afterPath="$PROJECT_DIR$/eflow/auto_modeler/auto_cluster.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -124,24 +105,24 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/eflow/data_analysis/feature_analysis.py">
+        <entry file="file://$PROJECT_DIR$/eflow/auto_modeler/auto_cluster.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="261">
-              <caret line="918" column="43" selection-start-line="918" selection-start-column="43" selection-end-line="918" selection-end-column="43" />
+            <state relative-caret-position="471">
+              <caret line="555" column="24" lean-forward="true" selection-start-line="555" selection-start-column="24" selection-end-line="555" selection-end-column="24" />
               <folding>
-                <element signature="e#0#51#0" expanded="true" />
+                <element signature="e#1#53#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/eflow/auto_modeler/cluster_master.py">
+        <entry file="file://$PROJECT_DIR$/eflow/utils/sys_utils.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="24120">
-              <caret line="1652" selection-start-line="1652" selection-end-line="1652" />
+            <state relative-caret-position="263">
+              <caret line="259" selection-start-line="259" selection-end-line="291" />
               <folding>
-                <element signature="e#1#53#0" expanded="true" />
+                <element signature="e#0#86#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -241,7 +222,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>pickle_object_to_file</find>
       <find>write_object_text_to_file</find>
       <find>dict_to_json_file</find>
       <find>json_file_to_dict</find>
@@ -271,6 +251,7 @@
       <find>Returns/</find>
       <find>analyze_feature</find>
       <find>Desc:</find>
+      <find>get_all_files_from</find>
     </findStrings>
     <replaceStrings>
       <replace>if not self.__target_feature:</replace>
@@ -314,7 +295,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/eflow/widgets/__init__.py" />
         <option value="$PROJECT_DIR$/eflow/_hidden/parent_objects/jupyter_widget.py" />
         <option value="$PROJECT_DIR$/eflow/widgets/color_labeling_widget.py" />
         <option value="$PROJECT_DIR$/eflow/data_pipeline_segments/data_transformer.py" />
@@ -365,6 +345,7 @@
         <option value="$PROJECT_DIR$/docs/source/conf.py" />
         <option value="$PROJECT_DIR$/docs/source/index.rst" />
         <option value="$PROJECT_DIR$/eflow/data_analysis/feature_analysis.py" />
+        <option value="$PROJECT_DIR$/eflow/auto_modeler/auto_cluster.py" />
       </list>
     </option>
   </component>
@@ -408,7 +389,24 @@
               <item name="eFlow" type="b2602c69:ProjectViewProjectNode" />
               <item name="eFlow" type="462c0819:PsiDirectoryNode" />
               <item name="eflow" type="462c0819:PsiDirectoryNode" />
+              <item name="auto_modeler" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="eFlow" type="b2602c69:ProjectViewProjectNode" />
+              <item name="eFlow" type="462c0819:PsiDirectoryNode" />
+              <item name="eflow" type="462c0819:PsiDirectoryNode" />
               <item name="data_analysis" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="eFlow" type="b2602c69:ProjectViewProjectNode" />
+              <item name="eFlow" type="462c0819:PsiDirectoryNode" />
+              <item name="eflow" type="462c0819:PsiDirectoryNode" />
+              <item name="utils" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="eFlow" type="b2602c69:ProjectViewProjectNode" />
+              <item name="eFlow" type="462c0819:PsiDirectoryNode" />
+              <item name="testing" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -466,7 +464,7 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/eflow/auto_modeler/cluster_master.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/eflow/auto_modeler/auto_cluster.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -663,12 +661,12 @@
       <workItem from="1585200232338" duration="5000" />
       <workItem from="1585667780075" duration="2561000" />
       <workItem from="1585756677608" duration="10073000" />
-      <workItem from="1585843473141" duration="577000" />
+      <workItem from="1585843473141" duration="2423000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="845309000" />
+    <option name="totallyTimeSpent" value="847155000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="50" y="23" width="1630" height="1027" extended-state="0" />
@@ -1012,16 +1010,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/eflow/utils/sys_utils.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2745">
-          <caret line="183" column="41" selection-start-line="183" selection-start-column="41" selection-end-line="183" selection-end-column="41" />
-          <folding>
-            <element signature="e#0#86#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/eflow/data_analysis/null_analysis.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="14550">
@@ -1060,16 +1048,6 @@
           <caret line="918" column="43" selection-start-line="918" selection-start-column="43" selection-end-line="918" selection-end-column="43" />
           <folding>
             <element signature="e#0#51#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/eflow/auto_modeler/cluster_master.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="24120">
-          <caret line="1652" selection-start-line="1652" selection-end-line="1652" />
-          <folding>
-            <element signature="e#1#53#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1138,6 +1116,26 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="210">
           <caret line="14" column="29" selection-start-line="14" selection-end-line="14" selection-end-column="29" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/eflow/utils/sys_utils.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="263">
+          <caret line="259" selection-start-line="259" selection-end-line="291" />
+          <folding>
+            <element signature="e#0#86#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/eflow/auto_modeler/auto_cluster.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="471">
+          <caret line="555" column="24" lean-forward="true" selection-start-line="555" selection-start-column="24" selection-end-line="555" selection-end-column="24" />
+          <folding>
+            <element signature="e#1#53#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
