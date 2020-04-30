@@ -3,11 +3,11 @@ import setuptools
 with open("README.md", "r") as fh:
     long_description = fh.read()
 
-MAIN_PACKAGES = [i.strip() for i in open("Installation/main_packages.txt").readlines()]
+MAIN_PACKAGES = [i.strip() for i in open("main_packages.txt").readlines()]
 
 setuptools.setup(
      name='eflow',
-     version='0.1.99',
+     version='0.2.00',
      scripts=['init_env'],
      author="Eric Cacciavillani",
      author_email="eric.cacciavillani@gmail.com",

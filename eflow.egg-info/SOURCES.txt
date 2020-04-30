@@ -35,7 +35,7 @@ eflow/_hidden/widgets/__init__.py
 eflow/_hidden/widgets/feature_data_cleaning_widget.py
 eflow/_hidden/widgets/string_cleaning_widget.py
 eflow/auto_modeler/__init__.py
-eflow/auto_modeler/cluster_master.py
+eflow/auto_modeler/auto_cluster.py
 eflow/data_analysis/__init__.py
 eflow/data_analysis/feature_analysis.py
 eflow/data_analysis/null_analysis.py

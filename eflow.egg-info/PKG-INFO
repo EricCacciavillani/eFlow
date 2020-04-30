@@ -1,6 +1,6 @@
 Metadata-Version: 2.1
 Name: eflow
-Version: 0.1.99
+Version: 0.2.0
 Summary: UNKNOWN
 Home-page: https://github.com/EricCacciavillani/eFlow
 Author: Eric Cacciavillani
@@ -10,6 +10,9 @@ Description: # eflow
         I designed this project to help make my life easier for my data science projects. It uses a combination of generating code in cell blocks (Check my testing/templates for example notebooks) and well designed objects for analysis and modeling. Currently it is far from done; (studying for GRE and have a full time job in my defense: ) ).
         
         This project was mainly designed for and in Jupyter-Lab. I don't know how well it works in Jupyter-Notebook.
+        
+        # Documentation
+        Can be found by clicking on docs/build/html/index.html in eflow using sphinx or go to https://eflow.readthedocs.io/en/latest/index.html.
         
         # Installation
         ```bash
