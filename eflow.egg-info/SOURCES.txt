@@ -11,6 +11,7 @@ Backlogged Code/cluster_master.py
 Backlogged Code/cluster_master_1.py
 Backlogged Code/data_manipulation.py
 Backlogged Code/eval_model.py
+Backlogged Code/generate_docs.py
 eflow/__init__.py
 eflow.egg-info/PKG-INFO
 eflow.egg-info/SOURCES.txt
