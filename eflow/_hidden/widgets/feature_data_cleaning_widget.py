@@ -22,7 +22,7 @@ class DataCleaningWidget():
         df: pd.Dataframe
             Pandas dataframe object
 
-        project_name: string
+        dataset_name: string
             Appending directory structure/name to the absolute path of the
             output directory.
 
@@ -198,9 +198,11 @@ class DataCleaningWidget():
                     self.__df_features,
                     self.__features_w.value)
             if len(self.__input_w.value) > 0:
-                self.__input_w.value = ''.join(
-                    [i for i in self.__input_w.value if i.isdigit() or i == '.'
-                     or i == "-"])
+
+                if self.__features_w.value not in self.__df_features.string_features():
+                    self.__input_w.value = ''.join(
+                        [i for i in self.__input_w.value if i.isdigit() or i == '.'
+                         or i == "-"])
 
                 if self.__require_input[self.__options_w.value] is not None \
                         and not string_condtional(self.__input_w.value,
@@ -312,11 +314,6 @@ class DataCleaningWidget():
             When a feature selection is chosen all the widgets are
             re-initialized.
         """
-
-        write_object_text_to_file(self.__feature_input_holder,
-                                  os.getcwd(),
-        "fuckk")
-
         self.__init_update_updateable_widgets()
 
         new_i = widgets.interactive(self.__save_option,
@@ -328,7 +325,8 @@ class DataCleaningWidget():
 
         self.__full_widgets_ui.children = new_i.children
 
-        self.__set_input_value("really?")
+        # Invoke input widget function call
+        self.__set_input_value(" ")
 
     # --- General functionality
 

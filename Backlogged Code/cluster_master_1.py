@@ -57,7 +57,7 @@ class AutoCluster(AutoModeler):
                  df,
                  df_features,
                  project_sub_dir="",
-                 project_name="Auto Clustering",
+                 dataset_name="Auto Clustering",
                  overwrite_full_path=None,
                  notebook_mode=False,
                  pca_perc=None):
@@ -72,7 +72,7 @@ class AutoCluster(AutoModeler):
             project_sub_dir: string
                 Sub directory to write data.
 
-            project_name: string
+            dataset_name: string
                 Main project directory
 
             overwrite_full_path: string
@@ -83,7 +83,7 @@ class AutoCluster(AutoModeler):
         """
 
         AutoModeler.__init__(self,
-                             f'{project_sub_dir}/{project_name}',
+                             f'{project_sub_dir}/{dataset_name}',
                              overwrite_full_path)
 
 

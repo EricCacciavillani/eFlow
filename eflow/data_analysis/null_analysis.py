@@ -29,8 +29,8 @@ class NullAnalysis(DataAnalysis):
 
     def __init__(self,
                  df_features,
-                 project_sub_dir="",
-                 project_name="Missing Data",
+                 dataset_sub_dir="",
+                 dataset_name="Default Dataset Name",
                  overwrite_full_path=None,
                  notebook_mode=False):
         """
@@ -38,10 +38,10 @@ class NullAnalysis(DataAnalysis):
             df_features:
                 Data
 
-            project_sub_dir: string
+            dataset_sub_dir: string
                 Appends to the absolute directory of the output folder
 
-            project_name: string
+            dataset_name: string
                 Creates a parent or "project" folder in which all sub-directories
                 will be inner nested.
 
@@ -53,7 +53,7 @@ class NullAnalysis(DataAnalysis):
         """
 
         DataAnalysis.__init__(self,
-                              f'{project_sub_dir}/{project_name}',
+                              f'{dataset_sub_dir}/{dataset_name}',
                               overwrite_full_path)
 
         self.__df_features = copy.deepcopy(df_features)
@@ -64,7 +64,7 @@ class NullAnalysis(DataAnalysis):
         self.__called_from_perform = False
 
         self.__feature_analysis = FeatureAnalysis(df_features,
-                                                  project_name=project_name,
+                                                  dataset_name=dataset_name,
                                                   project_sub_dir=project_sub_dir,
                                                   notebook_mode=notebook_mode)
 
@@ -291,7 +291,8 @@ class NullAnalysis(DataAnalysis):
                 print(f"No nan data found for {nan_feature_name}")
                 continue
 
-            print(f"Feature Analysis on data where {nan_feature_name} = NaN")
+            if display_print:
+                print(f"Feature Analysis on data where {nan_feature_name} = NaN")
 
             self.__feature_analysis.perform_analysis(
                 df[df[nan_feature_name].isna()].drop(columns=[nan_feature_name]),
@@ -301,7 +302,7 @@ class NullAnalysis(DataAnalysis):
                 display_print=display_print,
                 save_file=save_file,
                 dataframe_snapshot=False,
-                suppress_runtime_errors=False,
+                suppress_runtime_errors=suppress_runtime_errors,
                 aggregate_target_feature=aggregate_target_feature,
                 statistical_analysis_on_aggregates=statistical_analysis_on_aggregates,
                 selected_features=selected_features,

@@ -2,7 +2,7 @@ from eflow.utils.image_processing_utils import create_plt_png
 from eflow.utils.string_utils import correct_directory_path
 from eflow.utils.sys_utils import write_object_text_to_file, create_dir_structure, pickle_object_to_file
 from eflow._hidden.custom_exceptions import UnsatisfiedRequirments
-from eflow.utils.math_utils import calculate_entropy
+from eflow.utils.math_utils import calculate_entropy,freedman_diaconis_bins
 
 import pandas as pd
 from matplotlib import pyplot as plt
@@ -360,10 +360,10 @@ def generate_entropy_table(df,
                 format_float_pos=5)
 
 
-def auto_binning(df,
-                 df_features,
-                 feature_name,
-                 bins=5):
+def df_auto_binning(df,
+                    df_features,
+                    feature_name,
+                    bins=None):
     """
 
         Takes a pandas series object and assigns generalized labels and binning
@@ -385,6 +385,12 @@ def auto_binning(df,
     Returns:
         Gives back the bins and associated labels
     """
+
+    if not bins:
+        bins = 0
+
+    if bins <= 0:
+        bins = freedman_diaconis_bins(df[feature_name])
 
     if feature_name not in df_features.all_features():
         raise KeyError("Feature name must be encapsulated in df_features.")
@@ -443,7 +449,6 @@ def auto_binning(df,
 
     bins = [float(bins[i]) for i in range(0, len(bins))]
     return bins, labels
-
 
 
 def value_counts_table(df,
@@ -536,3 +541,34 @@ def suggest_removal_features(df):
             features_to_remove.add(feature)
 
     return features_to_remove
+
+
+def zcore_remove_outliers(df,
+                          feature_name,
+                          zscore_val):
+    """
+    Any zscore that is between the negative and positive of the 'zscore_val'
+    will be return as a pandas series object.
+
+    Args:
+        df:
+            Pandas dataframe object.
+
+        feature_name:
+            Feature's name.
+
+        zscore_val:
+            Any zscore that is between the negative and positive wil
+
+    Returns:
+        A Pandas series object that conforms to the proper
+    """
+
+    z_score_series = (df[feature_name] - df[feature_name].mean()) / df[
+        feature_name].std(ddof=0)
+
+    bool_series = (z_score_series.between((zscore_val * -1),
+                                         zscore_val).astype(int) +
+                   z_score_series.isna().astype(int)).astype(bool)
+
+    return df[feature_name][bool_series].reset_index(drop=True)

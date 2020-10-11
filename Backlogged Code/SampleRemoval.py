@@ -50,7 +50,7 @@ class TargetSampleRemoval:
                  columns_to_drop,
                  apply_pca=True,
                  pca_perc=.8,
-                 project_name="Default",
+                 dataset_name="Default",
                  overwrite_figure_path=None,
                  show_visuals=True,
                  ):
@@ -71,7 +71,7 @@ class TargetSampleRemoval:
         pca_perc:
             PCA cutoff point
 
-        project_name:
+        dataset_name:
             Starting folder name where the system
 
         overwrite_figure_path:
@@ -86,7 +86,7 @@ class TargetSampleRemoval:
         else:
             if pca_perc > 1:
                 pca_perc = 1
-            output_fig_sub_dir = "/Figures/" + project_name + \
+            output_fig_sub_dir = "/Figures/" + dataset_name + \
                                  "/SampleRemoval_PCA_Features={0}".format(
                                      pca_perc)
 
@@ -179,7 +179,7 @@ class TargetSampleRemoval:
 
         new_folder_path = ''.join(
             os.getcwd().partition('/eflow')[0:1]) + "/Figures/" + \
-                          project_name + "/SampleRemoval_PCA_Features={0}".format(
+                          dataset_name + "/SampleRemoval_PCA_Features={0}".format(
             scaled.shape[1])
 
         if not os.path.exists(new_folder_path):

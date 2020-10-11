@@ -4,7 +4,6 @@
   ],
   "string": [
     "Cabin",
-    "Pclass",
     "Embarked",
     "Sex"
   ],
@@ -15,6 +14,9 @@
   "float": [
     "Fare",
     "Age"
+  ],
+  "categorical": [
+    "Pclass"
   ],
   "target": "Survived",
   "feature_labels_bins": {
@@ -108,15 +110,6 @@
     }
   },
   "label_encoder": {
-    "Pclass": {
-      "1st Class": 1,
-      "2nd Class": 2,
-      "3rd Class": 3
-    },
-    "Sex": {
-      "female": 0,
-      "male": 1
-    },
     "Cabin": {
       "A": 0,
       "B": 1,
@@ -127,6 +120,15 @@
       "G": 6,
       "T": 7
     },
+    "Sex": {
+      "female": 0,
+      "male": 1
+    },
+    "Pclass": {
+      "1st Class": 1,
+      "2nd Class": 2,
+      "3rd Class": 3
+    },
     "Embarked": {
       "C": 0,
       "Q": 1,
@@ -134,15 +136,6 @@
     }
   },
   "label_decoder": {
-    "Pclass": {
-      "1": "1st Class",
-      "2": "2nd Class",
-      "3": "3rd Class"
-    },
-    "Sex": {
-      "0": "female",
-      "1": "male"
-    },
     "Cabin": {
       "0": "A",
       "1": "B",
@@ -152,6 +145,15 @@
       "5": "F",
       "6": "G",
       "7": "T"
+    },
+    "Sex": {
+      "0": "female",
+      "1": "male"
+    },
+    "Pclass": {
+      "1": "1st Class",
+      "2": "2nd Class",
+      "3": "3rd Class"
     },
     "Embarked": {
       "0": "C",

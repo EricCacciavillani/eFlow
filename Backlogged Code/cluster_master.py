@@ -36,7 +36,7 @@ class ClusterMaster:
                  df,
                  apply_pca=True,
                  pca_perc=.8,
-                 project_name="Default",
+                 dataset_name="Default",
                  overwrite_figure_path=None
                  ):
 
@@ -45,7 +45,7 @@ class ClusterMaster:
         else:
             if pca_perc > 1:
                 pca_perc = 1
-            output_fig_sub_dir = "/Figures/" + project_name +\
+            output_fig_sub_dir = "/Figures/" + dataset_name +\
                                  "/Clustering_PCA={0}".format(pca_perc)
 
         # Project directory structure

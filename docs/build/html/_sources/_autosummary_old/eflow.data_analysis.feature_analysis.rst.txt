@@ -9,7 +9,7 @@ eflow.data\_analysis.feature\_analysis
 
    .. autosummary::
    
-      auto_binning
+      df_auto_binning
       average_feature_correlation_table
       check_if_feature_exists
       create_dir_structure

@@ -8,6 +8,7 @@ missingno
 sklearn
 kneed
 tqdm
+Pillow
 python-dateutil
 scikit-plot
 ipywidgets

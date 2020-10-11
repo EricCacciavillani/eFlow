@@ -3,6 +3,8 @@ from eflow._hidden.parent_objects.data_pipeline_segment import *
 from eflow.foundation import DataFrameTypes
 from eflow.utils.pandas_utils import check_if_feature_exists
 from eflow.utils.misc_utils import get_parameters
+from eflow.utils.pandas_utils import zcore_remove_outliers
+
 
 __author__ = "Eric Cacciavillani"
 __copyright__ = "Copyright 2019, eFlow"
@@ -547,9 +549,9 @@ class FeatureDataCleaner(DataPipelineSegment):
 
         if z_score:
             if isinstance(z_score, float) or isinstance(z_score, int):
-                series_obj = self.__zcore_remove_outliers(series_obj.to_frame(),
-                                                          feature_name,
-                                                          z_score)
+                series_obj = zcore_remove_outliers(series_obj.to_frame(),
+                                                   feature_name,
+                                                   z_score).dropna()
             else:
                 raise ValueError("Z-Score must be at numerical value.")
         else:
@@ -596,9 +598,9 @@ class FeatureDataCleaner(DataPipelineSegment):
 
         if z_score:
             if isinstance(z_score,float) or isinstance(z_score,int):
-                series_obj = self.__zcore_remove_outliers(df,
-                                                          feature_name,
-                                                          z_score)
+                series_obj = zcore_remove_outliers(df,
+                                                   feature_name,
+                                                   z_score).dropna()
             else:
                 raise ValueError("Z-Score must be at numerical value.")
         else:
@@ -630,9 +632,9 @@ class FeatureDataCleaner(DataPipelineSegment):
                 + " Please select a valid feature from the df_features.")
 
         if z_score:
-            series_obj = self.__zcore_remove_outliers(df,
-                                                      feature_name,
-                                                      z_score)
+            series_obj = zcore_remove_outliers(df,
+                                               feature_name,
+                                               z_score).dropna()
         else:
             series_obj = df[feature_name].dropna()
 
@@ -712,9 +714,9 @@ class FeatureDataCleaner(DataPipelineSegment):
                     pass
 
         if z_score:
-            series_obj = self.__zcore_remove_outliers(df,
-                                                      feature_name,
-                                                      z_score)
+            series_obj = zcore_remove_outliers(df,
+                                               feature_name,
+                                               z_score).dropna()
         else:
             series_obj = df[feature_name].dropna()
 
@@ -729,19 +731,4 @@ class FeatureDataCleaner(DataPipelineSegment):
                                              feature_name=feature_name,
                                              replace_value=replace_value,
                                              _add_to_que=_add_to_que)
-
-    def __zcore_remove_outliers(self,
-                                df,
-                                feature_name,
-                                zscore_val,
-                                _add_to_que=True):
-
-        z_score_return = 2
-
-        print("After the zscore applied of {0} to -{0}".format(zscore_val))
-
-        return df[feature_name].dropna()[
-            (z_score_return >= (zscore_val * -1)) & (
-                    z_score_return <= zscore_val)]
-
 

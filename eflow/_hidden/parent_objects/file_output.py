@@ -15,9 +15,9 @@ __email__ = "eric.cacciavillani@gmail.com"
 class FileOutput(object):
     """
         Ensures a folder is part of eflow's main output stream and creates a
-        sub directory based on the arg project_name.
+        sub directory based on the arg dataset_name.
         Note:
-              If 'project_name' string is formatted in a relative path form
+              If 'dataset_name' string is formatted in a relative path form
               then it will generate the provided directory.
 
               Ex:
@@ -26,11 +26,11 @@ class FileOutput(object):
     """
 
     def __init__(self,
-                 project_name,
+                 dataset_name,
                  overwrite_full_path=None):
         """
         Args:
-            project_name: string
+            dataset_name: string
                 Sub directory to create on top of the directory
                 'PARENT_OUTPUT_FOLDER_NAME'.
 
@@ -43,7 +43,7 @@ class FileOutput(object):
         # Setup project structure
         if not overwrite_full_path:
             parent_structure = "/" + SYS_CONSTANTS.PARENT_OUTPUT_FOLDER_NAME \
-                               + "/" + project_name + "/"
+                               + "/" + dataset_name + "/"
 
             create_dir_structure(os.getcwd(),
                                        parent_structure)

@@ -5,7 +5,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
      name='eflow',
-     version='0.2.42',
+     version='0.2.43',
      install_requires=['numpy',
                        'matplotlib',
                        'scipy',

@@ -13,7 +13,7 @@ import numpy as np
 from matplotlib import pyplot as plt
 import copy
 from IPython.display import display
-from eflow.utils.pandas_utils import auto_binning
+from eflow.utils.pandas_utils import df_auto_binning
 import seaborn as sns
 import pandas as pd
 from scipy import stats
@@ -36,8 +36,8 @@ class FeatureAnalysis(DataAnalysis):
 
     def __init__(self,
                  df_features,
-                 project_sub_dir="",
-                 project_name="Feature Analysis",
+                 dataset_sub_dir="",
+                 dataset_name="",
                  overwrite_full_path=None,
                  notebook_mode=False):
         """
@@ -49,7 +49,7 @@ class FeatureAnalysis(DataAnalysis):
             project_sub_dir: string
                 Appends to the absolute directory of the output folder
 
-            project_name: string
+            dataset_name: string
                 Creates a parent or "project" folder in which all sub-directories
                 will be inner nested.
 
@@ -61,7 +61,7 @@ class FeatureAnalysis(DataAnalysis):
         """
 
         DataAnalysis.__init__(self,
-                              f'{project_sub_dir}/{project_name}',
+                              f'{dataset_name}/{dataset_sub_dir}',
                               overwrite_full_path)
 
 
@@ -1994,9 +1994,9 @@ class FeatureAnalysis(DataAnalysis):
             bins = None
             labels = None
             if feature_name in self.__df_features.continuous_numerical_features():
-                bins, labels = auto_binning(df,
-                                            self.__df_features,
-                                            feature_name)
+                bins, labels = df_auto_binning(df,
+                                               self.__df_features,
+                                               feature_name)
 
             # Labels and bins will act as feature values for aggregation
             if labels:

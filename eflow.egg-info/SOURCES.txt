@@ -12,6 +12,7 @@ Backlogged Code/cluster_master_1.py
 Backlogged Code/data_manipulation.py
 Backlogged Code/eval_model.py
 Backlogged Code/generate_docs.py
+Backlogged Code/type_fixer.py
 eflow/__init__.py
 eflow.egg-info/PKG-INFO
 eflow.egg-info/SOURCES.txt
@@ -45,7 +46,6 @@ eflow/data_pipeline_segments/data_encoder.py
 eflow/data_pipeline_segments/feature_data_cleaner.py
 eflow/data_pipeline_segments/feature_transformer.py
 eflow/data_pipeline_segments/string_cleaner.py
-eflow/data_pipeline_segments/type_fixer.py
 eflow/foundation/__init__.py
 eflow/foundation/data_frame_types.py
 eflow/foundation/data_pipeline.py

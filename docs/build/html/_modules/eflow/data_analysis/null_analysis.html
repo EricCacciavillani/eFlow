@@ -190,7 +190,7 @@
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
                  <span class="n">df_features</span><span class="p">,</span>
                  <span class="n">project_sub_dir</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span>
-                 <span class="n">project_name</span><span class="o">=</span><span class="s2">&quot;Missing Data&quot;</span><span class="p">,</span>
+                 <span class="n">dataset_name</span><span class="o">=</span><span class="s2">&quot;Missing Data&quot;</span><span class="p">,</span>
                  <span class="n">overwrite_full_path</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                  <span class="n">notebook_mode</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
@@ -201,7 +201,7 @@
 <span class="sd">            project_sub_dir: string</span>
 <span class="sd">                Appends to the absolute directory of the output folder</span>
 
-<span class="sd">            project_name: string</span>
+<span class="sd">            dataset_name: string</span>
 <span class="sd">                Creates a parent or &quot;project&quot; folder in which all sub-directories</span>
 <span class="sd">                will be inner nested.</span>
 
@@ -213,7 +213,7 @@
 <span class="sd">        &quot;&quot;&quot;</span>
 
         <span class="n">DataAnalysis</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
-                              <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{project_sub_dir}</span><span class="s1">/</span><span class="si">{project_name}</span><span class="s1">&#39;</span><span class="p">,</span>
+                              <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{project_sub_dir}</span><span class="s1">/</span><span class="si">{dataset_name}</span><span class="s1">&#39;</span><span class="p">,</span>
                               <span class="n">overwrite_full_path</span><span class="p">)</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">__df_features</span> <span class="o">=</span> <span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="n">df_features</span><span class="p">)</span>
@@ -224,7 +224,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">__called_from_perform</span> <span class="o">=</span> <span class="kc">False</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">__feature_analysis</span> <span class="o">=</span> <span class="n">FeatureAnalysis</span><span class="p">(</span><span class="n">df_features</span><span class="p">,</span>
-                                                  <span class="n">project_name</span><span class="o">=</span><span class="n">project_name</span><span class="p">,</span>
+                                                  <span class="n">dataset_name</span><span class="o">=</span><span class="n">dataset_name</span><span class="p">,</span>
                                                   <span class="n">project_sub_dir</span><span class="o">=</span><span class="n">project_sub_dir</span><span class="p">,</span>
                                                   <span class="n">notebook_mode</span><span class="o">=</span><span class="n">notebook_mode</span><span class="p">)</span>
 

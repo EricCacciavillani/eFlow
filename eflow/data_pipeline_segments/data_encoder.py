@@ -175,6 +175,7 @@ class DataEncoder(DataPipelineSegment):
             except KeyError:
                 pass
 
+        # Iterate through all features if no features are selected
         if not binable_features:
             binable_features = df.columns
 

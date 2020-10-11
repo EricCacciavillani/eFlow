@@ -1,0 +1,90 @@
+{
+  "shape": [
+    159,
+    8
+  ],
+  "feature_names": [
+    "Age",
+    "Embarked",
+    "Fare",
+    "Parch",
+    "Pclass",
+    "Sex",
+    "SibSp",
+    "Survived"
+  ],
+  "random_values": {
+    "Embarked": {
+      "Random Value 1": "Cherbourg",
+      "Random Value 2": "Cherbourg",
+      "Random Value 3": "Cherbourg",
+      "Random Value 4": "Cherbourg",
+      "Random Value 5": "Cherbourg",
+      "Random Value 6": "Cherbourg",
+      "Random Value 7": "Cherbourg",
+      "Random Value 8": "Cherbourg",
+      "Random Value 9": "Cherbourg",
+      "Random Value 10": "Cherbourg"
+    },
+    "Parch": {
+      "Random Value 1": "1",
+      "Random Value 2": "NaN",
+      "Random Value 3": "NaN",
+      "Random Value 4": "NaN",
+      "Random Value 5": "1",
+      "Random Value 6": "NaN",
+      "Random Value 7": "NaN",
+      "Random Value 8": "NaN",
+      "Random Value 9": "NaN",
+      "Random Value 10": "NaN"
+    },
+    "Pclass": {
+      "Random Value 1": "3",
+      "Random Value 2": "3",
+      "Random Value 3": "1",
+      "Random Value 4": "3",
+      "Random Value 5": "1",
+      "Random Value 6": "1",
+      "Random Value 7": "1",
+      "Random Value 8": "3",
+      "Random Value 9": "3",
+      "Random Value 10": "2"
+    },
+    "Sex": {
+      "Random Value 1": "female",
+      "Random Value 2": "female",
+      "Random Value 3": "female",
+      "Random Value 4": "male",
+      "Random Value 5": "male",
+      "Random Value 6": "male",
+      "Random Value 7": "female",
+      "Random Value 8": "female",
+      "Random Value 9": "female",
+      "Random Value 10": "female"
+    },
+    "SibSp": {
+      "Random Value 1": "NaN",
+      "Random Value 2": "NaN",
+      "Random Value 3": "NaN",
+      "Random Value 4": "1",
+      "Random Value 5": "NaN",
+      "Random Value 6": "NaN",
+      "Random Value 7": "NaN",
+      "Random Value 8": "1",
+      "Random Value 9": "NaN",
+      "Random Value 10": "NaN"
+    },
+    "Survived": {
+      "Random Value 1": "NaN",
+      "Random Value 2": "NaN",
+      "Random Value 3": "NaN",
+      "Random Value 4": "1",
+      "Random Value 5": "NaN",
+      "Random Value 6": "1",
+      "Random Value 7": "NaN",
+      "Random Value 8": "1",
+      "Random Value 9": "1",
+      "Random Value 10": "NaN"
+    }
+  }
+}

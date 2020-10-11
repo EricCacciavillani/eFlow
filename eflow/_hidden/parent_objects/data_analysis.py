@@ -23,11 +23,11 @@ class DataAnalysis(FileOutput):
     """
 
     def __init__(self,
-                 project_name,
+                 dataset_name,
                  overwrite_full_path=None):
         """
         Args:
-            project_name: string
+            dataset_name: string
                 Sub directory to create on top of the directory
                 'PARENT_OUTPUT_FOLDER_NAME'.
 
@@ -39,7 +39,7 @@ class DataAnalysis(FileOutput):
 
         # Create/Setup project directory
         FileOutput.__init__(self,
-                            project_name,
+                            dataset_name,
                             overwrite_full_path)
 
 

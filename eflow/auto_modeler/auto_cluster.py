@@ -61,8 +61,8 @@ class AutoCluster(AutoModeler):
 
     def __init__(self,
                  df,
-                 project_sub_dir="",
-                 project_name="Auto Clustering",
+                 dataset_sub_dir="",
+                 dataset_name="Default Dataset Name",
                  overwrite_full_path=None,
                  notebook_mode=False,
                  pca_perc=None):
@@ -71,10 +71,10 @@ class AutoCluster(AutoModeler):
             df: pd.Dataframe
                 pd.Dataframe
 
-            project_sub_dir: string
+            dataset_sub_dir: string
                 Sub directory to write data.
 
-            project_name: string
+            dataset_name: string
                 Main project directory
 
             overwrite_full_path: string
@@ -85,7 +85,7 @@ class AutoCluster(AutoModeler):
         """
 
         AutoModeler.__init__(self,
-                             f'{project_sub_dir}/{project_name}',
+                             f'{dataset_name}/{dataset_sub_dir}',
                              overwrite_full_path)
 
 
@@ -211,7 +211,7 @@ class AutoCluster(AutoModeler):
         # Save objects to directory structure
         if self.__pca:
             pipeline_path = create_dir_structure(self.folder_path,
-                                                 "Data Pipeline")
+                                                 "Data Cluster Pipeline")
 
 
             # Pickle data pipeline objects
@@ -1106,6 +1106,7 @@ class AutoCluster(AutoModeler):
                 # Run cluster analysis and obtain results.
                 model.process()
                 final_centers = np.array(self.__get_centers(model))
+                # print(f"final_centers {final_centers}")
                 labels = [self.__nearest_cluster(final_centers, dp)
                           for dp in self.__scaled]
 
@@ -1143,13 +1144,19 @@ class AutoCluster(AutoModeler):
             center_points = []
 
             for cluster_indexes in model.get_clusters():
-                all_dps = np.matrix([self.__scaled[i] for i in cluster_indexes])
+                # all_dps = np.matrix([self.__scaled[i] for i in cluster_indexes])
+                all_dps = np.array(
+                    [self.__scaled[i] for i in cluster_indexes])
+
+                # print(all_dps)
+                # print("----------\n")
+                # print(np.array([self.__scaled[i] for i in cluster_indexes]))
                 center_dp = all_dps.mean(0)
 
                 # Grave Yard code: Use existing point rather than generating abstract average data point
                 # np.absolute(all_dps - center_dp).sum(1).argmin()
 
-                center_points.append(np.array(center_dp.tolist()[0]))
+                center_points.append(np.array(center_dp))
 
             return center_points
 
@@ -1309,13 +1316,14 @@ class AutoCluster(AutoModeler):
 
             # Get inertia values
             if isinstance(elbow_inertias_matrix, type(None)):
-                inertias_matrix = np.matrix([inertias[i]])
-                elbow_inertias_matrix = np.matrix(inertias[i][elbow_cluster - 2:elbow_cluster + 1])
+                inertias_matrix = np.array([inertias[i]])
+                elbow_inertias_matrix = np.array(
+                    [inertias[i][elbow_cluster - 2:elbow_cluster + 1]])
             else:
                 inertias_matrix = np.vstack([inertias_matrix, inertias[i]])
-
                 elbow_inertias_matrix = np.vstack(
-                    [elbow_inertias_matrix, inertias[i][elbow_cluster - 2:elbow_cluster + 1]])
+                    [elbow_inertias_matrix, inertias[i][elbow_cluster - 2:
+                                                        elbow_cluster + 1]])
 
             elbow_models.append(k_models[i][elbow_cluster - 2:elbow_cluster + 1])
 
@@ -1370,8 +1378,6 @@ class AutoCluster(AutoModeler):
         plt.ylabel('Inertia')
         plt.xticks(ks)
 
-
-
         # Find the most agreed upon elbow section
         average_elbow_inertias = elbow_inertias_matrix.mean(0)
 
@@ -1382,11 +1388,11 @@ class AutoCluster(AutoModeler):
 
         best_elbow_index = np.array(elbow_vote).argmin()
 
-        print(inertias_matrix[best_elbow_index].tolist()[0])
+        print(inertias_matrix[best_elbow_index].tolist())
 
         # Plot most agreed upon elbow section
         plt.plot(ks,
-                 inertias_matrix[best_elbow_index].tolist()[0],
+                 inertias_matrix[best_elbow_index].tolist(),
                  '-o',
                  color='#367588')
 
@@ -1420,7 +1426,7 @@ class AutoCluster(AutoModeler):
                 print(f"Something went wrong when trying to save the model: {model_name}")
 
             plt.plot(ks[k_val - 1],
-                     inertias_matrix[best_elbow_index].tolist()[0][k_val - 1],
+                     inertias_matrix[best_elbow_index].tolist()[k_val - 1],
                      'r*')
             best_clusters.append(k_val)
 
@@ -1464,10 +1470,10 @@ class AutoCluster(AutoModeler):
 
             all_clusters += best_clusters
 
-
-        write_object_text_to_file(round(sum(all_clusters) / len(all_clusters)),
-                                  self.folder_path + "_Extras",
-                                  "Average of suggested clusters")
+        if all_clusters:
+            write_object_text_to_file(round(sum(all_clusters) / len(all_clusters)),
+                                      self.folder_path + "_Extras",
+                                      "Average of suggested clusters")
 
 
     def __get_unique_random_indexes(self,
