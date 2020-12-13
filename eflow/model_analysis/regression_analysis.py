@@ -1,14 +1,9 @@
 from eflow.utils.sys_utils import *
 from eflow.utils.pandas_utils import df_to_image
-from eflow.utils.image_processing_utils import create_plt_png
 from eflow._hidden.parent_objects import ModelAnalysis
-from eflow._hidden.custom_exceptions import RequiresPredictionMethods, ProbasNotPossible, \
-    UnsatisfiedRequirments
 from eflow.data_analysis import FeatureAnalysis
 
-from eflow._hidden.constants import GRAPH_DEFAULTS
-
-from sklearn.metrics import max_error
+# from sklearn.metrics import max_error
 from sklearn.metrics import explained_variance_score
 from sklearn.metrics import mean_absolute_error
 from sklearn.metrics import mean_squared_error
@@ -16,13 +11,11 @@ from sklearn.metrics import mean_squared_log_error
 from sklearn.metrics import median_absolute_error
 from sklearn.metrics import r2_score
 
-import scikitplot as skplt
 import numpy as np
 import warnings
 import copy
 import pandas as pd
 from IPython.display import display
-import matplotlib.pyplot as plt
 
 __author__ = "Eric Cacciavillani"
 __copyright__ = "Copyright 2019, eFlow"
@@ -310,7 +303,7 @@ class RegressionAnalysis(ModelAnalysis):
         # Default metric name's and their function
         metric_functions = dict()
         metric_functions["Explained Variance Score"] = explained_variance_score
-        metric_functions["Max Error"] = max_error
+        # metric_functions["Max Error"] = max_error
         metric_functions["Mean Absolute Error"] = mean_absolute_error
         metric_functions["Mean Squared Error"] = mean_squared_error
         metric_functions["Mean Squared Log Error"] = mean_squared_log_error

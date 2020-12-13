@@ -1,0 +1,60 @@
+{
+  "Response": {
+    "0 -> 1": {},
+    "0 -> All": {
+      "Vintage": {
+        "Kolmogorov-Smirnov statistic": {
+          "P-Value": 0.9999999999999412,
+          "Statistic": 0.00045702479471443347
+        }
+      }
+    },
+    "1 -> All": {},
+    "P-Values": {
+      "Age": {
+        "Kolmogorov-Smirnov statistic": {
+          "All pvalues": [],
+          "Pvalues Summary": {}
+        }
+      },
+      "Previously_Insured": {
+        "Kolmogorov-Smirnov statistic": {
+          "All pvalues": [],
+          "Pvalues Summary": {}
+        }
+      },
+      "Vehicle_Damage": {
+        "Kolmogorov-Smirnov statistic": {
+          "All pvalues": [],
+          "Pvalues Summary": {}
+        }
+      },
+      "Annual_Premium": {
+        "Kolmogorov-Smirnov statistic": {
+          "All pvalues": [],
+          "Pvalues Summary": {}
+        }
+      },
+      "Vintage": {
+        "Kolmogorov-Smirnov statistic": {
+          "All pvalues": [
+            0.9999999999999412
+          ],
+          "Pvalues Summary": {}
+        }
+      },
+      "Gender": {
+        "Kolmogorov-Smirnov statistic": {
+          "All pvalues": [],
+          "Pvalues Summary": {}
+        }
+      },
+      "Vehicle_Age": {
+        "Kolmogorov-Smirnov statistic": {
+          "All pvalues": [],
+          "Pvalues Summary": {}
+        }
+      }
+    }
+  }
+}

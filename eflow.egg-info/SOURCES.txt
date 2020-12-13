@@ -26,6 +26,8 @@ eflow/_hidden/custom_warnings.py
 eflow/_hidden/general_objects/__init__.py
 eflow/_hidden/general_objects/dataframe_snapshot.py
 eflow/_hidden/general_objects/enum.py
+eflow/_hidden/helper_functions/__init__.py
+eflow/_hidden/helper_functions/visualize_multidimensional_multi_threading.py
 eflow/_hidden/parent_objects/__init__.py
 eflow/_hidden/parent_objects/auto_modeler.py
 eflow/_hidden/parent_objects/data_analysis.py
@@ -46,11 +48,14 @@ eflow/data_pipeline_segments/data_encoder.py
 eflow/data_pipeline_segments/feature_data_cleaner.py
 eflow/data_pipeline_segments/feature_transformer.py
 eflow/data_pipeline_segments/string_cleaner.py
+eflow/decision_bounds/__init__.py
+eflow/decision_bounds/visualize_multidimensional.py
 eflow/foundation/__init__.py
 eflow/foundation/data_frame_types.py
 eflow/foundation/data_pipeline.py
 eflow/model_analysis/__init__.py
 eflow/model_analysis/classification_analysis.py
+eflow/model_analysis/outlier_analysis.py
 eflow/model_analysis/regression_analysis.py
 eflow/utils/__init__.py
 eflow/utils/eflow_utils.py

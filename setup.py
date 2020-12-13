@@ -5,7 +5,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
      name='eflow',
-     version='0.2.43',
+     version='0.2.44',
      install_requires=['numpy',
                        'matplotlib',
                        'scipy',
@@ -21,7 +21,7 @@ setuptools.setup(
                        'scikit-plot',
                        'ipywidgets',
                        'nltk',
-                       'ipython_blocking'],
+                       'pyclustering',],
      scripts=['init_env'],
      author="Eric Cacciavillani",
      author_email="eric.cacciavillani@gmail.com",

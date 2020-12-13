@@ -1,0 +1,86 @@
+{
+  "Response": {
+    "0 -> 1": {
+      "Vintage": {
+        "Kolmogorov-Smirnov statistic": {
+          "P-Value": 0.6175372764722815,
+          "Statistic": 0.003728885944954491
+        }
+      }
+    },
+    "0 -> All": {
+      "Vintage": {
+        "Kolmogorov-Smirnov statistic": {
+          "P-Value": 0.9999999999999412,
+          "Statistic": 0.00045702479471443347
+        }
+      }
+    },
+    "1 -> All": {
+      "Vintage": {
+        "Kolmogorov-Smirnov statistic": {
+          "P-Value": 0.763265489880198,
+          "Statistic": 0.0032718611502400574
+        }
+      }
+    },
+    "P-Values": {
+      "Age": {
+        "Kolmogorov-Smirnov statistic": {
+          "All pvalues": [],
+          "Pvalues Summary": {}
+        }
+      },
+      "Previously_Insured": {
+        "Kolmogorov-Smirnov statistic": {
+          "All pvalues": [],
+          "Pvalues Summary": {}
+        }
+      },
+      "Vehicle_Damage": {
+        "Kolmogorov-Smirnov statistic": {
+          "All pvalues": [],
+          "Pvalues Summary": {}
+        }
+      },
+      "Annual_Premium": {
+        "Kolmogorov-Smirnov statistic": {
+          "All pvalues": [],
+          "Pvalues Summary": {}
+        }
+      },
+      "Vintage": {
+        "Kolmogorov-Smirnov statistic": {
+          "All pvalues": [
+            0.6175372764722815,
+            0.763265489880198,
+            0.9999999999999412
+          ],
+          "Pvalues Summary": {
+            "count": 3.0,
+            "mean": 0.7936009221174736,
+            "std": 0.1930274917176709,
+            "min": 0.6175372764722815,
+            "25%": 0.6904013831762398,
+            "50%": 0.763265489880198,
+            "75%": 0.8816327449400696,
+            "max": 0.9999999999999412,
+            "var": 0.037259612558815505
+          }
+        }
+      },
+      "Gender": {
+        "Kolmogorov-Smirnov statistic": {
+          "All pvalues": [],
+          "Pvalues Summary": {}
+        }
+      },
+      "Vehicle_Age": {
+        "Kolmogorov-Smirnov statistic": {
+          "All pvalues": [],
+          "Pvalues Summary": {}
+        }
+      }
+    }
+  }
+}

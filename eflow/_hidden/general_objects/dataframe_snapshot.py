@@ -30,7 +30,7 @@ class DataFrameSnapshot:
             1: You generate a graph with dataset A and place it in a directory called A's Data.
             2: You generate a graph with dataset B and try to place it in A's Data.
 
-            An error should invoke; thus protecting against creating file's
+            An error should invoke; thus protecting against creating files
             that are relating to differing dataframes.
 
         Note:
@@ -195,7 +195,6 @@ class DataFrameSnapshot:
                                            feature_name,
                                            hash_type):
         """
-
             Create a sudo random integer based off the name of the feature and
             a number between 1 and 10.
 

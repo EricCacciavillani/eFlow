@@ -1,0 +1,39 @@
+{
+  "Pipeline Segment": {
+    "Object Type": "DataEncoder",
+    "Functions Performed Order": {
+      "Function Order 1": {
+        "apply_value_representation": {
+          "Params Dict": {}
+        }
+      },
+      "Function Order 2": {
+        "make_dummies": {
+          "Params Dict": {
+            "qualitative_features": [
+              "Gender",
+              "Vehicle_Age"
+            ],
+            "_feature_values_dict": {
+              "Gender": [
+                "F",
+                "M"
+              ],
+              "Vehicle_Age": [
+                "1-2 Year",
+                "< 1 Year",
+                "> 2 Years"
+              ]
+            }
+          }
+        }
+      },
+      "Function Order 3": {
+        "make_values_bool": {
+          "Params Dict": {}
+        }
+      }
+    },
+    "Function Count": 3
+  }
+}

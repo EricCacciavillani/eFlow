@@ -1,0 +1,1 @@
+obj = ['Age', 'SibSp', 'Parch', 'Fare', 'Sex_female', 'Sex_male', 'Pclass_1', 'Pclass_2', 'Pclass_3', 'Embarked_Cherbourg', 'Embarked_Queenstown', 'Embarked_Southampton']

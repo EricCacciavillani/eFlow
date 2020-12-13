@@ -1,0 +1,12 @@
+{
+  "Pipeline Name": "Home Insurance Pipeline",
+  "Pipeline Segment Order": {
+    "1": {
+      "Pipeline Segment Path": "_Extras/Pipeline Structure/Data Pipeline Segments/FeatureDataCleaner/921149600C.json",
+      "Pipeline Segment Type": "FeatureDataCleaner",
+      "Pipeline Segment Name": "Cleaning features with methods that only apply to that one feature.",
+      "Pipeline Segment ID": "921149600C"
+    }
+  },
+  "Pipeline Segment Count": 1
+}

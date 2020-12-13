@@ -1,0 +1,106 @@
+{
+  "Response": {
+    "1 -> All": {
+      "Age": {
+        "Kolmogorov-Smirnov statistic": {
+          "P-Value": 1.0,
+          "Statistic": 0.0
+        }
+      },
+      "Previously_Insured": {
+        "Kolmogorov-Smirnov statistic": {
+          "P-Value": 1.0,
+          "Statistic": 0.0
+        }
+      },
+      "Vehicle_Damage": {
+        "Kolmogorov-Smirnov statistic": {
+          "P-Value": 1.0,
+          "Statistic": 0.0
+        }
+      },
+      "Annual_Premium": {
+        "Kolmogorov-Smirnov statistic": {
+          "P-Value": 1.0,
+          "Statistic": 0.0
+        }
+      },
+      "Vintage": {
+        "Kolmogorov-Smirnov statistic": {
+          "P-Value": 1.0,
+          "Statistic": 0.0
+        }
+      },
+      "Gender": {
+        "Kolmogorov-Smirnov statistic": {
+          "P-Value": 1.0,
+          "Statistic": 0.0
+        }
+      },
+      "Vehicle_Age": {
+        "Kolmogorov-Smirnov statistic": {
+          "P-Value": 1.0,
+          "Statistic": 0.0
+        }
+      }
+    },
+    "P-Values": {
+      "Age": {
+        "Kolmogorov-Smirnov statistic": {
+          "All pvalues": [
+            1.0
+          ],
+          "Pvalues Summary": {}
+        }
+      },
+      "Previously_Insured": {
+        "Kolmogorov-Smirnov statistic": {
+          "All pvalues": [
+            1.0
+          ],
+          "Pvalues Summary": {}
+        }
+      },
+      "Vehicle_Damage": {
+        "Kolmogorov-Smirnov statistic": {
+          "All pvalues": [
+            1.0
+          ],
+          "Pvalues Summary": {}
+        }
+      },
+      "Annual_Premium": {
+        "Kolmogorov-Smirnov statistic": {
+          "All pvalues": [
+            1.0
+          ],
+          "Pvalues Summary": {}
+        }
+      },
+      "Vintage": {
+        "Kolmogorov-Smirnov statistic": {
+          "All pvalues": [
+            1.0
+          ],
+          "Pvalues Summary": {}
+        }
+      },
+      "Gender": {
+        "Kolmogorov-Smirnov statistic": {
+          "All pvalues": [
+            1.0
+          ],
+          "Pvalues Summary": {}
+        }
+      },
+      "Vehicle_Age": {
+        "Kolmogorov-Smirnov statistic": {
+          "All pvalues": [
+            1.0
+          ],
+          "Pvalues Summary": {}
+        }
+      }
+    }
+  }
+}

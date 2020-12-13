@@ -1,0 +1,72 @@
+{
+  "Pipeline Segment": {
+    "Object Type": "FeatureDataCleaner",
+    "Functions Performed Order": {
+      "Function Order 1": {
+        "fill_nan_with_specfic_value": {
+          "Params Dict": {
+            "feature_name": "Gender",
+            "replace_value": "Male"
+          }
+        }
+      },
+      "Function Order 2": {
+        "fill_nan_with_specfic_value": {
+          "Params Dict": {
+            "feature_name": "Age",
+            "replace_value": 37.096020739819295
+          }
+        }
+      },
+      "Function Order 3": {
+        "fill_nan_with_specfic_value": {
+          "Params Dict": {
+            "feature_name": "Previously_Insured",
+            "replace_value": 0
+          }
+        }
+      },
+      "Function Order 4": {
+        "fill_nan_with_specfic_value": {
+          "Params Dict": {
+            "feature_name": "Vehicle_Age",
+            "replace_value": "1-2 Year"
+          }
+        }
+      },
+      "Function Order 5": {
+        "fill_nan_with_specfic_value": {
+          "Params Dict": {
+            "feature_name": "Vehicle_Damage",
+            "replace_value": "No"
+          }
+        }
+      },
+      "Function Order 6": {
+        "fill_nan_with_specfic_value": {
+          "Params Dict": {
+            "feature_name": "Annual_Premium",
+            "replace_value": 29089.678316121754
+          }
+        }
+      },
+      "Function Order 7": {
+        "fill_nan_with_specfic_value": {
+          "Params Dict": {
+            "feature_name": "Vintage",
+            "replace_value": 256
+          }
+        }
+      },
+      "Function Order 8": {
+        "fill_nan_with_specfic_value": {
+          "Params Dict": {
+            "feature_name": "Response",
+            "replace_value": 1
+          }
+        }
+      }
+    },
+    "Function Count": 8
+  }
+}

@@ -1,0 +1,114 @@
+{
+  "shape": [
+    381109,
+    8
+  ],
+  "feature_names": [
+    "Age",
+    "Annual_Premium",
+    "Gender",
+    "Previously_Insured",
+    "Response",
+    "Vehicle_Age",
+    "Vehicle_Damage",
+    "Vintage"
+  ],
+  "random_values": {
+    "Age": {
+      "Random Value 1": "49",
+      "Random Value 2": "23",
+      "Random Value 3": "63",
+      "Random Value 4": "21",
+      "Random Value 5": "78",
+      "Random Value 6": "25",
+      "Random Value 7": "32",
+      "Random Value 8": "76",
+      "Random Value 9": "28",
+      "Random Value 10": "45"
+    },
+    "Annual_Premium": {
+      "Random Value 1": "23096",
+      "Random Value 2": "37707",
+      "Random Value 3": "42398",
+      "Random Value 4": "24797",
+      "Random Value 5": "49158",
+      "Random Value 6": "48414",
+      "Random Value 7": "35330",
+      "Random Value 8": "2630",
+      "Random Value 9": "2630",
+      "Random Value 10": "2630"
+    },
+    "Gender": {
+      "Random Value 1": "F",
+      "Random Value 2": "F",
+      "Random Value 3": "M",
+      "Random Value 4": "F",
+      "Random Value 5": "F",
+      "Random Value 6": "M",
+      "Random Value 7": "F",
+      "Random Value 8": "M",
+      "Random Value 9": "M",
+      "Random Value 10": "F"
+    },
+    "Previously_Insured": {
+      "Random Value 1": "1",
+      "Random Value 2": "1",
+      "Random Value 3": "1",
+      "Random Value 4": "1",
+      "Random Value 5": "1",
+      "Random Value 6": "1",
+      "Random Value 7": "1",
+      "Random Value 8": "1",
+      "Random Value 9": "NaN",
+      "Random Value 10": "1"
+    },
+    "Response": {
+      "Random Value 1": "NaN",
+      "Random Value 2": "NaN",
+      "Random Value 3": "NaN",
+      "Random Value 4": "NaN",
+      "Random Value 5": "NaN",
+      "Random Value 6": "NaN",
+      "Random Value 7": "NaN",
+      "Random Value 8": "NaN",
+      "Random Value 9": "NaN",
+      "Random Value 10": "NaN"
+    },
+    "Vehicle_Age": {
+      "Random Value 1": "< 1 Year",
+      "Random Value 2": "1-2 Year",
+      "Random Value 3": "1-2 Year",
+      "Random Value 4": "1-2 Year",
+      "Random Value 5": "1-2 Year",
+      "Random Value 6": "1-2 Year",
+      "Random Value 7": "1-2 Year",
+      "Random Value 8": "< 1 Year",
+      "Random Value 9": "< 1 Year",
+      "Random Value 10": "1-2 Year"
+    },
+    "Vehicle_Damage": {
+      "Random Value 1": "NaN",
+      "Random Value 2": "1",
+      "Random Value 3": "1",
+      "Random Value 4": "NaN",
+      "Random Value 5": "1",
+      "Random Value 6": "NaN",
+      "Random Value 7": "1",
+      "Random Value 8": "NaN",
+      "Random Value 9": "NaN",
+      "Random Value 10": "1"
+    },
+    "Vintage": {
+      "Random Value 1": "287",
+      "Random Value 2": "223",
+      "Random Value 3": "251",
+      "Random Value 4": "200",
+      "Random Value 5": "27",
+      "Random Value 6": "106",
+      "Random Value 7": "86",
+      "Random Value 8": "35",
+      "Random Value 9": "241",
+      "Random Value 10": "296"
+    }
+  }
+}

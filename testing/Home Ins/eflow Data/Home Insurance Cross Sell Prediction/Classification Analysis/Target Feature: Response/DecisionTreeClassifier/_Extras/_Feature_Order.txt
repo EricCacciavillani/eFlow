@@ -1,0 +1,1 @@
+obj = ['Age', 'Previously_Insured', 'Vehicle_Damage', 'Annual_Premium', 'Vintage', 'Gender_F', 'Gender_M', 'Vehicle_Age_1-2 Year', 'Vehicle_Age_< 1 Year', 'Vehicle_Age_> 2 Years']

@@ -13,4 +13,4 @@ python-dateutil
 scikit-plot
 ipywidgets
 nltk
-ipython_blocking
+pyclustering

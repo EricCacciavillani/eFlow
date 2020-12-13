@@ -1,0 +1,3 @@
+from .classification_analysis import ClassificationAnalysis
+from .regression_analysis import RegressionAnalysis
+from .outlier_analysis import OutlierAnalysis

@@ -1,0 +1,246 @@
+{
+  "Response": {
+    "0 -> 1": {
+      "Age": {
+        "Kolmogorov-Smirnov statistic": {
+          "P-Value": 0.0,
+          "Statistic": 0.3086051276215091
+        }
+      },
+      "Previously_Insured": {
+        "Kolmogorov-Smirnov statistic": {
+          "P-Value": 0.0,
+          "Statistic": 0.518359417530466
+        }
+      },
+      "Vehicle_Damage": {
+        "Kolmogorov-Smirnov statistic": {
+          "P-Value": 0.0,
+          "Statistic": 0.5403240369760739
+        }
+      },
+      "Annual_Premium": {
+        "Kolmogorov-Smirnov statistic": {
+          "P-Value": 2.8089489983468377e-136,
+          "Statistic": 0.06174509636686376
+        }
+      },
+      "Gender": {
+        "Kolmogorov-Smirnov statistic": {
+          "P-Value": 7.858474410963344e-227,
+          "Statistic": 0.07968852640407909
+        }
+      },
+      "Vehicle_Age": {
+        "Kolmogorov-Smirnov statistic": {
+          "P-Value": 0.0,
+          "Statistic": 0.25020327892267924
+        }
+      }
+    },
+    "0 -> All": {
+      "Age": {
+        "Kolmogorov-Smirnov statistic": {
+          "P-Value": 7.741973349165769e-222,
+          "Statistic": 0.037823681705760503
+        }
+      },
+      "Previously_Insured": {
+        "Kolmogorov-Smirnov statistic": {
+          "P-Value": 0.0,
+          "Statistic": 0.06353187249014863
+        }
+      },
+      "Vehicle_Damage": {
+        "Kolmogorov-Smirnov statistic": {
+          "P-Value": 0.0,
+          "Statistic": 0.06622393007552274
+        }
+      },
+      "Annual_Premium": {
+        "Kolmogorov-Smirnov statistic": {
+          "P-Value": 2.7452836061095438e-09,
+          "Statistic": 0.00756768654452189
+        }
+      },
+      "Gender": {
+        "Kolmogorov-Smirnov statistic": {
+          "P-Value": 3.466573589797185e-15,
+          "Statistic": 0.009766893640230312
+        }
+      },
+      "Vehicle_Age": {
+        "Kolmogorov-Smirnov statistic": {
+          "P-Value": 5.964921562138829e-146,
+          "Statistic": 0.030665754832550185
+        }
+      }
+    },
+    "1 -> All": {
+      "Age": {
+        "Kolmogorov-Smirnov statistic": {
+          "P-Value": 0.0,
+          "Statistic": 0.2707814459157486
+        }
+      },
+      "Previously_Insured": {
+        "Kolmogorov-Smirnov statistic": {
+          "P-Value": 0.0,
+          "Statistic": 0.4548275450403173
+        }
+      },
+      "Vehicle_Damage": {
+        "Kolmogorov-Smirnov statistic": {
+          "P-Value": 0.0,
+          "Statistic": 0.47410010690055115
+        }
+      },
+      "Annual_Premium": {
+        "Kolmogorov-Smirnov statistic": {
+          "P-Value": 1.3581029574583314e-106,
+          "Statistic": 0.05417740982234187
+        }
+      },
+      "Gender": {
+        "Kolmogorov-Smirnov statistic": {
+          "P-Value": 2.453544659951058e-177,
+          "Statistic": 0.06992163276384877
+        }
+      },
+      "Vehicle_Age": {
+        "Kolmogorov-Smirnov statistic": {
+          "P-Value": 0.0,
+          "Statistic": 0.21953752409012905
+        }
+      }
+    },
+    "P-Values": {
+      "Age": {
+        "Kolmogorov-Smirnov statistic": {
+          "All pvalues": [
+            0.0,
+            0.0,
+            7.741973349165769e-222
+          ],
+          "Pvalues Summary": {
+            "count": 3.0,
+            "mean": 2.5806577830552563e-222,
+            "std": 0.0,
+            "min": 0.0,
+            "25%": 0.0,
+            "50%": 0.0,
+            "75%": 3.8709866745828844e-222,
+            "max": 7.741973349165769e-222,
+            "var": 0.0
+          }
+        }
+      },
+      "Previously_Insured": {
+        "Kolmogorov-Smirnov statistic": {
+          "All pvalues": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "Pvalues Summary": {
+            "count": 3.0,
+            "mean": 0.0,
+            "std": 0.0,
+            "min": 0.0,
+            "25%": 0.0,
+            "50%": 0.0,
+            "75%": 0.0,
+            "max": 0.0,
+            "var": 0.0
+          }
+        }
+      },
+      "Vehicle_Damage": {
+        "Kolmogorov-Smirnov statistic": {
+          "All pvalues": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "Pvalues Summary": {
+            "count": 3.0,
+            "mean": 0.0,
+            "std": 0.0,
+            "min": 0.0,
+            "25%": 0.0,
+            "50%": 0.0,
+            "75%": 0.0,
+            "max": 0.0,
+            "var": 0.0
+          }
+        }
+      },
+      "Annual_Premium": {
+        "Kolmogorov-Smirnov statistic": {
+          "All pvalues": [
+            2.8089489983468377e-136,
+            1.3581029574583314e-106,
+            2.7452836061095438e-09
+          ],
+          "Pvalues Summary": {
+            "count": 3.0,
+            "mean": 9.150945353698479e-10,
+            "std": 1.5849902289892117e-09,
+            "min": 2.8089489983468377e-136,
+            "25%": 6.790514787291657e-107,
+            "50%": 1.3581029574583314e-106,
+            "75%": 1.3726418030547719e-09,
+            "max": 2.7452836061095438e-09,
+            "var": 2.5121940259912738e-18
+          }
+        }
+      },
+      "Vintage": {
+        "Kolmogorov-Smirnov statistic": {
+          "All pvalues": [],
+          "Pvalues Summary": {}
+        }
+      },
+      "Gender": {
+        "Kolmogorov-Smirnov statistic": {
+          "All pvalues": [
+            7.858474410963344e-227,
+            2.453544659951058e-177,
+            3.466573589797185e-15
+          ],
+          "Pvalues Summary": {
+            "count": 3.0,
+            "mean": 1.155524529932395e-15,
+            "std": 2.001427195235052e-15,
+            "min": 7.858474410963344e-227,
+            "25%": 1.226772329975529e-177,
+            "50%": 2.453544659951058e-177,
+            "75%": 1.7332867948985925e-15,
+            "max": 3.466573589797185e-15,
+            "var": 4.005710817826447e-30
+          }
+        }
+      },
+      "Vehicle_Age": {
+        "Kolmogorov-Smirnov statistic": {
+          "All pvalues": [
+            0.0,
+            0.0,
+            5.964921562138829e-146
+          ],
+          "Pvalues Summary": {
+            "count": 3.0,
+            "mean": 1.9883071873796095e-146,
+            "std": 3.443849069595856e-146,
+            "min": 0.0,
+            "25%": 0.0,
+            "50%": 0.0,
+            "75%": 2.9824607810694143e-146,
+            "max": 5.964921562138829e-146,
+            "var": 1.1860096414156242e-291
+          }
+        }
+      }
+    }
+  }
+}
